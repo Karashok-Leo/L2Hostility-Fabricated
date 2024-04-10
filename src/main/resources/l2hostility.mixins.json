@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.karashokleo.l2hostility.content.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "EntityMixin",
+    "ItemStackMixin",
+    "LivingEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}
