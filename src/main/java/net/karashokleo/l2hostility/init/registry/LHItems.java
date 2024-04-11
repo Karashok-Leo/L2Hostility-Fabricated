@@ -212,7 +212,7 @@ public class LHItems
                 .register();
 
         WITCH_WAND = ItemEntry.of(
-                        "detector_glasses",
+                        "witch_wand",
                         new WitchWand(
                                 new FabricItemSettings()
                                         .maxDamage(300)

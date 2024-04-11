@@ -19,7 +19,8 @@ public class TraitTagProvider extends FabricTagProvider<MobTrait>
 
     public static void add(TagKey<MobTrait> key, MobTrait trait)
     {
-        tags.putIfAbsent(key, new ArrayList<>()).add(trait);
+        tags.putIfAbsent(key, new ArrayList<>());
+        tags.get(key).add(trait);
     }
 
     public TraitTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture)

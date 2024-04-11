@@ -1,4 +1,4 @@
-package net.karashokleo.l2hostility.content.mixin;
+package net.karashokleo.l2hostility.mixin;
 
 import dev.xkmc.l2serial.util.Wrappers;
 import net.karashokleo.l2hostility.content.item.traits.EnchantmentDisabler;

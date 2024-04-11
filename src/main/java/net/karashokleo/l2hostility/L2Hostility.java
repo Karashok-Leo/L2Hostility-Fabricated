@@ -21,8 +21,6 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Objects;
-
 public class L2Hostility implements ModInitializer
 {
     public static final String MOD_ID = "l2hostility";
@@ -51,7 +49,7 @@ public class L2Hostility implements ModInitializer
         LHEvents.register();
         LHMiscs.register();
 
-        ServerPlayNetworking.registerGlobalReceiver(Objects.requireNonNull(HANDLER.getPacketType(TargetSetPacket.class)), (packet, player, responseSender) -> RayTraceUtil.sync(packet.packet()));
+        ServerPlayNetworking.registerGlobalReceiver(HANDLER.getPacketType(TargetSetPacket.class), (packet, player, responseSender) -> RayTraceUtil.sync(packet.packet()));
 
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new DataLoader());
     }

@@ -1,13 +1,14 @@
-package net.karashokleo.l2hostility;
+package net.karashokleo.l2hostility.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.content.item.traits.EnchantmentDisabler;
 import net.karashokleo.l2hostility.util.raytrace.ClientUpdatePacket;
-import net.karashokleo.l2hostility.util.raytrace.EntityTarget;
-import net.karashokleo.l2hostility.util.raytrace.RayTraceUtilClient;
+import net.karashokleo.l2hostility.client.util.raytrace.EntityTarget;
+import net.karashokleo.l2hostility.client.util.raytrace.RayTraceUtilClient;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;

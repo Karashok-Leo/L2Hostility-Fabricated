@@ -19,12 +19,14 @@ public class TagEntityTypeProvider extends FabricTagProvider.EntityTypeTagProvid
 
     public static void add(TagKey<EntityType<?>> key, EntityType<?> type)
     {
-        types.putIfAbsent(key, new ArrayList<>()).add(type);
+        types.putIfAbsent(key, new ArrayList<>());
+        types.get(key).add(type);
     }
 
     public static void add(TagKey<EntityType<?>> key, TagKey<EntityType<?>> tag)
     {
-        tags.putIfAbsent(key, new ArrayList<>()).add(tag);
+        tags.putIfAbsent(key, new ArrayList<>());
+        tags.get(key).add(tag);
     }
 
     public TagEntityTypeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture)

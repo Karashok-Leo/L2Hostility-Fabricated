@@ -1,4 +1,4 @@
-package net.karashokleo.l2hostility.util.raytrace;
+package net.karashokleo.l2hostility.client.util.raytrace;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

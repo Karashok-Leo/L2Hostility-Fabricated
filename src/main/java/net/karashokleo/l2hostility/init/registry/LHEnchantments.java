@@ -11,14 +11,12 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
-import java.util.Arrays;
-
 public class LHEnchantments
 {
     public static final HostilityEnchantment INSULATOR = new HostilityEnchantment(
             Enchantment.Rarity.VERY_RARE,
             EnchantmentTarget.ARMOR,
-            (EquipmentSlot[]) Arrays.stream(EquipmentSlot.values()).filter(EquipmentSlot::isArmorSlot).toArray(),
+            new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET},
             3
     );
     public static final RemoveTraitEnchantment SPLIT_SUPPRESS = new RemoveTraitEnchantment(

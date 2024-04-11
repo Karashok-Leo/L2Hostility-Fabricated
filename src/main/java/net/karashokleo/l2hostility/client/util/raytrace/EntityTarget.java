@@ -1,6 +1,7 @@
-package net.karashokleo.l2hostility.util.raytrace;
+package net.karashokleo.l2hostility.client.util.raytrace;
 
-import net.karashokleo.l2hostility.L2HostilityClient;
+import net.karashokleo.l2hostility.client.L2HostilityClient;
+import net.karashokleo.l2hostility.util.raytrace.IGlowingTarget;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

@@ -1,7 +1,7 @@
-package net.karashokleo.l2hostility.event;
+package net.karashokleo.l2hostility.client.event;
 
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
-import net.karashokleo.l2hostility.L2HostilityClient;
+import net.karashokleo.l2hostility.client.L2HostilityClient;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import net.karashokleo.l2hostility.config.LHConfig;
 import net.karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;

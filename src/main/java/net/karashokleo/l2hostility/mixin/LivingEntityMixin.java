@@ -1,4 +1,4 @@
-package net.karashokleo.l2hostility.content.mixin;
+package net.karashokleo.l2hostility.mixin;
 
 import net.karashokleo.l2hostility.init.registry.LHEffects;
 import net.karashokleo.l2hostility.init.registry.LHEnchantments;

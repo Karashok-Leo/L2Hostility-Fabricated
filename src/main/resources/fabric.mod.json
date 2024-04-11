@@ -18,7 +18,7 @@
           "net.karashokleo.l2hostility.L2Hostility"
 		],
 		"client": [
-			"net.karashokleo.l2hostility.L2HostilityClient"
+          "net.karashokleo.l2hostility.client.L2HostilityClient"
 		],
 		"fabric-datagen": [
 			"net.karashokleo.l2hostility.data.LHData"

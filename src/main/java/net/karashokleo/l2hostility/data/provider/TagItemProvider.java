@@ -18,7 +18,8 @@ public class TagItemProvider extends FabricTagProvider.ItemTagProvider
 
     public static void add(TagKey<Item> key, Item item)
     {
-        tags.putIfAbsent(key, new ArrayList<>()).add(item);
+        tags.putIfAbsent(key, new ArrayList<>());
+        tags.get(key).add(item);
     }
 
     public TagItemProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture)

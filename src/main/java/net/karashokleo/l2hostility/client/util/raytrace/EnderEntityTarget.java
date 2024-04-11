@@ -1,8 +1,10 @@
-package net.karashokleo.l2hostility.util.raytrace;
+package net.karashokleo.l2hostility.client.util.raytrace;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.karashokleo.l2hostility.L2Hostility;
-import net.karashokleo.l2hostility.L2HostilityClient;
+import net.karashokleo.l2hostility.client.L2HostilityClient;
+import net.karashokleo.l2hostility.util.raytrace.TargetSetPacket;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,8 +22,10 @@ public class EnderEntityTarget extends EntityTarget
     @Override
     public void onChange(@Nullable Entity entity)
     {
+        ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
+        if (player == null) return;
         UUID eid = entity == null ? null : entity.getUuid();
-        ClientPlayNetworking.send(L2Hostility.HANDLER.getPacket(new TargetSetPacket(L2HostilityClient.getClientPlayer().getUuid(), eid)));
+        ClientPlayNetworking.send(L2Hostility.HANDLER.getPacket(new TargetSetPacket(player.getUuid(), eid)));
         timeout = 0;
     }
 
