@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.mixin;
 
-import net.karashokleo.l2hostility.event.ClientEvents;
+import net.karashokleo.l2hostility.client.event.ClientEvents;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
