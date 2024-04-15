@@ -1,7 +1,9 @@
 package net.karashokleo.l2hostility.content.component.player;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.karashokleo.l2hostility.content.component.LHComponents;
+import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import net.karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
+import net.karashokleo.l2hostility.init.registry.LHComponents;
 import net.karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.logic.DifficultyLevel;
@@ -10,6 +12,7 @@ import net.karashokleo.l2hostility.content.logic.MobDifficultyCollector;
 import net.karashokleo.l2hostility.content.logic.TraitManager;
 import net.karashokleo.l2hostility.config.LHConfig;
 import net.karashokleo.l2hostility.init.data.LHTexts;
+import net.karashokleo.l2hostility.init.registry.LHItems;
 import net.karashokleo.l2hostility.init.registry.LHMiscs;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -88,16 +91,18 @@ public class PlayerDifficulty
         instance.acceptBonus(getLevel());
         instance.setTraitCap(getRankCap());
         // 傲慢诅咒，佩戴后每一级难度都可以为你提供 +2% 生命值和攻击力的加成
-//        if (CurioCompat.hasItemInCurio(player, LHItems.CURSE_PRIDE.get())) {
-//            instance.traitCostFactor(LHConfig.COMMON.prideTraitFactor.get());
-//            instance.setFullChance();
-//        }
+        if (TrinketCompat.hasItemInTrinket(owner, LHItems.CURSE_PRIDE))
+        {
+            instance.traitCostFactor(LHConfig.common().items.curse.prideTraitFactor);
+            instance.setFullChance();
+        }
         // ---
-//        if (CurioCompat.hasItemInCurio(player, LHItems.ABYSSAL_THORN.get())) {
-//            instance.traitCostFactor(0);
-//            instance.setFullChance();
-//            instance.setFullDrop();
-//        }
+        if (TrinketCompat.hasItemInTrinket(owner, LHItems.ABYSSAL_THORN))
+        {
+            instance.traitCostFactor(0);
+            instance.setFullChance();
+            instance.setFullDrop();
+        }
     }
 
     public int getRankCap()
@@ -109,9 +114,8 @@ public class PlayerDifficulty
     {
         double growFactor = 1;
         // 从饰品栏获取难度增长系数
-//        for (var stack : CurseCurioItem.getFromPlayer(player)) {
-//            growFactor *= stack.item().getGrowFactor(stack.stack(), this, cap);
-//        }
+        for (var stack : CurseTrinketItem.getFromPlayer(owner))
+            growFactor *= stack.item().getGrowFactor(stack.stack(), this, cap);
         difficulty.grow(growFactor, cap);
         cap.traits.values().stream().max(Comparator.naturalOrder())
                 .ifPresent(integer -> maxRankKilled = Math.max(maxRankKilled, integer));
@@ -119,7 +123,7 @@ public class PlayerDifficulty
         {
             rewardCount++;
             // 奖励恶意吸收宝珠
-//            player.getInventory().add(LHItems.HOSTILITY_ORB.asStack());
+            owner.getInventory().insertStack(LHItems.HOSTILITY_ORB.getDefaultStack());
             // TODO drop reward
         }
         sync(owner);

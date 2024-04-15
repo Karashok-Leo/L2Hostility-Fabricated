@@ -6,32 +6,35 @@ import net.karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.WorldChunk;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ChunkDifficultyComponent implements AutoSyncedComponent
 {
+    public Chunk chunk;
     @Nullable
-    public ChunkDifficulty diff = null;
+    public ChunkDifficulty diff;
 
     public ChunkDifficultyComponent(Chunk chunk)
     {
+        this.chunk = chunk;
+        this.diff = null;
         if (chunk instanceof WorldChunk worldChunk)
-        {
             this.diff = new ChunkDifficulty(worldChunk);
-            diff.init();
-        }
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag)
+    public void readFromNbt(@NotNull NbtCompound tag)
     {
-        diff = TagCodec.fromTag(tag, ChunkDifficulty.class);
+        this.diff = null;
+        if (this.chunk instanceof WorldChunk worldChunk)
+            this.diff = TagCodec.fromTag(tag, ChunkDifficulty.class, new ChunkDifficulty(worldChunk), serialField -> true);
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag)
+    public void writeToNbt(@NotNull NbtCompound tag)
     {
-        if (diff == null) return;
-        TagCodec.toTag(tag, diff);
+        if (this.diff == null) return;
+        TagCodec.toTag(tag, this.diff);
     }
 }

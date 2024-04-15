@@ -17,9 +17,15 @@ public class EntityConfigProvider extends ConfigDataProvider
     }
 
     @Override
-    public void add(Collector collector)
+    public String getName()
     {
-        collector.add(L2Hostility.id("bosses"), new EntityConfig()
+        return "LH Entity Config";
+    }
+
+    @Override
+    public void add()
+    {
+        add(L2Hostility.id("bosses"), new EntityConfig()
                 .putEntity(0, 20, 1, 0, List.of(EntityType.ELDER_GUARDIAN), List.of(
                         EntityConfig.trait(LHTraits.REPELLING, 1, 1, 300, 0.5f)
                 ))

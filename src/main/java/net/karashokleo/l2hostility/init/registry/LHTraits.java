@@ -1,9 +1,11 @@
 package net.karashokleo.l2hostility.init.registry;
 
+import dev.xkmc.l2serial.serialization.custom_handler.Handlers;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.content.item.traits.TraitSymbol;
 import net.karashokleo.l2hostility.content.trait.base.AttributeTrait;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.karashokleo.l2hostility.content.trait.base.SelfEffectTrait;
@@ -23,7 +25,6 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -115,6 +116,8 @@ public class LHTraits
 
     public static void register()
     {
+        Handlers.enable(MobTrait.class, () -> TRAIT);
+
         TraitEntry.of("tank", TANK, 20, 100, 5, 20)
                 .addEN()
                 .addZH("")
@@ -370,9 +373,10 @@ public class LHTraits
         public T register()
         {
             Identifier id = L2Hostility.id(name);
-            Item symbol = new Item(new FabricItemSettings());
-            ModelProvider.addItem(symbol);
+            TraitSymbol symbol = new TraitSymbol(new FabricItemSettings());
             Registry.register(Registries.ITEM, id, symbol);
+            ModelProvider.addItem(symbol);
+            TagItemProvider.add(LHTags.TRAIT_ITEM, symbol);
             TraitConfigProvider.add(trait, config);
             return Registry.register(LHTraits.TRAIT, id, trait);
         }

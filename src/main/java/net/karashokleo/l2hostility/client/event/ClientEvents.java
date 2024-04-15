@@ -1,12 +1,20 @@
 package net.karashokleo.l2hostility.client.event;
 
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.client.L2HostilityClient;
+import net.karashokleo.l2hostility.client.util.raytrace.EntityTarget;
+import net.karashokleo.l2hostility.client.util.raytrace.RayTraceUtilClient;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import net.karashokleo.l2hostility.config.LHConfig;
 import net.karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import net.karashokleo.l2hostility.content.item.traits.EnchantmentDisabler;
 import net.karashokleo.l2hostility.init.registry.LHItems;
+import net.karashokleo.l2hostility.util.raytrace.ClientUpdatePacket;
 import net.karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -65,8 +73,21 @@ public class ClientEvents
         }
     }
 
-    public static void onLevelRenderLast()
+    public static void register()
     {
+        ItemTooltipCallback.EVENT.register((stack, context, lines) ->
+        {
+            if (L2HostilityClient.getClientWorld() == null) return;
+            EnchantmentDisabler.modifyTooltip(stack, lines, L2HostilityClient.getClientWorld());
+        });
+        ClientTickEvents.START_CLIENT_TICK.register(client ->
+                client.execute(() ->
+                {
+                    for (EntityTarget target : EntityTarget.LIST)
+                        target.tickRender();
+                }));
+        ClientPlayNetworking.registerGlobalReceiver(L2Hostility.HANDLER.getPacketType(ClientUpdatePacket.class), (packet, player, responseSender) ->
+                RayTraceUtilClient.clientUpdateTarget(player, packet.packet().range));
         WorldRenderEvents.LAST.register(context ->
         {
 //            if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRIPWIRE_BLOCKS)

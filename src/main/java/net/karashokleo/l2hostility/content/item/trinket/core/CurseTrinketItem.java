@@ -3,14 +3,29 @@ package net.karashokleo.l2hostility.content.item.trinket.core;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
+import net.karashokleo.l2hostility.util.GenericItemStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CurseTrinketItem extends BaseTrinketItem
 {
+    public static List<GenericItemStack<CurseTrinketItem>> getFromPlayer(LivingEntity player)
+    {
+        var list = TrinketCompat.getItems(player, e -> e.getItem() instanceof CurseTrinketItem);
+        List<GenericItemStack<CurseTrinketItem>> ans = new ArrayList<>();
+        for (var e : list)
+            if (e.getItem() instanceof CurseTrinketItem item)
+                ans.add(new GenericItemStack<>(item, e));
+        return ans;
+    }
+
     public CurseTrinketItem(Settings settings)
     {
         super(settings);

@@ -6,33 +6,35 @@ import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import net.karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-
-import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerDifficultyComponent implements ServerTickingComponent, AutoSyncedComponent
 {
+    public PlayerEntity player;
     public PlayerDifficulty diff;
 
     public PlayerDifficultyComponent(PlayerEntity player)
     {
-        diff = new PlayerDifficulty(player);
+        this.player = player;
+        this.diff = new PlayerDifficulty(player);
     }
 
     @Override
     public void serverTick()
     {
-        diff.tick();
+        this.diff.tick();
+    }
+
+
+    @Override
+    public void readFromNbt(@NotNull NbtCompound tag)
+    {
+        this.diff = TagCodec.fromTag(tag, PlayerDifficulty.class, new PlayerDifficulty(this.player), serialField -> true);
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag)
+    public void writeToNbt(@NotNull NbtCompound tag)
     {
-        diff = Objects.requireNonNull(TagCodec.fromTag(tag, PlayerDifficulty.class));
-    }
-
-    @Override
-    public void writeToNbt(NbtCompound tag)
-    {
-        TagCodec.toTag(tag, diff);
+        TagCodec.toTag(tag, this.diff);
     }
 }

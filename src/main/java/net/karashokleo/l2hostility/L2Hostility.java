@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.karashokleo.l2hostility.data.DataLoader;
 import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.data.LHTags;
 import net.karashokleo.l2hostility.init.registry.*;
 import net.karashokleo.l2hostility.util.raytrace.ClientUpdatePacket;
 import net.karashokleo.l2hostility.util.raytrace.RayTraceUtil;
@@ -44,6 +45,8 @@ public class L2Hostility implements ModInitializer
         L2Hostility.HANDLER.configure(TargetSetPacket.class);
 
         LHItems.register();
+        LHTraits.register();
+        LHTags.register();
         LHEffects.register();
         LHEnchantments.register();
         LHEvents.register();

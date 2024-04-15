@@ -3,7 +3,7 @@ package net.karashokleo.l2hostility.content.component.mob;
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.l2serial.util.Wrappers;
-import net.karashokleo.l2hostility.content.component.LHComponents;
+import net.karashokleo.l2hostility.init.registry.LHComponents;
 import net.karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import net.karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
 import net.karashokleo.l2hostility.content.component.chunk.RegionalDifficultyModifier;
@@ -77,6 +77,20 @@ public class MobDifficulty
     public MobDifficulty(MobEntity mob)
     {
         this.owner = mob;
+    }
+
+    public MobDifficulty(MobEntity owner, Stage stage, int lv, boolean summoned, boolean noDrop, boolean fullDrop, double dropRate, @Nullable BlockPos pos, boolean inherited, boolean ticking)
+    {
+        this.owner = owner;
+        this.stage = stage;
+        this.lv = lv;
+        this.summoned = summoned;
+        this.noDrop = noDrop;
+        this.fullDrop = fullDrop;
+        this.dropRate = dropRate;
+        this.pos = pos;
+        this.inherited = inherited;
+        this.ticking = ticking;
     }
 
     public void init(RegionalDifficultyModifier difficulty)

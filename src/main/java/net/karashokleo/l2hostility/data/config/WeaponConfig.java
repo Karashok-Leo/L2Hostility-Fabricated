@@ -108,11 +108,9 @@ public class WeaponConfig
 
     public record ItemConfig(ArrayList<ItemStack> stack, int level, int weight)
     {
-
     }
 
     public record EnchConfig(ArrayList<Enchantment> enchantments, int level, float chance)
     {
-
     }
 }

@@ -64,41 +64,27 @@ public class TraitConfig
             return TagKey.of(Registries.ENTITY_TYPE.getKey(), tag);
         }
 
-        public Config addWhitelist(TagKey<EntityType<?>> tag)
-        {
-            TagEntityTypeProvider.add(getWhitelistTag(), tag);
-            return this;
-        }
-
-        public Config addWhitelist(EntityType<?> type)
-        {
-            TagEntityTypeProvider.add(getWhitelistTag(), type);
-            return this;
-        }
-
-        public Config addWhitelist(EntityType<?>... types)
-        {
-            for (EntityType<?> type : types)
-                addWhitelist(type);
-            return this;
-        }
-
         public Config addBlacklist(TagKey<EntityType<?>> tag)
         {
             TagEntityTypeProvider.add(getBlacklistTag(), tag);
             return this;
         }
 
-        public Config addBlacklist(EntityType<?> type)
+        public Config addBlacklist(EntityType<?>... types)
         {
-            TagEntityTypeProvider.add(getBlacklistTag(), type);
+            TagEntityTypeProvider.add(getBlacklistTag(), types);
             return this;
         }
 
-        public Config addBlacklist(EntityType<?>... types)
+        public Config addWhitelist(TagKey<EntityType<?>> tag)
         {
-            for (EntityType<?> type : types)
-                addBlacklist(type);
+            TagEntityTypeProvider.add(getWhitelistTag(), tag);
+            return this;
+        }
+
+        public Config addWhitelist(EntityType<?>... types)
+        {
+            TagEntityTypeProvider.add(getWhitelistTag(), types);
             return this;
         }
 

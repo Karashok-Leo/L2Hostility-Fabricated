@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "l2hostility:weakener",
+    "l2hostility:stray",
+    "l2hostility:poisonous",
+    "l2hostility:withering",
+    "l2hostility:blindness",
+    "l2hostility:nausea",
+    "l2hostility:levitation",
+    "l2hostility:soul_burner",
+    "l2hostility:freezing",
+    "l2hostility:cursed"
+  ]
+}

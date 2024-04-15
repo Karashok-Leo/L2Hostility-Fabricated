@@ -38,7 +38,7 @@ public class LHData implements DataGeneratorEntrypoint
         pack.addProvider(WorldDifficultyConfigProvider::new);
 
         pack.addProvider(EN_US_LangProvider::new);
-        pack.addProvider(ZH_CN_LangProvider::new);
+//        pack.addProvider(ZH_CN_LangProvider::new);
         pack.addProvider(ModelProvider::new);
         pack.addProvider(TagEntityTypeProvider::new);
         pack.addProvider(TagItemProvider::new);

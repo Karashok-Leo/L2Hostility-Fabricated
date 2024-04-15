@@ -17,10 +17,11 @@ public class TagEntityTypeProvider extends FabricTagProvider.EntityTypeTagProvid
     private static final Map<TagKey<EntityType<?>>, List<EntityType<?>>> types = new HashMap<>();
     private static final Map<TagKey<EntityType<?>>, List<TagKey<EntityType<?>>>> tags = new HashMap<>();
 
-    public static void add(TagKey<EntityType<?>> key, EntityType<?> type)
+    public static void add(TagKey<EntityType<?>> key, EntityType<?>... entityTypes)
     {
         types.putIfAbsent(key, new ArrayList<>());
-        types.get(key).add(type);
+        for (EntityType<?> type : entityTypes)
+            types.get(key).add(type);
     }
 
     public static void add(TagKey<EntityType<?>> key, TagKey<EntityType<?>> tag)
@@ -47,7 +48,7 @@ public class TagEntityTypeProvider extends FabricTagProvider.EntityTypeTagProvid
         {
             var builder = getOrCreateTagBuilder(entry.getKey());
             for (TagKey<EntityType<?>> tag : entry.getValue())
-                builder.addTag(tag);
+                builder.forceAddTag(tag);
         }
     }
 }

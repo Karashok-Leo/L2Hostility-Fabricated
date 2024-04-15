@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.content.trait.highlevel;
 
-import net.karashokleo.l2hostility.content.component.LHComponents;
+import net.karashokleo.l2hostility.init.registry.LHComponents;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.logic.InheritContext;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;

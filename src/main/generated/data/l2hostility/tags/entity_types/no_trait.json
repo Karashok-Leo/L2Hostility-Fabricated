@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:endermite",
+    "#l2hostility:blacklist"
+  ]
+}

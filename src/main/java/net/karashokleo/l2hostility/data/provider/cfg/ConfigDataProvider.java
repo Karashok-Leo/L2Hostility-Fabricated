@@ -26,43 +26,34 @@ public abstract class ConfigDataProvider implements DataProvider
         this.name = name;
     }
 
-    public abstract void add(Collector collector);
+    public abstract void add();
+
+    public <T> void add(Identifier id, T config)
+    {
+        entryList.add(
+                new ConfigEntry<>(
+                        "data/" + id.getNamespace() + "/" + Constants.PARENT_CONFIG_PATH + "/" + name + "/" + id.getPath()+".json",
+                        config
+                )
+        );
+    }
 
     @Override
     public CompletableFuture<?> run(DataWriter writer)
     {
         Path folder = output.getPath();
-        add(new Collector(name, entryList));
+        add();
         List<CompletableFuture<?>> list = new ArrayList<>();
         entryList.forEach(entry ->
         {
             JsonElement elem = entry.serialize();
             if (elem != null)
-                list.add(DataProvider.writeToPath(writer, elem, folder.resolve(entry.s + ".json")));
+                list.add(DataProvider.writeToPath(writer, elem, folder.resolve(entry.path)));
         });
         return CompletableFuture.allOf(list.toArray(CompletableFuture[]::new));
     }
 
-    @Override
-    public String getName()
-    {
-        return "LH Config";
-    }
-
-    public record Collector(String name, List<ConfigEntry<?>> list)
-    {
-        public <T> void add(Identifier id, T config)
-        {
-            list.add(
-                    new ConfigEntry<>(
-                            "data/" + id.getNamespace() + "/" + Constants.PARENT_CONFIG_PATH + "/" + name + "/" + id.getPath(),
-                            config
-                    )
-            );
-        }
-    }
-
-    public record ConfigEntry<T>(String s, T config)
+    public record ConfigEntry<T>(String path, T config)
     {
         @Nullable
         public JsonElement serialize()

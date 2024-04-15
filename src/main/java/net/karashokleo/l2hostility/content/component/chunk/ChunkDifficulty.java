@@ -1,7 +1,7 @@
 package net.karashokleo.l2hostility.content.component.chunk;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.karashokleo.l2hostility.content.component.LHComponents;
+import net.karashokleo.l2hostility.init.registry.LHComponents;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.logic.MobDifficultyCollector;
 import net.minecraft.entity.LivingEntity;
@@ -68,12 +68,16 @@ public class ChunkDifficulty implements RegionalDifficultyModifier
     private void check()
     {
         if (stage == ChunkStage.PRE_INIT)
+        {
+            init();
             stage = ChunkStage.INIT;
+        }
     }
 
     // 获得特定Section分区的SectionDifficulty
     public SectionDifficulty getSection(int y)
     {
+        check();
         int index = (y >> 4) - owner.getBottomSectionCoord();
         index = MathHelper.clamp(index, 0, sections.length - 1);
         return sections[index];
@@ -89,6 +93,7 @@ public class ChunkDifficulty implements RegionalDifficultyModifier
     // 增加击杀记录
     public void addKillHistory(PlayerEntity player, LivingEntity mob, MobDifficulty diff)
     {
+        check();
         BlockPos pos = mob.getBlockPos();
         int index = -owner.getBottomSectionCoord() + (pos.getY() >> 4);
         if (index >= 0 && index < sections.length)

@@ -15,9 +15,15 @@ public class WorldDifficultyConfigProvider extends ConfigDataProvider
     }
 
     @Override
-    public void add(Collector collector)
+    public String getName()
     {
-        collector.add(L2Hostility.id("overworld"), new WorldDifficultyConfig()
+        return "LH World Difficulty Config";
+    }
+
+    @Override
+    public void add()
+    {
+        add(L2Hostility.id("overworld"), new WorldDifficultyConfig()
                 .putDim(World.OVERWORLD, 0, 0, 4, 1)
                 .putBiome(0, 5, 1, 0,
                         BiomeKeys.LUSH_CAVES,
@@ -47,11 +53,11 @@ public class WorldDifficultyConfigProvider extends ConfigDataProvider
                 .putBiome(0, 50, 4, 0.5, BiomeKeys.DEEP_DARK)
         );
 
-        collector.add(L2Hostility.id("nether"), new WorldDifficultyConfig()
+        add(L2Hostility.id("nether"), new WorldDifficultyConfig()
                 .putDim(World.NETHER, 0, 20, 9, 1.2)
         );
 
-        collector.add(L2Hostility.id("end"), new WorldDifficultyConfig()
+        add(L2Hostility.id("end"), new WorldDifficultyConfig()
                 .putDim(World.END, 0, 40, 16, 1.5)
         );
     }

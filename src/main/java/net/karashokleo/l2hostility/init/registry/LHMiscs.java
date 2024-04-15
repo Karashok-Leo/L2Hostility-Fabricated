@@ -1,13 +1,27 @@
 package net.karashokleo.l2hostility.init.registry;
 
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.text.Text;
 
 public class LHMiscs
 {
+    public static final RegistryKey<ItemGroup> HOSTILITY_KEY = RegistryKey.of(RegistryKeys.ITEM_GROUP, L2Hostility.id("hostility"));
+
+    private static final ItemGroup HOSTILITY = FabricItemGroup.builder()
+            .icon(() -> LHTraits.ENDER.asItem().getDefaultStack())
+            .displayName(Text.translatable("itemGroup.l2hostility.hostility"))
+            .build();
+
     //    public static final MenuEntry<EquipmentsMenu> EQUIPMENTS =
 //            REGISTRATE.menu("equipments", EquipmentsMenu::fromNetwork, () -> EquipmentsScreen::new)
 //                    .register();
@@ -21,5 +35,10 @@ public class LHMiscs
     public static void register()
     {
         Registry.register(Registries.ATTRIBUTE, L2Hostility.id("level"), ADD_LEVEL);
+        ItemGroupEvents.modifyEntriesEvent(HOSTILITY_KEY).register(entries ->
+        {
+            for (Item item : LHItems.TAB_ITEMS)
+                entries.add(item);
+        });
     }
 }

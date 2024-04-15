@@ -1,7 +1,9 @@
 package net.karashokleo.l2hostility.init.data;
 
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalEntityTypeTags;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
+import net.karashokleo.l2hostility.data.provider.TagEntityTypeProvider;
 import net.karashokleo.l2hostility.init.registry.LHTraits;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
@@ -10,6 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+
+import java.util.List;
 
 public class LHTags
 {
@@ -41,32 +45,55 @@ public class LHTags
     public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
     public static final TagKey<EntityType<?>> RANGED_WEAPON_TARGET = createEntityTag("ranged_weapon_target");
 
-    //
-//    public static void onEntityTagGen(RegistrateTagsProvider.IntrinsicImpl<EntityType<?>> pvd) {
-//        pvd.addTag(BLACKLIST);
-//        pvd.addTag(WHITELIST);
-//        pvd.addTag(NO_SCALING).addTag(BLACKLIST);
-//        pvd.addTag(NO_TRAIT).addTag(BLACKLIST).add(EntityType.ENDERMITE);
-//
-//        pvd.addTag(ARMOR_TARGET).add(
-//                EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
-//                EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON,
-//                EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE
-//        );
-//
-//        pvd.addTag(MELEE_WEAPON_TARGET).add(
-//                EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
-//                EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE,
-//                EntityType.WITHER_SKELETON, EntityType.VINDICATOR
-//        );
-//
-//        pvd.addTag(RANGED_WEAPON_TARGET).add(
-//                EntityType.SKELETON, EntityType.STRAY
-//        );
-//
-//        pvd.addTag(SEMIBOSS).addTag(Tags.EntityTypes.BOSSES)
-//                .add(EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER);
-//
+    public static void register()
+    {
+        TagEntityTypeProvider.add(
+                BLACKLIST
+        );
+        TagEntityTypeProvider.add(
+                WHITELIST
+        );
+        TagEntityTypeProvider.add(
+                NO_SCALING,
+                WHITELIST
+        );
+        TagEntityTypeProvider.add(
+                NO_TRAIT,
+                BLACKLIST
+        );
+        TagEntityTypeProvider.add(
+                NO_TRAIT,
+                EntityType.ENDERMITE
+        );
+        TagEntityTypeProvider.add(
+                ARMOR_TARGET,
+                EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
+                EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON,
+                EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE
+        );
+        TagEntityTypeProvider.add(
+                SEMIBOSS,
+                ConventionalEntityTypeTags.BOSSES
+        );
+        TagEntityTypeProvider.add(
+                SEMIBOSS,
+                EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER
+        );
+        TagEntityTypeProvider.add(
+                NO_DROP
+        );
+        TagEntityTypeProvider.add(
+                MELEE_WEAPON_TARGET,
+                EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
+                EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE,
+                EntityType.WITHER_SKELETON, EntityType.VINDICATOR
+        );
+        TagEntityTypeProvider.add(
+                RANGED_WEAPON_TARGET,
+                EntityType.SKELETON, EntityType.STRAY
+        );
+    }
+
 //        if (ModList.get().isLoaded(TwilightForestMod.ID)) {
 //            pvd.addTag(NO_DROP).addOptional(TFEntities.DEATH_TOME.getId());
 //        }
@@ -125,12 +152,8 @@ public class LHTags
 //                    .addOptional(BMDEntities.GAUNTLET.getId())
 //                    .addOptional(BMDEntities.OBSIDILITH.getId())
 //                    .addOptional(BMDEntities.VOID_BLOSSOM.getId());
-//
 //        }
-//
-//        ENTITY_TAG_BUILDER.values().forEach(e -> e.accept(pvd));
-//    }
-//
+
     public static TagKey<Item> createItemTag(Identifier id)
     {
         return TagKey.of(RegistryKeys.ITEM, id);

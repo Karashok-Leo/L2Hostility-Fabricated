@@ -30,8 +30,13 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Rarity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LHItems
 {
+    public static final List<Item> TAB_ITEMS = new ArrayList<>();
+
     public static HostilityOrb HOSTILITY_ORB;
     public static BottleOfCurse BOTTLE_CURSE;
     public static BottleOfSanity BOTTLE_SANITY;
@@ -288,7 +293,7 @@ public class LHItems
                 .addModel()
                 .addEN("Unpolished Looting Charm")
                 .addZH("")
-                .addTag(LHTags.NO_SEAL)
+                .addTag(LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
         LOOT_2 = ItemEntry.of(
@@ -300,7 +305,7 @@ public class LHItems
                 .addModel()
                 .addEN("Magical Looting Charm")
                 .addZH("")
-                .addTag(LHTags.NO_SEAL)
+                .addTag(LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
         LOOT_3 = ItemEntry.of(
@@ -312,7 +317,7 @@ public class LHItems
                 .addModel()
                 .addEN("Chaotic Looting Charm")
                 .addZH("")
-                .addTag(LHTags.NO_SEAL)
+                .addTag(LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
         LOOT_4 = ItemEntry.of(
@@ -324,7 +329,7 @@ public class LHItems
                 .addModel()
                 .addEN("Miraculous Looting Charm")
                 .addZH("")
-                .addTag(LHTags.NO_SEAL)
+                .addTag(LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
         CURSE_ENVY = ItemEntry.of(
@@ -615,6 +620,18 @@ public class LHItems
                 .addTag(LHTags.CHAOS, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
+        NIDHOGGUR = ItemEntry.of(
+                        "greed_of_nidhoggur",
+                        new GreedOfNidhoggur(
+                                new FabricItemSettings()
+                        )
+                )
+                .addModel()
+                .addEN()
+                .addZH("")
+                .addTag(LHTags.CHAOS, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
+                .register();
+
         RESTORATION = ItemEntry.of(
                         "pocket_of_restoration",
                         new PocketOfRestoration(
@@ -688,6 +705,7 @@ public class LHItems
                 .addEN()
                 .addZH("")
                 .addTag(LHTags.NO_SEAL)
+                .removeTab()
                 .register();
     }
 
@@ -695,6 +713,7 @@ public class LHItems
     {
         String name;
         T item;
+        boolean addToTab = true;
 
         private ItemEntry(String name, T item)
         {
@@ -709,7 +728,14 @@ public class LHItems
 
         public T register()
         {
+            if (addToTab) TAB_ITEMS.add(item);
             return Registry.register(Registries.ITEM, L2Hostility.id(name), item);
+        }
+
+        public ItemEntry<T> removeTab()
+        {
+            addToTab = false;
+            return this;
         }
 
         public ItemEntry<T> addModel()

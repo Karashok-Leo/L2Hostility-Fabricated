@@ -15,9 +15,15 @@ public class WeaponConfigProvider extends ConfigDataProvider
     }
 
     @Override
-    public void add(Collector collector)
+    public String getName()
     {
-        collector.add(L2Hostility.id("vanilla"), new WeaponConfig()
+        return "LH Weapon Config";
+    }
+
+    @Override
+    public void add()
+    {
+        add(L2Hostility.id("vanilla"), new WeaponConfig()
                 .putMeleeWeapon(0, 200, Items.AIR)
                 .putMeleeWeapon(30, 100, Items.IRON_AXE, Items.IRON_SWORD)
                 .putMeleeWeapon(50, 100, Items.DIAMOND_AXE, Items.DIAMOND_SWORD)

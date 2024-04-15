@@ -46,6 +46,18 @@ public class SectionDifficulty
     @SerialClass.SerialField
     private final DifficultyLevel difficulty = new DifficultyLevel();
 
+    public SectionDifficulty()
+    {
+    }
+
+    public SectionDifficulty(ChunkSection section, int index, BlockPos activePos, SectionStage stage)
+    {
+        this.section = section;
+        this.index = index;
+        this.activePos = activePos;
+        this.stage = stage;
+    }
+
     // 修改MobDifficultyCollector
     public void modifyInstance(World world, BlockPos pos, MobDifficultyCollector instance)
     {

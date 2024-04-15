@@ -23,9 +23,15 @@ public class TraitConfigProvider extends ConfigDataProvider
     }
 
     @Override
-    public void add(Collector collector)
+    public String getName()
+    {
+        return "LH Trait Config";
+    }
+
+    @Override
+    public void add()
     {
         for (Map.Entry<MobTrait, TraitConfig.Config> entry : configs.entrySet())
-            collector.add(entry.getKey().getNonNullId(), entry.getValue());
+            add(entry.getKey().getNonNullId(), entry.getValue());
     }
 }
