@@ -50,6 +50,7 @@ public class L2Hostility implements ModInitializer
         LHEffects.register();
         LHEnchantments.register();
         LHEvents.register();
+        LHTriggers.register();
         LHMiscs.register();
 
         ServerPlayNetworking.registerGlobalReceiver(HANDLER.getPacketType(TargetSetPacket.class), (packet, player, responseSender) -> RayTraceUtil.sync(packet.packet()));

@@ -50,4 +50,58 @@ public class CleanseEffect extends StatusEffect
     {
         clearOnEntity(entity);
     }
+
+    // NYI
+    // 净化实现
+//    public static boolean isSkill(MobEffectInstance ins, LivingEntity entity) {
+//        if (ins.getEffect() instanceof SkillEffect)
+//            return true;
+//        if (EffectUtil.getReason() == EffectUtil.AddReason.SKILL)
+//            return true;
+//        int pred = LCConfig.COMMON.cleansePredicate.get();
+//        if (ins.getEffect().isBeneficial() && pred > 0) return true;
+//        if (ins.getEffect().getCategory() == MobEffectCategory.NEUTRAL && pred > 1) return true;
+//        var tag = ForgeRegistries.MOB_EFFECTS.tags();
+//        if (tag != null && tag.getTag(TagGen.SKILL_EFFECT).contains(ins.getEffect())) {
+//            return true;
+//        }
+//        return CurioCompat.testEffect(ins, entity);
+//    }
+//
+//    public static boolean testEffect(MobEffectInstance ins, LivingEntity entity) {
+//        if (ModList.get().isLoaded("curios")) {
+//            return testEffectImpl(ins, entity);
+//        }
+//        return false;
+//    }
+//
+//    private static boolean testEffectImpl(MobEffectInstance ins, LivingEntity entity) {
+//        return CuriosApi.getCuriosInventory(entity).resolve().flatMap(cap ->
+//                cap.findFirstCurio(e -> e.getItem() instanceof EffectValidItem item &&
+//                        item.isEffectValid(ins, e, entity))).isPresent();
+//    }
+//
+//    @SubscribeEvent
+//    public static void onPotionTest(MobEffectEvent.Applicable event) {
+//        if (event.getEntity().hasEffect(LCEffects.CLEANSE.get())) {
+//            if (isSkill(event.getEffectInstance(), event.getEntity())) return;
+//            event.setResult(Event.Result.DENY);
+//        }
+//    }
+//
+//    @SubscribeEvent
+//    public static void onForceAdd(ForceAddEffectEvent event) {
+//        if (event.getEntity().hasEffect(LCEffects.CLEANSE.get())) {
+//            if (isSkill(event.getEffectInstance(), event.getEntity())) return;
+//            event.setResult(Event.Result.DENY);
+//        }
+//    }
+//
+//    @SubscribeEvent(priority = EventPriority.LOW)
+//    public static void onPotionAdded(MobEffectEvent.Added event) {
+//        if (event.getEntity().hasEffect(LCEffects.CLEANSE.get())) {
+//            if (isSkill(event.getEffectInstance(), event.getEntity())) return;
+//            GeneralEventHandler.schedule(() -> CleanseEffect.clearOnEntity(event.getEntity()));
+//        }
+//    }
 }

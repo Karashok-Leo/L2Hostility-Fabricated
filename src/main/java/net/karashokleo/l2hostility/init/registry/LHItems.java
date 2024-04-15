@@ -87,7 +87,7 @@ public class LHItems
 
     public static void register()
     {
-        HOSTILITY_ORB = ItemEntry.of(
+        HOSTILITY_ORB = Entry.of(
                         "hostility_orb",
                         new HostilityOrb(
                                 new FabricItemSettings()
@@ -97,10 +97,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("恶意吸收宝珠")
                 .register();
 
-        BOTTLE_CURSE = ItemEntry.of(
+        BOTTLE_CURSE = Entry.of(
                         "bottle_of_curse",
                         new BottleOfCurse(
                                 new FabricItemSettings()
@@ -111,10 +111,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("瓶装恶意")
                 .register();
 
-        BOTTLE_SANITY = ItemEntry.of(
+        BOTTLE_SANITY = Entry.of(
                         "bottle_of_sanity",
                         new BottleOfSanity(
                                 new FabricItemSettings()
@@ -125,10 +125,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("恶意净化药水")
                 .register();
 
-        WITCH_DROPLET = ItemEntry.of(
+        WITCH_DROPLET = Entry.of(
                         "witch_droplet",
                         new Item(
                                 new FabricItemSettings()
@@ -136,10 +136,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("女巫浓缩凝露")
                 .register();
 
-        BOOSTER_POTION = ItemEntry.of(
+        BOOSTER_POTION = Entry.of(
                         "booster_potion",
                         new EffectBoosterBottle(
                                 new FabricItemSettings()
@@ -150,9 +150,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("药水增幅药剂")
                 .register();
 
+        //嗜魔弹
 //            WITCH_CHARGE = LeosHostility.REGISTRATE.item("witch_charge",
 //                    p - new HostilityChargeItem(p, ChargeType.BOOST, () -
 //                            LangData.TOOLTIP_WITCH_CHARGE.get(
@@ -162,6 +163,7 @@ public class LHItems
 //                            ).withStyle(ChatFormatting.GRAY))
 //            ).register();
 //
+        //永恒嗜魔弹
 //            ETERNAL_WITCH_CHARGE = LeosHostility.REGISTRATE.item("eternal_witch_charge",
 //                    p - new HostilityChargeItem(p, ChargeType.ETERNAL, () -
 //                            LangData.TOOLTIP_WITCH_ETERNAL.get(
@@ -169,7 +171,7 @@ public class LHItems
 //                            ).withStyle(ChatFormatting.GRAY))
 //            ).register();
 
-        BOOK_COPY = ItemEntry.of(
+        BOOK_COPY = Entry.of(
                         "book_of_reprint",
                         new BookCopy(
                                 new FabricItemSettings()
@@ -177,10 +179,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("附魔影本")
                 .register();
 
-        BOOK_OMNISCIENCE = ItemEntry.of(
+        BOOK_OMNISCIENCE = Entry.of(
                         "book_of_omniscience",
                         new BookEverything(
                                 new FabricItemSettings()
@@ -188,10 +190,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("全知之书")
                 .register();
 
-        DETECTOR = ItemEntry.of(
+        DETECTOR = Entry.of(
                         "hostility_detector",
                         new Detector(
                                 new FabricItemSettings()
@@ -200,10 +202,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("恶意探测器")
                 .register();
 
-        DETECTOR_GLASSES = ItemEntry.of(
+        DETECTOR_GLASSES = Entry.of(
                         "detector_glasses",
                         new DetectorGlasses(
                                 new FabricItemSettings()
@@ -212,11 +214,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("侦测眼镜")
                 .addTag(LHTags.FACE_SLOT)
                 .register();
 
-        WITCH_WAND = ItemEntry.of(
+        WITCH_WAND = Entry.of(
                         "witch_wand",
                         new WitchWand(
                                 new FabricItemSettings()
@@ -227,11 +229,11 @@ public class LHItems
                 )
                 .addModel(Models.HANDHELD)
                 .addEN()
-                .addZH("")
+                .addZH("混乱魔药法杖")
                 .addTag(LHTags.CHAOS)
                 .register();
 
-        CHAOS_INGOT = ItemEntry.of(
+        CHAOS_INGOT = Entry.of(
                         "chaos_ingot",
                         new Item(
                                 new FabricItemSettings()
@@ -241,11 +243,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("混沌锭")
                 .addTag(LHTags.CHAOS)
                 .register();
 
-        HOSTILITY_ESSENCE = ItemEntry.of(
+        HOSTILITY_ESSENCE = Entry.of(
                         "hostility_essence",
                         new NetherStarItem(
                                 new FabricItemSettings()
@@ -255,10 +257,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("恶意精华")
                 .register();
 
-        MIRACLE_POWDER = ItemEntry.of(
+        MIRACLE_POWDER = Entry.of(
                         "miracle_powder",
                         new NetherStarItem(
                                 new FabricItemSettings()
@@ -268,10 +270,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("奇迹粉末")
                 .register();
 
-        MIRACLE_INGOT = ItemEntry.of(
+        MIRACLE_INGOT = Entry.of(
                         "miracle_ingot",
                         new NetherStarItem(
                                 new FabricItemSettings()
@@ -281,10 +283,10 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("奇迹锭")
                 .register();
 
-        LOOT_1 = ItemEntry.of(
+        LOOT_1 = Entry.of(
                         "charm_of_looting_1",
                         new LootingCharm(
                                 new FabricItemSettings()
@@ -292,11 +294,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN("Unpolished Looting Charm")
-                .addZH("")
+                .addZH("粗糙抢夺宝珠")
                 .addTag(LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        LOOT_2 = ItemEntry.of(
+        LOOT_2 = Entry.of(
                         "charm_of_looting_2",
                         new LootingCharm(
                                 new FabricItemSettings()
@@ -304,11 +306,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN("Magical Looting Charm")
-                .addZH("")
+                .addZH("魔能抢夺宝珠")
                 .addTag(LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        LOOT_3 = ItemEntry.of(
+        LOOT_3 = Entry.of(
                         "charm_of_looting_3",
                         new LootingCharm(
                                 new FabricItemSettings()
@@ -316,11 +318,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN("Chaotic Looting Charm")
-                .addZH("")
+                .addZH("混沌抢夺宝珠")
                 .addTag(LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        LOOT_4 = ItemEntry.of(
+        LOOT_4 = Entry.of(
                         "charm_of_looting_4",
                         new LootingCharm(
                                 new FabricItemSettings()
@@ -328,11 +330,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN("Miraculous Looting Charm")
-                .addZH("")
+                .addZH("奇迹抢夺宝珠")
                 .addTag(LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        CURSE_ENVY = ItemEntry.of(
+        CURSE_ENVY = Entry.of(
                         "curse_of_envy",
                         new CurseOfEnvy(
                                 new FabricItemSettings()
@@ -340,11 +342,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("嫉妒诅咒")
                 .addTag(LHTags.CHAOS, LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        CURSE_GLUTTONY = ItemEntry.of(
+        CURSE_GLUTTONY = Entry.of(
                         "curse_of_gluttony",
                         new CurseOfGluttony(
                                 new FabricItemSettings()
@@ -352,11 +354,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("暴食诅咒")
                 .addTag(LHTags.CHAOS, LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        CURSE_GREED = ItemEntry.of(
+        CURSE_GREED = Entry.of(
                         "curse_of_greed",
                         new CurseOfGreed(
                                 new FabricItemSettings()
@@ -364,11 +366,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("贪婪诅咒")
                 .addTag(LHTags.CHAOS, LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        CURSE_LUST = ItemEntry.of(
+        CURSE_LUST = Entry.of(
                         "curse_of_lust",
                         new CurseOfLust(
                                 new FabricItemSettings()
@@ -376,11 +378,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("色欲诅咒")
                 .addTag(LHTags.CHAOS, LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        CURSE_PRIDE = ItemEntry.of(
+        CURSE_PRIDE = Entry.of(
                         "curse_of_pride",
                         new CurseOfPride(
                                 new FabricItemSettings()
@@ -388,11 +390,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("傲慢诅咒")
                 .addTag(LHTags.CHAOS, LHTags.CHARM_SLOT, LHTags.CURSE_SLOT)
                 .register();
 
-        CURSE_SLOTH = ItemEntry.of(
+        CURSE_SLOTH = Entry.of(
                         "curse_of_sloth",
                         new CurseOfSloth(
                                 new FabricItemSettings()
@@ -400,11 +402,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("怠惰诅咒")
                 .addTag(LHTags.CHAOS, LHTags.CHARM_SLOT, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        CURSE_WRATH = ItemEntry.of(
+        CURSE_WRATH = Entry.of(
                         "curse_of_wrath",
                         new CurseOfWrath(
                                 new FabricItemSettings()
@@ -412,11 +414,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("暴怒诅咒")
                 .addTag(LHTags.CHAOS, LHTags.CHARM_SLOT, LHTags.CURSE_SLOT)
                 .register();
 
-        RING_OCEAN = ItemEntry.of(
+        RING_OCEAN = Entry.of(
                         "ring_of_ocean",
                         new RingOfOcean(
                                 new FabricItemSettings()
@@ -424,11 +426,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("深海加护之戒")
                 .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
                 .register();
 
-        RING_LIFE = ItemEntry.of(
+        RING_LIFE = Entry.of(
                         "ring_of_life",
                         new RingOfLife(
                                 new FabricItemSettings()
@@ -436,11 +438,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("屹立不倒之戒")
                 .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
                 .register();
 
-        RING_DIVINITY = ItemEntry.of(
+        RING_DIVINITY = Entry.of(
                         "ring_of_divinity",
                         new RingOfDivinity(
                                 new FabricItemSettings()
@@ -448,11 +450,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("圣光守护之戒")
                 .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
                 .register();
 
-        RING_REFLECTION = ItemEntry.of(
+        RING_REFLECTION = Entry.of(
                         "ring_of_reflection",
                         new RingOfReflection(
                                 new FabricItemSettings()
@@ -460,11 +462,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("诅咒扭曲之戒")
                 .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
                 .register();
 
-        RING_INCARCERATION = ItemEntry.of(
+        RING_INCARCERATION = Entry.of(
                         "ring_of_incarceration",
                         new RingOfIncarceration(
                                 new FabricItemSettings()
@@ -472,11 +474,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("禁锢诅咒之戒")
                 .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
                 .register();
 
-        RING_CORROSION = ItemEntry.of(
+        RING_CORROSION = Entry.of(
                         "ring_of_corrosion",
                         new RingOfCorrosion(
                                 new FabricItemSettings()
@@ -484,11 +486,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("丑恶诅咒之戒")
                 .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
                 .register();
 
-        RING_HEALING = ItemEntry.of(
+        RING_HEALING = Entry.of(
                         "ring_of_healing",
                         new RingOfHealing(
                                 new FabricItemSettings()
@@ -496,11 +498,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("再生之戒")
                 .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
                 .register();
 
-        FLAMING_THORN = ItemEntry.of(
+        FLAMING_THORN = Entry.of(
                         "flaming_thorn",
                         new FlamingThorn(
                                 new FabricItemSettings()
@@ -508,11 +510,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("魔焰荆棘")
                 .addTag(LHTags.CHAOS, LHTags.HAND_SLOT)
                 .register();
 
-        IMAGINE_BREAKER = ItemEntry.of(
+        IMAGINE_BREAKER = Entry.of(
                         "imagine_breaker",
                         new ImagineBreaker(
                                 new FabricItemSettings()
@@ -520,11 +522,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("破咒遗骨")
                 .addTag(LHTags.CHAOS, LHTags.HAND_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        PLATINUM_STAR = ItemEntry.of(
+        PLATINUM_STAR = Entry.of(
                         "platinum_star",
                         new PlatinumStar(
                                 new FabricItemSettings()
@@ -532,11 +534,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("破风拳套")
                 .addTag(LHTags.CHAOS, LHTags.HAND_SLOT, LHTags.CHARM_SLOT)
                 .register();
 
-        INFINITY_GLOVE = ItemEntry.of(
+        INFINITY_GLOVE = Entry.of(
                         "infinity_glove",
                         new InfinityGlove(
                                 new FabricItemSettings()
@@ -544,11 +546,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("宝石手套")
                 .addTag(LHTags.CHAOS, LHTags.HAND_SLOT)
                 .register();
 
-        ABYSSAL_THORN = ItemEntry.of(
+        ABYSSAL_THORN = Entry.of(
                         "abyssal_thorn",
                         new AbyssalThorn(
                                 new FabricItemSettings()
@@ -556,11 +558,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("深渊王座")
                 .addTag(LHTags.CHAOS, LHTags.CURSE_SLOT)
                 .register();
 
-        DIVINITY_CROSS = ItemEntry.of(
+        DIVINITY_CROSS = Entry.of(
                         "divinity_cross",
                         new DivinityCross(
                                 new FabricItemSettings()
@@ -568,11 +570,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("神圣十字")
                 .addTag(LHTags.CHAOS, LHTags.CURSE_SLOT, LHTags.CHARM_SLOT)
                 .register();
 
-        DIVINITY_LIGHT = ItemEntry.of(
+        DIVINITY_LIGHT = Entry.of(
                         "divinity_light",
                         new DivinityLight(
                                 new FabricItemSettings()
@@ -580,11 +582,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("神圣之光")
                 .addTag(LHTags.CHAOS, LHTags.CURSE_SLOT, LHTags.CHARM_SLOT)
                 .register();
 
-        ODDEYES_GLASSES = ItemEntry.of(
+        ODDEYES_GLASSES = Entry.of(
                         "oddeyes_glasses",
                         new OddeyesGlasses(
                                 new FabricItemSettings()
@@ -592,11 +594,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("异色眼镜")
                 .addTag(LHTags.CHAOS, LHTags.FACE_SLOT)
                 .register();
 
-        TRIPLE_STRIP_CAPE = ItemEntry.of(
+        TRIPLE_STRIP_CAPE = Entry.of(
                         "triple_strip_cape",
                         new TripleStripCape(
                                 new FabricItemSettings()
@@ -604,11 +606,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("三色披风")
                 .addTag(LHTags.CHAOS, LHTags.BACK_SLOT)
                 .register();
 
-        ABRAHADABRA = ItemEntry.of(
+        ABRAHADABRA = Entry.of(
                         "abrahadabra",
                         new Abrahadabra(
                                 new FabricItemSettings()
@@ -616,11 +618,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("扭曲之魂")
                 .addTag(LHTags.CHAOS, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        NIDHOGGUR = ItemEntry.of(
+        NIDHOGGUR = Entry.of(
                         "greed_of_nidhoggur",
                         new GreedOfNidhoggur(
                                 new FabricItemSettings()
@@ -628,11 +630,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("尼德霍格之欲")
                 .addTag(LHTags.CHAOS, LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        RESTORATION = ItemEntry.of(
+        RESTORATION = Entry.of(
                         "pocket_of_restoration",
                         new PocketOfRestoration(
                                 new FabricItemSettings(),
@@ -641,11 +643,11 @@ public class LHItems
                 )
                 .addModel()
                 .addEN()
-                .addZH("")
+                .addZH("解咒口袋")
                 .addTag(LHTags.CHARM_SLOT, LHTags.NO_SEAL)
                 .register();
 
-        TRAIT_ADDER_WAND = ItemEntry.of(
+        TRAIT_ADDER_WAND = Entry.of(
                         "trait_adder_wand",
                         new TraitAdderWand(
                                 new FabricItemSettings()
@@ -654,10 +656,10 @@ public class LHItems
                 )
                 .addModel(Models.HANDHELD)
                 .addEN()
-                .addZH("")
+                .addZH("词条配置手杖")
                 .register();
 
-        TARGET_SELECT_WAND = ItemEntry.of(
+        TARGET_SELECT_WAND = Entry.of(
                         "target_select_wand",
                         new TargetSelectWand(
                                 new FabricItemSettings()
@@ -666,10 +668,10 @@ public class LHItems
                 )
                 .addModel(Models.HANDHELD)
                 .addEN()
-                .addZH("")
+                .addZH("攻击目标控制手杖")
                 .register();
 
-        EQUIPMENT_WAND = ItemEntry.of(
+        EQUIPMENT_WAND = Entry.of(
                         "equipment_wand",
                         new EquipmentWand(
                                 new FabricItemSettings()
@@ -678,10 +680,10 @@ public class LHItems
                 )
                 .addModel(Models.HANDHELD)
                 .addEN()
-                .addZH("")
+                .addZH("装备配置手杖")
                 .register();
 
-        AI_CONFIG_WAND = ItemEntry.of(
+        AI_CONFIG_WAND = Entry.of(
                         "ai_config_wand",
                         new AiConfigWand(
                                 new FabricItemSettings()
@@ -690,10 +692,10 @@ public class LHItems
                 )
                 .addModel(Models.HANDHELD)
                 .addEN()
-                .addZH("")
+                .addZH("AI控制手杖")
                 .register();
 
-        SEAL = ItemEntry.of(
+        SEAL = Entry.of(
                         "sealed_item",
                         new SealedItem(
                                 new FabricItemSettings()
@@ -703,27 +705,27 @@ public class LHItems
                 )
                 .addModel(Models.HANDHELD)
                 .addEN()
-                .addZH("")
+                .addZH("被封印的物品")
                 .addTag(LHTags.NO_SEAL)
                 .removeTab()
                 .register();
     }
 
-    static class ItemEntry<T extends Item>
+    static class Entry<T extends Item>
     {
         String name;
         T item;
         boolean addToTab = true;
 
-        private ItemEntry(String name, T item)
+        private Entry(String name, T item)
         {
             this.name = name;
             this.item = item;
         }
 
-        public static <T extends Item> ItemEntry<T> of(String name, T item)
+        public static <T extends Item> Entry<T> of(String name, T item)
         {
-            return new ItemEntry<>(name, item);
+            return new Entry<>(name, item);
         }
 
         public T register()
@@ -732,49 +734,49 @@ public class LHItems
             return Registry.register(Registries.ITEM, L2Hostility.id(name), item);
         }
 
-        public ItemEntry<T> removeTab()
+        public Entry<T> removeTab()
         {
             addToTab = false;
             return this;
         }
 
-        public ItemEntry<T> addModel()
+        public Entry<T> addModel()
         {
             ModelProvider.addItem(item);
             return this;
         }
 
-        public ItemEntry<T> addModel(Model model)
+        public Entry<T> addModel(Model model)
         {
             ModelProvider.addItem(item, model);
             return this;
         }
 
-        public ItemEntry<T> addEN()
+        public Entry<T> addEN()
         {
             return addEN(StringUtil.getNameById(name));
         }
 
-        public ItemEntry<T> addEN(String en)
+        public Entry<T> addEN(String en)
         {
             EN_US_LangProvider.addItem(item, en);
             return this;
         }
 
-        public ItemEntry<T> addZH(String zh)
+        public Entry<T> addZH(String zh)
         {
             ZH_CN_LangProvider.addItem(item, zh);
             return this;
         }
 
-        public ItemEntry<T> addTag(TagKey<Item> key)
+        public Entry<T> addTag(TagKey<Item> key)
         {
             TagItemProvider.add(key, item);
             return this;
         }
 
         @SafeVarargs
-        public final ItemEntry<T> addTag(TagKey<Item>... keys)
+        public final Entry<T> addTag(TagKey<Item>... keys)
         {
             for (TagKey<Item> key : keys)
                 TagItemProvider.add(key, item);

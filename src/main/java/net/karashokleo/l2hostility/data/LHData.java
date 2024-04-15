@@ -43,6 +43,7 @@ public class LHData implements DataGeneratorEntrypoint
         pack.addProvider(TagEntityTypeProvider::new);
         pack.addProvider(TagItemProvider::new);
         pack.addProvider(TraitTagProvider::new);
+        pack.addProvider(AdvancementProvider::new);
 
 //        L2Hostility.REGISTRATE.CONFIGS.forEach(e -> e.accept(collector));
 //

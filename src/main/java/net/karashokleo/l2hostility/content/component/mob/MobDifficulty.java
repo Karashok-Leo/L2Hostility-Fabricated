@@ -12,10 +12,12 @@ import net.karashokleo.l2hostility.content.logic.*;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.karashokleo.l2hostility.config.LHConfig;
 import net.karashokleo.l2hostility.init.data.LHTexts;
+import net.karashokleo.l2hostility.init.registry.LHTriggers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -262,14 +264,14 @@ public class MobDifficulty
 //            summoner.data.onDeath(mob);
 //        }
         // ---
-//        if (player instanceof ServerPlayerEntity sp)
-//        {
-//            HostilityTriggers.TRAIT_LEVEL.trigger(sp, this);
-//            HostilityTriggers.TRAIT_COUNT.trigger(sp, this);
-//            HostilityTriggers.KILL_TRAITS.trigger(sp, this);
-//            HostilityTriggers.TRAIT_FLAME.trigger(sp, mob, this);
-//            HostilityTriggers.TRAIT_EFFECT.trigger(sp, mob, this);
-//        }
+        if (player instanceof ServerPlayerEntity sp)
+        {
+            LHTriggers.TRAIT_LEVEL.trigger(sp, this);
+            LHTriggers.TRAIT_COUNT.trigger(sp, this);
+            LHTriggers.KILL_TRAITS.trigger(sp, this);
+            LHTriggers.TRAIT_FLAME.trigger(sp, mob, this);
+            LHTriggers.TRAIT_EFFECT.trigger(sp, mob, this);
+        }
     }
 
     @Nullable

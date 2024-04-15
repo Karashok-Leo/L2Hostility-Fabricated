@@ -41,161 +41,203 @@ public class LHTraits
     public static final Registry<MobTrait> TRAIT = FabricRegistryBuilder.createSimple(TRAIT_KEY).buildAndRegister();
 
     // No Desc
-    public static final AttributeTrait TANK = new AttributeTrait(
-            Formatting.GREEN,
-            new AttributeTrait.AttributeEntry(
-                    "tank_health",
-                    () -> EntityAttributes.GENERIC_MAX_HEALTH,
-                    () -> LHConfig.common().traits.tankHealth,
-                    EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-            ),
-            new AttributeTrait.AttributeEntry(
-                    "tank_armor",
-                    () -> EntityAttributes.GENERIC_ARMOR,
-                    () -> LHConfig.common().traits.tankArmor,
-                    EntityAttributeModifier.Operation.ADDITION
-            ),
-            new AttributeTrait.AttributeEntry(
-                    "tank_tough",
-                    () -> EntityAttributes.GENERIC_ARMOR_TOUGHNESS,
-                    () -> LHConfig.common().traits.tankTough,
-                    EntityAttributeModifier.Operation.ADDITION
-            )
-    );
-    public static final AttributeTrait SPEEDY = new AttributeTrait(
-            Formatting.AQUA,
-            new AttributeTrait.AttributeEntry(
-                    "speedy",
-                    () -> EntityAttributes.GENERIC_MOVEMENT_SPEED,
-                    () -> LHConfig.common().traits.speedy,
-                    EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-            )
-    );
-    public static final SelfEffectTrait PROTECTION = new SelfEffectTrait(() -> StatusEffects.RESISTANCE);
-    public static final InvisibleTrait INVISIBLE = new InvisibleTrait();
+    public static AttributeTrait TANK;
+    public static AttributeTrait SPEEDY;
+    public static SelfEffectTrait PROTECTION;
+    public static InvisibleTrait INVISIBLE;
 
     // Common
-    public static final FieryTrait FIERY = new FieryTrait();
-    public static final RegenTrait REGEN = new RegenTrait();
-    public static final AdaptingTrait ADAPTIVE = new AdaptingTrait();
-    public static final ReflectTrait REFLECT = new ReflectTrait();
-    public static final ShulkerTrait SHULKER = new ShulkerTrait();
-    public static final GrenadeTrait GRENADE = new GrenadeTrait();
-    public static final CorrosionTrait CORROSION = new CorrosionTrait();
-    public static final ErosionTrait EROSION = new ErosionTrait();
-    public static final GrowthTrait GROWTH = new GrowthTrait();
-    public static final SplitTrait SPLIT = new SplitTrait();
-    public static final DrainTrait DRAIN = new DrainTrait();
-    public static final CounterStrikeTrait STRIKE = new CounterStrikeTrait();
-    public static final ArenaTrait ARENA = new ArenaTrait();
-    public static final AuraEffectTrait GRAVITY = new AuraEffectTrait(() -> LHEffects.GRAVITY);
-    public static final AuraEffectTrait MOONWALK = new AuraEffectTrait(() -> LHEffects.GRAVITY);
+    public static FieryTrait FIERY;
+    public static RegenTrait REGEN;
+    public static AdaptingTrait ADAPTIVE;
+    public static ReflectTrait REFLECT;
+    public static ShulkerTrait SHULKER;
+    public static GrenadeTrait GRENADE;
+    public static CorrosionTrait CORROSION;
+    public static ErosionTrait EROSION;
+    public static GrowthTrait GROWTH;
+    public static SplitTrait SPLIT;
+    public static DrainTrait DRAIN;
+    public static CounterStrikeTrait STRIKE;
+    public static AuraEffectTrait GRAVITY;
+    public static AuraEffectTrait MOONWALK;
+    public static ArenaTrait ARENA;
 
     // Legendary
-    public static final DementorTrait DEMENTOR = new DementorTrait();
-    public static final DispellTrait DISPELL = new DispellTrait();
-    public static final UndyingTrait UNDYING = new UndyingTrait();
-    public static final EnderTrait ENDER = new EnderTrait();
-    public static final RepellingTrait REPELLING = new RepellingTrait();
-    public static final PullingTrait PULLING = new PullingTrait();
-    public static final ReprintTrait REPRINT = new ReprintTrait();
-    public static final KillerAuraTrait KILLER_AURA = new KillerAuraTrait();
-    public static final RagnarokTrait RAGNAROK = new RagnarokTrait();
+    public static DementorTrait DEMENTOR;
+    public static DispellTrait DISPELL;
+    public static UndyingTrait UNDYING;
+    public static EnderTrait ENDER;
+    public static RepellingTrait REPELLING;
+    public static PullingTrait PULLING;
+    public static ReprintTrait REPRINT;
+    public static KillerAuraTrait KILLER_AURA;
+    public static RagnarokTrait RAGNAROK;
 
     // Effects
-    public static final TargetEffectTrait WEAKNESS = new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.WEAKNESS, LHConfig.common().traits.weakTime * lv));
-    public static final TargetEffectTrait SLOWNESS = new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.SLOWNESS, LHConfig.common().traits.slowTime * lv));
-    public static final TargetEffectTrait POISON = new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.POISON, LHConfig.common().traits.poisonTime * lv));
-    public static final TargetEffectTrait WITHER = new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.WITHER, LHConfig.common().traits.witherTime * lv));
-    public static final TargetEffectTrait BLIND = new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.BLINDNESS, LHConfig.common().traits.blindTime * lv));
-    public static final TargetEffectTrait CONFUSION = new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.NAUSEA, LHConfig.common().traits.confusionTime * lv));
-    public static final TargetEffectTrait LEVITATION = new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.LEVITATION, LHConfig.common().traits.levitationTime * lv));
-    public static final TargetEffectTrait SOUL_BURNER = new TargetEffectTrait(lv -> new StatusEffectInstance(LHEffects.FLAME, LHConfig.common().traits.soulBurnerTime * lv));
-    public static final TargetEffectTrait FREEZING = new TargetEffectTrait(lv -> new StatusEffectInstance(LHEffects.ICE, LHConfig.common().traits.freezingTime * lv));
-    public static final TargetEffectTrait CURSED = new TargetEffectTrait(lv -> new StatusEffectInstance(LHEffects.CURSE, LHConfig.common().traits.curseTime * lv));
+    public static TargetEffectTrait WEAKNESS;
+    public static TargetEffectTrait SLOWNESS;
+    public static TargetEffectTrait POISON;
+    public static TargetEffectTrait WITHER;
+    public static TargetEffectTrait BLIND;
+    public static TargetEffectTrait CONFUSION;
+    public static TargetEffectTrait LEVITATION;
+    public static TargetEffectTrait SOUL_BURNER;
+    public static TargetEffectTrait FREEZING;
+    public static TargetEffectTrait CURSED;
 
     public static void register()
     {
         Handlers.enable(MobTrait.class, () -> TRAIT);
 
-        TraitEntry.of("tank", TANK, 20, 100, 5, 20)
+        TANK = Entry.of(
+                        "tank",
+                        new AttributeTrait(
+                                Formatting.GREEN,
+                                new AttributeTrait.AttributeEntry(
+                                        "tank_health",
+                                        () -> EntityAttributes.GENERIC_MAX_HEALTH,
+                                        () -> LHConfig.common().traits.tankHealth,
+                                        EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+                                ),
+                                new AttributeTrait.AttributeEntry(
+                                        "tank_armor",
+                                        () -> EntityAttributes.GENERIC_ARMOR,
+                                        () -> LHConfig.common().traits.tankArmor,
+                                        EntityAttributeModifier.Operation.ADDITION
+                                ),
+                                new AttributeTrait.AttributeEntry(
+                                        "tank_tough",
+                                        () -> EntityAttributes.GENERIC_ARMOR_TOUGHNESS,
+                                        () -> LHConfig.common().traits.tankTough,
+                                        EntityAttributeModifier.Operation.ADDITION
+                                )
+                        ),
+                        20, 100, 5, 20)
                 .addEN()
-                .addZH("")
+                .addZH("重装")
                 .register();
-        TraitEntry.of("speedy", SPEEDY, 20, 100, 5, 50)
+        SPEEDY = Entry.of(
+                        "speedy",
+                        new AttributeTrait(
+                                Formatting.AQUA,
+                                new AttributeTrait.AttributeEntry(
+                                        "speedy",
+                                        () -> EntityAttributes.GENERIC_MOVEMENT_SPEED,
+                                        () -> LHConfig.common().traits.speedy,
+                                        EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+                                )
+                        ),
+                        20, 100, 5, 50)
                 .addEN()
-                .addZH("")
+                .addZH("神速")
                 .register();
-        TraitEntry.of("protection", PROTECTION, 30, 100, 4, 50)
+        PROTECTION = Entry.of(
+                        "protection",
+                        new SelfEffectTrait(() -> StatusEffects.RESISTANCE),
+                        30, 100, 4, 50)
                 .addEN()
-                .addZH("")
+                .addZH("保护")
                 .register();
-        TraitEntry.of("invisible", INVISIBLE, 30, 100, 1, 50)
+        INVISIBLE = Entry.of(
+                        "invisible",
+                        new InvisibleTrait(),
+                        30, 100, 1, 50)
                 .addEN()
-                .addZH("")
+                .addZH("隐身")
                 .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
                 .register();
-        TraitEntry.of("fiery", FIERY, 20, 100, 1, 20)
+        FIERY = Entry.of(
+                        "fiery",
+                        new FieryTrait(),
+                        20, 100, 1, 20)
                 .addEN()
                 .addENDesc("Ignite attacker and attack target for %s seconds. Makes mob immune to fire.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("烈焰")
+                .addZHDesc("点燃攻击者和被攻击者%s秒，怪物免疫火焰伤害")
                 .register();
-        TraitEntry.of("regenerate", REGEN, 30, 100, 5, 50)
+        REGEN = Entry.of(
+                        "regenerate",
+                        new RegenTrait(),
+                        30, 100, 5, 50)
                 .addEN()
                 .addENDesc("Heals %s%% of full health every second.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("再生")
+                .addZHDesc("每秒回复总血量的%s%%")
                 .register();
-        TraitEntry.of("adaptive", ADAPTIVE, 80, 50, 5, 100)
+        ADAPTIVE = Entry.of(
+                        "adaptive",
+                        new AdaptingTrait(),
+                        80, 50, 5, 100)
                 .addEN()
                 .addENDesc("Memorize damage types taken and stack %s%% damage reduction for those damage every time. Memorizes last %s different damage types.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("适应")
+                .addZHDesc("记忆最近收到的%2$s种伤害。每次受到记忆中的伤害时，对那个伤害叠加%s%%的减伤（无上限）")
                 .register();
-        TraitEntry.of("reflect", REFLECT, 80, 50, 5, 100)
+        REFLECT = Entry.of(
+                        "reflect",
+                        new ReflectTrait(),
+                        80, 50, 5, 100)
                 .addEN()
                 .addENDesc("Reflect direct physical damage as %s%% magical damage")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("反射")
+                .addZHDesc("将直接物理伤害以%s%%魔法伤害的形式反射")
                 .register();
-        TraitEntry.of("shulker", SHULKER, 30, 100, 1, 70)
+        SHULKER = Entry.of(
+                        "shulker",
+                        new ShulkerTrait(),
+                        30, 100, 1, 70)
                 .addEN()
                 .addENDesc("Shoot bullets every %s seconds after the previous bullet disappears.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("潜影")
+                .addZHDesc("发射潜影子弹。上一个子弹消失后%s秒发射下一个")
                 .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
                 .register();
-        TraitEntry.of("grenade", GRENADE, 50, 100, 5, 100)
+        GRENADE = Entry.of(
+                        "grenade",
+                        new GrenadeTrait(),
+                        50, 100, 5, 100)
                 .addEN()
                 .addENDesc("Shoot explosive bullets every %s seconds after the previous bullet disappears.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("榴弹")
+                .addZHDesc("发射会爆炸的潜影榴弹，不会破坏方块。上一个子弹消失后%s秒发射下一个。")
                 .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
                 .register();
-        TraitEntry.of("corrosion", CORROSION, 50, 50, 3, 200)
+        CORROSION = Entry.of(
+                        "corrosion",
+                        new CorrosionTrait(),
+                        50, 50, 3, 200)
                 .addEN()
                 .addENDesc("When hit target, randomly picks %s equipments and increase their durability loss by %s. When there aren't enough equipments, increase damage by %s per piece")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("腐蚀")
+                .addZHDesc("击中目标时，随机选中%s个装备，消耗等同于其损失的耐久的%s。如果装备不够，每少一件增加%s伤害。")
                 .register();
-        TraitEntry.of("erosion", EROSION, 50, 50, 3, 200)
+        EROSION = Entry.of(
+                        "erosion",
+                        new ErosionTrait(),
+                        50, 50, 3, 200)
                 .addEN()
                 .addENDesc("When hit target, randomly picks %s equipments and reduce their durability by %s. When there aren't enough equipments, increase damage by %s per piece")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("风蚀")
+                .addZHDesc("击中目标时，随机选中%s个装备，消耗当前耐久的%s。如果装备不够，每少一件增加%s伤害。")
                 .register();
-        TraitEntry.of("growth", GROWTH, 60, 300, 3, 100)
+        GROWTH = Entry.of(
+                        "growth",
+                        new GrowthTrait(),
+                        60, 300, 3, 100)
                 .addEN()
                 .addENDesc("Slime will grow larger when at full health. Automatically gain Regenerate trait.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("生长")
+                .addZHDesc("史莱姆自动获得再生词条，满血时长大")
                 .register();
-        TraitEntry.of("split", SPLIT, 50, 100, 3, 120)
+        SPLIT = Entry.of(
+                        "split",
+                        new SplitTrait(),
+                        50, 100, 3, 120)
                 .addEN()
                 .addENDesc("When mob dies, it will split into 2 of itself with half levels but same trait. This trait reduce by 1 when split.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("分裂")
+                .addZHDesc("怪物死亡时分裂，等级减半并继承所有词条。本词条分裂时等级-1")
                 .configure(config -> config.addWhitelist(
                         EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
                         EntityType.ZOMBIFIED_PIGLIN, EntityType.DROWNED, EntityType.HUSK,
@@ -205,69 +247,99 @@ public class LHTraits
                         EntityType.SILVERFISH, EntityType.ENDERMITE
                 ))
                 .register();
-        TraitEntry.of("drain", DRAIN, 80, 100, 3, 100)
+        DRAIN = Entry.of(
+                        "drain",
+                        new DrainTrait(),
+                        80, 100, 3, 100)
                 .addEN()
                 .addENDesc("Grants a random potion trait with same level. When hit target, remove %s beneficial effects, deal %s more damage for every harmful effects, and increase their duration by %s. At most increase to %ss.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("嗜魔")
+                .addZHDesc("怪物获得相同等级的随机药水词条。怪物击中目标时，随机移除目标身上%s个正面效果，目标身上每有一个负面效果伤害上升%s，并且所有负面效果时间延长%s，最高延长至%s秒")
                 .register();
-        TraitEntry.of("strike", STRIKE, 50, 100, 1, 60)
+        STRIKE = Entry.of(
+                        "strike",
+                        new CounterStrikeTrait(),
+                        50, 100, 1, 60)
                 .addEN()
                 .addENDesc("After attacked, it will attempt to perform a counter strike.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("反击")
+                .addZHDesc("被攻击后会试图冲刺反击")
                 .configure(config -> config.addBlacklist(EntityType.WARDEN).addBlacklist(LHTags.MELEE_WEAPON_TARGET))
                 .register();
-        TraitEntry.of("gravity", GRAVITY, 50, 100, 3, 80)
+        GRAVITY = Entry.of(
+                        "gravity",
+                        new AuraEffectTrait(() -> LHEffects.GRAVITY),
+                        50, 100, 3, 80)
                 .addEN()
                 .addENDesc("Increase gravity for mobs around it")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("重力")
+                .addZHDesc("增加周围区域重力")
                 .register();
-        TraitEntry.of("moonwalk", MOONWALK, 50, 100, 3, 80)
+        MOONWALK = Entry.of(
+                        "moonwalk",
+                        new AuraEffectTrait(() -> LHEffects.MOONWALK),
+                        50, 100, 3, 80)
                 .addEN()
                 .addENDesc("Decrease gravity for mobs around it")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("月步")
+                .addZHDesc("减少周围区域重力")
                 .register();
-        TraitEntry.of("arena", ARENA, 1000, 1, 1, 50)
+        ARENA = Entry.of(
+                        "arena",
+                        new ArenaTrait(),
+                        1000, 1, 1, 50)
                 .addEN()
                 .addENDesc("Players around it cannot place or break blocks. Immune damage from entities not affected by this.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("领域")
+                .addZHDesc("区域内玩家无法放置和破坏方块，免疫来自区域外的生物的伤害")
                 .configure(config -> config.addWhitelist(LHTags.SEMIBOSS))
                 .register();
-        TraitEntry.of("dementor", DEMENTOR, 120, 50, 1, 150)
+        DEMENTOR = Entry.of(
+                        "dementor",
+                        new DementorTrait(),
+                        120, 50, 1, 150)
                 .addEN()
                 .addENDesc("Immune to physical damage. Damage bypass armor.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("摄魂")
+                .addZHDesc("免疫物理伤害，伤害穿透护甲")
                 .register();
-        TraitEntry.of("dispell", DISPELL, 100, 50, 3, 150)
+        DISPELL = Entry.of(
+                        "dispell",
+                        new DispellTrait(),
+                        100, 50, 3, 150)
                 .addEN()
                 .addENDesc("Immune to magic damage. Damage bypass magical protections. Randomly picks %s enchanted equipment and disable enchantments on them for %s seconds.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("破魔")
+                .addZHDesc("免疫魔法伤害。伤害穿透魔法保护。攻击时随机选中%s个附魔的装备并将其附魔封印%s秒")
                 .register();
-        TraitEntry.of("undying", UNDYING, 150, 100, 1, 150)
+        UNDYING = Entry.of(
+                        "undying",
+                        new UndyingTrait(),
+                        150, 100, 1, 150)
                 .addEN()
                 .addENDesc("Mob will heal to full health every time it dies.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("不死")
+                .addZHDesc("怪物死亡时满血复活")
                 .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
                 .register();
-        TraitEntry.of("teleport", ENDER, 120, 100, 1, 150)
+        ENDER = Entry.of(
+                        "teleport",
+                        new EnderTrait(),
+                        120, 100, 1, 150)
                 .addEN()
                 .addENDesc("Mob will attempt to teleport to avoid physical damage and track targets.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("传送")
+                .addZHDesc("怪物会通过传送躲避伤害和追踪目标")
                 .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
                 .register();
-        TraitEntry.of("repelling", REPELLING, 50, 100, 1, 100)
+        REPELLING = Entry.of(
+                        "repelling",
+                        new RepellingTrait(),
+                        50, 100, 1, 100)
                 .addEN()
                 .addENDesc("Mob will push away entities hostile to it within %s blocks, and immune to projectiles.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("排斥")
+                .addZHDesc("怪物会推开%s格内对自己有敌意的生物，并且免疫弹射物")
                 .configure(config -> config.addWhitelist(
                         EntityType.SKELETON, EntityType.STRAY,
                         EntityType.PILLAGER, EntityType.EVOKER, EntityType.WITCH,
@@ -275,99 +347,141 @@ public class LHTraits
                         EntityType.WITHER
                 ))
                 .register();
-        TraitEntry.of("pulling", PULLING, 50, 100, 1, 100)
+        PULLING = Entry.of(
+                        "pulling",
+                        new PullingTrait(),
+                        50, 100, 1, 100)
                 .addEN()
                 .addENDesc("Mob will pull entities hostile to it within %s blocks.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("吸引")
+                .addZHDesc("怪物会吸引%s格内对自己有敌意的生物")
                 .configure(config -> config.addWhitelist(LHTags.MELEE_WEAPON_TARGET))
                 .register();
-        TraitEntry.of("reprint", REPRINT, 100, 100, 1, 100)
+        REPRINT = Entry.of(
+                        "reprint",
+                        new ReprintTrait(),
+                        100, 100, 1, 100)
                 .addEN()
                 .addENDesc("Mob will copy target enchantments, and deal %s more damage per enchantment point")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("复印")
+                .addZHDesc("目标装备附魔点数每有1点，怪物伤害提升%s。近战复制所有装备附魔。x级附魔提供2^x附魔点数")
                 .register();
-        TraitEntry.of("killer_aura", KILLER_AURA, 100, 50, 3, 300)
+        KILLER_AURA = Entry.of(
+                        "killer_aura",
+                        new KillerAuraTrait(),
+                        100, 50, 3, 300)
                 .addEN()
                 .addENDesc("Deal %s magic damage to players and entities targeting it within %s blocks and apply trait effects for every %ss")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("杀戮光环")
+                .addZHDesc("每%3$s对%2$s格内的玩家和对自己有敌意的生物造成%1$s魔法伤害并施加词条效果")
                 .register();
-        TraitEntry.of("ragnarok", RAGNAROK, 200, 50, 3, 600)
+        RAGNAROK = Entry.of(
+                        "ragnarok",
+                        new RagnarokTrait(),
+                        200, 50, 3, 600)
                 .addEN()
                 .addENDesc("When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal.")
-                .addZH("")
-                .addZHDesc("")
+                .addZH("诸神黄昏")
+                .addZHDesc("击中目标时，随机选中%s个装备/饰品，并封印它们。右键使用%s秒来解封")
                 .register();
-        TraitEntry.of("weakener", WEAKNESS, 25, 50, 5, 40)
+        WEAKNESS = Entry.of(
+                        "weakener",
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.WEAKNESS, LHConfig.common().traits.weakTime * lv)),
+                        25, 50, 5, 40)
                 .addEN()
-                .addZH("")
+                .addZH("虚弱")
                 .addTag(LHTags.POTION)
                 .register();
-        TraitEntry.of("stray", SLOWNESS, 10, 100, 5, 20)
+        SLOWNESS = Entry.of(
+                        "stray",
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.SLOWNESS, LHConfig.common().traits.slowTime * lv)),
+                        10, 100, 5, 20)
                 .addEN()
-                .addZH("")
+                .addZH("流沙")
                 .addTag(LHTags.POTION)
                 .register();
-        TraitEntry.of("poisonous", POISON, 15, 100, 3, 20)
+        POISON = Entry.of(
+                        "poisonous",
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.POISON, LHConfig.common().traits.poisonTime * lv)),
+                        15, 100, 3, 20)
                 .addEN()
-                .addZH("")
+                .addZH("剧毒")
                 .addTag(LHTags.POTION)
                 .register();
-        TraitEntry.of("withering", WITHER, 15, 50, 3, 20)
+        WITHER = Entry.of(
+                        "withering",
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.WITHER, LHConfig.common().traits.witherTime * lv)),
+                        15, 50, 3, 20)
                 .addEN()
-                .addZH("")
+                .addZH("凋零")
                 .addTag(LHTags.POTION)
                 .register();
-        TraitEntry.of("blindness", BLIND, 30, 50, 3, 40)
+        BLIND = Entry.of(
+                        "blindness",
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.BLINDNESS, LHConfig.common().traits.blindTime * lv)),
+                        30, 50, 3, 40)
                 .addEN()
-                .addZH("")
+                .addZH("致盲")
                 .addTag(LHTags.POTION)
                 .register();
-        TraitEntry.of("nausea", CONFUSION, 30, 50, 3, 40)
+        CONFUSION = Entry.of(
+                        "nausea",
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.NAUSEA, LHConfig.common().traits.confusionTime * lv)),
+                        30, 50, 3, 40)
                 .addEN()
-                .addZH("")
+                .addZH("扭曲")
                 .addTag(LHTags.POTION)
                 .register();
-        TraitEntry.of("levitation", LEVITATION, 25, 50, 3, 40)
+        LEVITATION = Entry.of(
+                        "levitation",
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.LEVITATION, LHConfig.common().traits.levitationTime * lv)),
+                        25, 50, 3, 40)
                 .addEN()
-                .addZH("")
+                .addZH("升空")
                 .addTag(LHTags.POTION)
                 .register();
-        TraitEntry.of("soul_burner", SOUL_BURNER, 50, 100, 3, 70)
+        SOUL_BURNER = Entry.of(
+                        "soul_burner",
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(LHEffects.FLAME, LHConfig.common().traits.soulBurnerTime * lv)),
+                        50, 100, 3, 70)
                 .addEN()
-                .addZH("")
+                .addZH("业火")
                 .addTag(LHTags.POTION)
                 .register();
-        TraitEntry.of("freezing", FREEZING, 30, 50, 3, 50)
+        FREEZING = Entry.of(
+                        "freezing",
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(LHEffects.ICE, LHConfig.common().traits.freezingTime * lv)),
+                        30, 50, 3, 50)
                 .addEN()
-                .addZH("")
+                .addZH("寒流")
                 .addTag(LHTags.POTION)
                 .register();
-        TraitEntry.of("cursed", CURSED, 20, 100, 3, 20)
+        CURSED = Entry.of(
+                        "cursed",
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(LHEffects.CURSE, LHConfig.common().traits.curseTime * lv)),
+                        20, 100, 3, 20)
                 .addEN()
-                .addZH("")
+                .addZH("诅咒")
                 .addTag(LHTags.POTION)
                 .register();
     }
 
-    static class TraitEntry<T extends MobTrait>
+    static class Entry<T extends MobTrait>
     {
         String name;
         T trait;
         TraitConfig.Config config;
 
-        private TraitEntry(String name, T trait, TraitConfig.Config config)
+        private Entry(String name, T trait, TraitConfig.Config config)
         {
             this.name = name;
             this.trait = trait;
             this.config = config;
         }
 
-        public static <T extends MobTrait> TraitEntry<T> of(String name, T trait, int cost, int weight, int maxRank, int minLevel)
+        public static <T extends MobTrait> Entry<T> of(String name, T trait, int cost, int weight, int maxRank, int minLevel)
         {
-            return new TraitEntry<>(name, trait, new TraitConfig.Config(L2Hostility.id(name), cost, weight, maxRank, minLevel));
+            return new Entry<>(name, trait, new TraitConfig.Config(L2Hostility.id(name), cost, weight, maxRank, minLevel));
         }
 
         public T register()
@@ -381,50 +495,50 @@ public class LHTraits
             return Registry.register(LHTraits.TRAIT, id, trait);
         }
 
-        public TraitEntry<T> addEN()
+        public Entry<T> addEN()
         {
             return addEN(StringUtil.getNameById(name));
         }
 
-        public TraitEntry<T> addEN(String en)
+        public Entry<T> addEN(String en)
         {
             EN_US_LangProvider.addTrait(trait, en);
             return this;
         }
 
-        public TraitEntry<T> addENDesc(String en)
+        public Entry<T> addENDesc(String en)
         {
             EN_US_LangProvider.addTraitDesc(trait, en);
             return this;
         }
 
-        public TraitEntry<T> addZH(String zh)
+        public Entry<T> addZH(String zh)
         {
             ZH_CN_LangProvider.addTrait(trait, zh);
             return this;
         }
 
-        public TraitEntry<T> addZHDesc(String zh)
+        public Entry<T> addZHDesc(String zh)
         {
             ZH_CN_LangProvider.addTraitDesc(trait, zh);
             return this;
         }
 
-        public TraitEntry<T> addTag(TagKey<MobTrait> key)
+        public Entry<T> addTag(TagKey<MobTrait> key)
         {
             TraitTagProvider.add(key, trait);
             return this;
         }
 
         @SafeVarargs
-        public final TraitEntry<T> addTag(TagKey<MobTrait>... keys)
+        public final Entry<T> addTag(TagKey<MobTrait>... keys)
         {
             for (TagKey<MobTrait> key : keys)
                 TraitTagProvider.add(key, trait);
             return this;
         }
 
-        public TraitEntry<T> configure(Consumer<TraitConfig.Config> consumer)
+        public Entry<T> configure(Consumer<TraitConfig.Config> consumer)
         {
             consumer.accept(config);
             return this;
