@@ -1,8 +1,8 @@
 package net.karashokleo.l2hostility.content.trait.legendary;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
-import net.karashokleo.l2hostility.config.LHConfig;
-import net.karashokleo.l2hostility.init.data.LHDamageTypes;
+import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.LHDamageTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.text.Text;

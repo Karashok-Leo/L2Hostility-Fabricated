@@ -2,10 +2,10 @@ package net.karashokleo.l2hostility.content.item.trinket.ring;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.item.traits.DurabilityEater;
 import net.karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
-import net.karashokleo.l2hostility.init.data.LHTexts;
+import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;

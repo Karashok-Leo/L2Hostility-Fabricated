@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.content.item.consumable;
 
-import net.karashokleo.l2hostility.init.data.LHTexts;
+import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;

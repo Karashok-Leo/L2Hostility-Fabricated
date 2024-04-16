@@ -3,16 +3,16 @@ package net.karashokleo.l2hostility.content.component.mob;
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.l2serial.util.Wrappers;
-import net.karashokleo.l2hostility.init.registry.LHComponents;
+import net.karashokleo.l2hostility.init.LHComponents;
 import net.karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import net.karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
 import net.karashokleo.l2hostility.content.component.chunk.RegionalDifficultyModifier;
-import net.karashokleo.l2hostility.data.LHData;
+import net.karashokleo.l2hostility.init.LHData;
 import net.karashokleo.l2hostility.content.logic.*;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
-import net.karashokleo.l2hostility.config.LHConfig;
-import net.karashokleo.l2hostility.init.data.LHTexts;
-import net.karashokleo.l2hostility.init.registry.LHTriggers;
+import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.LHTexts;
+import net.karashokleo.l2hostility.init.LHTriggers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.mob.MobEntity;
@@ -214,10 +214,8 @@ public class MobDifficulty
         if (!owner.getWorld().isClient())
         {
             if (!isInitialized())
-            {
-                var opt = ChunkDifficulty.at(owner.getWorld(), owner.getBlockPos());
-                opt.ifPresent(this::init);
-            }
+                ChunkDifficulty.at(owner.getWorld(), owner.getBlockPos())
+                        .ifPresent(this::init);
             if (stage == Stage.INIT)
             {
                 stage = Stage.POST_INIT;

@@ -2,11 +2,11 @@ package net.karashokleo.l2hostility.content.trait.common;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.component.mob.CapStorageData;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
-import net.karashokleo.l2hostility.init.data.LHDamageTypes;
+import net.karashokleo.l2hostility.init.LHDamageTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;

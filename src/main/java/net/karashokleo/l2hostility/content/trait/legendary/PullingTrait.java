@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.content.trait.legendary;
 
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 

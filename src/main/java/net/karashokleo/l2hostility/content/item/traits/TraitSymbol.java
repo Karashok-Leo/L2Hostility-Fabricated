@@ -1,12 +1,12 @@
 package net.karashokleo.l2hostility.content.item.traits;
 
 import net.karashokleo.l2hostility.L2Hostility;
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.karashokleo.l2hostility.content.trait.legendary.LegendaryTrait;
-import net.karashokleo.l2hostility.init.data.LHTexts;
-import net.karashokleo.l2hostility.init.registry.LHTraits;
+import net.karashokleo.l2hostility.init.LHTexts;
+import net.karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;

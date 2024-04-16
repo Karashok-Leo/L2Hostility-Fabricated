@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.content.item.traits;
 
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.util.EffectBuilder;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;

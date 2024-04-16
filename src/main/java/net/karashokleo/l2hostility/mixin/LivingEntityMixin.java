@@ -1,7 +1,7 @@
 package net.karashokleo.l2hostility.mixin;
 
-import net.karashokleo.l2hostility.init.registry.LHEffects;
-import net.karashokleo.l2hostility.init.registry.LHEnchantments;
+import net.karashokleo.l2hostility.init.LHEffects;
+import net.karashokleo.l2hostility.init.LHEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;

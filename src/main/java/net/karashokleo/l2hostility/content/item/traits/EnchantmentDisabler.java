@@ -1,8 +1,8 @@
 package net.karashokleo.l2hostility.content.item.traits;
 
-import net.karashokleo.l2hostility.init.data.LHTags;
-import net.karashokleo.l2hostility.init.data.LHTexts;
-import net.karashokleo.l2hostility.init.registry.LHEnchantments;
+import net.karashokleo.l2hostility.init.LHTags;
+import net.karashokleo.l2hostility.init.LHTexts;
+import net.karashokleo.l2hostility.init.LHEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

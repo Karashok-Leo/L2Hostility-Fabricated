@@ -1,10 +1,10 @@
 package net.karashokleo.l2hostility.content.logic;
 
-import net.karashokleo.l2hostility.data.LHData;
+import net.karashokleo.l2hostility.init.LHData;
 import net.karashokleo.l2hostility.data.config.EntityConfig;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
-import net.karashokleo.l2hostility.config.LHConfig;
-import net.karashokleo.l2hostility.init.registry.LHTraits;
+import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.random.Random;
 

@@ -4,7 +4,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEve
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.trait.common.AuraEffectTrait;
-import net.karashokleo.l2hostility.init.registry.LHEffects;
+import net.karashokleo.l2hostility.init.LHEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.registry.tag.DamageTypeTags;

@@ -2,8 +2,8 @@ package net.karashokleo.l2hostility.content.item.wand;
 
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
-import net.karashokleo.l2hostility.init.data.LHTexts;
-import net.karashokleo.l2hostility.init.registry.LHTraits;
+import net.karashokleo.l2hostility.init.LHTexts;
+import net.karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -87,8 +87,8 @@ public class TraitAdderWand extends BaseWand
     @Override
     public void clickNothing(ItemStack stack, PlayerEntity player)
     {
-        MobTrait old = get(stack), next;
-        next = player.isSneaking() ? prev(old) : next(old);
+        MobTrait old = get(stack);
+        MobTrait next = player.isSneaking() ? prev(old) : next(old);
         set(stack, next);
         player.sendMessage(LHTexts.MSG_SELECT_TRAIT.get(next.getName()));
     }

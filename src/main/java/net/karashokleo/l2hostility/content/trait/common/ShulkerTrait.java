@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.content.trait.common;
 
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.projectile.ShulkerBulletEntity;

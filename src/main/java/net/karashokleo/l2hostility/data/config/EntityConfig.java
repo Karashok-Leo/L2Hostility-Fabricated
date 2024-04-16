@@ -3,8 +3,8 @@ package net.karashokleo.l2hostility.data.config;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.karashokleo.l2hostility.content.logic.MobDifficultyCollector;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
-import net.karashokleo.l2hostility.config.LHConfig;
-import net.karashokleo.l2hostility.data.LHData;
+import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.LHData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -39,9 +39,7 @@ public class EntityConfig
     @Nullable
     public Config get(EntityType<?> type)
     {
-        if (!LHConfig.common().scaling.enableEntitySpecificDatapack)
-            return null;
-        return cache.get(type);
+        return LHConfig.common().scaling.enableEntitySpecificDatapack ? cache.get(type) : null;
     }
 
     @SerialClass
@@ -93,8 +91,7 @@ public class EntityConfig
         {
             if (entity.getRandom().nextDouble() > chance) return false;
             if (mobLevel < lv) return false;
-            if (id != null && !ins.hasAdvancement(id)) return false;
-            return true;
+            return id == null || ins.hasAdvancement(id);
         }
     }
 

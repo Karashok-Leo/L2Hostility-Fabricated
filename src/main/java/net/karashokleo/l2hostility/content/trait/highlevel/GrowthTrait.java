@@ -4,7 +4,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEve
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.logic.InheritContext;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
-import net.karashokleo.l2hostility.init.registry.LHTraits;
+import net.karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.mob.SlimeEntity;

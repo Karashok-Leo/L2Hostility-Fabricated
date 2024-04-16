@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.content.logic;
 
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 
 public record LevelEditor(DifficultyLevel difficulty, int extra)
 {

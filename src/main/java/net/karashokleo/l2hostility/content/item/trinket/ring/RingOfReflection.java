@@ -2,8 +2,8 @@ package net.karashokleo.l2hostility.content.item.trinket.ring;
 
 import net.karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
-import net.karashokleo.l2hostility.init.data.LHTags;
-import net.karashokleo.l2hostility.init.data.LHTexts;
+import net.karashokleo.l2hostility.init.LHTags;
+import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;

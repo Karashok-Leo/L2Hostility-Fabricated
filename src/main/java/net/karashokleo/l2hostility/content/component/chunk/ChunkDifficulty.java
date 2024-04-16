@@ -1,7 +1,7 @@
 package net.karashokleo.l2hostility.content.component.chunk;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.karashokleo.l2hostility.init.registry.LHComponents;
+import net.karashokleo.l2hostility.init.LHComponents;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.logic.MobDifficultyCollector;
 import net.minecraft.entity.LivingEntity;

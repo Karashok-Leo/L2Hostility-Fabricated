@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.content.item.wand;
 
-import net.karashokleo.l2hostility.init.data.LHTexts;
+import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

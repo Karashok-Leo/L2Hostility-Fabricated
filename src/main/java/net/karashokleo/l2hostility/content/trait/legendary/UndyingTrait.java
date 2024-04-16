@@ -2,8 +2,8 @@ package net.karashokleo.l2hostility.content.trait.legendary;
 
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import net.karashokleo.l2hostility.init.registry.LHEffects;
-import net.karashokleo.l2hostility.init.registry.LHTraits;
+import net.karashokleo.l2hostility.init.LHEffects;
+import net.karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;

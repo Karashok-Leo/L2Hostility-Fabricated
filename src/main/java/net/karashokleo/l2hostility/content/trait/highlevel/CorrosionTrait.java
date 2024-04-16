@@ -2,9 +2,9 @@ package net.karashokleo.l2hostility.content.trait.highlevel;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.item.traits.DurabilityEater;
-import net.karashokleo.l2hostility.init.registry.LHItems;
+import net.karashokleo.l2hostility.init.LHItems;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.Text;

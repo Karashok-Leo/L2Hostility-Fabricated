@@ -3,27 +3,37 @@ package net.karashokleo.l2hostility.config;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import net.karashokleo.l2hostility.init.LHTraits;
 
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 @Config(name = "common")
 public class CommonConfig implements ConfigData
 {
     @ConfigEntry.Gui.CollapsibleObject
-    public Difficulty difficulty;
+    public Difficulty difficulty = new Difficulty();
     @ConfigEntry.Gui.CollapsibleObject
-    public Scaling scaling;
+    public Scaling scaling = new Scaling();
     @ConfigEntry.Gui.CollapsibleObject
-    public OrbAndSpawner orbAndSpawner;
+    public OrbAndSpawner orbAndSpawner = new OrbAndSpawner();
     @ConfigEntry.Gui.CollapsibleObject
-    public Items items;
+    public Items items = new Items();
     @ConfigEntry.Gui.CollapsibleObject
-    public Traits traits;
+    public Traits traits = new Traits();
     @ConfigEntry.Gui.CollapsibleObject
-    public final Map<String, Boolean> map = new TreeMap<>();
+    public final Map<String, Boolean> map = LHTraits.TRAIT.stream().collect(
+            Collectors.toMap(
+                    mobTrait -> mobTrait.getNonNullId().getPath(),
+                    mobTrait -> true
+            )
+    );
     @ConfigEntry.Gui.CollapsibleObject
-    public final Map<String, Integer> range = new TreeMap<>();
+    public final Map<String, Integer> range = Map.of(
+            "gravity", 10,
+            "moonwalk", 10,
+            "arena", 24
+    );
 
     public static class Difficulty
     {
@@ -88,7 +98,7 @@ public class CommonConfig implements ConfigData
         public final double ringOfHealingRate = 0.05;
 
         @ConfigEntry.Gui.CollapsibleObject
-        public final Curse curse=new Curse();
+        public final Curse curse = new Curse();
 
         public static class Curse
         {

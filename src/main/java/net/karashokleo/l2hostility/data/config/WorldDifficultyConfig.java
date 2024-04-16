@@ -1,7 +1,7 @@
 package net.karashokleo.l2hostility.data.config;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
@@ -24,6 +24,11 @@ public class WorldDifficultyConfig
     public final HashMap<Identifier, DifficultyConfig> levelMap = new HashMap<>();
     @SerialClass.SerialField
     public final HashMap<Identifier, DifficultyConfig> biomeMap = new HashMap<>();
+
+    public DifficultyConfig getByLevelOrDefault(Identifier id)
+    {
+        return levelMap.containsKey(id) ? levelMap.get(id) : defaultLevel();
+    }
 
     public void merge(WorldDifficultyConfig config)
     {

@@ -3,7 +3,7 @@ package net.karashokleo.l2hostility.content.logic;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.component.player.PlayerDifficulty;
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;

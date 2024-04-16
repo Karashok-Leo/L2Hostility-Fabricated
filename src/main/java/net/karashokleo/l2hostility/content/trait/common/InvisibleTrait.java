@@ -2,7 +2,7 @@ package net.karashokleo.l2hostility.content.trait.common;
 
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.trait.base.SelfEffectTrait;
-import net.karashokleo.l2hostility.init.registry.LHEnchantments;
+import net.karashokleo.l2hostility.init.LHEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;

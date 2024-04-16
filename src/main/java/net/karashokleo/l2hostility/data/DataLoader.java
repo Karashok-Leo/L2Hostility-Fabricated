@@ -9,6 +9,7 @@ import net.karashokleo.l2hostility.data.config.EntityConfig;
 import net.karashokleo.l2hostility.data.config.TraitConfig;
 import net.karashokleo.l2hostility.data.config.WeaponConfig;
 import net.karashokleo.l2hostility.data.config.WorldDifficultyConfig;
+import net.karashokleo.l2hostility.init.LHData;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 
@@ -80,9 +81,7 @@ public class DataLoader implements SimpleSynchronousResourceReloadListener
                     int li = s.lastIndexOf('/');
                     int ri = s.lastIndexOf(".json");
                     if (li != -1 && ri != -1)
-                    {
                         return s.substring(li + 1, ri);
-                    }
                     return s;
                 }), Objects.requireNonNull(JsonCodec.from(data, TraitConfig.Config.class, null)));
             } catch (Exception e)

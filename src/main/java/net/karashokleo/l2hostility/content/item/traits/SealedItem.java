@@ -2,8 +2,8 @@ package net.karashokleo.l2hostility.content.item.traits;
 
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.Trinket;
-import net.karashokleo.l2hostility.init.data.LHTexts;
-import net.karashokleo.l2hostility.init.registry.LHItems;
+import net.karashokleo.l2hostility.init.LHTexts;
+import net.karashokleo.l2hostility.init.LHItems;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

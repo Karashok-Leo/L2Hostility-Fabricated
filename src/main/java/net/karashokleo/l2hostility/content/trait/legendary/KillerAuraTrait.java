@@ -1,10 +1,10 @@
 package net.karashokleo.l2hostility.content.trait.legendary;
 
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import net.karashokleo.l2hostility.init.data.LHDamageTypes;
-import net.karashokleo.l2hostility.init.registry.LHItems;
+import net.karashokleo.l2hostility.init.LHDamageTypes;
+import net.karashokleo.l2hostility.init.LHItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,10 +1,10 @@
 package net.karashokleo.l2hostility.mixin;
 
 import dev.xkmc.l2serial.util.Wrappers;
-import net.karashokleo.l2hostility.client.event.ClientGlowingHandler;
+import net.karashokleo.l2hostility.client.ClientGlowingHandler;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
-import net.karashokleo.l2hostility.init.registry.LHItems;
-import net.karashokleo.l2hostility.client.util.raytrace.EntityTarget;
+import net.karashokleo.l2hostility.init.LHItems;
+import net.karashokleo.l2hostility.util.raytrace.EntityTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;

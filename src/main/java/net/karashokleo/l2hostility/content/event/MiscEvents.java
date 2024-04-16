@@ -8,9 +8,9 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.karashokleo.l2hostility.content.enchantment.HitTargetEnchantment;
 import net.karashokleo.l2hostility.content.item.wand.IMobClickItem;
-import net.karashokleo.l2hostility.init.data.LHTags;
-import net.karashokleo.l2hostility.init.registry.LHEffects;
-import net.karashokleo.l2hostility.init.registry.LHEnchantments;
+import net.karashokleo.l2hostility.init.LHTags;
+import net.karashokleo.l2hostility.init.LHEffects;
+import net.karashokleo.l2hostility.init.LHEnchantments;
 import net.karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ItemEntity;
@@ -40,6 +40,7 @@ public class MiscEvents
                                 ActionResult.PASS :
                                 ActionResult.FAIL
         );
+
         // 禁止破坏方块
         PlayerBlockBreakEvents.BEFORE.register(
                 (world, player, pos, state, blockEntity) ->
@@ -75,6 +76,6 @@ public class MiscEvents
 
         // 物品实体加入世界判断是否携带 VANISH
         EntityEvents.ON_JOIN_WORLD.register((entity, world, b) ->
-                entity instanceof ItemEntity ie && EnchantmentHelper.getLevel(LHEnchantments.VANISH, ie.getStack()) > 0);
+                !(entity instanceof ItemEntity ie && EnchantmentHelper.getLevel(LHEnchantments.VANISH, ie.getStack()) > 0));
     }
 }

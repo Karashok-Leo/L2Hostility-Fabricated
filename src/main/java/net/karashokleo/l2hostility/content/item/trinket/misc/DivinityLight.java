@@ -4,7 +4,7 @@ import dev.emi.trinkets.api.SlotReference;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import net.karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
-import net.karashokleo.l2hostility.init.data.LHTexts;
+import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

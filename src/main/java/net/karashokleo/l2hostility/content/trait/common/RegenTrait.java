@@ -1,8 +1,8 @@
 package net.karashokleo.l2hostility.content.trait.common;
 
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
-import net.karashokleo.l2hostility.init.registry.LHEffects;
+import net.karashokleo.l2hostility.init.LHEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;

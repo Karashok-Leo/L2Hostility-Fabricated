@@ -1,7 +1,12 @@
 package net.karashokleo.l2hostility.util.raytrace;
 
 import com.google.common.collect.Maps;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.karashokleo.l2hostility.L2Hostility;
+import net.karashokleo.l2hostility.client.L2HostilityClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,7 +28,9 @@ import java.util.function.Predicate;
 
 public class RayTraceUtil
 {
+    public static final int CLIENT_TIMEOUT = 100;
     public static final int SERVER_TIMEOUT = 200;
+    public static final EntityTarget TARGET = new EnderEntityTarget();
     public static final ConcurrentMap<UUID, ServerTarget> TARGET_MAP = Maps.newConcurrentMap();
 
     @Nullable
@@ -57,6 +64,7 @@ public class RayTraceUtil
         return pos.add(f6 * reach, f5 * reach, f7 * reach);
     }
 
+    @Environment(EnvType.SERVER)
     public static void serverTick()
     {
         TARGET_MAP.entrySet().removeIf(e ->
@@ -83,6 +91,38 @@ public class RayTraceUtil
         } else TARGET_MAP.put(packet.player, new ServerTarget(packet.target));
     }
 
+    public static class EnderEntityTarget extends EntityTarget
+    {
+        private int timeout = 0;
+
+        public EnderEntityTarget()
+        {
+            super(3, Math.PI / 180 * 5, 10);
+        }
+
+        @Override
+        public void onChange(@Nullable Entity entity)
+        {
+            ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
+            if (player == null) return;
+            UUID eid = entity == null ? null : entity.getUuid();
+            ClientPlayNetworking.send(L2Hostility.HANDLER.getPacket(new TargetSetPacket(player.getUuid(), eid)));
+            timeout = 0;
+        }
+
+        @Override
+        public void tickRender()
+        {
+            super.tickRender();
+            if (target != null)
+            {
+                timeout++;
+                if (timeout > CLIENT_TIMEOUT)
+                    onChange(target);
+            }
+        }
+    }
+
     public static class ServerTarget
     {
 
@@ -96,10 +136,26 @@ public class RayTraceUtil
         }
     }
 
+    @Environment(EnvType.CLIENT)
+    public static void clientUpdateTarget(PlayerEntity player, double range)
+    {
+        if (!player.getWorld().isClient()) return;
+        Vec3d vec3 = player.getEyePos();
+        Vec3d vec31 = player.getRotationVec(1.0F).multiply(range);
+        Vec3d vec32 = vec3.add(vec31);
+        Box aabb = player.getBoundingBox().stretch(vec31).expand(1.0D);
+        double sq = range * range;
+        Predicate<Entity> predicate = (e) -> (e instanceof LivingEntity) && !e.isSpectator();
+        EntityHitResult result = ProjectileUtil.raycast(player, vec3, vec32, aabb, predicate, sq);
+        if (result != null && vec3.squaredDistanceTo(result.getPos()) < sq)
+            TARGET.updateTarget(result.getEntity());
+    }
 
+    @Environment(EnvType.SERVER)
     @Nullable
     public static LivingEntity serverGetTarget(PlayerEntity player)
     {
+        if (player.getWorld().isClient()) return player.getAttacking();
         UUID id = player.getUuid();
         if (!RayTraceUtil.TARGET_MAP.containsKey(id))
             return null;

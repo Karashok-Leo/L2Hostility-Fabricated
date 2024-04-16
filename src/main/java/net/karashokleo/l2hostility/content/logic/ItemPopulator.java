@@ -1,11 +1,11 @@
 package net.karashokleo.l2hostility.content.logic;
 
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import net.karashokleo.l2hostility.data.LHData;
+import net.karashokleo.l2hostility.init.LHData;
 import net.karashokleo.l2hostility.data.config.EntityConfig;
 import net.karashokleo.l2hostility.data.config.WeaponConfig;
-import net.karashokleo.l2hostility.config.LHConfig;
-import net.karashokleo.l2hostility.init.data.LHTags;
+import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.LHTags;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;

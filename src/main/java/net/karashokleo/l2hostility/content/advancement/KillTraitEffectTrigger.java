@@ -5,7 +5,7 @@ import net.karashokleo.l2hostility.content.advancement.base.BaseCriterion;
 import net.karashokleo.l2hostility.content.advancement.base.BaseCriterionConditions;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
-import net.karashokleo.l2hostility.init.registry.LHTriggers;
+import net.karashokleo.l2hostility.init.LHTriggers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.predicate.entity.LootContextPredicate;

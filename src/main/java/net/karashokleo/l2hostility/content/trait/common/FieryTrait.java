@@ -2,7 +2,7 @@ package net.karashokleo.l2hostility.content.trait.common;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.trait.base.SelfEffectTrait;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;

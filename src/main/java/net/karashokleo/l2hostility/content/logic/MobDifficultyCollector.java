@@ -1,7 +1,7 @@
 package net.karashokleo.l2hostility.content.logic;
 
 import net.karashokleo.l2hostility.data.config.WorldDifficultyConfig;
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;

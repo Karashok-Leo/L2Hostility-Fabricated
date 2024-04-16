@@ -1,7 +1,7 @@
 package net.karashokleo.l2hostility.content.item.trinket.misc;
 
 import net.karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
-import net.karashokleo.l2hostility.init.data.LHTexts;
+import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;

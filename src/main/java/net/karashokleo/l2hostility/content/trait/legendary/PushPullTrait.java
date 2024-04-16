@@ -1,9 +1,9 @@
 package net.karashokleo.l2hostility.content.trait.legendary;
 
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
-import net.karashokleo.l2hostility.config.LHConfig;
-import net.karashokleo.l2hostility.init.registry.LHEnchantments;
-import net.karashokleo.l2hostility.init.registry.LHItems;
+import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.LHEnchantments;
+import net.karashokleo.l2hostility.init.LHItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;

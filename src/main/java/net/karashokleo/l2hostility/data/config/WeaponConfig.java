@@ -1,7 +1,7 @@
 package net.karashokleo.l2hostility.data.config;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.karashokleo.l2hostility.data.LHData;
+import net.karashokleo.l2hostility.init.LHData;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

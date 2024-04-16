@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.mixin;
 
-import net.karashokleo.l2hostility.init.registry.LHEnchantments;
+import net.karashokleo.l2hostility.init.LHEnchantments;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;

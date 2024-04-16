@@ -2,7 +2,7 @@ package net.karashokleo.l2hostility.data.config;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.karashokleo.l2hostility.L2Hostility;
-import net.karashokleo.l2hostility.data.provider.TagEntityTypeProvider;
+import net.karashokleo.l2hostility.data.generate.TagEntityTypeProvider;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
@@ -19,12 +19,13 @@ public class TraitConfig
 
     public void put(Identifier id, Config config)
     {
+        config.id = id;
         map.put(id, config);
     }
 
-    public Config get(Identifier id)
+    public Config getOrDefault(Identifier id)
     {
-        return map.get(id);
+        return map.getOrDefault(id, DEFAULT);
     }
 
     @SerialClass

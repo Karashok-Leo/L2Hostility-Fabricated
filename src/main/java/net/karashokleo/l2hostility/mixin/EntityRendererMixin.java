@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.mixin;
 
-import net.karashokleo.l2hostility.client.event.ClientEvents;
+import net.karashokleo.l2hostility.client.MobTraitRenderer;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -23,6 +23,6 @@ public abstract class EntityRendererMixin<T extends Entity>
     @Inject(at = @At("HEAD"), method = "render")
     private void injectedRender(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci)
     {
-        ClientEvents.renderNamePlate(entity, light, matrices, textRenderer, vertexConsumers);
+        MobTraitRenderer.renderNamePlate(entity, light, matrices, textRenderer, vertexConsumers);
     }
 }

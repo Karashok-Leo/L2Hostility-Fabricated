@@ -4,13 +4,13 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEve
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import net.karashokleo.l2hostility.data.LHData;
+import net.karashokleo.l2hostility.init.LHData;
 import net.karashokleo.l2hostility.data.config.EntityConfig;
 import net.karashokleo.l2hostility.data.config.TraitConfig;
 import net.karashokleo.l2hostility.content.logic.InheritContext;
 import net.karashokleo.l2hostility.content.logic.TraitManager;
-import net.karashokleo.l2hostility.config.LHConfig;
-import net.karashokleo.l2hostility.init.registry.LHTraits;
+import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
@@ -45,12 +45,9 @@ public class MobTrait
         this(() -> formatting.getColorValue() == null ? 0xffffff : formatting.getColorValue());
     }
 
-    @SuppressWarnings("ConstantConditions")
     public TraitConfig.Config getConfig()
     {
-        TraitConfig.Config ans = LHData.traits.get(getId());
-        if (ans == null) return TraitConfig.DEFAULT;
-        return ans;
+        return LHData.traits.getOrDefault(getId());
     }
 
     public int getCost(double factor)

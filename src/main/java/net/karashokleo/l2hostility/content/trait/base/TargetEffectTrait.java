@@ -1,7 +1,7 @@
 package net.karashokleo.l2hostility.content.trait.base;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import net.karashokleo.l2hostility.init.data.LHTexts;
+import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;

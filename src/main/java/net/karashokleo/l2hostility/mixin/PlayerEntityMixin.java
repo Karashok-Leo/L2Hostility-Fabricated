@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.mixin;
 
-import net.karashokleo.l2hostility.init.registry.LHMiscs;
+import net.karashokleo.l2hostility.init.LHMiscs;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

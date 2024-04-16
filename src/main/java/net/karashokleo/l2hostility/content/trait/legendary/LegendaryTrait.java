@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.content.trait.legendary;
 
-import net.karashokleo.l2hostility.config.LHConfig;
+import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.logic.TraitManager;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.minecraft.entity.LivingEntity;

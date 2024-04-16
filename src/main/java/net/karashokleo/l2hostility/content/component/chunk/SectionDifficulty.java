@@ -2,13 +2,13 @@ package net.karashokleo.l2hostility.content.component.chunk;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import net.karashokleo.l2hostility.data.LHData;
+import net.karashokleo.l2hostility.init.LHData;
 import net.karashokleo.l2hostility.data.config.WorldDifficultyConfig;
 import net.karashokleo.l2hostility.content.logic.DifficultyLevel;
 import net.karashokleo.l2hostility.content.logic.LevelEditor;
 import net.karashokleo.l2hostility.content.logic.MobDifficultyCollector;
-import net.karashokleo.l2hostility.config.LHConfig;
-import net.karashokleo.l2hostility.init.data.LHTexts;
+import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -70,9 +70,7 @@ public class SectionDifficulty
 
     private void modifyInstanceInternal(World world, BlockPos pos, MobDifficultyCollector instance)
     {
-        var levelDiff = LHData.difficulties.levelMap.get(world.getDimensionKey().getValue());
-        if (levelDiff == null)
-            levelDiff = WorldDifficultyConfig.defaultLevel();
+        var levelDiff = LHData.difficulties.getByLevelOrDefault(world.getDimensionKey().getValue());
         instance.acceptConfig(levelDiff);
         world.getBiome(pos).getKey().map(e -> LHData.difficulties.biomeMap.get(e.getValue())).ifPresent(instance::acceptConfig);
         instance.acceptBonusLevel((int) Math.round(LHConfig.common().scaling.distanceFactor *
@@ -83,8 +81,8 @@ public class SectionDifficulty
     public List<Text> getSectionDifficultyDetail(PlayerEntity player)
     {
         if (isCleared()) return List.of();
-        var levelDiff = LHData.difficulties.levelMap.get(player.getWorld().getDimensionKey().getValue());
-        int dim = levelDiff == null ? WorldDifficultyConfig.defaultLevel().base() : levelDiff.base();
+        var levelDiff = LHData.difficulties.getByLevelOrDefault(player.getWorld().getDimensionKey().getValue());
+        int dim = levelDiff.base();
         BlockPos pos = player.getBlockPos();
         RegistryEntry<Biome> biome = player.getWorld().getBiome(pos);
         int bio = biome.getKey().map(e -> LHData.difficulties.biomeMap.get(e.getRegistry()))

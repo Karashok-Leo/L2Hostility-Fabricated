@@ -12,6 +12,11 @@ public class TargetSetPacket implements SerialPacketBase
     @SerialClass.SerialField
     public UUID player, target;
 
+    @Deprecated
+    public TargetSetPacket()
+    {
+    }
+
     public TargetSetPacket(UUID player, @Nullable UUID target)
     {
         this.player = player;
