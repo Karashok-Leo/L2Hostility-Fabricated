@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:ender_eye"
+    },
+    "E": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "I": {
+      "item": "l2hostility:miracle_ingot"
+    },
+    "X": {
+      "item": "minecraft:gilded_blackstone"
+    }
+  },
+  "pattern": [
+    "AIA",
+    "IEI",
+    "XIX"
+  ],
+  "result": {
+    "item": "l2hostility:abyssal_thorn"
+  },
+  "show_notification": true
+}

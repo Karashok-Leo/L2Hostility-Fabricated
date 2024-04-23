@@ -4,11 +4,12 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.karashokleo.l2hostility.data.Constants;
 import net.karashokleo.l2hostility.data.config.TraitConfig;
+import net.karashokleo.leobrary.data.AbstractDataProvider;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TraitConfigProvider extends ConfigDataProvider
+public class TraitConfigProvider extends AbstractDataProvider
 {
     private static final Map<MobTrait, TraitConfig.Config> configs = new HashMap<>();
 

@@ -9,7 +9,7 @@ public class ClientConfig implements ConfigData
     public final boolean showTraitOverHead = true;
     public final boolean showLevelOverHead = true;
     public final int overHeadRenderDistance = 32;
-    public final double overHeadRenderOffset = 32;
+    public final double overHeadRenderOffset = 0;
     public final boolean overHeadRenderFullBright = true;
     public final int overHeadLevelColor = 11184810;
     public final int overHeadLevelColorAbyss = 16733525;

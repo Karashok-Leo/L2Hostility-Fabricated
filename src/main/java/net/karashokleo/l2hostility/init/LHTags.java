@@ -3,7 +3,6 @@ package net.karashokleo.l2hostility.init;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalEntityTypeTags;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
-import net.karashokleo.l2hostility.data.generate.TagEntityTypeProvider;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffect;
@@ -44,48 +43,48 @@ public class LHTags
 
     public static void register()
     {
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 BLACKLIST
         );
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 WHITELIST
         );
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 NO_SCALING,
                 WHITELIST
         );
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 NO_TRAIT,
                 BLACKLIST
         );
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 NO_TRAIT,
                 EntityType.ENDERMITE
         );
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 ARMOR_TARGET,
                 EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
                 EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON,
                 EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE
         );
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 SEMIBOSS,
                 ConventionalEntityTypeTags.BOSSES
         );
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 SEMIBOSS,
                 EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER
         );
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 NO_DROP
         );
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 MELEE_WEAPON_TARGET,
                 EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
                 EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE,
                 EntityType.WITHER_SKELETON, EntityType.VINDICATOR
         );
-        TagEntityTypeProvider.add(
+        LHData.ENTITY_TYPE_TAGS.add(
                 RANGED_WEAPON_TARGET,
                 EntityType.SKELETON, EntityType.STRAY
         );

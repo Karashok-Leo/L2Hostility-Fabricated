@@ -7,7 +7,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -24,7 +23,7 @@ public abstract class BaseWand extends Item implements IGlowingTarget, IMobClick
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected)
     {
-        if (!world.isClient() && selected && entity instanceof ServerPlayerEntity player)
+        if (world.isClient() && selected && entity instanceof PlayerEntity player)
             RayTraceUtil.clientUpdateTarget(player, 64);
     }
 

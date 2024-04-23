@@ -64,7 +64,6 @@ public class RayTraceUtil
         return pos.add(f6 * reach, f5 * reach, f7 * reach);
     }
 
-    @Environment(EnvType.SERVER)
     public static void serverTick()
     {
         TARGET_MAP.entrySet().removeIf(e ->
@@ -136,7 +135,6 @@ public class RayTraceUtil
         }
     }
 
-    @Environment(EnvType.CLIENT)
     public static void clientUpdateTarget(PlayerEntity player, double range)
     {
         if (!player.getWorld().isClient()) return;
@@ -151,7 +149,6 @@ public class RayTraceUtil
             TARGET.updateTarget(result.getEntity());
     }
 
-    @Environment(EnvType.SERVER)
     @Nullable
     public static LivingEntity serverGetTarget(PlayerEntity player)
     {

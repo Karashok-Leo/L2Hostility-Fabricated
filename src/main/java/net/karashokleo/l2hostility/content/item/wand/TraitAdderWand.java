@@ -84,15 +84,6 @@ public class TraitAdderWand extends BaseWand
         return old + 1;
     }
 
-    @Override
-    public void clickNothing(ItemStack stack, PlayerEntity player)
-    {
-        MobTrait old = get(stack);
-        MobTrait next = player.isSneaking() ? prev(old) : next(old);
-        set(stack, next);
-        player.sendMessage(LHTexts.MSG_SELECT_TRAIT.get(next.getName()));
-    }
-
     public TraitAdderWand(Settings settings)
     {
         super(settings);
@@ -116,6 +107,15 @@ public class TraitAdderWand extends BaseWand
         cap.sync();
         entity.setHealth(entity.getMaxHealth());
         player.sendMessage(LHTexts.MSG_SET_TRAIT.get(trait.getName(), entity.getDisplayName(), val));
+    }
+
+    @Override
+    public void clickNothing(ItemStack stack, PlayerEntity player)
+    {
+        MobTrait old = get(stack);
+        MobTrait next = player.isSneaking() ? prev(old) : next(old);
+        set(stack, next);
+        player.sendMessage(LHTexts.MSG_SELECT_TRAIT.get(next.getName()));
     }
 
     @Override

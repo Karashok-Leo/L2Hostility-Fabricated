@@ -5,16 +5,13 @@ import net.karashokleo.l2hostility.content.enchantment.HostilityEnchantment;
 import net.karashokleo.l2hostility.content.enchantment.RemoveTraitEnchantment;
 import net.karashokleo.l2hostility.content.enchantment.SingleLevelEnchantment;
 import net.karashokleo.l2hostility.content.enchantment.VanishEnchantment;
-import net.karashokleo.l2hostility.data.generate.EN_US_LangProvider;
-import net.karashokleo.l2hostility.data.generate.ZH_CN_LangProvider;
-import net.karashokleo.l2hostility.data.generate.TagEnchantmentProvider;
-import net.karashokleo.l2hostility.util.StringUtil;
+import net.karashokleo.leobrary.datagen.builder.EnchantmentBuilder;
+import net.karashokleo.leobrary.datagen.generator.TagGenerator;
+import net.karashokleo.leobrary.datagen.generator.LanguageGenerator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.tag.TagKey;
+import org.jetbrains.annotations.Nullable;
 
 public class LHEnchantments
 {
@@ -81,60 +78,40 @@ public class LHEnchantments
                 .register();
     }
 
-    static class Entry<T extends Enchantment>
+    static class Entry<T extends Enchantment> extends EnchantmentBuilder<T>
     {
-        String name;
-        T enchantment;
-
-        private Entry(String name, T enchantment)
-        {
-            this.name = name;
-            this.enchantment = enchantment;
-        }
-
         public static <T extends Enchantment> Entry<T> of(String name, T enchantment)
         {
             return new Entry<>(name, enchantment);
         }
 
-        public T register()
+        private Entry(String name, T enchantment)
         {
-            return Registry.register(Registries.ENCHANTMENT, L2Hostility.id(name), enchantment);
+            super(name, enchantment);
         }
 
-        public Entry<T> addEN()
+        @Override
+        public @Nullable LanguageGenerator getEnglishGenerator()
         {
-            return addEN(StringUtil.getNameById(name));
+            return LHData.EN_TEXTS;
         }
 
-        public Entry<T> addEN(String en)
+        @Override
+        public @Nullable LanguageGenerator getChineseGenerator()
         {
-            EN_US_LangProvider.addEnchantment(enchantment, en);
-            return this;
+            return LHData.ZH_TEXTS;
         }
 
-        public Entry<T> addENDesc(String en)
+        @Override
+        public @Nullable TagGenerator<Enchantment> getTagGenerator()
         {
-            EN_US_LangProvider.addEnchantmentDesc(enchantment, en);
-            return this;
+            return LHData.ENCHANTMENT_TAGS;
         }
 
-        public Entry<T> addZH(String zh)
+        @Override
+        protected String getNameSpace()
         {
-            ZH_CN_LangProvider.addEnchantment(enchantment, zh);
-            return this;
-        }
-
-        public Entry<T> addZHDesc(String zh)
-        {
-            ZH_CN_LangProvider.addEnchantmentDesc(enchantment, zh);
-            return this;
-        }
-
-        public Entry<T> addTag(TagKey<Enchantment> key)
-        {
-            TagEnchantmentProvider.add(key, enchantment);
-            return this;
+            return L2Hostility.MOD_ID;
         }
     }
 }

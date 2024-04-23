@@ -9,34 +9,39 @@ import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.config.ClientConfig;
 import net.karashokleo.l2hostility.config.CommonConfig;
 
-@Config(name = L2Hostility.MOD_ID)
-public class LHConfig extends PartitioningSerializer.GlobalData
+public class LHConfig
 {
-    @ConfigEntry.Category("client")
-    @ConfigEntry.Gui.TransitiveObject
-    ClientConfig client;
+    private static Global CONFIG;
 
-    @ConfigEntry.Category("common")
-    @ConfigEntry.Gui.TransitiveObject
-    CommonConfig common;
+    @Config(name = L2Hostility.MOD_ID)
+    static class Global extends PartitioningSerializer.GlobalData
+    {
+        @ConfigEntry.Category("client")
+        @ConfigEntry.Gui.TransitiveObject
+        ClientConfig client;
+
+        @ConfigEntry.Category("common")
+        @ConfigEntry.Gui.TransitiveObject
+        CommonConfig common;
+    }
 
     public static ClientConfig client()
     {
-        return L2Hostility.CONFIG.client;
+        return CONFIG.client;
     }
 
     public static CommonConfig common()
     {
-        return L2Hostility.CONFIG.common;
+        return CONFIG.common;
     }
 
-    public static LHConfig register()
+    public static void register()
     {
         AutoConfig.register(
-                LHConfig.class,
+                Global.class,
                 PartitioningSerializer.wrap(JanksonConfigSerializer::new)
         );
-        return AutoConfig.getConfigHolder(LHConfig.class).getConfig();
+        CONFIG = AutoConfig.getConfigHolder(Global.class).getConfig();
     }
 }
 

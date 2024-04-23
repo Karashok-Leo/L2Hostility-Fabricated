@@ -4,10 +4,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.data.Constants;
 import net.karashokleo.l2hostility.data.config.WeaponConfig;
+import net.karashokleo.leobrary.data.AbstractDataProvider;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Items;
 
-public class WeaponConfigProvider extends ConfigDataProvider
+public class WeaponConfigProvider extends AbstractDataProvider
 {
     public WeaponConfigProvider(FabricDataOutput output)
     {

@@ -4,10 +4,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.data.Constants;
 import net.karashokleo.l2hostility.data.config.WorldDifficultyConfig;
+import net.karashokleo.leobrary.data.AbstractDataProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeKeys;
 
-public class WorldDifficultyConfigProvider extends ConfigDataProvider
+public class WorldDifficultyConfigProvider extends AbstractDataProvider
 {
     public WorldDifficultyConfigProvider(FabricDataOutput output)
     {

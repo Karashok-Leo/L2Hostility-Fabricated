@@ -15,9 +15,10 @@ import net.karashokleo.l2hostility.content.trait.goals.EnderTrait;
 import net.karashokleo.l2hostility.content.trait.highlevel.*;
 import net.karashokleo.l2hostility.content.trait.legendary.*;
 import net.karashokleo.l2hostility.data.config.TraitConfig;
-import net.karashokleo.l2hostility.data.generate.*;
 import net.karashokleo.l2hostility.data.config.provider.TraitConfigProvider;
 import net.karashokleo.l2hostility.util.StringUtil;
+import net.karashokleo.leobrary.datagen.builder.NamedEntryBuilder;
+import net.minecraft.data.client.Models;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -464,22 +465,20 @@ public class LHTraits
                 .register();
     }
 
-    static class Entry<T extends MobTrait>
+    static class Entry<T extends MobTrait> extends NamedEntryBuilder<T>
     {
-        String name;
-        T trait;
-        TraitConfig.Config config;
-
-        private Entry(String name, T trait, TraitConfig.Config config)
-        {
-            this.name = name;
-            this.trait = trait;
-            this.config = config;
-        }
-
         public static <T extends MobTrait> Entry<T> of(String name, T trait, int cost, int weight, int maxRank, int minLevel)
         {
             return new Entry<>(name, trait, new TraitConfig.Config(L2Hostility.id(name), cost, weight, maxRank, minLevel));
+        }
+
+        TraitConfig.Config config;
+        String translationKey;
+
+        private Entry(String name, T trait, TraitConfig.Config config)
+        {
+            super(name, trait);
+            this.config = config;
         }
 
         public T register()
@@ -487,10 +486,10 @@ public class LHTraits
             Identifier id = L2Hostility.id(name);
             TraitSymbol symbol = new TraitSymbol(new FabricItemSettings());
             Registry.register(Registries.ITEM, id, symbol);
-            ModelProvider.addItem(symbol);
-            TagItemProvider.add(LHTags.TRAIT_ITEM, symbol);
-            TraitConfigProvider.add(trait, config);
-            return Registry.register(LHTraits.TRAIT, id, trait);
+            LHData.MODELS.addItem(symbol, Models.GENERATED, "symbol/");
+            LHData.ITEM_TAGS.add(LHTags.TRAIT_ITEM, symbol);
+            TraitConfigProvider.add(content, config);
+            return Registry.register(LHTraits.TRAIT, id, content);
         }
 
         public Entry<T> addEN()
@@ -500,31 +499,31 @@ public class LHTraits
 
         public Entry<T> addEN(String en)
         {
-            EN_US_LangProvider.addTrait(trait, en);
+            LHData.EN_TEXTS.addText(getTranslationKey(), en);
             return this;
         }
 
         public Entry<T> addENDesc(String en)
         {
-            EN_US_LangProvider.addTraitDesc(trait, en);
+            LHData.EN_TEXTS.addText(getTranslationKey() + ".desc", en);
             return this;
         }
 
         public Entry<T> addZH(String zh)
         {
-            ZH_CN_LangProvider.addTrait(trait, zh);
+            LHData.ZH_TEXTS.addText(getTranslationKey(), zh);
             return this;
         }
 
         public Entry<T> addZHDesc(String zh)
         {
-            ZH_CN_LangProvider.addTraitDesc(trait, zh);
+            LHData.ZH_TEXTS.addText(getTranslationKey() + ".desc", zh);
             return this;
         }
 
         public Entry<T> addTag(TagKey<MobTrait> key)
         {
-            TraitTagProvider.add(key, trait);
+            LHData.TRAIT_TAGS.add(key, content);
             return this;
         }
 
@@ -532,14 +531,27 @@ public class LHTraits
         public final Entry<T> addTag(TagKey<MobTrait>... keys)
         {
             for (TagKey<MobTrait> key : keys)
-                TraitTagProvider.add(key, trait);
+                LHData.TRAIT_TAGS.add(key, content);
             return this;
+        }
+
+        public String getTranslationKey()
+        {
+            if (translationKey == null)
+                translationKey = getId().toTranslationKey(LHTraits.TRAIT_KEY.getValue().getPath());
+            return translationKey;
         }
 
         public Entry<T> configure(Consumer<TraitConfig.Config> consumer)
         {
             consumer.accept(config);
             return this;
+        }
+
+        @Override
+        protected String getNameSpace()
+        {
+            return L2Hostility.MOD_ID;
         }
     }
 }

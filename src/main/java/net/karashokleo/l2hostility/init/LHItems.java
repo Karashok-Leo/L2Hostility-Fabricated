@@ -1,5 +1,6 @@
 package net.karashokleo.l2hostility.init;
 
+import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.content.item.consumable.*;
@@ -14,29 +15,20 @@ import net.karashokleo.l2hostility.content.item.wand.AiConfigWand;
 import net.karashokleo.l2hostility.content.item.wand.EquipmentWand;
 import net.karashokleo.l2hostility.content.item.wand.TargetSelectWand;
 import net.karashokleo.l2hostility.content.item.wand.TraitAdderWand;
-import net.karashokleo.l2hostility.data.generate.EN_US_LangProvider;
-import net.karashokleo.l2hostility.data.generate.TagItemProvider;
-import net.karashokleo.l2hostility.data.generate.ModelProvider;
-import net.karashokleo.l2hostility.data.generate.ZH_CN_LangProvider;
-import net.karashokleo.l2hostility.util.StringUtil;
+import net.karashokleo.leobrary.datagen.builder.ItemBuilder;
+import net.karashokleo.leobrary.datagen.generator.ModelGenerator;
+import net.karashokleo.leobrary.datagen.generator.TagGenerator;
+import net.karashokleo.leobrary.datagen.generator.LanguageGenerator;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.Models;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.NetherStarItem;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Rarity;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.jetbrains.annotations.Nullable;
 
 public class LHItems
 {
-    public static final List<ItemStack> TAB_ITEMS = new ArrayList<>();
-
     public static HostilityOrb HOSTILITY_ORB;
     public static BottleOfCurse BOTTLE_CURSE;
     public static BottleOfSanity BOTTLE_SANITY;
@@ -161,7 +153,7 @@ public class LHItems
 //                                    Math.round(100 * LHConfig.COMMON.drainDuration.get()),
 //                                    LHConfig.COMMON.drainDurationMax.get() / 20
 //                            ).withStyle(ChatFormatting.GRAY))
-//            ).register();
+//            )//                .register();
 //
         //永恒嗜魔弹
 //            ETERNAL_WITCH_CHARGE = LeosHostility.REGISTRATE.item("eternal_witch_charge",
@@ -169,7 +161,7 @@ public class LHItems
 //                            LangData.TOOLTIP_WITCH_ETERNAL.get(
 //                                    LHConfig.COMMON.witchChargeMinDuration.get() / 20
 //                            ).withStyle(ChatFormatting.GRAY))
-//            ).register();
+//            )//                .register();
 
         BOOK_COPY = Entry.of(
                         "book_of_reprint",
@@ -707,80 +699,75 @@ public class LHItems
                 .addEN()
                 .addZH("被封印的物品")
                 .addTag(LHTags.NO_SEAL)
-                .removeTab()
+                .setTab(null)
                 .register();
     }
 
-    static class Entry<T extends Item>
+    static class Entry<T extends Item> extends ItemBuilder<T>
     {
-        String name;
-        T item;
-        boolean addToTab = true;
-
-        private Entry(String name, T item)
-        {
-            this.name = name;
-            this.item = item;
-        }
-
         public static <T extends Item> Entry<T> of(String name, T item)
         {
             return new Entry<>(name, item);
         }
 
-        public T register()
+        public Entry(String name, T content)
         {
-            if (addToTab) TAB_ITEMS.add(item.getDefaultStack());
-            return Registry.register(Registries.ITEM, L2Hostility.id(name), item);
+            super(name, content);
+            this.setTab(LHMiscs.GROUP);
         }
 
-        public Entry<T> removeTab()
+        @Override
+        public ItemBuilder<T> addModel()
         {
-            addToTab = false;
+            if (getModelGenerator() == null)
+                throw new UnsupportedOperationException();
+            if (content instanceof TrinketItem)
+                getModelGenerator().addItem(content, Models.GENERATED, "trinket/");
+            else
+                getModelGenerator().addItem(content);
             return this;
         }
 
-        public Entry<T> addModel()
+        @Override
+        public ItemBuilder<T> addModel(Model model)
         {
-            ModelProvider.addItem(item);
+            if (getModelGenerator() == null)
+                throw new UnsupportedOperationException();
+            if (content instanceof TrinketItem)
+                getModelGenerator().addItem(content, model, "trinket/");
+            else
+                getModelGenerator().addItem(content, model);
             return this;
         }
 
-        public Entry<T> addModel(Model model)
+        @Override
+        public @Nullable ModelGenerator getModelGenerator()
         {
-            ModelProvider.addItem(item, model);
-            return this;
+            return LHData.MODELS;
         }
 
-        public Entry<T> addEN()
+        @Override
+        public @Nullable LanguageGenerator getEnglishGenerator()
         {
-            return addEN(StringUtil.getNameById(name));
+            return LHData.EN_TEXTS;
         }
 
-        public Entry<T> addEN(String en)
+        @Override
+        public @Nullable LanguageGenerator getChineseGenerator()
         {
-            EN_US_LangProvider.addItem(item, en);
-            return this;
+            return LHData.ZH_TEXTS;
         }
 
-        public Entry<T> addZH(String zh)
+        @Override
+        public @Nullable TagGenerator<Item> getTagGenerator()
         {
-            ZH_CN_LangProvider.addItem(item, zh);
-            return this;
+            return LHData.ITEM_TAGS;
         }
 
-        public Entry<T> addTag(TagKey<Item> key)
+        @Override
+        protected String getNameSpace()
         {
-            TagItemProvider.add(key, item);
-            return this;
-        }
-
-        @SafeVarargs
-        public final Entry<T> addTag(TagKey<Item>... keys)
-        {
-            for (TagKey<Item> key : keys)
-                TagItemProvider.add(key, item);
-            return this;
+            return L2Hostility.MOD_ID;
         }
     }
 }

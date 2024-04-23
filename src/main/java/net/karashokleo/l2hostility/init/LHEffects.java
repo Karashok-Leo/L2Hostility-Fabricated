@@ -2,14 +2,11 @@ package net.karashokleo.l2hostility.init;
 
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.content.effect.*;
-import net.karashokleo.l2hostility.data.generate.EN_US_LangProvider;
-import net.karashokleo.l2hostility.data.generate.TagEffectProvider;
-import net.karashokleo.l2hostility.data.generate.ZH_CN_LangProvider;
-import net.karashokleo.l2hostility.util.StringUtil;
+import net.karashokleo.leobrary.datagen.builder.StatusEffectBuilder;
+import net.karashokleo.leobrary.datagen.generator.TagGenerator;
+import net.karashokleo.leobrary.datagen.generator.LanguageGenerator;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.tag.TagKey;
+import org.jetbrains.annotations.Nullable;
 
 public class LHEffects
 {
@@ -99,60 +96,40 @@ public class LHEffects
                 .register();
     }
 
-    static class Entry<T extends StatusEffect>
+    static class Entry<T extends StatusEffect> extends StatusEffectBuilder<T>
     {
-        String name;
-        T effect;
-
-        private Entry(String name, T effect)
-        {
-            this.name = name;
-            this.effect = effect;
-        }
-
         public static <T extends StatusEffect> Entry<T> of(String name, T effect)
         {
             return new Entry<>(name, effect);
         }
 
-        public T register()
+        private Entry(String name, T effect)
         {
-            return Registry.register(Registries.STATUS_EFFECT, L2Hostility.id(name), effect);
+            super(name, effect);
         }
 
-        public Entry<T> addEN()
+        @Override
+        public @Nullable LanguageGenerator getEnglishGenerator()
         {
-            return addEN(StringUtil.getNameById(name));
+            return LHData.EN_TEXTS;
         }
 
-        public Entry<T> addEN(String en)
+        @Override
+        public @Nullable LanguageGenerator getChineseGenerator()
         {
-            EN_US_LangProvider.addEffect(effect, en);
-            return this;
+            return LHData.ZH_TEXTS;
         }
 
-        public Entry<T> addENDesc(String en)
+        @Override
+        public @Nullable TagGenerator<StatusEffect> getTagGenerator()
         {
-            EN_US_LangProvider.addEffectDesc(effect, en);
-            return this;
+            return LHData.STATUS_EFFECT_TAGS;
         }
 
-        public Entry<T> addZH(String zh)
+        @Override
+        protected String getNameSpace()
         {
-            ZH_CN_LangProvider.addEffect(effect, zh);
-            return this;
-        }
-
-        public Entry<T> addZHDesc(String zh)
-        {
-            ZH_CN_LangProvider.addEffectDesc(effect, zh);
-            return this;
-        }
-
-        public Entry<T> addTag(TagKey<StatusEffect> key)
-        {
-            TagEffectProvider.add(key, effect);
-            return this;
+            return L2Hostility.MOD_ID;
         }
     }
 }

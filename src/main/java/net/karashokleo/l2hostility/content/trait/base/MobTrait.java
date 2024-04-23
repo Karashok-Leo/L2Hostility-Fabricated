@@ -115,10 +115,8 @@ public class MobTrait
     @NotNull
     public String getNameKey()
     {
-        if (desc != null) return desc;
-        Identifier id = getNonNullId();
-        Identifier reg = LHTraits.TRAIT.getKey().getRegistry();
-        desc = reg.getPath() + "." + id.getNamespace() + "." + id.getPath();
+        if (desc == null)
+            desc = getNonNullId().toTranslationKey(LHTraits.TRAIT_KEY.getValue().getPath());
         return desc;
     }
 

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "minecraft:blaze_powder"
+    },
+    "2": {
+      "item": "minecraft:blue_ice"
+    },
+    "3": {
+      "item": "minecraft:echo_shard"
+    },
+    "4": {
+      "item": "minecraft:experience_bottle"
+    },
+    "A": {
+      "item": "l2hostility:hostility_orb"
+    },
+    "B": {
+      "item": "l2hostility:bottle_of_curse"
+    }
+  },
+  "pattern": [
+    "B4B",
+    "1A2",
+    "B3B"
+  ],
+  "result": {
+    "item": "l2hostility:chaos_ingot"
+  },
+  "show_notification": true
+}

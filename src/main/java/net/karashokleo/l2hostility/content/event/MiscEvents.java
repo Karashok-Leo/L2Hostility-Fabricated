@@ -52,7 +52,7 @@ public class MiscEvents
         UseEntityCallback.EVENT.register(
                 (player, world, hand, entity, hitResult) ->
                         player.getStackInHand(hand).getItem() instanceof IMobClickItem && entity instanceof LivingEntity ?
-                                ActionResult.FAIL :
+                                ActionResult.CONSUME :
                                 ActionResult.PASS
         );
 

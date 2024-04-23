@@ -73,11 +73,11 @@ public class EntityConfig
         }
     }
 
-    public record ItemEntry(int weight, ItemStack stack)
+    public record ItemBuilder(int weight, ItemStack stack)
     {
     }
 
-    public record ItemPool(int level, float chance, String slot, ArrayList<ItemEntry> entries)
+    public record ItemPool(int level, float chance, String slot, ArrayList<ItemBuilder> entries)
     {
     }
 
@@ -110,7 +110,7 @@ public class EntityConfig
 
     public static ItemPool simplePool(int level, String slot, ItemStack stack)
     {
-        return new ItemPool(level, 1, slot, new ArrayList<>(List.of(new ItemEntry(100, stack))));
+        return new ItemPool(level, 1, slot, new ArrayList<>(List.of(new ItemBuilder(100, stack))));
     }
 
     public static TraitBase trait(MobTrait trait, int free, int min)
