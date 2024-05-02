@@ -8,6 +8,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
 public class ClientGlowingHandler
@@ -22,10 +23,21 @@ public class ClientGlowingHandler
         return false;
     }
 
+    private static int cacheTick;
+    private static boolean cacheGlass;
+
+    private static boolean playerHasGlass(PlayerEntity player)
+    {
+        if (player.age == cacheTick) return cacheGlass;
+        cacheGlass = TrinketCompat.hasItemEquippedOrInTrinket(player, LHItems.DETECTOR_GLASSES);
+        cacheTick = player.age;
+        return cacheGlass;
+    }
+
     private static boolean isGlowingImpl(LivingEntity entity)
     {
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
-        if (player != null && TrinketCompat.hasItemEquippedOrInTrinket(player, LHItems.DETECTOR_GLASSES))
+        if (player != null && playerHasGlass(player))
         {
             boolean glow = entity.isInvisible() || entity.isInvisibleTo(player);
             glow |= player.hasStatusEffect(StatusEffects.BLINDNESS);

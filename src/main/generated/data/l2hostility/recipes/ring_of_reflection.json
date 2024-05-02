@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "1": {
-      "item": "l2hostility:poisonous"
+      "item": "l2hostility:poison"
     },
     "2": {
-      "item": "l2hostility:stray"
+      "item": "l2hostility:slowness"
     },
     "3": {
       "item": "l2hostility:nausea"

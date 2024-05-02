@@ -1,6 +1,6 @@
 package net.karashokleo.l2hostility.content.logic;
 
-import net.karashokleo.l2hostility.data.config.WorldDifficultyConfig;
+import net.karashokleo.l2hostility.data.config.DifficultyConfig;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -28,7 +28,7 @@ public class MobDifficultyCollector
         trait_cost = 1;
     }
 
-    public void acceptConfig(WorldDifficultyConfig.DifficultyConfig config) {
+    public void acceptConfig(DifficultyConfig.Config config) {
         min = Math.max(min, config.min());
         base += config.base();
         scale += config.scale();

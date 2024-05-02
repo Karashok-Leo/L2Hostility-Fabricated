@@ -1,5 +1,6 @@
 package net.karashokleo.l2hostility.client;
 
+import io.github.fabricators_of_create.porting_lib.attributes.extensions.PlayerAttributesExtensions;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.util.raytrace.RayTraceUtil;
@@ -21,7 +22,7 @@ public class MobTraitRenderer
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
         assert player != null;
         boolean needHover = entity.isInvisible() || LHConfig.client().showOnlyWhenHovered;
-        if (needHover && RayTraceUtil.rayTraceEntity(player, player.getEntityReach(), e -> e == entity) == null) return;
+        if (needHover && RayTraceUtil.rayTraceEntity(player, ((PlayerAttributesExtensions)player).getEntityReach(), e -> e == entity) == null) return;
         var list = diff.get().getTitle(
                 LHConfig.client().showLevelOverHead,
                 LHConfig.client().showTraitOverHead

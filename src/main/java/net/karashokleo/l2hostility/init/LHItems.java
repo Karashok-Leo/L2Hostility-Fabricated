@@ -24,11 +24,13 @@ import net.minecraft.data.client.Models;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.NetherStarItem;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import org.jetbrains.annotations.Nullable;
 
 public class LHItems
 {
+    public static final Identifier GUIDE_BOOK = L2Hostility.id("hostility_guide");
     public static HostilityOrb HOSTILITY_ORB;
     public static BottleOfCurse BOTTLE_CURSE;
     public static BottleOfSanity BOTTLE_SANITY;
@@ -419,7 +421,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("深海加护之戒")
-                .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
+                .addTag(LHTags.CHAOS, LHTags.RING_SLOT, LHTags.OFF_RING_SLOT)
                 .register();
 
         RING_LIFE = Entry.of(
@@ -431,7 +433,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("屹立不倒之戒")
-                .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
+                .addTag(LHTags.CHAOS, LHTags.RING_SLOT, LHTags.OFF_RING_SLOT)
                 .register();
 
         RING_DIVINITY = Entry.of(
@@ -443,7 +445,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("圣光守护之戒")
-                .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
+                .addTag(LHTags.CHAOS, LHTags.RING_SLOT, LHTags.OFF_RING_SLOT)
                 .register();
 
         RING_REFLECTION = Entry.of(
@@ -455,7 +457,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("诅咒扭曲之戒")
-                .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
+                .addTag(LHTags.CHAOS, LHTags.RING_SLOT, LHTags.OFF_RING_SLOT)
                 .register();
 
         RING_INCARCERATION = Entry.of(
@@ -467,7 +469,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("禁锢诅咒之戒")
-                .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
+                .addTag(LHTags.CHAOS, LHTags.RING_SLOT, LHTags.OFF_RING_SLOT)
                 .register();
 
         RING_CORROSION = Entry.of(
@@ -479,7 +481,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("丑恶诅咒之戒")
-                .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
+                .addTag(LHTags.CHAOS, LHTags.RING_SLOT, LHTags.OFF_RING_SLOT)
                 .register();
 
         RING_HEALING = Entry.of(
@@ -491,7 +493,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("再生之戒")
-                .addTag(LHTags.CHAOS, LHTags.RING_SLOT)
+                .addTag(LHTags.CHAOS, LHTags.RING_SLOT, LHTags.OFF_RING_SLOT)
                 .register();
 
         FLAMING_THORN = Entry.of(
@@ -503,7 +505,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("魔焰荆棘")
-                .addTag(LHTags.CHAOS, LHTags.HAND_SLOT)
+                .addTag(LHTags.CHAOS, LHTags.HAND_SLOT, LHTags.OFF_HAND_SLOT)
                 .register();
 
         IMAGINE_BREAKER = Entry.of(
@@ -515,7 +517,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("破咒遗骨")
-                .addTag(LHTags.CHAOS, LHTags.HAND_SLOT, LHTags.NO_SEAL)
+                .addTag(LHTags.CHAOS, LHTags.HAND_SLOT, LHTags.OFF_HAND_SLOT, LHTags.NO_SEAL)
                 .register();
 
         PLATINUM_STAR = Entry.of(
@@ -527,7 +529,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("破风拳套")
-                .addTag(LHTags.CHAOS, LHTags.HAND_SLOT, LHTags.CHARM_SLOT)
+                .addTag(LHTags.CHAOS, LHTags.HAND_SLOT, LHTags.OFF_HAND_SLOT, LHTags.CHARM_SLOT)
                 .register();
 
         INFINITY_GLOVE = Entry.of(
@@ -539,7 +541,7 @@ public class LHItems
                 .addModel()
                 .addEN()
                 .addZH("宝石手套")
-                .addTag(LHTags.CHAOS, LHTags.HAND_SLOT)
+                .addTag(LHTags.CHAOS, LHTags.HAND_SLOT, LHTags.OFF_HAND_SLOT)
                 .register();
 
         ABYSSAL_THORN = Entry.of(

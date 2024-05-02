@@ -1,0 +1,15 @@
+{
+  "type": "patchouli:shapeless_book_recipe",
+  "book": "l2hostility:hostility_guide",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "minecraft:rotten_flesh"
+    },
+    {
+      "item": "minecraft:bone"
+    }
+  ]
+}

@@ -27,10 +27,9 @@ public class ClientEvents
                         target.tickRender();
                 }));
 
-        WorldRenderEvents.LAST.register(context ->
+        WorldRenderEvents.BEFORE_DEBUG_RENDER.register(context ->
         {
-//            if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRIPWIRE_BLOCKS)
-//                return;
+//            if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRIPWIRE_BLOCKS) return;
             ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
             if (player == null) return;
             var opt = ChunkDifficulty.at(player.getWorld(), player.getBlockPos());

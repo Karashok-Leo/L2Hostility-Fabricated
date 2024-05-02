@@ -1,0 +1,8 @@
+{
+  "creative_tab": "l2hostility:hostility",
+  "model": "l2hostility:hostility_guide",
+  "name": "l2hostility.patchouli.title",
+  "landing_text": "l2hostility.patchouli.landing",
+  "use_resource_pack": true,
+  "version": 1
+}

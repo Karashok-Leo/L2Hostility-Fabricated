@@ -12,7 +12,7 @@ public class WeaponConfigProvider extends AbstractDataProvider
 {
     public WeaponConfigProvider(FabricDataOutput output)
     {
-        super(output, Constants.WEAPON_CONFIG_PATH);
+        super(output, Constants.PARENT_CONFIG_PATH + "/" + Constants.WEAPON_CONFIG_PATH);
     }
 
     @Override

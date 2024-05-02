@@ -1,5 +1,6 @@
 package net.karashokleo.l2hostility.data.config.loader;
 
+import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.data.Constants;
 import net.karashokleo.l2hostility.data.config.WeaponConfig;
 import net.karashokleo.l2hostility.init.LHData;
@@ -23,5 +24,11 @@ public class WeaponConfigLoader extends AbstractDataLoader<WeaponConfig>
     protected void load(Identifier id, WeaponConfig config)
     {
         LHData.weapons.merge(config);
+    }
+
+    @Override
+    public Identifier getFabricId()
+    {
+        return L2Hostility.id("weapon_config");
     }
 }

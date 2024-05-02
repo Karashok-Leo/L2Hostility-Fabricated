@@ -1,10 +1,13 @@
 package net.karashokleo.l2hostility.content.item.wand;
 
+import net.karashokleo.l2hostility.content.screen.equipment.EquipmentScreenHandlerFactory;
 import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
@@ -28,6 +31,9 @@ public class EquipmentWand extends BaseWand
 //            else
 //                new EquipmentsMenuPvd(mob).open((ServerPlayerEntity) player);
 //        }
+
+        if (entity instanceof MobEntity mob)
+            new EquipmentScreenHandlerFactory(mob).open((ServerPlayerEntity) player);
     }
 
 

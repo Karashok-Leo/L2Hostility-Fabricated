@@ -118,9 +118,12 @@ public enum LHTexts
     COMMAND_REGION_GET_SCALE("command.region.get_scale", "Target section has difficulty scale %s", "目标子区块的难度倍率为%s", 1),
     COMMAND_REGION_CLEAR("command.region.clear", "Section Cleared", "子区块难度已净化", 0),
     COMMAND_REGION_NOT_CLEAR("command.region.not_clear", "Section Not Cleared", "子区块难度还未净化", 0),
+
     COMMAND_MOB_SUCCEED("command.mob.success", "Performed actions on %s mobs", "指令已对%s个怪物起效", 1),
-    PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", "莱特兰·恶意-教程与词条列表", 0),
-    PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", "这个模组提升了怪物数值，并添加了各种能力", 0),
+//    PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", "莱特兰·恶意-教程与词条列表", 0),
+//    PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", "这个模组提升了怪物数值，并添加了各种能力", 0),
+    PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", "莱特兰恶意教程", 0),
+    PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", "了解难度机制和怪物词条，以更好地应对它们", 0)
     ;
 
     public final String id, defEn, defZh;
@@ -151,12 +154,16 @@ public enum LHTexts
         return ITEM_SECTION_RENDER.get(item(LHItems.DETECTOR.getDefaultStack()), item(LHItems.DETECTOR_GLASSES.getDefaultStack()));
     }
 
-    public static void register()
+    public static void init()
     {
         for (LHTexts text : LHTexts.values())
         {
             LHData.EN_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defEn);
             LHData.ZH_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defZh);
         }
+        LHData.EN_TEXTS.addText("trinkets.slot.chest.hostility_curse","Curse");
+        LHData.ZH_TEXTS.addText("trinkets.slot.chest.hostility_curse","诅咒");
+        LHData.EN_TEXTS.addText("trinkets.slot.chest.charm","Charm");
+        LHData.ZH_TEXTS.addText("trinkets.slot.chest.charm","护符");
     }
 }

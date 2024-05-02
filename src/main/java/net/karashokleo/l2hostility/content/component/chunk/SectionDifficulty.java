@@ -1,13 +1,16 @@
 package net.karashokleo.l2hostility.content.component.chunk;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
+import net.karashokleo.l2hostility.client.TraitEffect;
+import net.karashokleo.l2hostility.client.TraitEffectToClient;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.init.LHData;
-import net.karashokleo.l2hostility.data.config.WorldDifficultyConfig;
+import net.karashokleo.l2hostility.data.config.DifficultyConfig;
 import net.karashokleo.l2hostility.content.logic.DifficultyLevel;
 import net.karashokleo.l2hostility.content.logic.LevelEditor;
 import net.karashokleo.l2hostility.content.logic.MobDifficultyCollector;
 import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.LHNetworking;
 import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -86,7 +89,7 @@ public class SectionDifficulty
         BlockPos pos = player.getBlockPos();
         RegistryEntry<Biome> biome = player.getWorld().getBiome(pos);
         int bio = biome.getKey().map(e -> LHData.difficulties.biomeMap.get(e.getRegistry()))
-                .map(WorldDifficultyConfig.DifficultyConfig::base).orElse(0);
+                .map(DifficultyConfig.Config::base).orElse(0);
         int dist = (int) Math.round(LHConfig.common().scaling.distanceFactor *
                 Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ()));
         int adaptive = difficulty.getLevel();
@@ -109,6 +112,7 @@ public class SectionDifficulty
         stage = SectionStage.CLEARED;
         chunk.owner.setNeedsSaving(true);
         chunk.sync();
+        LHNetworking.toTracking(chunk.owner, new TraitEffectToClient(pos, TraitEffect.CLEAR));
         return true;
     }
 
@@ -118,6 +122,7 @@ public class SectionDifficulty
         stage = SectionStage.INIT;
         chunk.owner.setNeedsSaving(true);
         chunk.sync();
+        LHNetworking.toTracking(chunk.owner, new TraitEffectToClient(pos, TraitEffect.CLEAR));
         return true;
     }
 

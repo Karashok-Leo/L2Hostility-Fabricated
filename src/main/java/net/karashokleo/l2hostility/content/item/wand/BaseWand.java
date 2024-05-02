@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 
 public abstract class BaseWand extends Item implements IGlowingTarget, IMobClickItem
 {
-
     public BaseWand(Settings settings)
     {
         super(settings);

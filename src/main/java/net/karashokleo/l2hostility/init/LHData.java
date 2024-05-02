@@ -2,16 +2,22 @@ package net.karashokleo.l2hostility.init;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
+import net.karashokleo.l2hostility.data.config.DifficultyConfig;
 import net.karashokleo.l2hostility.data.config.EntityConfig;
 import net.karashokleo.l2hostility.data.config.TraitConfig;
 import net.karashokleo.l2hostility.data.config.WeaponConfig;
-import net.karashokleo.l2hostility.data.config.WorldDifficultyConfig;
+import net.karashokleo.l2hostility.data.config.loader.EntityConfigLoader;
+import net.karashokleo.l2hostility.data.config.loader.TraitConfigLoader;
+import net.karashokleo.l2hostility.data.config.loader.WeaponConfigLoader;
+import net.karashokleo.l2hostility.data.config.loader.DifficultyConfigLoader;
 import net.karashokleo.l2hostility.data.generate.*;
 import net.karashokleo.l2hostility.data.config.provider.EntityConfigProvider;
 import net.karashokleo.l2hostility.data.config.provider.TraitConfigProvider;
 import net.karashokleo.l2hostility.data.config.provider.WeaponConfigProvider;
 import net.karashokleo.l2hostility.data.config.provider.WorldDifficultyConfigProvider;
+import net.karashokleo.leobrary.compat.patchouli.PatchouliHelper;
 import net.karashokleo.leobrary.datagen.generator.DynamicRegistryGenerator;
 import net.karashokleo.leobrary.datagen.generator.ModelGenerator;
 import net.karashokleo.leobrary.datagen.generator.TagGenerator;
@@ -23,6 +29,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.resource.ResourceType;
 
 public class LHData implements DataGeneratorEntrypoint
 {
@@ -39,7 +46,15 @@ public class LHData implements DataGeneratorEntrypoint
     public static EntityConfig entities;
     public static TraitConfig traits;
     public static WeaponConfig weapons;
-    public static WorldDifficultyConfig difficulties;
+    public static DifficultyConfig difficulties;
+
+    public static void register()
+    {
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new EntityConfigLoader());
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new TraitConfigLoader());
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new WeaponConfigLoader());
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new DifficultyConfigLoader());
+    }
 
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator)
@@ -80,9 +95,10 @@ public class LHData implements DataGeneratorEntrypoint
         DYNAMICS.generate(pack);
         pack.addProvider(RecipeProvider::new);
         pack.addProvider(AdvancementProvider::new);
+        PatchouliHelper.model(pack, LHItems.GUIDE_BOOK);
 
-//        L2Hostility.REGISTRATE.CONFIGS.forEach(e -> e.accept(collector));
-//
+
+
 //        collector.add(L2DamageTracker.ARMOR, new ResourceLocation(L2Hostility.MODID, "equipments"), new ArmorEffectConfig()
 //                .add(LHItems.CURSE_WRATH.getId().toString(),
 //                        MobEffects.BLINDNESS, MobEffects.DARKNESS, MobEffects.CONFUSION,
@@ -97,11 +113,4 @@ public class LHData implements DataGeneratorEntrypoint
 //        if (ModList.get().isLoaded(IceAndFire.MODID))
 //            IaFData.genConfig(collector);
     }
-
-//    public static <T extends LivingEntity> void addEntity(AbstractDataProvider.Collector collector, int min, int base, RegistryObject<EntityType<T>> obj, EntityConfig.TraitBase... traits) {
-//        collector.add(L2Hostility.ENTITY, obj.getId(), new EntityConfig().putEntity(min, base, 0, 0, List.of(obj.get()), List.of(traits)));
-//    }
-//
-//    public static <T extends LivingEntity> void addEntity(AbstractDataProvider.Collector collector, int min, int base, RegistryObject<EntityType<T>> obj, List<EntityConfig.TraitBase> traits, List<EntityConfig.ItemPool> items) {
-//        collector.add(L2Hostility.ENTITY, obj.getId(), new EntityConfig().putEntityAndItem(min, base, 0, 0, List.of(obj.get()), traits, items));
 }

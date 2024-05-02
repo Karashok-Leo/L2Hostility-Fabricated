@@ -1,10 +1,10 @@
 package net.karashokleo.l2hostility.content.trait.legendary;
 
+import net.karashokleo.l2hostility.client.TraitEffect;
+import net.karashokleo.l2hostility.client.TraitEffectToClient;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
-import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.*;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import net.karashokleo.l2hostility.init.LHDamageTypes;
-import net.karashokleo.l2hostility.init.LHItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,31 +21,35 @@ public class KillerAuraTrait extends LegendaryTrait
 {
     // 传奇词条，使怪物能够大范围杀伤。
     // 怪物每 6 -【词条等级】秒对周围 6 格范围的玩家造成【词条等级】* 10 的魔法伤害并施加词条效果。
-    public KillerAuraTrait() {
+    public KillerAuraTrait()
+    {
         super(Formatting.DARK_RED);
     }
 
     @Override
-    public void tick(LivingEntity mob, int level) {
+    public void tick(LivingEntity mob, int level)
+    {
         int itv = LHConfig.common().traits.killerAuraInterval / level;
         int damage = LHConfig.common().traits.killerAuraDamage * level;
         int range = LHConfig.common().traits.killerAuraRange;
-        if (!mob.getWorld().isClient() && mob.age % itv == 0) {
-            var diff=MobDifficulty.get(mob);
-            if (diff.isEmpty())return;
+        if (!mob.getWorld().isClient() && mob.age % itv == 0)
+        {
+            var diff = MobDifficulty.get(mob);
+            if (diff.isEmpty()) return;
             Box box = mob.getBoundingBox().expand(range);
-            for (var e : mob.getWorld().getEntitiesByClass(LivingEntity.class, box, EntityPredicates.VALID_ENTITY)) {
+            for (var e : mob.getWorld().getEntitiesByClass(LivingEntity.class, box, EntityPredicates.VALID_ENTITY))
                 if (e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode ||
                         e instanceof MobEntity target && target.getTarget() == mob ||
-                        mob instanceof MobEntity mobmob && mobmob.getTarget() == e) {
+                        mob instanceof MobEntity mobmob && mobmob.getTarget() == e)
+                {
                     if (e.distanceTo(mob) > range) continue;
                     if (TrinketCompat.hasItemInTrinket(e, LHItems.ABRAHADABRA)) continue;
                     e.damage(e.getDamageSources().create(LHDamageTypes.KILLER_AURA, null, mob), damage);
                 }
-            }
-            diff.get().sync();
+            LHNetworking.toTracking(mob, new TraitEffectToClient(mob, this, TraitEffect.AURA));
         }
-        if (mob.getWorld().isClient()) {
+        if (mob.getWorld().isClient())
+        {
             Vec3d center = mob.getPos();
             float tpi = (float) (Math.PI * 2);
             Vec3d v0 = new Vec3d(0, range, 0);
@@ -58,7 +62,8 @@ public class KillerAuraTrait extends LegendaryTrait
     }
 
     @Override
-    public void addDetail(List<Text> list) {
+    public void addDetail(List<Text> list)
+    {
         list.add(Text.translatable(getDescKey(),
                 mapLevel(i -> Text.literal(LHConfig.common().traits.killerAuraDamage * i + "")
                         .formatted(Formatting.AQUA)),

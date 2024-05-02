@@ -6,6 +6,7 @@ import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.content.recipe.EnchantmentIngredient;
 import net.karashokleo.l2hostility.content.recipe.EnchantmentRecipeBuilder;
 import net.karashokleo.l2hostility.init.*;
+import net.karashokleo.leobrary.compat.patchouli.PatchouliHelper;
 import net.karashokleo.leobrary.datagen.util.RecipeGenUtil;
 import net.minecraft.data.server.recipe.*;
 import net.minecraft.enchantment.Enchantment;
@@ -22,6 +23,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.function.Consumer;
 
+@SuppressWarnings("unused")
 public class RecipeProvider extends FabricRecipeProvider
 {
     private static final String currentFolder = "";
@@ -429,6 +431,12 @@ public class RecipeProvider extends FabricRecipeProvider
                     .input('I', LHItems.CHAOS_INGOT)
                     .input('A', LCItems.GUARDIAN_EYE)
                     .input('C', LHItems.BOTTLE_SANITY)
+                    .offerTo(exporter);
+
+            PatchouliHelper.shapeless(LHItems.GUIDE_BOOK,Items.BOOK)
+                    .input(Items.BOOK)
+                    .input(Items.ROTTEN_FLESH)
+                    .input(Items.BONE)
                     .offerTo(exporter);
         }
 

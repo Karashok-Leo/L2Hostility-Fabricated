@@ -1,11 +1,9 @@
 package net.karashokleo.l2hostility.util.raytrace;
 
 import com.google.common.collect.Maps;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.client.L2HostilityClient;
+import net.karashokleo.l2hostility.init.LHNetworking;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -105,7 +103,7 @@ public class RayTraceUtil
             ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
             if (player == null) return;
             UUID eid = entity == null ? null : entity.getUuid();
-            ClientPlayNetworking.send(L2Hostility.HANDLER.getPacket(new TargetSetPacket(player.getUuid(), eid)));
+            LHNetworking.toServer(new TargetSetPacket(player.getUuid(), eid));
             timeout = 0;
         }
 

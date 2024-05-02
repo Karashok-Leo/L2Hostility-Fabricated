@@ -3,16 +3,16 @@
   "category": "misc",
   "key": {
     "1": {
-      "item": "l2hostility:poisonous"
+      "item": "l2hostility:poison"
     },
     "2": {
-      "item": "l2hostility:withering"
+      "item": "l2hostility:wither"
     },
     "3": {
-      "item": "l2hostility:stray"
+      "item": "l2hostility:slowness"
     },
     "4": {
-      "item": "l2hostility:weakener"
+      "item": "l2hostility:weakness"
     },
     "5": {
       "item": "l2hostility:levitation"

@@ -22,8 +22,16 @@ public class InfinityGlove extends BaseTrinketItem
     public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid)
     {
         var map = super.getModifiers(stack, slot, entity, uuid);
-        SlotAttributes.addSlotModifier(map, "ring", uuid, 5, EntityAttributeModifier.Operation.ADDITION);
-        SlotAttributes.addSlotModifier(map, "charm", uuid, 1, EntityAttributeModifier.Operation.ADDITION);
+        if (slot.inventory().getSlotType().getGroup().equals("hand"))
+        {
+            SlotAttributes.addSlotModifier(map, "hand/ring", uuid, 5, EntityAttributeModifier.Operation.ADDITION);
+            SlotAttributes.addSlotModifier(map, "chest/charm", uuid, 1, EntityAttributeModifier.Operation.ADDITION);
+        }
+        if (slot.inventory().getSlotType().getGroup().equals("offhand"))
+        {
+            SlotAttributes.addSlotModifier(map, "offhand/ring", uuid, 5, EntityAttributeModifier.Operation.ADDITION);
+            SlotAttributes.addSlotModifier(map, "chest/charm", uuid, 1, EntityAttributeModifier.Operation.ADDITION);
+        }
         return map;
     }
 }

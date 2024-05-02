@@ -5,12 +5,13 @@
   "name": "L2 Hostility",
   "description": "L2 Hostility",
   "authors": [
+    "LightLand Team",
     "Karashok-Leo"
   ],
   "contact": {
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/Karashok-Leo/L2Hostility-Fabricated"
   },
-  "license": "GPLv3",
+  "license": "LGPLv2.1",
   "icon": "assets/l2hostility/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -38,11 +39,12 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=0.15.7",
+    "fabricloader": ">=0.15.10",
     "minecraft": "~1.20.1",
     "java": ">=17",
-    "fabric-api": "*"
-  },
-  "suggests": {
+    "fabric-api": "*",
+    "cloth-config": "*",
+    "patchouli": "*",
+    "trinkets": "*"
   }
 }

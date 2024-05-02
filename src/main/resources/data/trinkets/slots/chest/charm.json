@@ -1,0 +1,5 @@
+{
+  "icon": "l2hostility:slot/empty_hostility_slot",
+  "order": 333,
+  "validator_predicates": ["trinkets:tag"]
+}

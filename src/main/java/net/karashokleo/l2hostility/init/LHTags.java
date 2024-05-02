@@ -15,12 +15,14 @@ public class LHTags
 {
     public static final TagKey<MobTrait> POTION = createTraitTag("potion_trait");
     public static final TagKey<Item> CHAOS = createItemTag("chaos_equipment");
-    public static final TagKey<Item> FACE_SLOT = createItemTag(new Identifier("trinkets", "face"));
-    public static final TagKey<Item> CHARM_SLOT = createItemTag(new Identifier("trinkets", "charm"));
-    public static final TagKey<Item> RING_SLOT = createItemTag(new Identifier("trinkets", "ring"));
-    public static final TagKey<Item> HAND_SLOT = createItemTag(new Identifier("trinkets", "hand"));
-    public static final TagKey<Item> CURSE_SLOT = createItemTag(new Identifier("trinkets", "hostility_curse"));
-    public static final TagKey<Item> BACK_SLOT = createItemTag(new Identifier("trinkets", "back"));
+    public static final TagKey<Item> FACE_SLOT = createItemTag(new Identifier("trinkets", "head/face"));
+    public static final TagKey<Item> BACK_SLOT = createItemTag(new Identifier("trinkets", "chest/back"));
+    public static final TagKey<Item> CHARM_SLOT = createItemTag(new Identifier("trinkets", "chest/charm"));
+    public static final TagKey<Item> CURSE_SLOT = createItemTag(new Identifier("trinkets", "chest/hostility_curse"));
+    public static final TagKey<Item> RING_SLOT = createItemTag(new Identifier("trinkets", "hand/ring"));
+    public static final TagKey<Item> HAND_SLOT = createItemTag(new Identifier("trinkets", "hand/glove"));
+    public static final TagKey<Item> OFF_RING_SLOT = createItemTag(new Identifier("trinkets", "offhand/ring"));
+    public static final TagKey<Item> OFF_HAND_SLOT = createItemTag(new Identifier("trinkets", "offhand/glove"));
     public static final TagKey<Item> TRAIT_ITEM = createItemTag("trait_item");
     public static final TagKey<Item> NO_SEAL = createItemTag("no_seal");
     public static final TagKey<Item> ANTIBUILD_BAN = createItemTag("antibuild_ban");
@@ -41,7 +43,7 @@ public class LHTags
     public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
     public static final TagKey<EntityType<?>> RANGED_WEAPON_TARGET = createEntityTag("ranged_weapon_target");
 
-    public static void register()
+    public static void init()
     {
         LHData.ENTITY_TYPE_TAGS.add(
                 BLACKLIST

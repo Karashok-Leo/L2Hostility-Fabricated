@@ -2,7 +2,6 @@ package net.karashokleo.l2hostility.content.event;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
@@ -11,7 +10,6 @@ import net.karashokleo.l2hostility.content.item.wand.IMobClickItem;
 import net.karashokleo.l2hostility.init.LHTags;
 import net.karashokleo.l2hostility.init.LHEffects;
 import net.karashokleo.l2hostility.init.LHEnchantments;
-import net.karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -27,9 +25,6 @@ public class MiscEvents
             if (event.getSource().getAttacker() instanceof LivingEntity attacker)
                 HitTargetEnchantment.handle(attacker, event);
         });
-
-        // 射线检测
-        ServerTickEvents.START_SERVER_TICK.register(server -> server.execute(RayTraceUtil::serverTick));
 
         // 禁止放置方块
         UseBlockCallback.EVENT.register(
@@ -51,8 +46,9 @@ public class MiscEvents
         // 跳过实体交互
         UseEntityCallback.EVENT.register(
                 (player, world, hand, entity, hitResult) ->
-                        player.getStackInHand(hand).getItem() instanceof IMobClickItem && entity instanceof LivingEntity ?
-                                ActionResult.CONSUME :
+                        player.getStackInHand(hand).getItem() instanceof IMobClickItem && entity instanceof LivingEntity &&
+                                !entity.getWorld().isClient() ?
+                                ActionResult.FAIL :
                                 ActionResult.PASS
         );
 

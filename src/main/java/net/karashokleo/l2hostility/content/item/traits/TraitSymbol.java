@@ -8,6 +8,7 @@ import net.karashokleo.l2hostility.content.trait.legendary.LegendaryTrait;
 import net.karashokleo.l2hostility.init.LHTexts;
 import net.karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Ownable;
@@ -116,16 +117,19 @@ public class TraitSymbol extends Item
         }
         if (get() instanceof LegendaryTrait)
             tooltip.add(LHTexts.TOOLTIP_LEGENDARY.get().formatted(Formatting.GOLD));
-//        if (Screen.hasShiftDown())
-//        {
-        var config = get().getConfig();
-        tooltip.add(LHTexts.TOOLTIP_MIN_LEVEL.get(Text.literal(config.min_level + "").formatted(Formatting.AQUA)).formatted(Formatting.GRAY));
-        tooltip.add(LHTexts.TOOLTIP_LEVEL_COST.get(Text.literal(config.cost + "").formatted(Formatting.AQUA)).formatted(Formatting.GRAY));
-        tooltip.add(LHTexts.TOOLTIP_WEIGHT.get(Text.literal(config.weight + "").formatted(Formatting.DARK_AQUA)).formatted(Formatting.DARK_GRAY));
-//        } else
-//        {
-//            get().addDetail(tooltip);
-//            tooltip.add(LangData.SHIFT.get().formatted(Formatting.GRAY));
-//        }
+
+        if (Screen.hasShiftDown())
+        {
+            var config = get().getConfig();
+            tooltip.add(LHTexts.TOOLTIP_MIN_LEVEL.get(Text.literal(config.min_level + "").formatted(Formatting.AQUA)).formatted(Formatting.GRAY));
+            tooltip.add(LHTexts.TOOLTIP_LEVEL_COST.get(Text.literal(config.cost + "").formatted(Formatting.AQUA)).formatted(Formatting.GRAY));
+            tooltip.add(LHTexts.TOOLTIP_WEIGHT.get(Text.literal(config.weight + "").formatted(Formatting.DARK_AQUA)).formatted(Formatting.DARK_GRAY));
+        } else
+        {
+            get().addDetail(tooltip);
+            // \n
+            tooltip.add(Text.empty());
+            tooltip.add(LHTexts.SHIFT.get().formatted(Formatting.GRAY));
+        }
     }
 }

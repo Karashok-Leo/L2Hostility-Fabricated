@@ -1,5 +1,6 @@
 package net.karashokleo.l2hostility.data.config.loader;
 
+import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.data.Constants;
 import net.karashokleo.l2hostility.data.config.TraitConfig;
 import net.karashokleo.l2hostility.init.LHData;
@@ -22,13 +23,13 @@ public class TraitConfigLoader extends AbstractDataLoader<TraitConfig.Config>
     @Override
     protected void load(Identifier id, TraitConfig.Config config)
     {
-        LHData.traits.put(id.withPath(s ->
-        {
-            int li = s.lastIndexOf('/');
-            int ri = s.lastIndexOf(".json");
-            if (li != -1 && ri != -1)
-                return s.substring(li + 1, ri);
-            return s;
-        }), config);
+        config.id = id;
+        LHData.traits.put(id, config);
+    }
+
+    @Override
+    public Identifier getFabricId()
+    {
+        return L2Hostility.id("trait_config");
     }
 }

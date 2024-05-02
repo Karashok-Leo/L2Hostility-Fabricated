@@ -20,7 +20,7 @@ public class TraitConfigProvider extends AbstractDataProvider
 
     public TraitConfigProvider(FabricDataOutput output)
     {
-        super(output, Constants.TRAIT_CONFIG_PATH);
+        super(output, Constants.PARENT_CONFIG_PATH + "/" + Constants.TRAIT_CONFIG_PATH);
     }
 
     @Override

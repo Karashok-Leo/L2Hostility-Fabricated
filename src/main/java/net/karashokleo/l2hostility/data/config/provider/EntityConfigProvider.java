@@ -14,7 +14,7 @@ public class EntityConfigProvider extends AbstractDataProvider
 {
     public EntityConfigProvider(FabricDataOutput output)
     {
-        super(output, Constants.ENTITY_CONFIG_PATH);
+        super(output, Constants.PARENT_CONFIG_PATH + "/" + Constants.ENTITY_CONFIG_PATH);
     }
 
     @Override

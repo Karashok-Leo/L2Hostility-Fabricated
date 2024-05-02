@@ -22,7 +22,7 @@ public class TripleStripCape extends BaseTrinketItem
     public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid)
     {
         var map = super.getModifiers(stack, slot, entity, uuid);
-        SlotAttributes.addSlotModifier(map, "back", uuid, 3, EntityAttributeModifier.Operation.ADDITION);
+        SlotAttributes.addSlotModifier(map, "chest/back", uuid, 3, EntityAttributeModifier.Operation.ADDITION);
         return map;
     }
 }

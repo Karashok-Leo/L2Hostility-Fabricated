@@ -1,0 +1,13 @@
+{
+  "entities": ["player"],
+  "slots": [
+    "head/face",
+    "chest/back",
+    "chest/charm",
+    "chest/hostility_curse",
+    "hand/ring",
+    "hand/glove",
+    "offhand/ring",
+    "offhand/glove"
+  ]
+}

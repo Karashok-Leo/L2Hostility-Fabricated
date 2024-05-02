@@ -52,7 +52,7 @@ public class EntityConfig
         @SerialClass.SerialField
         public final LinkedHashSet<MobTrait> blacklist = new LinkedHashSet<>();
         @SerialClass.SerialField
-        public WorldDifficultyConfig.DifficultyConfig difficulty = new WorldDifficultyConfig.DifficultyConfig(0, 0, 0, 0, 1, 1);
+        public DifficultyConfig.Config difficulty = new DifficultyConfig.Config(0, 0, 0, 0, 1, 1);
         @SerialClass.SerialField
         public final ArrayList<ItemPool> items = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public class EntityConfig
 
         public Config(List<EntityType<?>> entities,
                       List<TraitBase> traits,
-                      WorldDifficultyConfig.DifficultyConfig difficulty,
+                      DifficultyConfig.Config difficulty,
                       List<ItemPool> items)
         {
             this.entities.addAll(entities);
@@ -103,7 +103,7 @@ public class EntityConfig
     public final EntityConfig putEntityAndItem(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits, List<ItemPool> items)
     {
         list.add(new Config(new ArrayList<>(keys), new ArrayList<>(traits),
-                new WorldDifficultyConfig.DifficultyConfig(min, base, var, scale, 1, 1),
+                new DifficultyConfig.Config(min, base, var, scale, 1, 1),
                 items));
         return this;
     }

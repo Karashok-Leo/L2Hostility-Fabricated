@@ -22,7 +22,7 @@ public class OddeyesGlasses extends BaseTrinketItem
     public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid)
     {
         var map = super.getModifiers(stack, slot, entity, uuid);
-        SlotAttributes.addSlotModifier(map, "head", uuid, 2, EntityAttributeModifier.Operation.ADDITION);
+        SlotAttributes.addSlotModifier(map, "head/face", uuid, 2, EntityAttributeModifier.Operation.ADDITION);
         return map;
     }
 }

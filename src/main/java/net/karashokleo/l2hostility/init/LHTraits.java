@@ -19,6 +19,7 @@ import net.karashokleo.l2hostility.data.config.provider.TraitConfigProvider;
 import net.karashokleo.l2hostility.util.StringUtil;
 import net.karashokleo.leobrary.datagen.builder.NamedEntryBuilder;
 import net.minecraft.data.client.Models;
+import net.minecraft.data.client.TextureMap;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -256,7 +257,7 @@ public class LHTraits
                 .addZHDesc("怪物获得相同等级的随机药水词条。怪物击中目标时，随机移除目标身上%s个正面效果，目标身上每有一个负面效果伤害上升%s，并且所有负面效果时间延长%s，最高延长至%s秒")
                 .register();
         STRIKE = Entry.of(
-                        "strike",
+                        "counter_strike",
                         new CounterStrikeTrait(),
                         50, 100, 1, 60)
                 .addEN()
@@ -384,34 +385,34 @@ public class LHTraits
                 .addZHDesc("击中目标时，随机选中%s个装备/饰品，并封印它们。右键使用%s秒来解封")
                 .register();
         WEAKNESS = Entry.of(
-                        "weakener",
+                        "weakness",
                         new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.WEAKNESS, LHConfig.common().traits.weakTime * lv)),
                         25, 50, 5, 40)
-                .addEN()
+                .addEN("Weakener")
                 .addZH("虚弱")
                 .addTag(LHTags.POTION)
                 .register();
         SLOWNESS = Entry.of(
-                        "stray",
+                        "slowness",
                         new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.SLOWNESS, LHConfig.common().traits.slowTime * lv)),
                         10, 100, 5, 20)
-                .addEN()
+                .addEN("Stray")
                 .addZH("流沙")
                 .addTag(LHTags.POTION)
                 .register();
         POISON = Entry.of(
-                        "poisonous",
+                        "poison",
                         new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.POISON, LHConfig.common().traits.poisonTime * lv)),
                         15, 100, 3, 20)
-                .addEN()
+                .addEN("Poisonous")
                 .addZH("剧毒")
                 .addTag(LHTags.POTION)
                 .register();
         WITHER = Entry.of(
-                        "withering",
+                        "wither",
                         new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.WITHER, LHConfig.common().traits.witherTime * lv)),
                         15, 50, 3, 20)
-                .addEN()
+                .addEN("Withering")
                 .addZH("凋零")
                 .addTag(LHTags.POTION)
                 .register();
@@ -419,7 +420,7 @@ public class LHTraits
                         "blindness",
                         new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.BLINDNESS, LHConfig.common().traits.blindTime * lv)),
                         30, 50, 3, 40)
-                .addEN()
+                .addEN("Blinder")
                 .addZH("致盲")
                 .addTag(LHTags.POTION)
                 .register();
@@ -427,7 +428,7 @@ public class LHTraits
                         "nausea",
                         new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.NAUSEA, LHConfig.common().traits.confusionTime * lv)),
                         30, 50, 3, 40)
-                .addEN()
+                .addEN("Distorter")
                 .addZH("扭曲")
                 .addTag(LHTags.POTION)
                 .register();
@@ -435,7 +436,7 @@ public class LHTraits
                         "levitation",
                         new TargetEffectTrait(lv -> new StatusEffectInstance(StatusEffects.LEVITATION, LHConfig.common().traits.levitationTime * lv)),
                         25, 50, 3, 40)
-                .addEN()
+                .addEN("Levitater")
                 .addZH("升空")
                 .addTag(LHTags.POTION)
                 .register();
@@ -472,6 +473,8 @@ public class LHTraits
             return new Entry<>(name, trait, new TraitConfig.Config(L2Hostility.id(name), cost, weight, maxRank, minLevel));
         }
 
+        private static final Identifier BACKGROUND = L2Hostility.id("item/bg");
+
         TraitConfig.Config config;
         String translationKey;
 
@@ -483,10 +486,16 @@ public class LHTraits
 
         public T register()
         {
-            Identifier id = L2Hostility.id(name);
+            Identifier id = getId();
             TraitSymbol symbol = new TraitSymbol(new FabricItemSettings());
             Registry.register(Registries.ITEM, id, symbol);
-            LHData.MODELS.addItem(symbol, Models.GENERATED, "symbol/");
+            LHMiscs.TRAITS.add(symbol);
+            LHData.MODELS.addItem(generator ->
+                    Models.GENERATED_TWO_LAYERS.upload(
+                            id.withPrefixedPath("item/"),
+                            TextureMap.layered(BACKGROUND, id.withPrefixedPath("item/trait/")),
+                            generator.writer
+                    ));
             LHData.ITEM_TAGS.add(LHTags.TRAIT_ITEM, symbol);
             TraitConfigProvider.add(content, config);
             return Registry.register(LHTraits.TRAIT, id, content);

@@ -34,7 +34,7 @@ public class ChunkClearRenderer
         }
         pose.push();
         pose.translate(-player.getX(), -player.getEyeY(), -player.getZ());
-        new ChunkClearRenderer(pose, r, sections, cx, cz, py >> 4);
+        new ChunkClearRenderer(pose, r, sections, cx, cz, py >> 4).render();
         pose.pop();
     }
 
@@ -60,7 +60,6 @@ public class ChunkClearRenderer
         this.lineCol = 0xffffffff;
         this.greenCol = 0x1f00ff00;
         this.redCol = 0x1fff0000;
-        render();
     }
 
     private void render()

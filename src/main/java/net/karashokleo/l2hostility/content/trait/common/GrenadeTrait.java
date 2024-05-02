@@ -31,7 +31,7 @@ public class GrenadeTrait extends IntervalTrait
             double g = target.getBodyY(0.5) - (0.5 + mob.getBodyY(0.5));
             double h = target.getZ() - (mob.getZ() + vec3d.z * 4.0);
             var fireball = new FireballEntity(world, mob, f, g, h, 1);
-            fireball.setPosition(mob.getX() + vec3d.x * 4.0, mob.getBodyY(0.5) + 0.5, mob.getZ() + vec3d.z * 4.0);
+            fireball.setPosition(mob.getX() + vec3d.x * mob.getWidth(), mob.getBodyY(0.5) + 0.5, mob.getZ() + vec3d.z * mob.getWidth());
             world.spawnEntity(fireball);
             mob.playSound(SoundEvents.ENTITY_SHULKER_SHOOT, 2.0F, (mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F + 1.0F);
             super.action(mob, data);

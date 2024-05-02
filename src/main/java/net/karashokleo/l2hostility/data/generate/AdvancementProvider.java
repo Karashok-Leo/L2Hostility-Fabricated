@@ -2,7 +2,22 @@ package net.karashokleo.l2hostility.data.generate;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
+import net.karashokleo.l2hostility.L2Hostility;
+import net.karashokleo.l2hostility.content.advancement.KillTraitCountTrigger;
+import net.karashokleo.l2hostility.content.advancement.KillTraitEffectTrigger;
+import net.karashokleo.l2hostility.content.advancement.KillTraitFlameTrigger;
+import net.karashokleo.l2hostility.content.advancement.KillTraitsTrigger;
+import net.karashokleo.l2hostility.init.*;
+import net.karashokleo.leobrary.compat.patchouli.PatchouliHelper;
 import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementFrame;
+import net.minecraft.advancement.CriterionMerger;
+import net.minecraft.advancement.criterion.ConsumeItemCriterion;
+import net.minecraft.advancement.criterion.InventoryChangedCriterion;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
+import net.minecraft.predicate.item.ItemPredicate;
 
 import java.util.function.Consumer;
 
@@ -16,174 +31,310 @@ public class AdvancementProvider extends FabricAdvancementProvider
     @Override
     public void generateAdvancement(Consumer<Advancement> consumer)
     {
-//        consumer.accept();
-//
-//        Advancement root = Advancement.Builder.create()
-//                .display(
-//                        LHTraits.ENDER.asItem(), // 显示的图标
-//                        Text.translatable("advancements.l2hostility.advancements.hostility.root.title"), // 标题
-//                        Text.translatable("advancements.l2hostility.advancements.hostility.root.description"), // 描述
-//                        L2Hostility.id("textures/gui/advancements/backgrounds/hostility.png"), // 使用的背景图片
-//                        AdvancementFrame.TASK, // 选项: TASK, CHALLENGE, GOAL
-//                        false, // 在右上角显示
-//                        false, // 在聊天框中提示
-//                        false // 在进度页面里隐藏
-//                )
-//                // Criterion 中使用的第一个字符串是其他进度在需要 'requirements' 时引用的名字
-//                .criterion("got_orb", InventoryChangedCriterion.Conditions.items(LHItems.HOSTILITY_ORB))
-//                .build(consumer, "hostility/root");
-//
-//
-//        var root = gen.new TabBuilder("hostility").root("root", LHTraits.ENDER.asItem(),
-//                CriterionBuilder.item(LHItems.HOSTILITY_ORB),
-//                "Welcome to L2Hostility", "Your survival guide").root();
-//        root.root().patchouli(L2Hostility.REGISTRATE, CriterionBuilder.item(LHItems.HOSTILITY_ORB),
-//                L2Hostility.id("hostility_guide"),
-//                        "Intro to L2Hostility", "Read the hostility guide")
-//
-//                .root()
-//
-//                .create("detector", LHItems.DETECTOR,
-//                        CriterionBuilder.item(LHItems.DETECTOR),
-//                        "Safety Compass", "Obtain Hostility Detector")
-//
-//                .create("glasses", LHItems.DETECTOR_GLASSES,
-//                        CriterionBuilder.item(LHItems.DETECTOR_GLASSES),
-//                        "The Invisible Threats", "Obtain Detector Glasses to find out invisible mobs")
-//
-//                .root()
-//
-//                .create("kill_first", Items.IRON_SWORD,
-//                        CriterionBuilder.one(KillTraitCountTrigger.ins(1)),
-//                        "Worthy Opponent", "Kill a mob with traits")
-//
-//                .create("kill_5_traits", Items.DIAMOND_SWORD,
-//                        CriterionBuilder.one(KillTraitCountTrigger.ins(5)),
-//                        "Legendary Battle", "Kill a mob with 5 traits")
-//                .type(FrameType.GOAL)
-//
-//                .create("kill_10_traits", Items.NETHERITE_SWORD,
-//                        CriterionBuilder.one(KillTraitCountTrigger.ins(10)),
-//                        "Legend Slayer", "Kill a mob with 10 traits")
-//                .type(FrameType.CHALLENGE)
-//                .root().enter()
-//
-//                .create("kill_tanky", LHTraits.PROTECTION.asItem(),
-//                        CriterionBuilder.one(KillTraitsTrigger.ins(
-//                                LHTraits.PROTECTION, LHTraits.TANK)),
-//                        "Can Opener", "Kill a mob with Protection and Tanky Trait")
-//                .type(FrameType.GOAL)
-//
-//                .create("kill_adaptive", LHTraits.ADAPTIVE.asItem(),
-//                        CriterionBuilder.one(KillTraitsTrigger.ins(
-//                                LHTraits.PROTECTION, LHTraits.REGEN, LHTraits.TANK, LHTraits.ADAPTIVE)),
-//                        "Counter-Defensive Measure", "Kill a mob with Protection, Regeneration, Tanky, and Adaptive Trait")
-//                .type(FrameType.CHALLENGE)
-//
-//                .create("kill_dementor", LHTraits.DISPELL.asItem(),
-//                        CriterionBuilder.one(KillTraitsTrigger.ins(
-//                                LHTraits.DEMENTOR, LHTraits.DISPELL)),
-//                        "Immunity Invalidator", "Kill a mob with Dementor and Dispell Trait")
-//                .type(FrameType.CHALLENGE)
-//
-//                .create("kill_ragnarok", LHTraits.RAGNAROK.asItem(),
-//                        CriterionBuilder.one(KillTraitsTrigger.ins(
-//                                LHTraits.KILLER_AURA, LHTraits.RAGNAROK)),
-//                        "The Final Battle", "Kill a mob with Killer Aura and Ragnarok Trait")
-//                .type(FrameType.CHALLENGE)
-//                .root().enter()
-//
-//                .create("effect_kill_regen", LHTraits.REGEN.asItem(),
-//                        CriterionBuilder.one(KillTraitEffectTrigger.ins(
-//                                LHTraits.REGEN, LCEffects.CURSE)),
-//                        "Prevent Healing", "Use curse effect on mobs with Regeneration and kill it")
-//                .type(FrameType.GOAL)
-//
-//                .create("effect_kill_adaptive", LHTraits.ADAPTIVE.asItem(),
-//                        CriterionBuilder.or().add(KillTraitEffectTrigger.ins(
-//                                        LHTraits.ADAPTIVE, LCEffects.FLAME))
-//                                .add(KillTraitEffectTrigger.ins(
-//                                        LHTraits.ADAPTIVE, MobEffects.POISON))
-//                                .add(KillTraitEffectTrigger.ins(
-//                                        LHTraits.ADAPTIVE, MobEffects.WITHER))
-//                                .add(KillTraitFlameTrigger.ins(
-//                                        LHTraits.ADAPTIVE, KillTraitFlameTrigger.Type.FLAME)),
-//                        "Prevent Adaption", "Use poison/wither/soul flame effect or fire on mobs with Adaptive and kill it")
-//                .type(FrameType.GOAL)
-//
-//                .create("effect_kill_undead", LHTraits.UNDYING.asItem(),
-//                        CriterionBuilder.one(KillTraitEffectTrigger.ins(
-//                                LHTraits.UNDYING, LCEffects.CURSE)),
-//                        "Prevent Reviving", "Use curse effect on mobs with Undying and kill it")
-//                .type(FrameType.CHALLENGE)
-//
-//                .create("effect_kill_teleport", LHTraits.ENDER.asItem(),
-//                        CriterionBuilder.one(KillTraitEffectTrigger.ins(
-//                                LHTraits.ENDER, LCEffects.STONE_CAGE)),
-//                        "Prevent Teleporting", "Use incarceration effect on mobs with Teleport and kill it")
-//                .type(FrameType.CHALLENGE);
-//        var ingot = root.root().enter()
-//
-//                .create("ingot", LHItems.CHAOS_INGOT,
-//                CriterionBuilder.item(LHItems.CHAOS_INGOT),
-//                "Pandora's Box", "Obtain a Chaos Ingot");
-//        ingot
-//                .create("sloth", LHItems.CURSE_SLOTH,
-//                CriterionBuilder.item(LHItems.CURSE_SLOTH),
-//                "I want a break", "Obtain Curse of Sloth").type(FrameType.GOAL);
-//
-//        var trait = ingot
-//                .create("envy", LHItems.CURSE_ENVY,
-//                        CriterionBuilder.item(LHItems.CURSE_ENVY),
-//                        "I want that!", "Obtain Curse of Envy")
-//                .type(FrameType.GOAL)
-//
-//                .create("trait", LHTraits.TANK.asItem(),
-//                        CriterionBuilder.item(LHTagGen.TRAIT_ITEM),
-//                        "Gate to the New World", "Obtain a trait item");
-//        trait
-//                .create("greed", LHItems.CURSE_GREED,
-//                CriterionBuilder.item(LHItems.CURSE_GREED),
-//                "The More the Better", "Obtain Curse of Greed").type(FrameType.GOAL);
-//        trait
-//                .create("lust", LHItems.CURSE_LUST,
-//                CriterionBuilder.item(LHItems.CURSE_LUST),
-//                "Naked Corpse", "Obtain Curse of Lust").type(FrameType.GOAL);
-//
-//        var miracle = trait
-//                .create("gluttony", LHItems.CURSE_GLUTTONY,
-//                        CriterionBuilder.item(LHItems.CURSE_GLUTTONY),
-//                        "Hostility Unlimited", "Obtain Curse of Gluttony")
-//
-//                .create("miracle", LHItems.MIRACLE_INGOT,
-//                        CriterionBuilder.item(LHItems.MIRACLE_INGOT),
-//                        "Miracle of the World", "Obtain Miracle Ingot");
-//
-//        trait
-//                .create("breed", LHTraits.REGEN.asItem(),
-//                        CriterionBuilder.one(ConsumeItemTrigger.TriggerInstance.usedItem(
-//                                ItemPredicate.Builder.item().of(LHTagGen.TRAIT_ITEM).build())),
-//                        "Breeding Mobs", "Use a trait item on mobs")
-//
-//                .create("imagine_breaker", LHItems.IMAGINE_BREAKER.asStack(),
-//                        CriterionBuilder.item(LHItems.IMAGINE_BREAKER),
-//                        "Reality Breakthrough", "Obtain Imagine Breaker").type(FrameType.CHALLENGE);
-//
-//        miracle
-//                .create("wrath", LHItems.CURSE_WRATH,
-//                CriterionBuilder.item(LHItems.CURSE_WRATH),
-//                "Revenge Time", "Obtain Curse of Wrath").type(FrameType.CHALLENGE);
-//
-//        miracle
-//                .create("pride", LHItems.CURSE_PRIDE,
-//                CriterionBuilder.item(LHItems.CURSE_PRIDE),
-//                "King of Hostility", "Obtain Curse of Pride").type(FrameType.CHALLENGE);
-//
-//        miracle
-//                .create("abrahadabra", LHItems.ABRAHADABRA,
-//                CriterionBuilder.item(LHItems.ABRAHADABRA),
-//                "The Finale", "Obtain Abrahadabra").type(FrameType.CHALLENGE);
-//
-//        root.finish();
+        Advancement root = Advancement.Builder.create()
+                .display(
+                        LHTraits.ENDER.asItem(),
+                        LHAdvTexts.ROOT.getTitle(),
+                        LHAdvTexts.ROOT.getDesc(),
+                        L2Hostility.id("textures/gui/advancements/backgrounds/hostility.png"),
+                        AdvancementFrame.TASK,
+                        false,
+                        false,
+                        false
+                )
+                .criterion("0", InventoryChangedCriterion.Conditions.items(LHItems.HOSTILITY_ORB))
+                .build(L2Hostility.id("hostility/root"));
+
+        Advancement patchouli = Advancement.Builder.create()
+                .parent(root)
+                .display(
+                        PatchouliHelper.book(LHItems.GUIDE_BOOK),
+                        LHAdvTexts.PATCHOULI.getTitle(),
+                        LHAdvTexts.PATCHOULI.getDesc(),
+                        null,
+                        AdvancementFrame.TASK,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", InventoryChangedCriterion.Conditions.items(LHItems.HOSTILITY_ORB))
+                .build(L2Hostility.id("hostility/patchouli"));
+
+        Advancement detector = simpleGet(root, LHItems.DETECTOR, LHAdvTexts.DETECTOR, "detector");
+
+        Advancement glasses = simpleGet(detector, LHItems.DETECTOR_GLASSES, LHAdvTexts.GLASSES, "glasses");
+
+        Advancement kill_first = Advancement.Builder.create()
+                .parent(root)
+                .display(
+                        Items.IRON_SWORD,
+                        LHAdvTexts.KILL_FIRST.getTitle(),
+                        LHAdvTexts.KILL_FIRST.getDesc(),
+                        null,
+                        AdvancementFrame.TASK,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitCountTrigger.condition(1))
+                .build(L2Hostility.id("hostility/kill_first"));
+
+        Advancement kill_5_traits = Advancement.Builder.create()
+                .parent(kill_first)
+                .display(
+                        Items.DIAMOND_SWORD,
+                        LHAdvTexts.KILL_5_TRAITS.getTitle(),
+                        LHAdvTexts.KILL_5_TRAITS.getDesc(),
+                        null,
+                        AdvancementFrame.GOAL,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitCountTrigger.condition(5))
+                .build(L2Hostility.id("hostility/kill_5_traits"));
+
+        Advancement kill_10_traits = Advancement.Builder.create()
+                .parent(kill_5_traits)
+                .display(
+                        Items.NETHERITE_SWORD,
+                        LHAdvTexts.KILL_10_TRAITS.getTitle(),
+                        LHAdvTexts.KILL_10_TRAITS.getDesc(),
+                        null,
+                        AdvancementFrame.CHALLENGE,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitCountTrigger.condition(10))
+                .build(L2Hostility.id("hostility/kill_10_traits"));
+
+        Advancement kill_tanky = Advancement.Builder.create()
+                .parent(kill_first)
+                .display(
+                        LHTraits.PROTECTION.asItem(),
+                        LHAdvTexts.KILL_TANKY.getTitle(),
+                        LHAdvTexts.KILL_TANKY.getDesc(),
+                        null,
+                        AdvancementFrame.GOAL,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitsTrigger.condition(LHTraits.PROTECTION, LHTraits.TANK))
+                .build(L2Hostility.id("hostility/kill_tanky"));
+
+        Advancement kill_adaptive = Advancement.Builder.create()
+                .parent(kill_tanky)
+                .display(
+                        LHTraits.ADAPTIVE.asItem(),
+                        LHAdvTexts.KILL_ADAPTIVE.getTitle(),
+                        LHAdvTexts.KILL_ADAPTIVE.getDesc(),
+                        null,
+                        AdvancementFrame.CHALLENGE,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitsTrigger.condition(LHTraits.PROTECTION, LHTraits.REGEN, LHTraits.TANK, LHTraits.ADAPTIVE))
+                .build(L2Hostility.id("hostility/kill_adaptive"));
+
+        Advancement kill_dementor = Advancement.Builder.create()
+                .parent(kill_adaptive)
+                .display(
+                        LHTraits.DISPELL.asItem(),
+                        LHAdvTexts.KILL_DEMENTOR.getTitle(),
+                        LHAdvTexts.KILL_DEMENTOR.getDesc(),
+                        null,
+                        AdvancementFrame.CHALLENGE,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitsTrigger.condition(LHTraits.DEMENTOR, LHTraits.DISPELL))
+                .build(L2Hostility.id("hostility/kill_dementor"));
+
+        Advancement kill_ragnarok = Advancement.Builder.create()
+                .parent(kill_dementor)
+                .display(
+                        LHTraits.RAGNAROK.asItem(),
+                        LHAdvTexts.KILL_RAGNAROK.getTitle(),
+                        LHAdvTexts.KILL_RAGNAROK.getDesc(),
+                        null,
+                        AdvancementFrame.CHALLENGE,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitsTrigger.condition(LHTraits.KILLER_AURA, LHTraits.RAGNAROK))
+                .build(L2Hostility.id("hostility/kill_ragnarok"));
+
+        Advancement effect_kill_regen = Advancement.Builder.create()
+                .parent(kill_first)
+                .display(
+                        LHTraits.REGEN.asItem(),
+                        LHAdvTexts.EFFECT_KILL_REGEN.getTitle(),
+                        LHAdvTexts.EFFECT_KILL_REGEN.getDesc(),
+                        null,
+                        AdvancementFrame.GOAL,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitEffectTrigger.condition(LHTraits.REGEN, LHEffects.CURSE))
+                .build(L2Hostility.id("hostility/effect_kill_regen"));
+
+        Advancement effect_kill_adaptive = Advancement.Builder.create()
+                .parent(effect_kill_regen)
+                .display(
+                        LHTraits.ADAPTIVE.asItem(),
+                        LHAdvTexts.EFFECT_KILL_ADAPTIVE.getTitle(),
+                        LHAdvTexts.EFFECT_KILL_ADAPTIVE.getDesc(),
+                        null,
+                        AdvancementFrame.GOAL,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitEffectTrigger.condition(LHTraits.ADAPTIVE, LHEffects.FLAME))
+                .criterion("1", KillTraitEffectTrigger.condition(LHTraits.ADAPTIVE, StatusEffects.POISON))
+                .criterion("2", KillTraitEffectTrigger.condition(LHTraits.ADAPTIVE, StatusEffects.WITHER))
+                .criterion("3", KillTraitFlameTrigger.condition(LHTraits.ADAPTIVE, KillTraitFlameTrigger.Type.FLAME))
+                .criteriaMerger(CriterionMerger.OR)
+                .build(L2Hostility.id("hostility/effect_kill_adaptive"));
+
+        Advancement effect_kill_undead = Advancement.Builder.create()
+                .parent(effect_kill_adaptive)
+                .display(
+                        LHTraits.UNDYING.asItem(),
+                        LHAdvTexts.EFFECT_KILL_ADAPTIVE.getTitle(),
+                        LHAdvTexts.EFFECT_KILL_ADAPTIVE.getDesc(),
+                        null,
+                        AdvancementFrame.CHALLENGE,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitEffectTrigger.condition(LHTraits.UNDYING, LHEffects.CURSE))
+                .build(L2Hostility.id("hostility/effect_kill_undead"));
+
+        Advancement effect_kill_teleport = Advancement.Builder.create()
+                .parent(effect_kill_undead)
+                .display(
+                        LHTraits.ENDER.asItem(),
+                        LHAdvTexts.EFFECT_KILL_TELEPORT.getTitle(),
+                        LHAdvTexts.EFFECT_KILL_TELEPORT.getDesc(),
+                        null,
+                        AdvancementFrame.CHALLENGE,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", KillTraitEffectTrigger.condition(LHTraits.ENDER, LHEffects.STONE_CAGE))
+                .build(L2Hostility.id("hostility/effect_kill_teleport"));
+
+        Advancement ingot = simpleGet(kill_first, LHItems.CHAOS_INGOT, LHAdvTexts.INGOT, "ingot");
+
+        Advancement sloth = simpleGet(ingot, LHItems.CURSE_SLOTH, LHAdvTexts.SLOTH, AdvancementFrame.GOAL, "sloth");
+
+        Advancement envy = simpleGet(ingot, LHItems.CURSE_ENVY, LHAdvTexts.ENVY, AdvancementFrame.GOAL, "envy");
+
+        Advancement trait = Advancement.Builder.create()
+                .parent(envy)
+                .display(
+                        LHTraits.TANK.asItem(),
+                        LHAdvTexts.TRAIT.getTitle(),
+                        LHAdvTexts.TRAIT.getDesc(),
+                        null,
+                        AdvancementFrame.TASK,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", InventoryChangedCriterion.Conditions.items(ItemPredicate.Builder.create().tag(LHTags.TRAIT_ITEM).build()))
+                .build(L2Hostility.id("hostility/trait"));
+
+        Advancement greed = simpleGet(trait, LHItems.CURSE_GREED, LHAdvTexts.GREED, AdvancementFrame.GOAL, "greed");
+
+        Advancement lust = simpleGet(trait, LHItems.CURSE_LUST, LHAdvTexts.LUST, AdvancementFrame.GOAL, "lust");
+
+        Advancement gluttony = simpleGet(trait, LHItems.CURSE_GLUTTONY, LHAdvTexts.GLUTTONY, "gluttony");
+
+        Advancement miracle = simpleGet(gluttony, LHItems.MIRACLE_INGOT, LHAdvTexts.MIRACLE, "miracle");
+
+        Advancement breed = Advancement.Builder.create()
+                .parent(trait)
+                .display(
+                        LHTraits.REGEN.asItem(),
+                        LHAdvTexts.BREED.getTitle(),
+                        LHAdvTexts.BREED.getDesc(),
+                        null,
+                        AdvancementFrame.TASK,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", ConsumeItemCriterion.Conditions.predicate(ItemPredicate.Builder.create().tag(LHTags.TRAIT_ITEM).build()))
+                .build(L2Hostility.id("hostility/breed"));
+
+        Advancement imagine_breaker = simpleGet(breed, LHItems.IMAGINE_BREAKER, LHAdvTexts.IMAGINE_BREAKER, AdvancementFrame.CHALLENGE, "imagine_breaker");
+
+        Advancement wrath = simpleGet(miracle, LHItems.CURSE_WRATH, LHAdvTexts.WRATH, AdvancementFrame.CHALLENGE, "wrath");
+
+        Advancement pride = simpleGet(miracle, LHItems.CURSE_PRIDE, LHAdvTexts.PRIDE, AdvancementFrame.CHALLENGE, "pride");
+
+        Advancement abrahadabra = simpleGet(miracle, LHItems.ABRAHADABRA, LHAdvTexts.ABRAHADABRA, AdvancementFrame.CHALLENGE, "abrahadabra");
+
+        consumer.accept(root);
+        consumer.accept(patchouli);
+        consumer.accept(detector);
+        consumer.accept(glasses);
+        consumer.accept(kill_first);
+        consumer.accept(kill_5_traits);
+        consumer.accept(kill_10_traits);
+        consumer.accept(kill_tanky);
+        consumer.accept(kill_adaptive);
+        consumer.accept(kill_dementor);
+        consumer.accept(kill_ragnarok);
+        consumer.accept(effect_kill_regen);
+        consumer.accept(effect_kill_adaptive);
+        consumer.accept(effect_kill_undead);
+        consumer.accept(effect_kill_teleport);
+        consumer.accept(ingot);
+        consumer.accept(sloth);
+        consumer.accept(envy);
+        consumer.accept(trait);
+        consumer.accept(greed);
+        consumer.accept(lust);
+        consumer.accept(gluttony);
+        consumer.accept(miracle);
+        consumer.accept(breed);
+        consumer.accept(imagine_breaker);
+        consumer.accept(wrath);
+        consumer.accept(pride);
+        consumer.accept(abrahadabra);
+    }
+
+    public static Advancement simpleGet(Advancement parent, Item item, LHAdvTexts text, String path)
+    {
+        return simpleGet(parent, item, text, AdvancementFrame.TASK, path);
+    }
+
+    public static Advancement simpleGet(Advancement parent, Item item, LHAdvTexts text, AdvancementFrame frame, String path)
+    {
+        return Advancement.Builder.create()
+                .parent(parent)
+                .display(
+                        item,
+                        text.getTitle(),
+                        text.getDesc(),
+                        null,
+                        frame,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", InventoryChangedCriterion.Conditions.items(item))
+                .build(L2Hostility.id("hostility/" + path));
     }
 }

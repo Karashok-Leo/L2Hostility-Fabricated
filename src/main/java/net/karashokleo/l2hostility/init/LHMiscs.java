@@ -1,28 +1,26 @@
 package net.karashokleo.l2hostility.init;
 
 import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredientSerializer;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.content.recipe.EnchantmentIngredient;
+import net.karashokleo.l2hostility.content.screen.equipment.EquipmentScreenHandler;
 import net.karashokleo.leobrary.datagen.builder.ItemGroupBuilder;
 import net.karashokleo.leobrary.datagen.generator.LanguageGenerator;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.screen.ScreenHandlerType;
 import org.jetbrains.annotations.Nullable;
 
 public class LHMiscs
 {
     public static final ItemGroupBuilder GROUP = GroupEntry.of("hostility");
+    public static final ItemGroupBuilder TRAITS = GroupEntry.of("traits");
 
-    //    public static final MenuEntry<EquipmentsMenu> EQUIPMENTS =
-//            REGISTRATE.menu("equipments", EquipmentsMenu::fromNetwork, () -> EquipmentsScreen::new)
-//                    .register();
-//
-//    public static final MenuEntry<EntityCuriosListMenu> CURIOS =
-//            REGISTRATE.menu("curios", EntityCuriosListMenu::fromNetwork, () -> EntityCuriosListScreen::new)
-//                    .register();
-//
+    public static final ScreenHandlerType<EquipmentScreenHandler> EQUIPMENTS = new ExtendedScreenHandlerType<>(EquipmentScreenHandler::fromNetwork);
+
     public static EntityAttribute ADD_LEVEL = new ClampedEntityAttribute("extra_difficulty", 0, 0, 1000).setTracked(true);
 
     public static void register()
@@ -37,6 +35,12 @@ public class LHMiscs
                 .addEN("L2 Hostility")
                 .addZH("莱特兰-恶意")
                 .register();
+        TRAITS.setIcon(() -> LHTraits.FIERY.asItem().getDefaultStack())
+                .addEN("L2 Hostility - Traits")
+                .addZH("莱特兰-恶意-词条")
+                .register();
+        Registry.register(Registries.SCREEN_HANDLER, L2Hostility.id("equipments"), EQUIPMENTS);
+//        Registry.register(Registries.SCREEN_HANDLER, L2Hostility.id("trinkets"), TRINKETS);
     }
 
     static class GroupEntry extends ItemGroupBuilder
