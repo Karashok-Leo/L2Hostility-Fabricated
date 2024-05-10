@@ -208,40 +208,38 @@ public class MobDifficulty
         }
     }
 
-    public void tick()
+    public void serverTick()
     {
         ticking = true;
-        if (!owner.getWorld().isClient())
+        if (!isInitialized())
+            ChunkDifficulty.at(owner.getWorld(), owner.getBlockPos())
+                    .ifPresent(this::init);
+        if (stage == Stage.INIT)
         {
-            if (!isInitialized())
-                ChunkDifficulty.at(owner.getWorld(), owner.getBlockPos())
-                        .ifPresent(this::init);
-            if (stage == Stage.INIT)
-            {
-                stage = Stage.POST_INIT;
-                ItemPopulator.postFill(this, owner);
-                traits.forEach((k, v) -> k.postInit(owner, v));
-                clearPending(owner);
-                owner.setHealth(owner.getMaxHealth());
-                sync();
-            }
-            if (!traits.isEmpty() &&
-                    !LHConfig.common().scaling.allowTraitOnOwnable &&
-                    owner instanceof Ownable own &&
-                    own.getOwner() instanceof PlayerEntity)
-            {
-                traits.clear();
-                sync();
-            }
+            stage = Stage.POST_INIT;
+            ItemPopulator.postFill(this, owner);
+            traits.forEach((k, v) -> k.postInit(owner, v));
+            clearPending(owner);
+            owner.setHealth(owner.getMaxHealth());
+            sync();
         }
+        if (!traits.isEmpty() &&
+                !LHConfig.common().scaling.allowTraitOnOwnable &&
+                owner instanceof Ownable own &&
+                own.getOwner() instanceof PlayerEntity)
+        {
+            traits.clear();
+            sync();
+        }
+
         if (isInitialized() && !traits.isEmpty())
         {
             traits.keySet().removeIf(MobTrait::isBanned);
-            traits.forEach((k, v) -> k.tick(owner, v));
+            traits.forEach((k, v) -> k.serverTick(owner, v));
             clearPending(owner);
         }
         // 恶意刷怪笼
-//        if (!owner.getWorld().isClient() && pos != null)
+//        if (pos != null)
 //        {
 //            if (summoner == null) {
 //                if (owner.level().getBlockEntity(pos) instanceof TraitSpawnerBlockEntity be) {

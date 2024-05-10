@@ -4,7 +4,9 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import net.karashokleo.l2hostility.init.LHTraits;
+import net.minecraft.entity.effect.StatusEffectCategory;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -19,6 +21,10 @@ public class CommonConfig implements ConfigData
     public OrbAndSpawner orbAndSpawner = new OrbAndSpawner();
     @ConfigEntry.Gui.CollapsibleObject
     public Items items = new Items();
+    @ConfigEntry.Gui.CollapsibleObject
+    public Effects effects = new Effects();
+    @ConfigEntry.Gui.CollapsibleObject
+    public Enchantments enchantments = new Enchantments();
     @ConfigEntry.Gui.CollapsibleObject
     public Traits traits = new Traits();
     @ConfigEntry.Gui.CollapsibleObject
@@ -119,6 +125,16 @@ public class CommonConfig implements ConfigData
         public final int nidhoggurExtraLevel = 100;
         public final double nidhoggurDropFactor = 0.01;
         public final double insulatorFactor = 0.8;
+    }
+
+    public static class Effects
+    {
+        public final List<StatusEffectCategory> cleansePredicate = List.of(StatusEffectCategory.BENEFICIAL, StatusEffectCategory.HARMFUL, StatusEffectCategory.NEUTRAL);
+    }
+
+    public static class Enchantments
+    {
+
     }
 
     public static class Traits

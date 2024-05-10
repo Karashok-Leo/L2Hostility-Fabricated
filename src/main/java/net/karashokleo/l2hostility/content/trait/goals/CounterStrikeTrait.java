@@ -23,9 +23,8 @@ public class CounterStrikeTrait extends MobTrait
     }
 
     @Override
-    public void tick(LivingEntity le, int level)
+    public void serverTick(LivingEntity le, int level)
     {
-        if (le.getWorld().isClient()) return;
         var diff = MobDifficulty.get(le);
         if (diff.isEmpty()) return;
         var data = diff.get().getOrCreateData(getId(), Data::new);
@@ -37,6 +36,7 @@ public class CounterStrikeTrait extends MobTrait
         if (!le.isOnGround()) return;
         var target = diff.get().owner.getTarget();
         if (target == null || !target.isAlive()) return;
+        if (target.distanceTo(le) > LHConfig.common().traits.counterStrikeRange) return;
         if (data.strikeId == null || !data.strikeId.equals(target.getUuid())) return;
         Vec3d vec3d = target.getPos().subtract(le.getPos());
         vec3d = vec3d.normalize().multiply(3);

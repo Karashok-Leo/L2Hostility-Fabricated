@@ -29,7 +29,7 @@ public class LHTags
 
     public static final TagKey<Enchantment> NO_DISPELL = createEnchantmentTag("no_dispell");
 
-    public static final TagKey<StatusEffect> SKILL_EFFECT = createEffectTag("skill_effect");
+    public static final TagKey<StatusEffect> CLEANSE_BLACKLIST = createEffectTag("cleanse_blacklist");
 
     public static final TagKey<EntityType<?>> BLACKLIST = createEntityTag("blacklist");
     public static final TagKey<EntityType<?>> WHITELIST = createEntityTag("whitelist");

@@ -23,9 +23,8 @@ public abstract class IntervalTrait extends MobTrait
     }
 
     @Override
-    public void tick(LivingEntity e, int level)
+    public void serverTick(LivingEntity e, int level)
     {
-        if (e.getWorld().isClient()) return;
         var diff = MobDifficulty.get(e);
         if (diff.isEmpty()) return;
         var cap = diff.get();

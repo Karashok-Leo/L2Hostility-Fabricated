@@ -16,8 +16,8 @@ import net.karashokleo.l2hostility.content.trait.highlevel.*;
 import net.karashokleo.l2hostility.content.trait.legendary.*;
 import net.karashokleo.l2hostility.data.config.TraitConfig;
 import net.karashokleo.l2hostility.data.config.provider.TraitConfigProvider;
-import net.karashokleo.l2hostility.util.StringUtil;
 import net.karashokleo.leobrary.datagen.builder.NamedEntryBuilder;
+import net.karashokleo.leobrary.datagen.util.StringUtil;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.client.TextureMap;
 import net.minecraft.entity.EntityType;
@@ -503,7 +503,7 @@ public class LHTraits
 
         public Entry<T> addEN()
         {
-            return addEN(StringUtil.getNameById(name));
+            return addEN(StringUtil.defaultName(name));
         }
 
         public Entry<T> addEN(String en)

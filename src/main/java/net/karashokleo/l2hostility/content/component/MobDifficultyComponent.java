@@ -37,7 +37,7 @@ public class MobDifficultyComponent implements ServerTickingComponent, AutoSynce
     public void serverTick()
     {
         if (this.diff != null)
-            this.diff.tick();
+            this.diff.serverTick();
     }
 
     @Override

@@ -6,9 +6,10 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.karashokleo.l2hostility.L2Hostility;
-import net.karashokleo.l2hostility.client.TraitEffectHandlers;
-import net.karashokleo.l2hostility.client.TraitEffectToClient;
-import net.karashokleo.l2hostility.util.raytrace.RayTraceUtil;
+import net.karashokleo.l2hostility.content.network.S2CAuraEffect;
+import net.karashokleo.l2hostility.content.network.S2CClearDifficulty;
+import net.karashokleo.l2hostility.content.network.S2CKillerAura;
+import net.karashokleo.l2hostility.content.network.S2CUndying;
 import net.karashokleo.l2hostility.util.raytrace.TargetSetPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
@@ -20,14 +21,14 @@ public class LHNetworking
 
     public static void init()
     {
-        HANDLER.configure(TargetSetPacket.class, TraitEffectToClient.class);
+        HANDLER.configure(TargetSetPacket.class, S2CClearDifficulty.class, S2CAuraEffect.class, S2CKillerAura.class, S2CUndying.class);
 
-        ServerPlayNetworking.registerGlobalReceiver(HANDLER.getPacketType(TargetSetPacket.class), (packet, player, responseSender) -> RayTraceUtil.sync(packet.packet()));
+        HANDLER.configureC2S(TargetSetPacket.class);
     }
 
     public static void initClient()
     {
-        ClientPlayNetworking.registerGlobalReceiver(HANDLER.getPacketType(TraitEffectToClient.class), (packet, player, responseSender) -> TraitEffectHandlers.handleEffect(packet.packet()));
+        HANDLER.configureS2C(S2CClearDifficulty.class, S2CAuraEffect.class, S2CKillerAura.class, S2CUndying.class);
     }
 
     public static <T extends SimplePacketBase> void toTracking(Entity entity, T packet)

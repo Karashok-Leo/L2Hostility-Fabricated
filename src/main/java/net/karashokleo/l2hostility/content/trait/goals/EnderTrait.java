@@ -26,9 +26,8 @@ public class EnderTrait extends LegendaryTrait
     }
 
     @Override
-    public void tick(LivingEntity mob, int level)
+    public void serverTick(LivingEntity mob, int level)
     {
-        if (mob.getWorld().isClient()) return;
         int duration = LHConfig.common().traits.teleportDuration;
         int r = LHConfig.common().traits.teleportRange;
         if (mob.age % duration == 0 && mob instanceof MobEntity m && m.getTarget() != null)

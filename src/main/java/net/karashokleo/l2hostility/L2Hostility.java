@@ -23,17 +23,19 @@ public class L2Hostility implements ModInitializer
         // LCItems
         // Compat
         // Hostility Charge Item
+        // Special Bullet Entity
+        // Special StatusEffect Renderer
         // Advancements Generation ————————————————————————————————————————√
         // Recipes Generation —————————————————————————————————————————————√
         // Patchouli Generation ———————————————————————————————————————————√
-        // Potion Events / EffectValidItem / SkillEffect
+        // Potion Events / EffectValidItem / SkillEffect ——————————————————√
         // Commands
         // Hostility Spawner
         // Ring Of Reflection
         // EntityTrinketsMenu
         // EquipmentsMenu —————————————————————————————————————————————————√
         // Difficulty Tab —————————————————————————————————————————————————√
-        // Difficulty Overlay
+        // Detector Difficulty Overlay
         // Grenade MobTrait / Grenade Bullet Entity
         // Trait Effect ———————————————————————————————————————————————————√
         // Killer Aura Damage Type ————————————————————————————————————————√

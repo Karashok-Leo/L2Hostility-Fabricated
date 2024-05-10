@@ -26,21 +26,13 @@ public abstract class PushPullTrait extends LegendaryTrait
     protected abstract double getStrength(double dist);
 
     @Override
-    public void tick(LivingEntity mob, int level)
+    public void serverTick(LivingEntity mob, int level)
     {
         int r = getRange();
-        List<? extends LivingEntity> list;
-        if (mob.getWorld().isClient())
-        {
-            list = mob.getWorld().getEntitiesByType(TypeFilter.instanceOf(PlayerEntity.class),
-                    mob.getBoundingBox().expand(r), e -> e.isMainPlayer() && !e.getAbilities().creativeMode);
-        } else
-        {
-            list = mob.getWorld().getEntitiesByType(TypeFilter.instanceOf(LivingEntity.class),
-                    mob.getBoundingBox().expand(r), e ->
-                            e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode ||
-                                    e instanceof MobEntity m && m.getTarget() == mob);
-        }
+        List<? extends LivingEntity> list = mob.getWorld().getEntitiesByType(TypeFilter.instanceOf(LivingEntity.class),
+                mob.getBoundingBox().expand(r), e ->
+                        e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode ||
+                                e instanceof MobEntity m && m.getTarget() == mob);
         for (var e : list)
         {
             double dist = mob.distanceTo(e) / r;

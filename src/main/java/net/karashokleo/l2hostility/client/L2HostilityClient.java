@@ -6,13 +6,17 @@ import dev.xkmc.l2tabs.tabs.inventory.TabRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.karashokleo.l2hostility.L2Hostility;
+import net.karashokleo.l2hostility.content.item.trinket.misc.PocketOfRestoration;
 import net.karashokleo.l2hostility.content.screen.equipment.EquipmentScreen;
 import net.karashokleo.l2hostility.content.screen.tab.DifficultyTab;
+import net.karashokleo.l2hostility.init.LHItems;
 import net.karashokleo.l2hostility.init.LHMiscs;
 import net.karashokleo.l2hostility.init.LHNetworking;
 import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.Items;
@@ -32,8 +36,7 @@ public class L2HostilityClient implements ClientModInitializer
         TAB_DIFFICULTY = TabRegistry.GROUP.registerTab(5000, DifficultyTab::new,
                 () -> Items.ZOMBIE_HEAD, LHTexts.INFO_TAB_TITLE.get());
 
-//        ItemProperties.register(LHItems.RESTORATION.get(), new ResourceLocation(L2Hostility.MODID, "filled"),
-//                (stack, level, entity, i) -> stack.getTagElement(PocketOfRestoration.ROOT) == null ? 0 : 1);
+        ModelPredicateProviderRegistry.register(LHItems.RESTORATION, L2Hostility.id("filled"), (stack, world, entity, seed) -> stack.getSubNbt(PocketOfRestoration.ROOT) == null ? 0 : 1);
     }
 
     public static MinecraftClient getClient()

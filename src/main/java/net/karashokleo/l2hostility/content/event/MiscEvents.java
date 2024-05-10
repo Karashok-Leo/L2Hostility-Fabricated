@@ -2,13 +2,9 @@ package net.karashokleo.l2hostility.content.event;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.karashokleo.l2hostility.content.enchantment.HitTargetEnchantment;
 import net.karashokleo.l2hostility.content.item.wand.IMobClickItem;
-import net.karashokleo.l2hostility.init.LHTags;
-import net.karashokleo.l2hostility.init.LHEffects;
 import net.karashokleo.l2hostility.init.LHEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ItemEntity;
@@ -25,23 +21,6 @@ public class MiscEvents
             if (event.getSource().getAttacker() instanceof LivingEntity attacker)
                 HitTargetEnchantment.handle(attacker, event);
         });
-
-        // 禁止放置方块
-        UseBlockCallback.EVENT.register(
-                (player, world, hand, hitResult) ->
-                        player.getAbilities().creativeMode ||
-                                !player.hasStatusEffect(LHEffects.ANTI_BUILD) ||
-                                player.getStackInHand(hand).isIn(LHTags.ANTIBUILD_BAN) ?
-                                ActionResult.PASS :
-                                ActionResult.FAIL
-        );
-
-        // 禁止破坏方块
-        PlayerBlockBreakEvents.BEFORE.register(
-                (world, player, pos, state, blockEntity) ->
-                        player.getAbilities().creativeMode ||
-                                !player.hasStatusEffect(LHEffects.ANTI_BUILD)
-        );
 
         // 跳过实体交互
         UseEntityCallback.EVENT.register(

@@ -1,19 +1,16 @@
 package net.karashokleo.l2hostility.content.trait.legendary;
 
-import net.karashokleo.l2hostility.client.TraitEffect;
-import net.karashokleo.l2hostility.client.TraitEffectToClient;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import net.karashokleo.l2hostility.content.network.S2CKillerAura;
 import net.karashokleo.l2hostility.init.*;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
 
@@ -27,12 +24,12 @@ public class KillerAuraTrait extends LegendaryTrait
     }
 
     @Override
-    public void tick(LivingEntity mob, int level)
+    public void serverTick(LivingEntity mob, int level)
     {
         int itv = LHConfig.common().traits.killerAuraInterval / level;
         int damage = LHConfig.common().traits.killerAuraDamage * level;
         int range = LHConfig.common().traits.killerAuraRange;
-        if (!mob.getWorld().isClient() && mob.age % itv == 0)
+        if (mob.age % itv == 0)
         {
             var diff = MobDifficulty.get(mob);
             if (diff.isEmpty()) return;
@@ -46,18 +43,7 @@ public class KillerAuraTrait extends LegendaryTrait
                     if (TrinketCompat.hasItemInTrinket(e, LHItems.ABRAHADABRA)) continue;
                     e.damage(e.getDamageSources().create(LHDamageTypes.KILLER_AURA, null, mob), damage);
                 }
-            LHNetworking.toTracking(mob, new TraitEffectToClient(mob, this, TraitEffect.AURA));
-        }
-        if (mob.getWorld().isClient())
-        {
-            Vec3d center = mob.getPos();
-            float tpi = (float) (Math.PI * 2);
-            Vec3d v0 = new Vec3d(0, range, 0);
-            v0 = v0.rotateX(tpi / 4).rotateY(mob.getRandom().nextFloat() * tpi);
-            mob.getWorld().addImportantParticle(ParticleTypes.FLAME,
-                    center.x + v0.x,
-                    center.y + v0.y + 0.5f,
-                    center.z + v0.z, 0, 0, 0);
+            LHNetworking.toTracking(mob, new S2CKillerAura(mob));
         }
     }
 

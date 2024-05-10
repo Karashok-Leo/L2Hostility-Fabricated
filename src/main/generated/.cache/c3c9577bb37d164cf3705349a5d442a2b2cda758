@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-02T13:13:01.4390673	L2 Hostility/Model Definitions
+// 1.20.1	2024-05-10T18:49:41.8596399	L2 Hostility/Model Definitions
 787903b9f0311061258da774b1ca33e23307b88a assets\l2hostility\models\item\soul_burner.json
 505fbebf6c324ad812fd27b8bc1834408c8d070a assets\l2hostility\models\item\curse_of_pride.json
 d69681b4cb7544b64e002366a0e64e7a6402cdc8 assets\l2hostility\models\item\witch_wand.json
@@ -21,8 +21,8 @@ dedb5287c68c054529d15637665dbbcbb095eec3 assets\l2hostility\models\item\ring_of_
 f39de621f7fb9484531ccbb1c2afa815ee4d9a96 assets\l2hostility\models\item\protection.json
 f6895697bdab127d46712e9c9ad3aa07e2c99c38 assets\l2hostility\models\item\moonwalk.json
 c3e83e5767641301057986ee59bc7154e2749bb3 assets\l2hostility\models\item\booster_potion.json
-68727c611f17c0b44e30b8e979413abd37f13306 assets\l2hostility\models\item\sealed_item.json
 20e51dcb17187561c46bfd411cd6733de2bb0a06 assets\l2hostility\models\item\hostility_detector.json
+68727c611f17c0b44e30b8e979413abd37f13306 assets\l2hostility\models\item\sealed_item.json
 31eb768e73a9e25dd120627d1792a0fc4b23a659 assets\l2hostility\models\item\equipment_wand.json
 2048c3857e1ab68ec463d6ceab47267dff206a2b assets\l2hostility\models\item\curse_of_greed.json
 d720e288311376eb0f4708a50573f9e2bb4ff090 assets\l2hostility\models\item\grenade.json
@@ -74,8 +74,8 @@ e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets\l2hostility\models\item\wither.j
 1739df0d5d6c03e3738f188a9606b095b5198c01 assets\l2hostility\models\item\adaptive.json
 ed5550c308958c62ec675a8c592c8d8fc43e40c0 assets\l2hostility\models\item\oddeyes_glasses.json
 38ebdcb219de6ddebd2181e8c53d6c00711a4b1f assets\l2hostility\models\item\bottle_of_sanity.json
-e16e74a184b0503c495c91a1ccb4a10449fd94c3 assets\l2hostility\models\item\chaos_ingot.json
 79df8d7f57c20e395ef38ac80ae4f5c351e3823c assets\l2hostility\models\item\arena.json
+e16e74a184b0503c495c91a1ccb4a10449fd94c3 assets\l2hostility\models\item\chaos_ingot.json
 a05bb7b11be51e5184811d6a39397b6abb39aa49 assets\l2hostility\models\item\ragnarok.json
 6e3e167f1b7742efa394e5ab17725dc3cdd953cb assets\l2hostility\models\item\hostility_orb.json
 ba69cec47e6a481ee3a839b4b203736c07085f0e assets\l2hostility\models\item\hostility_spawner.json
@@ -85,7 +85,6 @@ f8c0c7e966fec3a4a914d67237bd38a9b42a8a7a assets\l2hostility\models\item\ring_of_
 425e908f5a3fc8b410d194df746f6245c6a9680c assets\l2hostility\models\item\miracle_powder.json
 4f9454023c1410ac93b27243063ad6374e6aa6a8 assets\l2hostility\models\item\ring_of_ocean.json
 347b84c3484867babce110b45aa6a175fc13feb4 assets\l2hostility\models\item\witch_droplet.json
-07219352e167fa776df7fb451e8435dcaafb70ab assets\l2hostility\models\item\pocket_of_restoration.json
 d05297a99d447dde61132c58d8095fa3f73ff84a assets\l2hostility\models\item\tank.json
 b5fae17e61c9b2b9cd9b1ba115630551feae2d7d assets\l2hostility\models\item\book_of_omniscience.json
 dadd2563e86a56aff08ffd0c71acf25daeba3559 assets\l2hostility\models\item\flaming_thorn.json

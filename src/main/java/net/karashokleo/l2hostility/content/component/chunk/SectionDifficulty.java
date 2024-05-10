@@ -1,9 +1,8 @@
 package net.karashokleo.l2hostility.content.component.chunk;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.karashokleo.l2hostility.client.TraitEffect;
-import net.karashokleo.l2hostility.client.TraitEffectToClient;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import net.karashokleo.l2hostility.content.network.S2CClearDifficulty;
 import net.karashokleo.l2hostility.init.LHData;
 import net.karashokleo.l2hostility.data.config.DifficultyConfig;
 import net.karashokleo.l2hostility.content.logic.DifficultyLevel;
@@ -112,7 +111,7 @@ public class SectionDifficulty
         stage = SectionStage.CLEARED;
         chunk.owner.setNeedsSaving(true);
         chunk.sync();
-        LHNetworking.toTracking(chunk.owner, new TraitEffectToClient(pos, TraitEffect.CLEAR));
+        LHNetworking.toTracking(chunk.owner, new S2CClearDifficulty(pos));
         return true;
     }
 
@@ -122,7 +121,7 @@ public class SectionDifficulty
         stage = SectionStage.INIT;
         chunk.owner.setNeedsSaving(true);
         chunk.sync();
-        LHNetworking.toTracking(chunk.owner, new TraitEffectToClient(pos, TraitEffect.CLEAR));
+        LHNetworking.toTracking(chunk.owner, new S2CClearDifficulty(pos));
         return true;
     }
 

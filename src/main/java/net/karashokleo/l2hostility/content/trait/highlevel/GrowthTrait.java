@@ -12,15 +12,15 @@ import net.minecraft.util.Formatting;
 
 public class GrowthTrait extends MobTrait
 {
-    // 使怪物能够重创拥有大量附魔装备的目标。
-    // 怪物会复制目标身上装备的所有附魔，目标的每级附魔提升 2% 的伤害（ x级附魔提供 2x 的附魔点数）。
+    // 使史莱姆类的怪物能够变得更大。
+    // 史莱姆获得再生的词条，会在满血后变大，词条等级决定了其最大的体积，分裂的史莱姆只有一只会继承该词条并且词条等级 -1 。
     public GrowthTrait()
     {
         super(Formatting.DARK_GREEN);
     }
 
     @Override
-    public void tick(LivingEntity mob, int level)
+    public void serverTick(LivingEntity mob, int level)
     {
         if (mob.getHealth() == mob.getMaxHealth() && mob instanceof SlimeEntity slime)
         {

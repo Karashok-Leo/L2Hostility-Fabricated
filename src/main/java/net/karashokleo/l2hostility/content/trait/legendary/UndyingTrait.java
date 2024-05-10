@@ -1,9 +1,8 @@
 package net.karashokleo.l2hostility.content.trait.legendary;
 
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.karashokleo.l2hostility.client.TraitEffect;
-import net.karashokleo.l2hostility.client.TraitEffectToClient;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import net.karashokleo.l2hostility.content.network.S2CUndying;
 import net.karashokleo.l2hostility.init.LHEffects;
 import net.karashokleo.l2hostility.init.LHNetworking;
 import net.karashokleo.l2hostility.init.LHTraits;
@@ -25,7 +24,7 @@ public class UndyingTrait extends LegendaryTrait
         {
             entity.setHealth(0.1F);
             entity.heal(entity.getMaxHealth() - entity.getHealth());
-            LHNetworking.toTracking(entity, new TraitEffectToClient(entity, LHTraits.UNDYING, TraitEffect.UNDYING));
+            LHNetworking.toTracking(entity, new S2CUndying(entity));
             return false;
         } else return true;
     };

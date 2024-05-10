@@ -82,7 +82,7 @@ public class MobTrait
     {
     }
 
-    public void tick(LivingEntity mob, int level)
+    public void serverTick(LivingEntity mob, int level)
     {
     }
 

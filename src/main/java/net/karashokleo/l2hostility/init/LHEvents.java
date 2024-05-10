@@ -1,9 +1,6 @@
 package net.karashokleo.l2hostility.init;
 
-import net.karashokleo.l2hostility.content.event.ComponentEvents;
-import net.karashokleo.l2hostility.content.event.GenericEvents;
-import net.karashokleo.l2hostility.content.event.MiscEvents;
-import net.karashokleo.l2hostility.content.event.MobEvents;
+import net.karashokleo.l2hostility.content.event.*;
 
 public class LHEvents
 {
@@ -12,6 +9,7 @@ public class LHEvents
         GenericEvents.register();
         ComponentEvents.register();
         MobEvents.register();
+        EffectEvents.register();
         MiscEvents.register();
     }
 }

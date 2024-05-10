@@ -1,10 +1,14 @@
 package net.karashokleo.l2hostility.content.effect;
 
+import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import net.karashokleo.l2hostility.init.LHConfig;
+import net.karashokleo.l2hostility.init.LHTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.registry.Registries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +17,22 @@ public class CleanseEffect extends StatusEffect
 {
     private static int recursive = 0;
 
+    public static boolean isInCleanseBlacklist(StatusEffectInstance effectInstance, LivingEntity entity)
+    {
+        if (Registries.STATUS_EFFECT.getEntry(effectInstance.getEffectType()).isIn(LHTags.CLEANSE_BLACKLIST) ||
+                TrinketCompat.isEffectValidInTrinket(effectInstance, entity))
+            return true;
+        return !LHConfig.common().effects.cleansePredicate.contains(effectInstance.getEffectType().getCategory());
+
+    }
+
     public static void clearOnEntity(LivingEntity entity)
     {
         recursive++;
         List<StatusEffectInstance> list = new ArrayList<>(entity.getStatusEffects());
         for (StatusEffectInstance ins : list)
         {
+            if (isInCleanseBlacklist(ins, entity)) continue;
             StatusEffect type = ins.getEffectType();
             if (recursive <= 1)
                 entity.removeStatusEffect(type);

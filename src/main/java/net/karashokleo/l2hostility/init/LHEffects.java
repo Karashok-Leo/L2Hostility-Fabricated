@@ -5,19 +5,21 @@ import net.karashokleo.l2hostility.content.effect.*;
 import net.karashokleo.leobrary.datagen.builder.StatusEffectBuilder;
 import net.karashokleo.leobrary.datagen.generator.TagGenerator;
 import net.karashokleo.leobrary.datagen.generator.LanguageGenerator;
+import net.karashokleo.leobrary.effect.api.util.GenericStatusEffect;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectCategory;
 import org.jetbrains.annotations.Nullable;
 
 public class LHEffects
 {
-    public static GravityEffect GRAVITY = new GravityEffect();
-    public static MoonwalkEffect MOONWALK = new MoonwalkEffect();
-    public static AntiBuildEffect ANTI_BUILD = new AntiBuildEffect();
-    public static FlameEffect FLAME = new FlameEffect();
-    public static IceEffect ICE = new IceEffect();
-    public static CurseEffect CURSE = new CurseEffect();
-    public static CleanseEffect CLEANSE = new CleanseEffect();
-    public static StoneCageEffect STONE_CAGE = new StoneCageEffect();
+    public static GravityEffect GRAVITY;
+    public static MoonwalkEffect MOONWALK;
+    public static GenericStatusEffect ANTI_BUILD;
+    public static FlameEffect FLAME;
+    public static IceEffect ICE;
+    public static GenericStatusEffect CURSE;
+    public static CleanseEffect CLEANSE;
+    public static StoneCageEffect STONE_CAGE;
 
     public static void register()
     {
@@ -41,13 +43,13 @@ public class LHEffects
                 .register();
         ANTI_BUILD = Entry.of(
                         "anti_build",
-                        new AntiBuildEffect()
+                        new GenericStatusEffect(StatusEffectCategory.HARMFUL, 0xff7f7f)
                 )
                 .addEN("Antibuild")
                 .addENDesc("Make player cannot place block.")
                 .addZH("领域压制")
                 .addZHDesc("玩家无法放置方块")
-                .addTag(LHTags.SKILL_EFFECT)
+                .addTag(LHTags.CLEANSE_BLACKLIST)
                 .register();
         FLAME = Entry.of(
                         "flame",
@@ -69,7 +71,7 @@ public class LHEffects
                 .register();
         CURSE = Entry.of(
                         "curse",
-                        new CurseEffect()
+                        new GenericStatusEffect(StatusEffectCategory.HARMFUL, 0x3f3f3f)
                 )
                 .addEN("Cursed")
                 .addENDesc("Make the entity cannot heal.")

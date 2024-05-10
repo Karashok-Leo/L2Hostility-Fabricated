@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-02T13:13:01.4450894	L2 Hostility/Tags for minecraft:item
+// 1.20.1	2024-05-10T18:49:41.8646404	L2 Hostility/Tags for minecraft:item
 1efa130ed007d72ed0e10b4309f21ba723207645 data\l2hostility\tags\items\chaos_equipment.json
 af9b765b6745330d395cc4e45c882c45b7cbf1dd data\l2hostility\tags\items\no_seal.json
 1d7620a600e87619847db27c4c6c978fea03abfa data\trinkets\tags\items\chest\hostility_curse.json
@@ -8,5 +8,5 @@ af9b765b6745330d395cc4e45c882c45b7cbf1dd data\l2hostility\tags\items\no_seal.jso
 b15511d755ba45963869fc1d39176327ecb1d385 data\trinkets\tags\items\chest\back.json
 9eb22f554a8688df1e7fa602bc4d998c0927fcfe data\trinkets\tags\items\hand\glove.json
 4dde4f124081eeece23b3fd23b2bbfd0943b8e16 data\trinkets\tags\items\offhand\ring.json
-7004ba73df427b2ab5ecf55d1ce8e582576bd3e4 data\trinkets\tags\items\head\face.json
 a7f7dcf5f740d0b7aba1ac0ff22aae96989def28 data\trinkets\tags\items\chest\charm.json
+7004ba73df427b2ab5ecf55d1ce8e582576bd3e4 data\trinkets\tags\items\head\face.json

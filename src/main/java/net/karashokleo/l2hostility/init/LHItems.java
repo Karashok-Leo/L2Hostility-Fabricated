@@ -635,7 +635,6 @@ public class LHItems
                                 128
                         )
                 )
-                .addModel()
                 .addEN()
                 .addZH("解咒口袋")
                 .addTag(LHTags.CHARM_SLOT, LHTags.NO_SEAL)

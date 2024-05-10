@@ -5,10 +5,12 @@ import dev.emi.trinkets.api.*;
 import net.karashokleo.l2hostility.compat.trinket.slot.EntitySlotAccess;
 import net.karashokleo.l2hostility.compat.trinket.slot.EquipmentSlotAccess;
 import net.karashokleo.l2hostility.compat.trinket.slot.TrinketSlotAccess;
+import net.karashokleo.l2hostility.content.item.trinket.core.EffectValidItem;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -21,6 +23,14 @@ import java.util.function.Predicate;
 
 public class TrinketCompat
 {
+    public static boolean isEffectValidInTrinket(StatusEffectInstance effectInstance, LivingEntity entity)
+    {
+        return TrinketsApi.getTrinketComponent(entity).map(trinketComponent ->
+                trinketComponent.isEquipped(stack ->
+                        stack.getItem() instanceof EffectValidItem effectValidItem &&
+                                effectValidItem.isEffectValid(effectInstance, stack, entity))).orElse(false);
+    }
+
     public static boolean hasItemEquippedOrInTrinket(LivingEntity le, Item item)
     {
         return hasItemEquipped(le, item) || hasItemInTrinket(le, item);

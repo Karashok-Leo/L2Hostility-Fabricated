@@ -39,6 +39,7 @@ dependencies {
     include modImplementation("dev.xkmc.l2tabs:L2Tabs:${project.l2tabs_version}")
     include modImplementation("net.karashokleo.leobrary:data:${project.leobrary_version}")
     include modImplementation("net.karashokleo.leobrary:datagen:${project.leobrary_version}")
+    include modImplementation("net.karashokleo.leobrary:effect:${project.leobrary_version}")
     include modImplementation("net.karashokleo.leobrary:compat-patchouli:${project.leobrary_version}")
 
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"

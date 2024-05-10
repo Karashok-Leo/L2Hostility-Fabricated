@@ -4,7 +4,6 @@ import dev.emi.trinkets.api.SlotReference;
 import net.karashokleo.l2hostility.content.item.trinket.core.BaseTrinketItem;
 import net.karashokleo.l2hostility.init.LHTexts;
 import net.karashokleo.l2hostility.init.LHEffects;
-import net.karashokleo.l2hostility.util.EffectUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -32,7 +31,6 @@ public class RingOfDivinity extends BaseTrinketItem
     @Override
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
-        EffectUtil.refreshEffect(entity, new StatusEffectInstance(LHEffects.CLEANSE, 40,
-                0, true, true), entity);
+        entity.addStatusEffect(new StatusEffectInstance(LHEffects.CLEANSE, 40, 0, true, true), entity);
     }
 }

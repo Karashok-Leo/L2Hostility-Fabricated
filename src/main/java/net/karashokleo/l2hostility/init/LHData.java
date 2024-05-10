@@ -68,7 +68,7 @@ public class LHData implements DataGeneratorEntrypoint
                 Enchantments.UNBREAKING
         );
         STATUS_EFFECT_TAGS.add(
-                LHTags.SKILL_EFFECT,
+                LHTags.CLEANSE_BLACKLIST,
                 StatusEffects.NIGHT_VISION,
                 StatusEffects.BAD_OMEN,
                 StatusEffects.HERO_OF_THE_VILLAGE,

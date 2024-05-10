@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "l2hostility:item/trinket/pocket_of_restoration"
-  }
-}

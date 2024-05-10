@@ -5,7 +5,6 @@ import io.github.fabricators_of_create.porting_lib.attributes.PortingLibAttribut
 import net.karashokleo.l2hostility.content.item.trinket.core.BaseTrinketItem;
 import net.karashokleo.l2hostility.init.LHTexts;
 import net.karashokleo.l2hostility.init.LHEffects;
-import net.karashokleo.l2hostility.util.EffectUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -39,6 +38,6 @@ public class RingOfIncarceration extends BaseTrinketItem
         var ins = entity.getAttributeInstance(attr);
         var reach = ins == null ? attr.getDefaultValue() : ins.getValue();
         for (var e : entity.getWorld().getEntitiesByType(TypeFilter.instanceOf(LivingEntity.class), entity.getBoundingBox().expand(reach), e -> entity.distanceTo(e) < reach))
-            EffectUtil.refreshEffect(e, new StatusEffectInstance(LHEffects.STONE_CAGE, 40, 0, true, true), entity);
+            e.addStatusEffect(new StatusEffectInstance(LHEffects.STONE_CAGE, 40, 0, true, true), entity);
     }
 }
