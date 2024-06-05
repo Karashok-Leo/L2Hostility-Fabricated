@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "l2hostility:soul_flame"
+    },
+    "2": {
+      "item": "l2hostility:hard_ice"
+    },
+    "3": {
+      "item": "l2hostility:explosion_shard"
+    },
+    "4": {
+      "item": "l2hostility:captured_wind"
+    },
+    "A": {
+      "item": "l2hostility:hostility_orb"
+    },
+    "B": {
+      "item": "l2hostility:bottle_of_curse"
+    }
+  },
+  "pattern": [
+    "B4B",
+    "1A2",
+    "B3B"
+  ],
+  "result": {
+    "item": "l2hostility:chaos_ingot"
+  },
+  "show_notification": true
+}

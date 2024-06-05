@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:salmon"
+    },
+    "B": {
+      "item": "l2hostility:life_essence"
+    },
+    "C": {
+      "item": "minecraft:bucket"
+    },
+    "L": {
+      "item": "l2hostility:totemic_gold_ingot"
+    }
+  },
+  "pattern": [
+    " A ",
+    "LBL",
+    " C "
+  ],
+  "result": {
+    "item": "minecraft:salmon_bucket"
+  },
+  "show_notification": true
+}

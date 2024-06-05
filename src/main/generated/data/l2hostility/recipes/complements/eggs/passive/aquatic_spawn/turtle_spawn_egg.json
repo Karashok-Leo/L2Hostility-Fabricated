@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:scute"
+    },
+    "B": {
+      "item": "l2hostility:life_essence"
+    },
+    "C": {
+      "item": "minecraft:egg"
+    },
+    "L": {
+      "item": "l2hostility:totemic_gold_ingot"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "LBL",
+    "ACA"
+  ],
+  "result": {
+    "item": "minecraft:turtle_spawn_egg"
+  },
+  "show_notification": true
+}

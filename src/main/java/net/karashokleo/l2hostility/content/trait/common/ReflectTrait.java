@@ -4,6 +4,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEve
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import net.karashokleo.l2hostility.content.event.GenericEvents;
+import net.karashokleo.l2hostility.content.item.TrinketItems;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.karashokleo.l2hostility.init.LHItems;
@@ -29,7 +30,7 @@ public class ReflectTrait extends MobTrait
         if (event.getSource().getSource() instanceof LivingEntity le &&
                 entity.distanceTo(le) < 3)
         {
-            if (TrinketCompat.hasItemInTrinket(le, LHItems.ABRAHADABRA)) return;
+            if (TrinketCompat.hasItemInTrinket(le, TrinketItems.ABRAHADABRA)) return;
             float factor = (float) (level * LHConfig.common().traits.reflectFactor);
             GenericEvents.schedule(() -> le.damage(entity.getWorld().getDamageSources().indirectMagic(entity, null), event.getAmount() * factor));
         }

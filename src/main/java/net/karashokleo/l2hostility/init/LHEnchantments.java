@@ -1,13 +1,13 @@
 package net.karashokleo.l2hostility.init;
 
+import karashokleo.leobrary.datagen.builder.EnchantmentBuilder;
+import karashokleo.leobrary.datagen.generator.LanguageGenerator;
+import karashokleo.leobrary.datagen.generator.TagGenerator;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.content.enchantment.HostilityEnchantment;
 import net.karashokleo.l2hostility.content.enchantment.RemoveTraitEnchantment;
 import net.karashokleo.l2hostility.content.enchantment.SingleLevelEnchantment;
 import net.karashokleo.l2hostility.content.enchantment.VanishEnchantment;
-import net.karashokleo.leobrary.datagen.builder.EnchantmentBuilder;
-import net.karashokleo.leobrary.datagen.generator.TagGenerator;
-import net.karashokleo.leobrary.datagen.generator.LanguageGenerator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;

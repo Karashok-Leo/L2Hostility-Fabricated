@@ -1,6 +1,8 @@
 package net.karashokleo.l2hostility.init;
 
 import dev.xkmc.l2serial.serialization.custom_handler.Handlers;
+import karashokleo.leobrary.datagen.builder.NamedEntryBuilder;
+import karashokleo.leobrary.datagen.util.StringUtil;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.karashokleo.l2hostility.L2Hostility;
@@ -16,8 +18,6 @@ import net.karashokleo.l2hostility.content.trait.highlevel.*;
 import net.karashokleo.l2hostility.content.trait.legendary.*;
 import net.karashokleo.l2hostility.data.config.TraitConfig;
 import net.karashokleo.l2hostility.data.config.provider.TraitConfigProvider;
-import net.karashokleo.leobrary.datagen.builder.NamedEntryBuilder;
-import net.karashokleo.leobrary.datagen.util.StringUtil;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.client.TextureMap;
 import net.minecraft.entity.EntityType;

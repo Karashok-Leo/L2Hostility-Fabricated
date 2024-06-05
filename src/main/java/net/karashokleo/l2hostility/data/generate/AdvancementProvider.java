@@ -1,5 +1,6 @@
 package net.karashokleo.l2hostility.data.generate;
 
+import karashokleo.leobrary.compat.patchouli.PatchouliHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.karashokleo.l2hostility.L2Hostility;
@@ -7,10 +8,13 @@ import net.karashokleo.l2hostility.content.advancement.KillTraitCountTrigger;
 import net.karashokleo.l2hostility.content.advancement.KillTraitEffectTrigger;
 import net.karashokleo.l2hostility.content.advancement.KillTraitFlameTrigger;
 import net.karashokleo.l2hostility.content.advancement.KillTraitsTrigger;
+import net.karashokleo.l2hostility.content.item.ConsumableItems;
+import net.karashokleo.l2hostility.content.item.MiscItems;
+import net.karashokleo.l2hostility.content.item.TrinketItems;
 import net.karashokleo.l2hostility.init.*;
-import net.karashokleo.leobrary.compat.patchouli.PatchouliHelper;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementFrame;
+import net.minecraft.advancement.AdvancementRewards;
 import net.minecraft.advancement.CriterionMerger;
 import net.minecraft.advancement.criterion.ConsumeItemCriterion;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
@@ -42,13 +46,13 @@ public class AdvancementProvider extends FabricAdvancementProvider
                         false,
                         false
                 )
-                .criterion("0", InventoryChangedCriterion.Conditions.items(LHItems.HOSTILITY_ORB))
+                .criterion("0", InventoryChangedCriterion.Conditions.items(ConsumableItems.HOSTILITY_ORB))
                 .build(L2Hostility.id("hostility/root"));
 
         Advancement patchouli = Advancement.Builder.create()
                 .parent(root)
                 .display(
-                        PatchouliHelper.book(LHItems.GUIDE_BOOK),
+                        PatchouliHelper.book(MiscItems.GUIDE_BOOK),
                         LHAdvTexts.PATCHOULI.getTitle(),
                         LHAdvTexts.PATCHOULI.getDesc(),
                         null,
@@ -57,12 +61,13 @@ public class AdvancementProvider extends FabricAdvancementProvider
                         true,
                         false
                 )
-                .criterion("0", InventoryChangedCriterion.Conditions.items(LHItems.HOSTILITY_ORB))
+                .criterion("0", InventoryChangedCriterion.Conditions.items(ConsumableItems.HOSTILITY_ORB))
+                .rewards(new AdvancementRewards.Builder().addLoot(MiscItems.GUIDE_BOOK))
                 .build(L2Hostility.id("hostility/patchouli"));
 
-        Advancement detector = simpleGet(root, LHItems.DETECTOR, LHAdvTexts.DETECTOR, "detector");
+        Advancement detector = simpleGet(root, MiscItems.DETECTOR, LHAdvTexts.DETECTOR, "detector");
 
-        Advancement glasses = simpleGet(detector, LHItems.DETECTOR_GLASSES, LHAdvTexts.GLASSES, "glasses");
+        Advancement glasses = simpleGet(detector, MiscItems.DETECTOR_GLASSES, LHAdvTexts.GLASSES, "glasses");
 
         Advancement kill_first = Advancement.Builder.create()
                 .parent(root)
@@ -233,11 +238,11 @@ public class AdvancementProvider extends FabricAdvancementProvider
                 .criterion("0", KillTraitEffectTrigger.condition(LHTraits.ENDER, LHEffects.STONE_CAGE))
                 .build(L2Hostility.id("hostility/effect_kill_teleport"));
 
-        Advancement ingot = simpleGet(kill_first, LHItems.CHAOS_INGOT, LHAdvTexts.INGOT, "ingot");
+        Advancement ingot = simpleGet(kill_first, MiscItems.CHAOS_INGOT, LHAdvTexts.INGOT, "ingot");
 
-        Advancement sloth = simpleGet(ingot, LHItems.CURSE_SLOTH, LHAdvTexts.SLOTH, AdvancementFrame.GOAL, "sloth");
+        Advancement sloth = simpleGet(ingot, TrinketItems.CURSE_SLOTH, LHAdvTexts.SLOTH, AdvancementFrame.GOAL, "sloth");
 
-        Advancement envy = simpleGet(ingot, LHItems.CURSE_ENVY, LHAdvTexts.ENVY, AdvancementFrame.GOAL, "envy");
+        Advancement envy = simpleGet(ingot, TrinketItems.CURSE_ENVY, LHAdvTexts.ENVY, AdvancementFrame.GOAL, "envy");
 
         Advancement trait = Advancement.Builder.create()
                 .parent(envy)
@@ -254,13 +259,13 @@ public class AdvancementProvider extends FabricAdvancementProvider
                 .criterion("0", InventoryChangedCriterion.Conditions.items(ItemPredicate.Builder.create().tag(LHTags.TRAIT_ITEM).build()))
                 .build(L2Hostility.id("hostility/trait"));
 
-        Advancement greed = simpleGet(trait, LHItems.CURSE_GREED, LHAdvTexts.GREED, AdvancementFrame.GOAL, "greed");
+        Advancement greed = simpleGet(trait, TrinketItems.CURSE_GREED, LHAdvTexts.GREED, AdvancementFrame.GOAL, "greed");
 
-        Advancement lust = simpleGet(trait, LHItems.CURSE_LUST, LHAdvTexts.LUST, AdvancementFrame.GOAL, "lust");
+        Advancement lust = simpleGet(trait, TrinketItems.CURSE_LUST, LHAdvTexts.LUST, AdvancementFrame.GOAL, "lust");
 
-        Advancement gluttony = simpleGet(trait, LHItems.CURSE_GLUTTONY, LHAdvTexts.GLUTTONY, "gluttony");
+        Advancement gluttony = simpleGet(trait, TrinketItems.CURSE_GLUTTONY, LHAdvTexts.GLUTTONY, "gluttony");
 
-        Advancement miracle = simpleGet(gluttony, LHItems.MIRACLE_INGOT, LHAdvTexts.MIRACLE, "miracle");
+        Advancement miracle = simpleGet(gluttony, MiscItems.MIRACLE_INGOT, LHAdvTexts.MIRACLE, "miracle");
 
         Advancement breed = Advancement.Builder.create()
                 .parent(trait)
@@ -277,13 +282,13 @@ public class AdvancementProvider extends FabricAdvancementProvider
                 .criterion("0", ConsumeItemCriterion.Conditions.predicate(ItemPredicate.Builder.create().tag(LHTags.TRAIT_ITEM).build()))
                 .build(L2Hostility.id("hostility/breed"));
 
-        Advancement imagine_breaker = simpleGet(breed, LHItems.IMAGINE_BREAKER, LHAdvTexts.IMAGINE_BREAKER, AdvancementFrame.CHALLENGE, "imagine_breaker");
+        Advancement imagine_breaker = simpleGet(breed, TrinketItems.IMAGINE_BREAKER, LHAdvTexts.IMAGINE_BREAKER, AdvancementFrame.CHALLENGE, "imagine_breaker");
 
-        Advancement wrath = simpleGet(miracle, LHItems.CURSE_WRATH, LHAdvTexts.WRATH, AdvancementFrame.CHALLENGE, "wrath");
+        Advancement wrath = simpleGet(miracle, TrinketItems.CURSE_WRATH, LHAdvTexts.WRATH, AdvancementFrame.CHALLENGE, "wrath");
 
-        Advancement pride = simpleGet(miracle, LHItems.CURSE_PRIDE, LHAdvTexts.PRIDE, AdvancementFrame.CHALLENGE, "pride");
+        Advancement pride = simpleGet(miracle, TrinketItems.CURSE_PRIDE, LHAdvTexts.PRIDE, AdvancementFrame.CHALLENGE, "pride");
 
-        Advancement abrahadabra = simpleGet(miracle, LHItems.ABRAHADABRA, LHAdvTexts.ABRAHADABRA, AdvancementFrame.CHALLENGE, "abrahadabra");
+        Advancement abrahadabra = simpleGet(miracle, TrinketItems.ABRAHADABRA, LHAdvTexts.ABRAHADABRA, AdvancementFrame.CHALLENGE, "abrahadabra");
 
         consumer.accept(root);
         consumer.accept(patchouli);

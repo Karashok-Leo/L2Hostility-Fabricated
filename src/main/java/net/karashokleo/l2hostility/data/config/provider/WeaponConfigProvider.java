@@ -1,10 +1,10 @@
 package net.karashokleo.l2hostility.data.config.provider;
 
+import karashokleo.leobrary.data.AbstractDataProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.data.Constants;
 import net.karashokleo.l2hostility.data.config.WeaponConfig;
-import net.karashokleo.leobrary.data.AbstractDataProvider;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Items;
 
@@ -53,7 +53,7 @@ public class WeaponConfigProvider extends AbstractDataProvider
                 )
                 .putArmorEnch(70, 0.3f, Enchantments.BINDING_CURSE)
         );
-//
+
 //        collector.add(L2Hostility.WEAPON, new Identifier(L2Complements.MODID, "l2complements"), new WeaponConfig()
 //                .putWeaponEnch(100, 0.02f,
 //                        LCEnchantments.CURSE_BLADE.get(),
@@ -72,42 +72,6 @@ public class WeaponConfigProvider extends AbstractDataProvider
 //                        LCEnchantments.ICE_THORN.get(),
 //                        LCEnchantments.FLAME_THORN.get(),
 //                        LCEnchantments.SAFEGUARD.get()
-//                )
-//        );
-//
-//
-//        collector.add(L2Hostility.WEAPON, new Identifier(L2Weaponry.MODID, "weapons"), new WeaponConfig()
-//                .putMeleeWeapon(200, 10,
-//                        LWItems.STORM_JAVELIN.get(),
-//                        LWItems.FLAME_AXE.get(),
-//                        LWItems.FROZEN_SPEAR.get()
-//                )
-//                .putMeleeWeapon(300, 5,
-//                        LWItems.ABYSS_MACHETE.get(),
-//                        LWItems.HOLY_AXE.get(),
-//                        LWItems.BLACK_AXE.get()
-//                )
-//                .putMeleeWeapon(400, 2,
-//                        LWItems.CHEATER_CLAW.get(),
-//                        LWItems.CHEATER_MACHETE.get()
-//                )
-//        );
-//
-//        collector.add(L2Hostility.WEAPON, new Identifier(L2Archery.MODID, "bows"), new WeaponConfig()
-//                .putRangedWeapon(50, 10,
-//                        ArcheryItems.STARTER_BOW.get()
-//                )
-//                .putRangedWeapon(70, 5,
-//                        ArcheryItems.IRON_BOW.get(),
-//                        ArcheryItems.MASTER_BOW.get()
-//                )
-//                .putRangedWeapon(100, 2,
-//                        ArcheryItems.FLAME_BOW.get(),
-//                        ArcheryItems.BLACKSTONE_BOW.get(),
-//                        ArcheryItems.TURTLE_BOW.get(),
-//                        ArcheryItems.EAGLE_BOW.get(),
-//                        ArcheryItems.EXPLOSION_BOW.get(),
-//                        ArcheryItems.FROZE_BOW.get()
 //                )
 //        );
     }

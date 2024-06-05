@@ -1,5 +1,8 @@
 package net.karashokleo.l2hostility.content.effect;
 
+import karashokleo.effect_overlay.api.IconEffectRenderer;
+import karashokleo.effect_overlay.api.IconOverlayEffect;
+import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.init.LHTags;
@@ -13,7 +16,7 @@ import net.minecraft.registry.Registries;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CleanseEffect extends StatusEffect
+public class CleanseEffect extends StatusEffect implements IconOverlayEffect
 {
     private static int recursive = 0;
 
@@ -63,6 +66,12 @@ public class CleanseEffect extends StatusEffect
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier)
     {
         clearOnEntity(entity);
+    }
+
+    @Override
+    public IconEffectRenderer getIcon(LivingEntity entity, int lv)
+    {
+        return IconEffectRenderer.icon(entity, L2Hostility.id("textures/effect_overlay/cleanse.png"));
     }
 
     // NYI

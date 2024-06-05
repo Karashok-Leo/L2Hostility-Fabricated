@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_guardian_eye": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2hostility:guardian_eye"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "l2hostility:complements/vanilla/heart_of_the_sea"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_guardian_eye",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "l2hostility:complements/vanilla/heart_of_the_sea"
+    ]
+  },
+  "sends_telemetry_event": false
+}

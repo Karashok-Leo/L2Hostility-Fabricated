@@ -2,8 +2,12 @@ package net.karashokleo.l2hostility;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.karashokleo.l2hostility.client.ForceFieldRenderer;
+import net.karashokleo.l2hostility.data.generate.TraitGLMProvider;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.init.*;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -18,40 +22,23 @@ public class L2Hostility implements ModInitializer
     @Override
     public void onInitialize()
     {
-        // Current Commit - bdae4c76d3265658cb227fde3f22a226ea3cc4a0
-        // ————NYI————
-        // LCItems
-        // Compat
-        // Hostility Charge Item
-        // Special Bullet Entity
-        // Special StatusEffect Renderer
-        // Advancements Generation ————————————————————————————————————————√
-        // Recipes Generation —————————————————————————————————————————————√
-        // Patchouli Generation ———————————————————————————————————————————√
-        // Potion Events / EffectValidItem / SkillEffect ——————————————————√
-        // Commands
-        // Hostility Spawner
-        // Ring Of Reflection
-        // EntityTrinketsMenu
-        // EquipmentsMenu —————————————————————————————————————————————————√
-        // Difficulty Tab —————————————————————————————————————————————————√
-        // Detector Difficulty Overlay
-        // Grenade MobTrait / Grenade Bullet Entity
-        // Trait Effect ———————————————————————————————————————————————————√
-        // Killer Aura Damage Type ————————————————————————————————————————√
-
         LHNetworking.init();
         LHItems.register();
         LHBlocks.register();
         LHTraits.register();
         LHTexts.init();
         LHAdvTexts.init();
+        LHCplTexts.init();
         LHConfig.register();
         LHTags.init();
         LHEffects.register();
+        LHPotions.register();
         LHEnchantments.register();
         LHDamageTypes.register();
+        LHParticles.register();
+        TraitGLMProvider.register();
         LHEvents.register();
+        LHRecipes.register();
         LHTriggers.register();
         LHMiscs.register();
         LHData.register();

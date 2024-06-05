@@ -3,10 +3,10 @@ package net.karashokleo.l2hostility.content.trait.legendary;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import net.karashokleo.l2hostility.compat.trinket.slot.EntitySlotAccess;
+import net.karashokleo.l2hostility.content.item.MiscItems;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.item.traits.SealedItem;
 import net.karashokleo.l2hostility.init.LHTags;
-import net.karashokleo.l2hostility.init.LHItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -22,14 +22,10 @@ public class RagnarokTrait extends LegendaryTrait
     {
         ItemStack stack = access.get();
         if (stack.isEmpty()) return false;
-        if (stack.isOf(LHItems.SEAL)) return false;
+        if (stack.isOf(MiscItems.SEAL)) return false;
         if (stack.isIn(LHTags.NO_SEAL)) return false;
         if (!LHConfig.common().traits.ragnarokSealBackpack)
-        {
-            var rl = Registries.ITEM.getId(stack.getItem());
-            if (rl == null) return false;
-            if (rl.toString().contains("backpack")) return false;
-        }
+            if (Registries.ITEM.getId(stack.getItem()).toString().contains("backpack")) return false;
         if (!LHConfig.common().traits.ragnarokSealSlotAdder)
             return !TrinketCompat.isSlotAdder(access);
         return true;

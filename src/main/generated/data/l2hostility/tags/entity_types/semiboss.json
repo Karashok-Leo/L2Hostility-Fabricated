@@ -4,6 +4,9 @@
     "minecraft:warden",
     "minecraft:elder_guardian",
     "minecraft:ravager",
-    "#c:bosses"
+    {
+      "id": "#c:bosses",
+      "required": false
+    }
   ]
 }

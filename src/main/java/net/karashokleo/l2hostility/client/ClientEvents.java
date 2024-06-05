@@ -3,6 +3,7 @@ package net.karashokleo.l2hostility.client;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.karashokleo.l2hostility.content.item.MiscItems;
 import net.karashokleo.l2hostility.util.raytrace.EntityTarget;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import net.karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
@@ -34,8 +35,8 @@ public class ClientEvents
             if (player == null) return;
             var opt = ChunkDifficulty.at(player.getWorld(), player.getBlockPos());
             if (opt.isEmpty()) return;
-            if (!TrinketCompat.hasItemEquippedOrInTrinket(player, LHItems.DETECTOR_GLASSES)) return;
-            if (!TrinketCompat.hasItemEquippedOrInTrinket(player, LHItems.DETECTOR)) return;
+            if (!TrinketCompat.hasItemEquippedOrInTrinket(player, MiscItems.DETECTOR_GLASSES)) return;
+            if (!TrinketCompat.hasItemEquippedOrInTrinket(player, MiscItems.DETECTOR)) return;
             ChunkClearRenderer.render(context.matrixStack(), player, opt.get());
         });
     }

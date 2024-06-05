@@ -6,14 +6,17 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 
+import java.util.UUID;
+
 public class MoonwalkEffect extends StatusEffect
 {
+    private static final UUID ID = MathHelper.getUUIDFromIdentifier("moonwalk");
     private static final double FACTOR = 0.7;
 
     public MoonwalkEffect()
     {
         super(StatusEffectCategory.NEUTRAL, 0xcfcfcf);
-        addAttributeModifier(PortingLibAttributes.ENTITY_GRAVITY, MathHelper.getUUIDFromString("moonwalk").toString(), FACTOR, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+        addAttributeModifier(PortingLibAttributes.ENTITY_GRAVITY, ID.toString(), FACTOR, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
     }
 
     @Override

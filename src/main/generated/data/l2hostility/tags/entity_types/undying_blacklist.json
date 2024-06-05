@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#l2hostility:semiboss"
+    {
+      "id": "#l2hostility:semiboss",
+      "required": false
+    }
   ]
 }

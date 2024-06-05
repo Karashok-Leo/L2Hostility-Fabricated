@@ -1,0 +1,11 @@
+{
+  "type": "l2hostility:burnt",
+  "chance": 576,
+  "ingredient": {
+    "item": "minecraft:ghast_tear"
+  },
+  "result": {
+    "Count": 1,
+    "id": "l2hostility:cursed_droplet"
+  }
+}

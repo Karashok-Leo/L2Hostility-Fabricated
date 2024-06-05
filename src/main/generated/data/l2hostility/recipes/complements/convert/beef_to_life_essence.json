@@ -1,0 +1,11 @@
+{
+  "type": "l2hostility:burnt",
+  "chance": 15552,
+  "ingredient": {
+    "item": "minecraft:beef"
+  },
+  "result": {
+    "Count": 1,
+    "id": "l2hostility:life_essence"
+  }
+}

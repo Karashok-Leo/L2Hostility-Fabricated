@@ -1,9 +1,9 @@
 package net.karashokleo.l2hostility.content.trait.legendary;
 
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import net.karashokleo.l2hostility.content.item.TrinketItems;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.init.LHEnchantments;
-import net.karashokleo.l2hostility.init.LHItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -37,7 +37,7 @@ public abstract class PushPullTrait extends LegendaryTrait
         {
             double dist = mob.distanceTo(e) / r;
             if (dist > 1) return;
-            if (TrinketCompat.hasItemInTrinket(e, LHItems.ABRAHADABRA)) continue;
+            if (TrinketCompat.hasItemInTrinket(e, TrinketItems.ABRAHADABRA)) continue;
             double strength = getStrength(dist);
             int lv = 0;
             for (var armor : e.getArmorItems())

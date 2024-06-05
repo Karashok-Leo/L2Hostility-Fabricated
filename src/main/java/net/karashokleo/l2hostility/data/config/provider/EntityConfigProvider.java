@@ -1,11 +1,11 @@
 package net.karashokleo.l2hostility.data.config.provider;
 
+import karashokleo.leobrary.data.AbstractDataProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.data.Constants;
 import net.karashokleo.l2hostility.data.config.EntityConfig;
 import net.karashokleo.l2hostility.init.LHTraits;
-import net.karashokleo.leobrary.data.AbstractDataProvider;
 import net.minecraft.entity.EntityType;
 
 import java.util.List;

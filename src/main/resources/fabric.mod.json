@@ -26,6 +26,18 @@
     ],
     "cardinal-components": [
       "net.karashokleo.l2hostility.init.LHComponents"
+    ],
+    "jade": [
+      "net.karashokleo.l2hostility.compat.jade.JadeCompat"
+    ],
+    "modmenu": [
+      "net.karashokleo.l2hostility.compat.modmenu.ModMenuCompat"
+    ],
+    "emi": [
+      "net.karashokleo.l2hostility.compat.emi.EMICompat"
+    ],
+    "rei_client": [
+      "net.karashokleo.l2hostility.compat.rei.REICompat"
     ]
   },
   "mixins": [

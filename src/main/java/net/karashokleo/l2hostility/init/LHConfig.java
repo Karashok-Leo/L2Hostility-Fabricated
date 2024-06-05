@@ -8,6 +8,7 @@ import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.config.ClientConfig;
 import net.karashokleo.l2hostility.config.CommonConfig;
+import net.minecraft.client.gui.screen.Screen;
 
 public class LHConfig
 {
@@ -33,6 +34,11 @@ public class LHConfig
     public static CommonConfig common()
     {
         return CONFIG.common;
+    }
+
+    public static Screen screen(Screen parent)
+    {
+        return AutoConfig.getConfigScreen(Global.class, parent).get();
     }
 
     public static void register()

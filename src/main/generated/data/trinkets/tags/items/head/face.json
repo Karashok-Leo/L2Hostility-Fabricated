@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "l2hostility:detector_glasses",
-    "l2hostility:oddeyes_glasses"
+    "l2hostility:oddeyes_glasses",
+    "l2hostility:detector_glasses"
   ]
 }

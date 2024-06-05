@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:explosion_shard"
+    },
+    "B": {
+      "item": "l2hostility:captured_wind"
+    },
+    "C": {
+      "item": "l2hostility:sun_membrane"
+    },
+    "D": {
+      "item": "l2hostility:resonant_feather"
+    },
+    "E": {
+      "item": "l2hostility:storm_core"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "CEC",
+    "D D"
+  ],
+  "result": {
+    "item": "minecraft:elytra"
+  },
+  "show_notification": true
+}

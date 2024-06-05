@@ -6,77 +6,24 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDa
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import net.karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.karashokleo.l2hostility.content.component.player.PlayerDifficulty;
+import net.karashokleo.l2hostility.content.item.TrinketItems;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
-import net.karashokleo.l2hostility.content.trait.legendary.UndyingTrait;
 import net.karashokleo.l2hostility.init.LHDamageTypes;
-import net.karashokleo.l2hostility.init.LHItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Ownable;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.chunk.WorldChunk;
 
 public class MobEvents
 {
-    private static final LivingAttackEvent.LivingAttackCallback onAttacked = event ->
-    {
-        DamageSource source = event.getSource();
-        if (LHDamageTypes.isMagic(source) && !LHDamageTypes.bypasses(source))
-            if (TrinketCompat.hasItemInTrinket(event.getEntity(), LHItems.RING_DIVINITY))
-            {
-                event.setCanceled(true);
-                return;
-            }
-        LivingEntity entity = event.getEntity();
-        var diff = MobDifficulty.get(entity);
-        if (diff.isEmpty()) return;
-        diff.get().traitEvent((k, v) -> k.onAttacked(v, entity, event));
-    };
-    private static final LivingHurtEvent.HurtCallback onHurting = event ->
-    {
-        Entity attacker = event.getSource().getAttacker();
-        var op = MobDifficulty.get(attacker);
-        if (op.isEmpty()) return;
-        op.get().traitEvent((k, v) -> k.onHurting(v, op.get().owner, event));
-    };
-    private static final LivingHurtEvent.HurtCallback onHurt = event ->
-    {
-        if (!(event.getEntity() instanceof MobEntity mob)) return;
-        var diff = MobDifficulty.get(mob);
-        if (diff.isPresent())
-            diff.get().traitEvent((k, v) -> k.onHurt(v, event.getEntity(), event));
-        else if (event.getEntity() instanceof PlayerEntity player &&
-                !LHDamageTypes.bypasses(event.getSource()) &&
-                TrinketCompat.hasItemInTrinket(player, LHItems.CURSE_PRIDE))
-        {
-            int level = PlayerDifficulty.get(player).getLevel().getLevel();
-            double rate = LHConfig.common().items.curse.prideHealthBonus;
-            double factor = 1 + rate * level;
-            event.setAmount((float) (event.getAmount() / factor));
-        }
-    };
-    private static final LivingDamageEvent.DamageCallback onDamaged = event ->
-    {
-        for (var e : TrinketCompat.getItems(event.getEntity(), e -> e.getItem() instanceof CurseTrinketItem))
-            if (e.getItem() instanceof CurseTrinketItem curse)
-                curse.onDamaged(e, event.getEntity(), event);
-    };
-    private static final ServerLivingEntityEvents.AfterDeath onDeath = (entity, source) ->
-    {
-        if (!(entity instanceof MobEntity mob)) return;
-        var credit = mob.getPrimeAdversary();
-        if (credit != null && TrinketCompat.hasItemInTrinket(credit, LHItems.CURSE_LUST))
-            for (var e : EquipmentSlot.values())
-                mob.setEquipmentDropChance(e, 1);
-        var diff = MobDifficulty.get(mob);
-        if (diff.isEmpty()) return;
-        diff.get().traitEvent((k, v) -> k.onDeath(v, entity, source));
-    };
-
     public static void register()
     {
         /**
@@ -94,7 +41,20 @@ public class MobEvents
          * This event does not have a result.<br>
          * <br>
          **/
-        LivingAttackEvent.ATTACK.register(onAttacked);
+        LivingAttackEvent.ATTACK.register(event ->
+        {
+            DamageSource source = event.getSource();
+            if (LHDamageTypes.isMagic(source) && !LHDamageTypes.bypasses(source))
+                if (TrinketCompat.hasItemInTrinket(event.getEntity(), TrinketItems.RING_DIVINITY))
+                {
+                    event.setCanceled(true);
+                    return;
+                }
+            LivingEntity entity = event.getEntity();
+            var diff = MobDifficulty.get(entity);
+            if (diff.isEmpty()) return;
+            diff.get().traitEvent((k, v) -> k.onAttacked(v, entity, event));
+        });
 
         /**
          * LivingHurtEvent is fired when an Entity is set to be hurt. <br>
@@ -113,8 +73,29 @@ public class MobEvents
          *
          * @see LivingDamageEvent
          **/
-        LivingHurtEvent.HURT.register(onHurting);
-        LivingHurtEvent.HURT.register(onHurt);
+        LivingHurtEvent.HURT.register(event ->
+        {
+            Entity attacker = event.getSource().getAttacker();
+            var op = MobDifficulty.get(attacker);
+            if (op.isEmpty()) return;
+            op.get().traitEvent((k, v) -> k.onHurting(v, op.get().owner, event));
+        });
+        LivingHurtEvent.HURT.register(event ->
+        {
+            if (!(event.getEntity() instanceof MobEntity mob)) return;
+            var diff = MobDifficulty.get(mob);
+            if (diff.isPresent())
+                diff.get().traitEvent((k, v) -> k.onHurt(v, event.getEntity(), event));
+            else if (event.getEntity() instanceof PlayerEntity player &&
+                    !LHDamageTypes.bypasses(event.getSource()) &&
+                    TrinketCompat.hasItemInTrinket(player, TrinketItems.CURSE_PRIDE))
+            {
+                int level = PlayerDifficulty.get(player).getLevel().getLevel();
+                double rate = LHConfig.common().items.curse.prideHealthBonus;
+                double factor = 1 + rate * level;
+                event.setAmount((float) (event.getAmount() / factor));
+            }
+        });
 
         /**
          * LivingDamageEvent is fired just before damage is applied to entity.<br>
@@ -134,20 +115,58 @@ public class MobEvents
          *
          * @see LivingHurtEvent
          **/
-        LivingDamageEvent.DAMAGE.register(onDamaged);
+        LivingDamageEvent.DAMAGE.register(event ->
+        {
+            for (var e : TrinketCompat.getItems(event.getEntity(), e -> e.getItem() instanceof CurseTrinketItem))
+                if (e.getItem() instanceof CurseTrinketItem curse)
+                    curse.onDamaged(e, event.getEntity(), event);
+        });
 
-        ServerLivingEntityEvents.AFTER_DEATH.register(onDeath);
+        ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) ->
+        {
+            if (!(entity instanceof MobEntity mob)) return;
+            var credit = mob.getPrimeAdversary();
+            if (credit != null && TrinketCompat.hasItemInTrinket(credit, TrinketItems.CURSE_LUST))
+                for (var e : EquipmentSlot.values())
+                    mob.setEquipmentDropChance(e, 1);
+            var diff = MobDifficulty.get(mob);
+            if (diff.isEmpty()) return;
+            diff.get().traitEvent((k, v) -> k.onDeath(v, entity, source));
+        });
 
-        ServerLivingEntityEvents.ALLOW_DEATH.register(UndyingTrait.allowDeath);
+        ServerLivingEntityEvents.AFTER_DEATH.register((entity, damageSource) ->
+        {
+            Entity killer = damageSource.getAttacker();
+            PlayerEntity player = null;
+            if (killer instanceof PlayerEntity pl)
+                player = pl;
+            else if (killer instanceof Ownable own && own.getOwner() instanceof PlayerEntity pl)
+                player = pl;
+            var op = MobDifficulty.get(entity);
+            if (op.isEmpty()) return;
+            MobDifficulty mobDiff = op.get();
+            MobEntity mob = mobDiff.owner;
+            if (killer != null)
+                mobDiff.onKilled(mob, player);
+            if (player != null)
+            {
+                PlayerDifficulty playerDiff = PlayerDifficulty.get(player);
+                playerDiff.addKillCredit(mobDiff);
+                WorldChunk chunk = mob.getWorld().getWorldChunk(mob.getBlockPos());
+                var chunkDiff = ChunkDifficulty.get(chunk);
+                if (chunkDiff.isPresent())
+                    chunkDiff.get().addKillHistory(player, mob, mobDiff);
+            }
+        });
 
         LivingEntityEvents.DROPS.register((target, source, drops, lootingLevel, recentlyHit) ->
         {
             var op = MobDifficulty.get(target);
-            if (op.isEmpty()) return true;
+            if (op.isEmpty()) return false;
             MobDifficulty diff = op.get();
-            if (diff.noDrop) return true;
+            if (diff.noDrop) return false;
             LivingEntity killer = target.getPrimeAdversary();
-            if (killer != null && TrinketCompat.hasItemInTrinket(killer, LHItems.NIDHOGGUR))
+            if (killer != null && TrinketCompat.hasItemInTrinket(killer, TrinketItems.NIDHOGGUR))
             {
                 double val = LHConfig.common().items.nidhoggurDropFactor * diff.getLevel();
                 int count = (int) val;
@@ -156,7 +175,7 @@ public class MobEvents
                 for (var stack : drops)
                     stack.getStack().setCount(stack.getStack().getCount() * count);
             }
-            return true;
+            return false;
         });
 
         LivingEntityEvents.EXPERIENCE_DROP.register((i, playerEntity, livingEntity) ->

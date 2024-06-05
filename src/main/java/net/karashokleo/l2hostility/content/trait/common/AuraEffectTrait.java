@@ -1,7 +1,8 @@
 package net.karashokleo.l2hostility.content.trait.common;
 
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
-import net.karashokleo.l2hostility.content.network.S2CAuraEffect;
+import net.karashokleo.l2hostility.content.item.TrinketItems;
+import net.karashokleo.l2hostility.content.network.S2CEffectAura;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.karashokleo.l2hostility.init.LHItems;
@@ -26,15 +27,15 @@ public class AuraEffectTrait extends MobTrait
 
     protected boolean canApply(LivingEntity e)
     {
-        return !TrinketCompat.hasItemInTrinket(e, LHItems.RING_REFLECTION) &&
-                !TrinketCompat.hasItemInTrinket(e, LHItems.ABRAHADABRA);
+        return !TrinketCompat.hasItemInTrinket(e, TrinketItems.RING_REFLECTION) &&
+                !TrinketCompat.hasItemInTrinket(e, TrinketItems.ABRAHADABRA);
     }
 
     @Override
     public void serverTick(LivingEntity mob, int level)
     {
         int range = LHConfig.common().range.get(getId().getPath());
-        LHNetworking.toTracking(mob, new S2CAuraEffect(mob, range, effect.get().getColor()));
+        LHNetworking.toTracking(mob, new S2CEffectAura(mob, range, effect.get().getColor()));
         for (var e : mob.getWorld().getEntitiesByClass(LivingEntity.class, mob.getBoundingBox().expand(range), EntityPredicates.VALID_ENTITY))
         {
             if (e instanceof PlayerEntity pl && pl.getAbilities().creativeMode) continue;

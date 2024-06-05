@@ -1,9 +1,11 @@
 package net.karashokleo.l2hostility.content.trait.common;
 
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Vec3d;
@@ -36,5 +38,12 @@ public class GrenadeTrait extends IntervalTrait
             mob.playSound(SoundEvents.ENTITY_SHULKER_SHOOT, 2.0F, (mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F + 1.0F);
             super.action(mob, data);
         }
+    }
+
+    @Override
+    public void onHurt(int level, LivingEntity entity, LivingHurtEvent event)
+    {
+        if (event.getSource().isIn(DamageTypeTags.IS_EXPLOSION))
+            event.setCanceled(true);
     }
 }

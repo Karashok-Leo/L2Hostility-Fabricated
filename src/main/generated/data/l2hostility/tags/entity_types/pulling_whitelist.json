@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#l2hostility:melee_weapon_target"
+    {
+      "id": "#l2hostility:melee_weapon_target",
+      "required": false
+    }
   ]
 }

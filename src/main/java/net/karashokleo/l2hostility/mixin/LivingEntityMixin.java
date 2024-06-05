@@ -18,8 +18,12 @@ public abstract class LivingEntityMixin
     @NotNull
     public abstract Iterable<ItemStack> getArmorItems();
 
-    @Inject(at = @At("HEAD"), method = "getArmorVisibility", cancellable = true)
-    private void injectedGetArmorVisibility(CallbackInfoReturnable<Float> cir)
+    @Inject(
+            method = "getArmorVisibility",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void inject_getArmorVisibility(CallbackInfoReturnable<Float> cir)
     {
         Iterable<ItemStack> iterable = this.getArmorItems();
         int total = 0;

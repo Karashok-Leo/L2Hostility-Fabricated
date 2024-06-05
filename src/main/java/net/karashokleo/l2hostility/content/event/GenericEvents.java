@@ -11,11 +11,7 @@ public class GenericEvents
 {
     public static void register()
     {
-        ServerTickEvents.END_SERVER_TICK.register(server ->
-        {
-            execute();
-
-        });
+        ServerTickEvents.END_SERVER_TICK.register(server -> execute());
         ServerTickEvents.END_SERVER_TICK.register(server -> RayTraceUtil.serverTick());
     }
 

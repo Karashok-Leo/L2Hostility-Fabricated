@@ -4,20 +4,30 @@ import dev.xkmc.l2serial.serialization.SerialClass;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 @SerialClass
 public class DifficultyConfig
 {
-    public static Config defaultLevel()
+    private static Config DEFAULT = null;
+
+    public static Config defaultConfig()
     {
-        int base = LHConfig.common().scaling.defaultLevelBase;
-        double var = LHConfig.common().scaling.defaultLevelVar;
-        double scale = LHConfig.common().scaling.defaultLevelScale;
-        return new Config(0, base, var, scale, 1, 1);
+        if (DEFAULT == null)
+            DEFAULT = new Config(
+                    0,
+                    LHConfig.common().scaling.defaultLevelBase,
+                    LHConfig.common().scaling.defaultLevelVar,
+                    LHConfig.common().scaling.defaultLevelScale,
+                    1,
+                    1
+            );
+        return DEFAULT;
     }
 
     @SerialClass.SerialField
@@ -27,7 +37,12 @@ public class DifficultyConfig
 
     public Config getByLevelOrDefault(Identifier id)
     {
-        return levelMap.containsKey(id) ? levelMap.get(id) : defaultLevel();
+        return levelMap.containsKey(id) ? levelMap.get(id) : defaultConfig();
+    }
+
+    public Optional<Config> getByBiome(World world, BlockPos pos)
+    {
+        return world.getBiome(pos).getKey().map(e -> biomeMap.get(e.getValue()));
     }
 
     public void merge(DifficultyConfig config)

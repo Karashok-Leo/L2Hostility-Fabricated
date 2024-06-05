@@ -13,12 +13,10 @@ import net.karashokleo.l2hostility.init.LHNetworking;
 import net.karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkSection;
 
 import java.util.List;
@@ -74,7 +72,7 @@ public class SectionDifficulty
     {
         var levelDiff = LHData.difficulties.getByLevelOrDefault(world.getDimensionKey().getValue());
         instance.acceptConfig(levelDiff);
-        world.getBiome(pos).getKey().map(e -> LHData.difficulties.biomeMap.get(e.getValue())).ifPresent(instance::acceptConfig);
+        LHData.difficulties.getByBiome(world, pos).ifPresent(instance::acceptConfig);
         instance.acceptBonusLevel((int) Math.round(LHConfig.common().scaling.distanceFactor *
                 Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ())));
     }
@@ -86,9 +84,7 @@ public class SectionDifficulty
         var levelDiff = LHData.difficulties.getByLevelOrDefault(player.getWorld().getDimensionKey().getValue());
         int dim = levelDiff.base();
         BlockPos pos = player.getBlockPos();
-        RegistryEntry<Biome> biome = player.getWorld().getBiome(pos);
-        int bio = biome.getKey().map(e -> LHData.difficulties.biomeMap.get(e.getRegistry()))
-                .map(DifficultyConfig.Config::base).orElse(0);
+        int bio = LHData.difficulties.getByBiome(player.getWorld(), pos).map(DifficultyConfig.Config::base).orElse(0);
         int dist = (int) Math.round(LHConfig.common().scaling.distanceFactor *
                 Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ()));
         int adaptive = difficulty.getLevel();

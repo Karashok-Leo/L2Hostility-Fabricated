@@ -1,0 +1,11 @@
+{
+  "type": "l2hostility:burnt",
+  "chance": 15552,
+  "ingredient": {
+    "item": "minecraft:emerald"
+  },
+  "result": {
+    "Count": 1,
+    "id": "l2hostility:heirophant_green"
+  }
+}

@@ -1,10 +1,10 @@
 package net.karashokleo.l2hostility.init;
 
+import karashokleo.leobrary.datagen.builder.StatusEffectBuilder;
+import karashokleo.leobrary.datagen.generator.LanguageGenerator;
+import karashokleo.leobrary.datagen.generator.TagGenerator;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.content.effect.*;
-import net.karashokleo.leobrary.datagen.builder.StatusEffectBuilder;
-import net.karashokleo.leobrary.datagen.generator.TagGenerator;
-import net.karashokleo.leobrary.datagen.generator.LanguageGenerator;
 import net.karashokleo.leobrary.effect.api.util.GenericStatusEffect;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -15,11 +15,14 @@ public class LHEffects
     public static GravityEffect GRAVITY;
     public static MoonwalkEffect MOONWALK;
     public static GenericStatusEffect ANTI_BUILD;
+    public static EmeraldPopeEffect EMERALD;
     public static FlameEffect FLAME;
     public static IceEffect ICE;
-    public static GenericStatusEffect CURSE;
-    public static CleanseEffect CLEANSE;
+    public static ArmorReduceEffect ARMOR_REDUCE;
     public static StoneCageEffect STONE_CAGE;
+    public static BleedEffect BLEED;
+    public static CurseEffect CURSE;
+    public static CleanseEffect CLEANSE;
 
     public static void register()
     {
@@ -32,6 +35,7 @@ public class LHEffects
                 .addZH("重力")
                 .addZHDesc("增加生物重力")
                 .register();
+
         MOONWALK = Entry.of(
                         "moonwalk",
                         new MoonwalkEffect()
@@ -41,6 +45,7 @@ public class LHEffects
                 .addZH("月步")
                 .addZHDesc("减少生物重力")
                 .register();
+
         ANTI_BUILD = Entry.of(
                         "anti_build",
                         new GenericStatusEffect(StatusEffectCategory.HARMFUL, 0xff7f7f)
@@ -51,6 +56,17 @@ public class LHEffects
                 .addZHDesc("玩家无法放置方块")
                 .addTag(LHTags.CLEANSE_BLACKLIST)
                 .register();
+
+        EMERALD = Entry.of(
+                        "emerald_splash",
+                        new EmeraldPopeEffect()
+                )
+                .addEN()
+                .addENDesc("Attack all surrounding enemies. Damage is based on currently player stats and weapons.")
+                .addZH("绿宝石水花")
+                .addZHDesc("持续对周围实体造成伤害。伤害基于实体数值和武器")
+                .register();
+
         FLAME = Entry.of(
                         "flame",
                         new FlameEffect()
@@ -60,6 +76,7 @@ public class LHEffects
                 .addZH("魂火")
                 .addZHDesc("持续造成伤害。无视火焰免疫，但是不会对火基生物造成伤害")
                 .register();
+
         ICE = Entry.of(
                         "ice",
                         new IceEffect()
@@ -69,24 +86,17 @@ public class LHEffects
                 .addZH("寒流")
                 .addZHDesc("让实体减速，等同于让实体陷入细雪")
                 .register();
-        CURSE = Entry.of(
-                        "curse",
-                        new GenericStatusEffect(StatusEffectCategory.HARMFUL, 0x3f3f3f)
+
+        ARMOR_REDUCE = Entry.of(
+                        "armor_reduce",
+                        new ArmorReduceEffect()
                 )
-                .addEN("Cursed")
-                .addENDesc("Make the entity cannot heal.")
-                .addZH("诅咒")
-                .addZHDesc("持续阻止回血")
+                .addEN("Armor Corrosion")
+                .addENDesc("Reduce armor value significantly.")
+                .addZH("破甲")
+                .addZHDesc("大幅降低护甲值")
                 .register();
-        CLEANSE = Entry.of(
-                        "cleanse",
-                        new CleanseEffect()
-                )
-                .addEN("Cleansed")
-                .addENDesc("Clear all potion effects and make the entity immune to potion effects.")
-                .addZH("净化")
-                .addZHDesc("清除所有效果，并且持续免疫药水效果")
-                .register();
+
         STONE_CAGE = Entry.of(
                         "stone_cage",
                         new StoneCageEffect()
@@ -95,6 +105,36 @@ public class LHEffects
                 .addENDesc("Immobilize the entity. Making it cannot move and unaffected by external forces.")
                 .addZH("禁锢")
                 .addZHDesc("让实体无法移动，也无法改变位置")
+                .register();
+
+        BLEED = Entry.of(
+                        "bleed",
+                        new BleedEffect()
+                )
+                .addEN()
+                .addENDesc("Make the entity lose attack and speed, and damage the entity every 3 seconds. Stacks when applied.")
+                .addZH("流血")
+                .addZHDesc("降低攻击和移动速度，并且每三秒造成一次伤害。可叠加")
+                .register();
+
+        CURSE = Entry.of(
+                        "curse",
+                        new CurseEffect()
+                )
+                .addEN("Cursed")
+                .addENDesc("Make the entity cannot heal.")
+                .addZH("诅咒")
+                .addZHDesc("持续阻止回血")
+                .register();
+
+        CLEANSE = Entry.of(
+                        "cleanse",
+                        new CleanseEffect()
+                )
+                .addEN("Cleansed")
+                .addENDesc("Clear all potion effects and make the entity immune to potion effects.")
+                .addZH("净化")
+                .addZHDesc("清除所有效果，并且持续免疫药水效果")
                 .register();
     }
 

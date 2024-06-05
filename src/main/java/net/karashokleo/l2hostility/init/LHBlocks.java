@@ -1,26 +1,113 @@
 package net.karashokleo.l2hostility.init;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import karashokleo.leobrary.datagen.builder.BlockBuilder;
+import karashokleo.leobrary.datagen.builder.BlockSet;
+import karashokleo.leobrary.datagen.generator.BlockLootGenerator;
+import karashokleo.leobrary.datagen.generator.LanguageGenerator;
+import karashokleo.leobrary.datagen.generator.ModelGenerator;
+import karashokleo.leobrary.datagen.generator.TagGenerator;
 import net.karashokleo.l2hostility.L2Hostility;
+import net.karashokleo.l2hostility.content.block.HostilitySpawner;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItem;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.data.client.*;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 public class LHBlocks
 {
-    public static Block BURST_SPAWNER;
-    public static BlockItem SPAWNER;
+    public static BlockSet SPAWNER;
 
     public static void register()
     {
-        BURST_SPAWNER = new Block(FabricBlockSettings.copyOf(Blocks.SPAWNER).strength(50F, 1200F));
-        SPAWNER = new BlockItem(BURST_SPAWNER, new FabricItemSettings());
-        Registry.register(Registries.BLOCK, L2Hostility.id("hostility_spawner"), BURST_SPAWNER);
-        Registry.register(Registries.ITEM, L2Hostility.id("hostility_spawner"), SPAWNER);
-        LHData.MODELS.addBlock(generator -> generator.registerSimpleCubeAll(BURST_SPAWNER));
-        LHMiscs.GROUP.add(SPAWNER);
+        SPAWNER = Entry.of(
+                        "hostility_spawner",
+                        new HostilitySpawner()
+                )
+                .addSimpleItem()
+                .addEN()
+                .addZH("恶意刷怪笼")
+                .registerWithItem();
+
+        LHData.MODELS.addBlock(LHBlocks::generateSpawnerState);
+
+        LHMiscs.GROUP.add(SPAWNER.item());
+    }
+
+    public static void generateSpawnerState(BlockStateModelGenerator generator)
+    {
+        Identifier id = generator.createSubModel(SPAWNER.block(), "", Models.CUBE_ALL, TextureMap::all);
+        Identifier id_activated = generator.createSubModel(SPAWNER.block(), "_activated", Models.CUBE_ALL, TextureMap::all);
+        Identifier id_clear = generator.createSubModel(SPAWNER.block(), "_clear", Models.CUBE_ALL, TextureMap::all);
+        Identifier id_failed = generator.createSubModel(SPAWNER.block(), "_failed", Models.CUBE_ALL, TextureMap::all);
+        generator.registerParentedItemModel(SPAWNER.block(), id);
+        generator.blockStateCollector.accept(VariantsBlockStateSupplier
+                .create(SPAWNER.block())
+                .coordinate(
+                        BlockStateVariantMap
+                                .create(HostilitySpawner.STATE)
+                                .register(phase -> BlockStateVariant
+                                        .create()
+                                        .put(
+                                                VariantSettings.MODEL,
+                                                switch (phase)
+                                                {
+                                                    case IDLE -> id;
+                                                    case ACTIVATED -> id_activated;
+                                                    case CLEAR -> id_clear;
+                                                    case FAILED -> id_failed;
+                                                }
+                                        )
+                                )
+                )
+        );
+    }
+
+    public static class Entry<T extends Block> extends BlockBuilder<T>
+    {
+        public static <T extends Block> Entry<T> of(String name, T block)
+        {
+            return new Entry<>(name, block);
+        }
+
+        public Entry(String name, T content)
+        {
+            super(name, content);
+        }
+
+        @Override
+        public @Nullable LanguageGenerator getEnglishGenerator()
+        {
+            return LHData.EN_TEXTS;
+        }
+
+        @Override
+        public @Nullable LanguageGenerator getChineseGenerator()
+        {
+            return LHData.ZH_TEXTS;
+        }
+
+        @Override
+        public @Nullable TagGenerator<Block> getTagGenerator()
+        {
+            return LHData.BLOCK_TAGS;
+        }
+
+        @Override
+        public @Nullable ModelGenerator getModelGenerator()
+        {
+            return LHData.MODELS;
+        }
+
+        @Override
+        public @Nullable BlockLootGenerator getLootGenerator()
+        {
+            return LHData.BLOCK_LOOTS;
+        }
+
+        @Override
+        protected String getNameSpace()
+        {
+            return L2Hostility.MOD_ID;
+        }
     }
 }

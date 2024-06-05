@@ -1,6 +1,7 @@
 package net.karashokleo.l2hostility.init;
 
 import net.karashokleo.l2hostility.L2Hostility;
+import net.karashokleo.l2hostility.content.item.MiscItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -66,7 +67,7 @@ public enum LHTexts
     ABRAHADABRA("item.equipment.abrahadabra", "When a mob trait tries to apply a trait effect on you, apply it to surrounding enemies that target you instead.", "当一个怪物携带的词条试图对你施加词条效果时，将其施加在周围所有对你有敌意的生物上作为替代", 0),
     NIDHOGGUR("item.equipment.nidhoggur", "Mobs you kill will drop +%s%% loot per mob level", "击杀怪物掉落的所有掉落物根据怪物等级每级增加+%s%%", 1),
     POCKET_OF_RESTORATION("item.equipment.pocket_of_restoration", "Automatically put sealed item inside, unseal it, and put it back when finished.", "自动收纳被封印的物品，将其解除封印后放回原位", 0),
-    LOOTING_CHARM("item.equipment.looting", "Enables some hostility trait drops. Check JEI for detail.", "击杀带部分词条的生物时掉落额外奖励。查看JEI了解详情", 0),
+    LOOTING_CHARM("item.equipment.looting", "Enables some hostility trait drops. Check REI/EMI for detail.", "击杀带部分词条的生物时掉落额外奖励。查看REI/EMI了解详情", 0),
     ABYSSAL_THORN("item.equipment.abyssal_thorn", "Mobs get all possible traits at their level, but with Curse of Envy, they will always drop trait symbols of those when killed", "怪物会获得当前等级下所有能获得的词条，但佩戴嫉妒诅咒时，必定掉落那些词条", 0),
     DIVINITY_CROSS("item.equipment.divinity_cross", "Cleanse effect will not clear Lv.1 beneficial effects", "净化效果不会清除1级的正面效果", 0),
     DIVINITY_LIGHT("item.equipment.divinity_light", "Your adaptive level will stay at 0.", "玩家动态等级维持在0", 0),
@@ -95,15 +96,15 @@ public enum LHTexts
     INFO_SECTION_ADAPTIVE_LEVEL("info.section_detail.adaptive", "Adaptive level: %s", "动态等级: %s", 1),
     INFO_SECTION_DISTANCE_LEVEL("info.section_detail.distance", "Distance bonus: %s", "距离加成: %s", 1),
     BOSS_EVENT("boss_event", "Hostility Clearing Progress: %s/%s", "恶意清除进度：%s/%s", 2),
-    LOOT_TITLE("jei.loot_title", "Trait Loot", "恶意词条掉落", 0),
-    LOOT_CHANCE("jei.loot_chance", "%s chance for %s rank %s", "%3$s阶%2$s词条%1$s概率掉落", 3),
-    LOOT_MIN_LEVEL("jei.min_level", "Drops on mobs with level %s or higher", "等级%s及以上的怪物才会掉落", 1),
-    LOOT_MIN_HEALTH("jei.min_health", "Drops on mobs with %s or higher max health", "总血量在%s及以上的怪物才会掉落", 1),
-    LOOT_NO_TRAIT("jei.no_trait", "%s chance to drop when conditions met", "击杀满足条件的怪物时有%s概率掉落", 1),
-    LOOT_OTHER_TRAIT("jei.other_trait", "Requires %s at rank %s", "同时需要%2$s阶%1$s词条", 2),
-    TOOLTIP_JEI_ENVY("jei.envy", "Drops when you equips Curse of Envy while killing mobs of this trait", "装备嫉妒诅咒时击杀有词条的怪物有概率掉落对应词条", 0),
-    TOOLTIP_JEI_GLUTTONY("jei.gluttony", "Drops when you equips Curse of Gluttony while killing mobs with levels", "装备暴食诅咒时击杀有等级的怪物有概率掉落", 0),
-    TOOLTIP_JEI_REQUIRED("jei.required", "Requires you to equip %s while killing mobs", "需要佩戴[%s]饰品才能掉落", 1),
+    LOOT_TITLE("compat.loot_title", "Trait Loot", "恶意词条掉落", 0),
+    LOOT_CHANCE("compat.loot_chance", "%s chance for %s rank %s", "%3$s阶%2$s词条%1$s概率掉落", 3),
+    LOOT_MIN_LEVEL("compat.min_level", "Drops on mobs with level %s or higher", "等级%s及以上的怪物才会掉落", 1),
+    LOOT_MIN_HEALTH("compat.min_health", "Drops on mobs with %s or higher max health", "总血量在%s及以上的怪物才会掉落", 1),
+    LOOT_NO_TRAIT("compat.no_trait", "%s chance to drop when conditions met", "击杀满足条件的怪物时有%s概率掉落", 1),
+    LOOT_OTHER_TRAIT("compat.other_trait", "Requires %s at rank %s", "同时需要%2$s阶%1$s词条", 2),
+    TOOLTIP_LOOT_ENVY("compat.envy", "Drops when you equips Curse of Envy while killing mobs of this trait", "装备嫉妒诅咒时击杀有词条的怪物有概率掉落对应词条", 0),
+    TOOLTIP_LOOT_GLUTTONY("compat.gluttony", "Drops when you equips Curse of Gluttony while killing mobs with levels", "装备暴食诅咒时击杀有等级的怪物有概率掉落", 0),
+    TOOLTIP_LOOT_REQUIRED("compat.required", "Requires you to equip %s while killing mobs", "需要佩戴[%s]饰品才能掉落", 1),
     COMMAND_PLAYER_SUCCEED("command.player.success", "Performed actions on %s players", "指令已对%s个玩家起效", 1),
     COMMAND_PLAYER_FAIL("command.player.fail", "Command has no target or no effect", "指令无目标或者无效", 0),
     COMMAND_PLAYER_GET_BASE("command.player.get_base", "%s has base difficulty level %s", "%s的基础难度等级位Lv.%s", 2),
@@ -120,11 +121,10 @@ public enum LHTexts
     COMMAND_REGION_NOT_CLEAR("command.region.not_clear", "Section Not Cleared", "子区块难度还未净化", 0),
 
     COMMAND_MOB_SUCCEED("command.mob.success", "Performed actions on %s mobs", "指令已对%s个怪物起效", 1),
-//    PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", "莱特兰·恶意-教程与词条列表", 0),
+    //    PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", "莱特兰·恶意-教程与词条列表", 0),
 //    PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", "这个模组提升了怪物数值，并添加了各种能力", 0),
     PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", "莱特兰恶意教程", 0),
-    PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", "了解难度机制和怪物词条，以更好地应对它们", 0)
-    ;
+    PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", "了解难度机制和怪物词条，以更好地应对它们", 0);
 
     public final String id, defEn, defZh;
     public final int count;
@@ -151,7 +151,7 @@ public enum LHTexts
 
     public static MutableText sectionRender()
     {
-        return ITEM_SECTION_RENDER.get(item(LHItems.DETECTOR.getDefaultStack()), item(LHItems.DETECTOR_GLASSES.getDefaultStack()));
+        return ITEM_SECTION_RENDER.get(item(MiscItems.DETECTOR.getDefaultStack()), item(MiscItems.DETECTOR_GLASSES.getDefaultStack()));
     }
 
     public static void init()
@@ -161,9 +161,12 @@ public enum LHTexts
             LHData.EN_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defEn);
             LHData.ZH_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defZh);
         }
-        LHData.EN_TEXTS.addText("trinkets.slot.chest.hostility_curse","Curse");
-        LHData.ZH_TEXTS.addText("trinkets.slot.chest.hostility_curse","诅咒");
-        LHData.EN_TEXTS.addText("trinkets.slot.chest.charm","Charm");
-        LHData.ZH_TEXTS.addText("trinkets.slot.chest.charm","护符");
+        LHData.EN_TEXTS.addText("config.jade.plugin_l2hostility.mob", "L2Hostility");
+        LHData.ZH_TEXTS.addText("config.jade.plugin_l2hostility.mob", "莱特兰 - 恶意");
+
+        LHData.EN_TEXTS.addText("trinkets.slot.chest.hostility_curse", "L2Hostility - Curse");
+        LHData.ZH_TEXTS.addText("trinkets.slot.chest.hostility_curse", "恶意 - 诅咒");
+        LHData.EN_TEXTS.addText("trinkets.slot.chest.charm", "Charm");
+        LHData.ZH_TEXTS.addText("trinkets.slot.chest.charm", "护符");
     }
 }

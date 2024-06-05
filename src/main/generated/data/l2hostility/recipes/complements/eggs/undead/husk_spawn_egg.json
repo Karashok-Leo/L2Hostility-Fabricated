@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "B": {
+      "item": "l2hostility:cursed_droplet"
+    },
+    "C": {
+      "item": "minecraft:egg"
+    },
+    "D": {
+      "item": "minecraft:sand"
+    }
+  },
+  "pattern": [
+    "ADA",
+    "ABA",
+    "ACA"
+  ],
+  "result": {
+    "item": "minecraft:husk_spawn_egg"
+  },
+  "show_notification": true
+}

@@ -28,6 +28,8 @@ public class CommonConfig implements ConfigData
     @ConfigEntry.Gui.CollapsibleObject
     public Traits traits = new Traits();
     @ConfigEntry.Gui.CollapsibleObject
+    public Complements complements = new Complements();
+    @ConfigEntry.Gui.CollapsibleObject
     public final Map<String, Boolean> map = LHTraits.TRAIT.stream().collect(
             Collectors.toMap(
                     mobTrait -> mobTrait.getNonNullId().getPath(),
@@ -92,7 +94,6 @@ public class CommonConfig implements ConfigData
 
     public static class Items
     {
-        public final boolean disableHostilityLootCurioRequirement = false;
         public final int bottleOfCurseLevel = 50;
         public final int witchChargeMinDuration = 200;
         public final double ringOfLifeMaxDamage = 0.9;
@@ -152,7 +153,8 @@ public class CommonConfig implements ConfigData
         public final int slowTime = 200;
         public final int poisonTime = 200;
         public final int witherTime = 200;
-        public final int levitationTime = 200;
+        public final int levitationTime = 80;
+        //        public final int levitationTime = 200;
         public final int blindTime = 200;
         public final int confusionTime = 200;
         public final int soulBurnerTime = 60;
@@ -183,5 +185,55 @@ public class CommonConfig implements ConfigData
         public final double pullingStrength = 0.2;
         public final double reprintDamage = 0.02;
         public final int reprintBypass = 10;
+    }
+
+    public static class Complements
+    {
+        public final boolean enableVanillaItemRecipe = true;
+        public final boolean enableSpawnEggRecipe = true;
+        public final boolean enableImmunityEnchantments = true;
+
+        @ConfigEntry.Gui.CollapsibleObject
+        public final Materials materials = new Materials();
+
+        @ConfigEntry.Gui.CollapsibleObject
+        public final FireCharge fireCharge = new FireCharge();
+
+        @ConfigEntry.Gui.CollapsibleObject
+        public final Properties properties = new Properties();
+
+        public static class Materials
+        {
+            public final double windSpeed = 10;
+            public final int belowVoid = 16;
+            public final int phantomHeight = 200;
+            public final int explosionDamage = 80;
+            public final boolean enableSpaceShard = true;
+            public final int spaceDamage = 16384;
+        }
+
+        public static class FireCharge
+        {
+            public final int soulFireChargeDuration = 60;
+            public final int blackFireChargeDuration = 100;
+            public final int strongFireChargePower = 2;
+        }
+
+        public static class Properties
+        {
+            public final int totemicHealDuration = 100;
+            public final int totemicHealAmount = 1;
+            public final double windSweepIncrement = 1;
+            public final double emeraldDamageFactor = 0.5;
+            public final int emeraldBaseRange = 10;
+            public final int iceEnchantDuration = 100;
+            public final int flameEnchantDuration = 60;
+            public final int bleedEnchantDuration = 80;
+            public final int curseEnchantDuration = 100;
+            public final int bleedEnchantMax = 3;
+            public final double voidTouchChance = 0.05;
+            public final double voidTouchChanceBonus = 0.5;
+            public final double mobTypeBonus = 1D;
+        }
     }
 }

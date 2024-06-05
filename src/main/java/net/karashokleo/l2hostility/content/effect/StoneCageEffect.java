@@ -1,6 +1,8 @@
 package net.karashokleo.l2hostility.content.effect;
 
 import io.github.fabricators_of_create.porting_lib.attributes.PortingLibAttributes;
+import karashokleo.effect_overlay.api.IconEffectRenderer;
+import karashokleo.effect_overlay.api.IconOverlayEffect;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.util.MathHelper;
 import net.minecraft.entity.LivingEntity;
@@ -11,12 +13,12 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 
 import java.util.UUID;
 
-public class StoneCageEffect extends StatusEffect
+public class StoneCageEffect extends StatusEffect implements IconOverlayEffect
 {
-    private static final UUID ID_SLOW = MathHelper.getUUIDFromString(L2Hostility.MOD_ID + ":stone_cage_slow");
-    private static final UUID ID_FLY = MathHelper.getUUIDFromString(L2Hostility.MOD_ID + ":stone_cage_fly");
-    private static final UUID ID_KB = MathHelper.getUUIDFromString(L2Hostility.MOD_ID + ":stone_cage_kb");
-    private static final UUID ID_SWIM = MathHelper.getUUIDFromString(L2Hostility.MOD_ID + ":stone_cage_swim");
+    private static final UUID ID_SLOW = MathHelper.getUUIDFromIdentifier("stone_cage_slow");
+    private static final UUID ID_FLY = MathHelper.getUUIDFromIdentifier("stone_cage_fly");
+    private static final UUID ID_KB = MathHelper.getUUIDFromIdentifier("stone_cage_kb");
+    private static final UUID ID_SWIM = MathHelper.getUUIDFromIdentifier("stone_cage_swim");
 
     public StoneCageEffect()
     {
@@ -37,5 +39,11 @@ public class StoneCageEffect extends StatusEffect
     public void applyUpdateEffect(LivingEntity entity, int amplifier)
     {
         entity.setVelocity(0, 0, 0);
+    }
+
+    @Override
+    public IconEffectRenderer getIcon(LivingEntity entity, int lv)
+    {
+        return IconEffectRenderer.icon(entity, L2Hostility.id("textures/effect_overlay/stone_cage.png"));
     }
 }

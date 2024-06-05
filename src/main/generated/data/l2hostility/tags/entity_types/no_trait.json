@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "minecraft:endermite",
-    "#l2hostility:blacklist"
+    {
+      "id": "#l2hostility:blacklist",
+      "required": false
+    }
   ]
 }

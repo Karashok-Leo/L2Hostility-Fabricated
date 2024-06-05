@@ -23,6 +23,7 @@ import java.util.function.Predicate;
 
 public class TrinketCompat
 {
+    // 饰品栏中是否存在可以免疫该effectInstance的饰品
     public static boolean isEffectValidInTrinket(StatusEffectInstance effectInstance, LivingEntity entity)
     {
         return TrinketsApi.getTrinketComponent(entity).map(trinketComponent ->
@@ -31,11 +32,13 @@ public class TrinketCompat
                                 effectValidItem.isEffectValid(effectInstance, stack, entity))).orElse(false);
     }
 
+    // 装备栏或者饰品栏是否存在item
     public static boolean hasItemEquippedOrInTrinket(LivingEntity le, Item item)
     {
         return hasItemEquipped(le, item) || hasItemInTrinket(le, item);
     }
 
+    // 装备栏是否存在item
     public static boolean hasItemEquipped(LivingEntity le, Item item)
     {
         for (EquipmentSlot e : EquipmentSlot.values())
@@ -44,20 +47,67 @@ public class TrinketCompat
         return false;
     }
 
+    // 饰品栏是否存在item
     public static boolean hasItemInTrinket(LivingEntity le, Item item)
     {
         return TrinketsApi.getTrinketComponent(le).map(trinketComponent -> trinketComponent.isEquipped(item)).orElse(false);
     }
 
+    // 获取装备栏与饰品栏中的所有 ItemStack
     public static List<ItemStack> getItems(LivingEntity le, Predicate<ItemStack> pred)
     {
-        List<ItemStack> ans = new ArrayList<>();
-        getEquippedItems(ans, le, pred);
-        getTrinketItems(ans, le, pred);
-        return ans;
+        List<ItemStack> list = new ArrayList<>();
+        getItems(list, le, pred);
+        return list;
     }
 
-    public static void getEquippedItems(List<ItemStack> list, LivingEntity le, Predicate<ItemStack> pred)
+    // 获取装备栏中的所有 ItemStack
+    public static List<ItemStack> getEquippedItems(LivingEntity le, Predicate<ItemStack> pred)
+    {
+        List<ItemStack> list = new ArrayList<>();
+        getEquippedItems(list, le, pred);
+        return list;
+    }
+
+    // 获取饰品栏中的所有 ItemStack
+    public static List<ItemStack> getTrinketItems(LivingEntity le, Predicate<ItemStack> pred)
+    {
+        List<ItemStack> list = new ArrayList<>();
+        getTrinketItems(list, le, pred);
+        return list;
+    }
+
+    // 获取装备栏与饰品栏中的所有 EntitySlotAccess
+    public static List<EntitySlotAccess> getItemAccess(LivingEntity le)
+    {
+        List<EntitySlotAccess> list = new ArrayList<>();
+        getItemAccess(list, le);
+        return list;
+    }
+
+    // 获取装备栏中的所有 EntitySlotAccess
+    public static List<EntitySlotAccess> getItemAccessEquipped(LivingEntity le)
+    {
+        List<EntitySlotAccess> list = new ArrayList<>();
+        getItemAccessEquipped(list, le);
+        return list;
+    }
+
+    // 获取饰品栏中的所有 EntitySlotAccess
+    public static List<EntitySlotAccess> getItemAccessInTrinket(LivingEntity le)
+    {
+        List<EntitySlotAccess> list = new ArrayList<>();
+        getItemAccessInTrinket(list, le);
+        return list;
+    }
+
+    private static void getItems(List<ItemStack> list, LivingEntity le, Predicate<ItemStack> pred)
+    {
+        getEquippedItems(list, le, pred);
+        getTrinketItems(list, le, pred);
+    }
+
+    private static void getEquippedItems(List<ItemStack> list, LivingEntity le, Predicate<ItemStack> pred)
     {
         for (EquipmentSlot e : EquipmentSlot.values())
         {
@@ -81,12 +131,10 @@ public class TrinketCompat
                 }
     }
 
-    public static List<EntitySlotAccess> getItemAccess(LivingEntity le)
+    public static void getItemAccess(List<EntitySlotAccess> list, LivingEntity le)
     {
-        List<EntitySlotAccess> ans = new ArrayList<>();
-        getItemAccessEquipped(ans, le);
-        getItemAccessInTrinket(ans, le);
-        return ans;
+        getItemAccessEquipped(list, le);
+        getItemAccessInTrinket(list, le);
     }
 
     public static void getItemAccessEquipped(List<EntitySlotAccess> list, LivingEntity le)
@@ -95,7 +143,7 @@ public class TrinketCompat
             list.add(new EquipmentSlotAccess(le, e));
     }
 
-    private static void getItemAccessInTrinket(List<EntitySlotAccess> list, LivingEntity le)
+    public static void getItemAccessInTrinket(List<EntitySlotAccess> list, LivingEntity le)
     {
         var opt = TrinketsApi.getTrinketComponent(le);
         if (opt.isEmpty()) return;
@@ -105,22 +153,24 @@ public class TrinketCompat
                     list.add(new TrinketSlotAccess(le, entry.getKey(), inventoryEntry.getKey(), i));
     }
 
+    // 反序列化 EntitySlotAccess
     @Nullable
     public static EntitySlotAccess decode(String id, LivingEntity le)
     {
         try
         {
-            var strs = id.split("/");
-            if (strs[0].equals("equipment"))
-                return new EquipmentSlotAccess(le, EquipmentSlot.byName(strs[1]));
-            else if (strs[0].equals("trinket"))
-                return new TrinketSlotAccess(le, strs[1], strs[2], Integer.parseInt(strs[3]));
+            var strings = id.split("/");
+            if (strings[0].equals("equipment"))
+                return new EquipmentSlotAccess(le, EquipmentSlot.byName(strings[1]));
+            else if (strings[0].equals("trinket"))
+                return new TrinketSlotAccess(le, strings[1], strings[2], Integer.parseInt(strings[3]));
         } catch (Exception ignored)
         {
         }
         return null;
     }
 
+    // 该 EntitySlotAccess 是否存在可以增加饰品槽位属性的饰品
     public static boolean isSlotAdder(EntitySlotAccess access)
     {
         Multimap<EntityAttribute, EntityAttributeModifier> multimap = null;

@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-10T18:49:41.8616405	L2 Hostility/Advancements
+// 1.20.1	2024-06-05T18:09:05.5865573	L2 Hostility/Advancements
 731cb8898830c0a838ee74dee40b4de3a49d49d5 data\l2hostility\advancements\hostility\trait.json
 cb89cdae2c01feadec39cbd3dee91341dc0907e5 data\l2hostility\advancements\hostility\kill_tanky.json
 194a66b2f60fae3dfba8c2a7c30e726a720d8b96 data\l2hostility\advancements\hostility\glasses.json
@@ -22,8 +22,8 @@ c9fc814d55f965e716d816dd0ef2bc2be0037098 data\l2hostility\advancements\hostility
 f6f4f1c7dc271fdb27b2c3eeb5d96a32307bdfd3 data\l2hostility\advancements\hostility\envy.json
 fc56527f0d9be5a9bea4e9112c40487a5ef9762f data\l2hostility\advancements\hostility\gluttony.json
 d305329a3f36553d4e57e1afed6694eca9ba03e3 data\l2hostility\advancements\hostility\kill_dementor.json
-cf14a7ecb93f2b8729e1ab74f416d12237793016 data\l2hostility\advancements\hostility\ingot.json
 00055c6f33407dee464c599c78c7c03b679169d9 data\l2hostility\advancements\hostility\root.json
+cf14a7ecb93f2b8729e1ab74f416d12237793016 data\l2hostility\advancements\hostility\ingot.json
 8d0a6794f1fefe8d29bd40114ad724376673c667 data\l2hostility\advancements\hostility\greed.json
-45c0d10dbf8033060380fc7d16c407b97520a708 data\l2hostility\advancements\hostility\patchouli.json
+0fbcf97e3a5af2927a3d009c7a796ffbaae67f2e data\l2hostility\advancements\hostility\patchouli.json
 b820fb4f5929e22e8ab9f93b1a999f1dcd14f074 data\l2hostility\advancements\hostility\lust.json

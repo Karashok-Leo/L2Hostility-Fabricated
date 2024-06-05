@@ -1,0 +1,11 @@
+{
+  "type": "l2hostility:burnt",
+  "chance": 27648,
+  "ingredient": {
+    "item": "minecraft:soul_sand"
+  },
+  "result": {
+    "Count": 1,
+    "id": "l2hostility:cursed_droplet"
+  }
+}

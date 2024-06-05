@@ -35,5 +35,10 @@
       "0"
     ]
   ],
+  "rewards": {
+    "loot": [
+      "l2hostility:hostility_guide"
+    ]
+  },
   "sends_telemetry_event": true
 }

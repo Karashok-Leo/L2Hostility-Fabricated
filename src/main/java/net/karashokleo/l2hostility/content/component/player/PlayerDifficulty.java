@@ -2,6 +2,8 @@ package net.karashokleo.l2hostility.content.component.player;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import net.karashokleo.l2hostility.content.item.ConsumableItems;
+import net.karashokleo.l2hostility.content.item.TrinketItems;
 import net.karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import net.karashokleo.l2hostility.init.LHComponents;
 import net.karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
@@ -12,7 +14,6 @@ import net.karashokleo.l2hostility.content.logic.MobDifficultyCollector;
 import net.karashokleo.l2hostility.content.logic.TraitManager;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.init.LHTexts;
-import net.karashokleo.l2hostility.init.LHItems;
 import net.karashokleo.l2hostility.init.LHMiscs;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -91,13 +92,13 @@ public class PlayerDifficulty
         instance.acceptBonus(getLevel());
         instance.setTraitCap(getRankCap());
         // 傲慢诅咒，佩戴后每一级难度都可以为你提供 +2% 生命值和攻击力的加成
-        if (TrinketCompat.hasItemInTrinket(owner, LHItems.CURSE_PRIDE))
+        if (TrinketCompat.hasItemInTrinket(owner, TrinketItems.CURSE_PRIDE))
         {
             instance.traitCostFactor(LHConfig.common().items.curse.prideTraitFactor);
             instance.setFullChance();
         }
         // ---
-        if (TrinketCompat.hasItemInTrinket(owner, LHItems.ABYSSAL_THORN))
+        if (TrinketCompat.hasItemInTrinket(owner, TrinketItems.ABYSSAL_THORN))
         {
             instance.traitCostFactor(0);
             instance.setFullChance();
@@ -123,7 +124,7 @@ public class PlayerDifficulty
         {
             rewardCount++;
             // 奖励恶意吸收宝珠
-            owner.getInventory().insertStack(LHItems.HOSTILITY_ORB.getDefaultStack());
+            owner.getInventory().insertStack(ConsumableItems.HOSTILITY_ORB.getDefaultStack());
             // TODO drop reward
         }
         sync(owner);

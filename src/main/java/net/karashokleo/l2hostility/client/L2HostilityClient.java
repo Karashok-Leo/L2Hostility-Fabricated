@@ -6,20 +6,23 @@ import dev.xkmc.l2tabs.tabs.inventory.TabRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.karashokleo.l2hostility.L2Hostility;
+import net.karashokleo.l2hostility.content.item.ComplementItems;
+import net.karashokleo.l2hostility.content.item.TrinketItems;
 import net.karashokleo.l2hostility.content.item.trinket.misc.PocketOfRestoration;
 import net.karashokleo.l2hostility.content.screen.equipment.EquipmentScreen;
 import net.karashokleo.l2hostility.content.screen.tab.DifficultyTab;
-import net.karashokleo.l2hostility.init.LHItems;
-import net.karashokleo.l2hostility.init.LHMiscs;
-import net.karashokleo.l2hostility.init.LHNetworking;
-import net.karashokleo.l2hostility.init.LHTexts;
+import net.karashokleo.l2hostility.init.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.Items;
+import net.minecraft.resource.ResourceType;
 import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
@@ -30,13 +33,19 @@ public class L2HostilityClient implements ClientModInitializer
     @Override
     public void onInitializeClient()
     {
+        LHParticles.registerClient();
         LHNetworking.initClient();
         ClientEvents.register();
+
+        BlockRenderLayerMap.INSTANCE.putBlock(LHBlocks.SPAWNER.block(), RenderLayer.getCutout());
+
         HandledScreens.register(LHMiscs.EQUIPMENTS, EquipmentScreen::new);
         TAB_DIFFICULTY = TabRegistry.GROUP.registerTab(5000, DifficultyTab::new,
                 () -> Items.ZOMBIE_HEAD, LHTexts.INFO_TAB_TITLE.get());
 
-        ModelPredicateProviderRegistry.register(LHItems.RESTORATION, L2Hostility.id("filled"), (stack, world, entity, seed) -> stack.getSubNbt(PocketOfRestoration.ROOT) == null ? 0 : 1);
+        ModelPredicateProviderRegistry.register(TrinketItems.RESTORATION, L2Hostility.id("filled"), (stack, world, entity, seed) -> stack.getSubNbt(PocketOfRestoration.ROOT) == null ? 0 : 1);
+
+        BuiltinItemRendererRegistry.INSTANCE.register(ComplementItems.FORCE_FIELD, ForceFieldRenderer.INSTANCE);
     }
 
     public static MinecraftClient getClient()

@@ -1,10 +1,10 @@
 package net.karashokleo.l2hostility.data.config.loader;
 
+import karashokleo.leobrary.data.AbstractDataLoader;
 import net.karashokleo.l2hostility.L2Hostility;
 import net.karashokleo.l2hostility.data.Constants;
 import net.karashokleo.l2hostility.data.config.WeaponConfig;
 import net.karashokleo.l2hostility.init.LHData;
-import net.karashokleo.leobrary.data.AbstractDataLoader;
 import net.minecraft.util.Identifier;
 
 public class WeaponConfigLoader extends AbstractDataLoader<WeaponConfig>

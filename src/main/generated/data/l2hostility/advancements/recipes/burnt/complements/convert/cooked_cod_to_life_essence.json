@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cooked_cod": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:cooked_cod"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "l2hostility:complements/convert/cooked_cod_to_life_essence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_cooked_cod",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "l2hostility:complements/convert/cooked_cod_to_life_essence"
+    ]
+  },
+  "sends_telemetry_event": false
+}

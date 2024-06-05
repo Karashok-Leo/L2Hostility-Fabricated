@@ -2,6 +2,7 @@ package net.karashokleo.l2hostility.content.trait.highlevel;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import net.karashokleo.l2hostility.content.item.TrinketItems;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.item.traits.DurabilityEater;
 import net.karashokleo.l2hostility.init.LHItems;
@@ -24,7 +25,7 @@ public class CorrosionTrait extends SlotIterateDamageTrait
     @Override
     public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
     {
-        if (TrinketCompat.hasItemInTrinket(event.getEntity(), LHItems.ABRAHADABRA)) return;
+        if (TrinketCompat.hasItemInTrinket(event.getEntity(), TrinketItems.ABRAHADABRA)) return;
         int count = process(level, entity, event.getEntity());
         if (count < level)
             event.setAmount(event.getAmount() * (float) (LHConfig.common().traits.corrosionDamage * level * (level - count)));

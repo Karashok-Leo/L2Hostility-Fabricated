@@ -1,0 +1,11 @@
+{
+  "type": "l2hostility:burnt",
+  "chance": 15552,
+  "ingredient": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "result": {
+    "Count": 1,
+    "id": "l2hostility:cursed_droplet"
+  }
+}

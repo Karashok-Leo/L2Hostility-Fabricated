@@ -32,11 +32,10 @@ public class S2CKillerAura extends S2CEntity
         {
             double radius = LHConfig.common().traits.killerAuraRange;
             Vec3d center = entity.getPos();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 30 * radius; i++)
             {
                 float tpi = (float) (Math.PI * 2);
-                Vec3d v0 = new Vec3d(0, radius, 0);
-                v0 = v0.rotateX(tpi / 4).rotateY(world.getRandom().nextFloat() * tpi);
+                Vec3d v0 = new Vec3d(0, radius, 0).rotateX(tpi / 4).rotateY(world.getRandom().nextFloat() * tpi);
                 world.addImportantParticle(ParticleTypes.FLAME,
                         center.x + v0.x,
                         center.y + v0.y + 0.5f,

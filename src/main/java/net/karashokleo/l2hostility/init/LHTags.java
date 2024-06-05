@@ -26,6 +26,7 @@ public class LHTags
     public static final TagKey<Item> TRAIT_ITEM = createItemTag("trait_item");
     public static final TagKey<Item> NO_SEAL = createItemTag("no_seal");
     public static final TagKey<Item> ANTIBUILD_BAN = createItemTag("antibuild_ban");
+    public static final TagKey<Item> DELICATE_BONE = createItemTag("delicate_bone");
 
     public static final TagKey<Enchantment> NO_DISPELL = createEnchantmentTag("no_dispell");
 

@@ -17,8 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HeldItemFeatureRenderer.class)
 public abstract class HeldItemFeatureRendererMixin
 {
-    @Inject(at = @At("HEAD"), method = "renderItem", cancellable = true)
-    private void injectedRenderItem(LivingEntity entity, ItemStack stack, ModelTransformationMode transformationMode, Arm arm, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci)
+    @Inject(
+            method = "renderItem", cancellable = true,
+            at = @At("HEAD")
+    )
+    private void inject_renderItem(LivingEntity entity, ItemStack stack, ModelTransformationMode transformationMode, Arm arm, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci)
     {
         if (EnchantmentHelper.getLevel(LHEnchantments.SHULKER_ARMOR, stack) > 0)
             ci.cancel();

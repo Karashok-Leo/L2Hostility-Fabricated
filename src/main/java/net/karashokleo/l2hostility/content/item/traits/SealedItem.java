@@ -2,8 +2,8 @@ package net.karashokleo.l2hostility.content.item.traits;
 
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.Trinket;
+import net.karashokleo.l2hostility.content.item.MiscItems;
 import net.karashokleo.l2hostility.init.LHTexts;
-import net.karashokleo.l2hostility.init.LHItems;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,12 +26,12 @@ public class SealedItem extends Item implements Trinket
 
     public static ItemStack sealItem(ItemStack stack, int time)
     {
-        if (stack.isOf(LHItems.SEAL))
+        if (stack.isOf(MiscItems.SEAL))
         {
             stack.getOrCreateNbt().putInt(TIME, Math.max(stack.getOrCreateNbt().getInt(TIME), time));
             return stack;
         }
-        ItemStack ans = LHItems.SEAL.getDefaultStack();
+        ItemStack ans = MiscItems.SEAL.getDefaultStack();
         ans.getOrCreateNbt().putInt(TIME, time);
         ans.getOrCreateNbt().put(DATA, stack.writeNbt(new NbtCompound()));
         return ans;

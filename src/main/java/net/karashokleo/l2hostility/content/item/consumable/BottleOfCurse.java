@@ -1,6 +1,7 @@
 package net.karashokleo.l2hostility.content.item.consumable;
 
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import net.karashokleo.l2hostility.content.item.TrinketItems;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import net.karashokleo.l2hostility.content.logic.LevelEditor;
@@ -30,7 +31,7 @@ public class BottleOfCurse extends DrinkableBottleItem
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         ItemStack stack = user.getStackInHand(hand);
-        if (TrinketCompat.hasItemInTrinket(user, LHItems.DIVINITY_LIGHT))
+        if (TrinketCompat.hasItemInTrinket(user, TrinketItems.DIVINITY_LIGHT))
             return TypedActionResult.fail(stack);
         return super.use(world, user, hand);
     }

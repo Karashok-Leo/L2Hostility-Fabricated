@@ -7,6 +7,7 @@ import dev.xkmc.l2serial.serialization.codec.PacketCodec;
 import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredient;
 import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredientSerializer;
 import net.karashokleo.l2hostility.L2Hostility;
+import net.karashokleo.l2hostility.init.LHRecipes;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
@@ -25,8 +26,6 @@ public class EnchantmentIngredient implements CustomIngredient
     {
         return new EnchantmentIngredient(enchantment, min_level).toVanilla();
     }
-
-    public static final CustomIngredientSerializer<EnchantmentIngredient> SERIALIZER = new Serializer();
 
     @SerialClass.SerialField
     public Enchantment enchantment;
@@ -65,10 +64,10 @@ public class EnchantmentIngredient implements CustomIngredient
     @Override
     public CustomIngredientSerializer<?> getSerializer()
     {
-        return SERIALIZER;
+        return LHRecipes.ENCHANTMENT_INGREDIENT_SERIALIZER;
     }
 
-    private static class Serializer implements CustomIngredientSerializer<EnchantmentIngredient>
+    public static class Serializer implements CustomIngredientSerializer<EnchantmentIngredient>
     {
         private final Identifier id = L2Hostility.id("enchantment");
 

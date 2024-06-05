@@ -14,26 +14,28 @@ import net.minecraft.util.Formatting;
 
 public class UndyingTrait extends LegendaryTrait
 {
-    public static final ServerLivingEntityEvents.AllowDeath allowDeath = (entity, source, amount) ->
+    public static void undyingEvent()
     {
-        if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY)) return true;
-        var diff = MobDifficulty.get(entity);
-        if (diff.isEmpty()) return true;
-        if (diff.get().hasTrait(LHTraits.SPLIT)) return true;
-        if (diff.get().hasTrait(LHTraits.UNDYING) && validTarget(entity))
+        ServerLivingEntityEvents.ALLOW_DEATH.register((entity, source, amount) ->
         {
-            entity.setHealth(0.1F);
-            entity.heal(entity.getMaxHealth() - entity.getHealth());
-            LHNetworking.toTracking(entity, new S2CUndying(entity));
-            return false;
-        } else return true;
-    };
+            if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY)) return true;
+            var diff = MobDifficulty.get(entity);
+            if (diff.isEmpty()) return true;
+            if (diff.get().hasTrait(LHTraits.SPLIT)) return true;
+            if (diff.get().hasTrait(LHTraits.UNDYING) && validTarget(entity))
+            {
+                entity.setHealth(0.1F);
+                entity.heal(entity.getMaxHealth() - entity.getHealth());
+                LHNetworking.toTracking(entity, new S2CUndying(entity));
+                return false;
+            } else return true;
+        });
+    }
 
     public static boolean validTarget(LivingEntity le)
     {
-        if (le instanceof EnderDragonEntity)
-            return false;
-        return le.canHaveStatusEffect(new StatusEffectInstance(LHEffects.CURSE, 100));
+        return !(le instanceof EnderDragonEntity) &&
+                le.canHaveStatusEffect(new StatusEffectInstance(LHEffects.CURSE, 100));
     }
 
     // 传奇词条，使怪物拥有无限续杯的不死图腾。

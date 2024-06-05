@@ -7,8 +7,8 @@ public class LHEvents
     public static void register()
     {
         GenericEvents.register();
-        ComponentEvents.register();
         MobEvents.register();
+        TraitEvents.register();
         EffectEvents.register();
         MiscEvents.register();
     }

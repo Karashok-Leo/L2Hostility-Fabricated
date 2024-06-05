@@ -20,8 +20,11 @@ public abstract class EntityRendererMixin<T extends Entity>
     @Final
     private TextRenderer textRenderer;
 
-    @Inject(at = @At("HEAD"), method = "render")
-    private void injectedRender(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci)
+    @Inject(
+            method = "render",
+            at = @At("HEAD")
+    )
+    private void inject_render(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci)
     {
         MobTraitRenderer.renderNamePlate(entity, light, matrices, textRenderer, vertexConsumers);
     }

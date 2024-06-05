@@ -1,6 +1,7 @@
 package net.karashokleo.l2hostility.content.trait.legendary;
 
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import net.karashokleo.l2hostility.content.item.TrinketItems;
 import net.karashokleo.l2hostility.content.network.S2CKillerAura;
 import net.karashokleo.l2hostility.init.*;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
@@ -40,7 +41,7 @@ public class KillerAuraTrait extends LegendaryTrait
                         mob instanceof MobEntity mobmob && mobmob.getTarget() == e)
                 {
                     if (e.distanceTo(mob) > range) continue;
-                    if (TrinketCompat.hasItemInTrinket(e, LHItems.ABRAHADABRA)) continue;
+                    if (TrinketCompat.hasItemInTrinket(e, TrinketItems.ABRAHADABRA)) continue;
                     e.damage(e.getDamageSources().create(LHDamageTypes.KILLER_AURA, null, mob), damage);
                 }
             LHNetworking.toTracking(mob, new S2CKillerAura(mob));

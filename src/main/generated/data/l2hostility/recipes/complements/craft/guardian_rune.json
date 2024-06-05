@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:cursed_droplet"
+    },
+    "B": {
+      "item": "l2hostility:poseidite_ingot"
+    },
+    "C": {
+      "item": "minecraft:nautilus_shell"
+    },
+    "D": {
+      "item": "minecraft:prismarine_shard"
+    }
+  },
+  "pattern": [
+    "DAD",
+    "CBC",
+    "DCD"
+  ],
+  "result": {
+    "item": "l2hostility:guardian_rune"
+  },
+  "show_notification": true
+}

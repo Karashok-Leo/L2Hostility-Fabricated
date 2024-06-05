@@ -25,7 +25,6 @@ import java.util.UUID;
 public class CurseOfPride extends CurseTrinketItem
 {
     private static final String NAME = "l2hostility:pride";
-    private static final UUID ID = MathHelper.getUUIDFromString(NAME);
 
     public CurseOfPride(Settings settings)
     {

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "B": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "C": {
+      "item": "l2hostility:guardian_eye"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "item": "minecraft:heart_of_the_sea"
+  },
+  "show_notification": true
+}

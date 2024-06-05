@@ -1,9 +1,9 @@
 package net.karashokleo.l2hostility.client;
 
 import net.karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import net.karashokleo.l2hostility.content.item.MiscItems;
 import net.karashokleo.l2hostility.init.LHConfig;
 import net.karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import net.karashokleo.l2hostility.init.LHItems;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -29,7 +29,7 @@ public class ClientGlowingHandler
     private static boolean playerHasGlass(PlayerEntity player)
     {
         if (player.age == cacheTick) return cacheGlass;
-        cacheGlass = TrinketCompat.hasItemEquippedOrInTrinket(player, LHItems.DETECTOR_GLASSES);
+        cacheGlass = TrinketCompat.hasItemEquippedOrInTrinket(player, MiscItems.DETECTOR_GLASSES);
         cacheTick = player.age;
         return cacheGlass;
     }

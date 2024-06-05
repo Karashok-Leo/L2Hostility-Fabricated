@@ -13,9 +13,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin
 {
-
-    @Inject(at = @At("HEAD"), method = "inventoryTick")
-    public void l2hostility_stackTick(World world, Entity entity, int slot, boolean selected, CallbackInfo ci) {
+    @Inject(
+            method = "inventoryTick",
+            at = @At("HEAD")
+    )
+    public void inject_inventoryTick(World world, Entity entity, int slot, boolean selected, CallbackInfo ci) {
         EnchantmentDisabler.tickStack(world, entity, Wrappers.cast(this));
     }
 }

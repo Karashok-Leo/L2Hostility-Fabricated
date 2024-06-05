@@ -16,8 +16,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ArmorFeatureRenderer.class)
 public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, A extends BipedEntityModel<T>>
 {
-    @Inject(at = @At("HEAD"), method = "renderArmor", cancellable = true)
-    private void injectedRenderArmor(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T entity, EquipmentSlot armorSlot, int light, A model, CallbackInfo ci)
+    @Inject(
+            method = "renderArmor",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void inject_renderArmor(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T entity, EquipmentSlot armorSlot, int light, A model, CallbackInfo ci)
     {
         if (EnchantmentHelper.getLevel(LHEnchantments.SHULKER_ARMOR, entity.getEquippedStack(armorSlot)) > 0)
             ci.cancel();

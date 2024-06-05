@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:cursed_droplet"
+    },
+    "B": {
+      "item": "minecraft:nether_star"
+    },
+    "C": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "D": {
+      "item": "minecraft:blackstone"
+    }
+  },
+  "pattern": [
+    "DAD",
+    "CBC",
+    "DCD"
+  ],
+  "result": {
+    "item": "l2hostility:piglin_rune"
+  },
+  "show_notification": true
+}
