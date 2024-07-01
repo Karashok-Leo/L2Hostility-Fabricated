@@ -1,0 +1,44 @@
+package karashokleo.l2hostility.content.trait.common;
+
+import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
+import karashokleo.l2hostility.content.network.S2CEffectAura;
+import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHNetworking;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.predicate.entity.EntityPredicates;
+
+import java.util.function.Supplier;
+
+public class AuraEffectTrait extends MobTrait
+{
+    private final Supplier<StatusEffect> effect;
+
+    public AuraEffectTrait(Supplier<StatusEffect> effect)
+    {
+        super(() -> effect.get().getColor());
+        this.effect = effect;
+    }
+
+    protected boolean canApply(LivingEntity e)
+    {
+        return !ReflectTrinket.canReflect(e, this);
+    }
+
+    @Override
+    public void serverTick(LivingEntity mob, int level)
+    {
+        int range = LHConfig.common().range.get(getId().getPath());
+        LHNetworking.toTracking(mob, new S2CEffectAura(mob, range, effect.get().getColor()));
+        for (var e : mob.getWorld().getEntitiesByClass(LivingEntity.class, mob.getBoundingBox().expand(range), EntityPredicates.VALID_ENTITY))
+        {
+            if (e instanceof PlayerEntity pl && pl.getAbilities().creativeMode) continue;
+            if (e.distanceTo(mob) > range) continue;
+            if (!canApply(e)) continue;
+            e.addStatusEffect(new StatusEffectInstance(effect.get(), 40, level - 1, true, true), mob);
+        }
+    }
+}
