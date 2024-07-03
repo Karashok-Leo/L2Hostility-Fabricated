@@ -4,7 +4,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.trait.legendary.LegendaryTrait;
-import karashokleo.l2hostility.init.LHDamageTypes;
+import karashokleo.l2hostility.init.LHTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -60,7 +60,7 @@ public class EnderTrait extends LegendaryTrait
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
                 !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-                !source.isIn(LHDamageTypes.MAGIC))
+                !source.isIn(LHTags.MAGIC))
             if (teleport(entity) || source.isIn(DamageTypeTags.IS_PROJECTILE))
                 event.setCanceled(true);
     }

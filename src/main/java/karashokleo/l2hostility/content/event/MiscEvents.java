@@ -40,28 +40,11 @@ public class MiscEvents
                                 ActionResult.PASS
         );
 
-        // 复制附魔书
-//        public static void onAnvilCraft(AnvilUpdateEvent event) {
-//            ItemStack copy = event.getLeft();
-//            ItemStack book = event.getRight();
-//            if (copy.getItem() instanceof BookCopy && book.getItem() instanceof EnchantedBookItem) {
-//                var map = EnchantmentHelper.getEnchantments(book);
-//                int cost = 0;
-//                for (var e : map.entrySet()) {
-//                    cost += BookCopy.cost(e.getKey(), e.getValue());
-//                }
-//                ItemStack result = book.copy();
-//                result.setCount(book.getCount() + copy.getCount());
-//                event.setOutput(result);
-//                event.setMaterialCost(book.getCount());
-//                event.setCost(cost);
-//            }
-//        }
-
         // 物品实体加入世界判断是否携带 VANISH
         EntityEvents.ON_JOIN_WORLD.register((entity, world, b) ->
                 !(entity instanceof ItemEntity ie && EnchantmentHelper.getLevel(LHEnchantments.VANISH, ie.getStack()) > 0));
 
+        // 发送 LootModifier
         ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) ->
         {
             List<IGlobalLootModifier> list = new ArrayList<>();

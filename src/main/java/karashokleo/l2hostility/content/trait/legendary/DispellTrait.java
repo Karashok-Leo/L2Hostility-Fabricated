@@ -4,7 +4,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEve
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.item.traits.EnchantmentDisabler;
-import karashokleo.l2hostility.init.LHDamageTypes;
+import karashokleo.l2hostility.init.LHTags;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -25,12 +25,11 @@ public class DispellTrait extends LegendaryTrait
         super(Formatting.DARK_PURPLE);
     }
 
-//    @Override
-//    public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event)
-//    {
-//        if (event.getResult() == L2DamageTypes.MOB_ATTACK)
-//            event.enable(DefaultDamageState.BYPASS_MAGIC);
-//    }
+    @Override
+    public void onAttacking(int level, LivingEntity entity, LivingAttackEvent event)
+    {
+        event.getSource().setBypassMagic();
+    }
 
     @Override
     public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
@@ -58,7 +57,7 @@ public class DispellTrait extends LegendaryTrait
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
                 !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-                source.isIn(LHDamageTypes.MAGIC))
+                source.isIn(LHTags.MAGIC))
             event.setCanceled(true);
     }
 

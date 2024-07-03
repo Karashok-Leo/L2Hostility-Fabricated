@@ -87,6 +87,10 @@ public class MobTrait
     {
     }
 
+    public void onAttacking(int level, LivingEntity entity, LivingAttackEvent event)
+    {
+    }
+
     public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
     {
     }

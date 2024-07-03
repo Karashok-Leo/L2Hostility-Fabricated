@@ -44,12 +44,8 @@ public class KillTraitsTrigger extends BaseCriterion<KillTraitsTrigger.Condition
         {
             if (cap.traits.isEmpty()) return false;
             for (var e : traits)
-            {
                 if (!cap.hasTrait(e))
-                {
                     return false;
-                }
-            }
             return true;
         }
     }

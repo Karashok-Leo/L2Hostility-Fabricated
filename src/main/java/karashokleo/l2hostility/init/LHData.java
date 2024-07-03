@@ -112,11 +112,6 @@ public class LHData implements DataGeneratorEntrypoint
         pack.addProvider(TraitGLMProvider::new);
         PatchouliHelper.model(pack, MiscItems.GUIDE_BOOK);
 
-//        collector.add(L2DamageTracker.ARMOR, new ResourceLocation(L2Hostility.MODID, "equipments"), new ArmorEffectConfig()
-//                .add(LHItems.CURSE_WRATH.getId().toString(),
-//                        MobEffects.BLINDNESS, MobEffects.DARKNESS, MobEffects.CONFUSION,
-//                        MobEffects.MOVEMENT_SLOWDOWN, MobEffects.DIG_SLOWDOWN, MobEffects.WEAKNESS));
-//
 //        if (ModList.get().isLoaded(TwilightForestMod.ID))
 //            TFData.genConfig(collector);
 //        if (ModList.get().isLoaded("bosses_of_mass_destruction"))

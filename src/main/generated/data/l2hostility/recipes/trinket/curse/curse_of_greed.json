@@ -3,12 +3,12 @@
   "category": "misc",
   "key": {
     "1": {
-      "fabric:type": "l2hostility:enchantment",
+      "fabric:type": "enchantment_infusion:enchantment",
       "enchantment": "minecraft:looting",
       "min_level": 1
     },
     "2": {
-      "fabric:type": "l2hostility:enchantment",
+      "fabric:type": "enchantment_infusion:enchantment",
       "enchantment": "minecraft:fortune",
       "min_level": 1
     },

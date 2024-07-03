@@ -8,7 +8,6 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.TagKey;
-import net.spell_power.api.SpellPowerTags;
 
 public class LHDamageTypes
 {
@@ -18,13 +17,6 @@ public class LHDamageTypes
     public static RegistryKey<DamageType> BLEED = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("bleed"));
     public static RegistryKey<DamageType> LIFE_SYNC = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("life_sync"));
     public static RegistryKey<DamageType> VOID_EYE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("void_eye"));
-
-    public static TagKey<DamageType> MAGIC = of("magic");
-
-    private static TagKey<DamageType> of(String path)
-    {
-        return TagKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id(path));
-    }
 
     public static void register()
     {
@@ -36,7 +28,7 @@ public class LHDamageTypes
                 "%s被杀戮光环杀死了",
                 "%s被%s被杀戮光环杀死了",
                 DamageTypeTags.BYPASSES_ARMOR,
-                MAGIC
+                LHTags.MAGIC
         );
         register(
                 EMERALD,
@@ -56,7 +48,7 @@ public class LHDamageTypes
                 "%s的灵魂被%s烧掉了",
                 DamageTypeTags.BYPASSES_ARMOR,
                 DamageTypeTags.AVOIDS_GUARDIAN_THORNS,
-                MAGIC
+                LHTags.MAGIC
         );
         register(
                 BLEED,
@@ -95,8 +87,6 @@ public class LHDamageTypes
                 DamageTypeTags.BYPASSES_INVULNERABILITY,
                 DamageTypeTags.BYPASSES_EFFECTS
         );
-
-        LHData.DAMAGE_TYPE_TAGS.add(MAGIC, SpellPowerTags.DamageType.IS_SPELL);
     }
 
     @SafeVarargs

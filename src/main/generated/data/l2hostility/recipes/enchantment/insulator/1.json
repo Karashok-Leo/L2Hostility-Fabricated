@@ -1,0 +1,33 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:insulator",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:chaos_ingot"
+    },
+    {
+      "item": "l2hostility:bottle_of_sanity"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "l2hostility:force_field"
+    },
+    {
+      "item": "l2hostility:force_field"
+    },
+    {
+      "item": "l2hostility:force_field"
+    },
+    {
+      "item": "l2hostility:force_field"
+    }
+  ],
+  "level": 1,
+  "mode": "ADD"
+}

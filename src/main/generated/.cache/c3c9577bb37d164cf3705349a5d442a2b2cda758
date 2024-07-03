@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-05T18:09:05.5845586	L2 Hostility/Model Definitions
+// 1.20.1	2024-07-03T14:33:36.814689	L2 Hostility/Model Definitions
 787903b9f0311061258da774b1ca33e23307b88a assets\l2hostility\models\item\soul_burner.json
 ba8303f3d0cf3332a374ead31a1187a77b1edc20 assets\l2hostility\models\item\triple_strip_cape.json
 54ec7d329a369b54157cf3d13348a880b9214075 assets\l2hostility\models\item\charm_of_looting_2.json
@@ -52,15 +52,15 @@ a7e2d8292fc281adc07394f2043952d89b2af88a assets\l2hostility\models\item\erosion.
 8087a14c1e3dc8abe56531947a8ad17092af0d31 assets\l2hostility\models\item\corrosion.json
 35c86995f5f78475515fc173c46a04ba4f24b41c assets\l2hostility\models\item\dementor.json
 e0ee1b985ea019ee472911949b3ea34c7f4f9e88 assets\l2hostility\models\item\ring_of_healing.json
-e492c947eea653cdc2c213d0dd2fd5d4fa69ad9d assets\l2hostility\models\item\regenerate.json
 d01c2e00663a1fa8f17ee103dec1baa887e4387b assets\l2hostility\models\item\ring_of_divinity.json
+e492c947eea653cdc2c213d0dd2fd5d4fa69ad9d assets\l2hostility\models\item\regenerate.json
 daf50b250dc8c7ce6cb12a093b0dd1993c52e64f assets\l2hostility\models\item\drain.json
 017032b777ebc6a76cb09c6e097a335ebf5ec84a assets\l2hostility\models\item\slowness.json
 ab6468a3edc27534ade0b63f4f810b2cce5e97ce assets\l2hostility\models\item\greed_of_nidhoggur.json
 9490a10afb4d159d34be10805e0cc02492130193 assets\l2hostility\models\item\miracle_ingot.json
 4b946676b9f080b4ad8ee512408e6ddc64372cff assets\l2hostility\models\block\sculkium_block.json
-68e7d5144c357b421964b2c26ba688790126b811 assets\l2hostility\models\item\dispell.json
 e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets\l2hostility\models\item\wither.json
+68e7d5144c357b421964b2c26ba688790126b811 assets\l2hostility\models\item\dispell.json
 1739df0d5d6c03e3738f188a9606b095b5198c01 assets\l2hostility\models\item\adaptive.json
 38ebdcb219de6ddebd2181e8c53d6c00711a4b1f assets\l2hostility\models\item\bottle_of_sanity.json
 c22e95a1e35e2fbf55620102f54f37510eb6a704 assets\l2hostility\models\item\poseidite_block.json
@@ -120,9 +120,9 @@ ac146bd3ed5f64d0b1c3bf4a14e9ba50ea6ce120 assets\l2hostility\models\block\hostili
 ed5550c308958c62ec675a8c592c8d8fc43e40c0 assets\l2hostility\models\item\oddeyes_glasses.json
 89b6fe18d01e36241b1351f4a39f40e0458bde5c assets\l2hostility\models\item\sculkium_nugget.json
 84f634cc35c3739a82b7e3190849c839bdf51700 assets\l2hostility\models\item\explosion_shard.json
-79df8d7f57c20e395ef38ac80ae4f5c351e3823c assets\l2hostility\models\item\arena.json
 a05bb7b11be51e5184811d6a39397b6abb39aa49 assets\l2hostility\models\item\ragnarok.json
 e16e74a184b0503c495c91a1ccb4a10449fd94c3 assets\l2hostility\models\item\chaos_ingot.json
+79df8d7f57c20e395ef38ac80ae4f5c351e3823c assets\l2hostility\models\item\arena.json
 ba69cec47e6a481ee3a839b4b203736c07085f0e assets\l2hostility\models\item\hostility_spawner.json
 f8c0c7e966fec3a4a914d67237bd38a9b42a8a7a assets\l2hostility\models\item\ring_of_reflection.json
 e24b19f1b1696a75d1268168fc5b155fa7bf09b5 assets\l2hostility\models\item\totemic_gold_ingot.json

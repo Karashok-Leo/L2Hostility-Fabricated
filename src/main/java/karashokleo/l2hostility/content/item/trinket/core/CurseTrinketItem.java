@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class CurseTrinketItem extends BaseTrinketItem
+public class CurseTrinketItem extends DamageListenerTrinketItem
 {
     public static List<GenericItemStack<CurseTrinketItem>> getFromPlayer(LivingEntity player)
     {
@@ -61,21 +61,5 @@ public class CurseTrinketItem extends BaseTrinketItem
     public double getGrowFactor(ItemStack stack, PlayerDifficulty player, MobDifficulty mob)
     {
         return 1;
-    }
-
-    public void onAttacked(ItemStack stack, LivingEntity entity, LivingAttackEvent event)
-    {
-    }
-
-    public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
-    {
-    }
-
-    public void onHurt(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
-    {
-    }
-
-    public void onDamaged(ItemStack stack, LivingEntity entity, LivingDamageEvent event)
-    {
     }
 }

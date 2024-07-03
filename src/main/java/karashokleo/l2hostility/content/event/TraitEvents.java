@@ -13,8 +13,10 @@ public class TraitEvents
     {
         // damage()头部
         LivingAttackEvent.ATTACK.register(event ->
-                MobDifficulty.get(event.getEntity()).ifPresent(diff -> diff.traitEvent((k, v) -> k.onAttacked(v, diff.owner, event)))
-        );
+        {
+            MobDifficulty.get(event.getSource().getAttacker()).ifPresent(diff -> diff.traitEvent((k, v) -> k.onAttacking(v, diff.owner, event)));
+            MobDifficulty.get(event.getEntity()).ifPresent(diff -> diff.traitEvent((k, v) -> k.onAttacked(v, diff.owner, event)));
+        });
 
         // applyDamage()头部
         LivingHurtEvent.HURT.register(event ->

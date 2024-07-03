@@ -5,11 +5,14 @@ import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.spell_power.api.SpellPowerTags;
 
 public class LHTags
 {
@@ -31,6 +34,9 @@ public class LHTags
     public static final TagKey<Enchantment> NO_DISPELL = createEnchantmentTag("no_dispell");
 
     public static final TagKey<StatusEffect> CLEANSE_BLACKLIST = createEffectTag("cleanse_blacklist");
+    public static final TagKey<StatusEffect> WRATH_INVULNERABILITY = createEffectTag("wrath_invulnerability");
+
+    public static final TagKey<DamageType> MAGIC = createDamageTypeTag("magic");
 
     public static final TagKey<EntityType<?>> BLACKLIST = createEntityTag("blacklist");
     public static final TagKey<EntityType<?>> WHITELIST = createEntityTag("whitelist");
@@ -91,6 +97,16 @@ public class LHTags
                 RANGED_WEAPON_TARGET,
                 EntityType.SKELETON, EntityType.STRAY
         );
+        LHData.STATUS_EFFECT_TAGS.add(
+                WRATH_INVULNERABILITY,
+                StatusEffects.BLINDNESS,
+                StatusEffects.DARKNESS,
+                StatusEffects.NAUSEA,
+                StatusEffects.SLOWNESS,
+                StatusEffects.MINING_FATIGUE,
+                StatusEffects.WEAKNESS
+        );
+        LHData.DAMAGE_TYPE_TAGS.add(MAGIC, SpellPowerTags.DamageType.ALL);
     }
 
 //        if (ModList.get().isLoaded(TwilightForestMod.ID)) {
@@ -178,13 +194,13 @@ public class LHTags
         return TagKey.of(RegistryKeys.STATUS_EFFECT, L2Hostility.id(id));
     }
 
+    private static TagKey<DamageType> createDamageTypeTag(String id)
+    {
+        return TagKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id(id));
+    }
+
     public static TagKey<MobTrait> createTraitTag(String id)
     {
         return TagKey.of(LHTraits.TRAIT_KEY, L2Hostility.id(id));
     }
-
-//    public static void onEffTagGen(RegistrateTagsProvider.IntrinsicImpl<MobEffect> pvd)
-//    {
-//        pvd.addTag(TagGen.SKILL_EFFECT).add(LHEffects.ANTIBUILD.get());
-//    }
 }

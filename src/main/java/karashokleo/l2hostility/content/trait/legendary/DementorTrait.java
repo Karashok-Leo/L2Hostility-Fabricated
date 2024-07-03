@@ -1,7 +1,7 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
-import karashokleo.l2hostility.init.LHDamageTypes;
+import karashokleo.l2hostility.init.LHTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.registry.tag.DamageTypeTags;
@@ -16,12 +16,12 @@ public class DementorTrait extends LegendaryTrait
         super(Formatting.DARK_GRAY);
     }
 
-//    @Override
-//    public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event)
-//    {
-//        if (event.getResult() == L2DamageTypes.MOB_ATTACK)
-//            event.enable(DefaultDamageState.BYPASS_ARMOR);
-//    }
+    @Override
+    public void onAttacking(int level, LivingEntity entity, LivingAttackEvent event)
+    {
+        event.getSource().setBypassArmor();
+        event.getSource().setBypassShield();
+    }
 
     @Override
     public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
@@ -29,7 +29,7 @@ public class DementorTrait extends LegendaryTrait
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
                 !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-                !source.isIn(LHDamageTypes.MAGIC))
+                !source.isIn(LHTags.MAGIC))
             event.setCanceled(true);
     }
 }

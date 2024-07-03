@@ -1,0 +1,33 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:shulker_armor",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "l2hostility:shulkerate_nugget"
+    },
+    {
+      "item": "l2hostility:shulkerate_nugget"
+    },
+    {
+      "item": "l2hostility:shulkerate_nugget"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "level": 1,
+  "mode": "ADD"
+}

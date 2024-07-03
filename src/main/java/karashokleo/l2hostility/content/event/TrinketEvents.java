@@ -4,52 +4,58 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEve
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
+import karashokleo.l2hostility.init.LHTags;
+import karashokleo.leobrary.effect.api.event.EffectApplicable;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.item.TrinketItems;
-import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import karashokleo.l2hostility.init.LHConfig;
-import karashokleo.l2hostility.init.LHDamageTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.DamageTypeTags;
 
 public class TrinketEvents
 {
     public static void register()
     {
-        // 诅咒
+        // DamageListenerTrinketItem
         LivingAttackEvent.ATTACK.register(event ->
         {
             LivingEntity target = event.getEntity();
-            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof CurseTrinketItem))
-                if (e.getItem() instanceof CurseTrinketItem curse)
-                    curse.onAttacked(e, target, event);
+            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof DamageListenerTrinketItem))
+                if (e.getItem() instanceof DamageListenerTrinketItem listener)
+                    listener.onAttacked(e, target, event);
+            if (!(event.getSource().getAttacker() instanceof LivingEntity attacker)) return;
+            for (var e : TrinketCompat.getItems(attacker, e -> e.getItem() instanceof DamageListenerTrinketItem))
+                if (e.getItem() instanceof DamageListenerTrinketItem listener)
+                    listener.onAttacking(e, attacker, event);
         });
 
         LivingHurtEvent.HURT.register(event ->
         {
             LivingEntity target = event.getEntity();
-            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof CurseTrinketItem))
-                if (e.getItem() instanceof CurseTrinketItem curse)
-                    curse.onHurt(e, target, event);
+            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof DamageListenerTrinketItem))
+                if (e.getItem() instanceof DamageListenerTrinketItem listener)
+                    listener.onHurt(e, target, event);
             if (!(event.getSource().getAttacker() instanceof LivingEntity attacker)) return;
-            for (var e : TrinketCompat.getItems(attacker, e -> e.getItem() instanceof CurseTrinketItem))
-                if (e.getItem() instanceof CurseTrinketItem curse)
-                    curse.onHurting(e, attacker, event);
+            for (var e : TrinketCompat.getItems(attacker, e -> e.getItem() instanceof DamageListenerTrinketItem))
+                if (e.getItem() instanceof DamageListenerTrinketItem listener)
+                    listener.onHurting(e, attacker, event);
         });
 
         LivingDamageEvent.DAMAGE.register(event ->
         {
             LivingEntity target = event.getEntity();
-            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof CurseTrinketItem))
-                if (e.getItem() instanceof CurseTrinketItem curse)
-                    curse.onDamaged(e, target, event);
+            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof DamageListenerTrinketItem))
+                if (e.getItem() instanceof DamageListenerTrinketItem listener)
+                    listener.onDamaged(e, target, event);
         });
 
         // 傲慢诅咒
@@ -68,7 +74,7 @@ public class TrinketEvents
             }
         });
 
-        // 色欲诅咒
+        // 色欲诅咒击杀必掉装备
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) ->
         {
             if (!(entity instanceof MobEntity mob)) return;
@@ -78,6 +84,7 @@ public class TrinketEvents
                     mob.setEquipmentDropChance(e, 1);
         });
 
+        // 尼德霍格之欲掉落
         LivingEntityEvents.DROPS.register((target, source, drops, lootingLevel, recentlyHit) ->
         {
             var op = MobDifficulty.get(target);
@@ -97,45 +104,12 @@ public class TrinketEvents
             return false;
         });
 
-        LivingAttackEvent.ATTACK.register(event ->
+        // 暴怒之戒免疫
+        EffectApplicable.EVENT.register((entity, effect, cir) ->
         {
-            DamageSource source = event.getSource();
-            if (TrinketCompat.hasItemInTrinket(event.getEntity(), TrinketItems.RING_DIVINITY) &&
-                    !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-                    !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-                    source.isIn(LHDamageTypes.MAGIC))
-                event.setCanceled(true);
+            if (TrinketCompat.hasItemInTrinket(entity, TrinketItems.CURSE_WRATH) &&
+                    Registries.STATUS_EFFECT.getEntry(effect.getEffectType()).isIn(LHTags.WRATH_INVULNERABILITY))
+                cir.setReturnValue(false);
         });
     }
-
-//    @SubscribeEvent(priority = EventPriority.HIGH)
-//    public static void onPotionTest(MobEffectEvent.Applicable event)
-//    {
-//        LivingEntity entity = event.getEntity();
-//        if (CurioCompat.hasItemInCurio(entity, LHItems.CURSE_WRATH.get()))
-//        {
-//            var config = ArmorEffectConfig.get().getImmunity(LHItems.CURSE_WRATH.getId().toString());
-//            if (config.contains(event.getEffectInstance().getEffect()))
-//                event.setResult(Event.Result.DENY);
-//        }
-//    }
-//
-    //    @Override
-//    public void onCreateSource(CreateSourceEvent event) {
-//        LivingEntity mob = event.getAttacker();
-//        if (MobTraitCap.HOLDER.isProper(mob)) {
-//            MobTraitCap.HOLDER.get(mob).traitEvent((k, v) -> k.onCreateSource(v, event.getAttacker(), event));
-//        }
-//        var type = event.getResult();
-//        if (type == null) return;
-//        var root = type.toRoot();
-//        if (root == L2DamageTypes.MOB_ATTACK || root == L2DamageTypes.PLAYER_ATTACK) {
-//            if (CurioCompat.hasItemInCurioOrSlot(mob, LHItems.IMAGINE_BREAKER.get())) {
-//                event.enable(DefaultDamageState.BYPASS_MAGIC);
-//            }
-//            if (CurioCompat.hasItemInCurio(mob, LHItems.PLATINUM_STAR.get())) {
-//                event.enable(HostilityDamageState.BYPASS_COOLDOWN);
-//            }
-//        }
-//    }
 }

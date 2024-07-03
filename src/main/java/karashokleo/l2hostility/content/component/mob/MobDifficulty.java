@@ -48,6 +48,12 @@ public class MobDifficulty
         return entity instanceof MobEntity mob ? get(mob) : Optional.empty();
     }
 
+    public static boolean hasTrait(Entity entity, MobTrait trait)
+    {
+        Optional<MobDifficulty> diff = MobDifficulty.get(entity);
+        return diff.isPresent() && diff.get().hasTrait(trait);
+    }
+
     public void sync()
     {
         LHComponents.MOB_DIFFICULTY.sync(owner);
