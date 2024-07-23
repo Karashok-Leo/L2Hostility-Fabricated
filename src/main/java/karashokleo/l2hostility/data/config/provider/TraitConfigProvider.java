@@ -30,7 +30,7 @@ public class TraitConfigProvider extends AbstractDataProvider
     }
 
     @Override
-    public void add()
+    public void addAll()
     {
         for (Map.Entry<MobTrait, TraitConfig.Config> entry : configs.entrySet())
             add(entry.getKey().getNonNullId(), entry.getValue());

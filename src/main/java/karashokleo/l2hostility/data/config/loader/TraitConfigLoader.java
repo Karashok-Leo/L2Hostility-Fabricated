@@ -23,7 +23,6 @@ public class TraitConfigLoader extends AbstractDataLoader<TraitConfig.Config>
     @Override
     protected void load(Identifier id, TraitConfig.Config config)
     {
-        config.id = id;
         LHData.traits.put(id, config);
     }
 

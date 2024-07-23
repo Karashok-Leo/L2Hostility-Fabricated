@@ -1,5 +1,5 @@
-// 1.20.1	2024-07-03T14:33:36.818196	L2 Hostility/Tags for minecraft:block
+// 1.20.1	2024-07-23T17:25:25.4588069	L2 Hostility/Tags for minecraft:block
 2864081aebb58d8179e020fbd6d677e6260802f1 data\minecraft\tags\blocks\needs_stone_tool.json
-593ee3a851c7f6acdc0884e73c9f2fe87d743cce data\minecraft\tags\blocks\needs_diamond_tool.json
+b1e111ef06e1e2dba3f06388682308908f9b50fb data\minecraft\tags\blocks\needs_diamond_tool.json
 9666695510d18308a4df7740b3687c6a2064d9fa data\minecraft\tags\blocks\needs_iron_tool.json
-f4d6e721ba822a1c1afd47df99e1ffff43a3d3d4 data\minecraft\tags\blocks\mineable\pickaxe.json
+0c79a0fb4cc3610a2d539a2aa6177d4f2ec3fdd1 data\minecraft\tags\blocks\mineable\pickaxe.json

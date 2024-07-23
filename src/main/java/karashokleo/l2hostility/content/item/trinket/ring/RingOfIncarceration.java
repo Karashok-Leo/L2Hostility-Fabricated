@@ -3,12 +3,11 @@ package karashokleo.l2hostility.content.item.trinket.ring;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import dev.emi.trinkets.api.SlotReference;
 import karashokleo.l2hostility.content.item.trinket.core.BaseTrinketItem;
-import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.l2hostility.init.LHEffects;
+import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -37,8 +36,6 @@ public class RingOfIncarceration extends BaseTrinketItem
         if (!entity.isSneaking()) return;
         // Default Entity Interact Distance: 3.0
         double reach = ReachEntityAttributes.getAttackRange(entity, 3.0);
-        if (entity instanceof PlayerEntity player)
-            System.out.println(player.getEntityReach());
         for (var e : entity.getWorld().getEntitiesByType(TypeFilter.instanceOf(LivingEntity.class), entity.getBoundingBox().expand(reach), e -> entity.distanceTo(e) < reach))
             e.addStatusEffect(new StatusEffectInstance(LHEffects.STONE_CAGE, 40, 0, true, true), entity);
     }

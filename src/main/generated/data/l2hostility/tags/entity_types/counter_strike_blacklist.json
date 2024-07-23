@@ -2,9 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:warden",
-    {
-      "id": "#l2hostility:melee_weapon_target",
-      "required": false
-    }
+    "#l2hostility:melee_weapon_target"
   ]
 }

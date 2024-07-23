@@ -1,23 +1,20 @@
 package karashokleo.l2hostility.content.item;
 
-import karashokleo.leobrary.datagen.builder.BlockBuilder;
-import karashokleo.leobrary.datagen.builder.ItemBuilder;
-import karashokleo.leobrary.datagen.builder.MaterialBuilder;
+import karashokleo.l2hostility.content.item.complements.*;
+import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.init.LHCplTexts;
+import karashokleo.l2hostility.init.LHItems;
+import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.leobrary.datagen.builder.MaterialSet;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import karashokleo.l2hostility.content.item.complements.*;
-import karashokleo.l2hostility.init.*;
-import net.minecraft.block.Block;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.FoodComponent;
-import net.minecraft.item.Item;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Rarity;
-
-import java.util.function.BiFunction;
 
 public class ComplementItems
 {
@@ -303,58 +300,33 @@ public class ComplementItems
                 .register();
 
         TOTEMIC_GOLD = MaterialEntry.of("totemic_gold", "生命")
-                .itemSettings(settings -> settings.rarity(Rarity.UNCOMMON))
-                .blockSetting(settings -> settings.mapColor(MapColor.GOLD).instrument(Instrument.BELL).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.METAL))
-                .blockBuilder(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.NEEDS_STONE_TOOL, BlockTags.PICKAXE_MINEABLE))
+                .ingotAndNugget(new FabricItemSettings().rarity(Rarity.UNCOMMON))
+                .block(FabricBlockSettings.create().mapColor(MapColor.GOLD).instrument(Instrument.BELL).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.METAL))
+                .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.NEEDS_STONE_TOOL, BlockTags.PICKAXE_MINEABLE))
                 .register();
 
         POSEIDITE = MaterialEntry.of("poseidite", "海神")
-                .itemSettings(settings -> settings.fireproof().rarity(Rarity.UNCOMMON))
-                .blockSetting(settings -> settings.mapColor(MapColor.WATER_BLUE).instrument(Instrument.BELL).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.METAL))
-                .blockBuilder(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.NEEDS_STONE_TOOL, BlockTags.PICKAXE_MINEABLE))
+                .ingotAndNugget(new FabricItemSettings().fireproof().rarity(Rarity.UNCOMMON))
+                .block(FabricBlockSettings.create().mapColor(MapColor.WATER_BLUE).instrument(Instrument.BELL).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.METAL))
+                .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.NEEDS_STONE_TOOL, BlockTags.PICKAXE_MINEABLE))
                 .register();
 
         SHULKERATE = MaterialEntry.of("shulkerate", "潜影")
-                .itemSettings(settings -> settings.rarity(Rarity.RARE))
-                .blockSetting(settings -> settings.mapColor(MapColor.PURPLE).requiresTool().strength(12.0F, 24.0F).sounds(BlockSoundGroup.METAL))
-                .blockBuilder(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.NEEDS_IRON_TOOL, BlockTags.PICKAXE_MINEABLE))
+                .ingotAndNugget(new FabricItemSettings().rarity(Rarity.RARE))
+                .block(FabricBlockSettings.create().mapColor(MapColor.PURPLE).requiresTool().strength(12.0F, 24.0F).sounds(BlockSoundGroup.METAL))
+                .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.NEEDS_IRON_TOOL, BlockTags.PICKAXE_MINEABLE))
                 .register();
 
         SCULKIUM = MaterialEntry.of("sculkium", "幽匿")
-                .itemSettings(settings -> settings.rarity(Rarity.RARE))
-                .blockSetting(settings -> settings.mapColor(MapColor.BLACK).requiresTool().strength(12.0F, 24.0F).sounds(BlockSoundGroup.METAL))
-                .blockBuilder(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.NEEDS_IRON_TOOL, BlockTags.PICKAXE_MINEABLE))
+                .ingotAndNugget(new FabricItemSettings().rarity(Rarity.RARE))
+                .block(FabricBlockSettings.create().mapColor(MapColor.BLACK).requiresTool().strength(12.0F, 24.0F).sounds(BlockSoundGroup.METAL))
+                .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.NEEDS_IRON_TOOL, BlockTags.PICKAXE_MINEABLE))
                 .register();
 
         ETERNIUM = MaterialEntry.of("eternium", "永恒")
-                .itemSettings(settings -> settings.fireproof().rarity(Rarity.EPIC))
-                .blockSetting(settings -> settings.mapColor(MapColor.LIGHT_BLUE).instrument(Instrument.BASEDRUM).requiresTool().strength(50.0F, 1200.0F).sounds(BlockSoundGroup.METAL))
-                .blockBuilder(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.NEEDS_DIAMOND_TOOL, BlockTags.PICKAXE_MINEABLE))
+                .ingotAndNugget(new FabricItemSettings().fireproof().rarity(Rarity.EPIC))
+                .block(FabricBlockSettings.create().mapColor(MapColor.LIGHT_BLUE).instrument(Instrument.BASEDRUM).requiresTool().strength(50.0F, 1200.0F).sounds(BlockSoundGroup.METAL))
+                .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.NEEDS_DIAMOND_TOOL, BlockTags.PICKAXE_MINEABLE))
                 .register();
-    }
-
-    static class MaterialEntry extends MaterialBuilder
-    {
-        public static MaterialEntry of(String name_en, String name_zh)
-        {
-            return new MaterialEntry(name_en, name_zh);
-        }
-
-        public MaterialEntry(String name_en, String name_zh)
-        {
-            super(name_en, name_zh);
-        }
-
-        @Override
-        public <T extends Item> BiFunction<String, T, ItemBuilder<T>> getItemBuilder()
-        {
-            return LHItems.Entry::of;
-        }
-
-        @Override
-        public <T extends Block> BiFunction<String, T, BlockBuilder<T>> getBlockBuilder()
-        {
-            return LHBlocks.Entry::of;
-        }
     }
 }

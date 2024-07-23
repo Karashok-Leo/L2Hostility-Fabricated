@@ -140,7 +140,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider
                 new PlayerHasItemLootCondition(loot3)
         );
 
-        add(LHTraits.DEMENTOR, new ItemStack(MiscItems.CHAOS_INGOT, 1), 1, 0,
+        add(LHTraits.DEMENTOR, new ItemStack(MiscItems.CHAOS.ingot(), 1), 1, 0,
                 LootTableTemplate.byPlayer().build(),
                 new TraitLootCondition(LHTraits.KILLER_AURA, 1, 5),
                 new TraitLootCondition(LHTraits.RAGNAROK, 1, 5),

@@ -2,8 +2,8 @@ package karashokleo.l2hostility.content.trait.common;
 
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.content.network.S2CEffectAura;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHNetworking;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
@@ -15,6 +15,8 @@ import java.util.function.Supplier;
 
 public class AuraEffectTrait extends MobTrait
 {
+    private static final int TICK_AURA_INTERNAL = 10;
+
     private final Supplier<StatusEffect> effect;
 
     public AuraEffectTrait(Supplier<StatusEffect> effect)
@@ -31,6 +33,7 @@ public class AuraEffectTrait extends MobTrait
     @Override
     public void serverTick(LivingEntity mob, int level)
     {
+        if (mob.age % TICK_AURA_INTERNAL != 0) return;
         int range = LHConfig.common().range.get(getId().getPath());
         LHNetworking.toTracking(mob, new S2CEffectAura(mob, range, effect.get().getColor()));
         for (var e : mob.getWorld().getEntitiesByClass(LivingEntity.class, mob.getBoundingBox().expand(range), EntityPredicates.VALID_ENTITY))

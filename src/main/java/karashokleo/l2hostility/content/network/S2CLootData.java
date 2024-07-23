@@ -3,6 +3,7 @@ package karashokleo.l2hostility.content.network;
 import dev.xkmc.l2serial.network.SerialPacketS2C;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import io.github.fabricators_of_create.porting_lib.loot.IGlobalLootModifier;
+import io.github.fabricators_of_create.porting_lib.loot.LootModifierManager;
 import karashokleo.l2hostility.compat.loot.ITraitLootRecipe;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -43,5 +44,14 @@ public class S2CLootData implements SerialPacketS2C
             if (ans.get().getFirst() instanceof ITraitLootRecipe mod)
                 ITraitLootRecipe.LIST_CACHE.add(mod);
         }
+    }
+
+    public static S2CLootData create()
+    {
+        List<IGlobalLootModifier> list = new ArrayList<>();
+        for (var e : LootModifierManager.getLootModifierManager().getAllLootMods())
+            if (e instanceof ITraitLootRecipe)
+                list.add(e);
+        return new S2CLootData(list);
     }
 }

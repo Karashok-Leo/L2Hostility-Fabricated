@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.data.config;
 
+import com.google.common.collect.ImmutableMap;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.init.LHData;
@@ -21,6 +22,11 @@ public class TraitConfig
     {
         config.id = id;
         map.put(id, config);
+    }
+
+    public Map<Identifier, Config> getAll()
+    {
+        return ImmutableMap.copyOf(map);
     }
 
     public Config getOrDefault(Identifier id)
@@ -67,7 +73,7 @@ public class TraitConfig
 
         public Config addBlacklist(TagKey<EntityType<?>> tag)
         {
-            LHData.ENTITY_TYPE_TAGS.add(getBlacklistTag(), tag);
+            LHData.ENTITY_TYPE_TAGS.addTag(getBlacklistTag(), tag);
             return this;
         }
 
@@ -79,7 +85,7 @@ public class TraitConfig
 
         public Config addWhitelist(TagKey<EntityType<?>> tag)
         {
-            LHData.ENTITY_TYPE_TAGS.add(getWhitelistTag(), tag);
+            LHData.ENTITY_TYPE_TAGS.addTag(getWhitelistTag(), tag);
             return this;
         }
 

@@ -5,16 +5,17 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDa
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
-import karashokleo.l2hostility.init.LHData;
-import karashokleo.l2hostility.data.config.EntityConfig;
-import karashokleo.l2hostility.data.config.TraitConfig;
 import karashokleo.l2hostility.content.logic.InheritContext;
 import karashokleo.l2hostility.content.logic.TraitManager;
+import karashokleo.l2hostility.data.config.EntityConfig;
+import karashokleo.l2hostility.data.config.TraitConfig;
 import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.init.LHData;
 import karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.screen.ScreenTexts;
@@ -31,7 +32,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.IntSupplier;
 
-public class MobTrait
+public class MobTrait implements ItemConvertible
 {
     private final IntSupplier color;
     private String desc = null;
@@ -190,6 +191,7 @@ public class MobTrait
         return tagList.isPresent() && tagList.get().contains(LHTraits.TRAIT.getEntry(this));
     }
 
+    @Override
     public Item asItem()
     {
         return Registries.ITEM.get(getNonNullId());

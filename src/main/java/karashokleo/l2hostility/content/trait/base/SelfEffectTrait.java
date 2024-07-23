@@ -12,6 +12,9 @@ import java.util.function.Supplier;
 
 public class SelfEffectTrait extends MobTrait
 {
+    private static final int TICK_REFRESH_INTERNAL = 10;
+    private static final int EFFECT_DURATION = 40;
+
     public final Supplier<StatusEffect> effect;
 
     public SelfEffectTrait(Supplier<StatusEffect> effect)
@@ -23,7 +26,8 @@ public class SelfEffectTrait extends MobTrait
     @Override
     public void serverTick(LivingEntity mob, int level)
     {
-        mob.addStatusEffect(new StatusEffectInstance(effect.get(), 40, level - 1), mob);
+        if (mob.age % TICK_REFRESH_INTERNAL == 0)
+            mob.addStatusEffect(new StatusEffectInstance(effect.get(), EFFECT_DURATION, level - 1), mob);
     }
 
     @Override

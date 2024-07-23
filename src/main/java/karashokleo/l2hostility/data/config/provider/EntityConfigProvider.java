@@ -24,7 +24,7 @@ public class EntityConfigProvider extends AbstractDataProvider
     }
 
     @Override
-    public void add()
+    public void addAll()
     {
         add(L2Hostility.id("bosses"), new EntityConfig()
                 .putEntity(0, 20, 1, 0, List.of(EntityType.ELDER_GUARDIAN), List.of(

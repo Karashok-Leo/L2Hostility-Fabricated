@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-03T14:33:36.8212083	L2 Hostility/Tags for minecraft:damage_type
+// 1.20.1	2024-07-23T17:25:25.4633194	L2 Hostility/Tags for minecraft:damage_type
 ea6fd8c8b1e2681cb03a30430ed8db8e7d7ea942 data\minecraft\tags\damage_type\bypasses_armor.json
 7b73e057048882c3e933f941638aba985225909d data\minecraft\tags\damage_type\bypasses_invulnerability.json
 3aa378dfce679a517b57a2fd2dd82727f2cb5266 data\l2hostility\tags\damage_type\magic.json

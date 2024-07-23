@@ -1,8 +1,9 @@
 package karashokleo.l2hostility.init;
 
-import net.fabricmc.fabric.api.tag.convention.v1.ConventionalEntityTypeTags;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalEntityTypeTags;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageType;
@@ -58,11 +59,11 @@ public class LHTags
         LHData.ENTITY_TYPE_TAGS.add(
                 WHITELIST
         );
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHData.ENTITY_TYPE_TAGS.addOptionalTag(
                 NO_SCALING,
                 WHITELIST
         );
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHData.ENTITY_TYPE_TAGS.addOptionalTag(
                 NO_TRAIT,
                 BLACKLIST
         );
@@ -76,7 +77,7 @@ public class LHTags
                 EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON,
                 EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE
         );
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHData.ENTITY_TYPE_TAGS.addOptionalTag(
                 SEMIBOSS,
                 ConventionalEntityTypeTags.BOSSES
         );
@@ -106,7 +107,11 @@ public class LHTags
                 StatusEffects.MINING_FATIGUE,
                 StatusEffects.WEAKNESS
         );
-        LHData.DAMAGE_TYPE_TAGS.add(MAGIC, SpellPowerTags.DamageType.ALL);
+        if (FabricLoader.getInstance().isModLoaded("spell_power"))
+            LHData.DAMAGE_TYPE_TAGS.addOptionalTag(
+                    MAGIC,
+                    SpellPowerTags.DamageType.ALL
+            );
     }
 
 //        if (ModList.get().isLoaded(TwilightForestMod.ID)) {

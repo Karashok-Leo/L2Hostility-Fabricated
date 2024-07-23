@@ -238,7 +238,7 @@ public class AdvancementProvider extends FabricAdvancementProvider
                 .criterion("0", KillTraitEffectTrigger.condition(LHTraits.ENDER, LHEffects.STONE_CAGE))
                 .build(L2Hostility.id("hostility/effect_kill_teleport"));
 
-        Advancement ingot = simpleGet(kill_first, MiscItems.CHAOS_INGOT, LHAdvTexts.INGOT, "ingot");
+        Advancement ingot = simpleGet(kill_first, MiscItems.CHAOS.ingot(), LHAdvTexts.INGOT, "ingot");
 
         Advancement sloth = simpleGet(ingot, TrinketItems.CURSE_SLOTH, LHAdvTexts.SLOTH, AdvancementFrame.GOAL, "sloth");
 
@@ -265,7 +265,7 @@ public class AdvancementProvider extends FabricAdvancementProvider
 
         Advancement gluttony = simpleGet(trait, TrinketItems.CURSE_GLUTTONY, LHAdvTexts.GLUTTONY, "gluttony");
 
-        Advancement miracle = simpleGet(gluttony, MiscItems.MIRACLE_INGOT, LHAdvTexts.MIRACLE, "miracle");
+        Advancement miracle = simpleGet(gluttony, MiscItems.MIRACLE.ingot(), LHAdvTexts.MIRACLE, "miracle");
 
         Advancement breed = Advancement.Builder.create()
                 .parent(trait)

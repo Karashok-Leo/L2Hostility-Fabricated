@@ -3,16 +3,12 @@ package karashokleo.l2hostility.content.component.mob;
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.l2serial.util.Wrappers;
-import karashokleo.l2hostility.init.LHComponents;
-import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
 import karashokleo.l2hostility.content.component.chunk.RegionalDifficultyModifier;
-import karashokleo.l2hostility.init.LHData;
+import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.logic.*;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
-import karashokleo.l2hostility.init.LHConfig;
-import karashokleo.l2hostility.init.LHTexts;
-import karashokleo.l2hostility.init.LHTriggers;
+import karashokleo.l2hostility.init.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.mob.MobEntity;
@@ -33,6 +29,8 @@ import java.util.function.Supplier;
 @SerialClass
 public class MobDifficulty
 {
+    private static final int TICK_REMOVE_INTERNAl = 10;
+
     public enum Stage
     {
         PRE_INIT, INIT, POST_INIT
@@ -128,7 +126,7 @@ public class MobDifficulty
         stage = Stage.PRE_INIT;
     }
 
-    public boolean reinit(int level, boolean max)
+    public boolean reInit(int level, boolean max)
     {
         deinit();
         init((pos, ins) ->
@@ -240,7 +238,11 @@ public class MobDifficulty
 
         if (isInitialized() && !traits.isEmpty())
         {
-            traits.keySet().removeIf(MobTrait::isBanned);
+            if (owner.age % TICK_REMOVE_INTERNAl == 0)
+            {
+                traits.keySet().removeIf(Objects::isNull);
+                traits.keySet().removeIf(MobTrait::isBanned);
+            }
             traits.forEach((k, v) -> k.serverTick(owner, v));
             clearPending(owner);
         }

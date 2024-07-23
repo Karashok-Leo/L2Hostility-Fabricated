@@ -22,7 +22,7 @@ public class WorldDifficultyConfigProvider extends AbstractDataProvider
     }
 
     @Override
-    public void add()
+    public void addAll()
     {
         add(L2Hostility.id("overworld"), new DifficultyConfig()
                 .putDim(World.OVERWORLD, 0, 0, 4, 1)

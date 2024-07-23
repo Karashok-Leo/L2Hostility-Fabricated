@@ -3,19 +3,23 @@ package karashokleo.l2hostility.data.generate;
 import karashokleo.enchantment_infusion.api.recipe.EnchantmentIngredient;
 import karashokleo.enchantment_infusion.api.util.EIRecipeUtil;
 import karashokleo.enchantment_infusion.content.data.EnchantmentInfusionRecipeBuilder;
+import karashokleo.l2hostility.L2Hostility;
+import karashokleo.l2hostility.content.item.ComplementItems;
+import karashokleo.l2hostility.content.item.ConsumableItems;
+import karashokleo.l2hostility.content.item.MiscItems;
+import karashokleo.l2hostility.content.item.TrinketItems;
+import karashokleo.l2hostility.content.recipe.BurntRecipeBuilder;
+import karashokleo.l2hostility.init.LHBlocks;
+import karashokleo.l2hostility.init.LHEnchantments;
+import karashokleo.l2hostility.init.LHTags;
+import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.leobrary.compat.patchouli.PatchouliHelper;
 import karashokleo.leobrary.datagen.util.IdUtil;
 import karashokleo.leobrary.datagen.util.RecipeTemplate;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import karashokleo.l2hostility.L2Hostility;
-import karashokleo.l2hostility.content.item.ConsumableItems;
-import karashokleo.l2hostility.content.item.ComplementItems;
-import karashokleo.l2hostility.content.item.MiscItems;
-import karashokleo.l2hostility.content.item.TrinketItems;
-import karashokleo.l2hostility.content.recipe.BurntRecipeBuilder;
-import karashokleo.l2hostility.init.*;
-import net.minecraft.data.server.recipe.*;
+import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
@@ -42,9 +46,9 @@ public class RecipeProvider extends FabricRecipeProvider
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter)
     {
-        ID_UTIL.pushPrefix("complements/");
+        ID_UTIL.pushAndPop("complements/", () ->
         {
-            ID_UTIL.pushPrefix("convert/");
+            ID_UTIL.pushAndPop("convert/", () ->
             {
                 convert(exporter, Items.EMERALD, ComplementItems.EMERALD, 64 * 27 * 9);
 
@@ -89,10 +93,9 @@ public class RecipeProvider extends FabricRecipeProvider
                 convert(exporter, Items.SALMON, ComplementItems.LIFE_ESSENCE, 64 * 27 * 9);
 
                 convert(exporter, Items.TOTEM_OF_UNDYING, ComplementItems.LIFE_ESSENCE, 64);
-            }
-            ID_UTIL.popPrefix();
+            });
 
-            ID_UTIL.pushPrefix("craft/");
+            ID_UTIL.pushAndPop("craft/", () ->
             {
                 RecipeTemplate.shapeless(ComplementItems.WIND_BOTTLE, 1, Items.GLASS_BOTTLE)
                         .input(Items.GLASS_BOTTLE)
@@ -253,10 +256,9 @@ public class RecipeProvider extends FabricRecipeProvider
 //                    .input('M', ComplementItems.STORM_CORE)
 //                    .input('C', Items.STICK)
 //                    .offerTo(exporter, ID_UTIL.get(ComplementItems.DIFFUSION_WAND));
-            }
-            ID_UTIL.popPrefix();
+            });
 
-            ID_UTIL.pushPrefix("vanilla/");
+            ID_UTIL.pushAndPop("vanilla/", () ->
             {
                 RecipeTemplate.shapeless(Items.ECHO_SHARD, 1, ComplementItems.RESONANT_FEATHER)
                         .input(ComplementItems.RESONANT_FEATHER)
@@ -319,15 +321,14 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('C', Items.NETHERRACK)
                         .input('A', ComplementItems.BLACKSTONE_CORE)
                         .offerTo(exporter, ID_UTIL.path(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE).get());
-            }
-            ID_UTIL.popPrefix();
+            });
 
-            ID_UTIL.pushPrefix("eggs/");
+            ID_UTIL.pushAndPop("eggs/", () ->
             {
                 /*
                 zombie, husk, drowned, zombified piglin, skeleton, stray, wither skeleton, phantom, ghast
                 */
-                ID_UTIL.pushPrefix("undead/");
+                ID_UTIL.pushAndPop("undead/", () ->
                 {
                     RecipeTemplate.shaped(Items.ZOMBIE_SPAWN_EGG, 1, ComplementItems.CURSED_DROPLET)
                             .pattern("AAA")
@@ -415,8 +416,7 @@ public class RecipeProvider extends FabricRecipeProvider
                             .input('C', Items.EGG)
                             .offerTo(exporter, ID_UTIL.path(Items.GHAST_SPAWN_EGG).get());
 
-                }
-                ID_UTIL.popPrefix();
+                });
                  /*
                  allay
                  blaze
@@ -434,9 +434,9 @@ public class RecipeProvider extends FabricRecipeProvider
                  */
 
                 /*pig, cow, mooshroom, chicken, rabbit, bee, cod, salmon, tropical fish, squid, glow squid, frog, turtle*/
-                ID_UTIL.pushPrefix("passive/");
+                ID_UTIL.pushAndPop("passive/", () ->
                 {
-                    ID_UTIL.pushPrefix("animal/");
+                    ID_UTIL.pushAndPop("animal/", () ->
                     {
                         RecipeTemplate.shaped(Items.PIG_SPAWN_EGG, 1, ComplementItems.LIFE_ESSENCE)
                                 .pattern("AAA")
@@ -507,10 +507,9 @@ public class RecipeProvider extends FabricRecipeProvider
                                 .input('L', ComplementItems.TOTEMIC_GOLD.ingot())
                                 .input('C', Items.EGG)
                                 .offerTo(exporter, ID_UTIL.path(Items.BEE_SPAWN_EGG).get());
-                    }
-                    ID_UTIL.popPrefix();
+                    });
 
-                    ID_UTIL.pushPrefix("aquatic_spawn/");
+                    ID_UTIL.pushAndPop("aquatic_spawn/", () ->
                     {
                         RecipeTemplate.shaped(Items.COD_SPAWN_EGG, 1, ComplementItems.LIFE_ESSENCE)
                                 .pattern("AAA")
@@ -582,10 +581,9 @@ public class RecipeProvider extends FabricRecipeProvider
                                 .input('L', ComplementItems.TOTEMIC_GOLD.ingot())
                                 .input('C', Items.EGG)
                                 .offerTo(exporter, ID_UTIL.path(Items.TURTLE_SPAWN_EGG).get());
-                    }
-                    ID_UTIL.popPrefix();
+                    });
 
-                    ID_UTIL.pushPrefix("aquatic_alternate/");
+                    ID_UTIL.pushAndPop("aquatic_alternate/", () ->
                     {
                         RecipeTemplate.shaped(Items.COD_BUCKET, 1, ComplementItems.LIFE_ESSENCE)
                                 .pattern(" A ")
@@ -624,8 +622,7 @@ public class RecipeProvider extends FabricRecipeProvider
                                 .input('L', ComplementItems.TOTEMIC_GOLD.ingot())
                                 .input('C', Items.TURTLE_EGG)
                                 .offerTo(exporter, ID_UTIL.path(Items.TURTLE_SPAWN_EGG).get());
-                    }
-                    ID_UTIL.popPrefix();
+                    });
 
                     // panda
                     // polar bear
@@ -643,24 +640,20 @@ public class RecipeProvider extends FabricRecipeProvider
                     // dolphin
                     // bat
                     // axolotl
-                }
-                ID_UTIL.popPrefix();
-            }
-            ID_UTIL.popPrefix();
+                });
+            });
 
-            ID_UTIL.pushPrefix("storage/");
+            ID_UTIL.pushAndPop("storage/", () ->
             {
-                RecipeTemplate.storage(exporter, ComplementItems.TOTEMIC_GOLD, "storage/");
-                RecipeTemplate.storage(exporter, ComplementItems.POSEIDITE, "storage/");
-                RecipeTemplate.storage(exporter, ComplementItems.SHULKERATE, "storage/");
-                RecipeTemplate.storage(exporter, ComplementItems.SCULKIUM, "storage/");
-                RecipeTemplate.storage(exporter, ComplementItems.ETERNIUM, "storage/");
-            }
-            ID_UTIL.popPrefix();
-        }
-        ID_UTIL.popPrefix();
+                RecipeTemplate.storage(exporter, ComplementItems.TOTEMIC_GOLD, ID_UTIL);
+                RecipeTemplate.storage(exporter, ComplementItems.POSEIDITE, ID_UTIL);
+                RecipeTemplate.storage(exporter, ComplementItems.SHULKERATE, ID_UTIL);
+                RecipeTemplate.storage(exporter, ComplementItems.SCULKIUM, ID_UTIL);
+                RecipeTemplate.storage(exporter, ComplementItems.ETERNIUM, ID_UTIL);
+            });
+        });
 
-        ID_UTIL.pushPrefix("consumable/");
+        ID_UTIL.pushAndPop("consumable/", () ->
         {
             RecipeTemplate.shapeless(ConsumableItems.BOTTLE_SANITY, 3, ConsumableItems.HOSTILITY_ORB)
                     .input(ConsumableItems.HOSTILITY_ORB)
@@ -692,10 +685,9 @@ public class RecipeProvider extends FabricRecipeProvider
                     .offerTo(exporter, ID_UTIL.get(ConsumableItems.BOOK_OMNISCIENCE));
 
             convert(exporter, ConsumableItems.BOTTLE_CURSE, MiscItems.HOSTILITY_ESSENCE, 512);
-        }
-        ID_UTIL.popPrefix();
+        });
 
-        ID_UTIL.pushPrefix("misc/");
+        ID_UTIL.pushAndPop("misc/", () ->
         {
             RecipeTemplate.shaped(MiscItems.DETECTOR, 1, Items.LIGHTNING_ROD)
                     .pattern("ADA")
@@ -728,11 +720,11 @@ public class RecipeProvider extends FabricRecipeProvider
 //                    .input('C', MiscItems.WITCH_DROPLET)
 //                    .offerTo(exporter, ID_UTIL.get(MiscItems.ETERNAL_WITCH_CHARGE));
 
-            RecipeTemplate.shaped(MiscItems.WITCH_WAND, 1, MiscItems.CHAOS_INGOT)
+            RecipeTemplate.shaped(MiscItems.WITCH_WAND, 1, MiscItems.CHAOS.ingot())
                     .pattern("123")
                     .pattern("7I4")
                     .pattern("S65")
-                    .input('I', MiscItems.CHAOS_INGOT)
+                    .input('I', MiscItems.CHAOS.ingot())
                     .input('S', Items.STICK)
                     .input('1', LHTraits.POISON.asItem())
                     .input('2', LHTraits.WITHER.asItem())
@@ -743,7 +735,7 @@ public class RecipeProvider extends FabricRecipeProvider
                     .input('7', LHTraits.CURSED.asItem())
                     .offerTo(exporter, ID_UTIL.get(MiscItems.WITCH_WAND));
 
-            RecipeTemplate.shaped(MiscItems.CHAOS_INGOT, 1, ConsumableItems.HOSTILITY_ORB)
+            RecipeTemplate.shaped(MiscItems.CHAOS.ingot(), 1, ConsumableItems.HOSTILITY_ORB)
                     .pattern("B4B")
                     .pattern("1A2")
                     .pattern("B3B")
@@ -753,26 +745,31 @@ public class RecipeProvider extends FabricRecipeProvider
                     .input('2', ComplementItems.HARD_ICE)
                     .input('3', ComplementItems.EXPLOSION_SHARD)
                     .input('4', ComplementItems.CAPTURED_WIND)
-                    .offerTo(exporter, ID_UTIL.get(MiscItems.CHAOS_INGOT));
+                    .offerTo(exporter, ID_UTIL.get(MiscItems.CHAOS.ingot()));
 
-            recycle(exporter, LHTags.CHAOS, MiscItems.CHAOS_INGOT, 1f);
+            recycle(exporter, LHTags.CHAOS, MiscItems.CHAOS.ingot(), 1f);
 
             recycle(exporter, LHTags.TRAIT_ITEM, MiscItems.MIRACLE_POWDER, 1f);
 
-            RecipeTemplate.shaped(MiscItems.MIRACLE_INGOT, 1, MiscItems.CHAOS_INGOT)
+            RecipeTemplate.shaped(MiscItems.MIRACLE.ingot(), 1, MiscItems.CHAOS.ingot())
                     .pattern("ABA")
                     .pattern("ACA")
                     .pattern("ABA")
-                    .input('C', MiscItems.CHAOS_INGOT)
+                    .input('C', MiscItems.CHAOS.ingot())
                     .input('B', MiscItems.HOSTILITY_ESSENCE)
                     .input('A', MiscItems.MIRACLE_POWDER)
-                    .offerTo(exporter, ID_UTIL.get(MiscItems.MIRACLE_INGOT));
-        }
-        ID_UTIL.popPrefix();
+                    .offerTo(exporter, ID_UTIL.get(MiscItems.MIRACLE.ingot()));
 
-        ID_UTIL.pushPrefix("trinket/");
+            ID_UTIL.pushAndPop("storage/", () ->
+            {
+                RecipeTemplate.storage(exporter, MiscItems.CHAOS.ingot(), MiscItems.CHAOS.blockSet().item(), ID_UTIL);
+                RecipeTemplate.storage(exporter, MiscItems.MIRACLE.ingot(), MiscItems.MIRACLE.blockSet().item(), ID_UTIL);
+            });
+        });
+
+        ID_UTIL.pushAndPop("trinket/", () ->
         {
-            ID_UTIL.pushPrefix("loot/");
+            ID_UTIL.pushAndPop("loot/", () ->
             {
                 RecipeTemplate.shaped(TrinketItems.LOOT_1, 1, Items.EMERALD)
                         .pattern(" A ")
@@ -792,55 +789,54 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('D', Items.DRAGON_BREATH)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.LOOT_2));
 
-                RecipeTemplate.shaped(TrinketItems.LOOT_3, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.LOOT_3, 1, MiscItems.CHAOS.ingot())
                         .pattern(" A ")
                         .pattern("DID")
                         .pattern(" A ")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', ComplementItems.LIFE_ESSENCE)
                         .input('D', MiscItems.WITCH_DROPLET)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.LOOT_3));
 
-                RecipeTemplate.shaped(TrinketItems.LOOT_4, 1, MiscItems.MIRACLE_INGOT)
+                RecipeTemplate.shaped(TrinketItems.LOOT_4, 1, MiscItems.MIRACLE.ingot())
                         .pattern(" A ")
                         .pattern("DID")
                         .pattern(" A ")
-                        .input('I', MiscItems.MIRACLE_INGOT)
+                        .input('I', MiscItems.MIRACLE.ingot())
                         .input('A', ComplementItems.BLACKSTONE_CORE)
                         .input('D', ComplementItems.FORCE_FIELD)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.LOOT_4));
-            }
-            ID_UTIL.popPrefix();
+            });
 
-            ID_UTIL.pushPrefix("curse/");
+            ID_UTIL.pushAndPop("curse/", () ->
             {
-                RecipeTemplate.shaped(TrinketItems.CURSE_SLOTH, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.CURSE_SLOTH, 1, MiscItems.CHAOS.ingot())
                         .pattern("B1B")
                         .pattern("CIC")
                         .pattern("BAB")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', ComplementItems.BLACKSTONE_CORE)
                         .input('1', EnchantmentIngredient.of(Enchantments.VANISHING_CURSE, 1))
                         .input('B', Items.COPPER_INGOT)
                         .input('C', ConsumableItems.BOTTLE_SANITY)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.CURSE_SLOTH));
 
-                RecipeTemplate.shaped(TrinketItems.CURSE_ENVY, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.CURSE_ENVY, 1, MiscItems.CHAOS.ingot())
                         .pattern("B1B")
                         .pattern("CIC")
                         .pattern("B2B")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('1', EnchantmentIngredient.of(Enchantments.LOOTING, 1))
                         .input('2', EnchantmentIngredient.of(Enchantments.SILK_TOUCH, 1))
                         .input('B', Items.PRISMARINE_SHARD)
                         .input('C', Items.ENDER_EYE)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.CURSE_ENVY));
 
-                RecipeTemplate.shaped(TrinketItems.CURSE_LUST, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.CURSE_LUST, 1, MiscItems.CHAOS.ingot())
                         .pattern("B1B")
                         .pattern("CID")
                         .pattern("B2B")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('1', EnchantmentIngredient.of(Enchantments.LOOTING, 1))
                         .input('2', EnchantmentIngredient.of(Enchantments.BINDING_CURSE, 1))
                         .input('B', Items.PHANTOM_MEMBRANE)
@@ -848,11 +844,11 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('D', LHTraits.INVISIBLE.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.CURSE_LUST));
 
-                RecipeTemplate.shaped(TrinketItems.CURSE_GREED, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.CURSE_GREED, 1, MiscItems.CHAOS.ingot())
                         .pattern("B1B")
                         .pattern("CID")
                         .pattern("B2B")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('1', EnchantmentIngredient.of(Enchantments.LOOTING, 1))
                         .input('2', EnchantmentIngredient.of(Enchantments.FORTUNE, 1))
                         .input('B', Items.GOLD_INGOT)
@@ -860,11 +856,11 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('D', LHTraits.TANK.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.CURSE_GREED));
 
-                RecipeTemplate.shaped(TrinketItems.CURSE_GLUTTONY, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.CURSE_GLUTTONY, 1, MiscItems.CHAOS.ingot())
                         .pattern("B1B")
                         .pattern("CID")
                         .pattern("B2B")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('1', EnchantmentIngredient.of(Enchantments.LOOTING, 1))
                         .input('2', EnchantmentIngredient.of(Enchantments.VANISHING_CURSE, 1))
                         .input('B', Items.NETHERITE_INGOT)
@@ -872,11 +868,11 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('D', LHTraits.WITHER.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.CURSE_GLUTTONY));
 
-                RecipeTemplate.shaped(TrinketItems.CURSE_WRATH, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.CURSE_WRATH, 1, MiscItems.CHAOS.ingot())
                         .pattern("314")
                         .pattern("5I6")
                         .pattern("B2B")
-                        .input('I', MiscItems.MIRACLE_INGOT)
+                        .input('I', MiscItems.MIRACLE.ingot())
                         .input('B', MiscItems.HOSTILITY_ESSENCE)
                         .input('1', LHTraits.FIERY.asItem())
                         .input('2', LHTraits.REPRINT.asItem())
@@ -886,11 +882,11 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('6', LHTraits.REFLECT.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.CURSE_WRATH));
 
-                RecipeTemplate.shaped(TrinketItems.CURSE_PRIDE, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.CURSE_PRIDE, 1, MiscItems.CHAOS.ingot())
                         .pattern("515")
                         .pattern("3I4")
                         .pattern("B2B")
-                        .input('I', MiscItems.MIRACLE_INGOT)
+                        .input('I', MiscItems.MIRACLE.ingot())
                         .input('B', MiscItems.HOSTILITY_ESSENCE)
                         .input('1', LHTraits.KILLER_AURA.asItem())
                         .input('2', LHTraits.PROTECTION.asItem())
@@ -898,56 +894,55 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('4', LHTraits.ADAPTIVE.asItem())
                         .input('5', LHTraits.GROWTH.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.CURSE_PRIDE));
-            }
-            ID_UTIL.popPrefix();
+            });
 
-            ID_UTIL.pushPrefix("ring/");
+            ID_UTIL.pushAndPop("ring/", () ->
             {
-                RecipeTemplate.shaped(TrinketItems.RING_OCEAN, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.RING_OCEAN, 1, MiscItems.CHAOS.ingot())
                         .pattern("BAB")
                         .pattern("DID")
                         .pattern("BAB")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', ComplementItems.GUARDIAN_EYE)
                         .input('B', ComplementItems.POSEIDITE.ingot())
                         .input('D', LHTraits.CONFUSION.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.RING_OCEAN));
 
-                RecipeTemplate.shaped(TrinketItems.RING_LIFE, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.RING_LIFE, 1, MiscItems.CHAOS.ingot())
                         .pattern("BAB")
                         .pattern("DID")
                         .pattern("BAB")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', LHTraits.UNDYING.asItem())
                         .input('B', ComplementItems.SHULKERATE.ingot())
                         .input('D', LHTraits.REPELLING.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.RING_LIFE));
 
-                RecipeTemplate.shaped(TrinketItems.RING_HEALING, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.RING_HEALING, 1, MiscItems.CHAOS.ingot())
                         .pattern("BAB")
                         .pattern("DID")
                         .pattern("BAB")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', Items.GHAST_TEAR)
                         .input('B', ComplementItems.TOTEMIC_GOLD.ingot())
                         .input('D', LHTraits.REGEN.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.RING_HEALING));
 
-                RecipeTemplate.shaped(TrinketItems.RING_DIVINITY, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.RING_DIVINITY, 1, MiscItems.CHAOS.ingot())
                         .pattern("BAB")
                         .pattern("DID")
                         .pattern("BAB")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', ComplementItems.LIFE_ESSENCE)
                         .input('B', ComplementItems.TOTEMIC_GOLD.ingot())
                         .input('D', LHTraits.DISPELL.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.RING_DIVINITY));
 
-                RecipeTemplate.shaped(TrinketItems.RING_REFLECTION, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.RING_REFLECTION, 1, MiscItems.CHAOS.ingot())
                         .pattern("1A2")
                         .pattern("DID")
                         .pattern("3A4")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', ComplementItems.FORCE_FIELD)
                         .input('1', LHTraits.POISON.asItem())
                         .input('2', LHTraits.SLOWNESS.asItem())
@@ -956,74 +951,73 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('D', LHTraits.REFLECT.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.RING_REFLECTION));
 
-                RecipeTemplate.shaped(TrinketItems.RING_CORROSION, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.RING_CORROSION, 1, MiscItems.CHAOS.ingot())
                         .pattern("BAB")
                         .pattern("DID")
                         .pattern("BAB")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', LHTraits.CORROSION.asItem())
                         .input('B', ComplementItems.CURSED_DROPLET)
                         .input('D', LHTraits.EROSION.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.RING_CORROSION));
 
-                RecipeTemplate.shaped(TrinketItems.RING_INCARCERATION, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.RING_INCARCERATION, 1, MiscItems.CHAOS.ingot())
                         .pattern("BAB")
                         .pattern("1I2")
                         .pattern("BAB")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('1', LHTraits.SLOWNESS.asItem())
                         .input('2', LHTraits.FREEZING.asItem())
                         .input('A', LHTraits.KILLER_AURA.asItem())
                         .input('B', ComplementItems.BLACKSTONE_CORE)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.RING_INCARCERATION));
-            }
-            ID_UTIL.popPrefix();
+            });
 
-            ID_UTIL.pushPrefix("misc/");
+            ID_UTIL.pushAndPop("misc/", () ->
             {
-                RecipeTemplate.shaped(TrinketItems.FLAMING_THORN, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.FLAMING_THORN, 1, MiscItems.CHAOS.ingot())
                         .pattern("BAB")
                         .pattern("DID")
                         .pattern("BAB")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', LHTraits.DRAIN.asItem())
                         .input('B', ComplementItems.WARDEN_BONE_SHARD)
                         .input('D', LHTraits.SOUL_BURNER.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.FLAMING_THORN));
 
-                RecipeTemplate.shaped(TrinketItems.INFINITY_GLOVE, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.INFINITY_GLOVE, 1, MiscItems.CHAOS.ingot())
                         .pattern("BAB")
                         .pattern("III")
                         .pattern("DID")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', LHTraits.SPLIT.asItem())
                         .input('B', LHTraits.ENDER.asItem())
                         .input('D', LHTraits.PULLING.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.INFINITY_GLOVE));
 
-                RecipeTemplate.shaped(TrinketItems.ODDEYES_GLASSES, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.ODDEYES_GLASSES, 1, MiscItems.CHAOS.ingot())
                         .pattern(" A ")
                         .pattern("1I2")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('A', Items.GOLD_INGOT)
                         .input('1', Items.CYAN_STAINED_GLASS_PANE)
                         .input('2', Items.MAGENTA_STAINED_GLASS_PANE)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.ODDEYES_GLASSES));
 
-                RecipeTemplate.shaped(TrinketItems.TRIPLE_STRIP_CAPE, 1, MiscItems.CHAOS_INGOT)
+                RecipeTemplate.shaped(TrinketItems.TRIPLE_STRIP_CAPE, 1, MiscItems.CHAOS.ingot())
                         .pattern(" I ")
                         .pattern("CCC")
                         .pattern("FFF")
-                        .input('I', MiscItems.CHAOS_INGOT)
+                        .input('I', MiscItems.CHAOS.ingot())
                         .input('C', ItemTags.BANNERS)
                         .input('F', ComplementItems.RESONANT_FEATHER)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.TRIPLE_STRIP_CAPE));
 
-                RecipeTemplate.shaped(TrinketItems.ABRAHADABRA, 1, MiscItems.MIRACLE_INGOT)
+                RecipeTemplate.shaped(TrinketItems.ABRAHADABRA, 1, MiscItems.MIRACLE.ingot())
                         .pattern("AIA")
                         .pattern("EOE")
                         .pattern("BIC")
-                        .input('I', MiscItems.MIRACLE_INGOT)
+                        .input('I', MiscItems.MIRACLE.ingot())
                         .input('E', ComplementItems.ETERNIUM.ingot())
                         .input('O', TrinketItems.RING_REFLECTION)
                         .input('A', LHTraits.RAGNAROK.asItem())
@@ -1031,78 +1025,76 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('C', LHTraits.PULLING.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.ABRAHADABRA));
 
-                RecipeTemplate.shaped(TrinketItems.NIDHOGGUR, 1, MiscItems.MIRACLE_INGOT)
+                RecipeTemplate.shaped(TrinketItems.NIDHOGGUR, 1, MiscItems.MIRACLE.ingot())
                         .pattern("AIA")
                         .pattern("EOE")
                         .pattern("BIB")
-                        .input('I', MiscItems.MIRACLE_INGOT)
+                        .input('I', MiscItems.MIRACLE.ingot())
                         .input('E', ComplementItems.ETERNIUM.ingot())
                         .input('O', TrinketItems.CURSE_GREED)
                         .input('A', LHTraits.RAGNAROK.asItem())
                         .input('B', LHTraits.PULLING.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.NIDHOGGUR));
 
-                RecipeTemplate.shaped(TrinketItems.PLATINUM_STAR, 1, MiscItems.MIRACLE_INGOT)
+                RecipeTemplate.shaped(TrinketItems.PLATINUM_STAR, 1, MiscItems.MIRACLE.ingot())
                         .pattern("BIB")
                         .pattern("ISI")
                         .pattern("BIB")
-                        .input('S', MiscItems.MIRACLE_INGOT)
+                        .input('S', MiscItems.MIRACLE.ingot())
                         .input('B', LHTraits.KILLER_AURA.asItem())
                         .input('I', Items.NETHER_STAR)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.PLATINUM_STAR));
 
-                RecipeTemplate.shaped(TrinketItems.RESTORATION, 1, MiscItems.MIRACLE_INGOT)
+                RecipeTemplate.shaped(TrinketItems.RESTORATION, 1, MiscItems.MIRACLE.ingot())
                         .pattern("BLB")
                         .pattern("SIS")
                         .pattern("BGB")
-                        .input('I', MiscItems.MIRACLE_INGOT)
+                        .input('I', MiscItems.MIRACLE.ingot())
                         .input('B', ComplementItems.BLACKSTONE_CORE)
                         .input('S', LHTraits.DISPELL.asItem())
                         .input('L', LHTraits.MOONWALK.asItem())
                         .input('G', LHTraits.GRAVITY.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.RESTORATION));
 
-                RecipeTemplate.shaped(TrinketItems.ABYSSAL_THORN, 1, MiscItems.MIRACLE_INGOT)
+                RecipeTemplate.shaped(TrinketItems.ABYSSAL_THORN, 1, MiscItems.MIRACLE.ingot())
                         .pattern("AIA")
                         .pattern("IEI")
                         .pattern("XIX")
-                        .input('I', MiscItems.MIRACLE_INGOT)
+                        .input('I', MiscItems.MIRACLE.ingot())
                         .input('E', ComplementItems.ETERNIUM.ingot())
                         .input('A', ComplementItems.GUARDIAN_EYE)
                         .input('X', ComplementItems.BLACKSTONE_CORE)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.ABYSSAL_THORN));
 
-                RecipeTemplate.shaped(TrinketItems.DIVINITY_CROSS, 1, MiscItems.MIRACLE_INGOT)
+                RecipeTemplate.shaped(TrinketItems.DIVINITY_CROSS, 1, MiscItems.MIRACLE.ingot())
                         .pattern("STS")
                         .pattern("TIT")
                         .pattern("ETA")
-                        .input('I', MiscItems.MIRACLE_INGOT)
+                        .input('I', MiscItems.MIRACLE.ingot())
                         .input('T', ComplementItems.LIFE_ESSENCE)
                         .input('E', LHTraits.DRAIN.asItem())
                         .input('A', LHTraits.KILLER_AURA.asItem())
                         .input('S', MiscItems.WITCH_DROPLET)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.DIVINITY_CROSS));
 
-                RecipeTemplate.shaped(TrinketItems.DIVINITY_LIGHT, 1, MiscItems.MIRACLE_INGOT)
+                RecipeTemplate.shaped(TrinketItems.DIVINITY_LIGHT, 1, MiscItems.MIRACLE.ingot())
                         .pattern("STS")
                         .pattern("TIT")
                         .pattern("ETA")
-                        .input('T', MiscItems.MIRACLE_INGOT)
+                        .input('T', MiscItems.MIRACLE.ingot())
                         .input('I', TrinketItems.CURSE_SLOTH)
                         .input('E', LHTraits.GRAVITY.asItem())
                         .input('A', LHTraits.KILLER_AURA.asItem())
                         .input('S', ConsumableItems.HOSTILITY_ORB)
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.DIVINITY_LIGHT));
-            }
-            ID_UTIL.popPrefix();
-        }
-        ID_UTIL.popPrefix();
+            });
+        });
 
-        ID_UTIL.pushPrefix("enchantment/");
+        ID_UTIL.pushAndPop("enchantment/", () ->
         {
             enchantment(
                     builder -> builder
-                            .withPedestalItem(1, MiscItems.CHAOS_INGOT)
+                            .withPedestalItem(1, MiscItems.CHAOS.ingot())
                             .withPedestalItem(1, ConsumableItems.BOTTLE_SANITY)
                             .withPedestalItem(2, Items.LAPIS_LAZULI)
                             .withPedestalItem(4, ComplementItems.FORCE_FIELD),
@@ -1111,7 +1103,7 @@ public class RecipeProvider extends FabricRecipeProvider
 
             enchantment(
                     builder -> builder
-                            .withPedestalItem(1, MiscItems.CHAOS_INGOT)
+                            .withPedestalItem(1, MiscItems.CHAOS.ingot())
                             .withPedestalItem(1, ConsumableItems.BOTTLE_SANITY)
                             .withPedestalItem(2, Items.LAPIS_LAZULI)
                             .withPedestalItem(4, ComplementItems.GUARDIAN_EYE),
@@ -1125,8 +1117,7 @@ public class RecipeProvider extends FabricRecipeProvider
                             .withPedestalItem(4, Items.LAPIS_LAZULI),
                     LHEnchantments.SHULKER_ARMOR, 1, exporter
             );
-        }
-        ID_UTIL.popPrefix();
+        });
 
         RecipeTemplate.shaped(LHBlocks.SPAWNER.item(), 1, Items.NETHER_STAR)
                 .pattern("ADA")

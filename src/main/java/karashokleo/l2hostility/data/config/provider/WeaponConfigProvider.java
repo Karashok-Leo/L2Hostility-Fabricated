@@ -22,7 +22,7 @@ public class WeaponConfigProvider extends AbstractDataProvider
     }
 
     @Override
-    public void add()
+    public void addAll()
     {
         add(L2Hostility.id("vanilla"), new WeaponConfig()
                 .putMeleeWeapon(0, 200, Items.AIR)
@@ -32,26 +32,26 @@ public class WeaponConfigProvider extends AbstractDataProvider
                 .putRangedWeapon(0, 100,
                         Items.AIR
                 )
-                .putWeaponEnch(30, 0.5f,
+                .putWeaponEnchantment(30, 0.5f,
                         Enchantments.SHARPNESS,
                         Enchantments.POWER
                 )
-                .putWeaponEnch(40, 0.2f,
+                .putWeaponEnchantment(40, 0.2f,
                         Enchantments.KNOCKBACK,
                         Enchantments.PUNCH
                 )
-                .putWeaponEnch(50, 0.1f,
+                .putWeaponEnchantment(50, 0.1f,
                         Enchantments.FIRE_ASPECT,
                         Enchantments.FLAME
                 )
-                .putArmorEnch(30, 0.5f, Enchantments.PROTECTION)
-                .putArmorEnch(30, 0.2f,
+                .putArmorEnchantment(30, 0.5f, Enchantments.PROTECTION)
+                .putArmorEnchantment(30, 0.2f,
                         Enchantments.PROJECTILE_PROTECTION,
                         Enchantments.BLAST_PROTECTION,
                         Enchantments.FIRE_PROTECTION,
                         Enchantments.FEATHER_FALLING
                 )
-                .putArmorEnch(70, 0.3f, Enchantments.BINDING_CURSE)
+                .putArmorEnchantment(70, 0.3f, Enchantments.BINDING_CURSE)
         );
 
 //        collector.add(L2Hostility.WEAPON, new Identifier(L2Complements.MODID, "l2complements"), new WeaponConfig()

@@ -72,10 +72,7 @@ public class WeaponConfig
     public WeaponConfig putMeleeWeapon(int level, int weight, Item... items)
     {
         ArrayList<ItemStack> list = new ArrayList<>();
-        for (var e : items)
-        {
-            list.add(e.getDefaultStack());
-        }
+        for (var e : items) list.add(e.getDefaultStack());
         melee_weapons.add(new ItemConfig(list, level, weight));
         return this;
     }
@@ -91,7 +88,7 @@ public class WeaponConfig
         return this;
     }
 
-    public WeaponConfig putWeaponEnch(int level, float chance, Enchantment... items)
+    public WeaponConfig putWeaponEnchantment(int level, float chance, Enchantment... items)
     {
         ArrayList<Enchantment> list = new ArrayList<>(Arrays.asList(items));
         weapon_enchantments.add(new EnchConfig(list, level, chance));
@@ -99,7 +96,7 @@ public class WeaponConfig
     }
 
 
-    public WeaponConfig putArmorEnch(int level, float chance, Enchantment... items)
+    public WeaponConfig putArmorEnchantment(int level, float chance, Enchantment... items)
     {
         ArrayList<Enchantment> list = new ArrayList<>(Arrays.asList(items));
         armor_enchantments.add(new EnchConfig(list, level, chance));

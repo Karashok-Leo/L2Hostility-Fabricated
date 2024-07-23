@@ -5,6 +5,8 @@
     "l2hostility:poseidite_block",
     "l2hostility:shulkerate_block",
     "l2hostility:sculkium_block",
-    "l2hostility:eternium_block"
+    "l2hostility:eternium_block",
+    "l2hostility:chaos_block",
+    "l2hostility:miracle_block"
   ]
 }
