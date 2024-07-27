@@ -49,7 +49,7 @@ public class EmeraldPopeEffect extends StatusEffect implements ClientRenderEffec
             {
                 double dist = targetPos.distanceTo(selfPos);
                 if (dist > 0.1)
-                    ((LivingEntity) target).takeKnockback(0.4F, targetPos.x - selfPos.x, targetPos.z - selfPos.z);
+                    ((LivingEntity) target).takeKnockback(0.4F, selfPos.x - targetPos.x, selfPos.z - targetPos.z);
                 target.damage(source, damage);
             }
         }
