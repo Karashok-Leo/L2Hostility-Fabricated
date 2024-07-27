@@ -38,19 +38,19 @@ public class EmeraldPopeEffect extends StatusEffect implements ClientRenderEffec
         var atk = entity.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE);
         int damage = (int) (LHConfig.common().complements.properties.emeraldDamageFactor * (atk == null ? 1 : atk.getValue()));
         DamageSource source = entity.getDamageSources().create(LHDamageTypes.EMERALD);
-        Vec3d pos = entity.getPos();
-        for (Entity e : entity.getWorld().getOtherEntities(entity, new Box(entity.getBlockPos()).expand(radius)))
+        Vec3d selfPos = entity.getPos();
+        for (Entity target : entity.getWorld().getOtherEntities(entity, new Box(entity.getBlockPos()).expand(radius)))
         {
-            Vec3d ePos = e.getPos();
-            if (e instanceof Monster &&
-                    !e.isTeammate(entity) &&
-                    ((LivingEntity) e).hurtTime == 0 &&
-                    ePos.squaredDistanceTo(pos) < radius * radius)
+            Vec3d targetPos = target.getPos();
+            if (target instanceof Monster &&
+                    !target.isTeammate(entity) &&
+                    ((LivingEntity) target).hurtTime == 0 &&
+                    targetPos.squaredDistanceTo(selfPos) < radius * radius)
             {
-                double dist = ePos.distanceTo(pos);
+                double dist = targetPos.distanceTo(selfPos);
                 if (dist > 0.1)
-                    ((LivingEntity) e).takeKnockback(0.4F, ePos.x - pos.x, ePos.z - pos.z);
-                e.damage(source, damage);
+                    ((LivingEntity) target).takeKnockback(0.4F, targetPos.x - selfPos.x, targetPos.z - selfPos.z);
+                target.damage(source, damage);
             }
         }
     }

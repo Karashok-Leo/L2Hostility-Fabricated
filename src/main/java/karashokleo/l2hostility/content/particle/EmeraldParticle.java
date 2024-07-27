@@ -2,11 +2,10 @@ package karashokleo.l2hostility.content.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.particle.v1.FabricSpriteProvider;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
+import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class EmeraldParticle extends SpriteBillboardParticle
@@ -41,17 +40,22 @@ public class EmeraldParticle extends SpriteBillboardParticle
     }
 
     @Environment(EnvType.CLIENT)
-    public static class Factory implements ParticleFactoryRegistry.PendingParticleFactory<DefaultParticleType>
+    public static class Factory implements ParticleFactory<DefaultParticleType>
     {
-        @Override
-        public ParticleFactory<DefaultParticleType> create(FabricSpriteProvider provider)
+        private final SpriteProvider spriteProvider;
+
+        public Factory(SpriteProvider spriteProvider)
         {
-            return (parameters, world, x, y, z, velocityX, velocityY, velocityZ) ->
-            {
-                EmeraldParticle part = new EmeraldParticle(world, x, y, z, velocityX, velocityY, velocityZ);
-                part.setSprite(provider);
-                return part;
-            };
+            this.spriteProvider = spriteProvider;
+        }
+
+        @Nullable
+        @Override
+        public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ)
+        {
+            EmeraldParticle part = new EmeraldParticle(world, x, y, z, velocityX, velocityY, velocityZ);
+            part.setSprite(spriteProvider);
+            return part;
         }
     }
 }
