@@ -46,6 +46,6 @@ public class BleedEffect extends StatusEffect implements IconOverlayEffect, Stac
     @Override
     public IconEffectRenderer getIcon(LivingEntity entity, int lv)
     {
-        return IconEffectRenderer.icon(entity, L2Hostility.id("textures/effect_overlay/bleed.png"));
+        return IconEffectRenderer.icon(entity, L2Hostility.id("textures/effect_overlay/bleed_" + net.minecraft.util.math.MathHelper.clamp(lv, 0, 8) + ".png"));
     }
 }

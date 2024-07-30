@@ -48,6 +48,7 @@ public class LHDamageTypes
                 "%s的灵魂被%s烧掉了",
                 DamageTypeTags.BYPASSES_ARMOR,
                 DamageTypeTags.AVOIDS_GUARDIAN_THORNS,
+                DamageTypeTags.NO_IMPACT,
                 LHTags.MAGIC
         );
         register(
@@ -60,7 +61,8 @@ public class LHDamageTypes
                 DamageTypeTags.BYPASSES_ARMOR,
                 DamageTypeTags.BYPASSES_ENCHANTMENTS,
                 DamageTypeTags.BYPASSES_RESISTANCE,
-                DamageTypeTags.BYPASSES_EFFECTS
+                DamageTypeTags.BYPASSES_EFFECTS,
+                DamageTypeTags.NO_IMPACT
         );
         register(
                 LIFE_SYNC,
@@ -72,7 +74,8 @@ public class LHDamageTypes
                 DamageTypeTags.BYPASSES_ARMOR,
                 DamageTypeTags.BYPASSES_ENCHANTMENTS,
                 DamageTypeTags.BYPASSES_RESISTANCE,
-                DamageTypeTags.BYPASSES_EFFECTS
+                DamageTypeTags.BYPASSES_EFFECTS,
+                DamageTypeTags.NO_IMPACT
         );
         register(
                 VOID_EYE,
@@ -85,7 +88,8 @@ public class LHDamageTypes
                 DamageTypeTags.BYPASSES_ENCHANTMENTS,
                 DamageTypeTags.BYPASSES_RESISTANCE,
                 DamageTypeTags.BYPASSES_INVULNERABILITY,
-                DamageTypeTags.BYPASSES_EFFECTS
+                DamageTypeTags.BYPASSES_EFFECTS,
+                DamageTypeTags.NO_IMPACT
         );
     }
 

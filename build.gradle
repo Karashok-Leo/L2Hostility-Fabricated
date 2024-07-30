@@ -61,6 +61,7 @@ dependencies {
     include modImplementation("karashokleo.leobrary:datagen:${project.leobrary_version}")
     include modImplementation("karashokleo.leobrary:damage:${project.leobrary_version}")
     include modImplementation("karashokleo.leobrary:effect:${project.leobrary_version}")
+    include modImplementation("karashokleo.leobrary:gui:${project.leobrary_version}")
     include modImplementation("karashokleo.leobrary:compat-patchouli:${project.leobrary_version}")
     include modImplementation("karashokleo.effect_overlay:effect-overlay:${project.effect_overlay_version}")
 
@@ -109,5 +110,6 @@ publishing {
     }
 
     repositories {
+        mavenLocal()
     }
 }

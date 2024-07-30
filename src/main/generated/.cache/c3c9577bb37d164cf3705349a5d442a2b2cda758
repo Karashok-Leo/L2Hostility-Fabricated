@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-23T17:25:25.4528056	L2 Hostility/Model Definitions
+// 1.20.1	2024-07-30T16:44:09.9182819	L2 Hostility/Model Definitions
 787903b9f0311061258da774b1ca33e23307b88a assets\l2hostility\models\item\soul_burner.json
 ba8303f3d0cf3332a374ead31a1187a77b1edc20 assets\l2hostility\models\item\triple_strip_cape.json
 54ec7d329a369b54157cf3d13348a880b9214075 assets\l2hostility\models\item\charm_of_looting_2.json
@@ -94,8 +94,8 @@ afc112097770c1a42201c48a6fcfbc75243485c8 assets\l2hostility\models\item\platinum
 f39de621f7fb9484531ccbb1c2afa815ee4d9a96 assets\l2hostility\models\item\protection.json
 f13f7d5f287cd6c420cea695c84dc0f2377b4a78 assets\l2hostility\models\item\shulkerate_ingot.json
 4104394dfd7f01487f4766e82c90c707b98c7732 assets\l2hostility\models\item\sculkium_block.json
-20e51dcb17187561c46bfd411cd6733de2bb0a06 assets\l2hostility\models\item\hostility_detector.json
 73b870f23e6fbe1b10e84f2b876470419fec3cfd assets\l2hostility\blockstates\shulkerate_block.json
+20e51dcb17187561c46bfd411cd6733de2bb0a06 assets\l2hostility\models\item\hostility_detector.json
 2048c3857e1ab68ec463d6ceab47267dff206a2b assets\l2hostility\models\item\curse_of_greed.json
 74111503db0c8c5f3b6a7e6b9805d3f6dda1190e assets\l2hostility\models\item\divinity_cross.json
 0ccaf1b8a833e0813771253fba066ba18b372c80 assets\l2hostility\models\item\undying.json

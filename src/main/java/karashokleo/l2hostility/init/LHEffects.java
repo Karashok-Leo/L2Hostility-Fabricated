@@ -78,7 +78,7 @@ public class LHEffects
                 .register();
 
         ICE = Entry.of(
-                        "ice",
+                        "frozen",
                         new IceEffect()
                 )
                 .addEN("Frost")

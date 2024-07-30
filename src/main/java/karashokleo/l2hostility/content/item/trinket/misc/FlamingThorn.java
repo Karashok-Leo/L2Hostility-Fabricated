@@ -3,7 +3,6 @@ package karashokleo.l2hostility.content.item.trinket.misc;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
 import karashokleo.l2hostility.init.LHConfig;
-import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.l2hostility.init.LHEffects;
 import net.minecraft.client.item.TooltipContext;
@@ -27,7 +26,7 @@ public class FlamingThorn extends DamageListenerTrinketItem
     @Override
     public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
-        int size = entity.getActiveStatusEffects().size();
+        int size = event.getEntity().getActiveStatusEffects().size();
         if (size == 0) return;
         event.getEntity().addStatusEffect(new StatusEffectInstance(LHEffects.FLAME, LHConfig.common().items.flameThornTime, size - 1), entity);
     }
