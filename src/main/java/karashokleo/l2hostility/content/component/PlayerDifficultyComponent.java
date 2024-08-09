@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
+import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,5 +37,11 @@ public class PlayerDifficultyComponent implements ServerTickingComponent, AutoSy
     public void writeToNbt(@NotNull NbtCompound tag)
     {
         TagCodec.toTag(tag, this.diff);
+    }
+
+    public static void copyStrategy(PlayerDifficultyComponent from, PlayerDifficultyComponent to, boolean lossless, boolean keepInventory, boolean sameCharacter)
+    {
+        RespawnCopyStrategy.copy(from, to);
+        to.diff.onClone(lossless, keepInventory);
     }
 }

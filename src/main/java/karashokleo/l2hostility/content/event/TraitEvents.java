@@ -3,14 +3,30 @@ package karashokleo.l2hostility.content.event;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.legendary.UndyingTrait;
+import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.leobrary.damage.api.modify.DamageModifier;
+import karashokleo.leobrary.damage.api.modify.DamagePhase;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 
 public class TraitEvents
 {
     public static void register()
     {
+        // 等级伤害加成
+        DamagePhase.ARMOR.registerModifier(
+                1000,
+                damageAccess -> MobDifficulty.get(damageAccess.getAttacker()).ifPresent(diff ->
+                {
+                    int level = diff.getLevel();
+                    double factor = LHConfig.common().scaling.exponentialDamage ?
+                            Math.pow(1 + LHConfig.common().scaling.damageFactor, level) :
+                            1 + level * LHConfig.common().scaling.damageFactor;
+                    damageAccess.addModifier(DamageModifier.multiply((float) factor));
+                })
+        );
+
         // damage()头部
         LivingAttackEvent.ATTACK.register(event ->
         {

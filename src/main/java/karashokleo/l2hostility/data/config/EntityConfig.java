@@ -39,7 +39,7 @@ public class EntityConfig
     @Nullable
     public Config get(EntityType<?> type)
     {
-        return LHConfig.common().scaling.enableEntitySpecificDatapack ? cache.get(type) : null;
+        return LHConfig.common().enableEntitySpecificDatapack ? cache.get(type) : null;
     }
 
     @SerialClass

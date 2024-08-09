@@ -34,7 +34,7 @@ public class AuraEffectTrait extends MobTrait
     public void serverTick(LivingEntity mob, int level)
     {
         if (mob.age % TICK_AURA_INTERNAL != 0) return;
-        int range = LHConfig.common().range.get(getId().getPath());
+        int range = LHConfig.common().traits.auraRange.get(getId().getPath());
         LHNetworking.toTracking(mob, new S2CEffectAura(mob, range, effect.get().getColor()));
         for (var e : mob.getWorld().getEntitiesByClass(LivingEntity.class, mob.getBoundingBox().expand(range), EntityPredicates.VALID_ENTITY))
         {

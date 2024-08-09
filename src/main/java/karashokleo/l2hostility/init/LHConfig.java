@@ -1,13 +1,13 @@
 package karashokleo.l2hostility.init;
 
+import karashokleo.l2hostility.L2Hostility;
+import karashokleo.l2hostility.config.ClientConfig;
+import karashokleo.l2hostility.config.CommonConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
-import karashokleo.l2hostility.L2Hostility;
-import karashokleo.l2hostility.config.ClientConfig;
-import karashokleo.l2hostility.config.CommonConfig;
 import net.minecraft.client.gui.screen.Screen;
 
 public class LHConfig

@@ -1,6 +1,8 @@
 package karashokleo.l2hostility.init;
 
 import karashokleo.l2hostility.L2Hostility;
+import karashokleo.l2hostility.compat.data.BoMDData;
+import karashokleo.l2hostility.compat.data.IaFData;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalEntityTypeTags;
 import net.fabricmc.loader.api.FabricLoader;
@@ -107,11 +109,49 @@ public class LHTags
                 StatusEffects.MINING_FATIGUE,
                 StatusEffects.WEAKNESS
         );
+
         if (FabricLoader.getInstance().isModLoaded("spell_power"))
             LHData.DAMAGE_TYPE_TAGS.addOptionalTag(
                     MAGIC,
                     SpellPowerTags.DamageType.ALL
             );
+
+        if (FabricLoader.getInstance().isModLoaded(BoMDData.COMPAT_MOD_ID))
+        {
+            LHData.ENTITY_TYPE_TAGS.addOptional(
+                    SEMIBOSS,
+                    BoMDData.LICH,
+                    BoMDData.OBSIDILITH,
+                    BoMDData.GAUNTLET,
+                    BoMDData.VOID_BLOSSOM
+            );
+            LHData.ENTITY_TYPE_TAGS.addOptional(
+                    WHITELIST,
+                    BoMDData.LICH,
+                    BoMDData.OBSIDILITH,
+                    BoMDData.GAUNTLET,
+                    BoMDData.VOID_BLOSSOM
+            );
+        }
+        if (FabricLoader.getInstance().isModLoaded(IaFData.COMPAT_MOD_ID))
+        {
+            LHData.ENTITY_TYPE_TAGS.addOptional(
+                    SEMIBOSS,
+                    IaFData.FIRE_DRAGON,
+                    IaFData.ICE_DRAGON,
+                    IaFData.LIGHTNING_DRAGON,
+                    IaFData.DEATH_WORM,
+                    IaFData.SEA_SERPENT
+            );
+            LHData.ENTITY_TYPE_TAGS.addOptional(
+                    WHITELIST,
+                    IaFData.FIRE_DRAGON,
+                    IaFData.ICE_DRAGON,
+                    IaFData.LIGHTNING_DRAGON,
+                    IaFData.DEATH_WORM,
+                    IaFData.SEA_SERPENT
+            );
+        }
     }
 
 //        if (ModList.get().isLoaded(TwilightForestMod.ID)) {
@@ -130,23 +170,6 @@ public class LHTags
 //                    .addOptional(ModEntities.ANCIENT_REMNANT.getId());
 //        }
 //
-//        if (ModList.get().isLoaded(IceAndFire.MOD_ID)) {
-//            pvd.addTag(SEMIBOSS)
-//                    .addOptional(IafEntityRegistry.ICE_DRAGON.getId())
-//                    .addOptional(IafEntityRegistry.FIRE_DRAGON.getId())
-//                    .addOptional(IafEntityRegistry.LIGHTNING_DRAGON.getId())
-//                    .addOptional(IafEntityRegistry.DEATH_WORM.getId())
-//                    .addOptional(IafEntityRegistry.SEA_SERPENT.getId());
-//
-//            pvd.addTag(WHITELIST)
-//                    .addOptional(IafEntityRegistry.ICE_DRAGON.getId())
-//                    .addOptional(IafEntityRegistry.FIRE_DRAGON.getId())
-//                    .addOptional(IafEntityRegistry.LIGHTNING_DRAGON.getId())
-//                    .addOptional(IafEntityRegistry.DEATH_WORM.getId())
-//                    .addOptional(IafEntityRegistry.SEA_SERPENT.getId());
-//        }
-//
-//
 //        if (ModList.get().isLoaded(AlexsCaves.MOD_ID)) {
 //            pvd.addTag(SEMIBOSS)
 //                    .addOptional(ACEntityRegistry.HULLBREAKER.getId());
@@ -159,20 +182,7 @@ public class LHTags
 //                    .addOptional(ACEntityRegistry.SUBTERRANODON.getId())
 //                    .addOptional(ACEntityRegistry.TREMORSAURUS.getId());
 //        }
-//
-//        if (ModList.get().isLoaded("bosses_of_mass_destruction")) {
-//            pvd.addTag(SEMIBOSS)
-//                    .addOptional(BMDEntities.LICH.getId())
-//                    .addOptional(BMDEntities.GAUNTLET.getId())
-//                    .addOptional(BMDEntities.OBSIDILITH.getId())
-//                    .addOptional(BMDEntities.VOID_BLOSSOM.getId());
-//
-//            pvd.addTag(WHITELIST)
-//                    .addOptional(BMDEntities.LICH.getId())
-//                    .addOptional(BMDEntities.GAUNTLET.getId())
-//                    .addOptional(BMDEntities.OBSIDILITH.getId())
-//                    .addOptional(BMDEntities.VOID_BLOSSOM.getId());
-//        }
+
 
     public static TagKey<Item> createItemTag(Identifier id)
     {

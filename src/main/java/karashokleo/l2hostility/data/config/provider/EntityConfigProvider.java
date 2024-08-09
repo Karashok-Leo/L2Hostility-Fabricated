@@ -1,11 +1,14 @@
 package karashokleo.l2hostility.data.config.provider;
 
-import karashokleo.leobrary.data.AbstractDataProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import karashokleo.l2hostility.L2Hostility;
+import karashokleo.l2hostility.compat.data.BoMDData;
+import karashokleo.l2hostility.compat.data.IaFData;
 import karashokleo.l2hostility.data.Constants;
 import karashokleo.l2hostility.data.config.EntityConfig;
 import karashokleo.l2hostility.init.LHTraits;
+import karashokleo.leobrary.data.AbstractDataProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EntityType;
 
 import java.util.List;
@@ -42,5 +45,10 @@ public class EntityConfigProvider extends AbstractDataProvider
                 ))
                 .putEntity(100, 50, 1, 0, List.of(EntityType.ENDER_DRAGON), List.of())
         );
+
+        if (FabricLoader.getInstance().isModLoaded(BoMDData.COMPAT_MOD_ID))
+            BoMDData.CONFIGS.forEach(this::add);
+        if (FabricLoader.getInstance().isModLoaded(IaFData.COMPAT_MOD_ID))
+            IaFData.CONFIGS.forEach(this::add);
     }
 }

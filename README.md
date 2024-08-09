@@ -17,6 +17,7 @@
 - JEI兼容
 - TF兼容
 - BoMD兼容
+- 类烈焰弹物品
 - L2扩充其余内容
 - L2恶意新版内容
 - L2C附魔配置 (WeaponConfig)

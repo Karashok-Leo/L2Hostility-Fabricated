@@ -175,8 +175,8 @@ public class MobTrait implements ItemConvertible
 
     public boolean isBanned()
     {
-        if (LHConfig.common().map.containsKey(getNonNullId().getPath()))
-            return !LHConfig.common().map.get(getNonNullId().getPath());
+        if (LHConfig.common().traits.traitToggle.containsKey(getNonNullId().getPath()))
+            return !LHConfig.common().traits.traitToggle.get(getNonNullId().getPath());
         return false;
     }
 

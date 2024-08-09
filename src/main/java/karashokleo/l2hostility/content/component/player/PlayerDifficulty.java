@@ -2,25 +2,24 @@ package karashokleo.l2hostility.content.component.player;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
-import karashokleo.l2hostility.init.LHComponents;
-import karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
-import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.l2hostility.content.logic.LevelEditor;
 import karashokleo.l2hostility.content.logic.MobDifficultyCollector;
 import karashokleo.l2hostility.content.logic.TraitManager;
+import karashokleo.l2hostility.init.LHComponents;
 import karashokleo.l2hostility.init.LHConfig;
-import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.l2hostility.init.LHMiscs;
+import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.GameRules;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
@@ -55,11 +54,10 @@ public class PlayerDifficulty
         this.owner = player;
     }
 
-    public void onClone(boolean isWasDeath)
+    public void onClone(boolean lossless, boolean keepInventory)
     {
-        if (!isWasDeath) return;
-        if (LHConfig.common().difficulty.keepInventoryRuleKeepDifficulty &&
-                owner.getWorld().getGameRules().getBoolean(GameRules.KEEP_INVENTORY))
+        if (lossless) return;
+        if (LHConfig.common().difficulty.keepInventoryRuleKeepDifficulty && keepInventory)
             return;
         if (LHConfig.common().difficulty.deathDecayDimension)
             dimensions.clear();

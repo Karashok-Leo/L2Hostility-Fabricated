@@ -1,9 +1,9 @@
-// 1.20.1	2024-07-30T16:44:09.9293095	L2 Hostility/Tags for minecraft:entity_type
+// 1.20.1	2024-08-09T20:41:28.5492395	L2 Hostility/Tags for minecraft:entity_type
 d45e3286ace0c4f95a2a28c2aacf5331d13982bd data\l2hostility\tags\entity_types\no_trait.json
 7548c59c2941c7ae30ab1a959216ff03cfbc98b5 data\l2hostility\tags\entity_types\pulling_whitelist.json
-46f2282ac72db09f145b3dcf035eff48422bd744 data\l2hostility\tags\entity_types\teleport_blacklist.json
 46f2282ac72db09f145b3dcf035eff48422bd744 data\l2hostility\tags\entity_types\invisible_blacklist.json
-2aeb7db2c012ad0852fa32f666f434c3fc6097f2 data\l2hostility\tags\entity_types\semiboss.json
+46f2282ac72db09f145b3dcf035eff48422bd744 data\l2hostility\tags\entity_types\teleport_blacklist.json
+7123014cf2e1bc4ee3eca4be51177bf7eefbd4bd data\l2hostility\tags\entity_types\semiboss.json
 097dd603edf84557c894fc36b9897a8b565aa83f data\l2hostility\tags\entity_types\ranged_weapon_target.json
 ca5038e9edcc8a553aa6fa26ab591aa551b0073e data\l2hostility\tags\entity_types\no_scaling.json
 46f2282ac72db09f145b3dcf035eff48422bd744 data\l2hostility\tags\entity_types\arena_whitelist.json
@@ -14,4 +14,5 @@ b22c43014def37782cad9361cf26eddcbf0254e8 data\l2hostility\tags\entity_types\repe
 46f2282ac72db09f145b3dcf035eff48422bd744 data\l2hostility\tags\entity_types\grenade_blacklist.json
 95f151c560490abb82280892b0daff0d53273970 data\l2hostility\tags\entity_types\split_whitelist.json
 95a0f840195379faaa63ea500758099316ba2fcd data\l2hostility\tags\entity_types\counter_strike_blacklist.json
+3b2b7773a9636285249d2d660cd8405091069beb data\l2hostility\tags\entity_types\whitelist.json
 46f2282ac72db09f145b3dcf035eff48422bd744 data\l2hostility\tags\entity_types\undying_blacklist.json

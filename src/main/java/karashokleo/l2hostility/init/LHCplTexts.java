@@ -37,7 +37,6 @@ public enum LHCplTexts
 
     EFFECT_CHARGE("tooltip.misc.effect_charge", "Apply on Hit: %s", "击中目标时施加: %s", 1),
     EXPLOSION_CHARGE("tooltip.misc.explosion_charge", "Create explosion of level %s on Hit", "造成等级%s的爆炸", 1),
-    ARMOR_IMMUNE("tooltip.tool.immune", "Immune to: ", "免疫: ", 0),
 
     POSEIDITE_TOOL("tooltip.tool.poseidite_tool", "Sharper and faster when user is in rain or water. Effective against water based mobs and mobs sensitive to water.", "在水/雨中时提升伤害和攻击速度。对水生生物和怕水生物造成更高伤害", 0),
     POSEIDITE_ARMOR("tooltip.tool.poseidite_armor", "When user is in rain or water: provides extra protection, walk/swim speed boost, and conduit/dolphin grace effect.", "当使用者在水/雨中时，提供额外保护，提升移动/游泳速度，提供潮涌/海豚祝福效果", 0),

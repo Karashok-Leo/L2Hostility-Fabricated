@@ -2,18 +2,16 @@ package karashokleo.l2hostility.content.logic;
 
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import karashokleo.l2hostility.init.LHData;
 import karashokleo.l2hostility.data.config.EntityConfig;
 import karashokleo.l2hostility.data.config.WeaponConfig;
 import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.init.LHData;
 import karashokleo.l2hostility.init.LHTags;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.DrownedEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -28,15 +26,14 @@ public class ItemPopulator
     // 装备盔甲
     public static void populateArmors(LivingEntity le, int lv)
     {
-        int rank = Math.min(4, lv / LHConfig.common().scaling.armorFactor - 1);
-        if (rank < 0) return;
+        var r = le.getRandom();
         for (EquipmentSlot slot : EquipmentSlot.values())
             if (slot.getType() == EquipmentSlot.Type.ARMOR)
                 if (le.getEquippedStack(slot).isEmpty())
                 {
-                    Item item = MobEntity.getEquipmentForSlot(slot, rank);
-                    if (item != null)
-                        le.equipStack(slot, new ItemStack(item));
+                    ItemStack stack = WeaponConfig.getRandomArmor(slot, lv, r);
+                    if (!stack.isEmpty())
+                        le.equipStack(slot, stack);
                 }
     }
 
@@ -47,7 +44,7 @@ public class ItemPopulator
         if (manager == null) return;
         if (le instanceof DrownedEntity && le.getMainHandStack().isEmpty())
         {
-            double factor = cap.getLevel() / 16d / LHConfig.common().scaling.armorFactor;
+            double factor = cap.getLevel() * LHConfig.common().scaling.drownedTridentChancePerLevel;
             if (factor > le.getRandom().nextDouble())
                 le.setStackInHand(Hand.MAIN_HAND, new ItemStack(Items.TRIDENT));
         }

@@ -6,7 +6,6 @@ import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
-import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.component.ChunkDifficultyComponent;
 import karashokleo.l2hostility.content.component.MobDifficultyComponent;
@@ -22,7 +21,7 @@ public class LHComponents implements EntityComponentInitializer, ChunkComponentI
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry)
     {
-        registry.registerForPlayers(PLAYER_DIFFICULTY, PlayerDifficultyComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(PLAYER_DIFFICULTY, PlayerDifficultyComponent::new, PlayerDifficultyComponent::copyStrategy);
         registry.registerFor(MobEntity.class, MOB_DIFFICULTY, MobDifficultyComponent::new);
     }
 

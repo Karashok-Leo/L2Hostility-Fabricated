@@ -63,7 +63,7 @@ public enum LHTexts
     ITEM_RING_CORROSION_NEG("item.equipment.ring_of_corrosion_neg", "When you take damage, damage all your equipments by %s%% of max durability.", "受到伤害时，你所有装备耐久下降总耐久的%s%%", 1),
     ITEM_RING_INCARCERATION("item.equipment.ring_of_incarceration", "When sneaking, apply Incarceration effect on you and all mobs within your attack range.", "潜行时，对你和你攻击范围内所有生物施加禁锢", 0),
     ITEM_RING_HEALING("item.equipment.ring_of_healing", "Heals %s%% of max health every second.", "每秒回复总血量的%s%%", 1),
-    ARMOR_IMMUNE("l2damagetracker.tooltip.tool.immune", "Immune to: ", "免疫: ", 0),
+    ARMOR_IMMUNE("tooltip.tool.immune", "Immune to: ", "免疫: ", 0),
     ABRAHADABRA("item.equipment.abrahadabra", "When a mob trait tries to apply a trait effect on you, apply it to surrounding enemies that target you instead.", "当一个怪物携带的词条试图对你施加词条效果时，将其施加在周围所有对你有敌意的生物上作为替代", 0),
     NIDHOGGUR("item.equipment.nidhoggur", "Mobs you kill will drop +%s%% loot per mob level", "击杀怪物掉落的所有掉落物根据怪物等级每级增加+%s%%", 1),
     POCKET_OF_RESTORATION("item.equipment.pocket_of_restoration", "Automatically put sealed item inside, unseal it, and put it back when finished.", "自动收纳被封印的物品，将其解除封印后放回原位", 0),
@@ -166,6 +166,7 @@ public enum LHTexts
 
         LHData.EN_TEXTS.addText("trinkets.slot.chest.hostility_curse", "L2Hostility - Curse");
         LHData.ZH_TEXTS.addText("trinkets.slot.chest.hostility_curse", "恶意 - 诅咒");
+
         LHData.EN_TEXTS.addText("trinkets.slot.chest.charm", "Charm");
         LHData.ZH_TEXTS.addText("trinkets.slot.chest.charm", "护符");
     }
