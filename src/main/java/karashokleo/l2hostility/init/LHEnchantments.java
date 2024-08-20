@@ -1,17 +1,11 @@
 package karashokleo.l2hostility.init;
 
-import karashokleo.leobrary.datagen.builder.EnchantmentBuilder;
-import karashokleo.leobrary.datagen.generator.LanguageGenerator;
-import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.l2hostility.L2Hostility;
-import karashokleo.l2hostility.content.enchantment.HostilityEnchantment;
-import karashokleo.l2hostility.content.enchantment.RemoveTraitEnchantment;
-import karashokleo.l2hostility.content.enchantment.SingleLevelEnchantment;
-import karashokleo.l2hostility.content.enchantment.VanishEnchantment;
+import karashokleo.l2hostility.content.enchantment.*;
+import karashokleo.leobrary.datagen.builder.EnchantmentBuilder;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
-import org.jetbrains.annotations.Nullable;
 
 public class LHEnchantments
 {
@@ -19,6 +13,9 @@ public class LHEnchantments
     public static RemoveTraitEnchantment SPLIT_SUPPRESS;
     public static VanishEnchantment VANISH;
     public static SingleLevelEnchantment SHULKER_ARMOR;
+    public static CurseBladeEnchantment CURSE_BLADE;
+    public static SoulFlameBladeEnchantment FLAME_BLADE;
+    public static IceBladeEnchantment ICE_BLADE;
 
     public static void register()
     {
@@ -76,6 +73,45 @@ public class LHEnchantments
                 .addZH("遁隐")
                 .addZHDesc("玩家隐身时，物品也隐身")
                 .register();
+        CURSE_BLADE = Entry.of(
+                        "cursed_blade",
+                        new CurseBladeEnchantment(
+                                Enchantment.Rarity.VERY_RARE,
+                                EnchantmentTarget.WEAPON,
+                                new EquipmentSlot[]{EquipmentSlot.MAINHAND}
+                        )
+                )
+                .addEN()
+                .addENDesc("Apply cursed effect to target. Higher levels have longer duration.")
+                .addZH("诅咒之刃")
+                .addZHDesc("对敌人施加诅咒效果。更高级的附魔延长效果时间")
+                .register();
+        FLAME_BLADE = Entry.of(
+                        "soul_flame_blade",
+                        new SoulFlameBladeEnchantment(
+                                Enchantment.Rarity.VERY_RARE,
+                                EnchantmentTarget.WEAPON,
+                                new EquipmentSlot[]{EquipmentSlot.MAINHAND}
+                        )
+                )
+                .addEN()
+                .addENDesc("Apply flame effect to target. Higher levels have higher damage.")
+                .addZH("炎刃")
+                .addZHDesc("对敌人施加魂火效果。更高级的附魔造成的伤害更高")
+                .register();
+        ICE_BLADE = Entry.of(
+                        "ice_blade",
+                        new IceBladeEnchantment(
+                                Enchantment.Rarity.VERY_RARE,
+                                EnchantmentTarget.WEAPON,
+                                new EquipmentSlot[]{EquipmentSlot.MAINHAND}
+                        )
+                )
+                .addEN()
+                .addENDesc("Apply freezing effect to target. Higher levels have longer duration.")
+                .addZH("冰刃")
+                .addZHDesc("对敌人施加寒流效果。更高级的附魔延长效果时间")
+                .register();
     }
 
     static class Entry<T extends Enchantment> extends EnchantmentBuilder<T>
@@ -91,25 +127,7 @@ public class LHEnchantments
         }
 
         @Override
-        public @Nullable LanguageGenerator getEnglishGenerator()
-        {
-            return LHData.EN_TEXTS;
-        }
-
-        @Override
-        public @Nullable LanguageGenerator getChineseGenerator()
-        {
-            return LHData.ZH_TEXTS;
-        }
-
-        @Override
-        public @Nullable TagGenerator<Enchantment> getTagGenerator()
-        {
-            return LHData.ENCHANTMENT_TAGS;
-        }
-
-        @Override
-        protected String getNameSpace()
+        public String getNameSpace()
         {
             return L2Hostility.MOD_ID;
         }

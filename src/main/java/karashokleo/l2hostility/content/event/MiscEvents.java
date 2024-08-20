@@ -5,7 +5,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHu
 import karashokleo.l2hostility.content.enchantment.HitTargetEnchantment;
 import karashokleo.l2hostility.content.item.misc.wand.IMobClickItem;
 import karashokleo.l2hostility.content.network.S2CLootData;
-import karashokleo.l2hostility.content.network.S2CTraitConfigData;
+import karashokleo.l2hostility.content.network.S2CConfigData;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHNetworking;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -45,7 +45,7 @@ public class MiscEvents
         ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> LHNetworking.toClientPlayer(player, S2CLootData.create()));
 
         // 发送 TraitConfig
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> LHNetworking.toClientPlayer(sender, S2CTraitConfigData.create()));
-        ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> LHNetworking.toClientPlayer(player, S2CTraitConfigData.create()));
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> LHNetworking.toClientPlayer(sender, S2CConfigData.create()));
+        ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> LHNetworking.toClientPlayer(player, S2CConfigData.create()));
     }
 }

@@ -17,13 +17,13 @@ public class UnobtainableEnchantment extends Enchantment
     @Override
     public int getMinPower(int level)
     {
-        return 200;
+        return 1;
     }
 
     @Override
     public int getMaxPower(int level)
     {
-        return 150;
+        return 5;
     }
 
     @Override

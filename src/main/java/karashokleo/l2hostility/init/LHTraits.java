@@ -1,10 +1,6 @@
 package karashokleo.l2hostility.init;
 
 import dev.xkmc.l2serial.serialization.custom_handler.Handlers;
-import karashokleo.leobrary.datagen.builder.NamedEntryBuilder;
-import karashokleo.leobrary.datagen.util.StringUtil;
-import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.item.traits.TraitSymbol;
 import karashokleo.l2hostility.content.trait.base.AttributeTrait;
@@ -18,20 +14,28 @@ import karashokleo.l2hostility.content.trait.highlevel.*;
 import karashokleo.l2hostility.content.trait.legendary.*;
 import karashokleo.l2hostility.data.config.TraitConfig;
 import karashokleo.l2hostility.data.config.provider.TraitConfigProvider;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TextureMap;
+import karashokleo.leobrary.datagen.builder.ItemBuilder;
+import karashokleo.leobrary.datagen.builder.NamedEntryBuilder;
+import karashokleo.leobrary.datagen.builder.provider.DefaultLanguageGeneratorProvider;
+import karashokleo.leobrary.datagen.builder.provider.ModelGeneratorProvider;
+import karashokleo.leobrary.datagen.builder.provider.TagGeneratorProvider;
+import karashokleo.leobrary.datagen.generator.TagGenerator;
+import karashokleo.leobrary.datagen.util.StringUtil;
+import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.registry.Registries;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 public class LHTraits
@@ -466,14 +470,14 @@ public class LHTraits
                 .register();
     }
 
-    static class Entry<T extends MobTrait> extends NamedEntryBuilder<T>
+    static class Entry<T extends MobTrait>
+            extends NamedEntryBuilder<T>
+            implements DefaultLanguageGeneratorProvider, TagGeneratorProvider<MobTrait>, ModelGeneratorProvider
     {
         public static <T extends MobTrait> Entry<T> of(String name, T trait, int cost, int weight, int maxRank, int minLevel)
         {
             return new Entry<>(name, trait, new TraitConfig.Config(L2Hostility.id(name), cost, weight, maxRank, minLevel));
         }
-
-        private static final Identifier BACKGROUND = L2Hostility.id("item/bg");
 
         TraitConfig.Config config;
         String translationKey;
@@ -484,19 +488,19 @@ public class LHTraits
             this.config = config;
         }
 
+        public <I extends Item> BiFunction<String, I, ItemBuilder<I>> getItemBuilder()
+        {
+            return LHItems.Entry::of;
+        }
+
         public T register()
         {
             Identifier id = getId();
-            TraitSymbol symbol = new TraitSymbol(new FabricItemSettings());
-            Registry.register(Registries.ITEM, id, symbol);
-            LHMiscs.TRAITS.add(symbol);
-            LHData.MODELS.addItem(generator ->
-                    Models.GENERATED_TWO_LAYERS.upload(
-                            id.withPrefixedPath("item/"),
-                            TextureMap.layered(BACKGROUND, id.withPrefixedPath("item/trait/")),
-                            generator.writer
-                    ));
-            LHData.ITEM_TAGS.add(LHTags.TRAIT_ITEM, symbol);
+            this.getItemBuilder()
+                    .apply(name, new TraitSymbol(new FabricItemSettings()))
+                    .addModel()
+                    .addTag(LHTags.TRAIT_ITEM)
+                    .register();
             TraitConfigProvider.add(content, config);
             return Registry.register(LHTraits.TRAIT, id, content);
         }
@@ -508,39 +512,40 @@ public class LHTraits
 
         public Entry<T> addEN(String en)
         {
-            LHData.EN_TEXTS.addText(getTranslationKey(), en);
+            this.getEnglishGenerator().addText(getTranslationKey(), en);
             return this;
         }
 
         public Entry<T> addENDesc(String en)
         {
-            LHData.EN_TEXTS.addText(getTranslationKey() + ".desc", en);
+            this.getEnglishGenerator().addText(getTranslationKey() + ".desc", en);
             return this;
         }
 
         public Entry<T> addZH(String zh)
         {
-            LHData.ZH_TEXTS.addText(getTranslationKey(), zh);
+            this.getChineseGenerator().addText(getTranslationKey(), zh);
             return this;
         }
 
         public Entry<T> addZHDesc(String zh)
         {
-            LHData.ZH_TEXTS.addText(getTranslationKey() + ".desc", zh);
+            this.getChineseGenerator().addText(getTranslationKey() + ".desc", zh);
             return this;
         }
 
         public Entry<T> addTag(TagKey<MobTrait> key)
         {
-            LHData.TRAIT_TAGS.add(key, content);
+            this.getTagGenerator(TRAIT_KEY).add(key, getId());
             return this;
         }
 
         @SafeVarargs
         public final Entry<T> addTag(TagKey<MobTrait>... keys)
         {
+            TagGenerator<MobTrait> tagGenerator = getTagGenerator(TRAIT_KEY);
             for (TagKey<MobTrait> key : keys)
-                LHData.TRAIT_TAGS.add(key, content);
+                tagGenerator.add(key, getId());
             return this;
         }
 
@@ -558,7 +563,7 @@ public class LHTraits
         }
 
         @Override
-        protected String getNameSpace()
+        public String getNameSpace()
         {
             return L2Hostility.MOD_ID;
         }

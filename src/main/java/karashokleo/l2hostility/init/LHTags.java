@@ -55,52 +55,52 @@ public class LHTags
 
     public static void init()
     {
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHGenerators.ENTITY_TYPE_TAGS.addTag(
                 BLACKLIST
         );
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHGenerators.ENTITY_TYPE_TAGS.addTag(
                 WHITELIST
         );
-        LHData.ENTITY_TYPE_TAGS.addOptionalTag(
+        LHGenerators.ENTITY_TYPE_TAGS.addOptionalTag(
                 NO_SCALING,
                 WHITELIST
         );
-        LHData.ENTITY_TYPE_TAGS.addOptionalTag(
+        LHGenerators.ENTITY_TYPE_TAGS.addOptionalTag(
                 NO_TRAIT,
                 BLACKLIST
         );
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHGenerators.ENTITY_TYPE_TAGS.add(
                 NO_TRAIT,
                 EntityType.ENDERMITE
         );
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHGenerators.ENTITY_TYPE_TAGS.add(
                 ARMOR_TARGET,
                 EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
                 EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON,
                 EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE
         );
-        LHData.ENTITY_TYPE_TAGS.addOptionalTag(
+        LHGenerators.ENTITY_TYPE_TAGS.addOptionalTag(
                 SEMIBOSS,
                 ConventionalEntityTypeTags.BOSSES
         );
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHGenerators.ENTITY_TYPE_TAGS.add(
                 SEMIBOSS,
                 EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER
         );
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHGenerators.ENTITY_TYPE_TAGS.addTag(
                 NO_DROP
         );
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHGenerators.ENTITY_TYPE_TAGS.add(
                 MELEE_WEAPON_TARGET,
                 EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
                 EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE,
                 EntityType.WITHER_SKELETON, EntityType.VINDICATOR
         );
-        LHData.ENTITY_TYPE_TAGS.add(
+        LHGenerators.ENTITY_TYPE_TAGS.add(
                 RANGED_WEAPON_TARGET,
                 EntityType.SKELETON, EntityType.STRAY
         );
-        LHData.STATUS_EFFECT_TAGS.add(
+        LHGenerators.STATUS_EFFECT_TAGS.add(
                 WRATH_INVULNERABILITY,
                 StatusEffects.BLINDNESS,
                 StatusEffects.DARKNESS,
@@ -111,21 +111,21 @@ public class LHTags
         );
 
         if (FabricLoader.getInstance().isModLoaded("spell_power"))
-            LHData.DAMAGE_TYPE_TAGS.addOptionalTag(
+            LHGenerators.DAMAGE_TYPE_TAGS.addOptionalTag(
                     MAGIC,
                     SpellPowerTags.DamageType.ALL
             );
 
         if (FabricLoader.getInstance().isModLoaded(BoMDData.COMPAT_MOD_ID))
         {
-            LHData.ENTITY_TYPE_TAGS.addOptional(
+            LHGenerators.ENTITY_TYPE_TAGS.addOptional(
                     SEMIBOSS,
                     BoMDData.LICH,
                     BoMDData.OBSIDILITH,
                     BoMDData.GAUNTLET,
                     BoMDData.VOID_BLOSSOM
             );
-            LHData.ENTITY_TYPE_TAGS.addOptional(
+            LHGenerators.ENTITY_TYPE_TAGS.addOptional(
                     WHITELIST,
                     BoMDData.LICH,
                     BoMDData.OBSIDILITH,
@@ -135,7 +135,7 @@ public class LHTags
         }
         if (FabricLoader.getInstance().isModLoaded(IaFData.COMPAT_MOD_ID))
         {
-            LHData.ENTITY_TYPE_TAGS.addOptional(
+            LHGenerators.ENTITY_TYPE_TAGS.addOptional(
                     SEMIBOSS,
                     IaFData.FIRE_DRAGON,
                     IaFData.ICE_DRAGON,
@@ -143,7 +143,7 @@ public class LHTags
                     IaFData.DEATH_WORM,
                     IaFData.SEA_SERPENT
             );
-            LHData.ENTITY_TYPE_TAGS.addOptional(
+            LHGenerators.ENTITY_TYPE_TAGS.addOptional(
                     WHITELIST,
                     IaFData.FIRE_DRAGON,
                     IaFData.ICE_DRAGON,

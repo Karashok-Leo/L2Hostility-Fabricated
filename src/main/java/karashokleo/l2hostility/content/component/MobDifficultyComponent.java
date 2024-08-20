@@ -56,10 +56,9 @@ public class MobDifficultyComponent implements ServerTickingComponent, AutoSynce
     }
 
     @Override
-    public void copyFrom(MobDifficultyComponent other)
+    public void copyFrom(@NotNull MobDifficultyComponent other)
     {
-        NbtCompound tag = new NbtCompound();
-        other.writeToNbt(tag);
-        this.readFromNbt(tag);
+        if (this.diff == null || other.diff == null) return;
+        this.diff.copyFrom(other.mob, this.mob, other.diff);
     }
 }

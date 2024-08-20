@@ -155,10 +155,10 @@ public enum LHAdvTexts
     {
         for (LHAdvTexts text : LHAdvTexts.values())
         {
-            LHData.EN_TEXTS.addText(text.getTitleKey(),text.titleEn);
-            LHData.EN_TEXTS.addText(text.getDescKey(),text.descEn);
-            LHData.ZH_TEXTS.addText(text.getTitleKey(),text.titleZh);
-            LHData.ZH_TEXTS.addText(text.getDescKey(),text.descZh);
+            LHGenerators.EN_TEXTS.addText(text.getTitleKey(),text.titleEn);
+            LHGenerators.EN_TEXTS.addText(text.getDescKey(),text.descEn);
+            LHGenerators.ZH_TEXTS.addText(text.getTitleKey(),text.titleZh);
+            LHGenerators.ZH_TEXTS.addText(text.getDescKey(),text.descZh);
         }
     }
 }

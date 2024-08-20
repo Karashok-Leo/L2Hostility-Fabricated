@@ -1,14 +1,11 @@
 package karashokleo.l2hostility.init;
 
-import karashokleo.leobrary.datagen.builder.StatusEffectBuilder;
-import karashokleo.leobrary.datagen.generator.LanguageGenerator;
-import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.effect.*;
+import karashokleo.leobrary.datagen.builder.StatusEffectBuilder;
 import karashokleo.leobrary.effect.api.util.GenericStatusEffect;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import org.jetbrains.annotations.Nullable;
 
 public class LHEffects
 {
@@ -151,25 +148,7 @@ public class LHEffects
         }
 
         @Override
-        public @Nullable LanguageGenerator getEnglishGenerator()
-        {
-            return LHData.EN_TEXTS;
-        }
-
-        @Override
-        public @Nullable LanguageGenerator getChineseGenerator()
-        {
-            return LHData.ZH_TEXTS;
-        }
-
-        @Override
-        public @Nullable TagGenerator<StatusEffect> getTagGenerator()
-        {
-            return LHData.STATUS_EFFECT_TAGS;
-        }
-
-        @Override
-        protected String getNameSpace()
+        public String getNameSpace()
         {
             return L2Hostility.MOD_ID;
         }

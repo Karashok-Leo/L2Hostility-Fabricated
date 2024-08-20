@@ -158,16 +158,16 @@ public enum LHTexts
     {
         for (LHTexts text : LHTexts.values())
         {
-            LHData.EN_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defEn);
-            LHData.ZH_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defZh);
+            LHGenerators.EN_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defEn);
+            LHGenerators.ZH_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defZh);
         }
-        LHData.EN_TEXTS.addText("config.jade.plugin_l2hostility.mob", "L2Hostility");
-        LHData.ZH_TEXTS.addText("config.jade.plugin_l2hostility.mob", "莱特兰 - 恶意");
+        LHGenerators.EN_TEXTS.addText("config.jade.plugin_l2hostility.mob", "L2Hostility");
+        LHGenerators.ZH_TEXTS.addText("config.jade.plugin_l2hostility.mob", "莱特兰 - 恶意");
 
-        LHData.EN_TEXTS.addText("trinkets.slot.chest.hostility_curse", "L2Hostility - Curse");
-        LHData.ZH_TEXTS.addText("trinkets.slot.chest.hostility_curse", "恶意 - 诅咒");
+        LHGenerators.EN_TEXTS.addText("trinkets.slot.chest.hostility_curse", "L2Hostility - Curse");
+        LHGenerators.ZH_TEXTS.addText("trinkets.slot.chest.hostility_curse", "恶意 - 诅咒");
 
-        LHData.EN_TEXTS.addText("trinkets.slot.chest.charm", "Charm");
-        LHData.ZH_TEXTS.addText("trinkets.slot.chest.charm", "护符");
+        LHGenerators.EN_TEXTS.addText("trinkets.slot.chest.charm", "Charm");
+        LHGenerators.ZH_TEXTS.addText("trinkets.slot.chest.charm", "护符");
     }
 }

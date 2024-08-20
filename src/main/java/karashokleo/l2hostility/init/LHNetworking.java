@@ -22,14 +22,14 @@ public class LHNetworking
     public static void init()
     {
         HANDLER.configure(TargetSetPacket.class);
-        HANDLER.configure(S2CClearDifficulty.class, S2CEffectAura.class, S2CKillerAura.class, S2CUndying.class, S2CLootData.class, S2CTraitConfigData.class);
+        HANDLER.configure(S2CClearDifficulty.class, S2CEffectAura.class, S2CKillerAura.class, S2CUndying.class, S2CLootData.class, S2CConfigData.class);
 
         HANDLER.configureC2S(TargetSetPacket.class);
     }
 
     public static void initClient()
     {
-        HANDLER.configureS2C(S2CClearDifficulty.class, S2CEffectAura.class, S2CKillerAura.class, S2CUndying.class, S2CLootData.class, S2CTraitConfigData.class);
+        HANDLER.configureS2C(S2CClearDifficulty.class, S2CEffectAura.class, S2CKillerAura.class, S2CUndying.class, S2CLootData.class, S2CConfigData.class);
     }
 
     public static <T extends SimplePacketBase> void toClientPlayer(PacketSender sender, T packet)

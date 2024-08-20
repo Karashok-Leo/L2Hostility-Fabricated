@@ -24,6 +24,9 @@
     "fabric-datagen": [
       "karashokleo.l2hostility.init.LHData"
     ],
+    "leobrary-generator": [
+      "karashokleo.l2hostility.init.LHGenerators"
+    ],
     "cardinal-components": [
       "karashokleo.l2hostility.init.LHComponents"
     ],

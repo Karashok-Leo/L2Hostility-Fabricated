@@ -4,6 +4,8 @@ import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -34,6 +36,7 @@ public class ClientGlowingHandler
         return cacheGlass;
     }
 
+    @Environment(EnvType.CLIENT)
     private static boolean isGlowingImpl(LivingEntity entity)
     {
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();

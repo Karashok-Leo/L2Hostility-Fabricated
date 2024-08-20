@@ -47,8 +47,8 @@ public class EntityConfigProvider extends AbstractDataProvider
         );
 
         if (FabricLoader.getInstance().isModLoaded(BoMDData.COMPAT_MOD_ID))
-            BoMDData.CONFIGS.forEach(this::add);
+            BoMDData.getConfigs().forEach(this::add);
         if (FabricLoader.getInstance().isModLoaded(IaFData.COMPAT_MOD_ID))
-            IaFData.CONFIGS.forEach(this::add);
+            IaFData.getConfigs().forEach(this::add);
     }
 }

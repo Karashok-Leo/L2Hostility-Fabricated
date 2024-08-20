@@ -18,36 +18,36 @@ public class BoMDData
     public static final Identifier GAUNTLET = new Identifier(COMPAT_MOD_ID, "gauntlet");
     public static final Identifier VOID_BLOSSOM = new Identifier(COMPAT_MOD_ID, "void_blossom");
 
-    public static final Map<Identifier, EntityConfig> CONFIGS = new HashMap<>();
-
-    static
+    public static Map<Identifier, EntityConfig> getConfigs()
     {
-        addEntity(200, 50, LICH,
+        Map<Identifier, EntityConfig> configs = new HashMap<>();
+        addEntity(configs, 200, 50, LICH,
                 EntityConfig.trait(LHTraits.TANK, 2, 3),
                 EntityConfig.trait(LHTraits.REPRINT, 1, 1),
                 EntityConfig.trait(LHTraits.FREEZING, 2, 3)
         );
-        addEntity(200, 50, OBSIDILITH,
+        addEntity(configs, 200, 50, OBSIDILITH,
                 EntityConfig.trait(LHTraits.TANK, 2, 3),
                 EntityConfig.trait(LHTraits.REFLECT, 2, 3),
                 EntityConfig.trait(LHTraits.WEAKNESS, 5, 5)
         );
-        addEntity(200, 50, GAUNTLET,
+        addEntity(configs, 200, 50, GAUNTLET,
                 EntityConfig.trait(LHTraits.TANK, 2, 3),
                 EntityConfig.trait(LHTraits.REFLECT, 2, 3),
                 EntityConfig.trait(LHTraits.SOUL_BURNER, 2, 3)
         );
-        addEntity(200, 50, VOID_BLOSSOM,
+        addEntity(configs, 200, 50, VOID_BLOSSOM,
                 EntityConfig.trait(LHTraits.TANK, 2, 3),
                 EntityConfig.trait(LHTraits.REGEN, 5, 5),
                 EntityConfig.trait(LHTraits.ADAPTIVE, 2, 3)
         );
+        return configs;
     }
 
     @SuppressWarnings("all")
-    private static void addEntity(int min, int base, Identifier id, EntityConfig.TraitBase... traits)
+    private static void addEntity(Map<Identifier, EntityConfig> configMap, int min, int base, Identifier id, EntityConfig.TraitBase... traits)
     {
-        CONFIGS.put(
+        configMap.put(
                 id,
                 new EntityConfig()
                         .putEntity(min, base, 0, 0, List.of(Registries.ENTITY_TYPE.get(id)), List.of(traits))

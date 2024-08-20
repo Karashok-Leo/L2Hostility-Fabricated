@@ -1,0 +1,38 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:soul_flame_blade",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:soul_flame"
+    },
+    {
+      "item": "l2hostility:soul_flame"
+    },
+    {
+      "item": "l2hostility:soul_flame"
+    },
+    {
+      "item": "l2hostility:soul_flame"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "input": {
+    "fabric:type": "enchantment_infusion:enchantment",
+    "enchantment": "minecraft:fire_aspect",
+    "min_level": 2
+  },
+  "level": 1,
+  "mode": "ADD"
+}

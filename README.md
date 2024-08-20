@@ -29,3 +29,4 @@
 ## 待修复
 - 实体交互距离问题 (ReachEntityAttributes & PortingLibAttributes)
 - EMI Untranslated Tag Warnings
+- ImmediatelyFast Compat

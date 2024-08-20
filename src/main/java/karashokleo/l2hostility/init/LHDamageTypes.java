@@ -96,14 +96,14 @@ public class LHDamageTypes
     @SafeVarargs
     public static void register(RegistryKey<DamageType> registryKey, DamageType damageType, String deathMsgEn, String deathMsgPlayerEn, String deathMsgZh, String deathMsgPlayerZh, TagKey<DamageType>... tags)
     {
-        LHData.DYNAMICS.add(registryKey, damageType);
+        LHGenerators.DYNAMICS.add(registryKey, damageType);
         String deathMsg = "death.attack." + damageType.msgId();
         String deathMsgPlayer = "death.attack." + damageType.msgId() + ".player";
-        LHData.EN_TEXTS.addText(deathMsg, deathMsgEn);
-        LHData.EN_TEXTS.addText(deathMsgPlayer, deathMsgPlayerEn);
-        LHData.ZH_TEXTS.addText(deathMsg, deathMsgZh);
-        LHData.ZH_TEXTS.addText(deathMsgPlayer, deathMsgPlayerZh);
+        LHGenerators.EN_TEXTS.addText(deathMsg, deathMsgEn);
+        LHGenerators.EN_TEXTS.addText(deathMsgPlayer, deathMsgPlayerEn);
+        LHGenerators.ZH_TEXTS.addText(deathMsg, deathMsgZh);
+        LHGenerators.ZH_TEXTS.addText(deathMsgPlayer, deathMsgPlayerZh);
         for (TagKey<DamageType> tag : tags)
-            LHData.DAMAGE_TYPE_TAGS.add(tag, registryKey);
+            LHGenerators.DAMAGE_TYPE_TAGS.add(tag, registryKey);
     }
 }

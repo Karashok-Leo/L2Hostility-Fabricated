@@ -70,8 +70,8 @@ public enum LHCplTexts
     {
         for (LHCplTexts text : LHCplTexts.values())
         {
-            LHData.EN_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defEn);
-            LHData.ZH_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defZh);
+            LHGenerators.EN_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defEn);
+            LHGenerators.ZH_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defZh);
         }
     }
 }

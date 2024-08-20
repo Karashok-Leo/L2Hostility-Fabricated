@@ -1,9 +1,9 @@
 package karashokleo.l2hostility;
 
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import karashokleo.l2hostility.data.generate.TraitGLMProvider;
 import karashokleo.l2hostility.init.*;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -18,6 +18,7 @@ public class L2Hostility implements ModInitializer
     @Override
     public void onInitialize()
     {
+        LHData.register();
         LHNetworking.init();
         LHItems.register();
         LHBlocks.register();
@@ -37,7 +38,6 @@ public class L2Hostility implements ModInitializer
         LHRecipes.register();
         LHTriggers.register();
         LHMiscs.register();
-        LHData.register();
         ServerLifecycleEvents.SERVER_STARTED.register(server -> SERVER = server);
     }
 

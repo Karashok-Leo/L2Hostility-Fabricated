@@ -1,0 +1,33 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:ice_blade",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:hard_ice"
+    },
+    {
+      "item": "l2hostility:hard_ice"
+    },
+    {
+      "item": "l2hostility:hard_ice"
+    },
+    {
+      "item": "l2hostility:hard_ice"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "level": 1,
+  "mode": "ADD"
+}

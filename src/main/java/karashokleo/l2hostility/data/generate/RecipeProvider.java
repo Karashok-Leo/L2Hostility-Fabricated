@@ -1117,6 +1117,29 @@ public class RecipeProvider extends FabricRecipeProvider
                             .withPedestalItem(4, Items.LAPIS_LAZULI),
                     LHEnchantments.SHULKER_ARMOR, 1, exporter
             );
+
+            enchantment(
+                    builder -> builder
+                            .withPedestalItem(2, Items.FERMENTED_SPIDER_EYE)
+                            .withPedestalItem(2, ComplementItems.CURSED_DROPLET)
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.CURSE_BLADE, 1, exporter
+            );
+
+            enchantment(
+                    builder -> builder
+                            .withPedestalItem(4, ComplementItems.HARD_ICE)
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.ICE_BLADE, 1, exporter
+            );
+
+            enchantment(
+                    builder -> builder
+                            .withTableIngredient(Enchantments.FIRE_ASPECT, 2)
+                            .withPedestalItem(4, ComplementItems.SOUL_FLAME)
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.FLAME_BLADE, 1, exporter
+            );
         });
 
         RecipeTemplate.shaped(LHBlocks.SPAWNER.item(), 1, Items.NETHER_STAR)

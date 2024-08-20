@@ -3,7 +3,7 @@ package karashokleo.l2hostility.data.config;
 import com.google.common.collect.ImmutableMap;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.L2Hostility;
-import karashokleo.l2hostility.init.LHData;
+import karashokleo.l2hostility.init.LHGenerators;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
@@ -73,25 +73,25 @@ public class TraitConfig
 
         public Config addBlacklist(TagKey<EntityType<?>> tag)
         {
-            LHData.ENTITY_TYPE_TAGS.addTag(getBlacklistTag(), tag);
+            LHGenerators.ENTITY_TYPE_TAGS.addTag(getBlacklistTag(), tag);
             return this;
         }
 
         public Config addBlacklist(EntityType<?>... types)
         {
-            LHData.ENTITY_TYPE_TAGS.add(getBlacklistTag(), types);
+            LHGenerators.ENTITY_TYPE_TAGS.add(getBlacklistTag(), types);
             return this;
         }
 
         public Config addWhitelist(TagKey<EntityType<?>> tag)
         {
-            LHData.ENTITY_TYPE_TAGS.addTag(getWhitelistTag(), tag);
+            LHGenerators.ENTITY_TYPE_TAGS.addTag(getWhitelistTag(), tag);
             return this;
         }
 
         public Config addWhitelist(EntityType<?>... types)
         {
-            LHData.ENTITY_TYPE_TAGS.add(getWhitelistTag(), types);
+            LHGenerators.ENTITY_TYPE_TAGS.add(getWhitelistTag(), types);
             return this;
         }
 

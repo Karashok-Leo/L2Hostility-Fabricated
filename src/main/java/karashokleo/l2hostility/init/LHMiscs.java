@@ -1,16 +1,14 @@
 package karashokleo.l2hostility.init;
 
-import karashokleo.leobrary.datagen.builder.ItemGroupBuilder;
-import karashokleo.leobrary.datagen.generator.LanguageGenerator;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.screen.equipment.EquipmentScreenHandler;
+import karashokleo.leobrary.datagen.builder.ItemGroupBuilder;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.screen.ScreenHandlerType;
-import org.jetbrains.annotations.Nullable;
 
 public class LHMiscs
 {
@@ -56,19 +54,7 @@ public class LHMiscs
         }
 
         @Override
-        public @Nullable LanguageGenerator getEnglishGenerator()
-        {
-            return LHData.EN_TEXTS;
-        }
-
-        @Override
-        public @Nullable LanguageGenerator getChineseGenerator()
-        {
-            return LHData.ZH_TEXTS;
-        }
-
-        @Override
-        protected String getNameSpace()
+        public String getNameSpace()
         {
             return L2Hostility.MOD_ID;
         }

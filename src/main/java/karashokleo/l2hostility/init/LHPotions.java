@@ -1,15 +1,13 @@
 package karashokleo.l2hostility.init;
 
-import karashokleo.leobrary.datagen.builder.PotionBuilder;
-import karashokleo.leobrary.datagen.builder.PotionSet;
-import karashokleo.leobrary.datagen.generator.LanguageGenerator;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.item.ComplementItems;
+import karashokleo.leobrary.datagen.builder.PotionBuilder;
+import karashokleo.leobrary.datagen.builder.PotionSet;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potions;
-import org.jetbrains.annotations.Nullable;
 
 public class LHPotions
 {
@@ -129,19 +127,7 @@ public class LHPotions
         }
 
         @Override
-        public @Nullable LanguageGenerator getEnglishGenerator()
-        {
-            return LHData.EN_TEXTS;
-        }
-
-        @Override
-        public @Nullable LanguageGenerator getChineseGenerator()
-        {
-            return LHData.ZH_TEXTS;
-        }
-
-        @Override
-        protected String getNameSpace()
+        public String getNameSpace()
         {
             return L2Hostility.MOD_ID;
         }

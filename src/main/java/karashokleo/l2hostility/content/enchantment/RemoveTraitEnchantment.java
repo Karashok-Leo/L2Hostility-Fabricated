@@ -20,9 +20,9 @@ public class RemoveTraitEnchantment extends HostilityEnchantment implements HitT
     }
 
     @Override
-    public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurting(int level, LivingEntity attacker, LivingHurtEvent event)
     {
-        MobDifficulty.get(entity).ifPresent(diff ->
+        MobDifficulty.get(event.getEntity()).ifPresent(diff ->
         {
             diff.removeTrait(sup.get());
             diff.sync();

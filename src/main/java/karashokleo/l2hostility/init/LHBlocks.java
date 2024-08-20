@@ -1,17 +1,12 @@
 package karashokleo.l2hostility.init;
 
-import karashokleo.leobrary.datagen.builder.BlockBuilder;
-import karashokleo.leobrary.datagen.builder.BlockSet;
-import karashokleo.leobrary.datagen.generator.BlockLootGenerator;
-import karashokleo.leobrary.datagen.generator.LanguageGenerator;
-import karashokleo.leobrary.datagen.generator.ModelGenerator;
-import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.block.HostilitySpawner;
+import karashokleo.leobrary.datagen.builder.BlockBuilder;
+import karashokleo.leobrary.datagen.builder.BlockSet;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 
 public class LHBlocks
 {
@@ -28,7 +23,7 @@ public class LHBlocks
                 .addZH("恶意刷怪笼")
                 .registerWithItem();
 
-        LHData.MODELS.addBlock(LHBlocks::generateSpawnerState);
+        LHGenerators.MODELS.addBlock(LHBlocks::generateSpawnerState);
 
         LHMiscs.GROUP.add(SPAWNER.item());
     }
@@ -75,37 +70,7 @@ public class LHBlocks
         }
 
         @Override
-        public @Nullable LanguageGenerator getEnglishGenerator()
-        {
-            return LHData.EN_TEXTS;
-        }
-
-        @Override
-        public @Nullable LanguageGenerator getChineseGenerator()
-        {
-            return LHData.ZH_TEXTS;
-        }
-
-        @Override
-        public @Nullable TagGenerator<Block> getTagGenerator()
-        {
-            return LHData.BLOCK_TAGS;
-        }
-
-        @Override
-        public @Nullable ModelGenerator getModelGenerator()
-        {
-            return LHData.MODELS;
-        }
-
-        @Override
-        public @Nullable BlockLootGenerator getLootGenerator()
-        {
-            return LHData.BLOCK_LOOTS;
-        }
-
-        @Override
-        protected String getNameSpace()
+        public String getNameSpace()
         {
             return L2Hostility.MOD_ID;
         }

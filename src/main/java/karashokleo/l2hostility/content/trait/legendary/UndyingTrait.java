@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
+import karashokleo.leobrary.effect.api.event.LivingHeal;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.network.S2CUndying;
@@ -11,6 +12,7 @@ import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.Formatting;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class UndyingTrait extends LegendaryTrait
 {
@@ -24,8 +26,10 @@ public class UndyingTrait extends LegendaryTrait
             if (diff.get().hasTrait(LHTraits.SPLIT)) return true;
             if (diff.get().hasTrait(LHTraits.UNDYING) && validTarget(entity))
             {
-                entity.setHealth(0.1F);
-                entity.heal(entity.getMaxHealth() - entity.getHealth());
+                CallbackInfo ci = new CallbackInfo("UndyingTraitHeal", true);
+                LivingHeal.EVENT.invoker().onLivingHeal(entity, entity.getMaxHealth()-entity.getHealth(), ci);
+                if (ci.isCancelled()) return true;
+                entity.setHealth(entity.getMaxHealth());
                 LHNetworking.toTracking(entity, new S2CUndying(entity));
                 return false;
             } else return true;
