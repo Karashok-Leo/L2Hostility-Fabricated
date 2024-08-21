@@ -61,6 +61,6 @@
     "cloth-config": "*",
     "patchouli": "*",
     "trinkets": "*",
-    "enchantment_infusion": "*"
+    "enchantment_infusion": ">=1.1.0"
   }
 }
