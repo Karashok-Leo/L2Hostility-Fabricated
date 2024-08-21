@@ -1,6 +1,12 @@
 {
   "replace": false,
   "values": [
+    "minecraft:magic",
+    "minecraft:indirect_magic",
+    "minecraft:thorns",
+    "minecraft:wither",
+    "minecraft:wither_skull",
+    "minecraft:dragon_breath",
     "l2hostility:killer_aura",
     "l2hostility:soul_flame",
     {

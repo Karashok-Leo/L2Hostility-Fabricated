@@ -6,25 +6,41 @@ import karashokleo.l2hostility.content.component.mob.CapStorageData;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
-import karashokleo.leobrary.damage.api.state.DamageState;
-import karashokleo.leobrary.damage.api.state.DamageStateProvider;
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 public class AdaptingTrait extends MobTrait
 {
-    private static final Set<Predicate<DamageState<?>>> STATE_PREDICATES = new HashSet<>();
-
-    public static void registerStatePredicate(final Predicate<DamageState<?>> predicate)
+    public interface Adapt
     {
-        STATE_PREDICATES.add(predicate);
+        /**
+         * @return Adapting data
+         * null refers to default logic
+         */
+        @Nullable
+        String onAdapt(int level, LivingEntity entity, LivingHurtEvent event, Data data);
     }
+
+    public static Event<Adapt> EVENT = EventFactory.createArrayBacked(Adapt.class, callbacks -> ((level, entity, event, data) ->
+    {
+        for (Adapt callback : callbacks)
+        {
+            String id = callback.onAdapt(level, entity, event, data);
+            if (id != null) return id;
+        }
+        return null;
+    }));
 
     // 使怪物获得强大的同类伤害减免的效果。
     // 每级使怪物能够记忆的伤害类型 +1，受到来自记忆类型的伤害时降低50%的该伤害（可无限叠加）。
@@ -42,28 +58,10 @@ public class AdaptingTrait extends MobTrait
         var cap = MobDifficulty.get(entity);
         if (cap.isEmpty()) return;
 
-        String id = event.getSource().getType().msgId();
-        Optional<DamageState<?>> damageState = ((DamageStateProvider) source).getState(state ->
-        {
-            for (Predicate<DamageState<?>> predicate : STATE_PREDICATES)
-                if (predicate.test(state)) return true;
-            return false;
-        });
-        if (damageState.isPresent()) id = damageState.get().toString();
-
         Data data = cap.get().getOrCreateData(getId(), Data::new);
-        data.adapt(id, level).ifPresent(factor -> event.setAmount(event.getAmount() * factor));
-    }
-
-    @Override
-    public void addDetail(List<Text> list)
-    {
-        list.add(Text.translatable(getDescKey(),
-                        Text.literal((int) Math.round(100 * (1 - LHConfig.common().traits.adaptFactor)) + "")
-                                .formatted(Formatting.AQUA),
-                        mapLevel(i -> Text.literal("" + i)
-                                .formatted(Formatting.AQUA)))
-                .formatted(Formatting.GRAY));
+        String id = EVENT.invoker().onAdapt(level, entity, event, data);
+        data.adapt(id == null ? source.getType().msgId() : id, level)
+                .ifPresent(factor -> event.setAmount(event.getAmount() * factor));
     }
 
     @SerialClass
@@ -94,5 +92,16 @@ public class AdaptingTrait extends MobTrait
                 return Optional.empty();
             }
         }
+    }
+
+    @Override
+    public void addDetail(List<Text> list)
+    {
+        list.add(Text.translatable(getDescKey(),
+                        Text.literal((int) Math.round(100 * (1 - LHConfig.common().traits.adaptFactor)) + "")
+                                .formatted(Formatting.AQUA),
+                        mapLevel(i -> Text.literal("" + i)
+                                .formatted(Formatting.AQUA)))
+                .formatted(Formatting.GRAY));
     }
 }

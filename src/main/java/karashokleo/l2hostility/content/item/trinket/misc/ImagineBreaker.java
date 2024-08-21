@@ -1,15 +1,19 @@
 package karashokleo.l2hostility.content.item.trinket.misc;
 
-import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,9 +27,9 @@ public class ImagineBreaker extends CurseTrinketItem
     }
 
     @Override
-    public void onAttacking(ItemStack stack, LivingEntity entity, LivingAttackEvent event)
+    public void onDamageSourceCreate(ItemStack stack, LivingEntity entity, DamageSource damageSource, RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Vec3d position)
     {
-        event.getSource().setBypassMagic();
+        damageSource.setBypassMagic();
     }
 
     @Override

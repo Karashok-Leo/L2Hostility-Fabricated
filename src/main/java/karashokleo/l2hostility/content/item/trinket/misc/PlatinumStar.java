@@ -5,10 +5,15 @@ import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,9 +27,9 @@ public class PlatinumStar extends DamageListenerTrinketItem
     }
 
     @Override
-    public void onAttacking(ItemStack stack, LivingEntity entity, LivingAttackEvent event)
+    public void onDamageSourceCreate(ItemStack stack, LivingEntity entity, DamageSource damageSource, RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Vec3d position)
     {
-        event.getSource().setBypassCooldown();
+        damageSource.setBypassCooldown();
     }
 
     @Override

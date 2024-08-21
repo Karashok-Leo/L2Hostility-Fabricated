@@ -41,7 +41,7 @@ public class MobDifficulty
         return Optional.ofNullable(mob.getComponent(LHComponents.MOB_DIFFICULTY).diff);
     }
 
-    public static Optional<MobDifficulty> get(Entity entity)
+    public static Optional<MobDifficulty> get(@Nullable Entity entity)
     {
         return entity instanceof MobEntity mob ? get(mob) : Optional.empty();
     }

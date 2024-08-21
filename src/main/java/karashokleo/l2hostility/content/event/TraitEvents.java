@@ -6,6 +6,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHu
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.legendary.UndyingTrait;
 import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.leobrary.damage.api.event.DamageSourceCreateCallback;
 import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
@@ -26,6 +27,10 @@ public class TraitEvents
                     damageAccess.addModifier(DamageModifier.multiply((float) factor));
                 })
         );
+
+        DamageSourceCreateCallback.EVENT.register((type, source, attacker, position, damageSource) -> {
+            MobDifficulty.get(attacker).ifPresent(diff -> diff.traitEvent((k, v) -> k.onDamageSourceCreate(v, diff.owner, damageSource, type, source, position)));
+        });
 
         // damage()头部
         LivingAttackEvent.ATTACK.register(event ->

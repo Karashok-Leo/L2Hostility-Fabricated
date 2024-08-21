@@ -12,11 +12,14 @@ import karashokleo.l2hostility.data.config.TraitConfig;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHData;
 import karashokleo.l2hostility.init.LHTraits;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.MutableText;
@@ -24,6 +27,7 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -85,6 +89,10 @@ public class MobTrait implements ItemConvertible
     }
 
     public void serverTick(LivingEntity mob, int level)
+    {
+    }
+
+    public void onDamageSourceCreate(int level, LivingEntity entity, DamageSource damageSource, RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Vec3d position)
     {
     }
 

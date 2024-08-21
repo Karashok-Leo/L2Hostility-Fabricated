@@ -4,15 +4,16 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEve
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
-import karashokleo.l2hostility.init.LHTags;
-import karashokleo.leobrary.effect.api.event.EffectApplicable;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.item.TrinketItems;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
 import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.init.LHTags;
+import karashokleo.leobrary.damage.api.event.DamageSourceCreateCallback;
+import karashokleo.leobrary.effect.api.event.EffectApplicable;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -26,6 +27,14 @@ public class TrinketEvents
     public static void register()
     {
         // DamageListenerTrinketItem
+        DamageSourceCreateCallback.EVENT.register((type, source, attacker, position, damageSource) ->
+        {
+            if (attacker instanceof LivingEntity living)
+                for (var e : TrinketCompat.getItems(living, e -> e.getItem() instanceof DamageListenerTrinketItem))
+                    if (e.getItem() instanceof DamageListenerTrinketItem listener)
+                        listener.onDamageSourceCreate(e, living, damageSource, type, source, position);
+        });
+
         LivingAttackEvent.ATTACK.register(event ->
         {
             LivingEntity target = event.getEntity();

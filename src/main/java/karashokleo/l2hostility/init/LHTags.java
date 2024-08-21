@@ -9,6 +9,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageType;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
@@ -108,6 +109,16 @@ public class LHTags
                 StatusEffects.SLOWNESS,
                 StatusEffects.MINING_FATIGUE,
                 StatusEffects.WEAKNESS
+        );
+
+        LHGenerators.DAMAGE_TYPE_TAGS.add(
+                MAGIC,
+                DamageTypes.MAGIC,
+                DamageTypes.INDIRECT_MAGIC,
+                DamageTypes.THORNS,
+                DamageTypes.WITHER,
+                DamageTypes.WITHER_SKULL,
+                DamageTypes.DRAGON_BREATH
         );
 
         if (FabricLoader.getInstance().isModLoaded("spell_power"))

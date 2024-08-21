@@ -2,16 +2,21 @@ package karashokleo.l2hostility.content.trait.legendary;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.item.traits.EnchantmentDisabler;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +31,9 @@ public class DispellTrait extends LegendaryTrait
     }
 
     @Override
-    public void onAttacking(int level, LivingEntity entity, LivingAttackEvent event)
+    public void onDamageSourceCreate(int level, LivingEntity entity, DamageSource damageSource, RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Vec3d position)
     {
-        event.getSource().setBypassMagic();
+        damageSource.setBypassMagic();
     }
 
     @Override
