@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-20T20:51:11.7148751	L2 Hostility/Advancements
+// 1.20.1	2024-08-21T10:38:59.4001476	L2 Hostility/Advancements
 731cb8898830c0a838ee74dee40b4de3a49d49d5 data\l2hostility\advancements\hostility\trait.json
 cb89cdae2c01feadec39cbd3dee91341dc0907e5 data\l2hostility\advancements\hostility\kill_tanky.json
 194a66b2f60fae3dfba8c2a7c30e726a720d8b96 data\l2hostility\advancements\hostility\glasses.json
@@ -9,8 +9,8 @@ e7f00cc4421dcbf814c4040ac1e1ac97f51788a6 data\l2hostility\advancements\hostility
 757280cf7573a0fef2768fd51eb49e1c1732ea4d data\l2hostility\advancements\hostility\kill_first.json
 b40d22d4accd3502992c06b5785d380464a83f02 data\l2hostility\advancements\hostility\abrahadabra.json
 6492f33b6173071ffd8a216b2a35b3a647af984f data\l2hostility\advancements\hostility\effect_kill_teleport.json
-76c7e436b33db09994e82d2cccd66b2f7ecdafc9 data\l2hostility\advancements\hostility\wrath.json
 2de991efc4d8af40370f5521673afe0122ee8370 data\l2hostility\advancements\hostility\sloth.json
+76c7e436b33db09994e82d2cccd66b2f7ecdafc9 data\l2hostility\advancements\hostility\wrath.json
 38f6b75bf8ed7ff593e588dd63eb09a6d3d801ff data\l2hostility\advancements\hostility\miracle.json
 258e10c304326369fc57fb534f1ee93bf726a22c data\l2hostility\advancements\hostility\kill_5_traits.json
 97022997ca635740da5a9c31fec5292f249119fe data\l2hostility\advancements\hostility\effect_kill_adaptive.json

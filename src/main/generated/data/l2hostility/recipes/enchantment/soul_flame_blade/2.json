@@ -23,14 +23,7 @@
     },
     {
       "item": "minecraft:lapis_lazuli"
-    },
-    {
-      "item": "minecraft:lapis_lazuli"
     }
   ],
-  "input": {
-    "enchantment": "minecraft:fire_aspect",
-    "min_level": 2
-  },
-  "level": 1
+  "level": 2
 }

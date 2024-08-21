@@ -1,8 +1,8 @@
-// 1.20.1	2024-08-20T20:51:11.7243957	L2 Hostility/Tags for minecraft:entity_type
+// 1.20.1	2024-08-21T10:38:59.4256801	L2 Hostility/Tags for minecraft:entity_type
 d45e3286ace0c4f95a2a28c2aacf5331d13982bd data\l2hostility\tags\entity_types\no_trait.json
 7548c59c2941c7ae30ab1a959216ff03cfbc98b5 data\l2hostility\tags\entity_types\pulling_whitelist.json
-46f2282ac72db09f145b3dcf035eff48422bd744 data\l2hostility\tags\entity_types\invisible_blacklist.json
 46f2282ac72db09f145b3dcf035eff48422bd744 data\l2hostility\tags\entity_types\teleport_blacklist.json
+46f2282ac72db09f145b3dcf035eff48422bd744 data\l2hostility\tags\entity_types\invisible_blacklist.json
 7123014cf2e1bc4ee3eca4be51177bf7eefbd4bd data\l2hostility\tags\entity_types\semiboss.json
 097dd603edf84557c894fc36b9897a8b565aa83f data\l2hostility\tags\entity_types\ranged_weapon_target.json
 ca5038e9edcc8a553aa6fa26ab591aa551b0073e data\l2hostility\tags\entity_types\no_scaling.json

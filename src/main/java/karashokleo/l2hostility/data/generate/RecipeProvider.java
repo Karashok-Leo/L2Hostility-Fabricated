@@ -1092,7 +1092,7 @@ public class RecipeProvider extends FabricRecipeProvider
 
         ID_UTIL.pushAndPop("enchantment/", () ->
         {
-            enchantment(
+            enchantmentAdd(
                     builder -> builder
                             .withPedestalItem(1, MiscItems.CHAOS.ingot())
                             .withPedestalItem(1, ConsumableItems.BOTTLE_SANITY)
@@ -1101,7 +1101,7 @@ public class RecipeProvider extends FabricRecipeProvider
                     LHEnchantments.INSULATOR, 1, exporter
             );
 
-            enchantment(
+            enchantmentAdd(
                     builder -> builder
                             .withPedestalItem(1, MiscItems.CHAOS.ingot())
                             .withPedestalItem(1, ConsumableItems.BOTTLE_SANITY)
@@ -1110,7 +1110,7 @@ public class RecipeProvider extends FabricRecipeProvider
                     LHEnchantments.SPLIT_SUPPRESS, 1, exporter
             );
 
-            enchantment(
+            enchantmentAdd(
                     builder -> builder
                             .withPedestalItem(1, Items.GLASS)
                             .withPedestalItem(3, ComplementItems.SHULKERATE.nugget())
@@ -1118,7 +1118,7 @@ public class RecipeProvider extends FabricRecipeProvider
                     LHEnchantments.SHULKER_ARMOR, 1, exporter
             );
 
-            enchantment(
+            enchantmentAdd(
                     builder -> builder
                             .withPedestalItem(2, Items.FERMENTED_SPIDER_EYE)
                             .withPedestalItem(2, ComplementItems.CURSED_DROPLET)
@@ -1126,19 +1126,26 @@ public class RecipeProvider extends FabricRecipeProvider
                     LHEnchantments.CURSE_BLADE, 1, exporter
             );
 
-            enchantment(
+            enchantmentAdd(
                     builder -> builder
                             .withPedestalItem(4, ComplementItems.HARD_ICE)
                             .withPedestalItem(4, Items.LAPIS_LAZULI),
                     LHEnchantments.ICE_BLADE, 1, exporter
             );
 
-            enchantment(
+            enchantmentSet(
                     builder -> builder
                             .withTableIngredient(Enchantments.FIRE_ASPECT, 2)
                             .withPedestalItem(4, ComplementItems.SOUL_FLAME)
                             .withPedestalItem(4, Items.LAPIS_LAZULI),
                     LHEnchantments.FLAME_BLADE, 1, exporter
+            );
+
+            enchantmentSet(
+                    builder -> builder
+                            .withPedestalItem(4, ComplementItems.SOUL_FLAME)
+                            .withPedestalItem(3, Items.LAPIS_LAZULI),
+                    LHEnchantments.FLAME_BLADE, 2, exporter
             );
         });
 
@@ -1159,9 +1166,20 @@ public class RecipeProvider extends FabricRecipeProvider
                 .offerTo(exporter);
     }
 
-    private static void enchantment(Consumer<EnchantmentInfusionRecipeBuilder> consumer, Enchantment enchantment, int level, Consumer<RecipeJsonProvider> exporter)
+    private static void enchantmentAdd(Consumer<EnchantmentInfusionRecipeBuilder> consumer, Enchantment enchantment, int level, Consumer<RecipeJsonProvider> exporter)
     {
         EIRecipeUtil.add(
+                consumer,
+                enchantment,
+                level,
+                exporter,
+                ID_UTIL.path(Objects.requireNonNull(Registries.ENCHANTMENT.getId(enchantment)).getPath() + "/" + level).get()
+        );
+    }
+
+    private static void enchantmentSet(Consumer<EnchantmentInfusionRecipeBuilder> consumer, Enchantment enchantment, int level, Consumer<RecipeJsonProvider> exporter)
+    {
+        EIRecipeUtil.set(
                 consumer,
                 enchantment,
                 level,

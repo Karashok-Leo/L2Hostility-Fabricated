@@ -28,6 +28,9 @@
       "item": "l2hostility:force_field"
     }
   ],
-  "level": 1,
-  "mode": "ADD"
+  "input": {
+    "enchantment": "l2hostility:insulator",
+    "min_level": 0
+  },
+  "level": 1
 }

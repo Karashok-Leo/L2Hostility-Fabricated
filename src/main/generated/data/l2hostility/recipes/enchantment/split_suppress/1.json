@@ -28,6 +28,9 @@
       "item": "l2hostility:guardian_eye"
     }
   ],
-  "level": 1,
-  "mode": "ADD"
+  "input": {
+    "enchantment": "l2hostility:split_suppress",
+    "min_level": 0
+  },
+  "level": 1
 }
