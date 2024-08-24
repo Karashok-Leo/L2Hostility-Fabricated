@@ -31,7 +31,7 @@ public class EntityConfig
     public void merge(EntityConfig config)
     {
         list.addAll(config.list);
-        for (var e : list)
+        for (var e : config.list)
             for (var type : e.entities)
                 cache.put(type, e);
     }

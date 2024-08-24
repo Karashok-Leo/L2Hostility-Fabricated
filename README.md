@@ -30,3 +30,9 @@
 - 实体交互距离问题 (ReachEntityAttributes & PortingLibAttributes)
 - EMI Untranslated Tag Warnings
 - ImmediatelyFast Compat
+
+## 一个关于数据包的细节问题
+- 当试图用OpenLoader加载数据包以覆写模组内置的数据包时，有可能不起作用。
+- 这个问题曾被我误以为是数据包加载顺序不对，重命名数据包 *(前缀Z)* 后仍不起效，后来发现与数据包加载顺序无关，这是由模组内部整理资源的方法导致的副作用。
+- 比如说模组内置的对`minecraft:wither`的配置，这项配置对应的 **Identifier** 是`l2hostility:bosses`，要覆写这项配置，后来的 **Identifier** 应该 **大于** `l2hostility:bosses`。
+- **Identifier** 的比较方法是优先比较 **Path** ，当 **Path** 比较结果为相等时再比较 **Namespace** 。
