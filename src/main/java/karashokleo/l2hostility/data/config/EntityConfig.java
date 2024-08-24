@@ -61,10 +61,12 @@ public class EntityConfig
         {
         }
 
-        public Config(List<EntityType<?>> entities,
-                      List<TraitBase> traits,
-                      DifficultyConfig.Config difficulty,
-                      List<ItemPool> items)
+        public Config(
+                List<EntityType<?>> entities,
+                List<TraitBase> traits,
+                DifficultyConfig.Config difficulty,
+                List<ItemPool> items
+        )
         {
             this.entities.addAll(entities);
             this.traits.addAll(traits);

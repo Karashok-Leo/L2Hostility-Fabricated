@@ -268,7 +268,7 @@ public class LHTraits
                 .addENDesc("After attacked, it will attempt to perform a counter strike.")
                 .addZH("反击")
                 .addZHDesc("被攻击后会试图冲刺反击")
-                .configure(config -> config.addBlacklist(EntityType.WARDEN).addBlacklist(LHTags.MELEE_WEAPON_TARGET))
+                .configure(config -> config.addWhitelist(EntityType.WARDEN).addWhitelist(LHTags.MELEE_WEAPON_TARGET))
                 .register();
         GRAVITY = Entry.of(
                         "gravity",
