@@ -1,11 +1,11 @@
-// 1.20.1	2024-08-24T10:59:52.7130044	L2 Hostility/LH Entity Config
+// 1.20.1	2024-08-27T10:06:01.8965168	L2 Hostility/LH Entity Config
 68bc506bb5b059010cc655ae819e24fbecb98794 data\iceandfire\l2hostility_config\entity\siren.json
 3b17d23d1e4877ba03c865ee4fbc88ba287bf6a5 data\bosses_of_mass_destruction\l2hostility_config\entity\obsidilith.json
 92a5bfb3847a0039ebb8929df5aa0eeb5759c4fa data\iceandfire\l2hostility_config\entity\fire_dragon.json
 5fbad313d5dfcd98f724e819283dca6f274ba601 data\bosses_of_mass_destruction\l2hostility_config\entity\gauntlet.json
-f2054530f14f46a246da7b99bb86898b8de1b8d1 data\iceandfire\l2hostility_config\entity\ice_dragon.json
 364b99bda90359e48387d71bfc8c1b23da090735 data\l2hostility\l2hostility_config\entity\bosses.json
+f2054530f14f46a246da7b99bb86898b8de1b8d1 data\iceandfire\l2hostility_config\entity\ice_dragon.json
 37b3998f3598e8fb9f2ecfed0c1fbe92b3931728 data\bosses_of_mass_destruction\l2hostility_config\entity\void_blossom.json
-2bb3a06cb2213d14b2ebfbd72e6b12f0e10f757f data\bosses_of_mass_destruction\l2hostility_config\entity\lich.json
 89f69141c2edb064c58ae64bc176ffae9ec1fd4a data\iceandfire\l2hostility_config\entity\lightning_dragon.json
 d5193d7c8d26de2bf8de82d35069fc37f58b953e data\iceandfire\l2hostility_config\entity\ghost.json
+2bb3a06cb2213d14b2ebfbd72e6b12f0e10f757f data\bosses_of_mass_destruction\l2hostility_config\entity\lich.json

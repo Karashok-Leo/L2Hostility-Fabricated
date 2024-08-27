@@ -536,7 +536,7 @@ public class LHTraits
 
         public Entry<T> addTag(TagKey<MobTrait> key)
         {
-            this.getTagGenerator(TRAIT_KEY).add(key, getId());
+            this.getTagGenerator(TRAIT_KEY).getOrCreateContainer(key).add(getId());
             return this;
         }
 
@@ -545,7 +545,7 @@ public class LHTraits
         {
             TagGenerator<MobTrait> tagGenerator = getTagGenerator(TRAIT_KEY);
             for (TagKey<MobTrait> key : keys)
-                tagGenerator.add(key, getId());
+                tagGenerator.getOrCreateContainer(key).add(getId());
             return this;
         }
 

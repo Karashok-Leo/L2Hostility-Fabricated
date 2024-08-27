@@ -53,24 +53,6 @@ public class LHData implements DataGeneratorEntrypoint
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator)
     {
-        LHGenerators.ITEM_TAGS.add(
-                LHTags.DELICATE_BONE,
-                Items.SCULK_CATALYST,
-                Items.SCULK_SHRIEKER
-        );
-        LHGenerators.ENCHANTMENT_TAGS.add(
-                LHTags.NO_DISPELL,
-                Enchantments.UNBREAKING
-        );
-        LHGenerators.STATUS_EFFECT_TAGS.add(
-                LHTags.CLEANSE_BLACKLIST,
-                StatusEffects.NIGHT_VISION,
-                StatusEffects.BAD_OMEN,
-                StatusEffects.HERO_OF_THE_VILLAGE,
-                StatusEffects.DOLPHINS_GRACE,
-                StatusEffects.CONDUIT_POWER,
-                StatusEffects.WATER_BREATHING
-        );
         LHGenerators.EMPTY_LOOTS.addLoot(MiscItems.GUIDE_BOOK, PatchouliHelper.loot(MiscItems.GUIDE_BOOK));
 
         generateConfigTexts();

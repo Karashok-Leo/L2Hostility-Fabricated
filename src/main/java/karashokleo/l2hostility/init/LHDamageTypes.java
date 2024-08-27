@@ -104,6 +104,6 @@ public class LHDamageTypes
         LHGenerators.ZH_TEXTS.addText(deathMsg, deathMsgZh);
         LHGenerators.ZH_TEXTS.addText(deathMsgPlayer, deathMsgPlayerZh);
         for (TagKey<DamageType> tag : tags)
-            LHGenerators.DAMAGE_TYPE_TAGS.add(tag, registryKey);
+            LHGenerators.DAMAGE_TYPE_TAGS.getOrCreateContainer(tag).add(registryKey);
     }
 }

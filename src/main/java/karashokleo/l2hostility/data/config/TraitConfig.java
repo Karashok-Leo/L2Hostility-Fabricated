@@ -73,25 +73,25 @@ public class TraitConfig
 
         public Config addBlacklist(TagKey<EntityType<?>> tag)
         {
-            LHGenerators.ENTITY_TYPE_TAGS.addTag(getBlacklistTag(), tag);
+            LHGenerators.ENTITY_TYPE_TAGS.getOrCreateContainer(getBlacklistTag()).addTag(tag);
             return this;
         }
 
         public Config addBlacklist(EntityType<?>... types)
         {
-            LHGenerators.ENTITY_TYPE_TAGS.add(getBlacklistTag(), types);
+            LHGenerators.ENTITY_TYPE_TAGS.getOrCreateContainer(getBlacklistTag()).add(types);
             return this;
         }
 
         public Config addWhitelist(TagKey<EntityType<?>> tag)
         {
-            LHGenerators.ENTITY_TYPE_TAGS.addTag(getWhitelistTag(), tag);
+            LHGenerators.ENTITY_TYPE_TAGS.getOrCreateContainer(getWhitelistTag()).addTag(tag);
             return this;
         }
 
         public Config addWhitelist(EntityType<?>... types)
         {
-            LHGenerators.ENTITY_TYPE_TAGS.add(getWhitelistTag(), types);
+            LHGenerators.ENTITY_TYPE_TAGS.getOrCreateContainer(getWhitelistTag()).add(types);
             return this;
         }
 

@@ -4,15 +4,18 @@ import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.compat.data.BoMDData;
 import karashokleo.l2hostility.compat.data.IaFData;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.leobrary.datagen.generator.TagGenerator;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalEntityTypeTags;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -56,112 +59,113 @@ public class LHTags
 
     public static void init()
     {
-        LHGenerators.ENTITY_TYPE_TAGS.addTag(
-                BLACKLIST
-        );
-        LHGenerators.ENTITY_TYPE_TAGS.addTag(
-                WHITELIST
-        );
-        LHGenerators.ENTITY_TYPE_TAGS.addOptionalTag(
-                NO_SCALING,
-                WHITELIST
-        );
-        LHGenerators.ENTITY_TYPE_TAGS.addOptionalTag(
-                NO_TRAIT,
-                BLACKLIST
-        );
-        LHGenerators.ENTITY_TYPE_TAGS.add(
-                NO_TRAIT,
-                EntityType.ENDERMITE
-        );
-        LHGenerators.ENTITY_TYPE_TAGS.add(
-                ARMOR_TARGET,
-                EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
-                EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON,
-                EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE
-        );
-        LHGenerators.ENTITY_TYPE_TAGS.addOptionalTag(
-                SEMIBOSS,
-                ConventionalEntityTypeTags.BOSSES
-        );
-        LHGenerators.ENTITY_TYPE_TAGS.add(
-                SEMIBOSS,
-                EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER
-        );
-        LHGenerators.ENTITY_TYPE_TAGS.addTag(
-                NO_DROP
-        );
-        LHGenerators.ENTITY_TYPE_TAGS.add(
-                MELEE_WEAPON_TARGET,
-                EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
-                EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE,
-                EntityType.WITHER_SKELETON, EntityType.VINDICATOR
-        );
-        LHGenerators.ENTITY_TYPE_TAGS.add(
-                RANGED_WEAPON_TARGET,
-                EntityType.SKELETON, EntityType.STRAY
-        );
-        LHGenerators.STATUS_EFFECT_TAGS.add(
-                WRATH_INVULNERABILITY,
-                StatusEffects.BLINDNESS,
-                StatusEffects.DARKNESS,
-                StatusEffects.NAUSEA,
-                StatusEffects.SLOWNESS,
-                StatusEffects.MINING_FATIGUE,
-                StatusEffects.WEAKNESS
-        );
+        LHGenerators.ITEM_TAGS.getOrCreateContainer(DELICATE_BONE)
+                .add(
+                        Items.SCULK_CATALYST,
+                        Items.SCULK_SHRIEKER
+                );
+        LHGenerators.ENCHANTMENT_TAGS.getOrCreateContainer(NO_DISPELL)
+                .add(
+                        Enchantments.UNBREAKING
+                );
+        LHGenerators.STATUS_EFFECT_TAGS.getOrCreateContainer(CLEANSE_BLACKLIST)
+                .add(
+                        StatusEffects.NIGHT_VISION,
+                        StatusEffects.BAD_OMEN,
+                        StatusEffects.HERO_OF_THE_VILLAGE,
+                        StatusEffects.DOLPHINS_GRACE,
+                        StatusEffects.CONDUIT_POWER,
+                        StatusEffects.WATER_BREATHING
+                );
 
-        LHGenerators.DAMAGE_TYPE_TAGS.add(
-                MAGIC,
-                DamageTypes.MAGIC,
-                DamageTypes.INDIRECT_MAGIC,
-                DamageTypes.THORNS,
-                DamageTypes.WITHER,
-                DamageTypes.WITHER_SKULL,
-                DamageTypes.DRAGON_BREATH
-        );
+        TagGenerator<EntityType<?>> entityTypeTags = LHGenerators.ENTITY_TYPE_TAGS;
+        entityTypeTags.getOrCreateContainer(BLACKLIST);
+        entityTypeTags.getOrCreateContainer(WHITELIST);
+        entityTypeTags.getOrCreateContainer(NO_SCALING)
+                .addOptionalTag(WHITELIST);
+        entityTypeTags.getOrCreateContainer(NO_TRAIT)
+                .addOptionalTag(BLACKLIST);
+        entityTypeTags.getOrCreateContainer(NO_TRAIT)
+                .add(EntityType.ENDERMITE);
+        entityTypeTags.getOrCreateContainer(ARMOR_TARGET)
+                .add(
+                        EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
+                        EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON,
+                        EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE
+                );
+        entityTypeTags.getOrCreateContainer(SEMIBOSS)
+                .add(
+                        EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER
+                )
+                .addOptionalTag(ConventionalEntityTypeTags.BOSSES);
+        entityTypeTags.getOrCreateContainer(NO_DROP);
+        entityTypeTags.getOrCreateContainer(MELEE_WEAPON_TARGET)
+                .add(
+                        EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
+                        EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE,
+                        EntityType.WITHER_SKELETON, EntityType.VINDICATOR
+                );
+        entityTypeTags.getOrCreateContainer(RANGED_WEAPON_TARGET)
+                .add(
+                        EntityType.SKELETON, EntityType.STRAY
+                );
+        LHGenerators.STATUS_EFFECT_TAGS.getOrCreateContainer(WRATH_INVULNERABILITY)
+                .add(
+                        StatusEffects.BLINDNESS,
+                        StatusEffects.DARKNESS,
+                        StatusEffects.NAUSEA,
+                        StatusEffects.SLOWNESS,
+                        StatusEffects.MINING_FATIGUE,
+                        StatusEffects.WEAKNESS
+                );
+
+        LHGenerators.DAMAGE_TYPE_TAGS.getOrCreateContainer(MAGIC)
+                .add(DamageTypes.MAGIC)
+                .add(DamageTypes.INDIRECT_MAGIC)
+                .add(DamageTypes.THORNS)
+                .add(DamageTypes.WITHER)
+                .add(DamageTypes.WITHER_SKULL)
+                .add(DamageTypes.DRAGON_BREATH);
 
         if (FabricLoader.getInstance().isModLoaded("spell_power"))
-            LHGenerators.DAMAGE_TYPE_TAGS.addOptionalTag(
-                    MAGIC,
-                    SpellPowerTags.DamageType.ALL
-            );
+            LHGenerators.DAMAGE_TYPE_TAGS.getOrCreateContainer(MAGIC)
+                    .addOptionalTag(SpellPowerTags.DamageType.ALL);
 
         if (FabricLoader.getInstance().isModLoaded(BoMDData.COMPAT_MOD_ID))
         {
-            LHGenerators.ENTITY_TYPE_TAGS.addOptional(
-                    SEMIBOSS,
-                    BoMDData.LICH,
-                    BoMDData.OBSIDILITH,
-                    BoMDData.GAUNTLET,
-                    BoMDData.VOID_BLOSSOM
-            );
-            LHGenerators.ENTITY_TYPE_TAGS.addOptional(
-                    WHITELIST,
-                    BoMDData.LICH,
-                    BoMDData.OBSIDILITH,
-                    BoMDData.GAUNTLET,
-                    BoMDData.VOID_BLOSSOM
-            );
+            entityTypeTags.getOrCreateContainer(SEMIBOSS)
+                    .addOptional(
+                            BoMDData.LICH,
+                            BoMDData.OBSIDILITH,
+                            BoMDData.GAUNTLET,
+                            BoMDData.VOID_BLOSSOM
+                    );
+            entityTypeTags.getOrCreateContainer(WHITELIST)
+                    .addOptional(
+                            BoMDData.LICH,
+                            BoMDData.OBSIDILITH,
+                            BoMDData.GAUNTLET,
+                            BoMDData.VOID_BLOSSOM
+                    );
         }
         if (FabricLoader.getInstance().isModLoaded(IaFData.COMPAT_MOD_ID))
         {
-            LHGenerators.ENTITY_TYPE_TAGS.addOptional(
-                    SEMIBOSS,
-                    IaFData.FIRE_DRAGON,
-                    IaFData.ICE_DRAGON,
-                    IaFData.LIGHTNING_DRAGON,
-                    IaFData.DEATH_WORM,
-                    IaFData.SEA_SERPENT
-            );
-            LHGenerators.ENTITY_TYPE_TAGS.addOptional(
-                    WHITELIST,
-                    IaFData.FIRE_DRAGON,
-                    IaFData.ICE_DRAGON,
-                    IaFData.LIGHTNING_DRAGON,
-                    IaFData.DEATH_WORM,
-                    IaFData.SEA_SERPENT
-            );
+            entityTypeTags.getOrCreateContainer(SEMIBOSS)
+                    .addOptional(
+                            IaFData.FIRE_DRAGON,
+                            IaFData.ICE_DRAGON,
+                            IaFData.LIGHTNING_DRAGON,
+                            IaFData.DEATH_WORM,
+                            IaFData.SEA_SERPENT
+                    );
+            entityTypeTags.getOrCreateContainer(WHITELIST)
+                    .addOptional(
+                            IaFData.FIRE_DRAGON,
+                            IaFData.ICE_DRAGON,
+                            IaFData.LIGHTNING_DRAGON,
+                            IaFData.DEATH_WORM,
+                            IaFData.SEA_SERPENT
+                    );
         }
     }
 
