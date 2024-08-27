@@ -3,6 +3,7 @@ package karashokleo.l2hostility.data.config.provider;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.compat.data.BoMDData;
 import karashokleo.l2hostility.compat.data.IaFData;
+import karashokleo.l2hostility.compat.data.MMData;
 import karashokleo.l2hostility.data.Constants;
 import karashokleo.l2hostility.data.config.EntityConfig;
 import karashokleo.l2hostility.init.LHTraits;
@@ -50,5 +51,7 @@ public class EntityConfigProvider extends AbstractDataProvider
             BoMDData.getConfigs().forEach(this::add);
         if (FabricLoader.getInstance().isModLoaded(IaFData.COMPAT_MOD_ID))
             IaFData.getConfigs().forEach(this::add);
+        if (FabricLoader.getInstance().isModLoaded(MMData.COMPAT_MOD_ID))
+            MMData.getConfigs().forEach(this::add);
     }
 }

@@ -1,8 +1,10 @@
 package karashokleo.l2hostility.init;
 
+import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.compat.data.BoMDData;
 import karashokleo.l2hostility.compat.data.IaFData;
+import karashokleo.l2hostility.compat.data.MMData;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalEntityTypeTags;
@@ -165,6 +167,21 @@ public class LHTags
                             IaFData.LIGHTNING_DRAGON,
                             IaFData.DEATH_WORM,
                             IaFData.SEA_SERPENT
+                    );
+        }
+        if (FabricLoader.getInstance().isModLoaded(MMData.COMPAT_MOD_ID))
+        {
+            entityTypeTags.getOrCreateContainer(SEMIBOSS)
+                    .addOptional(
+                            ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.getResourceLocation(),
+                            ModRegistry.MUTANT_CREEPER_ENTITY_TYPE.getResourceLocation(),
+                            ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.getResourceLocation(),
+                            ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.getResourceLocation(),
+                            ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation()
+                    );
+            entityTypeTags.getOrCreateContainer(WHITELIST)
+                    .addOptional(
+                            ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation()
                     );
         }
     }

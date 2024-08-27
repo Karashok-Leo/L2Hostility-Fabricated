@@ -67,6 +67,10 @@ dependencies {
 
     modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${project.cca_version}"
 
+    modImplementation "maven.modrinth:puzzles-lib:${project.puzzles_lib_version}"
+    modImplementation "maven.modrinth:forge-config-api-port:${project.forge_config_api_port}"
+    modImplementation "maven.modrinth:mutant-monsters:${project.mutant_monster_version}"
+
     // Include
     include modImplementation("dev.xkmc.l2serial:L2Serial:${project.l2serial_version}")
     include modImplementation("dev.xkmc.l2tabs:L2Tabs:${project.l2tabs_version}")

@@ -36,6 +36,10 @@
     {
       "id": "iceandfire:sea_serpent",
       "required": false
+    },
+    {
+      "id": "mutantmonsters:spider_pig",
+      "required": false
     }
   ]
 }

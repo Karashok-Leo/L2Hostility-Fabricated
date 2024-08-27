@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-27T10:06:01.9047432	L2 Hostility/Recipes
+// 1.20.1	2024-08-27T11:47:55.2305003	L2 Hostility/Recipes
 0b5fef5aaf6a7c358d183ab937e509d2f7b70137 data\l2hostility\recipes\complements\storage\poseidite_ingot_compose.json
 3ba287f22f1430c42ec57f410db5f47ae0391b2a data\l2hostility\recipes\misc\storage\miracle_block_compose.json
 2023a3ddb554103f30502606857cb1f43e95f018 data\l2hostility\advancements\recipes\burnt\complements\convert\cooked_beef_to_life_essence.json
@@ -79,8 +79,8 @@ b6679ee1fae5f03593a55bf38f0dd4c2ac45adf7 data\l2hostility\recipes\complements\cr
 a9c602a30417c63fb9df4d03ec28cad3e1bab8b7 data\l2hostility\recipes\complements\storage\poseidite_block_compose.json
 22fa7c6336a5f603ea454ac13ba1e370db4f4f1c data\l2hostility\advancements\recipes\misc\complements\storage\sculkium_ingot_compose.json
 42098bb2a67647df6c1bcadf73a443df417197ed data\l2hostility\advancements\recipes\misc\complements\eggs\passive\animal\chicken_spawn_egg.json
-53577872e4c3a4d113482c57484e69e6405a0fc4 data\l2hostility\advancements\recipes\burnt\complements\convert\nether_star_to_cursed_droplet.json
 1191e098e79d6a0c0eba613e37cacd2855388a87 data\l2hostility\advancements\recipes\burnt\complements\convert\rotten_flesh_to_cursed_droplet.json
+53577872e4c3a4d113482c57484e69e6405a0fc4 data\l2hostility\advancements\recipes\burnt\complements\convert\nether_star_to_cursed_droplet.json
 f09926c3e9dfdb6478d047571b381b6b82e09531 data\l2hostility\recipes\complements\storage\poseidite_ingot_decompose.json
 025da6f8319ab277c6a051ee49d8032443468668 data\l2hostility\recipes\trinket\ring\ring_of_ocean.json
 975fba957525eeb5d504f11a44a43a6f0878e5fb data\l2hostility\recipes\complements\craft\wind_capture_bottle.json

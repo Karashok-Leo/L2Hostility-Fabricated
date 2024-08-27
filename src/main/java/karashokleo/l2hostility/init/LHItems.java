@@ -48,7 +48,7 @@ public class LHItems
         {
             ModelGenerator modelGenerator = this.getModelGenerator();
             if (content instanceof TrinketItem)
-                modelGenerator.addItem(content, Models.GENERATED, "trinket/");
+                modelGenerator.addItemWithTexturePrefix(content, Models.GENERATED, "trinket/");
             else if (content instanceof TraitSymbol)
                 modelGenerator.addItem(generator ->
                         Models.GENERATED_TWO_LAYERS.upload(
@@ -66,7 +66,7 @@ public class LHItems
         {
             ModelGenerator modelGenerator = this.getModelGenerator();
             if (content instanceof TrinketItem)
-                modelGenerator.addItem(content, model, "trinket/");
+                modelGenerator.addItemWithTexturePrefix(content, model, "trinket/");
             else
                 modelGenerator.addItem(content, model);
             return this;
