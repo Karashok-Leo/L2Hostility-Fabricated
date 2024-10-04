@@ -7,6 +7,7 @@ import karashokleo.l2hostility.content.trait.common.AuraEffectTrait;
 import karashokleo.l2hostility.init.LHEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.DamageTypeTags;
 
 public class ArenaTrait extends AuraEffectTrait
@@ -45,8 +46,10 @@ public class ArenaTrait extends AuraEffectTrait
     {
         DamageSource source = event.getSource();
         if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
-                (source.getAttacker() instanceof LivingEntity le &&
-                        le.hasStatusEffect(LHEffects.ANTI_BUILD)))
+            (source.getAttacker() instanceof LivingEntity le &&
+             le.hasStatusEffect(LHEffects.ANTI_BUILD)) ||
+            (source.getAttacker() instanceof PlayerEntity player &&
+             player.getAbilities().creativeMode))
             return;
         event.setAmount(0);
     }

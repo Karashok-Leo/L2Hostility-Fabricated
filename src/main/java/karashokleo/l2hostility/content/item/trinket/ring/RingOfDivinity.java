@@ -3,9 +3,10 @@ package karashokleo.l2hostility.content.item.trinket.ring;
 import dev.emi.trinkets.api.SlotReference;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
+import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.l2hostility.init.LHTexts;
-import karashokleo.l2hostility.init.LHEffects;
+import karashokleo.leobrary.effect.api.util.EffectUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -31,15 +32,16 @@ public class RingOfDivinity extends DamageListenerTrinketItem
     {
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-                !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-                source.isIn(LHTags.MAGIC))
+            !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
+            source.isIn(LHTags.MAGIC))
             event.setCanceled(true);
     }
 
     @Override
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
-        entity.addStatusEffect(new StatusEffectInstance(LHEffects.CLEANSE, 40, 0, true, true), entity);
+        EffectUtil.forceAddEffect(entity, new StatusEffectInstance(LHEffects.CLEANSE, 40, 0, true, true), entity);
+//        entity.addStatusEffect(new StatusEffectInstance(LHEffects.CLEANSE, 40, 0, true, true), entity);
     }
 
     @Override

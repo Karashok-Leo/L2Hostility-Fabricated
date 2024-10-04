@@ -5,6 +5,7 @@ import karashokleo.l2hostility.content.network.S2CEffectAura;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHNetworking;
+import karashokleo.leobrary.effect.api.util.EffectUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -41,7 +42,8 @@ public class AuraEffectTrait extends MobTrait
             if (e instanceof PlayerEntity pl && pl.getAbilities().creativeMode) continue;
             if (e.distanceTo(mob) > range) continue;
             if (!canApply(e)) continue;
-            e.addStatusEffect(new StatusEffectInstance(effect.get(), 40, level - 1, true, true), mob);
+            EffectUtil.forceAddEffect(e, new StatusEffectInstance(effect.get(), 40, level - 1, true, true), mob);
+//            e.addStatusEffect(new StatusEffectInstance(effect.get(), 40, level - 1, true, true), mob);
         }
     }
 }

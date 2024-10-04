@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.base;
 
 import karashokleo.l2hostility.init.LHTexts;
+import karashokleo.leobrary.effect.api.util.EffectUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -27,7 +28,8 @@ public class SelfEffectTrait extends MobTrait
     public void serverTick(LivingEntity mob, int level)
     {
         if (mob.age % TICK_REFRESH_INTERNAL == 0)
-            mob.addStatusEffect(new StatusEffectInstance(effect.get(), EFFECT_DURATION, level - 1), mob);
+            EffectUtil.forceAddEffect(mob, new StatusEffectInstance(effect.get(), EFFECT_DURATION, level - 1), mob);
+//            mob.addStatusEffect(new StatusEffectInstance(effect.get(), EFFECT_DURATION, level - 1), mob);
     }
 
     @Override

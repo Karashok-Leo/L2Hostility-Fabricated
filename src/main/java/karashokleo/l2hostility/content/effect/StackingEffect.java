@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 public interface StackingEffect
 {
+    // Used by SharpBladeEnchantment
     default void addTo(LivingEntity target, int dur, int max, @Nullable Entity source)
     {
         var old = target.getStatusEffect(asEffect());
