@@ -22,6 +22,8 @@ import java.util.List;
 
 public class RingOfDivinity extends DamageListenerTrinketItem
 {
+    private static final int TICK_REFRESH_INTERNAL = 10;
+
     public RingOfDivinity(Settings settings)
     {
         super(settings);
@@ -40,7 +42,8 @@ public class RingOfDivinity extends DamageListenerTrinketItem
     @Override
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
-        EffectUtil.forceAddEffect(entity, new StatusEffectInstance(LHEffects.CLEANSE, 40, 0, true, true), entity);
+        if (entity.age % TICK_REFRESH_INTERNAL == 0)
+            EffectUtil.forceAddEffect(entity, new StatusEffectInstance(LHEffects.CLEANSE, 40, 0, true, true), entity);
 //        entity.addStatusEffect(new StatusEffectInstance(LHEffects.CLEANSE, 40, 0, true, true), entity);
     }
 

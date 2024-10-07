@@ -108,6 +108,7 @@ public class WeaponConfig
 
     public void merge(WeaponConfig config)
     {
+        armors.addAll(config.armors);
         melee_weapons.addAll(config.melee_weapons);
         ranged_weapons.addAll(config.ranged_weapons);
         weapon_enchantments.addAll(config.weapon_enchantments);

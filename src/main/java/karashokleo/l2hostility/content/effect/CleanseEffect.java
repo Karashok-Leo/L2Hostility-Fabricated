@@ -5,6 +5,7 @@ import karashokleo.effect_overlay.api.IconOverlayEffect;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.init.LHTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
@@ -21,17 +22,21 @@ public class CleanseEffect extends StatusEffect implements IconOverlayEffect
     private static int recursive = 0;
 
     /*
-    * 判断效果是否不受净化影响
-    * true: 保留该效果
-    * false: 净化该效果
-    */
+     * 判断效果是否不受净化影响
+     * true: 保留该效果
+     * false: 净化该效果
+     */
     public static boolean isInCleanseBlacklist(StatusEffectInstance effectInstance, LivingEntity entity)
     {
-        if (Registries.STATUS_EFFECT.getEntry(effectInstance.getEffectType()).isIn(LHTags.CLEANSE_BLACKLIST) ||
-                TrinketCompat.isEffectValidInTrinket(effectInstance, entity))
+        StatusEffect type = effectInstance.getEffectType();
+        if (Registries.STATUS_EFFECT
+                    .getEntry(type)
+                    .isIn(LHTags.CLEANSE_BLACKLIST) ||
+            TrinketCompat.isEffectValidInTrinket(effectInstance, entity))
             return true;
-        return !LHConfig.common().effects.cleansePredicate.contains(effectInstance.getEffectType().getCategory());
-
+        return type == LHEffects.CLEANSE ||
+               !LHConfig.common().effects.cleansePredicate
+                       .contains(type.getCategory());
     }
 
     public static void clearOnEntity(LivingEntity entity)
