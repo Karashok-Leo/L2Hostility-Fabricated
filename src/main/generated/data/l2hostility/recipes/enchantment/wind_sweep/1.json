@@ -1,0 +1,36 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:wind_sweep",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:storm_core"
+    },
+    {
+      "item": "l2hostility:shulkerate_nugget"
+    },
+    {
+      "item": "l2hostility:shulkerate_nugget"
+    },
+    {
+      "item": "l2hostility:shulkerate_nugget"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "input": {
+    "enchantment": "l2hostility:wind_sweep",
+    "min_level": 0
+  },
+  "level": 1
+}

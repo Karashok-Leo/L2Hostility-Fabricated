@@ -1,4 +1,4 @@
-package karashokleo.l2hostility.content.enchantment;
+package karashokleo.l2hostility.content.enchantment.core;
 
 import io.github.fabricators_of_create.porting_lib.entity.PartEntity;
 import net.minecraft.enchantment.EnchantmentTarget;

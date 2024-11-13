@@ -28,6 +28,7 @@ public enum LHCplTexts
     BURNT_COUNT("jei.burnt.count", "One in %s chance of conversion", "1/%s的概率转化", 1),
 
     FLOAT("tooltip.misc.float", "This item will float in the air.", "这个物品会悬浮在空中。", 0),
+    BANNED_ENCH("tooltip.misc.banned_ench", "Disabled", "已禁用", 0),
 
     WARP_RECORD("tooltip.misc.warp_record", "Right click to record position. After that, right click to teleport. Durability: %s", "右键记录坐标，再次右键传送。耐久：%s", 1),
     WARP_TELEPORT("tooltip.misc.warp_teleport", "Right click to teleport. Durability: %s", "右键传送。剩余耐久：%s", 1),

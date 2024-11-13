@@ -12,8 +12,11 @@
   ],
   "client": [
     "ArmorFeatureRendererMixin",
+    "BackgroundRendererMixin",
+    "ClientPlayerEntityMixin",
     "EntityRendererMixin",
-    "HeldItemFeatureRendererMixin"
+    "HeldItemFeatureRendererMixin",
+    "InGameOverlayRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,0 +1,40 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:fire_reject",
+  "force": false,
+  "ingredients": [
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:fire_protection",
+      "min_level": 4
+    },
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:fire_protection",
+      "min_level": 4
+    },
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:protection",
+      "min_level": 4
+    },
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:protection",
+      "min_level": 4
+    },
+    {
+      "item": "l2hostility:soul_flame"
+    },
+    {
+      "item": "l2hostility:soul_flame"
+    },
+    {
+      "item": "l2hostility:hard_ice"
+    },
+    {
+      "item": "l2hostility:hard_ice"
+    }
+  ],
+  "level": 1
+}

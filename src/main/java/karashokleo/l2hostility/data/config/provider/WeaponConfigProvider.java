@@ -3,6 +3,7 @@ package karashokleo.l2hostility.data.config.provider;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.data.Constants;
 import karashokleo.l2hostility.data.config.WeaponConfig;
+import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.leobrary.data.AbstractDataProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.enchantment.Enchantments;
@@ -64,25 +65,25 @@ public class WeaponConfigProvider extends AbstractDataProvider
                 .putArmorEnchantment(70, 0.3f, Enchantments.BINDING_CURSE)
         );
 
-//        collector.add(L2Hostility.WEAPON, new Identifier(L2Complements.MODID, "l2complements"), new WeaponConfig()
-//                .putWeaponEnch(100, 0.02f,
-//                        LCEnchantments.CURSE_BLADE.get(),
-//                        LCEnchantments.SHARP_BLADE.get(),
-//                        LCEnchantments.FLAME_BLADE.get(),
-//                        LCEnchantments.ICE_BLADE.get()
-//                )
-//                .putWeaponEnch(200, 0.01f,
-//                        LCEnchantments.VOID_TOUCH.get()
-//                )
-//                .putArmorEnch(70, 0.2f,
-//                        LCEnchantments.STABLE_BODY.get(),
-//                        LCEnchantments.SNOW_WALKER.get()
-//                )
-//                .putArmorEnch(100, 0.02f,
-//                        LCEnchantments.ICE_THORN.get(),
-//                        LCEnchantments.FLAME_THORN.get(),
-//                        LCEnchantments.SAFEGUARD.get()
-//                )
-//        );
+        add(L2Hostility.id("l2complements"), new WeaponConfig()
+                        .putWeaponEnchantment(100, 0.02f,
+                                LHEnchantments.CURSE_BLADE,
+                                LHEnchantments.SHARP_BLADE,
+                                LHEnchantments.FLAME_BLADE,
+                                LHEnchantments.ICE_BLADE
+                        )
+                        .putWeaponEnchantment(200, 0.01f,
+                                LHEnchantments.VOID_TOUCH
+                        )
+                        .putArmorEnchantment(70, 0.2f,
+                                LHEnchantments.STABLE_BODY
+//                        LHEnchantments.SNOW_WALKER
+                        )
+                        .putArmorEnchantment(100, 0.02f,
+                                LHEnchantments.ICE_THORN,
+                                LHEnchantments.FLAME_THORN,
+                                LHEnchantments.SAFEGUARD
+                        )
+        );
     }
 }

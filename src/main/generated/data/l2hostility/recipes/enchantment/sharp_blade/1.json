@@ -1,0 +1,36 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:sharp_blade",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:cursed_droplet"
+    },
+    {
+      "item": "l2hostility:explosion_shard"
+    },
+    {
+      "item": "l2hostility:explosion_shard"
+    },
+    {
+      "item": "l2hostility:explosion_shard"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "input": {
+    "enchantment": "l2hostility:sharp_blade",
+    "min_level": 0
+  },
+  "level": 1
+}

@@ -1,0 +1,36 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:safeguard",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:shulkerate_nugget"
+    },
+    {
+      "item": "l2hostility:shulkerate_nugget"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "input": {
+    "enchantment": "l2hostility:safeguard",
+    "min_level": 0
+  },
+  "level": 1
+}

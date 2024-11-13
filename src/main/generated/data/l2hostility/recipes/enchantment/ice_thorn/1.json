@@ -1,19 +1,16 @@
 {
   "type": "enchantment_infusion:enchantment_infusion",
-  "enchantment": "l2hostility:soul_flame_blade",
+  "enchantment": "l2hostility:ice_thorn",
   "force": false,
   "ingredients": [
     {
-      "item": "l2hostility:soul_flame"
+      "item": "l2hostility:hard_ice"
     },
     {
-      "item": "l2hostility:soul_flame"
+      "item": "l2hostility:hard_ice"
     },
     {
-      "item": "l2hostility:soul_flame"
-    },
-    {
-      "item": "l2hostility:soul_flame"
+      "item": "minecraft:lapis_lazuli"
     },
     {
       "item": "minecraft:lapis_lazuli"
@@ -25,5 +22,9 @@
       "item": "minecraft:lapis_lazuli"
     }
   ],
-  "level": 2
+  "input": {
+    "enchantment": "minecraft:thorns",
+    "min_level": 3
+  },
+  "level": 1
 }

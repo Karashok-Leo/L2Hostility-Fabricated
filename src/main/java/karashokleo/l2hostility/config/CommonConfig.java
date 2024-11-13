@@ -331,51 +331,80 @@ public class CommonConfig implements ConfigData
 
     public static class Complements
     {
-        public boolean enableVanillaItemRecipe = true;
-        public boolean enableSpawnEggRecipe = true;
+        //        public boolean enableVanillaItemRecipe = true;
+//        public boolean enableSpawnEggRecipe = true;
         public boolean enableImmunityEnchantments = true;
 
         @ConfigEntry.Gui.CollapsibleObject
         public Materials materials = new Materials();
 
-        @ConfigEntry.Gui.CollapsibleObject
-        public FireCharge fireCharge = new FireCharge();
+//        @ConfigEntry.Gui.CollapsibleObject
+//        public FireCharge fireCharge = new FireCharge();
 
         @ConfigEntry.Gui.CollapsibleObject
         public Properties properties = new Properties();
 
         public static class Materials
         {
+            @Comment("Requirement for obtaining Captured Wind. Unit: Block per Tick")
             public double windSpeed = 10;
+            @Comment("Requirement for void eye drop")
             public int belowVoid = 16;
+            @Comment("Requirement for sun membrane drop")
             public int phantomHeight = 200;
+            @Comment("Requirement for explosion shard drop")
             public int explosionDamage = 80;
-            public boolean enableSpaceShard = true;
+            @Comment("Requirement for space shard drop")
             public int spaceDamage = 16384;
+            public boolean enableSpaceShard = true;
         }
 
         public static class FireCharge
         {
+            @Comment("Soul Fire Charge Duration")
             public int soulFireChargeDuration = 60;
+            @Comment("Black Fire Charge Duration")
             public int blackFireChargeDuration = 100;
+            @Comment("Strong Fire Charge Power")
             public int strongFireChargePower = 2;
+            @Comment("Strong Fire Charge Breaks Block")
+            public boolean strongFireChargeBreakBlock = true;
         }
 
         public static class Properties
         {
-            public int totemicHealDuration = 100;
-            public int totemicHealAmount = 1;
+            //            @Comment("Totemic Armor healing interval")
+//            public int totemicHealDuration = 100;
+//            @Comment("Totemic Armor healing amount")
+//            public int totemicHealAmount = 1;
+            @Comment("Wind Sweep enchantment increment to sweep hit box")
             public double windSweepIncrement = 1;
+            @Comment("Damage factor of emerald splash")
             public double emeraldDamageFactor = 0.5;
+            @Comment("Base range for emerald splash")
             public int emeraldBaseRange = 10;
+            //            @Comment("Sonic Shooter Damage")
+//            public int sonicShooterDamage = 10;
+//            @Comment("Hellfire Wand Damage")
+//            public int hellfireWandDamage = 10;
+            @Comment("Base duration for iceBlade")
             public int iceEnchantDuration = 100;
+            @Comment("Duration for flameBlade")
             public int flameEnchantDuration = 60;
+            @Comment("Base duration for sharpBlade")
             public int bleedEnchantDuration = 80;
+            @Comment("Base duration for cursedBlade")
             public int curseEnchantDuration = 100;
-            public int bleedEnchantMax = 3;
+            @Comment("Max effect level for sharpBlade")
+            public int bleedEnchantMax = 10;
+            @Comment("Void Touch chance for true damage")
             public double voidTouchChance = 0.05;
+            @Comment("Void Touch chance for true damage if bypass armor or magic")
             public double voidTouchChanceBonus = 0.5;
-            public double mobTypeBonus = 1D;
+            //            @Comment("Bonus damage factor for specific materials against specific mob types")
+//            public double mobTypeBonus = 1D;
+            @Comment("Damage factor for lifeSync (damage to user per durability cost)")
+            public double lifeSyncFactor = 1;
         }
     }
 

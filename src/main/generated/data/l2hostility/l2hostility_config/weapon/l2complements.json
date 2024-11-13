@@ -1,0 +1,42 @@
+{
+  "armor_enchantments": [
+    {
+      "chance": 0.2,
+      "enchantments": [
+        "l2hostility:stable_body"
+      ],
+      "level": 70
+    },
+    {
+      "chance": 0.02,
+      "enchantments": [
+        "l2hostility:ice_thorn",
+        "l2hostility:flame_thorn",
+        "l2hostility:safeguard"
+      ],
+      "level": 100
+    }
+  ],
+  "armors": [],
+  "melee_weapons": [],
+  "ranged_weapons": [],
+  "weapon_enchantments": [
+    {
+      "chance": 0.02,
+      "enchantments": [
+        "l2hostility:cursed_blade",
+        "l2hostility:sharp_blade",
+        "l2hostility:soul_flame_blade",
+        "l2hostility:ice_blade"
+      ],
+      "level": 100
+    },
+    {
+      "chance": 0.01,
+      "enchantments": [
+        "l2hostility:void_touch"
+      ],
+      "level": 200
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-package karashokleo.l2hostility.content.enchantment;
+package karashokleo.l2hostility.content.enchantment.armors;
 
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHEffects;
@@ -6,11 +6,15 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 
-public class IceBladeEnchantment extends AbstractBladeEnchantment
+public class IceThornEnchantment extends AbstractThornEnchantment
 {
-    public IceBladeEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot[] slotTypes)
+    public IceThornEnchantment()
     {
-        super(weight, target, slotTypes);
+        super(
+                Rarity.VERY_RARE,
+                EnchantmentTarget.ARMOR,
+                new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}
+        );
     }
 
     @Override

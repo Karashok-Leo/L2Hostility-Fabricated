@@ -1,0 +1,36 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:dampened",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:sculkium_nugget"
+    },
+    {
+      "item": "l2hostility:sculkium_nugget"
+    },
+    {
+      "item": "l2hostility:sculkium_nugget"
+    },
+    {
+      "item": "l2hostility:sculkium_nugget"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "input": {
+    "enchantment": "l2hostility:dampened",
+    "min_level": 0
+  },
+  "level": 1
+}

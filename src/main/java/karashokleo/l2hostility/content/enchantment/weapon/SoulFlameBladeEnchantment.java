@@ -1,16 +1,21 @@
-package karashokleo.l2hostility.content.enchantment;
+package karashokleo.l2hostility.content.enchantment.weapon;
 
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHEffects;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 
 public class SoulFlameBladeEnchantment extends AbstractBladeEnchantment
 {
-    public SoulFlameBladeEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot[] slotTypes)
+    public SoulFlameBladeEnchantment()
     {
-        super(weight, target, slotTypes);
+        super(
+                Enchantment.Rarity.VERY_RARE,
+                EnchantmentTarget.WEAPON,
+                new EquipmentSlot[]{EquipmentSlot.MAINHAND}
+        );
     }
 
     @Override

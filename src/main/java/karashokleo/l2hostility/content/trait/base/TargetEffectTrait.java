@@ -25,7 +25,7 @@ public class TargetEffectTrait extends MobTrait
     @Override
     public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
     {
-        event.getEntity().addStatusEffect(func.apply(level));
+        event.getEntity().addStatusEffect(func.apply(level), entity);
     }
 
     @Override

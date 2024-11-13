@@ -1,0 +1,40 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:explosion_reject",
+  "force": false,
+  "ingredients": [
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:blast_protection",
+      "min_level": 4
+    },
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:blast_protection",
+      "min_level": 4
+    },
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:protection",
+      "min_level": 4
+    },
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:protection",
+      "min_level": 4
+    },
+    {
+      "item": "l2hostility:explosion_shard"
+    },
+    {
+      "item": "l2hostility:explosion_shard"
+    },
+    {
+      "item": "minecraft:crying_obsidian"
+    },
+    {
+      "item": "minecraft:crying_obsidian"
+    }
+  ],
+  "level": 1
+}

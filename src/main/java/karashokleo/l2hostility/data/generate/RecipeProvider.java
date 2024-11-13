@@ -1120,17 +1120,96 @@ public class RecipeProvider extends FabricRecipeProvider
 
             enchantmentAdd(
                     builder -> builder
-                            .withPedestalItem(2, Items.FERMENTED_SPIDER_EYE)
-                            .withPedestalItem(2, ComplementItems.CURSED_DROPLET)
+                            .withPedestalItem(3, Items.OBSIDIAN)
+                            .withPedestalItem(1, Items.CRYING_OBSIDIAN)
                             .withPedestalItem(4, Items.LAPIS_LAZULI),
-                    LHEnchantments.CURSE_BLADE, 1, exporter
+                    LHEnchantments.STABLE_BODY, 1, exporter
+            );
+
+            enchantmentSet(
+                    builder -> builder
+                            .withTableIngredient(Enchantments.UNBREAKING, 1)
+                            .withPedestalItem(1, Items.DIAMOND)
+                            .withPedestalItem(3, Items.LAPIS_LAZULI),
+                    LHEnchantments.DURABLE_ARMOR, 1, exporter
+            );
+
+            enchantmentSet(
+                    builder -> builder
+                            .withTableIngredient(Enchantments.UNBREAKING, 2)
+                            .withPedestalItem(4, Items.DIAMOND)
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.DURABLE_ARMOR, 2, exporter
+            );
+
+            enchantmentSet(
+                    builder -> builder
+                            .withTableIngredient(Enchantments.UNBREAKING, 3)
+                            .withPedestalItem(1, Items.DIAMOND_HELMET)
+                            .withPedestalItem(1, Items.DIAMOND_CHESTPLATE)
+                            .withPedestalItem(1, Items.DIAMOND_LEGGINGS)
+                            .withPedestalItem(1, Items.DIAMOND_BOOTS)
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.DURABLE_ARMOR, 3, exporter
             );
 
             enchantmentAdd(
                     builder -> builder
-                            .withPedestalItem(4, ComplementItems.HARD_ICE)
+                            .withPedestalItem(3, Items.WITHER_ROSE)
+                            .withPedestalItem(1, ComplementItems.FORCE_FIELD)
                             .withPedestalItem(4, Items.LAPIS_LAZULI),
-                    LHEnchantments.ICE_BLADE, 1, exporter
+                    LHEnchantments.LIFE_SYNC, 1, exporter
+            );
+
+            enchantmentAdd(
+                    builder -> builder
+                            .withPedestalItem(2, Items.WEEPING_VINES)
+                            .withPedestalItem(2, Items.TWISTING_VINES)
+                            .withPedestalItem(2, Items.ROTTEN_FLESH)
+                            .withPedestalItem(2, Items.LAPIS_LAZULI),
+                    LHEnchantments.LIFE_MENDING, 1, exporter
+            );
+
+            enchantmentAdd(
+                    builder -> builder
+                            .withPedestalItem(2, ComplementItems.SHULKERATE.nugget())
+                            .withPedestalItem(2, Items.NETHERITE_SCRAP)
+                            .withPedestalItem(2, Items.AMETHYST_SHARD)
+                            .withPedestalItem(2, Items.LAPIS_LAZULI),
+                    LHEnchantments.SAFEGUARD, 1, exporter
+            );
+
+            enchantmentAdd(
+                    builder -> builder
+                            .withPedestalItem(3, ComplementItems.SHULKERATE.ingot())
+                            .withPedestalItem(2, ComplementItems.WARDEN_BONE_SHARD)
+                            .withPedestalItem(1, ComplementItems.EXPLOSION_SHARD)
+                            .withPedestalItem(2, Items.LAPIS_LAZULI),
+                    LHEnchantments.HARDENED, 1, exporter
+            );
+
+            enchantmentAdd(
+                    builder -> builder
+                            .withPedestalItem(4, ComplementItems.SCULKIUM.nugget())
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.DAMPENED, 1, exporter
+            );
+
+            enchantmentSet(
+                    builder -> builder
+                            .withTableIngredient(LHEnchantments.HARDENED, 1)
+                            .withPedestalItem(1, ComplementItems.SPACE_SHARD)
+                            .withPedestalItem(3, ComplementItems.ETERNIUM.ingot())
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.ETERNAL, 1, exporter
+            );
+
+            enchantmentAdd(
+                    builder -> builder
+                            .withPedestalItem(1, ComplementItems.STORM_CORE)
+                            .withPedestalItem(3, ComplementItems.SHULKERATE.nugget())
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.WIND_SWEEP, 1, exporter
             );
 
             enchantmentSet(
@@ -1141,12 +1220,119 @@ public class RecipeProvider extends FabricRecipeProvider
                     LHEnchantments.FLAME_BLADE, 1, exporter
             );
 
+            enchantmentAdd(
+                    builder -> builder
+                            .withPedestalItem(4, ComplementItems.HARD_ICE)
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.ICE_BLADE, 1, exporter
+            );
+
+            enchantmentAdd(
+                    builder -> builder
+                            .withPedestalItem(1, ComplementItems.CURSED_DROPLET)
+                            .withPedestalItem(3, ComplementItems.EXPLOSION_SHARD)
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.SHARP_BLADE, 1, exporter
+            );
+
+            enchantmentAdd(
+                    builder -> builder
+                            .withPedestalItem(2, Items.FERMENTED_SPIDER_EYE)
+                            .withPedestalItem(2, ComplementItems.CURSED_DROPLET)
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.CURSE_BLADE, 1, exporter
+            );
+
             enchantmentSet(
                     builder -> builder
-                            .withPedestalItem(4, ComplementItems.SOUL_FLAME)
-                            .withPedestalItem(3, Items.LAPIS_LAZULI),
-                    LHEnchantments.FLAME_BLADE, 2, exporter
+                            .withTableIngredient(Enchantments.THORNS, 3)
+                            .withPedestalItem(2, ComplementItems.HARD_ICE)
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.ICE_THORN, 1, exporter
             );
+
+            enchantmentSet(
+                    builder -> builder
+                            .withTableIngredient(Enchantments.THORNS, 3)
+                            .withPedestalItem(2, ComplementItems.SOUL_FLAME)
+                            .withPedestalItem(4, Items.LAPIS_LAZULI),
+                    LHEnchantments.FLAME_THORN, 1, exporter
+            );
+
+            enchantmentAdd(
+                    builder -> builder
+                            .withPedestalItem(2, ComplementItems.VOID_EYE)
+                            .withPedestalItem(2, ComplementItems.SUN_MEMBRANE)
+                            .withPedestalItem(4, ComplementItems.RESONANT_FEATHER),
+                    LHEnchantments.VOID_TOUCH, 1, exporter
+            );
+
+            ID_UTIL.pushAndPop("immune/", () ->
+            {
+                enchantmentSet(
+                        builder -> builder
+                                .withTableIngredient(Enchantments.INFINITY, 1)
+                                .withPedestalItem(2, EnchantmentIngredient.of(Enchantments.PROJECTILE_PROTECTION, 4))
+                                .withPedestalItem(2, EnchantmentIngredient.of(Enchantments.PROTECTION, 4))
+                                .withPedestalItem(4, ComplementItems.FORCE_FIELD),
+                        LHEnchantments.ENCH_PROJECTILE, 1, exporter
+                );
+
+                enchantmentSet(
+                        builder -> builder
+                                .withPedestalItem(2, EnchantmentIngredient.of(Enchantments.FIRE_PROTECTION, 4))
+                                .withPedestalItem(2, EnchantmentIngredient.of(Enchantments.PROTECTION, 4))
+                                .withPedestalItem(2, ComplementItems.SOUL_FLAME)
+                                .withPedestalItem(2, ComplementItems.HARD_ICE),
+                        LHEnchantments.ENCH_FIRE, 1, exporter
+                );
+
+                enchantmentSet(
+                        builder -> builder
+                                .withPedestalItem(2, EnchantmentIngredient.of(Enchantments.PROTECTION, 4))
+                                .withPedestalItem(2, ComplementItems.SUN_MEMBRANE)
+                                .withPedestalItem(2, ComplementItems.VOID_EYE)
+                                .withPedestalItem(2, ComplementItems.CAPTURED_WIND),
+                        LHEnchantments.ENCH_ENVIRONMENT, 1, exporter
+                );
+
+                enchantmentSet(
+                        builder -> builder
+                                .withPedestalItem(2, EnchantmentIngredient.of(Enchantments.BLAST_PROTECTION, 4))
+                                .withPedestalItem(2, EnchantmentIngredient.of(Enchantments.PROTECTION, 4))
+                                .withPedestalItem(2, ComplementItems.EXPLOSION_SHARD)
+                                .withPedestalItem(2, Items.CRYING_OBSIDIAN),
+                        LHEnchantments.ENCH_EXPLOSION, 1, exporter
+                );
+
+                enchantmentSet(
+                        builder -> builder
+                                .withPedestalItem(2, EnchantmentIngredient.of(Enchantments.PROTECTION, 4))
+                                .withPedestalItem(2, ComplementItems.VOID_EYE)
+                                .withPedestalItem(2, ComplementItems.FORCE_FIELD)
+                                .withPedestalItem(2, ComplementItems.RESONANT_FEATHER),
+                        LHEnchantments.ENCH_MAGIC, 1, exporter
+                );
+
+                enchantmentSet(
+                        builder -> builder
+                                .withTableIngredient(LHEnchantments.ENCH_ENVIRONMENT, 1)
+                                .withPedestalItem(1, EnchantmentIngredient.of(LHEnchantments.ENCH_FIRE, 1))
+                                .withPedestalItem(1, EnchantmentIngredient.of(LHEnchantments.ENCH_MAGIC, 1))
+                                .withPedestalItem(1, EnchantmentIngredient.of(LHEnchantments.ENCH_EXPLOSION, 1))
+                                .withPedestalItem(1, EnchantmentIngredient.of(LHEnchantments.ENCH_PROJECTILE, 1))
+                                .withPedestalItem(4, ComplementItems.FORCE_FIELD),
+                        LHEnchantments.ENCH_INVINCIBLE, 1, exporter
+                );
+
+                enchantmentSet(
+                        builder -> builder
+                                .withTableIngredient(Enchantments.PROTECTION, 4)
+                                .withPedestalItem(2, Items.NETHER_STAR)
+                                .withPedestalItem(6, Items.END_ROD),
+                        LHEnchantments.ENCH_MATES, 1, exporter
+                );
+            });
         });
 
         RecipeTemplate.shaped(LHBlocks.SPAWNER.item(), 1, Items.NETHER_STAR)

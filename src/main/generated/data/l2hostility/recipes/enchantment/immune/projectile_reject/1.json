@@ -1,0 +1,44 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:projectile_reject",
+  "force": false,
+  "ingredients": [
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:projectile_protection",
+      "min_level": 4
+    },
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:projectile_protection",
+      "min_level": 4
+    },
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:protection",
+      "min_level": 4
+    },
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:protection",
+      "min_level": 4
+    },
+    {
+      "item": "l2hostility:force_field"
+    },
+    {
+      "item": "l2hostility:force_field"
+    },
+    {
+      "item": "l2hostility:force_field"
+    },
+    {
+      "item": "l2hostility:force_field"
+    }
+  ],
+  "input": {
+    "enchantment": "minecraft:infinity",
+    "min_level": 1
+  },
+  "level": 1
+}

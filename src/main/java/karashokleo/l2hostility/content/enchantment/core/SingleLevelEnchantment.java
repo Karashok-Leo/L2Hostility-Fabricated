@@ -1,4 +1,4 @@
-package karashokleo.l2hostility.content.enchantment;
+package karashokleo.l2hostility.content.enchantment.core;
 
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;

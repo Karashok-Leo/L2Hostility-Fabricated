@@ -1,0 +1,36 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:hardened",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:shulkerate_ingot"
+    },
+    {
+      "item": "l2hostility:shulkerate_ingot"
+    },
+    {
+      "item": "l2hostility:shulkerate_ingot"
+    },
+    {
+      "item": "l2hostility:warden_bone_shard"
+    },
+    {
+      "item": "l2hostility:warden_bone_shard"
+    },
+    {
+      "item": "l2hostility:explosion_shard"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "input": {
+    "enchantment": "l2hostility:hardened",
+    "min_level": 0
+  },
+  "level": 1
+}

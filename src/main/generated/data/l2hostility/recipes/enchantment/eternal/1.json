@@ -1,0 +1,36 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:eternal",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:space_shard"
+    },
+    {
+      "item": "l2hostility:eternium_ingot"
+    },
+    {
+      "item": "l2hostility:eternium_ingot"
+    },
+    {
+      "item": "l2hostility:eternium_ingot"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "input": {
+    "enchantment": "l2hostility:hardened",
+    "min_level": 1
+  },
+  "level": 1
+}

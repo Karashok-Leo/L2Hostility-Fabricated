@@ -1,5 +1,6 @@
-package karashokleo.l2hostility.content.enchantment;
+package karashokleo.l2hostility.content.enchantment.weapon;
 
+import karashokleo.l2hostility.content.enchantment.core.BattleEnchantment;
 import karashokleo.leobrary.effect.api.util.EffectUtil;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;

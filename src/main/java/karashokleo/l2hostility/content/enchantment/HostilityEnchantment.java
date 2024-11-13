@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.enchantment;
 
+import karashokleo.l2hostility.content.enchantment.core.UnobtainableEnchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 

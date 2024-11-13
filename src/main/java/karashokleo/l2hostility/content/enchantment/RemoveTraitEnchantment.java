@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.enchantment;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.content.enchantment.core.HitTargetEnchantment;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
