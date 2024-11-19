@@ -19,11 +19,7 @@ public class FlameEffect extends StatusEffect implements IconOverlayEffect
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier)
     {
-        DamageSource source = new DamageSource(
-                entity.getDamageSources().registry.entryOf(LHDamageTypes.SOUL_FLAME),
-                null,
-                entity.getLastAttacker()
-        );
+        DamageSource source = entity.getDamageSources().create(LHDamageTypes.SOUL_FLAME);
         entity.damage(source, 2 << amplifier);
     }
 

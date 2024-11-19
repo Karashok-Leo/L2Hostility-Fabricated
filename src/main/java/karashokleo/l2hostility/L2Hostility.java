@@ -39,6 +39,7 @@ public class L2Hostility implements ModInitializer
         LHTriggers.register();
         LHMiscs.register();
         ServerLifecycleEvents.SERVER_STARTED.register(server -> SERVER = server);
+        LOGGER.info("Hello L2Hostility Fabricated!");
     }
 
     public static Identifier id(String path)
