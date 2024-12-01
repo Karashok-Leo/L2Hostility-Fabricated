@@ -88,7 +88,7 @@ public class ItemPopulator
     }
 
     // 装备附魔
-    public static void fillEnch(int level, Random source, ItemStack stack, EquipmentSlot slot)
+    public static void fillEnchantments(int level, Random source, ItemStack stack, EquipmentSlot slot)
     {
         var config = LHData.weapons;
         if (slot == EquipmentSlot.OFFHAND) return;
@@ -142,7 +142,7 @@ public class ItemPopulator
                 stack = EnchantmentHelper.enchant(r, stack, (int) lvl, false);
             }
             if (LHConfig.common().scaling.allowExtraEnchantments)
-                fillEnch(cap.getLevel(), le.getRandom(), stack, e);
+                fillEnchantments(cap.getLevel(), le.getRandom(), stack, e);
             le.equipStack(e, stack);
         }
         var config = LHData.entities.get(le.getType());

@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(AnvilScreenHandler.class)
 public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler
@@ -32,28 +31,25 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler
 
     @Inject(
             method = "updateResult",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/enchantment/EnchantmentHelper;get(Lnet/minecraft/item/ItemStack;)Ljava/util/Map;",
-                    ordinal = 0
-            ),
-            locals = LocalCapture.CAPTURE_FAILEXCEPTION,
+            at = @At("HEAD"),
             cancellable = true
     )
-    private void inject_updateResult(CallbackInfo ci, ItemStack copy, int i, int j, int k, ItemStack book)
+    private void inject_updateResult(CallbackInfo ci)
     {
-        if (copy.getItem() instanceof BookCopy &&
-                book.getItem() instanceof EnchantedBookItem)
+        ItemStack left = this.input.getStack(0);
+        ItemStack right = this.input.getStack(1);
+        if (left.getItem() instanceof BookCopy &&
+            right.getItem() instanceof EnchantedBookItem)
         {
-            var map = EnchantmentHelper.get(book);
+            var map = EnchantmentHelper.get(right);
             int cost = 0;
             for (var e : map.entrySet())
                 cost += BookCopy.cost(e.getKey(), e.getValue());
-            ItemStack result = book.copy();
-            result.setCount(copy.getCount() + book.getCount());
+            ItemStack result = right.copy();
+            result.setCount(left.getCount() + right.getCount());
             this.output.setStack(0, result);
             this.levelCost.set(cost);
-            this.repairItemUsage = book.getCount();
+            this.repairItemUsage = right.getCount();
             ci.cancel();
         }
     }
