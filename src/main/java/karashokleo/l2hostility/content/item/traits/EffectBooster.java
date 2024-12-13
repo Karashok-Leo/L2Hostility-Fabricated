@@ -1,7 +1,7 @@
 package karashokleo.l2hostility.content.item.traits;
 
 import karashokleo.l2hostility.init.LHConfig;
-import karashokleo.l2hostility.util.EffectBuilder;
+import karashokleo.leobrary.effect.api.util.StatusEffectInstanceBuilder;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -44,8 +44,10 @@ public class EffectBooster
                 if (current < min) continue;
                 int max = Math.min(maxTime, (int) (current * factor));
                 if (max > current)
-                    new EffectBuilder(e).setDuration(max);
-                target.setStatusEffect(e, null);
+                {
+                    StatusEffectInstance newEffect = new StatusEffectInstanceBuilder(e).setDuration(max).build();
+                    target.setStatusEffect(newEffect, null);
+                }
             }
         }
     }
@@ -60,8 +62,8 @@ public class EffectBooster
             {
                 int current = e.getDuration();
                 if (current < min) continue;
-                new EffectBuilder(e).setDuration(StatusEffectInstance.INFINITE);
-                target.setStatusEffect(e, null);
+                StatusEffectInstance newEffect = new StatusEffectInstanceBuilder(e).setDuration(StatusEffectInstance.INFINITE).build();
+                target.setStatusEffect(newEffect, null);
             }
         }
     }

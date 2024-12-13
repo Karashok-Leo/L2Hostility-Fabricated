@@ -2,12 +2,11 @@ package karashokleo.l2hostility.content.item.trinket.ring;
 
 import dev.emi.trinkets.api.SlotReference;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
-import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
 import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.l2hostility.init.LHTexts;
-import karashokleo.leobrary.effect.api.util.EffectUtil;
+import karashokleo.l2hostility.util.EffectHelper;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -46,11 +45,7 @@ public class RingOfDivinity extends DamageListenerTrinketItem
         if (entity.age % TICK_REFRESH_INTERNAL == 0)
         {
             StatusEffectInstance newEffect = new StatusEffectInstance(LHEffects.CLEANSE, 40, 0, true, true);
-            if (EffectUtil.forceAddEffect(entity, newEffect, entity))
-            {
-                StatusEffectInstance oldEffect = entity.getActiveStatusEffects().get(newEffect.getEffectType());
-                new MobEffectEvent.Added(entity, oldEffect, newEffect, entity).sendEvent();
-            }
+            EffectHelper.forceAddEffectWithEvent(entity, newEffect, entity);
         }
     }
 

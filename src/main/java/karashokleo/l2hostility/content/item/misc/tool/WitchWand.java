@@ -1,11 +1,11 @@
 package karashokleo.l2hostility.content.item.misc.tool;
 
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.trait.base.TargetEffectTrait;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.l2hostility.init.LHTraits;
-import karashokleo.l2hostility.util.EffectBuilder;
+import karashokleo.leobrary.effect.api.util.StatusEffectInstanceBuilder;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,7 +34,7 @@ public class WitchWand extends Item
         TargetEffectTrait trait = (TargetEffectTrait) list.get(random.nextInt(list.size()));
         int rank = Math.min(maxRank, trait.getConfig().max_rank);
         var ans = trait.func.apply(rank);
-        return new EffectBuilder(ans).setDuration(ans.getDuration() * LHConfig.common().items.witchWandFactor).build();
+        return new StatusEffectInstanceBuilder(ans).setDuration(ans.getDuration() * LHConfig.common().items.witchWandFactor).build();
     }
 
     public WitchWand(Settings settings)

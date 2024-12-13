@@ -1,12 +1,11 @@
 package karashokleo.l2hostility.content.trait.common;
 
-import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.content.network.S2CEffectAura;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHNetworking;
-import karashokleo.leobrary.effect.api.util.EffectUtil;
+import karashokleo.l2hostility.util.EffectHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -44,11 +43,7 @@ public class AuraEffectTrait extends MobTrait
             if (e.distanceTo(mob) > range) continue;
             if (!canApply(e)) continue;
             StatusEffectInstance newEffect = new StatusEffectInstance(effect.get(), 40, level - 1, true, true);
-            if (EffectUtil.forceAddEffect(e, newEffect, mob))
-            {
-                StatusEffectInstance oldEffect = e.getActiveStatusEffects().get(newEffect.getEffectType());
-                new MobEffectEvent.Added(e, oldEffect, newEffect, mob).sendEvent();
-            }
+            EffectHelper.forceAddEffectWithEvent(e, newEffect, mob);
         }
     }
 }

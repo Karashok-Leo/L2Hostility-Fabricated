@@ -1,13 +1,12 @@
 package karashokleo.l2hostility.content.item.trinket.misc;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHDamageTypes;
 import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.init.LHTexts;
-import karashokleo.leobrary.effect.api.util.EffectUtil;
+import karashokleo.l2hostility.util.EffectHelper;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -34,11 +33,7 @@ public class FlamingThorn extends DamageListenerTrinketItem
         int size = target.getActiveStatusEffects().size();
         if (size == 0) return;
         StatusEffectInstance newEffect = new StatusEffectInstance(LHEffects.FLAME, LHConfig.common().items.flameThornTime, size - 1);
-        if (EffectUtil.forceAddEffect(target, newEffect, entity))
-        {
-            StatusEffectInstance oldEffect = entity.getActiveStatusEffects().get(newEffect.getEffectType());
-            new MobEffectEvent.Added(target, oldEffect, newEffect, entity).sendEvent();
-        }
+        EffectHelper.forceAddEffectWithEvent(target, newEffect, entity);
     }
 
     @Override
