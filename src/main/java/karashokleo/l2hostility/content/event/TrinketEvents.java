@@ -1,9 +1,11 @@
 package karashokleo.l2hostility.content.event;
 
+import io.github.fabricators_of_create.porting_lib.core.event.BaseEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
@@ -12,7 +14,6 @@ import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketIt
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.event.DamageSourceCreateCallback;
-import karashokleo.leobrary.effect.api.event.EffectApplicable;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -72,9 +73,9 @@ public class TrinketEvents
         {
             DamageSource source = event.getSource();
             if (event.getEntity() instanceof PlayerEntity player &&
-                    !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-                    !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-                    TrinketCompat.hasItemInTrinket(player, TrinketItems.CURSE_PRIDE))
+                !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
+                !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
+                TrinketCompat.hasItemInTrinket(player, TrinketItems.CURSE_PRIDE))
             {
                 int level = PlayerDifficulty.get(player).getLevel().getLevel();
                 double rate = LHConfig.common().items.curse.prideHealthBonus;
@@ -114,11 +115,11 @@ public class TrinketEvents
         });
 
         // 暴怒之戒免疫
-        EffectApplicable.EVENT.register((entity, effect, cir) ->
+        MobEffectEvent.APPLICABLE.register(event ->
         {
-            if (TrinketCompat.hasItemInTrinket(entity, TrinketItems.CURSE_WRATH) &&
-                    Registries.STATUS_EFFECT.getEntry(effect.getEffectType()).isIn(LHTags.WRATH_INVULNERABILITY))
-                cir.setReturnValue(false);
+            if (TrinketCompat.hasItemInTrinket(event.getEntity(), TrinketItems.CURSE_WRATH) &&
+                Registries.STATUS_EFFECT.getEntry(event.getEffectInstance().getEffectType()).isIn(LHTags.WRATH_INVULNERABILITY))
+                event.setResult(BaseEvent.Result.DENY);
         });
     }
 }

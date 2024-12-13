@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.item.trinket.ring;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import dev.emi.trinkets.api.SlotReference;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.content.item.trinket.core.BaseTrinketItem;
 import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.init.LHTexts;
@@ -38,7 +39,13 @@ public class RingOfIncarceration extends BaseTrinketItem
         // Default Entity Interact Distance: 3.0
         double reach = ReachEntityAttributes.getAttackRange(entity, 3.0);
         for (var e : entity.getWorld().getEntitiesByType(TypeFilter.instanceOf(LivingEntity.class), entity.getBoundingBox().expand(reach), e -> entity.distanceTo(e) < reach))
-            EffectUtil.forceAddEffect(e, new StatusEffectInstance(LHEffects.STONE_CAGE, 40, 0, true, true), entity);
-//            e.addStatusEffect(new StatusEffectInstance(LHEffects.STONE_CAGE, 40, 0, true, true), entity);
+        {
+            StatusEffectInstance newEffect = new StatusEffectInstance(LHEffects.STONE_CAGE, 40, 0, true, true);
+            if (EffectUtil.forceAddEffect(e, newEffect, entity))
+            {
+                StatusEffectInstance oldEffect = entity.getActiveStatusEffects().get(newEffect.getEffectType());
+                new MobEffectEvent.Added(e, oldEffect, newEffect, entity).sendEvent();
+            }
+        }
     }
 }

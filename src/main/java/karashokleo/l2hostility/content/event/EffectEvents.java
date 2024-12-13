@@ -1,17 +1,17 @@
 package karashokleo.l2hostility.content.event;
 
+import io.github.fabricators_of_create.porting_lib.core.event.BaseEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.effect.CleanseEffect;
 import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTags;
-import karashokleo.leobrary.effect.api.event.EffectAdded;
-import karashokleo.leobrary.effect.api.event.EffectApplicable;
-import karashokleo.leobrary.effect.api.event.EffectRemove;
-import karashokleo.leobrary.effect.api.event.LivingHeal;
+import karashokleo.leobrary.effect.api.event.LivingHealCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 
@@ -20,26 +20,35 @@ public class EffectEvents
     public static void register()
     {
         // CLEANSE
-        EffectApplicable.EVENT.register((entity, effect, cir) ->
+        MobEffectEvent.APPLICABLE.register(event ->
         {
-            if (entity.hasStatusEffect(LHEffects.CLEANSE) && !CleanseEffect.isInCleanseBlacklist(effect, entity))
-                cir.setReturnValue(false);
+            LivingEntity entity = event.getEntity();
+            if (entity.hasStatusEffect(LHEffects.CLEANSE) &&
+                !CleanseEffect.isInCleanseBlacklist(event.getEffectInstance(), entity))
+                event.setResult(BaseEvent.Result.DENY);
         });
 
-        EffectAdded.EVENT.register((entity, newEffectInstance, oldEffectInstance, source, cir) ->
+        MobEffectEvent.ADDED.register(event ->
         {
-            if (entity.hasStatusEffect(LHEffects.CLEANSE) && !CleanseEffect.isInCleanseBlacklist(newEffectInstance, entity))
+            LivingEntity entity = event.getEntity();
+            if (entity.hasStatusEffect(LHEffects.CLEANSE) &&
+                !CleanseEffect.isInCleanseBlacklist(event.getEffectInstance(), entity))
                 GenericEvents.schedule(() -> CleanseEffect.clearOnEntity(entity));
         });
 
-        // CURSE
-        LivingHeal.EVENT.register((entity, amount, amountRef, ci) ->
+        MobEffectEvent.REMOVE.register(event ->
         {
+            if (event.getEffect() == LHEffects.ANTI_BUILD)
+                event.setCanceled(true);
+        });
+
+        // CURSE / LIFE MENDING
+        LivingHealCallback.EVENT.register(event ->
+        {
+            LivingEntity entity = event.getEntity();
             if (entity.hasStatusEffect(LHEffects.CURSE))
-            {
-                ci.cancel();
-                return;
-            }
+                return false;
+            float amount = event.getAmount();
             for (ItemStack stack : TrinketCompat.getItems(entity, e -> e.hasEnchantments() && e.isDamaged()))
             {
                 int lv = EnchantmentHelper.getLevel(LHEnchantments.LIFE_MENDING, stack);
@@ -55,13 +64,8 @@ public class EffectEvents
                     if (amount < 1e-3) break;
                 }
             }
-            amountRef.set(amount);
-        });
-
-        EffectRemove.EVENT.register((entity, effect, cir) ->
-        {
-            if (effect == LHEffects.ANTI_BUILD)
-                cir.setReturnValue(false);
+            event.setAmount(amount);
+            return true;
         });
 
         // 禁止放置方块

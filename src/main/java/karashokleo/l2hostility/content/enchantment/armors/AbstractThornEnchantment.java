@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.enchantment.armors;
 
+import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.content.enchantment.core.BattleEnchantment;
 import karashokleo.leobrary.effect.api.util.EffectUtil;
 import net.minecraft.enchantment.EnchantmentTarget;
@@ -20,7 +21,14 @@ public abstract class AbstractThornEnchantment extends BattleEnchantment
     {
         var le = getTarget(attacker);
         if (le != null && le != user && !user.getWorld().isClient())
-            EffectUtil.forceAddEffect(le, getEffect(level), user);
+        {
+            StatusEffectInstance newEffect = getEffect(level);
+            if (EffectUtil.forceAddEffect(le, newEffect, user))
+            {
+                StatusEffectInstance oldEffect = le.getActiveStatusEffects().get(newEffect.getEffectType());
+                new MobEffectEvent.Added(le, oldEffect, newEffect, user).sendEvent();
+            }
+        }
     }
 
     protected abstract StatusEffectInstance getEffect(int level);

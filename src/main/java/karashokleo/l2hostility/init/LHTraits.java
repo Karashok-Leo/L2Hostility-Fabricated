@@ -242,14 +242,18 @@ public class LHTraits
                 .addENDesc("When mob dies, it will split into 2 of itself with half levels but same trait. This trait reduce by 1 when split.")
                 .addZH("分裂")
                 .addZHDesc("怪物死亡时分裂，等级减半并继承所有词条。本词条分裂时等级-1")
-                .configure(config -> config.addWhitelist(
-                        EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
-                        EntityType.ZOMBIFIED_PIGLIN, EntityType.DROWNED, EntityType.HUSK,
-                        EntityType.SKELETON, EntityType.WITHER_SKELETON, EntityType.STRAY,
-                        EntityType.SPIDER, EntityType.CAVE_SPIDER,
-                        EntityType.CREEPER, EntityType.VEX,
-                        EntityType.SILVERFISH, EntityType.ENDERMITE
-                ))
+                .configure(
+                        config -> config
+                                .addBlacklist(LHTags.SEMIBOSS)
+                                .addWhitelist(
+                                        EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
+                                        EntityType.ZOMBIFIED_PIGLIN, EntityType.DROWNED, EntityType.HUSK,
+                                        EntityType.SKELETON, EntityType.WITHER_SKELETON, EntityType.STRAY,
+                                        EntityType.SPIDER, EntityType.CAVE_SPIDER,
+                                        EntityType.CREEPER, EntityType.VEX,
+                                        EntityType.SILVERFISH, EntityType.ENDERMITE
+                                )
+                )
                 .register();
         DRAIN = Entry.of(
                         "drain",

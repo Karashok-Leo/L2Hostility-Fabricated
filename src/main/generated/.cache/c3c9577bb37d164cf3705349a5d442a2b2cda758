@@ -1,4 +1,4 @@
-// 1.20.1	2024-11-13T13:46:15.8190547	L2 Hostility/Model Definitions
+// 1.20.1	2024-12-13T13:06:52.8207997	L2 Hostility/Model Definitions
 787903b9f0311061258da774b1ca33e23307b88a assets\l2hostility\models\item\soul_burner.json
 ba8303f3d0cf3332a374ead31a1187a77b1edc20 assets\l2hostility\models\item\triple_strip_cape.json
 54ec7d329a369b54157cf3d13348a880b9214075 assets\l2hostility\models\item\charm_of_looting_2.json
@@ -60,9 +60,9 @@ daf50b250dc8c7ce6cb12a093b0dd1993c52e64f assets\l2hostility\models\item\drain.js
 ab6468a3edc27534ade0b63f4f810b2cce5e97ce assets\l2hostility\models\item\greed_of_nidhoggur.json
 9490a10afb4d159d34be10805e0cc02492130193 assets\l2hostility\models\item\miracle_ingot.json
 4b946676b9f080b4ad8ee512408e6ddc64372cff assets\l2hostility\models\block\sculkium_block.json
+e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets\l2hostility\models\item\wither.json
 68e7d5144c357b421964b2c26ba688790126b811 assets\l2hostility\models\item\dispell.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets\l2hostility\models\block\chaos_block.json
-e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets\l2hostility\models\item\wither.json
 1739df0d5d6c03e3738f188a9606b095b5198c01 assets\l2hostility\models\item\adaptive.json
 38ebdcb219de6ddebd2181e8c53d6c00711a4b1f assets\l2hostility\models\item\bottle_of_sanity.json
 c22e95a1e35e2fbf55620102f54f37510eb6a704 assets\l2hostility\models\item\poseidite_block.json
@@ -102,8 +102,8 @@ f13f7d5f287cd6c420cea695c84dc0f2377b4a78 assets\l2hostility\models\item\shulkera
 3ddab52c8faefddb808553cf6792661ae82231fa assets\l2hostility\models\item\killer_aura.json
 b21603cdc9f70bed702acee927a39a1316f5b947 assets\l2hostility\models\item\guardian_eye.json
 c31f068b4b2a417a624aaa2dda92bff9b69aef49 assets\l2hostility\models\item\abrahadabra.json
-663f51ab17e0a6f8d3a46a646bbe61f145eb213c assets\l2hostility\models\item\pulling.json
 cdab0ef3aed85ef59a2e0f6437d745dd45eaffc8 assets\l2hostility\models\item\life_essence.json
+663f51ab17e0a6f8d3a46a646bbe61f145eb213c assets\l2hostility\models\item\pulling.json
 f72a44d199f5c99ecb954baef47efc23468de1d3 assets\l2hostility\models\item\gravity.json
 90d283cf96c27a6098eb1cad5b5a8e9665ff352e assets\l2hostility\models\item\infinity_glove.json
 d2ba5b6f2c4d1704590d3b54e675788f8d47cfb1 assets\l2hostility\models\item\chaos_block.json
