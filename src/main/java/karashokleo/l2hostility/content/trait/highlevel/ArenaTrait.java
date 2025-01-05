@@ -34,6 +34,8 @@ public class ArenaTrait extends AuraEffectTrait
         {
             if (attacker.hasStatusEffect(LHEffects.ANTI_BUILD))
                 return;
+            if (attacker instanceof PlayerEntity player && player.getAbilities().creativeMode)
+                return;
             var diff = MobDifficulty.get(attacker);
             if (diff.isPresent() && diff.get().getTraitLevel(this) >= level)
                 return;

@@ -24,12 +24,12 @@ public class ReflectTrait extends MobTrait
     public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
     {
         // 距离小于3时触发
-        if (event.getSource().getSource() instanceof LivingEntity le &&
+        if (event.getSource().getAttacker() instanceof LivingEntity le &&
                 entity.distanceTo(le) < 3)
         {
             if (ReflectTrinket.canReflect(le, this)) return;
             float factor = (float) (level * LHConfig.common().traits.reflectFactor);
-            GenericEvents.schedule(() -> le.damage(entity.getWorld().getDamageSources().indirectMagic(entity, null), event.getAmount() * factor));
+            GenericEvents.schedule(() -> le.damage(entity.getDamageSources().indirectMagic(entity, null), event.getAmount() * factor));
         }
     }
 
