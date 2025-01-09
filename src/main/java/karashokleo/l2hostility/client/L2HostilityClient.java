@@ -17,11 +17,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.client.render.entity.ShulkerBulletEntityRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.Items;
 import org.jetbrains.annotations.Nullable;
@@ -37,6 +40,9 @@ public class L2HostilityClient implements ClientModInitializer
         LHParticles.registerClient();
         LHNetworking.initClient();
         ClientEvents.register();
+
+        EntityRendererRegistry.register(LHEntities.HOSTILITY_BULLET, ShulkerBulletEntityRenderer::new);
+        EntityRendererRegistry.register(LHEntities.HOSTILITY_FIREBALL, context -> new FlyingItemEntityRenderer<>(context, 3.0f, true));
 
         GuiOverlayRegistry.registerLayer(10, new DifficultyOverlay());
 

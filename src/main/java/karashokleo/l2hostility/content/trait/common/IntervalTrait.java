@@ -30,7 +30,7 @@ public abstract class IntervalTrait extends MobTrait
         var cap = diff.get();
         var data = getData(cap);
         if (data.tickCount++ < interval.getAsInt()) return;
-        action(cap.owner, data);
+        action(cap.owner, level, data);
     }
 
     public Data getData(MobDifficulty diff)
@@ -38,7 +38,7 @@ public abstract class IntervalTrait extends MobTrait
         return diff.getOrCreateData(getId(), Data::new);
     }
 
-    public void action(MobEntity mob, Data data)
+    public void action(MobEntity mob, int level, Data data)
     {
         data.tickCount = 0;
     }

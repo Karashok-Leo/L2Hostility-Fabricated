@@ -22,6 +22,7 @@ public class L2Hostility implements ModInitializer
         LHNetworking.init();
         LHItems.register();
         LHBlocks.register();
+        LHEntities.register();
         LHTraits.register();
         LHTexts.init();
         LHAdvTexts.init();

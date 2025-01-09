@@ -1,9 +1,9 @@
 package karashokleo.l2hostility.content.trait.common;
 
+import karashokleo.l2hostility.content.entity.HostilityBulletEntity;
 import karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.projectile.ShulkerBulletEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Direction;
@@ -19,17 +19,17 @@ public class ShulkerTrait extends IntervalTrait
     }
 
     @Override
-    public void action(MobEntity mob, Data data)
+    public void action(MobEntity mob, int level, Data data)
     {
         LivingEntity target = mob.getTarget();
         if (target != null && target.isAlive())
         {
             World world = mob.getWorld();
-            var bullet = new ShulkerBulletEntity(world, mob, target, Direction.Axis.Y);
+            var bullet = new HostilityBulletEntity(world, mob, target, Direction.Axis.Y, level * 4.0f);
             bullet.setPosition(mob.getX(), mob.getBodyY(0.5) + 0.5, mob.getZ());
             world.spawnEntity(bullet);
             mob.playSound(SoundEvents.ENTITY_SHULKER_SHOOT, 2.0F, (mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F + 1.0F);
-            super.action(mob, data);
+            super.action(mob, level, data);
         }
     }
 }
