@@ -50,7 +50,7 @@ public class TraitSymbol extends Item
         if (ans == null)
         {
             L2Hostility.LOGGER.error("------------");
-            L2Hostility.LOGGER.error("Trait " + Registries.ITEM.getId(this) + " is not registered. Why?");
+            L2Hostility.LOGGER.error("Trait {} is not registered. Why?", Registries.ITEM.getId(this));
             var set = LHTraits.TRAIT.getIds();
             L2Hostility.LOGGER.error("List of all ids registered: ");
             for (var e : set)

@@ -25,9 +25,6 @@ import karashokleo.leobrary.datagen.util.IdUtil;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.resource.ResourceType;
 
