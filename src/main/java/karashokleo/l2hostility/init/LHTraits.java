@@ -190,11 +190,11 @@ public class LHTraits
         SHULKER = Entry.of(
                         "shulker",
                         new ShulkerTrait(),
-                        30, 100, 1, 70)
+                        30, 100, 5, 70)
                 .addEN()
-                .addENDesc("Shoot bullets every %s seconds after the previous bullet disappears.")
+                .addENDesc("Shoot a shulker bullet every %s seconds. Bullets will not levitate target, but deal 4 damage per level on hit.")
                 .addZH("潜影")
-                .addZHDesc("发射潜影子弹。上一个子弹消失后%s秒发射下一个")
+                .addZHDesc("每隔%s秒发射一个潜影子弹。子弹命中目标时不会使其飘浮，但造成每级4点伤害。")
                 .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
                 .register();
         GRENADE = Entry.of(
@@ -202,9 +202,9 @@ public class LHTraits
                         new GrenadeTrait(),
                         50, 100, 5, 100)
                 .addEN()
-                .addENDesc("Shoot explosive bullets every %s seconds after the previous bullet disappears.")
+                .addENDesc("Shoot a explosive fireball every %s seconds. Fireballs will not destroy blocks and deal 4 damage per level on hit.")
                 .addZH("榴弹")
-                .addZHDesc("发射会爆炸的潜影榴弹，不会破坏方块。上一个子弹消失后%s秒发射下一个。")
+                .addZHDesc("每隔%s秒发射一个会爆炸的火球。火球不会破坏方块，命中目标时造成每级4点伤害。")
                 .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
                 .register();
         CORROSION = Entry.of(

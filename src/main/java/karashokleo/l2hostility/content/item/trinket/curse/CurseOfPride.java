@@ -60,7 +60,6 @@ public class CurseOfPride extends CurseTrinketItem
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-
         int protect = (int) Math.round(100 * LHConfig.common().items.curse.prideHealthBonus);
         int damage = (int) Math.round(100 * LHConfig.common().items.curse.prideDamageBonus);
         int trait = (int) Math.round(100 * (1 / LHConfig.common().items.curse.prideTraitFactor - 1));
