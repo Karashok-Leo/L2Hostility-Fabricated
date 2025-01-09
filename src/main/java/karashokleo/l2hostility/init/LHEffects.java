@@ -48,9 +48,9 @@ public class LHEffects
                         new GenericStatusEffect(StatusEffectCategory.HARMFUL, 0xff7f7f)
                 )
                 .addEN("Antibuild")
-                .addENDesc("Make player cannot place block.")
+                .addENDesc("Make player cannot place or break blocks.")
                 .addZH("领域压制")
-                .addZHDesc("玩家无法放置方块")
+                .addZHDesc("玩家无法放置或破坏方块")
                 .addTag(LHTags.CLEANSE_BLACKLIST)
                 .register();
 

@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 
@@ -71,11 +72,17 @@ public class EffectEvents
         // 禁止放置方块
         UseBlockCallback.EVENT.register(
                 (player, world, hand, hitResult) ->
-                        player.getAbilities().creativeMode ||
-                        !player.hasStatusEffect(LHEffects.ANTI_BUILD) ||
-                        player.getStackInHand(hand).isIn(LHTags.ANTIBUILD_BAN) ?
-                                ActionResult.PASS :
-                                ActionResult.FAIL
+                {
+                    if (!player.getAbilities().creativeMode &&
+                        player.hasStatusEffect(LHEffects.ANTI_BUILD))
+                    {
+                        ItemStack stack = player.getStackInHand(hand);
+                        if (stack.getItem() instanceof BlockItem ||
+                            stack.isIn(LHTags.ANTIBUILD_BAN))
+                            return ActionResult.FAIL;
+                    }
+                    return ActionResult.PASS;
+                }
         );
 
         // 禁止破坏方块
