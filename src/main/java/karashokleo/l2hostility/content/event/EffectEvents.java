@@ -69,6 +69,14 @@ public class EffectEvents
             return true;
         });
 
+        // Stone Cage disable Teleport
+        MobEffectEvent.TELEPORT.register(event ->
+        {
+            if (event.getEntity() instanceof LivingEntity living &&
+                living.hasStatusEffect(LHEffects.STONE_CAGE))
+                event.setCanceled(true);
+        });
+
         // 禁止放置方块
         UseBlockCallback.EVENT.register(
                 (player, world, hand, hitResult) ->
