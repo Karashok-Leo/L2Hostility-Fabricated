@@ -8,7 +8,6 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHu
 import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
 import karashokleo.l2hostility.init.LHConfig;
@@ -17,11 +16,8 @@ import karashokleo.leobrary.damage.api.event.DamageSourceCreateCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.DamageTypeTags;
 
 public class TrinketEvents
 {
@@ -66,22 +62,6 @@ public class TrinketEvents
             for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof DamageListenerTrinketItem))
                 if (e.getItem() instanceof DamageListenerTrinketItem listener)
                     listener.onDamaged(e, target, event);
-        });
-
-        // 傲慢诅咒
-        LivingHurtEvent.HURT.register(event ->
-        {
-            DamageSource source = event.getSource();
-            if (event.getEntity() instanceof PlayerEntity player &&
-                !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-                !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-                TrinketCompat.hasItemInTrinket(player, TrinketItems.CURSE_PRIDE))
-            {
-                int level = PlayerDifficulty.get(player).getLevel().getLevel();
-                double rate = LHConfig.common().items.curse.prideHealthBonus;
-                double factor = 1 + rate * level;
-                event.setAmount((float) (event.getAmount() / factor));
-            }
         });
 
         // 色欲诅咒击杀必掉装备

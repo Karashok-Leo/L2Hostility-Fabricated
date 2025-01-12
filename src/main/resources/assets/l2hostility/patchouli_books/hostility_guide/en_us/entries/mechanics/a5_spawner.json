@@ -7,7 +7,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:hostility_spawner",
-	  "text": "This item can help you to clear difficulty in a chunk section. To use it, place it in the desired chunk section. Right click it to activate. It will summon a hoard of enemies, and kill them all to clear chunk section difficulty. If any mob are dead for suspicious cause, The spawner will fail. You can click it to restore."
+	  "text": "(Not yet implement!!!) This item can help you to clear difficulty in a chunk section. To use it, place it in the desired chunk section. Right click it to activate. It will summon a hoard of enemies, and kill them all to clear chunk section difficulty. If any mob are dead for suspicious cause, The spawner will fail. You can click it to restore."
 	},
 	{
 	  "type": "patchouli:text",

@@ -89,13 +89,11 @@ public class PlayerDifficulty
         instance.setPlayer(owner);
         instance.acceptBonus(getLevel());
         instance.setTraitCap(getRankCap());
-        // 傲慢诅咒，佩戴后每一级难度都可以为你提供 +2% 生命值和攻击力的加成
         if (TrinketCompat.hasItemInTrinket(owner, TrinketItems.CURSE_PRIDE))
         {
             instance.traitCostFactor(LHConfig.common().items.curse.prideTraitFactor);
             instance.setFullChance();
         }
-        // ---
         if (TrinketCompat.hasItemInTrinket(owner, TrinketItems.ABYSSAL_THORN))
         {
             instance.traitCostFactor(0);
