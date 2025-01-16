@@ -25,7 +25,7 @@ public class NoGravMagicalItem extends TooltipItem
         super(settings, textSupplier);
     }
 
-    public boolean onEntityItemUpdate(ItemEntity entity)
+    public void onEntityItemUpdate(ItemEntity entity)
     {
         World world = entity.getWorld();
         Vec3d pos = entity.getPos();
@@ -51,16 +51,15 @@ public class NoGravMagicalItem extends TooltipItem
                 }
                 persistentData.putBoolean("PlayEffects", true);
             }
-            return false;
+            return;
         }
 
         entity.setGlowing(true);
         entity.setNoGravity(true);
 
         if (!persistentData.contains("JustCreated"))
-            return false;
+            return;
         onCreated(entity, persistentData);
-        return false;
     }
 
     protected float getIdleParticleChance(ItemEntity entity)

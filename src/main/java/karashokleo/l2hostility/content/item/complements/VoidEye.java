@@ -19,21 +19,20 @@ public class VoidEye extends ShadowSteelItem
     }
 
     @Override
-    public boolean onEntityItemUpdate(ItemEntity entity)
+    public void onEntityItemUpdate(ItemEntity entity)
     {
         super.onEntityItemUpdate(entity);
         Vec3d v = entity.getVelocity();
         if (v.getY() < 0.05)
             entity.setVelocity(v.add(0, 0.005, 0));
-        return false;
     }
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected)
     {
         if (!world.isClient() &&
-                entity instanceof LivingEntity le &&
-                le.getPos().getY() < world.getBottomY())
+            entity instanceof LivingEntity le &&
+            le.getPos().getY() < world.getBottomY())
         {
             stack.setCount(0);
             le.damage(entity.getDamageSources().create(LHDamageTypes.VOID_EYE), le.getMaxHealth());

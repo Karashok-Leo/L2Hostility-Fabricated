@@ -29,14 +29,12 @@ public abstract class ItemEntityMixin extends Entity
 
     @Inject(
             method = "tick",
-            at = @At("HEAD"),
-            cancellable = true
+            at = @At("HEAD")
     )
     private void inject_tick(CallbackInfo ci)
     {
-        if (this.getStack().getItem() instanceof NoGravMagicalItem item &&
-                item.onEntityItemUpdate((ItemEntity) (Object) this))
-            ci.cancel();
+        if (this.getStack().getItem() instanceof NoGravMagicalItem item)
+            item.onEntityItemUpdate((ItemEntity) (Object) this);
     }
 
     @Inject(
