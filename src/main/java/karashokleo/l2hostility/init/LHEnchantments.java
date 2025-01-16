@@ -189,9 +189,9 @@ public class LHEnchantments
                         )
                 )
                 .addEN()
-                .addENDesc("when item has more than 1 durability, it will keep at least 1 durability if damaged")
+                .addENDesc("when item has more than 1 durability, it will keep at least 1 durability if damaged. Will be removed if not repaired after a while.")
                 .addZH("保险")
-                .addZHDesc("耐久大于1的此物品受到耐久损耗时，最多削减耐久到1")
+                .addZHDesc("耐久大于1的此物品受到耐久损耗时，最多削减耐久到1。一段时间后如果没有恢复原来的耐久，则移除该附魔")
                 .register();
         HARDENED = Entry.of(
                         "hardened",

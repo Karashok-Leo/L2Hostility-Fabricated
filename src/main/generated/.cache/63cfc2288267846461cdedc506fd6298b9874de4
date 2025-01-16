@@ -1,9 +1,9 @@
-// 1.20.1	2025-01-09T18:45:18.2112295	L2 Hostility/Tags for minecraft:damage_type
+// 1.20.1	2025-01-16T23:50:22.8374462	L2 Hostility/Tags for minecraft:damage_type
 ea6fd8c8b1e2681cb03a30430ed8db8e7d7ea942 data\minecraft\tags\damage_type\bypasses_armor.json
 7b73e057048882c3e933f941638aba985225909d data\minecraft\tags\damage_type\bypasses_invulnerability.json
 f7ededdd634fe326c03d979783719b430b162523 data\l2hostility\tags\damage_type\magic.json
-8a8b533b718546d169b07b3f8bd7696132fa6364 data\minecraft\tags\damage_type\bypasses_effects.json
 fba9d6c016489755f02a65651e2d51896e8cda96 data\minecraft\tags\damage_type\no_impact.json
+8a8b533b718546d169b07b3f8bd7696132fa6364 data\minecraft\tags\damage_type\bypasses_effects.json
 8a8b533b718546d169b07b3f8bd7696132fa6364 data\minecraft\tags\damage_type\bypasses_enchantments.json
 8a8b533b718546d169b07b3f8bd7696132fa6364 data\minecraft\tags\damage_type\bypasses_resistance.json
 3de8e77c409c55d3db61d4db63b05c86b1a2afd6 data\minecraft\tags\damage_type\avoids_guardian_thorns.json

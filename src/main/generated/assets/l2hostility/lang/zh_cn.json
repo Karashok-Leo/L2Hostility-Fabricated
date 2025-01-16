@@ -135,7 +135,7 @@
   "enchantment.l2hostility.projectile_reject": "弹射物免疫",
   "enchantment.l2hostility.projectile_reject.desc": "反射所有弹射物。使用者免疫弹射物伤害",
   "enchantment.l2hostility.safeguard": "保险",
-  "enchantment.l2hostility.safeguard.desc": "耐久大于1的此物品受到耐久损耗时，最多削减耐久到1",
+  "enchantment.l2hostility.safeguard.desc": "耐久大于1的此物品受到耐久损耗时，最多削减耐久到1。一段时间后如果没有恢复原来的耐久，则移除该附魔",
   "enchantment.l2hostility.sharp_blade": "撕裂之刃",
   "enchantment.l2hostility.sharp_blade.desc": "对敌人叠加流血效果。更高级的附魔增加叠加上限",
   "enchantment.l2hostility.shulker_armor": "遁隐",
