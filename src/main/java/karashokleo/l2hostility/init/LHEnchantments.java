@@ -75,12 +75,7 @@ public class LHEnchantments
                 .register();
         SPLIT_SUPPRESS = Entry.of(
                         "split_suppress",
-                        new RemoveTraitEnchantment(
-                                Enchantment.Rarity.VERY_RARE,
-                                EnchantmentTarget.WEAPON,
-                                new EquipmentSlot[]{EquipmentSlot.OFFHAND},
-                                () -> LHTraits.SPLIT
-                        )
+                        new SplitSuppressEnchantment()
                 )
                 .addEN()
                 .addENDesc("Disable Split trait on enemies on hit.")

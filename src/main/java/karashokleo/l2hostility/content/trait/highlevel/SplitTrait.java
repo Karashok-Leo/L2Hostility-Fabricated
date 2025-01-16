@@ -1,9 +1,9 @@
 package karashokleo.l2hostility.content.trait.highlevel;
 
-import karashokleo.l2hostility.init.LHComponents;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.logic.InheritContext;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHComponents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.SlimeEntity;
@@ -12,6 +12,13 @@ import net.minecraft.util.Formatting;
 
 public class SplitTrait extends MobTrait
 {
+    public static void copyComponents(LivingEntity entity, LivingEntity added)
+    {
+        var originDiff = entity.getComponent(LHComponents.MOB_DIFFICULTY);
+        var addedDiff = added.getComponent(LHComponents.MOB_DIFFICULTY);
+        addedDiff.copyFrom(originDiff);
+    }
+
     // 使怪物能够像史莱姆一样分裂。
     // 怪物在死亡时分裂，分裂的怪物会继承所有词条并且词条等级 -1，拥有装备的怪物分裂出来的装备会降级 。
     public SplitTrait()
@@ -29,7 +36,7 @@ public class SplitTrait extends MobTrait
     public void onDeath(int level, LivingEntity entity, DamageSource source)
     {
         if (entity.getWorld().isClient() ||
-                source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+            source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
             return;
         add(entity);
         add(entity);
@@ -40,9 +47,7 @@ public class SplitTrait extends MobTrait
         var level = entity.getWorld();
         LivingEntity added = (LivingEntity) entity.getType().create(level);
         assert added != null;
-        var originDiff = entity.getComponent(LHComponents.MOB_DIFFICULTY);
-        var addedDiff = added.getComponent(LHComponents.MOB_DIFFICULTY);
-        addedDiff.copyFrom(originDiff);
+        copyComponents(entity, added);
         added.copyPositionAndRotation(entity);
         level.spawnEntity(added);
     }
