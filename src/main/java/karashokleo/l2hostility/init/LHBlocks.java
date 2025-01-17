@@ -74,5 +74,13 @@ public class LHBlocks
         {
             return L2Hostility.MOD_ID;
         }
+
+        @Override
+        public BlockSet registerWithItem()
+        {
+            if (this.getItem() != null)
+                LHMiscs.GROUP.add(this.getItem());
+            return super.registerWithItem();
+        }
     }
 }
