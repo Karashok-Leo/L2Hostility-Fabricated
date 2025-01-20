@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.logic;
 
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
@@ -25,7 +26,7 @@ public class TraitManager
     }
 
     // 怪物难度实现
-    public static int fill(LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
+    public static int fill(MobDifficulty diff, LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
     {
         int lv = ins.getDifficulty(le.getRandom());
         int ans = 0;
@@ -52,7 +53,7 @@ public class TraitManager
         if (ins.trait_chance(lv) >= le.getRandom().nextDouble())
         {
             if (!le.getType().isIn(LHTags.NO_TRAIT))
-                TraitGenerator.generateTraits(le, lv, traits, ins);
+                TraitGenerator.generateTraits(diff, le, lv, traits, ins);
             ans = lv;
         }
         le.setHealth(le.getMaxHealth());

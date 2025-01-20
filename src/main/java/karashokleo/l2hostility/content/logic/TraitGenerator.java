@@ -1,8 +1,8 @@
 package karashokleo.l2hostility.content.logic;
 
-import karashokleo.l2hostility.init.LHData;
-import karashokleo.l2hostility.data.config.EntityConfig;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.data.config.EntityConfig;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.entity.LivingEntity;
@@ -14,9 +14,9 @@ import java.util.List;
 
 public class TraitGenerator
 {
-    public static void generateTraits(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
+    public static void generateTraits(MobDifficulty diff, LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
     {
-        new TraitGenerator(le, lv, traits, ins).generate();
+        new TraitGenerator(diff, le, lv, traits, ins).generate();
     }
 
     private final LivingEntity entity;
@@ -28,7 +28,7 @@ public class TraitGenerator
 
     private int level, weights;
 
-    private TraitGenerator(LivingEntity entity, int mobLevel, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
+    private TraitGenerator(MobDifficulty diff, LivingEntity entity, int mobLevel, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
     {
         this.entity = entity;
         this.mobLevel = mobLevel;
@@ -38,14 +38,17 @@ public class TraitGenerator
         rand = entity.getRandom();
         level = mobLevel;
 
-        var config = LHData.entities.get(entity.getType());
+        var config = diff.getConfigCache();
         if (config != null)
             for (var base : config.traits)
                 if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
                     genBase(base);
 
         traitPool = new ArrayList<>(LHTraits.TRAIT.stream().filter(e ->
-                !traits.containsKey(e) && e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
+                config == null ||
+                !config.blacklist.contains(e) &&
+                !traits.containsKey(e) &&
+                e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
         weights = 0;
         for (var e : traitPool)
             weights += e.getConfig().weight;

@@ -55,6 +55,8 @@ public class EntityConfig
         public DifficultyConfig.Config difficulty = new DifficultyConfig.Config(0, 0, 0, 0, 1, 1);
         @SerialClass.SerialField
         public final ArrayList<ItemPool> items = new ArrayList<>();
+        @SerialClass.SerialField
+        public int minSpawnLevel = 0;
 
         @Deprecated
         public Config()

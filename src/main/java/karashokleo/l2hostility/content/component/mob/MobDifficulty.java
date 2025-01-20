@@ -8,6 +8,7 @@ import karashokleo.l2hostility.content.component.chunk.RegionalDifficultyModifie
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.logic.*;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.data.config.EntityConfig;
 import karashokleo.l2hostility.init.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Ownable;
@@ -78,6 +79,7 @@ public class MobDifficulty
 //    private TraitSpawnerBlockEntity summoner = null;
     private boolean inherited = false;
     private boolean ticking = false;
+    private EntityConfig.Config configCache = null;
     private final ArrayList<Pair<MobTrait, Integer>> pending = new ArrayList<>();
 
     public MobDifficulty(MobEntity mob)
@@ -99,12 +101,27 @@ public class MobDifficulty
         this.ticking = ticking;
     }
 
+    @Nullable
+    public EntityConfig.Config getConfigCache()
+    {
+        if (configCache == null)
+        {
+            configCache = LHData.entities.get(owner.getType());
+        }
+        return configCache;
+    }
+
+    public void setConfigCache(EntityConfig.Config config)
+    {
+        configCache = config;
+    }
+
     public void init(RegionalDifficultyModifier difficulty)
     {
         boolean skip = !LHConfig.common().scaling.allowNoAI && owner.isAiDisabled();
         MobDifficultyCollector instance = new MobDifficultyCollector();
-        var diff = LHData.entities.get(owner.getType());
-        if (diff != null) instance.acceptConfig(diff.difficulty);
+        var config = getConfigCache();
+        if (config != null) instance.acceptConfig(config.difficulty);
         difficulty.modifyInstance(owner.getBlockPos(), instance);
         PlayerEntity player = PlayerFinder.getNearestPlayer(owner.getWorld(), owner);
         if (player != null)
@@ -113,7 +130,7 @@ public class MobDifficulty
             playerDiff.apply(instance);
             if (!LHConfig.common().scaling.allowPlayerAllies && owner.isTeammate(player)) skip = true;
         }
-        lv = skip ? 0 : TraitManager.fill(owner, traits, instance);
+        lv = skip ? 0 : TraitManager.fill(this, owner, traits, instance);
         fullDrop = instance.isFullDrop();
         stage = Stage.INIT;
         sync();
@@ -150,7 +167,7 @@ public class MobDifficulty
             int rank = ent.getKey().inherited(this, ent.getValue(), ctx);
             if (rank > 0) traits.put(ent.getKey(), rank);
         }
-        TraitManager.fill(child, traits, MobDifficultyCollector.noTrait(lv));
+        TraitManager.fill(this, child, traits, MobDifficultyCollector.noTrait(lv));
         stage = Stage.INIT;
     }
 
@@ -212,12 +229,26 @@ public class MobDifficulty
         }
     }
 
+    public boolean shouldDiscard()
+    {
+        var config = getConfigCache();
+        if (config == null || config.minSpawnLevel <= 0) return false;
+        return lv < config.minSpawnLevel;
+    }
+
     public void serverTick()
     {
         ticking = true;
         if (!isInitialized())
+        {
             ChunkDifficulty.at(owner.getWorld(), owner.getBlockPos())
                     .ifPresent(this::init);
+            if (this.shouldDiscard())
+            {
+                owner.discard();
+                return;
+            }
+        }
         if (stage == Stage.INIT)
         {
             stage = Stage.POST_INIT;
@@ -226,25 +257,41 @@ public class MobDifficulty
             clearPending(owner);
             owner.setHealth(owner.getMaxHealth());
             sync();
+            if (this.shouldDiscard())
+            {
+                owner.discard();
+                return;
+            }
         }
         if (!traits.isEmpty() &&
-                !LHConfig.common().scaling.allowTraitOnOwnable &&
-                owner instanceof Ownable own &&
-                own.getOwner() instanceof PlayerEntity)
+            !LHConfig.common().scaling.allowTraitOnOwnable &&
+            owner instanceof Ownable own &&
+            own.getOwner() instanceof PlayerEntity)
         {
             traits.clear();
             sync();
         }
 
-        if (isInitialized() && !traits.isEmpty())
+        if (isInitialized())
         {
             if (owner.age % TICK_REMOVE_INTERNAl == 0)
             {
-                traits.keySet().removeIf(Objects::isNull);
-                traits.keySet().removeIf(MobTrait::isBanned);
+                if (this.shouldDiscard())
+                {
+                    owner.discard();
+                    return;
+                }
             }
-            traits.forEach((k, v) -> k.serverTick(owner, v));
-            clearPending(owner);
+            if (!traits.isEmpty())
+            {
+                if (owner.age % TICK_REMOVE_INTERNAl == 0)
+                {
+                    traits.keySet().removeIf(Objects::isNull);
+                    traits.keySet().removeIf(MobTrait::isBanned);
+                }
+                traits.forEach((k, v) -> k.serverTick(owner, v));
+                clearPending(owner);
+            }
         }
         // 恶意刷怪笼
 //        if (pos != null)

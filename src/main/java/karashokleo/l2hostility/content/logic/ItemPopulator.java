@@ -145,7 +145,7 @@ public class ItemPopulator
                 fillEnchantments(cap.getLevel(), le.getRandom(), stack, e);
             le.equipStack(e, stack);
         }
-        var config = LHData.entities.get(le.getType());
+        var config = cap.getConfigCache();
         if (config != null && !config.items.isEmpty())
             for (var pool : config.items)
                 generateItems(cap, le, pool);
