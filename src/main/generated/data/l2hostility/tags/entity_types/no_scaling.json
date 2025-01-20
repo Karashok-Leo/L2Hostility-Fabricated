@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     {
-      "id": "#l2hostility:whitelist",
+      "id": "#l2hostility:blacklist",
       "required": false
     }
   ]

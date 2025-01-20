@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-16T23:50:22.8354473	L2 Hostility/Global Loot Modifiers : l2hostility
+// 1.20.1	2025-01-20T17:17:27.3782575	L2 Hostility/Global Loot Modifiers : l2hostility
 59c513ee22ef5565838906530feb2df2eb4d09e6 data\l2hostility\loot_modifiers\grenade_drop_storm_core.json
 969128ed498b2dd2803fe879c166a9707acebce9 data\l2hostility\loot_modifiers\speedy_drop_sculkium_nugget.json
 a5b016becd9d933544775b644b9461e9425dfc71 data\l2hostility\loot_modifiers\blindness_drop_ink_sac.json
@@ -51,6 +51,6 @@ c382fd8651dccac2b6ef8443497193c1b24f170b data\l2hostility\loot_modifiers\nausea_
 e67747f0a434847f155d1e9ba462ffc2ec403e45 data\l2hostility\loot_modifiers\soul_burner_drop_soul_flame.json
 f434a2aceadb93f7051c0f06e4f7ad72039f673d data\l2hostility\loot_modifiers\teleport_drop_void_eye.json
 88c2ef26111e226db2b1d848ada759376f3e603e data\l2hostility\loot_modifiers\counter_strike_drop_explosion_shard.json
-85f1ae8fa706e8331734fce7435e6acd24815693 data\l2hostility\loot_modifiers\killer_aura_drop_heirophant_green.json
 a9d5ace2aa4fd93016082cf0a6ce584d3f1e4642 data\l2hostility\loot_modifiers\split_drop_guardian_eye.json
+85f1ae8fa706e8331734fce7435e6acd24815693 data\l2hostility\loot_modifiers\killer_aura_drop_heirophant_green.json
 f0cd5432625df01ee1a2035ab7138f32ef553535 data\l2hostility\loot_modifiers\gravity_drop_dragon_breath.json

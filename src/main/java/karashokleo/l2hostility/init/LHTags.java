@@ -84,10 +84,9 @@ public class LHTags
         entityTypeTags.getOrCreateContainer(BLACKLIST);
         entityTypeTags.getOrCreateContainer(WHITELIST);
         entityTypeTags.getOrCreateContainer(NO_SCALING)
-                .addOptionalTag(WHITELIST);
-        entityTypeTags.getOrCreateContainer(NO_TRAIT)
                 .addOptionalTag(BLACKLIST);
         entityTypeTags.getOrCreateContainer(NO_TRAIT)
+                .addOptionalTag(BLACKLIST)
                 .add(EntityType.ENDERMITE);
         entityTypeTags.getOrCreateContainer(ARMOR_TARGET)
                 .add(
