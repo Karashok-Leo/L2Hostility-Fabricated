@@ -28,17 +28,18 @@ public class L2Hostility implements ModInitializer
         LHAdvTexts.init();
         LHCplTexts.init();
         LHConfig.register();
-        LHTags.init();
         LHEffects.register();
         LHPotions.register();
         LHEnchantments.register();
         LHDamageTypes.register();
+        LHMiscs.register();
+        LHTags.init();
         LHParticles.register();
         TraitGLMProvider.register();
         LHEvents.register();
         LHRecipes.register();
         LHTriggers.register();
-        LHMiscs.register();
+        LHCommands.register();
         ServerLifecycleEvents.SERVER_STARTED.register(server -> SERVER = server);
         LOGGER.info("Hello L2Hostility Fabricated!");
     }
