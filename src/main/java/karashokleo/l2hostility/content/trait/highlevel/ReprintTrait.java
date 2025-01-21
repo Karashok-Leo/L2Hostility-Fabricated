@@ -1,9 +1,10 @@
 package karashokleo.l2hostility.content.trait.highlevel;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.item.traits.ReprintHandler;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.init.LHEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
@@ -48,10 +49,11 @@ public class ReprintTrait extends MobTrait
         {
             ItemStack weapon = entity.getEquippedStack(EquipmentSlot.MAINHAND);
             if (!weapon.isEmpty() &&
-                    (weapon.hasEnchantments() || weapon.isEnchantable()))
+                (weapon.hasEnchantments() || weapon.isEnchantable()))
             {
                 var map = EnchantmentHelper.get(weapon);
-                // NYI 虚空之触
+                if (LHEnchantments.VOID_TOUCH.isAcceptableItem(weapon))
+                    map.compute(LHEnchantments.VOID_TOUCH, (k, v) -> v == null ? 20 : Math.max(v, 20));
                 map.compute(Enchantments.VANISHING_CURSE, (k, v) -> v == null ? 1 : Math.max(v, 1));
                 EnchantmentHelper.set(map, weapon);
             }

@@ -4,8 +4,10 @@ import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.Trinket;
 import dev.emi.trinkets.api.TrinketItem;
 import karashokleo.l2hostility.content.item.MiscItems;
+import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -34,6 +36,10 @@ public class SealedItem extends TrinketItem
         ItemStack ans = MiscItems.SEAL.getDefaultStack();
         ans.getOrCreateNbt().putInt(TIME, time);
         ans.getOrCreateNbt().put(DATA, stack.writeNbt(new NbtCompound()));
+//        if (EnchantmentHelper.getLevel(LHEnchantments.SOUL_BOUND, stack) > 0)
+//            ans.addEnchantment(LHEnchantments.SOUL_BOUND, 1);
+        if (EnchantmentHelper.getLevel(LHEnchantments.VANISH, stack) > 0)
+            ans.addEnchantment(LHEnchantments.VANISH, 1);
         return ans;
     }
 

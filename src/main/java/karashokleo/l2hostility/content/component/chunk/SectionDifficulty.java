@@ -73,8 +73,9 @@ public class SectionDifficulty
         var levelDiff = LHData.difficulties.getByLevelOrDefault(world.getDimensionKey().getValue());
         instance.acceptConfig(levelDiff);
         LHData.difficulties.getByBiome(world, pos).ifPresent(instance::acceptConfig);
-        instance.acceptBonusLevel((int) Math.round(LHConfig.common().scaling.distanceFactor *
-                Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ())));
+        instance.acceptBonusLevel(
+                (int) Math.round(LHConfig.common().scaling.distanceFactor *
+                Math.sqrt(1d * (pos.getX() * pos.getX() + pos.getZ() * pos.getZ()))));
     }
 
     // 获取SectionDifficulty文本

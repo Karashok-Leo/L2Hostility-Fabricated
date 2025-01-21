@@ -28,20 +28,14 @@ public class TraitManager
     // 怪物难度实现
     public static int fill(MobDifficulty diff, LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
     {
-        int lv = ins.getDifficulty(le.getRandom());
+        int lv = diff.clampLevel(ins.getDifficulty(le.getRandom()));
         int ans = 0;
         if (ins.apply_chance() < le.getRandom().nextDouble())
             return ans;
         // add attributes
         if (!le.getType().isIn(LHTags.NO_SCALING))
         {
-            double factor;
-            if (LHConfig.common().scaling.exponentialHealth)
-                factor = Math.pow(1 + LHConfig.common().scaling.healthFactor, lv) - 1;
-            else
-                factor = lv * LHConfig.common().scaling.healthFactor;
-            addAttribute(le, EntityAttributes.GENERIC_MAX_HEALTH, "hostility_health", factor,
-                    EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+            scale(le, lv);
             ans = lv;
         }
         // armor
@@ -58,6 +52,20 @@ public class TraitManager
         }
         le.setHealth(le.getMaxHealth());
         return ans;
+    }
+
+    public static void scale(LivingEntity le, int lv)
+    {
+        double factor;
+        if (LHConfig.common().scaling.exponentialHealth)
+            factor = Math.pow(1 + LHConfig.common().scaling.healthFactor, lv) - 1;
+        else
+            factor = lv * LHConfig.common().scaling.healthFactor;
+        addAttribute(
+                le, EntityAttributes.GENERIC_MAX_HEALTH,
+                "hostility_health", factor,
+                EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+        );
     }
 
     public static int getMaxLevel()

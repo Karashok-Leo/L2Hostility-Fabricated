@@ -45,8 +45,7 @@ public class TraitGenerator
                     genBase(base);
 
         traitPool = new ArrayList<>(LHTraits.TRAIT.stream().filter(e ->
-                config == null ||
-                !config.blacklist.contains(e) &&
+                (config == null || !config.blacklist.contains(e)) &&
                 !traits.containsKey(e) &&
                 e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
         weights = 0;

@@ -56,6 +56,11 @@ public class MobTrait implements ItemConvertible
         return LHData.traits.getOrDefault(getId());
     }
 
+    public int getColor()
+    {
+        return color.getAsInt();
+    }
+
     public int getCost(double factor)
     {
         return Math.max(1, (int) Math.round(getConfig().cost * factor));

@@ -101,6 +101,24 @@ public class MobDifficulty
         this.ticking = ticking;
     }
 
+    public void setLevel(int level)
+    {
+        lv = level;
+        lv = clampLevel(level);
+        TraitManager.scale(owner, lv);
+    }
+
+    public int clampLevel(int lv)
+    {
+        int cap = LHConfig.common().difficulty.maxMobLevel;
+        var config = getConfigCache();
+        if (config != null && config.maxLevel > 0)
+        {
+            cap = Math.min(config.maxLevel, cap);
+        }
+        return Math.min(cap, lv);
+    }
+
     @Nullable
     public EntityConfig.Config getConfigCache()
     {
@@ -211,10 +229,12 @@ public class MobDifficulty
         if (!traits.containsKey(trait)) return;
         if (ticking) setTrait(trait, 0);
         else traits.remove(trait);
+        sync();
     }
 
-    private void clearPending(MobEntity mob)
+    private boolean clearPending(MobEntity mob)
     {
+        if (pending.isEmpty()) return false;
         while (!pending.isEmpty())
         {
             var temp = new ArrayList<>(pending);
@@ -226,7 +246,15 @@ public class MobDifficulty
                 pair.getFirst().initialize(mob, pair.getSecond());
                 pair.getFirst().postInit(mob, pair.getSecond());
             }
+            for (var pair : temp)
+            {
+                if (pair.getSecond() == 0)
+                {
+                    traits.remove(pair.getFirst());
+                }
+            }
         }
+        return true;
     }
 
     public boolean shouldDiscard()
@@ -238,16 +266,17 @@ public class MobDifficulty
 
     public void serverTick()
     {
+        boolean sync = false;
         ticking = true;
         if (!isInitialized())
         {
-            ChunkDifficulty.at(owner.getWorld(), owner.getBlockPos())
-                    .ifPresent(this::init);
             if (this.shouldDiscard())
             {
                 owner.discard();
                 return;
             }
+            ChunkDifficulty.at(owner.getWorld(), owner.getBlockPos())
+                    .ifPresent(this::init);
         }
         if (stage == Stage.INIT)
         {
@@ -256,12 +285,7 @@ public class MobDifficulty
             traits.forEach((k, v) -> k.postInit(owner, v));
             clearPending(owner);
             owner.setHealth(owner.getMaxHealth());
-            sync();
-            if (this.shouldDiscard())
-            {
-                owner.discard();
-                return;
-            }
+            sync = true;
         }
         if (!traits.isEmpty() &&
             !LHConfig.common().scaling.allowTraitOnOwnable &&
@@ -269,29 +293,21 @@ public class MobDifficulty
             own.getOwner() instanceof PlayerEntity)
         {
             traits.clear();
-            sync();
+            sync = true;
         }
 
         if (isInitialized())
         {
-            if (owner.age % TICK_REMOVE_INTERNAl == 0)
-            {
-                if (this.shouldDiscard())
-                {
-                    owner.discard();
-                    return;
-                }
-            }
             if (!traits.isEmpty())
             {
                 if (owner.age % TICK_REMOVE_INTERNAl == 0)
                 {
-                    traits.keySet().removeIf(Objects::isNull);
-                    traits.keySet().removeIf(MobTrait::isBanned);
+                    sync |= traits.keySet().removeIf(Objects::isNull);
+                    sync |= traits.keySet().removeIf(MobTrait::isBanned);
                 }
                 traits.forEach((k, v) -> k.serverTick(owner, v));
-                clearPending(owner);
             }
+            sync |= clearPending(owner);
         }
         // 恶意刷怪笼
 //        if (pos != null)
@@ -305,6 +321,7 @@ public class MobDifficulty
 //                owner.discard();
 //            }
 //        }
+        if (sync && !owner.isRemoved()) sync();
         ticking = false;
     }
 
