@@ -24,8 +24,6 @@ public class LHBlocks
                 .registerWithItem();
 
         LHGenerators.MODELS.addBlock(LHBlocks::generateSpawnerState);
-
-        LHMiscs.GROUP.add(SPAWNER.item());
     }
 
     public static void generateSpawnerState(BlockStateModelGenerator generator)

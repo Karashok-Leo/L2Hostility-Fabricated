@@ -68,7 +68,16 @@ public class LHTags
                 );
         LHGenerators.ENCHANTMENT_TAGS.getOrCreateContainer(NO_DISPELL)
                 .add(
-                        Enchantments.UNBREAKING
+                        Enchantments.UNBREAKING,
+                        LHEnchantments.LIFE_SYNC,
+                        LHEnchantments.HARDENED,
+                        LHEnchantments.SAFEGUARD,
+                        LHEnchantments.ETERNAL,
+                        LHEnchantments.DURABLE_ARMOR,
+//                        LHEnchantments.SOUL_BOUND,
+                        LHEnchantments.SPLIT_SUPPRESS,
+                        LHEnchantments.INSULATOR,
+                        LHEnchantments.VANISH
                 );
         LHGenerators.STATUS_EFFECT_TAGS.getOrCreateContainer(CLEANSE_BLACKLIST)
                 .add(

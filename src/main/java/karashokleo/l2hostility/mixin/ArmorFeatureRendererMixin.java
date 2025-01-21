@@ -13,7 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ArmorFeatureRenderer.class)
+// set priority to 0 to inject before other mods in sure that the rendering is canceled
+@Mixin(value = ArmorFeatureRenderer.class, priority = 0)
 public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, A extends BipedEntityModel<T>>
 {
     @Inject(
