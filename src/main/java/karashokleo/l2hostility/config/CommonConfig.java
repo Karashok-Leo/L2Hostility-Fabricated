@@ -39,6 +39,8 @@ public class CommonConfig implements ConfigData
         public int killsPerLevel = 30;
         @Comment("Max player adaptive level")
         public int maxPlayerLevel = 2000;
+        @Comment("Max mob level")
+        public int maxMobLevel = 3000;
         @Comment("Mobs spawned within this range will use lowest player level in range instead of nearest player's level to determine mob level")
         public int newPlayerProtectRange = 48;
         @Comment("Decay in player difficulty on death")

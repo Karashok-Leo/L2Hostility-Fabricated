@@ -1,6 +1,8 @@
 package karashokleo.l2hostility.content.item.consumable;
 
+import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
+import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
@@ -30,6 +32,9 @@ public class HostilityOrb extends Item
         ItemStack stack = user.getStackInHand(hand);
         if (!LHConfig.common().orbAndSpawner.allowHostilityOrb)
             return TypedActionResult.pass(stack);
+        if (!TrinketCompat.hasItemEquippedOrInTrinket(user, MiscItems.DETECTOR) ||
+            !TrinketCompat.hasItemEquippedOrInTrinket(user, MiscItems.DETECTOR_GLASSES))
+            return TypedActionResult.pass(stack);
         if (!world.isClient())
         {
             boolean success = false;
@@ -53,9 +58,13 @@ public class HostilityOrb extends Item
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         if (!LHConfig.common().orbAndSpawner.allowHostilityOrb)
+        {
             tooltip.add(LHTexts.BANNED.get());
+            return;
+        }
         int r = LHConfig.common().orbAndSpawner.orbRadius * 2 + 1;
+        tooltip.add(LHTexts.orbUse().formatted(Formatting.DARK_GREEN));
         tooltip.add(LHTexts.ITEM_ORB.get(r, r, r).formatted(Formatting.GRAY));
-        tooltip.add(LHTexts.sectionRender().formatted(Formatting.DARK_GREEN));
+//        tooltip.add(LHTexts.sectionRender().formatted(Formatting.DARK_GREEN));
     }
 }

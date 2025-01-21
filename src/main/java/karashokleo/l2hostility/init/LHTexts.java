@@ -31,6 +31,7 @@ public enum LHTexts
     ITEM_GLASSES("item.equipment.glasses", "Allow you to see invisible mobs, and see mobs when you have blindness or darkness effects", "让你能看见隐身怪物，以及在失明/黑暗效果下看见怪物", 0),
     ITEM_DETECTOR("item.equipment.detector", "Shows player and regional difficulty information when held in hand / offhand", "在主副手持有时显示玩家和区域难度信息", 0),
     ITEM_SECTION_RENDER("item.equipment.section_render", "Hold [%s] and Equip [%s] to see regions cleared of hostility", "持有[%s]且佩戴[%s]时渲染被净化的区域", 2),
+    ITEM_ORB_USE("item.equipment.orb_use", "Usable only when you hold [%s] in off hand and Equip [%s]", "只有持有[%s]且佩戴[%s]时才能使用", 2),
     ITEM_SPAWNER("item.spawner", "Summon strong mobs. Kill them all to make a chunk section no longer spawn mobs with levels", "召唤强力怪物。击败它们能让当前子区块不再生成有等级的怪物", 0),
     ITEM_ORB("item.consumable.orb", "Make %sx%sx%s chunk sections no longer spawn mobs with levels.", "让%sx%sx%s的子区块不再生成有等级的怪物", 3),
     ITEM_BOTTLE_CURSE("item.consumable.bottle_of_curse", "Increase player difficulty by %s", "玩家难度等级提升%s", 1),
@@ -121,6 +122,8 @@ public enum LHTexts
     COMMAND_REGION_NOT_CLEAR("command.region.not_clear", "Section Not Cleared", "子区块难度还未净化", 0),
 
     COMMAND_MOB_SUCCEED("command.mob.success", "Performed actions on %s mobs", "指令已对%s个怪物起效", 1),
+
+    COMMAND_INVALID_TRAIT("command.invalid_trait", "Invalid trait id %s", "%s不是正确的词条id", 1),
     //    PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", "莱特兰·恶意-教程与词条列表", 0),
 //    PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", "这个模组提升了怪物数值，并添加了各种能力", 0),
     PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", "莱特兰恶意教程", 0),
@@ -152,6 +155,11 @@ public enum LHTexts
     public static MutableText sectionRender()
     {
         return ITEM_SECTION_RENDER.get(item(MiscItems.DETECTOR.getDefaultStack()), item(MiscItems.DETECTOR_GLASSES.getDefaultStack()));
+    }
+
+    public static MutableText orbUse()
+    {
+        return ITEM_ORB_USE.get(item(MiscItems.DETECTOR.getDefaultStack()), item(MiscItems.DETECTOR_GLASSES.getDefaultStack()));
     }
 
     public static void init()

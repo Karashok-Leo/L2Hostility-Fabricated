@@ -57,6 +57,8 @@ public class EntityConfig
         public final ArrayList<ItemPool> items = new ArrayList<>();
         @SerialClass.SerialField
         public int minSpawnLevel = 0;
+        @SerialClass.SerialField
+        public int maxLevel = 0;
 
         @Deprecated
         public Config()
@@ -65,15 +67,56 @@ public class EntityConfig
 
         public Config(
                 List<EntityType<?>> entities,
-                List<TraitBase> traits,
-                DifficultyConfig.Config difficulty,
-                List<ItemPool> items
+                DifficultyConfig.Config difficulty
         )
         {
             this.entities.addAll(entities);
-            this.traits.addAll(traits);
             this.difficulty = difficulty;
-            this.items.addAll(items);
+        }
+
+        public Set<MobTrait> blacklist()
+        {
+            return blacklist;
+        }
+
+        public List<TraitBase> traits()
+        {
+            return traits;
+        }
+
+        public DifficultyConfig.Config difficulty()
+        {
+            return difficulty;
+        }
+
+        public Config minLevel(int level)
+        {
+            minSpawnLevel = level;
+            return this;
+        }
+
+        public Config maxLevel(int level)
+        {
+            maxLevel = level;
+            return this;
+        }
+
+        public Config trait(List<TraitBase> list)
+        {
+            traits.addAll(list);
+            return this;
+        }
+
+        public Config item(List<ItemPool> list)
+        {
+            items.addAll(list);
+            return this;
+        }
+
+        public Config blacklist(MobTrait... list)
+        {
+            Collections.addAll(blacklist, list);
+            return this;
         }
     }
 
@@ -99,6 +142,12 @@ public class EntityConfig
         }
     }
 
+    public final EntityConfig put(Config config)
+    {
+        list.add(config);
+        return this;
+    }
+
     public final EntityConfig putEntity(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits)
     {
         return putEntityAndItem(min, base, var, scale, keys, traits, List.of());
@@ -106,10 +155,15 @@ public class EntityConfig
 
     public final EntityConfig putEntityAndItem(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits, List<ItemPool> items)
     {
-        list.add(new Config(new ArrayList<>(keys), new ArrayList<>(traits),
-                new DifficultyConfig.Config(min, base, var, scale, 1, 1),
-                items));
-        return this;
+        return put(entity(min, base, var, scale, keys).trait(traits).item(items));
+    }
+
+    public static Config entity(int min, int base, double var, double scale, List<EntityType<?>> keys)
+    {
+        return new Config(
+                new ArrayList<>(keys),
+                new DifficultyConfig.Config(min, base, var, scale, 1, 1)
+        );
     }
 
     public static ItemPool simplePool(int level, String slot, ItemStack stack)
