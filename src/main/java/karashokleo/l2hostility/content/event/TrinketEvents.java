@@ -80,7 +80,8 @@ public class TrinketEvents
             var op = MobDifficulty.get(target);
             if (op.isEmpty()) return false;
             MobDifficulty diff = op.get();
-            if (diff.noDrop) return false;
+            // return true means cancel the drop
+            if (diff.noDrop) return true;
             LivingEntity killer = target.getPrimeAdversary();
             if (killer != null && TrinketCompat.hasItemInTrinket(killer, TrinketItems.NIDHOGGUR))
             {

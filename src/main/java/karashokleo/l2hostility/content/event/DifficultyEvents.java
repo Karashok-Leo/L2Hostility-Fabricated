@@ -1,11 +1,11 @@
 package karashokleo.l2hostility.content.event;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.init.LHConfig;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.mob.MobEntity;

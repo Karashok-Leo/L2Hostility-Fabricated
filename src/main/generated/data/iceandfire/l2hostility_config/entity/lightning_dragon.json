@@ -16,6 +16,8 @@
         "iceandfire:lightning_dragon"
       ],
       "items": [],
+      "maxLevel": 0,
+      "minSpawnLevel": 0,
       "traits": [
         {
           "free": 1,

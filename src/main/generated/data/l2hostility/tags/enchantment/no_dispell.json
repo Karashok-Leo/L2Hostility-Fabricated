@@ -1,6 +1,14 @@
 {
   "replace": false,
   "values": [
-    "minecraft:unbreaking"
+    "minecraft:unbreaking",
+    "l2hostility:life_sync",
+    "l2hostility:hardened",
+    "l2hostility:safeguard",
+    "l2hostility:eternal",
+    "l2hostility:durable_armor",
+    "l2hostility:split_suppress",
+    "l2hostility:insulator",
+    "l2hostility:vanish"
   ]
 }

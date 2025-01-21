@@ -1,14 +1,14 @@
 {
   "replace": false,
   "values": [
+    "l2hostility:killer_aura",
+    "l2hostility:soul_flame",
     "minecraft:magic",
     "minecraft:indirect_magic",
     "minecraft:thorns",
     "minecraft:wither",
     "minecraft:wither_skull",
     "minecraft:dragon_breath",
-    "l2hostility:killer_aura",
-    "l2hostility:soul_flame",
     {
       "id": "#spell_power:all",
       "required": false
