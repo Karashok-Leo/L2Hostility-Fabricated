@@ -2,7 +2,7 @@ package karashokleo.l2hostility.init;
 
 import dev.xkmc.l2serial.serialization.custom_handler.Handlers;
 import karashokleo.l2hostility.L2Hostility;
-import karashokleo.l2hostility.content.item.traits.TraitSymbol;
+import karashokleo.l2hostility.content.trait.MobTraitBuilder;
 import karashokleo.l2hostility.content.trait.base.AttributeTrait;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.content.trait.base.SelfEffectTrait;
@@ -13,16 +13,8 @@ import karashokleo.l2hostility.content.trait.goals.EnderTrait;
 import karashokleo.l2hostility.content.trait.highlevel.*;
 import karashokleo.l2hostility.content.trait.legendary.*;
 import karashokleo.l2hostility.data.config.TraitConfig;
-import karashokleo.l2hostility.data.config.provider.TraitConfigProvider;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;
-import karashokleo.leobrary.datagen.builder.NamedEntryBuilder;
-import karashokleo.leobrary.datagen.builder.provider.DefaultLanguageGeneratorProvider;
-import karashokleo.leobrary.datagen.builder.provider.ModelGeneratorProvider;
-import karashokleo.leobrary.datagen.builder.provider.TagGeneratorProvider;
-import karashokleo.leobrary.datagen.generator.TagGenerator;
-import karashokleo.leobrary.datagen.util.StringUtil;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -31,12 +23,9 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 
 public class LHTraits
 {
@@ -149,7 +138,7 @@ public class LHTraits
                         30, 100, 1, 50)
                 .addEN()
                 .addZH("隐身")
-                .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
+                .addBlacklist(LHTags.SEMIBOSS)
                 .register();
         FIERY = Entry.of(
                         "fiery",
@@ -195,7 +184,7 @@ public class LHTraits
                 .addENDesc("Shoot a shulker bullet every %s seconds. Bullets will not levitate target, but deal 4 damage per level on hit.")
                 .addZH("潜影")
                 .addZHDesc("每隔%s秒发射一个潜影子弹。子弹命中目标时不会使其飘浮，但造成每级4点伤害。")
-                .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
+                .addBlacklist(LHTags.SEMIBOSS)
                 .register();
         GRENADE = Entry.of(
                         "grenade",
@@ -205,7 +194,7 @@ public class LHTraits
                 .addENDesc("Shoot a explosive fireball every %s seconds. Fireballs will not destroy blocks and deal 4 damage per level on hit.")
                 .addZH("榴弹")
                 .addZHDesc("每隔%s秒发射一个会爆炸的火球。火球不会破坏方块，命中目标时造成每级4点伤害。")
-                .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
+                .addBlacklist(LHTags.SEMIBOSS)
                 .register();
         CORROSION = Entry.of(
                         "corrosion",
@@ -242,17 +231,14 @@ public class LHTraits
                 .addENDesc("When mob dies, it will split into 2 of itself with half levels but same trait. This trait reduce by 1 when split.")
                 .addZH("分裂")
                 .addZHDesc("怪物死亡时分裂，等级减半并继承所有词条。本词条分裂时等级-1")
-                .configure(
-                        config -> config
-                                .addBlacklist(LHTags.SEMIBOSS)
-                                .addWhitelist(
-                                        EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
-                                        EntityType.ZOMBIFIED_PIGLIN, EntityType.DROWNED, EntityType.HUSK,
-                                        EntityType.SKELETON, EntityType.WITHER_SKELETON, EntityType.STRAY,
-                                        EntityType.SPIDER, EntityType.CAVE_SPIDER,
-                                        EntityType.CREEPER, EntityType.VEX,
-                                        EntityType.SILVERFISH, EntityType.ENDERMITE
-                                )
+                .addBlacklist(LHTags.SEMIBOSS)
+                .addWhitelist(
+                        EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
+                        EntityType.ZOMBIFIED_PIGLIN, EntityType.DROWNED, EntityType.HUSK,
+                        EntityType.SKELETON, EntityType.WITHER_SKELETON, EntityType.STRAY,
+                        EntityType.SPIDER, EntityType.CAVE_SPIDER,
+                        EntityType.CREEPER, EntityType.VEX,
+                        EntityType.SILVERFISH, EntityType.ENDERMITE
                 )
                 .register();
         DRAIN = Entry.of(
@@ -272,7 +258,8 @@ public class LHTraits
                 .addENDesc("After attacked, it will attempt to perform a counter strike.")
                 .addZH("反击")
                 .addZHDesc("被攻击后会试图冲刺反击")
-                .configure(config -> config.addWhitelist(EntityType.WARDEN).addWhitelist(LHTags.MELEE_WEAPON_TARGET))
+                .addWhitelist(EntityType.WARDEN)
+                .addWhitelist(LHTags.MELEE_WEAPON_TARGET)
                 .register();
         GRAVITY = Entry.of(
                         "gravity",
@@ -300,7 +287,7 @@ public class LHTraits
                 .addENDesc("Players around it cannot place or break blocks. Immune damage from entities not affected by this.")
                 .addZH("领域")
                 .addZHDesc("区域内玩家无法放置和破坏方块，免疫来自区域外的生物的伤害")
-                .configure(config -> config.addWhitelist(LHTags.SEMIBOSS))
+                .addWhitelist(LHTags.SEMIBOSS)
                 .register();
         DEMENTOR = Entry.of(
                         "dementor",
@@ -328,7 +315,7 @@ public class LHTraits
                 .addENDesc("Mob will heal to full health every time it dies.")
                 .addZH("不死")
                 .addZHDesc("怪物死亡时满血复活")
-                .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
+                .addBlacklist(LHTags.SEMIBOSS)
                 .register();
         ENDER = Entry.of(
                         "teleport",
@@ -338,7 +325,7 @@ public class LHTraits
                 .addENDesc("Mob will attempt to teleport to avoid physical damage and track targets.")
                 .addZH("传送")
                 .addZHDesc("怪物会通过传送躲避伤害和追踪目标")
-                .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
+                .addBlacklist(LHTags.SEMIBOSS)
                 .register();
         REPELLING = Entry.of(
                         "repelling",
@@ -348,12 +335,12 @@ public class LHTraits
                 .addENDesc("Mob will push away entities hostile to it within %s blocks, and immune to projectiles.")
                 .addZH("排斥")
                 .addZHDesc("怪物会推开%s格内对自己有敌意的生物，并且免疫弹射物")
-                .configure(config -> config.addWhitelist(
+                .addWhitelist(
                         EntityType.SKELETON, EntityType.STRAY,
                         EntityType.PILLAGER, EntityType.EVOKER, EntityType.WITCH,
                         EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
                         EntityType.WITHER
-                ))
+                )
                 .register();
         PULLING = Entry.of(
                         "pulling",
@@ -363,7 +350,7 @@ public class LHTraits
                 .addENDesc("Mob will pull entities hostile to it within %s blocks.")
                 .addZH("吸引")
                 .addZHDesc("怪物会吸引%s格内对自己有敌意的生物")
-                .configure(config -> config.addWhitelist(LHTags.MELEE_WEAPON_TARGET))
+                .addWhitelist(LHTags.MELEE_WEAPON_TARGET)
                 .register();
         REPRINT = Entry.of(
                         "reprint",
@@ -474,96 +461,22 @@ public class LHTraits
                 .register();
     }
 
-    static class Entry<T extends MobTrait>
-            extends NamedEntryBuilder<T>
-            implements DefaultLanguageGeneratorProvider, TagGeneratorProvider<MobTrait>, ModelGeneratorProvider
+    static class Entry<T extends MobTrait> extends MobTraitBuilder<T>
     {
         public static <T extends MobTrait> Entry<T> of(String name, T trait, int cost, int weight, int maxRank, int minLevel)
         {
             return new Entry<>(name, trait, new TraitConfig.Config(L2Hostility.id(name), cost, weight, maxRank, minLevel));
         }
 
-        TraitConfig.Config config;
-        String translationKey;
-
         private Entry(String name, T trait, TraitConfig.Config config)
         {
-            super(name, trait);
-            this.config = config;
+            super(name, trait, config);
         }
 
+        @Override
         public <I extends Item> BiFunction<String, I, ItemBuilder<I>> getItemBuilder()
         {
             return LHItems.Entry::of;
-        }
-
-        public T register()
-        {
-            Identifier id = getId();
-            this.getItemBuilder()
-                    .apply(name, new TraitSymbol(new FabricItemSettings()))
-                    .addModel()
-                    .addTag(LHTags.TRAIT_ITEM)
-                    .register();
-            TraitConfigProvider.add(content, config);
-            return Registry.register(LHTraits.TRAIT, id, content);
-        }
-
-        public Entry<T> addEN()
-        {
-            return addEN(StringUtil.defaultName(name));
-        }
-
-        public Entry<T> addEN(String en)
-        {
-            this.getEnglishGenerator().addText(getTranslationKey(), en);
-            return this;
-        }
-
-        public Entry<T> addENDesc(String en)
-        {
-            this.getEnglishGenerator().addText(getTranslationKey() + ".desc", en);
-            return this;
-        }
-
-        public Entry<T> addZH(String zh)
-        {
-            this.getChineseGenerator().addText(getTranslationKey(), zh);
-            return this;
-        }
-
-        public Entry<T> addZHDesc(String zh)
-        {
-            this.getChineseGenerator().addText(getTranslationKey() + ".desc", zh);
-            return this;
-        }
-
-        public Entry<T> addTag(TagKey<MobTrait> key)
-        {
-            this.getTagGenerator(TRAIT_KEY).getOrCreateContainer(key).add(getId());
-            return this;
-        }
-
-        @SafeVarargs
-        public final Entry<T> addTag(TagKey<MobTrait>... keys)
-        {
-            TagGenerator<MobTrait> tagGenerator = getTagGenerator(TRAIT_KEY);
-            for (TagKey<MobTrait> key : keys)
-                tagGenerator.getOrCreateContainer(key).add(getId());
-            return this;
-        }
-
-        public String getTranslationKey()
-        {
-            if (translationKey == null)
-                translationKey = getId().toTranslationKey(LHTraits.TRAIT_KEY.getValue().getPath());
-            return translationKey;
-        }
-
-        public Entry<T> configure(Consumer<TraitConfig.Config> consumer)
-        {
-            consumer.accept(config);
-            return this;
         }
 
         @Override

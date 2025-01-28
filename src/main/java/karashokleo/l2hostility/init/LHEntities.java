@@ -53,7 +53,7 @@ public class LHEntities
 
     static class Entry<T extends EntityType<?>>
             extends NamedEntryBuilder<T>
-            implements DefaultLanguageGeneratorProvider, TagGeneratorProvider<EntityType<?>>
+            implements DefaultLanguageGeneratorProvider, TagGeneratorProvider
     {
         public static <T extends EntityType<?>> Entry<T> of(String name, T entity)
         {

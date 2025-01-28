@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-20T22:11:27.1221608	L2 Hostility/Model Definitions
+// 1.20.1	2025-01-28T20:36:53.6950807	L2 Hostility/Model Definitions
 787903b9f0311061258da774b1ca33e23307b88a assets\l2hostility\models\item\soul_burner.json
 ba8303f3d0cf3332a374ead31a1187a77b1edc20 assets\l2hostility\models\item\triple_strip_cape.json
 54ec7d329a369b54157cf3d13348a880b9214075 assets\l2hostility\models\item\charm_of_looting_2.json
@@ -60,9 +60,9 @@ daf50b250dc8c7ce6cb12a093b0dd1993c52e64f assets\l2hostility\models\item\drain.js
 ab6468a3edc27534ade0b63f4f810b2cce5e97ce assets\l2hostility\models\item\greed_of_nidhoggur.json
 9490a10afb4d159d34be10805e0cc02492130193 assets\l2hostility\models\item\miracle_ingot.json
 4b946676b9f080b4ad8ee512408e6ddc64372cff assets\l2hostility\models\block\sculkium_block.json
+68e7d5144c357b421964b2c26ba688790126b811 assets\l2hostility\models\item\dispell.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets\l2hostility\models\block\chaos_block.json
 e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets\l2hostility\models\item\wither.json
-68e7d5144c357b421964b2c26ba688790126b811 assets\l2hostility\models\item\dispell.json
 1739df0d5d6c03e3738f188a9606b095b5198c01 assets\l2hostility\models\item\adaptive.json
 38ebdcb219de6ddebd2181e8c53d6c00711a4b1f assets\l2hostility\models\item\bottle_of_sanity.json
 c22e95a1e35e2fbf55620102f54f37510eb6a704 assets\l2hostility\models\item\poseidite_block.json
@@ -97,8 +97,8 @@ f13f7d5f287cd6c420cea695c84dc0f2377b4a78 assets\l2hostility\models\item\shulkera
 73b870f23e6fbe1b10e84f2b876470419fec3cfd assets\l2hostility\blockstates\shulkerate_block.json
 20e51dcb17187561c46bfd411cd6733de2bb0a06 assets\l2hostility\models\item\hostility_detector.json
 2048c3857e1ab68ec463d6ceab47267dff206a2b assets\l2hostility\models\item\curse_of_greed.json
-0ccaf1b8a833e0813771253fba066ba18b372c80 assets\l2hostility\models\item\undying.json
 74111503db0c8c5f3b6a7e6b9805d3f6dda1190e assets\l2hostility\models\item\divinity_cross.json
+0ccaf1b8a833e0813771253fba066ba18b372c80 assets\l2hostility\models\item\undying.json
 3ddab52c8faefddb808553cf6792661ae82231fa assets\l2hostility\models\item\killer_aura.json
 b21603cdc9f70bed702acee927a39a1316f5b947 assets\l2hostility\models\item\guardian_eye.json
 c31f068b4b2a417a624aaa2dda92bff9b69aef49 assets\l2hostility\models\item\abrahadabra.json

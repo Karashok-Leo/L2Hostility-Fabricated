@@ -3,7 +3,6 @@ package karashokleo.l2hostility.data.config;
 import com.google.common.collect.ImmutableMap;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.L2Hostility;
-import karashokleo.l2hostility.init.LHGenerators;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
@@ -53,8 +52,6 @@ public class TraitConfig
             this.weight = weight;
             this.max_rank = maxRank;
             this.min_level = minLevel;
-            addBlacklist();
-            addWhitelist();
         }
 
         public TagKey<EntityType<?>> getBlacklistTag()
@@ -69,30 +66,6 @@ public class TraitConfig
             assert id != null;
             Identifier tag = new Identifier(id.getNamespace(), id.getPath() + "_whitelist");
             return TagKey.of(Registries.ENTITY_TYPE.getKey(), tag);
-        }
-
-        public Config addBlacklist(TagKey<EntityType<?>> tag)
-        {
-            LHGenerators.ENTITY_TYPE_TAGS.getOrCreateContainer(getBlacklistTag()).addTag(tag);
-            return this;
-        }
-
-        public Config addBlacklist(EntityType<?>... types)
-        {
-            LHGenerators.ENTITY_TYPE_TAGS.getOrCreateContainer(getBlacklistTag()).add(types);
-            return this;
-        }
-
-        public Config addWhitelist(TagKey<EntityType<?>> tag)
-        {
-            LHGenerators.ENTITY_TYPE_TAGS.getOrCreateContainer(getWhitelistTag()).addTag(tag);
-            return this;
-        }
-
-        public Config addWhitelist(EntityType<?>... types)
-        {
-            LHGenerators.ENTITY_TYPE_TAGS.getOrCreateContainer(getWhitelistTag()).add(types);
-            return this;
         }
 
         public boolean allows(EntityType<?> type)
