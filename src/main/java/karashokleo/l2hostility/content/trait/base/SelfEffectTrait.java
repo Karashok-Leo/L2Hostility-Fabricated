@@ -13,8 +13,8 @@ import java.util.function.Supplier;
 
 public class SelfEffectTrait extends MobTrait
 {
-    private static final int TICK_REFRESH_INTERNAL = 10;
-    private static final int EFFECT_DURATION = 40;
+    protected static final int TICK_REFRESH_INTERNAL = 10;
+    protected static final int EFFECT_DURATION = 40;
 
     public final Supplier<StatusEffect> effect;
 

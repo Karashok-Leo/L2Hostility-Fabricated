@@ -23,7 +23,7 @@ public class AttributeTrait extends MobTrait
     {
     }
 
-    private final AttributeEntry[] entries;
+    protected final AttributeEntry[] entries;
 
     public AttributeTrait(Formatting style, AttributeEntry... entries)
     {

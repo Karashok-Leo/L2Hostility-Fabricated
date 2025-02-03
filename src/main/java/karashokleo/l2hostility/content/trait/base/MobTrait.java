@@ -38,8 +38,8 @@ import java.util.function.IntSupplier;
 
 public class MobTrait implements ItemConvertible
 {
-    private final IntSupplier color;
-    private String desc = null;
+    protected final IntSupplier color;
+    protected String desc = null;
 
     public MobTrait(IntSupplier color)
     {

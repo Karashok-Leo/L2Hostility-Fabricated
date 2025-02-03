@@ -16,9 +16,9 @@ import java.util.function.Supplier;
 
 public class AuraEffectTrait extends MobTrait
 {
-    private static final int TICK_AURA_INTERNAL = 10;
+    protected static final int TICK_AURA_INTERNAL = 10;
 
-    private final Supplier<StatusEffect> effect;
+    protected final Supplier<StatusEffect> effect;
 
     public AuraEffectTrait(Supplier<StatusEffect> effect)
     {

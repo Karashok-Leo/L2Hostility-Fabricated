@@ -14,7 +14,7 @@ import java.util.function.IntSupplier;
 
 public abstract class IntervalTrait extends MobTrait
 {
-    private final IntSupplier interval;
+    protected final IntSupplier interval;
 
     public IntervalTrait(Formatting format, IntSupplier interval)
     {
