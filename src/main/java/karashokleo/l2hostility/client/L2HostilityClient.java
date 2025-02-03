@@ -43,6 +43,11 @@ public class L2HostilityClient implements ClientModInitializer
 
         EntityRendererRegistry.register(LHEntities.HOSTILITY_BULLET, ShulkerBulletEntityRenderer::new);
         EntityRendererRegistry.register(LHEntities.HOSTILITY_FIREBALL, context -> new FlyingItemEntityRenderer<>(context, 3.0f, true));
+        EntityRendererRegistry.register(LHEntities.SOUL_FIREBALL, context -> new FlyingItemEntityRenderer<>(context, 1, true));
+        EntityRendererRegistry.register(LHEntities.STRONG_FIREBALL, context -> new FlyingItemEntityRenderer<>(context, 1, true));
+        EntityRendererRegistry.register(LHEntities.BLACK_FIREBALL, context -> new FlyingItemEntityRenderer<>(context, 1, true));
+        EntityRendererRegistry.register(LHEntities.WITCH_FIREBALL, context -> new FlyingItemEntityRenderer<>(context, 1, true));
+        EntityRendererRegistry.register(LHEntities.ETERNAL_WITCH_FIREBALL, context -> new FlyingItemEntityRenderer<>(context, 1, true));
 
         GuiOverlayRegistry.registerLayer(10, new DifficultyOverlay());
 

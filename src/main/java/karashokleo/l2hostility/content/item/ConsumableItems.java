@@ -1,8 +1,9 @@
 package karashokleo.l2hostility.content.item;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import karashokleo.l2hostility.content.item.consumable.*;
+import karashokleo.l2hostility.content.item.consumable.charge.*;
 import karashokleo.l2hostility.init.LHItems;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Items;
 import net.minecraft.util.Rarity;
 
@@ -14,7 +15,11 @@ public class ConsumableItems
     public static BottleOfSanity BOTTLE_SANITY;
     public static EffectBoosterBottle BOOSTER_POTION;
     public static HostilityOrb HOSTILITY_ORB;
-    //    public static HostilityChargeItem WITCH_CHARGE, ETERNAL_WITCH_CHARGE;
+    public static SoulFireChargeItem SOUL_FIRE_CHARGE;
+    public static StrongFireChargeItem STRONG_FIRE_CHARGE;
+    public static BlackFireChargeItem BLACK_FIRE_CHARGE;
+    public static WitchChargeItem WITCH_CHARGE;
+    public static EternalWitchChargeItem ETERNAL_WITCH_CHARGE;
 
     public static void register()
     {
@@ -82,24 +87,6 @@ public class ConsumableItems
                 .addZH("药水增幅药剂")
                 .register();
 
-        //嗜魔弹
-//            WITCH_CHARGE = LeosHostility.REGISTRATE.item("witch_charge",
-//                    p - new HostilityChargeItem(p, ChargeType.BOOST, () -
-//                            LangData.TOOLTIP_WITCH_CHARGE.get(
-//                                    LHConfig.COMMON.witchChargeMinDuration.get() / 20,
-//                                    Math.round(100 * LHConfig.COMMON.drainDuration.get()),
-//                                    LHConfig.COMMON.drainDurationMax.get() / 20
-//                            ).withStyle(ChatFormatting.GRAY))
-//            )//                .register();
-//
-        //永恒嗜魔弹
-//            ETERNAL_WITCH_CHARGE = LeosHostility.REGISTRATE.item("eternal_witch_charge",
-//                    p - new HostilityChargeItem(p, ChargeType.ETERNAL, () -
-//                            LangData.TOOLTIP_WITCH_ETERNAL.get(
-//                                    LHConfig.COMMON.witchChargeMinDuration.get() / 20
-//                            ).withStyle(ChatFormatting.GRAY))
-//            )//                .register();
-
         HOSTILITY_ORB = LHItems.Entry.of(
                         "hostility_orb",
                         new HostilityOrb(
@@ -111,6 +98,47 @@ public class ConsumableItems
                 .addModel()
                 .addEN()
                 .addZH("恶意吸收宝珠")
+                .register();
+
+        SOUL_FIRE_CHARGE = LHItems.Entry.of(
+                        "soul_fire_charge",
+                        new SoulFireChargeItem(new FabricItemSettings())
+                )
+                .addModel()
+                .addEN()
+                .addZH("魂炎弹")
+                .register();
+        STRONG_FIRE_CHARGE = LHItems.Entry.of(
+                        "strong_fire_charge",
+                        new StrongFireChargeItem(new FabricItemSettings())
+                )
+                .addModel()
+                .addEN()
+                .addZH("爆炎弹")
+                .register();
+        BLACK_FIRE_CHARGE = LHItems.Entry.of(
+                        "black_fire_charge",
+                        new BlackFireChargeItem(new FabricItemSettings())
+                )
+                .addModel()
+                .addEN()
+                .addZH("黑炎弹")
+                .register();
+        WITCH_CHARGE = LHItems.Entry.of(
+                        "witch_charge",
+                        new WitchChargeItem(new FabricItemSettings())
+                )
+                .addModel()
+                .addEN()
+                .addZH("嗜魔弹")
+                .register();
+        ETERNAL_WITCH_CHARGE = LHItems.Entry.of(
+                        "eternal_witch_charge",
+                        new EternalWitchChargeItem(new FabricItemSettings())
+                )
+                .addModel()
+                .addEN()
+                .addZH("永恒嗜魔弹")
                 .register();
     }
 }

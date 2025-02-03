@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "l2hostility:hostility_fireball"
+    "l2hostility:hostility_fireball",
+    "l2hostility:soul_fire_charge",
+    "l2hostility:strong_fire_charge",
+    "l2hostility:black_fire_charge",
+    "l2hostility:witch_charge",
+    "l2hostility:eternal_witch_charge"
   ]
 }

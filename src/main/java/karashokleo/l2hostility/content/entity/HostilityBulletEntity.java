@@ -14,12 +14,7 @@ public class HostilityBulletEntity extends ShulkerBulletEntity
     public static final String DAMAGE_KEY = "Damage";
     private float damage;
 
-    public static HostilityBulletEntity typeFactory(EntityType<? extends ShulkerBulletEntity> entityType, World world)
-    {
-        return new HostilityBulletEntity(entityType, world);
-    }
-
-    private HostilityBulletEntity(EntityType<? extends ShulkerBulletEntity> entityType, World world)
+    public HostilityBulletEntity(EntityType<? extends ShulkerBulletEntity> entityType, World world)
     {
         super(entityType, world);
     }

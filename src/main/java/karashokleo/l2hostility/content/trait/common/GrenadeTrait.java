@@ -1,7 +1,7 @@
 package karashokleo.l2hostility.content.trait.common;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import karashokleo.l2hostility.content.entity.HostilityFireBallEntity;
+import karashokleo.l2hostility.content.entity.fireball.HostilityFireballEntity;
 import karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -34,7 +34,7 @@ public class GrenadeTrait extends IntervalTrait
             double f = target.getX() - (mob.getX() + vec3d.x * 4.0);
             double g = target.getBodyY(0.5) - (0.5 + mob.getBodyY(0.5));
             double h = target.getZ() - (mob.getZ() + vec3d.z * 4.0);
-            var fireball = new HostilityFireBallEntity(world, mob, f, g, h, level, false, false, level * 4.0f);
+            var fireball = new HostilityFireballEntity(world, mob, f, g, h, level, false, false, level * 4.0f);
             fireball.setPosition(mob.getX() + vec3d.x * mob.getWidth(), mob.getBodyY(0.5) + 0.5, mob.getZ() + vec3d.z * mob.getWidth());
             world.spawnEntity(fireball);
             mob.playSound(SoundEvents.ENTITY_SHULKER_SHOOT, 2.0F, (mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F + 1.0F);

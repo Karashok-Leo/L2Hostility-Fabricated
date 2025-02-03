@@ -1,17 +1,15 @@
-package karashokleo.l2hostility.content.entity;
+package karashokleo.l2hostility.content.entity.fireball;
 
 import karashokleo.l2hostility.init.LHEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.AbstractFireballEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
-public class HostilityFireBallEntity extends AbstractFireballEntity
+public class HostilityFireballEntity extends BaseFireballEntity
 {
     public static final String EXPLOSION_POWER_KEY = "ExplosionPower";
     public static final String CREATE_FIRE_KEY = "CreateFire";
@@ -22,19 +20,23 @@ public class HostilityFireBallEntity extends AbstractFireballEntity
     private boolean destroyBlock = false;
     private float damage = 4.0f;
 
-    public static HostilityFireBallEntity typeFactory(EntityType<HostilityFireBallEntity> entityType, World world)
-    {
-        return new HostilityFireBallEntity(entityType, world);
-    }
-
-    private HostilityFireBallEntity(EntityType<? extends HostilityFireBallEntity> entityType, World world)
+    public HostilityFireballEntity(EntityType<? extends HostilityFireballEntity> entityType, World world)
     {
         super(entityType, world);
     }
 
-    public HostilityFireBallEntity(World world, LivingEntity owner, double velocityX, double velocityY, double velocityZ, int explosionPower, boolean createFire, boolean destroyBlock, float damage)
+    public HostilityFireballEntity(double x, double y, double z, double vx, double vy, double vz, World world, int explosionPower, boolean createFire, boolean destroyBlock, float damage)
     {
-        super(LHEntities.HOSTILITY_FIREBALL, owner, velocityX, velocityY, velocityZ, world);
+        super(LHEntities.HOSTILITY_FIREBALL, x, y, z, vx, vy, vz, world);
+        this.explosionPower = explosionPower;
+        this.createFire = createFire;
+        this.destroyBlock = destroyBlock;
+        this.damage = damage;
+    }
+
+    public HostilityFireballEntity(World world, LivingEntity owner, double vx, double vy, double vz, int explosionPower, boolean createFire, boolean destroyBlock, float damage)
+    {
+        super(LHEntities.HOSTILITY_FIREBALL, owner, vx, vy, vz, world);
         this.explosionPower = explosionPower;
         this.createFire = createFire;
         this.destroyBlock = destroyBlock;
@@ -42,17 +44,7 @@ public class HostilityFireBallEntity extends AbstractFireballEntity
     }
 
     @Override
-    protected void onCollision(HitResult hitResult)
-    {
-        super.onCollision(hitResult);
-        if (!this.getWorld().isClient)
-        {
-            createExplosion();
-            this.discard();
-        }
-    }
-
-    private void createExplosion()
+    protected void onCollisionAction(Vec3d pos)
     {
         Explosion explosion = new Explosion(
                 this.getWorld(), this, null, null,
@@ -66,10 +58,8 @@ public class HostilityFireBallEntity extends AbstractFireballEntity
     }
 
     @Override
-    protected void onEntityHit(EntityHitResult entityHitResult)
+    protected void onEntityHitAction(Entity target)
     {
-        super.onEntityHit(entityHitResult);
-        Entity target = entityHitResult.getEntity();
         Entity owner = this.getOwner();
         boolean damaged = target.damage(this.getDamageSources().fireball(this, owner), this.damage);
         if (owner instanceof LivingEntity && damaged)
@@ -96,5 +86,17 @@ public class HostilityFireBallEntity extends AbstractFireballEntity
         this.createFire = nbt.getBoolean(CREATE_FIRE_KEY);
         this.destroyBlock = nbt.getBoolean(DESTROY_BLOCK_KEY);
         this.damage = nbt.getFloat(DAMAGE_KEY);
+    }
+
+    @Override
+    protected float getDrag()
+    {
+        return 0.95F;
+    }
+
+    @Override
+    protected boolean isBurning()
+    {
+        return true;
     }
 }

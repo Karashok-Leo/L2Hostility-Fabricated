@@ -340,8 +340,8 @@ public class CommonConfig implements ConfigData
         @ConfigEntry.Gui.CollapsibleObject
         public Materials materials = new Materials();
 
-//        @ConfigEntry.Gui.CollapsibleObject
-//        public FireCharge fireCharge = new FireCharge();
+        @ConfigEntry.Gui.CollapsibleObject
+        public FireCharge fireCharge = new FireCharge();
 
         @ConfigEntry.Gui.CollapsibleObject
         public Properties properties = new Properties();

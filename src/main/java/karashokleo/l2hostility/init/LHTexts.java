@@ -177,5 +177,15 @@ public enum LHTexts
 
         LHGenerators.EN_TEXTS.addText("trinkets.slot.chest.charm", "Charm");
         LHGenerators.ZH_TEXTS.addText("trinkets.slot.chest.charm", "护符");
+
+        String tagTranslationPrefix = "tag.item";
+        LHGenerators.EN_TEXTS.addText(LHTags.TRAIT_ITEM.id().toTranslationKey(tagTranslationPrefix), "Trait Item");
+        LHGenerators.ZH_TEXTS.addText(LHTags.TRAIT_ITEM.id().toTranslationKey(tagTranslationPrefix), "词条物品");
+        LHGenerators.EN_TEXTS.addText(LHTags.CHAOS.id().toTranslationKey(tagTranslationPrefix), "Chaos Equipments");
+        LHGenerators.ZH_TEXTS.addText(LHTags.CHAOS.id().toTranslationKey(tagTranslationPrefix), "混沌装备");
+        LHGenerators.EN_TEXTS.addText(LHTags.NO_SEAL.id().toTranslationKey(tagTranslationPrefix), "Unsealable Items");
+        LHGenerators.ZH_TEXTS.addText(LHTags.NO_SEAL.id().toTranslationKey(tagTranslationPrefix), "无法被封印的物品");
+//        LHGenerators.EN_TEXTS.addText(LHTags.DELICATE_BONE.id().toTranslationKey(tagTranslationPrefix), "");
+//        LHGenerators.ZH_TEXTS.addText(LHTags.DELICATE_BONE.id().toTranslationKey(tagTranslationPrefix), "");
     }
 }

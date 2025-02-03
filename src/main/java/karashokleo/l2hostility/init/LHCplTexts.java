@@ -36,6 +36,7 @@ public enum LHCplTexts
     TOTEM_DREAM("tooltip.misc.totem_dream", "Return players back to home when triggers, and becomes a fragile warp stone to go back. Valid against void damage. Also heal player to full health.", "激活时让玩家回到出生点，同时变成一个绑定了激活地点的易碎传送石。对虚空伤害也有效。回复全部血量。", 0),
     TOTEM_SEA("tooltip.misc.totem_sea", "It's stackable, but can only be triggered when in water or rain.", "可堆叠，但能只在水中/雨中激活。", 0),
 
+    CHARGE_THROW("tooltip.misc.charge_throw", "Right click to throw at target", "右键朝目标丢出", 0),
     EFFECT_CHARGE("tooltip.misc.effect_charge", "Apply on Hit: %s", "击中目标时施加: %s", 1),
     EXPLOSION_CHARGE("tooltip.misc.explosion_charge", "Create explosion of level %s on Hit", "造成等级%s的爆炸", 1),
 

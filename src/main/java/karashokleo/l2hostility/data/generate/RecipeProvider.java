@@ -685,6 +685,41 @@ public class RecipeProvider extends FabricRecipeProvider
                     .offerTo(exporter, ID_UTIL.get(ConsumableItems.BOOK_OMNISCIENCE));
 
             convert(exporter, ConsumableItems.BOTTLE_CURSE, MiscItems.HOSTILITY_ESSENCE, 512);
+
+            RecipeTemplate.shapeless(ConsumableItems.SOUL_FIRE_CHARGE, 2, Items.BLAZE_POWDER)
+                    .input(ItemTags.SOUL_FIRE_BASE_BLOCKS)
+                    .input(Items.BLAZE_POWDER, 2)
+                    .input(Items.GUNPOWDER, 2)
+                    .offerTo(exporter, ID_UTIL.get(ConsumableItems.SOUL_FIRE_CHARGE));
+
+            RecipeTemplate.shapeless(ConsumableItems.STRONG_FIRE_CHARGE, 2, Items.BLAZE_POWDER)
+                    .input(Ingredient.ofItems(Items.COAL, Items.CHARCOAL))
+                    .input(Items.BLAZE_POWDER, 2)
+                    .input(Items.GUNPOWDER, 2)
+                    .offerTo(exporter, ID_UTIL.get(ConsumableItems.STRONG_FIRE_CHARGE));
+
+            RecipeTemplate.shapeless(ConsumableItems.BLACK_FIRE_CHARGE, 2, Items.BLAZE_POWDER)
+                    .input(Items.BLACKSTONE)
+                    .input(Items.BLAZE_POWDER, 2)
+                    .input(Items.GUNPOWDER, 2)
+                    .offerTo(exporter, ID_UTIL.get(ConsumableItems.BLACK_FIRE_CHARGE));
+
+            RecipeTemplate.shapeless(ConsumableItems.WITCH_CHARGE, 1, MiscItems.WITCH_DROPLET)
+                    .input(MiscItems.WITCH_DROPLET)
+                    .input(ComplementItems.CURSED_DROPLET)
+                    .input(Items.BLAZE_POWDER, 1)
+                    .input(Items.GUNPOWDER, 1)
+                    .offerTo(exporter, ID_UTIL.get(ConsumableItems.WITCH_CHARGE));
+
+            RecipeTemplate.shaped(ConsumableItems.ETERNAL_WITCH_CHARGE, 1, MiscItems.WITCH_DROPLET)
+                    .pattern("ABA")
+                    .pattern("BCB")
+                    .pattern("DBD")
+                    .input('A', Items.GUNPOWDER)
+                    .input('D', Items.BLAZE_POWDER)
+                    .input('B', ComplementItems.BLACKSTONE_CORE)
+                    .input('C', MiscItems.WITCH_DROPLET)
+                    .offerTo(exporter, ID_UTIL.get(ConsumableItems.ETERNAL_WITCH_CHARGE));
         });
 
         ID_UTIL.pushAndPop("misc/", () ->
