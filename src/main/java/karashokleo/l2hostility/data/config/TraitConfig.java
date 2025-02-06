@@ -74,13 +74,17 @@ public class TraitConfig
             var whitelist = getWhitelistTag();
             var manager = Registries.ENTITY_TYPE;
             assert manager != null;
+            var whitelistEntries = manager.getEntryList(whitelist);
+            var blacklistEntries = manager.getEntryList(blacklist);
             boolean def = true;
-            if (manager.getEntryList(whitelist).isPresent())
+            if (whitelistEntries.isPresent() &&
+                whitelistEntries.get().size() > 0)
             {
                 if (type.isIn(whitelist)) return true;
                 def = false;
             }
-            if (manager.getEntryList(blacklist).isPresent())
+            if (blacklistEntries.isPresent() &&
+                blacklistEntries.get().size() > 0)
             {
                 if (type.isIn(blacklist)) return false;
                 def = true;
