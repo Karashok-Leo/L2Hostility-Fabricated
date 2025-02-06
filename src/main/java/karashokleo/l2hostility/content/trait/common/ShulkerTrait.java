@@ -15,7 +15,7 @@ public class ShulkerTrait extends IntervalTrait
     // 怪物能够以 2.0秒 的频率发射潜影弹，潜影弹会携带怪物所拥有的词条的能力。
     public ShulkerTrait()
     {
-        super(Formatting.LIGHT_PURPLE, () -> LHConfig.common().traits.shulkerInterval);
+        super(Formatting.LIGHT_PURPLE, lv -> LHConfig.common().traits.shulkerInterval);
     }
 
     @Override

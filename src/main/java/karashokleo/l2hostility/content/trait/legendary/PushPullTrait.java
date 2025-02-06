@@ -12,9 +12,15 @@ import net.minecraft.util.TypeFilter;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
+import java.util.function.IntSupplier;
 
 public abstract class PushPullTrait extends LegendaryTrait
 {
+    public PushPullTrait(IntSupplier color)
+    {
+        super(color);
+    }
+
     public PushPullTrait(Formatting style)
     {
         super(style);
@@ -44,7 +50,7 @@ public abstract class PushPullTrait extends LegendaryTrait
         List<? extends LivingEntity> list = mob.getWorld().getEntitiesByType(TypeFilter.instanceOf(LivingEntity.class),
                 mob.getBoundingBox().expand(r), e ->
                         e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode ||
-                                e instanceof MobEntity m && m.getTarget() == mob);
+                        e instanceof MobEntity m && m.getTarget() == mob);
         for (var e : list)
         {
             double dist = mob.distanceTo(e) / r;

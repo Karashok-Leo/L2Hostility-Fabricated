@@ -20,7 +20,7 @@ public class GrenadeTrait extends IntervalTrait
     // Fabricated: 改为发射火球
     public GrenadeTrait()
     {
-        super(Formatting.RED, () -> LHConfig.common().traits.grenadeInterval);
+        super(Formatting.RED, lv -> LHConfig.common().traits.grenadeInterval);
     }
 
     @Override

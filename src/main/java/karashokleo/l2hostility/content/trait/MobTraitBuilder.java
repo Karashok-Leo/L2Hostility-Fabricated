@@ -3,7 +3,6 @@ package karashokleo.l2hostility.content.trait;
 import karashokleo.l2hostility.content.item.traits.TraitSymbol;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.data.config.TraitConfig;
-import karashokleo.l2hostility.data.config.provider.TraitConfigProvider;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;
@@ -30,8 +29,8 @@ public abstract class MobTraitBuilder<T extends MobTrait>
         extends NamedEntryBuilder<T>
         implements DefaultLanguageGeneratorProvider, TagGeneratorProvider, ModelGeneratorProvider
 {
-    TraitConfig.Config config;
-    String translationKey;
+    protected TraitConfig.Config config;
+    protected String translationKey;
 
     protected MobTraitBuilder(String name, T trait, TraitConfig.Config config)
     {
@@ -42,6 +41,8 @@ public abstract class MobTraitBuilder<T extends MobTrait>
 
     public abstract <I extends Item> BiFunction<String, I, ItemBuilder<I>> getItemBuilder();
 
+    public abstract void generateConfig(MobTrait trait, TraitConfig.Config config);
+
     public T register()
     {
         Identifier id = getId();
@@ -50,7 +51,7 @@ public abstract class MobTraitBuilder<T extends MobTrait>
                 .addModel()
                 .addTag(LHTags.TRAIT_ITEM)
                 .register();
-        TraitConfigProvider.add(content, config);
+        this.generateConfig(content, config);
         return Registry.register(LHTraits.TRAIT, id, content);
     }
 

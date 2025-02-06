@@ -228,6 +228,8 @@ public class CommonConfig implements ConfigData
         public double regen = 0.02;
         @Comment("Damage factor for Adaptive. Higher means less reduction")
         public double adaptFactor = 0.5;
+        @Comment("Trigger range for Reflect")
+        public double reflectRange = 3;
         @Comment("Reflect factor per level for Reflect. 0.5 means +50% extra damage")
         public double reflectFactor = 0.3;
         @Comment("Duration in ticks for enchantments to be disabled per level for Dispell")

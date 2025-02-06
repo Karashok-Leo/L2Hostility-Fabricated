@@ -6,6 +6,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHu
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHEffects;
+import karashokleo.l2hostility.init.LHTags;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -69,7 +70,7 @@ public class MaterialEvents
 
         LivingHurtEvent.HURT.register(event ->
         {
-            if (event.getSource().isIn(DamageTypeTags.IS_PROJECTILE) &&
+            if (event.getSource().isIn(LHTags.SPACE_SHARD) &&
                 event.getSource().getAttacker() instanceof PlayerEntity &&
                 LHConfig.common().complements.materials.enableSpaceShard &&
                 event.getAmount() >= LHConfig.common().complements.materials.spaceDamage)

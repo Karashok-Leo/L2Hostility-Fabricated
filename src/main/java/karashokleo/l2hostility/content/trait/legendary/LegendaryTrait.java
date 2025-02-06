@@ -6,8 +6,15 @@ import karashokleo.l2hostility.content.trait.base.MobTrait;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Formatting;
 
+import java.util.function.IntSupplier;
+
 public class LegendaryTrait extends MobTrait
 {
+    public LegendaryTrait(IntSupplier color)
+    {
+        super(color);
+    }
+
     public LegendaryTrait(Formatting format)
     {
         super(format);

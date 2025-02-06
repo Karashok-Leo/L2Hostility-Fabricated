@@ -13,6 +13,7 @@ import karashokleo.l2hostility.content.trait.goals.EnderTrait;
 import karashokleo.l2hostility.content.trait.highlevel.*;
 import karashokleo.l2hostility.content.trait.legendary.*;
 import karashokleo.l2hostility.data.config.TraitConfig;
+import karashokleo.l2hostility.data.config.provider.TraitConfigProvider;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.entity.EntityType;
@@ -172,9 +173,9 @@ public class LHTraits
                         new ReflectTrait(),
                         80, 50, 5, 100)
                 .addEN()
-                .addENDesc("Reflect direct physical damage as %s%% magical damage")
+                .addENDesc("Reflect damage within %s blocks as %s%% magical damage")
                 .addZH("反射")
-                .addZHDesc("将直接物理伤害以%s%%魔法伤害的形式反射")
+                .addZHDesc("将%s格内的伤害以%s%%魔法伤害的形式反射")
                 .register();
         SHULKER = Entry.of(
                         "shulker",
@@ -294,9 +295,9 @@ public class LHTraits
                         new DementorTrait(),
                         120, 50, 1, 150)
                 .addEN()
-                .addENDesc("Immune to physical damage. Damage bypass armor.")
+                .addENDesc("Immune to physical damage. Damage bypass armor and shield.")
                 .addZH("摄魂")
-                .addZHDesc("免疫物理伤害，伤害穿透护甲")
+                .addZHDesc("免疫物理伤害，伤害穿透护甲和盾牌")
                 .register();
         DISPELL = Entry.of(
                         "dispell",
@@ -477,6 +478,12 @@ public class LHTraits
         public <I extends Item> BiFunction<String, I, ItemBuilder<I>> getItemBuilder()
         {
             return LHItems.Entry::of;
+        }
+
+        @Override
+        public void generateConfig(MobTrait trait, TraitConfig.Config config)
+        {
+            TraitConfigProvider.add(trait, config);
         }
 
         @Override

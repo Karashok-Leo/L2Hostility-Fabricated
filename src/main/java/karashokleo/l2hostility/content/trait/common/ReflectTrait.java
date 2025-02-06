@@ -3,8 +3,8 @@ package karashokleo.l2hostility.content.trait.common;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -25,7 +25,7 @@ public class ReflectTrait extends MobTrait
     {
         // 距离小于3时触发
         if (event.getSource().getAttacker() instanceof LivingEntity le &&
-                entity.distanceTo(le) < 3)
+            entity.distanceTo(le) < LHConfig.common().traits.reflectRange)
         {
             if (ReflectTrinket.canReflect(le, this)) return;
             float factor = (float) (level * LHConfig.common().traits.reflectFactor);
@@ -37,6 +37,7 @@ public class ReflectTrait extends MobTrait
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
+                        LHConfig.common().traits.reflectRange,
                         mapLevel(i -> Text.literal((int) Math.round(100 * (i * LHConfig.common().traits.reflectFactor)) + "")
                                 .formatted(Formatting.AQUA)))
                 .formatted(Formatting.GRAY));

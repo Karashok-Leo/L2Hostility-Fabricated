@@ -19,6 +19,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.spell_power.api.SpellPowerTags;
@@ -46,6 +47,7 @@ public class LHTags
     public static final TagKey<StatusEffect> WRATH_INVULNERABILITY = createEffectTag("wrath_invulnerability");
 
     public static final TagKey<DamageType> MAGIC = createDamageTypeTag("magic");
+    public static final TagKey<DamageType> SPACE_SHARD = createDamageTypeTag("space_shard");
 
     public static final TagKey<EntityType<?>> BLACKLIST = createEntityTag("blacklist");
     public static final TagKey<EntityType<?>> WHITELIST = createEntityTag("whitelist");
@@ -136,6 +138,8 @@ public class LHTags
                 .add(DamageTypes.WITHER)
                 .add(DamageTypes.WITHER_SKULL)
                 .add(DamageTypes.DRAGON_BREATH);
+        LHGenerators.DAMAGE_TYPE_TAGS.getOrCreateContainer(SPACE_SHARD)
+                .addOptionalTag(DamageTypeTags.IS_PROJECTILE);
 
         if (FabricLoader.getInstance().isModLoaded("spell_power"))
             LHGenerators.DAMAGE_TYPE_TAGS.getOrCreateContainer(MAGIC)

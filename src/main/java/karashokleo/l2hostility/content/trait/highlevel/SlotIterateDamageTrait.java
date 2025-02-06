@@ -9,9 +9,15 @@ import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntSupplier;
 
 public abstract class SlotIterateDamageTrait extends MobTrait
 {
+    public SlotIterateDamageTrait(IntSupplier color)
+    {
+        super(color);
+    }
+
     public SlotIterateDamageTrait(Formatting format)
     {
         super(format);

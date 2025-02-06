@@ -11,12 +11,19 @@ import net.minecraft.util.Formatting;
 
 import java.util.List;
 import java.util.function.IntSupplier;
+import java.util.function.IntUnaryOperator;
 
 public abstract class IntervalTrait extends MobTrait
 {
-    protected final IntSupplier interval;
+    protected final IntUnaryOperator interval;
 
-    public IntervalTrait(Formatting format, IntSupplier interval)
+    public IntervalTrait(IntSupplier color, IntUnaryOperator interval)
+    {
+        super(color);
+        this.interval = interval;
+    }
+
+    public IntervalTrait(Formatting format, IntUnaryOperator interval)
     {
         super(format);
         this.interval = interval;
@@ -29,7 +36,7 @@ public abstract class IntervalTrait extends MobTrait
         if (diff.isEmpty()) return;
         var cap = diff.get();
         var data = getData(cap);
-        if (data.tickCount++ < interval.getAsInt()) return;
+        if (data.tickCount++ < interval.applyAsInt(level)) return;
         action(cap.owner, level, data);
     }
 
@@ -46,9 +53,12 @@ public abstract class IntervalTrait extends MobTrait
     @Override
     public void addDetail(List<Text> list)
     {
-        list.add(Text.translatable(getDescKey(),
-                Text.literal(interval.getAsInt() / 20d + "")
-                        .formatted(Formatting.AQUA)).formatted(Formatting.GRAY));
+        list.add(
+                Text.translatable(
+                        getDescKey(),
+                        mapLevel(lv -> Text.literal(interval.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA))
+                ).formatted(Formatting.GRAY)
+        );
     }
 
     @SerialClass
