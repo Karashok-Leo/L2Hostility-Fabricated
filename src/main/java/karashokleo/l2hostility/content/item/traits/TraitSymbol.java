@@ -1,10 +1,10 @@
 package karashokleo.l2hostility.content.item.traits;
 
 import karashokleo.l2hostility.L2Hostility;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.content.trait.legendary.LegendaryTrait;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.advancement.criterion.Criteria;
@@ -21,7 +21,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Util;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +33,7 @@ public class TraitSymbol extends Item
         if (!LHConfig.common().scaling.allowPlayerAllies && target.isTeammate(player))
             return false;
         if (!LHConfig.common().scaling.allowTraitOnOwnable && target instanceof Ownable own &&
-                own.getOwner() instanceof PlayerEntity)
+            own.getOwner() instanceof PlayerEntity)
             return false;
         return trait.allow(target);
     }
@@ -49,13 +48,11 @@ public class TraitSymbol extends Item
         var ans = LHTraits.TRAIT.get(Registries.ITEM.getId(this));
         if (ans == null)
         {
-            L2Hostility.LOGGER.error("------------");
             L2Hostility.LOGGER.error("Trait {} is not registered. Why?", Registries.ITEM.getId(this));
             var set = LHTraits.TRAIT.getIds();
             L2Hostility.LOGGER.error("List of all ids registered: ");
             for (var e : set)
                 L2Hostility.LOGGER.error(e.toString());
-            L2Hostility.LOGGER.error("------------");
         }
         assert ans != null;
         return ans;
@@ -64,7 +61,7 @@ public class TraitSymbol extends Item
     @Override
     protected String getOrCreateTranslationKey()
     {
-        return Util.createTranslationKey(LHTraits.TRAIT_KEY.getValue().getPath(), Registries.ITEM.getId(this));
+        return this.get().getNameKey();
     }
 
     @Override
