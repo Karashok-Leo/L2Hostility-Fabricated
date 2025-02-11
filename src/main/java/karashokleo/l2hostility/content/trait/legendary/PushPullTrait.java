@@ -47,15 +47,21 @@ public abstract class PushPullTrait extends LegendaryTrait
     public void serverTick(LivingEntity mob, int level)
     {
         int r = getRange();
-        List<? extends LivingEntity> list = mob.getWorld().getEntitiesByType(TypeFilter.instanceOf(LivingEntity.class),
-                mob.getBoundingBox().expand(r), e ->
-                        e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode ||
-                        e instanceof MobEntity m && m.getTarget() == mob);
+        List<? extends LivingEntity> list = mob.getWorld()
+                .getEntitiesByType(
+                        TypeFilter.instanceOf(LivingEntity.class),
+                        mob.getBoundingBox().expand(r),
+                        e -> e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode &&
+                             !pl.isSpectator() ||
+                             e instanceof MobEntity m && m.getTarget() == mob
+                );
         for (var e : list)
         {
             double dist = mob.distanceTo(e) / r;
             if (dist > 1) return; // 范围形状从立方体变为球
-            Vec3d vec = e.getPos().subtract(mob.getPos()).normalize().multiply(getProcessedStrength(e, dist));
+            double strength = getProcessedStrength(e, dist);
+            if (strength == 0) continue;
+            Vec3d vec = e.getPos().subtract(mob.getPos()).normalize().multiply(strength);
             e.addVelocity(vec.x, vec.y, vec.z);
         }
     }

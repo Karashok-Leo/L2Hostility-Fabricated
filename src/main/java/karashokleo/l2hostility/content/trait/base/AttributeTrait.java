@@ -40,16 +40,20 @@ public class AttributeTrait extends MobTrait
     public void addDetail(List<Text> list)
     {
         for (var e : entries)
+        {
+            double value = e.factor.getAsDouble();
+            if (value == 0) continue;
             list.add(mapLevel(i ->
                     (e.op == EntityAttributeModifier.Operation.ADDITION ?
-                            Text.literal("+" + Math.round(e.factor.getAsDouble() * i)) :
-                            Text.literal("+" + Math.round(e.factor.getAsDouble() * i * 100) + "%"))
+                            Text.literal("+" + Math.round(value * i)) :
+                            Text.literal("+" + Math.round(value * i * 100) + "%"))
                             .formatted(Formatting.AQUA))
                     .append(ScreenTexts.SPACE)
                     .append(
                             Text.translatable(e.attribute.get().getTranslationKey())
                                     .formatted(Formatting.BLUE)
                     ));
+        }
     }
 
     public record AttributeEntry(

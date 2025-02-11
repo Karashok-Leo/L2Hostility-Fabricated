@@ -53,7 +53,7 @@ public class LHTraits
     public static SplitTrait SPLIT;
     public static DrainTrait DRAIN;
     public static CounterStrikeTrait STRIKE;
-    public static AuraEffectTrait GRAVITY;
+    public static GravityTrait GRAVITY;
     public static AuraEffectTrait MOONWALK;
     public static ArenaTrait ARENA;
 
@@ -264,12 +264,12 @@ public class LHTraits
                 .register();
         GRAVITY = Entry.of(
                         "gravity",
-                        new AuraEffectTrait(() -> LHEffects.GRAVITY),
+                        new GravityTrait(),
                         50, 100, 3, 80)
                 .addEN()
-                .addENDesc("Increase gravity for mobs around it")
+                .addENDesc("Increase gravity for mobs around it. Knock attackers downward when damaged.")
                 .addZH("重力")
-                .addZHDesc("增加周围区域重力")
+                .addZHDesc("增加周围区域重力。受到空中生物攻击时使攻击者向下坠落")
                 .register();
         MOONWALK = Entry.of(
                         "moonwalk",

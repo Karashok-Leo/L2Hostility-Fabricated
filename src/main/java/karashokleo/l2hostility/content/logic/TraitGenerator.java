@@ -63,7 +63,8 @@ public class TraitGenerator
     {
         if (rank == 0)
             traits.remove(e);
-        traits.put(e, rank);
+        else
+            traits.put(e, rank);
     }
 
     // 随机选择一个词条
