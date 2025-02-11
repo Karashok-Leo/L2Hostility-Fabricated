@@ -41,6 +41,7 @@ public class PocketOfRestoration extends BaseTrinketItem
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         if (entity.getWorld().isClient()) return;
+        if (!entity.isAlive()) return;
         var list = TrinketCompat.getItemAccess(entity);
         if (stack.getNbt() != null && stack.getNbt().contains(ROOT))
         {

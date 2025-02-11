@@ -168,6 +168,10 @@ public class CommonConfig implements ConfigData
         public int nidhoggurExtraLevel = 100;
         @Comment("All loot drop factor when using Greed of Nidhoggur")
         public double nidhoggurDropFactor = 0.01;
+        @Comment("Cap drop at item max stack size")
+        public boolean nidhoggurCapAtItemMaxStack = true;
+        @Comment("When using book of reprint to copy books, drop extra on player and does not allow overstacking")
+        public boolean bookOfReprintSpread = false;
         @Comment("Insulator Enchantment factor for reducing pushing")
         public double insulatorFactor = 0.8;
 
@@ -423,11 +427,5 @@ public class CommonConfig implements ConfigData
 
     maxMobLevel = builder.comment("Max mob level")
         .defineInRange("maxMobLevel", 3000, 100, 100000);
-
-    nidhoggurCapAtItemMaxStack = builder.comment("Cap drop at item max stack size")
-        .define("nidhoggurCapAtItemMaxStack", false);
-
-    bookOfReprintSpread = builder.comment("When using book of reprint to copy books, drop extra on player and does not allow overstacking")
-        .define("bookOfReprintSpread",false);
     */
 }

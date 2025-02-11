@@ -6,8 +6,10 @@ import karashokleo.l2hostility.content.logic.InheritContext;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.mob.SlimeEntity;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.Formatting;
 
 public class GrowthTrait extends MobTrait
@@ -46,6 +48,14 @@ public class GrowthTrait extends MobTrait
     {
         if (event.getSource().isOf(DamageTypes.IN_WALL))
             event.setCanceled(true);
+    }
+
+    @Override
+    public void onDeath(int level, LivingEntity entity, DamageSource source)
+    {
+        if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;
+        entity.setHealth(entity.getMaxHealth());
+        entity.discard();
     }
 
     @Override

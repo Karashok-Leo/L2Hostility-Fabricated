@@ -9,6 +9,7 @@ import karashokleo.l2hostility.util.EffectHelper;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -35,10 +36,13 @@ public class RingOfIncarceration extends BaseTrinketItem
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         if (!entity.isSneaking()) return;
+        if (entity.isSpectator()) return;
         // Default Entity Interact Distance: 3.0
         double reach = ReachEntityAttributes.getAttackRange(entity, 3.0);
         for (var e : entity.getWorld().getEntitiesByType(TypeFilter.instanceOf(LivingEntity.class), entity.getBoundingBox().expand(reach), e -> entity.distanceTo(e) < reach))
         {
+            if (e.isSpectator() ||
+                e instanceof PlayerEntity player && player.isCreative()) continue;
             StatusEffectInstance newEffect = new StatusEffectInstance(LHEffects.STONE_CAGE, 40, 0, true, true);
             EffectHelper.forceAddEffectWithEvent(e, newEffect, entity);
         }

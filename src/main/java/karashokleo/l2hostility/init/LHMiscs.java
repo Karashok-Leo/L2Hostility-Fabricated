@@ -60,6 +60,4 @@ public class LHMiscs
             return L2Hostility.MOD_ID;
         }
     }
-
-
 }

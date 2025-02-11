@@ -1,11 +1,11 @@
 package karashokleo.l2hostility.mixin;
 
 import karashokleo.l2hostility.content.item.consumable.BookCopy;
-import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.*;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,19 +38,26 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler
     {
         ItemStack left = this.input.getStack(0);
         ItemStack right = this.input.getStack(1);
-        if (left.getItem() instanceof BookCopy &&
-            right.getItem() instanceof EnchantedBookItem)
+        MutableInt mutRepairItemUsage = new MutableInt(this.repairItemUsage);
+        if (BookCopy.onAnvilUpdate(left, right, this.output, this.levelCost, mutRepairItemUsage))
         {
-            var map = EnchantmentHelper.get(right);
-            int cost = 0;
-            for (var e : map.entrySet())
-                cost += BookCopy.cost(e.getKey(), e.getValue());
-            ItemStack result = right.copy();
-            result.setCount(left.getCount() + right.getCount());
-            this.output.setStack(0, result);
-            this.levelCost.set(cost);
-            this.repairItemUsage = right.getCount();
+            this.repairItemUsage = mutRepairItemUsage.getValue();
             ci.cancel();
         }
+    }
+
+    @Inject(
+            method = "onTakeOutput",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/inventory/Inventory;setStack(ILnet/minecraft/item/ItemStack;)V",
+                    ordinal = 0
+            )
+    )
+    private void inject_onTakeOutput(PlayerEntity player, ItemStack stack, CallbackInfo ci)
+    {
+        ItemStack left = this.input.getStack(0);
+        ItemStack right = this.input.getStack(1);
+        BookCopy.onTakeOutput(left, right, player);
     }
 }

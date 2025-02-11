@@ -2,12 +2,15 @@ package karashokleo.l2hostility.data.config;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.init.LHConfig;
+import net.minecraft.entity.EntityType;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -19,6 +22,30 @@ public class DifficultyConfig
     public final HashMap<Identifier, Config> levelMap = new HashMap<>();
     @SerialClass.SerialField
     public final HashMap<Identifier, Config> biomeMap = new HashMap<>();
+    @SerialClass.SerialField
+    public final HashMap<Identifier, ArrayList<EntityConfig.Config>> levelDefaultTraits = new HashMap<>();
+
+    @Nullable
+    public EntityConfig.Config get(Identifier level, EntityType<?> type)
+    {
+        if (!LHConfig.common().enableEntitySpecificDatapack)
+            return null;
+        var list = levelDefaultTraits.get(level);
+        if (list == null) return null;
+        EntityConfig.Config def = null;
+        for (var e : list)
+        {
+            if (e.entities.contains(type))
+            {
+                return e;
+            }
+            if (e.entities.isEmpty())
+            {
+                def = e;
+            }
+        }
+        return def;
+    }
 
     public static Config defaultConfig()
     {

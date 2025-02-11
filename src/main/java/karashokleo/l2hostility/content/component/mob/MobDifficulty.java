@@ -53,6 +53,7 @@ public class MobDifficulty
     private boolean inherited = false;
     private boolean ticking = false;
     private EntityConfig.Config configCache = null;
+
     public MobDifficulty(MobEntity mob)
     {
         this.owner = mob;
@@ -110,6 +111,10 @@ public class MobDifficulty
         if (configCache == null)
         {
             configCache = LHData.entities.get(owner.getType());
+        }
+        if (configCache == null)
+        {
+            configCache = LHData.difficulties.get(owner.getWorld().getRegistryKey().getValue(), owner.getType());
         }
         return configCache;
     }

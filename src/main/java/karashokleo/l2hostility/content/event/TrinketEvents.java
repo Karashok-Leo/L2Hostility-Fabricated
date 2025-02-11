@@ -17,6 +17,7 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 
 public class TrinketEvents
@@ -90,7 +91,17 @@ public class TrinketEvents
                 if (target.getRandom().nextDouble() < val - count) count++;
                 count++;
                 for (var stack : drops)
-                    stack.getStack().setCount(stack.getStack().getCount() * count);
+                {
+                    System.out.println("BBB");
+                    ItemStack itemStack = stack.getStack();
+                    int ans = itemStack.getCount() * count;
+                    if (LHConfig.common().items.nidhoggurCapAtItemMaxStack)
+                    {
+                        System.out.println("AAAA");
+                        ans = Math.min(itemStack.getMaxCount(), ans);
+                    }
+                    itemStack.setCount(ans);
+                }
             }
             return false;
         });
