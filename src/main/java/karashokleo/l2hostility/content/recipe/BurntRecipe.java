@@ -21,6 +21,27 @@ import net.minecraft.world.World;
 @SerialClass
 public class BurntRecipe implements Recipe<BurntRecipe.Inv>
 {
+    @SerialClass.SerialField
+    public Ingredient ingredient;
+    @SerialClass.SerialField
+    public ItemStack result;
+    @SerialClass.SerialField
+    public int chance;
+    protected Identifier id;
+
+    public BurntRecipe(Identifier id)
+    {
+        this.id = id;
+    }
+
+    public BurntRecipe(Identifier id, Ingredient ingredient, ItemStack result, int chance)
+    {
+        this.id = id;
+        this.ingredient = ingredient;
+        this.result = result;
+        this.chance = chance;
+    }
+
     public static void onItemKill(World world, Entity entity, ItemStack stack)
     {
         Inv inv = new Inv(stack);
@@ -42,29 +63,6 @@ public class BurntRecipe implements Recipe<BurntRecipe.Inv>
             copy.setCount(sup);
             world.spawnEntity(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), copy, 0, 0.5, 0));
         }
-    }
-
-    protected Identifier id;
-    @SerialClass.SerialField
-    public Ingredient ingredient;
-
-    @SerialClass.SerialField
-    public ItemStack result;
-
-    @SerialClass.SerialField
-    public int chance;
-
-    public BurntRecipe(Identifier id)
-    {
-        this.id = id;
-    }
-
-    public BurntRecipe(Identifier id, Ingredient ingredient, ItemStack result, int chance)
-    {
-        this.id = id;
-        this.ingredient = ingredient;
-        this.result = result;
-        this.chance = chance;
     }
 
     @Override

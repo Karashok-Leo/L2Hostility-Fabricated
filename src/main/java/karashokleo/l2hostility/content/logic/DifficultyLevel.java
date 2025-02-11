@@ -11,11 +11,11 @@ import net.minecraft.entity.player.PlayerEntity;
 @SerialClass
 public class DifficultyLevel
 {
-    protected long experience;
     @SerialClass.SerialField
     public int level;
     @SerialClass.SerialField
     public int extraLevel;
+    protected long experience;
 
     public static DifficultyLevel merge(DifficultyLevel difficulty, int extraLevel)
     {

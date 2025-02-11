@@ -26,6 +26,11 @@ public class SealedItem extends TrinketItem
 {
     public static final String TIME = "sealTime", DATA = "sealedItem";
 
+    public SealedItem(Settings settings)
+    {
+        super(settings);
+    }
+
     public static ItemStack sealItem(ItemStack stack, int time)
     {
         if (stack.isOf(MiscItems.SEAL))
@@ -41,11 +46,6 @@ public class SealedItem extends TrinketItem
         if (EnchantmentHelper.getLevel(LHEnchantments.VANISH, stack) > 0)
             ans.addEnchantment(LHEnchantments.VANISH, 1);
         return ans;
-    }
-
-    public SealedItem(Settings settings)
-    {
-        super(settings);
     }
 
     @Override

@@ -28,6 +28,11 @@ import java.util.List;
 
 public class WitchWand extends Item
 {
+    public WitchWand(Settings settings)
+    {
+        super(settings);
+    }
+
     private static StatusEffectInstance getRandom(int maxRank, Random random)
     {
         var list = LHTraits.TRAIT.stream().filter(e -> e instanceof TargetEffectTrait).toList();
@@ -35,11 +40,6 @@ public class WitchWand extends Item
         int rank = Math.min(maxRank, trait.getConfig().max_rank);
         var ans = trait.func.apply(rank);
         return new StatusEffectInstanceBuilder(ans).setDuration(ans.getDuration() * LHConfig.common().items.witchWandFactor).build();
-    }
-
-    public WitchWand(Settings settings)
-    {
-        super(settings);
     }
 
     @Override

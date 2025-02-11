@@ -12,16 +12,16 @@ import net.minecraft.util.Identifier;
 
 public class KillTraitsTrigger extends BaseCriterion<KillTraitsTrigger.Condition, KillTraitsTrigger>
 {
+    public KillTraitsTrigger(Identifier id)
+    {
+        super(id, Condition::new, Condition.class);
+    }
+
     public static Condition condition(MobTrait... traits)
     {
         var ans = new Condition(LHTriggers.KILL_TRAITS.getId(), LootContextPredicate.EMPTY);
         ans.traits = traits;
         return ans;
-    }
-
-    public KillTraitsTrigger(Identifier id)
-    {
-        super(id, Condition::new, Condition.class);
     }
 
     public void trigger(ServerPlayerEntity player, MobDifficulty cap)

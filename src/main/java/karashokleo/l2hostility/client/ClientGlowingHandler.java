@@ -1,9 +1,9 @@
 package karashokleo.l2hostility.client;
 
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.init.LHConfig;
-import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -15,6 +15,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class ClientGlowingHandler
 {
+    private static int cacheTick;
+    private static boolean cacheGlass;
+
     public static boolean isGlowing(Entity entity)
     {
         var diff = MobDifficulty.get(entity);
@@ -24,9 +27,6 @@ public class ClientGlowingHandler
             return isGlowingImpl(diff.get().owner);
         return false;
     }
-
-    private static int cacheTick;
-    private static boolean cacheGlass;
 
     private static boolean playerHasGlass(PlayerEntity player)
     {

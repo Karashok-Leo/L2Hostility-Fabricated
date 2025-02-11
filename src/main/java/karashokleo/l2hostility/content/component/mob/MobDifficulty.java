@@ -31,10 +31,45 @@ import java.util.function.Supplier;
 public class MobDifficulty
 {
     private static final int TICK_REMOVE_INTERNAl = 10;
-
-    public enum Stage
+    @SerialClass.SerialField
+    public final LinkedHashMap<MobTrait, Integer> traits = new LinkedHashMap<>();
+    @SerialClass.SerialField
+    private final HashMap<Identifier, CapStorageData> data = new HashMap<>();
+    private final ArrayList<Pair<MobTrait, Integer>> pending = new ArrayList<>();
+    public MobEntity owner;
+    @SerialClass.SerialField
+    public int lv;
+    @SerialClass.SerialField
+    public boolean summoned = false, noDrop = false, fullDrop = false;
+    @SerialClass.SerialField
+    public double dropRate = 1;
+    @Nullable
+    @SerialClass.SerialField
+    public BlockPos pos = null;
+    @SerialClass.SerialField
+    private Stage stage = Stage.PRE_INIT;
+    //    @Nullable
+//    private TraitSpawnerBlockEntity summoner = null;
+    private boolean inherited = false;
+    private boolean ticking = false;
+    private EntityConfig.Config configCache = null;
+    public MobDifficulty(MobEntity mob)
     {
-        PRE_INIT, INIT, POST_INIT
+        this.owner = mob;
+    }
+
+    public MobDifficulty(MobEntity owner, Stage stage, int lv, boolean summoned, boolean noDrop, boolean fullDrop, double dropRate, @Nullable BlockPos pos, boolean inherited, boolean ticking)
+    {
+        this.owner = owner;
+        this.stage = stage;
+        this.lv = lv;
+        this.summoned = summoned;
+        this.noDrop = noDrop;
+        this.fullDrop = fullDrop;
+        this.dropRate = dropRate;
+        this.pos = pos;
+        this.inherited = inherited;
+        this.ticking = ticking;
     }
 
     public static Optional<MobDifficulty> get(MobEntity mob)
@@ -56,56 +91,6 @@ public class MobDifficulty
     public void sync()
     {
         LHComponents.MOB_DIFFICULTY.sync(owner);
-    }
-
-    public MobEntity owner;
-    @SerialClass.SerialField
-    public final LinkedHashMap<MobTrait, Integer> traits = new LinkedHashMap<>();
-    @SerialClass.SerialField
-    private Stage stage = Stage.PRE_INIT;
-    @SerialClass.SerialField
-    public int lv;
-    @SerialClass.SerialField
-    private final HashMap<Identifier, CapStorageData> data = new HashMap<>();
-    @SerialClass.SerialField
-    public boolean summoned = false, noDrop = false, fullDrop = false;
-    @SerialClass.SerialField
-    public double dropRate = 1;
-    @Nullable
-    @SerialClass.SerialField
-    public BlockPos pos = null;
-
-    //    @Nullable
-//    private TraitSpawnerBlockEntity summoner = null;
-    private boolean inherited = false;
-    private boolean ticking = false;
-    private EntityConfig.Config configCache = null;
-    private final ArrayList<Pair<MobTrait, Integer>> pending = new ArrayList<>();
-
-    public MobDifficulty(MobEntity mob)
-    {
-        this.owner = mob;
-    }
-
-    public MobDifficulty(MobEntity owner, Stage stage, int lv, boolean summoned, boolean noDrop, boolean fullDrop, double dropRate, @Nullable BlockPos pos, boolean inherited, boolean ticking)
-    {
-        this.owner = owner;
-        this.stage = stage;
-        this.lv = lv;
-        this.summoned = summoned;
-        this.noDrop = noDrop;
-        this.fullDrop = fullDrop;
-        this.dropRate = dropRate;
-        this.pos = pos;
-        this.inherited = inherited;
-        this.ticking = ticking;
-    }
-
-    public void setLevel(int level)
-    {
-        lv = level;
-        lv = clampLevel(level);
-        TraitManager.scale(owner, lv);
     }
 
     public int clampLevel(int lv)
@@ -202,6 +187,13 @@ public class MobDifficulty
     public int getLevel()
     {
         return lv;
+    }
+
+    public void setLevel(int level)
+    {
+        lv = level;
+        lv = clampLevel(level);
+        TraitManager.scale(owner, lv);
     }
 
     public boolean isInitialized()
@@ -384,5 +376,10 @@ public class MobDifficulty
         }
         if (count > 0) ans.add(temp);
         return ans;
+    }
+
+    public enum Stage
+    {
+        PRE_INIT, INIT, POST_INIT
     }
 }

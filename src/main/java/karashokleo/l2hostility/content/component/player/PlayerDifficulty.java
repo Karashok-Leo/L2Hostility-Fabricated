@@ -29,6 +29,20 @@ import java.util.TreeSet;
 @SerialClass
 public class PlayerDifficulty
 {
+    @SerialClass.SerialField
+    public final TreeSet<Identifier> dimensions = new TreeSet<>();
+    @SerialClass.SerialField
+    private final DifficultyLevel difficulty = new DifficultyLevel();
+    public PlayerEntity owner;
+    @SerialClass.SerialField
+    public int maxRankKilled = 0, rewardCount = 0;
+    @Nullable
+    public ChunkDifficulty prevChunk;
+    public PlayerDifficulty(PlayerEntity player)
+    {
+        this.owner = player;
+    }
+
     public static PlayerDifficulty get(PlayerEntity player)
     {
         return player.getComponent(LHComponents.PLAYER_DIFFICULTY).diff;
@@ -37,21 +51,6 @@ public class PlayerDifficulty
     public static void sync(PlayerEntity player)
     {
         LHComponents.PLAYER_DIFFICULTY.sync(player);
-    }
-
-    public PlayerEntity owner;
-    @SerialClass.SerialField
-    private final DifficultyLevel difficulty = new DifficultyLevel();
-    @SerialClass.SerialField
-    public int maxRankKilled = 0, rewardCount = 0;
-    @SerialClass.SerialField
-    public final TreeSet<Identifier> dimensions = new TreeSet<>();
-    @Nullable
-    public ChunkDifficulty prevChunk;
-
-    public PlayerDifficulty(PlayerEntity player)
-    {
-        this.owner = player;
     }
 
     public void onClone(boolean lossless, boolean keepInventory)

@@ -19,13 +19,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity
 {
-    @Shadow
-    public abstract ItemStack getStack();
-
     private ItemEntityMixin(EntityType<?> type, World world)
     {
         super(type, world);
     }
+
+    @Shadow
+    public abstract ItemStack getStack();
 
     @Inject(
             method = "tick",

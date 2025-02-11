@@ -28,32 +28,6 @@ public class DifficultyScreen extends BaseTextScreen
         super(title, new Identifier("l2tabs:textures/gui/empty.png"));
     }
 
-    public void init()
-    {
-        super.init();
-        new TabManager<>(this, new InvTabData()).init(this::addDrawableChild, L2HostilityClient.TAB_DIFFICULTY);
-    }
-
-    public void render(DrawContext context, int mx, int my, float ptick)
-    {
-        super.render(context, mx, my, ptick);
-        int x = this.leftPos + 8;
-        int y = this.topPos + 6;
-        List<Pair<Text, Supplier<List<Text>>>> list = new ArrayList<>();
-        addDifficultyInfo(list, Formatting.DARK_RED, Formatting.DARK_GREEN, Formatting.DARK_PURPLE);
-        addRewardInfo(list);
-        List<Text> tooltip = null;
-        for (var c : list)
-        {
-            if (mx >= x && mx <= x + textRenderer.getWidth(c.getLeft()) && my >= y && my <= y + 10)
-                tooltip = c.getRight() == null ? null : c.getRight().get();
-            context.drawText(this.textRenderer, c.getLeft(), x, y, 0, false);
-            y += 10;
-        }
-        if (tooltip != null && !tooltip.isEmpty())
-            context.drawTooltip(this.textRenderer, tooltip, mx, my);
-    }
-
     public static void addRewardInfo(List<Pair<Text, Supplier<List<Text>>>> list)
     {
         PlayerEntity player = L2HostilityClient.getClientPlayer();
@@ -91,5 +65,31 @@ public class DifficultyScreen extends BaseTextScreen
                 list.add(new Pair<>(LHTexts.INFO_CHUNK_SCALE.get(ins.scale).formatted(formats[0]), List::of));
             }
         }
+    }
+
+    public void init()
+    {
+        super.init();
+        new TabManager<>(this, new InvTabData()).init(this::addDrawableChild, L2HostilityClient.TAB_DIFFICULTY);
+    }
+
+    public void render(DrawContext context, int mx, int my, float ptick)
+    {
+        super.render(context, mx, my, ptick);
+        int x = this.leftPos + 8;
+        int y = this.topPos + 6;
+        List<Pair<Text, Supplier<List<Text>>>> list = new ArrayList<>();
+        addDifficultyInfo(list, Formatting.DARK_RED, Formatting.DARK_GREEN, Formatting.DARK_PURPLE);
+        addRewardInfo(list);
+        List<Text> tooltip = null;
+        for (var c : list)
+        {
+            if (mx >= x && mx <= x + textRenderer.getWidth(c.getLeft()) && my >= y && my <= y + 10)
+                tooltip = c.getRight() == null ? null : c.getRight().get();
+            context.drawText(this.textRenderer, c.getLeft(), x, y, 0, false);
+            y += 10;
+        }
+        if (tooltip != null && !tooltip.isEmpty())
+            context.drawTooltip(this.textRenderer, tooltip, mx, my);
     }
 }

@@ -61,8 +61,8 @@ public class DispellTrait extends LegendaryTrait
     {
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-                !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-                source.isIn(LHTags.MAGIC))
+            !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
+            source.isIn(LHTags.MAGIC))
             event.setCanceled(true);
     }
 

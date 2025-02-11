@@ -36,8 +36,8 @@ public class RepellingTrait extends PushPullTrait
     {
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-                !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-                source.isIn(DamageTypeTags.IS_PROJECTILE))
+            !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
+            source.isIn(DamageTypeTags.IS_PROJECTILE))
             event.setCanceled(true);
     }
 

@@ -1,8 +1,8 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.logic.TraitManager;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Formatting;
 

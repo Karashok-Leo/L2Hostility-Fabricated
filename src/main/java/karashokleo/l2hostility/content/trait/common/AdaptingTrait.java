@@ -40,6 +40,17 @@ public class AdaptingTrait extends MobTrait
                 .ifPresent(factor -> event.setAmount(event.getAmount() * factor));
     }
 
+    @Override
+    public void addDetail(List<Text> list)
+    {
+        list.add(Text.translatable(getDescKey(),
+                        Text.literal((int) Math.round(100 * (1 - LHConfig.common().traits.adaptFactor)) + "")
+                                .formatted(Formatting.AQUA),
+                        mapLevel(i -> Text.literal("" + i)
+                                .formatted(Formatting.AQUA)))
+                .formatted(Formatting.GRAY));
+    }
+
     @SerialClass
     public static class Data extends CapStorageData
     {
@@ -68,16 +79,5 @@ public class AdaptingTrait extends MobTrait
                 return Optional.empty();
             }
         }
-    }
-
-    @Override
-    public void addDetail(List<Text> list)
-    {
-        list.add(Text.translatable(getDescKey(),
-                        Text.literal((int) Math.round(100 * (1 - LHConfig.common().traits.adaptFactor)) + "")
-                                .formatted(Formatting.AQUA),
-                        mapLevel(i -> Text.literal("" + i)
-                                .formatted(Formatting.AQUA)))
-                .formatted(Formatting.GRAY));
     }
 }

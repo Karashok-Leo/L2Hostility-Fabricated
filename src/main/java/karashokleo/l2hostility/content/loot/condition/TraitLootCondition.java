@@ -41,9 +41,10 @@ public class TraitLootCondition implements LootCondition
     public boolean test(LootContext context)
     {
         return MobDifficulty.get(context.get(LootContextParameters.THIS_ENTITY))
-                .filter(diff ->{
-                    int lv=diff.getTraitLevel(trait);
-                    return lv>0&&lv >= minLevel && lv <= maxLevel;
+                .filter(diff ->
+                {
+                    int lv = diff.getTraitLevel(trait);
+                    return lv > 0 && lv >= minLevel && lv <= maxLevel;
                 }).isPresent();
     }
 }

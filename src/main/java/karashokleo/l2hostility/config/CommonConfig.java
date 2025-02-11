@@ -162,6 +162,14 @@ public class CommonConfig implements ConfigData
 
         @ConfigEntry.Gui.CollapsibleObject
         public Curse curse = new Curse();
+        @Comment("Number of level to add when using Abrahadabra")
+        public int abrahadabraExtraLevel = 100;
+        @Comment("Number of level to add when using Greed of Nidhoggur")
+        public int nidhoggurExtraLevel = 100;
+        @Comment("All loot drop factor when using Greed of Nidhoggur")
+        public double nidhoggurDropFactor = 0.01;
+        @Comment("Insulator Enchantment factor for reducing pushing")
+        public double insulatorFactor = 0.8;
 
         public static class Curse
         {
@@ -188,15 +196,6 @@ public class CommonConfig implements ConfigData
             @Comment("Trait cost multiplier when using Curse of Pride")
             public double prideTraitFactor = 0.5;
         }
-
-        @Comment("Number of level to add when using Abrahadabra")
-        public int abrahadabraExtraLevel = 100;
-        @Comment("Number of level to add when using Greed of Nidhoggur")
-        public int nidhoggurExtraLevel = 100;
-        @Comment("All loot drop factor when using Greed of Nidhoggur")
-        public double nidhoggurDropFactor = 0.01;
-        @Comment("Insulator Enchantment factor for reducing pushing")
-        public double insulatorFactor = 0.8;
     }
 
     public static class Effects

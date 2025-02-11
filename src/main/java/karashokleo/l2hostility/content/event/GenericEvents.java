@@ -1,7 +1,7 @@
 package karashokleo.l2hostility.content.event;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +9,13 @@ import java.util.function.BooleanSupplier;
 
 public class GenericEvents
 {
+    private static List<BooleanSupplier> TASKS = new ArrayList<>();
+
     public static void register()
     {
         ServerTickEvents.END_SERVER_TICK.register(server -> execute());
         ServerTickEvents.END_SERVER_TICK.register(server -> RayTraceUtil.serverTick());
     }
-
-    private static List<BooleanSupplier> TASKS = new ArrayList<>();
 
     public static synchronized void schedule(Runnable runnable)
     {

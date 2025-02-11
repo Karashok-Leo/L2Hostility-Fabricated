@@ -2,8 +2,8 @@ package karashokleo.l2hostility.content.trait.goals;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.trait.legendary.LegendaryTrait;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -23,46 +23,6 @@ public class EnderTrait extends LegendaryTrait
     public EnderTrait()
     {
         super(Formatting.DARK_PURPLE);
-    }
-
-    @Override
-    public void serverTick(LivingEntity mob, int level)
-    {
-        int duration = LHConfig.common().traits.teleportDuration;
-        int r = LHConfig.common().traits.teleportRange;
-        if (mob.age % duration == 0 && mob instanceof MobEntity m && m.getTarget() != null)
-        {
-            Vec3d old = mob.getPos();
-            Vec3d target = m.getTarget().getPos();
-            if (target.distanceTo(old) > r)
-                target = target.subtract(old).normalize().multiply(r).add(old);
-            var event = new EntityEvents.Teleport.EntityTeleportEvent(m, target.getX(), target.getY(), target.getZ());
-            event.sendEvent();
-            if (event.isCanceled()) return;
-            mob.teleport(target.getX(), target.getY(), target.getZ());
-            if (!mob.getWorld().isSpaceEmpty(mob))
-            {
-                mob.teleport(old.getX(), old.getY(), old.getZ());
-                return;
-            }
-            mob.getWorld().emitGameEvent(GameEvent.TELEPORT, m.getPos(), GameEvent.Emitter.of(mob));
-            if (!mob.isSilent())
-            {
-                mob.getWorld().playSound(null, mob.prevX, mob.prevY, mob.prevZ, SoundEvents.ENTITY_ENDERMAN_TELEPORT, mob.getSoundCategory(), 1.0F, 1.0F);
-                mob.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
-            }
-        }
-    }
-
-    @Override
-    public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
-    {
-        DamageSource source = event.getSource();
-        if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-                !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-                !source.isIn(LHTags.MAGIC))
-            if (teleport(entity) || source.isIn(DamageTypeTags.IS_PROJECTILE))
-                event.setCanceled(true);
     }
 
     private static boolean teleport(LivingEntity entity)
@@ -105,5 +65,45 @@ public class EnderTrait extends LegendaryTrait
             }
             return flag2;
         } else return false;
+    }
+
+    @Override
+    public void serverTick(LivingEntity mob, int level)
+    {
+        int duration = LHConfig.common().traits.teleportDuration;
+        int r = LHConfig.common().traits.teleportRange;
+        if (mob.age % duration == 0 && mob instanceof MobEntity m && m.getTarget() != null)
+        {
+            Vec3d old = mob.getPos();
+            Vec3d target = m.getTarget().getPos();
+            if (target.distanceTo(old) > r)
+                target = target.subtract(old).normalize().multiply(r).add(old);
+            var event = new EntityEvents.Teleport.EntityTeleportEvent(m, target.getX(), target.getY(), target.getZ());
+            event.sendEvent();
+            if (event.isCanceled()) return;
+            mob.teleport(target.getX(), target.getY(), target.getZ());
+            if (!mob.getWorld().isSpaceEmpty(mob))
+            {
+                mob.teleport(old.getX(), old.getY(), old.getZ());
+                return;
+            }
+            mob.getWorld().emitGameEvent(GameEvent.TELEPORT, m.getPos(), GameEvent.Emitter.of(mob));
+            if (!mob.isSilent())
+            {
+                mob.getWorld().playSound(null, mob.prevX, mob.prevY, mob.prevZ, SoundEvents.ENTITY_ENDERMAN_TELEPORT, mob.getSoundCategory(), 1.0F, 1.0F);
+                mob.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
+            }
+        }
+    }
+
+    @Override
+    public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
+    {
+        DamageSource source = event.getSource();
+        if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
+            !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
+            !source.isIn(LHTags.MAGIC))
+            if (teleport(entity) || source.isIn(DamageTypeTags.IS_PROJECTILE))
+                event.setCanceled(true);
     }
 }

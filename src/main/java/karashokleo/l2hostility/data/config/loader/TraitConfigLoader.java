@@ -1,10 +1,10 @@
 package karashokleo.l2hostility.data.config.loader;
 
-import karashokleo.leobrary.data.AbstractDataLoader;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.data.Constants;
 import karashokleo.l2hostility.data.config.TraitConfig;
 import karashokleo.l2hostility.init.LHData;
+import karashokleo.leobrary.data.AbstractDataLoader;
 import net.minecraft.util.Identifier;
 
 public class TraitConfigLoader extends AbstractDataLoader<TraitConfig.Config>

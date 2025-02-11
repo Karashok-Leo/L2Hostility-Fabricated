@@ -1,10 +1,10 @@
 package karashokleo.l2hostility.data.config.provider;
 
-import karashokleo.leobrary.data.AbstractDataProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.data.Constants;
 import karashokleo.l2hostility.data.config.DifficultyConfig;
+import karashokleo.leobrary.data.AbstractDataProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeKeys;
 

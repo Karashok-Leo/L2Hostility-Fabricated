@@ -14,17 +14,17 @@ import net.minecraft.util.Identifier;
 
 public class KillTraitEffectTrigger extends BaseCriterion<KillTraitEffectTrigger.Condition, KillTraitEffectTrigger>
 {
+    public KillTraitEffectTrigger(Identifier id)
+    {
+        super(id, Condition::new, Condition.class);
+    }
+
     public static Condition condition(MobTrait traits, StatusEffect effect)
     {
         var ans = new Condition(LHTriggers.TRAIT_EFFECT.getId(), LootContextPredicate.EMPTY);
         ans.trait = traits;
         ans.effect = effect;
         return ans;
-    }
-
-    public KillTraitEffectTrigger(Identifier id)
-    {
-        super(id, Condition::new, Condition.class);
     }
 
     public void trigger(ServerPlayerEntity player, LivingEntity le, MobDifficulty cap)

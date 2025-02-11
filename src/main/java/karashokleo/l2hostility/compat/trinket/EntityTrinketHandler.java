@@ -8,7 +8,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
-public record EntityTrinketHandler(LivingEntity entity,int page) implements NamedScreenHandlerFactory
+public record EntityTrinketHandler(LivingEntity entity, int page) implements NamedScreenHandlerFactory
 {
     @Override
     public Text getDisplayName()

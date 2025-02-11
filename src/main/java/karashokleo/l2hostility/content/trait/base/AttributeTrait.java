@@ -15,15 +15,6 @@ import java.util.function.Supplier;
 
 public class AttributeTrait extends MobTrait
 {
-    public record AttributeEntry(
-            String name,
-            Supplier<EntityAttribute> attribute,
-            DoubleSupplier factor,
-            EntityAttributeModifier.Operation op
-    )
-    {
-    }
-
     protected final AttributeEntry[] entries;
 
     public AttributeTrait(IntSupplier color, AttributeEntry... entries)
@@ -59,5 +50,14 @@ public class AttributeTrait extends MobTrait
                             Text.translatable(e.attribute.get().getTranslationKey())
                                     .formatted(Formatting.BLUE)
                     ));
+    }
+
+    public record AttributeEntry(
+            String name,
+            Supplier<EntityAttribute> attribute,
+            DoubleSupplier factor,
+            EntityAttributeModifier.Operation op
+    )
+    {
     }
 }

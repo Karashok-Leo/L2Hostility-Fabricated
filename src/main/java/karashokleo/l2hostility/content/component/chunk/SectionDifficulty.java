@@ -2,13 +2,13 @@ package karashokleo.l2hostility.content.component.chunk;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import karashokleo.l2hostility.content.network.S2CClearDifficulty;
-import karashokleo.l2hostility.init.LHData;
-import karashokleo.l2hostility.data.config.DifficultyConfig;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.l2hostility.content.logic.LevelEditor;
 import karashokleo.l2hostility.content.logic.MobDifficultyCollector;
+import karashokleo.l2hostility.content.network.S2CClearDifficulty;
+import karashokleo.l2hostility.data.config.DifficultyConfig;
 import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.init.LHData;
 import karashokleo.l2hostility.init.LHNetworking;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.entity.LivingEntity;
@@ -25,37 +25,30 @@ import java.util.Optional;
 @SerialClass
 public class SectionDifficulty
 {
-    public enum SectionStage
-    {
-        INIT, CLEARED
-    }
-
-    // 获取特定位置的SectionDifficulty
-    public static Optional<SectionDifficulty> sectionAt(World world, BlockPos pos)
-    {
-        return ChunkDifficulty.at(world, pos).map(e -> e.getSection(pos.getY()));
-    }
-
+    @SerialClass.SerialField
+    private final DifficultyLevel difficulty = new DifficultyLevel();
+    @SerialClass.SerialField
+    public BlockPos activePos = null;
     ChunkSection section;
     @SerialClass.SerialField
     int index;
     @SerialClass.SerialField
-    public BlockPos activePos = null;
-    @SerialClass.SerialField
     private SectionStage stage = SectionStage.INIT;
-    @SerialClass.SerialField
-    private final DifficultyLevel difficulty = new DifficultyLevel();
-
     public SectionDifficulty()
     {
     }
-
     public SectionDifficulty(ChunkSection section, int index, BlockPos activePos, SectionStage stage)
     {
         this.section = section;
         this.index = index;
         this.activePos = activePos;
         this.stage = stage;
+    }
+
+    // 获取特定位置的SectionDifficulty
+    public static Optional<SectionDifficulty> sectionAt(World world, BlockPos pos)
+    {
+        return ChunkDifficulty.at(world, pos).map(e -> e.getSection(pos.getY()));
     }
 
     // 修改MobDifficultyCollector
@@ -75,7 +68,7 @@ public class SectionDifficulty
         LHData.difficulties.getByBiome(world, pos).ifPresent(instance::acceptConfig);
         instance.acceptBonusLevel(
                 (int) Math.round(LHConfig.common().scaling.distanceFactor *
-                Math.sqrt(1d * (pos.getX() * pos.getX() + pos.getZ() * pos.getZ()))));
+                                 Math.sqrt(1d * (pos.getX() * pos.getX() + pos.getZ() * pos.getZ()))));
     }
 
     // 获取SectionDifficulty文本
@@ -87,7 +80,7 @@ public class SectionDifficulty
         BlockPos pos = player.getBlockPos();
         int bio = LHData.difficulties.getByBiome(player.getWorld(), pos).map(DifficultyConfig.Config::base).orElse(0);
         int dist = (int) Math.round(LHConfig.common().scaling.distanceFactor *
-                Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ()));
+                                    Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ()));
         int adaptive = difficulty.getLevel();
         return List.of(
                 LHTexts.INFO_SECTION_DIM_LEVEL.get(dim).formatted(Formatting.GRAY),
@@ -144,5 +137,10 @@ public class SectionDifficulty
         MobDifficultyCollector col = new MobDifficultyCollector();
         modifyInstanceInternal(world, pos, col);
         return col.scale;
+    }
+
+    public enum SectionStage
+    {
+        INIT, CLEARED
     }
 }

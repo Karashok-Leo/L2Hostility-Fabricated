@@ -1,8 +1,8 @@
 package karashokleo.l2hostility.client;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.network.ClientPlayerEntity;

@@ -1,9 +1,9 @@
 package karashokleo.l2hostility.content.item.trinket.misc;
 
-import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
+import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,8 @@ public class Abrahadabra extends CurseTrinketItem implements ReflectTrinket
     }
 
     @Override
-    public int getExtraLevel() {
+    public int getExtraLevel()
+    {
         return LHConfig.common().items.abrahadabraExtraLevel;
     }
 

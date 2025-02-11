@@ -33,6 +33,15 @@ public class S2CLootData implements SerialPacketS2C
         }
     }
 
+    public static S2CLootData create()
+    {
+        List<IGlobalLootModifier> list = new ArrayList<>();
+        for (var e : LootModifierManager.getLootModifierManager().getAllLootMods())
+            if (e instanceof ITraitLootRecipe)
+                list.add(e);
+        return new S2CLootData(list);
+    }
+
     @Override
     public void handle(ClientPlayerEntity player)
     {
@@ -44,14 +53,5 @@ public class S2CLootData implements SerialPacketS2C
             if (ans.get().getFirst() instanceof ITraitLootRecipe mod)
                 ITraitLootRecipe.LIST_CACHE.add(mod);
         }
-    }
-
-    public static S2CLootData create()
-    {
-        List<IGlobalLootModifier> list = new ArrayList<>();
-        for (var e : LootModifierManager.getLootModifierManager().getAllLootMods())
-            if (e instanceof ITraitLootRecipe)
-                list.add(e);
-        return new S2CLootData(list);
     }
 }

@@ -1,7 +1,5 @@
 package karashokleo.l2hostility.content.item.trinket.misc;
 
-import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
-import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;

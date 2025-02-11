@@ -14,32 +14,6 @@ import java.util.Locale;
 
 public class HostilitySpawner extends Block
 {
-    public enum State implements StringIdentifiable
-    {
-        IDLE(7),
-        ACTIVATED(11),
-        CLEAR(15),
-        FAILED(11);
-
-        private final int light;
-
-        State(int light)
-        {
-            this.light = light;
-        }
-
-        public int light()
-        {
-            return light;
-        }
-
-        @Override
-        public String asString()
-        {
-            return name().toLowerCase(Locale.ROOT);
-        }
-    }
-
     public static final EnumProperty<State> STATE = EnumProperty.of("state", State.class);
 
     public HostilitySpawner()
@@ -65,5 +39,31 @@ public class HostilitySpawner extends Block
     public BlockState getPlacementState(ItemPlacementContext ctx)
     {
         return this.getDefaultState().with(STATE, State.IDLE);
+    }
+
+    public enum State implements StringIdentifiable
+    {
+        IDLE(7),
+        ACTIVATED(11),
+        CLEAR(15),
+        FAILED(11);
+
+        private final int light;
+
+        State(int light)
+        {
+            this.light = light;
+        }
+
+        public int light()
+        {
+            return light;
+        }
+
+        @Override
+        public String asString()
+        {
+            return name().toLowerCase(Locale.ROOT);
+        }
     }
 }

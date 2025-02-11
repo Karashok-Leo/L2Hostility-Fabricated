@@ -33,7 +33,7 @@ public class TrinketCompat
         return TrinketsApi.getTrinketComponent(entity).map(trinketComponent ->
                 trinketComponent.isEquipped(stack ->
                         stack.getItem() instanceof EffectValidItem effectValidItem &&
-                                effectValidItem.isEffectValid(effectInstance, stack, entity))).orElse(false);
+                        effectValidItem.isEffectValid(effectInstance, stack, entity))).orElse(false);
     }
 
     // 装备栏或者饰品栏是否存在item
@@ -182,7 +182,7 @@ public class TrinketCompat
         if (access instanceof EquipmentSlotAccess equipmentSlotAccess)
             multimap = stack.getAttributeModifiers(equipmentSlotAccess.slot());
         else if (access instanceof TrinketSlotAccess trinketSlotAccess &&
-                stack.getItem() instanceof Trinket trinket)
+                 stack.getItem() instanceof Trinket trinket)
             multimap = trinket.getModifiers(stack, new SlotReference(trinketSlotAccess.getInventory(), trinketSlotAccess.slot()), trinketSlotAccess.le(), UUID.randomUUID());
         if (multimap != null)
             for (var e : multimap.keySet())

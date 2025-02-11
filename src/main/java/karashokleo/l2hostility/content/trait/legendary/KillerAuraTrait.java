@@ -1,9 +1,11 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.content.network.S2CKillerAura;
-import karashokleo.l2hostility.init.*;
-import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.init.LHDamageTypes;
+import karashokleo.l2hostility.init.LHNetworking;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,8 +36,8 @@ public class KillerAuraTrait extends LegendaryTrait
             if (diff.isEmpty()) return;
             for (var e : mob.getWorld().getEntitiesByClass(LivingEntity.class, mob.getBoundingBox().expand(range), EntityPredicates.VALID_ENTITY))
                 if (e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode ||
-                        e instanceof MobEntity target && target.getTarget() == mob ||
-                        mob instanceof MobEntity mobmob && mobmob.getTarget() == e)
+                    e instanceof MobEntity target && target.getTarget() == mob ||
+                    mob instanceof MobEntity mobmob && mobmob.getTarget() == e)
                 {
                     if (e.distanceTo(mob) > range) continue;
                     if (ReflectTrinket.canReflect(e, this)) continue;

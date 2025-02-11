@@ -28,6 +28,11 @@ import java.util.List;
 
 public class TraitSymbol extends Item
 {
+    public TraitSymbol(Settings settings)
+    {
+        super(settings);
+    }
+
     private static boolean allow(PlayerEntity player, MobTrait trait, LivingEntity target)
     {
         if (!LHConfig.common().scaling.allowPlayerAllies && target.isTeammate(player))
@@ -36,11 +41,6 @@ public class TraitSymbol extends Item
             own.getOwner() instanceof PlayerEntity)
             return false;
         return trait.allow(target);
-    }
-
-    public TraitSymbol(Settings settings)
-    {
-        super(settings);
     }
 
     public MobTrait get()

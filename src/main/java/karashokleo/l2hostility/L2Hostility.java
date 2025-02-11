@@ -15,6 +15,16 @@ public class L2Hostility implements ModInitializer
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     private static MinecraftServer SERVER;
 
+    public static Identifier id(String path)
+    {
+        return new Identifier(MOD_ID, path);
+    }
+
+    public static MinecraftServer getServer()
+    {
+        return SERVER;
+    }
+
     @Override
     public void onInitialize()
     {
@@ -42,15 +52,5 @@ public class L2Hostility implements ModInitializer
         LHCommands.register();
         ServerLifecycleEvents.SERVER_STARTED.register(server -> SERVER = server);
         LOGGER.info("Hello L2Hostility Fabricated!");
-    }
-
-    public static Identifier id(String path)
-    {
-        return new Identifier(MOD_ID, path);
-    }
-
-    public static MinecraftServer getServer()
-    {
-        return SERVER;
     }
 }

@@ -464,14 +464,14 @@ public class LHTraits
 
     static class Entry<T extends MobTrait> extends MobTraitBuilder<T>
     {
-        public static <T extends MobTrait> Entry<T> of(String name, T trait, int cost, int weight, int maxRank, int minLevel)
-        {
-            return new Entry<>(name, trait, new TraitConfig.Config(L2Hostility.id(name), cost, weight, maxRank, minLevel));
-        }
-
         private Entry(String name, T trait, TraitConfig.Config config)
         {
             super(name, trait, config);
+        }
+
+        public static <T extends MobTrait> Entry<T> of(String name, T trait, int cost, int weight, int maxRank, int minLevel)
+        {
+            return new Entry<>(name, trait, new TraitConfig.Config(L2Hostility.id(name), cost, weight, maxRank, minLevel));
         }
 
         @Override

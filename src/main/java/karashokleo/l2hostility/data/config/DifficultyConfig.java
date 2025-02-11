@@ -15,6 +15,10 @@ import java.util.Optional;
 public class DifficultyConfig
 {
     private static Config DEFAULT = null;
+    @SerialClass.SerialField
+    public final HashMap<Identifier, Config> levelMap = new HashMap<>();
+    @SerialClass.SerialField
+    public final HashMap<Identifier, Config> biomeMap = new HashMap<>();
 
     public static Config defaultConfig()
     {
@@ -29,11 +33,6 @@ public class DifficultyConfig
             );
         return DEFAULT;
     }
-
-    @SerialClass.SerialField
-    public final HashMap<Identifier, Config> levelMap = new HashMap<>();
-    @SerialClass.SerialField
-    public final HashMap<Identifier, Config> biomeMap = new HashMap<>();
 
     public Config getByLevelOrDefault(Identifier id)
     {
@@ -51,17 +50,6 @@ public class DifficultyConfig
         biomeMap.putAll(config.biomeMap);
     }
 
-    public record Config(
-            int min,
-            int base,
-            double variation,
-            double scale,
-            double apply_chance,
-            double trait_chance
-    )
-    {
-    }
-
     public DifficultyConfig putDim(RegistryKey<World> key, int min, int base, double var, double scale)
     {
         levelMap.put(key.getValue(), new Config(min, base, var, scale, 1, 1));
@@ -74,5 +62,16 @@ public class DifficultyConfig
         for (var key : keys)
             biomeMap.put(key.getValue(), new Config(min, base, var, scale, 1, 1));
         return this;
+    }
+
+    public record Config(
+            int min,
+            int base,
+            double variation,
+            double scale,
+            double apply_chance,
+            double trait_chance
+    )
+    {
     }
 }

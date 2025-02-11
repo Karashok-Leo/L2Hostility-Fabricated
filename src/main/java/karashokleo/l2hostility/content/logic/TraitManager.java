@@ -56,11 +56,9 @@ public class TraitManager
 
     public static void scale(LivingEntity le, int lv)
     {
-        double factor;
-        if (LHConfig.common().scaling.exponentialHealth)
-            factor = Math.pow(1 + LHConfig.common().scaling.healthFactor, lv) - 1;
-        else
-            factor = lv * LHConfig.common().scaling.healthFactor;
+        double factor = LHConfig.common().scaling.exponentialHealth ?
+                Math.pow(1 + LHConfig.common().scaling.healthFactor, lv) - 1 :
+                lv * LHConfig.common().scaling.healthFactor;
         addAttribute(
                 le, EntityAttributes.GENERIC_MAX_HEALTH,
                 "hostility_health", factor,

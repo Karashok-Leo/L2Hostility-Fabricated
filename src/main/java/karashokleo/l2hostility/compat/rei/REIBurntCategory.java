@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.compat.rei;
 
 import com.google.common.collect.Lists;
+import karashokleo.l2hostility.init.LHCplTexts;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -11,7 +12,6 @@ import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import karashokleo.l2hostility.init.LHCplTexts;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 
@@ -36,8 +36,8 @@ public class REIBurntCategory implements DisplayCategory<REIBurntDisplay>
         widgets.add(result);
         widgets.add(Widgets.createTooltip(point ->
                 bounds.contains(point) &&
-                        !(ingredient.getBounds().contains(point) ||
-                                result.getBounds().contains(point)) ?
+                !(ingredient.getBounds().contains(point) ||
+                  result.getBounds().contains(point)) ?
                         Tooltip.create(point, display.getTooltip()) : null));
         return widgets;
     }

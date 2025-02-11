@@ -137,8 +137,8 @@ public class ItemPopulator
             if (!stack.hasEnchantments())
             {
                 float lvl = MathHelper.clamp(cap.getLevel() * 0.02f, 0, 1) *
-                        r.nextInt(30) +
-                        cap.getEnchantBonus();
+                            r.nextInt(30) +
+                            cap.getEnchantBonus();
                 stack = EnchantmentHelper.enchant(r, stack, (int) lvl, false);
             }
             if (LHConfig.common().scaling.allowExtraEnchantments)

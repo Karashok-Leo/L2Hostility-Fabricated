@@ -1,10 +1,10 @@
 package karashokleo.l2hostility.content.item.consumable;
 
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
-import karashokleo.l2hostility.content.item.TrinketItems;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
+import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.logic.LevelEditor;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;

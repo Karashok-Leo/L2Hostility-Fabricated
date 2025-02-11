@@ -11,16 +11,16 @@ import net.minecraft.util.Identifier;
 
 public class KillTraitCountTrigger extends BaseCriterion<KillTraitCountTrigger.Condition, KillTraitCountTrigger>
 {
+    public KillTraitCountTrigger(Identifier id)
+    {
+        super(id, Condition::new, Condition.class);
+    }
+
     public static Condition condition(int count)
     {
         var ans = new Condition(LHTriggers.TRAIT_COUNT.getId(), LootContextPredicate.EMPTY);
         ans.count = count;
         return ans;
-    }
-
-    public KillTraitCountTrigger(Identifier id)
-    {
-        super(id, Condition::new, Condition.class);
     }
 
     public void trigger(ServerPlayerEntity player, MobDifficulty cap)

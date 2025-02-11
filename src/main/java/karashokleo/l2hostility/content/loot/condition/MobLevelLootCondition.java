@@ -46,7 +46,7 @@ public class MobLevelLootCondition implements LootCondition
                 {
                     int lv = diff.getLevel();
                     return (minLevel <= 0 || lv >= minLevel) &&
-                            (maxLevel <= 0 || lv < maxLevel);
+                           (maxLevel <= 0 || lv < maxLevel);
                 }).isPresent();
     }
 }

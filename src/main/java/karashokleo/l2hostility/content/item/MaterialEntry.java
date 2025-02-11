@@ -12,14 +12,14 @@ import java.util.function.BiFunction;
 
 public class MaterialEntry extends MaterialBuilder
 {
-    public static MaterialEntry of(String name_en, String name_zh)
-    {
-        return new MaterialEntry(name_en, name_zh);
-    }
-
     public MaterialEntry(String name_en, String name_zh)
     {
         super(name_en, name_zh);
+    }
+
+    public static MaterialEntry of(String name_en, String name_zh)
+    {
+        return new MaterialEntry(name_en, name_zh);
     }
 
     @Override

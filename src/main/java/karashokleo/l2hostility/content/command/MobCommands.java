@@ -28,6 +28,8 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class MobCommands
 {
+    private static final DynamicCommandExceptionType ERR_INVALID_NAME = new DynamicCommandExceptionType(LHTexts.COMMAND_INVALID_TRAIT::get);
+
     public static LiteralArgumentBuilder<ServerCommandSource> build()
     {
         return literal("mobs")
@@ -116,7 +118,6 @@ public class MobCommands
         return true;
     }
 
-
     private static Command<ServerCommandSource> mobRun(MobCommand cmd)
     {
         return ctx ->
@@ -188,28 +189,6 @@ public class MobCommands
         }
     }
 
-    private interface MobCommand
-    {
-        boolean run(MobDifficulty difficulty);
-    }
-
-    private interface MobLevelCommand
-    {
-        boolean run(MobDifficulty difficulty, int level);
-    }
-
-    private interface MobTraitCommand
-    {
-        boolean run(MobDifficulty difficulty, MobTrait trait);
-    }
-
-    private interface MobTraitRankCommand
-    {
-        boolean run(MobDifficulty difficulty, MobTrait trait, int rank);
-    }
-
-    private static final DynamicCommandExceptionType ERR_INVALID_NAME = new DynamicCommandExceptionType(LHTexts.COMMAND_INVALID_TRAIT::get);
-
     private static <T> RegistryKey<T> getRegistryKey(
             CommandContext<ServerCommandSource> ctx, String name,
             RegistryKey<Registry<T>> reg, DynamicCommandExceptionType err
@@ -232,5 +211,25 @@ public class MobCommands
     {
         RegistryKey<T> ans = getRegistryKey(ctx, name, reg, err);
         return getRegistry(ctx, reg).getEntry(ans).orElseThrow(() -> err.create(ans.getValue()));
+    }
+
+    private interface MobCommand
+    {
+        boolean run(MobDifficulty difficulty);
+    }
+
+    private interface MobLevelCommand
+    {
+        boolean run(MobDifficulty difficulty, int level);
+    }
+
+    private interface MobTraitCommand
+    {
+        boolean run(MobDifficulty difficulty, MobTrait trait);
+    }
+
+    private interface MobTraitRankCommand
+    {
+        boolean run(MobDifficulty difficulty, MobTrait trait, int rank);
     }
 }

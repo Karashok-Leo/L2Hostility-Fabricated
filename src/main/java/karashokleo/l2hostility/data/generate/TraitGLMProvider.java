@@ -3,9 +3,8 @@ package karashokleo.l2hostility.data.generate;
 import com.mojang.serialization.Codec;
 import io.github.fabricators_of_create.porting_lib.loot.GlobalLootModifierProvider;
 import io.github.fabricators_of_create.porting_lib.loot.PortingLibLoot;
-import karashokleo.leobrary.datagen.util.LootTableTemplate;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import karashokleo.l2hostility.L2Hostility;
+import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.content.item.TrinketItems;
@@ -18,9 +17,10 @@ import karashokleo.l2hostility.content.loot.modifier.EnvyLootModifier;
 import karashokleo.l2hostility.content.loot.modifier.GluttonyLootModifier;
 import karashokleo.l2hostility.content.loot.modifier.TraitLootModifier;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
-import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.init.LHPotions;
 import karashokleo.l2hostility.init.LHTraits;
+import karashokleo.leobrary.datagen.util.LootTableTemplate;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -40,6 +40,11 @@ public class TraitGLMProvider extends GlobalLootModifierProvider
     public static Codec<EnvyLootModifier> LOOT_ENVY;
     public static Codec<GluttonyLootModifier> LOOT_GLUTTONY;
 
+    public TraitGLMProvider(FabricDataOutput dataOutput)
+    {
+        super(dataOutput, L2Hostility.MOD_ID);
+    }
+
     public static void register()
     {
         TRAIT_AND_LEVEL = Registry.register(Registries.LOOT_CONDITION_TYPE, L2Hostility.id("trait_and_level"), new LootConditionType(new TraitSerializer<>(TraitLootCondition.class)));
@@ -50,11 +55,6 @@ public class TraitGLMProvider extends GlobalLootModifierProvider
         TRAIT_SCALED = Registry.register(PortingLibLoot.GLOBAL_LOOT_MODIFIER_SERIALIZERS.get(), L2Hostility.id("trait_scaled"), TraitLootModifier.CODEC);
         LOOT_ENVY = Registry.register(PortingLibLoot.GLOBAL_LOOT_MODIFIER_SERIALIZERS.get(), L2Hostility.id("loot_envy"), EnvyLootModifier.CODEC);
         LOOT_GLUTTONY = Registry.register(PortingLibLoot.GLOBAL_LOOT_MODIFIER_SERIALIZERS.get(), L2Hostility.id("loot_gluttony"), GluttonyLootModifier.CODEC);
-    }
-
-    public TraitGLMProvider(FabricDataOutput dataOutput)
-    {
-        super(dataOutput, L2Hostility.MOD_ID);
     }
 
     @Override

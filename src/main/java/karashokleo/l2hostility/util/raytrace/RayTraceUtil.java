@@ -88,6 +88,33 @@ public class RayTraceUtil
         } else TARGET_MAP.put(packet.player, new ServerTarget(packet.target));
     }
 
+    public static void clientUpdateTarget(PlayerEntity player, double range)
+    {
+        if (!player.getWorld().isClient()) return;
+        Vec3d vec3 = player.getEyePos();
+        Vec3d vec31 = player.getRotationVec(1.0F).multiply(range);
+        Vec3d vec32 = vec3.add(vec31);
+        Box aabb = player.getBoundingBox().stretch(vec31).expand(1.0D);
+        double sq = range * range;
+        Predicate<Entity> predicate = (e) -> (e instanceof LivingEntity) && !e.isSpectator();
+        EntityHitResult result = ProjectileUtil.raycast(player, vec3, vec32, aabb, predicate, sq);
+        if (result != null && vec3.squaredDistanceTo(result.getPos()) < sq)
+            TARGET.updateTarget(result.getEntity());
+    }
+
+    @Nullable
+    public static LivingEntity serverGetTarget(PlayerEntity player)
+    {
+        if (player.getWorld().isClient()) return player.getAttacking();
+        UUID id = player.getUuid();
+        if (!RayTraceUtil.TARGET_MAP.containsKey(id))
+            return null;
+        UUID tid = RayTraceUtil.TARGET_MAP.get(id).target;
+        if (tid == null)
+            return null;
+        return (LivingEntity) (((ServerWorld) player.getWorld()).getEntity(tid));
+    }
+
     public static class EnderEntityTarget extends EntityTarget
     {
         private int timeout = 0;
@@ -131,32 +158,5 @@ public class RayTraceUtil
             this.target = target;
             time = 0;
         }
-    }
-
-    public static void clientUpdateTarget(PlayerEntity player, double range)
-    {
-        if (!player.getWorld().isClient()) return;
-        Vec3d vec3 = player.getEyePos();
-        Vec3d vec31 = player.getRotationVec(1.0F).multiply(range);
-        Vec3d vec32 = vec3.add(vec31);
-        Box aabb = player.getBoundingBox().stretch(vec31).expand(1.0D);
-        double sq = range * range;
-        Predicate<Entity> predicate = (e) -> (e instanceof LivingEntity) && !e.isSpectator();
-        EntityHitResult result = ProjectileUtil.raycast(player, vec3, vec32, aabb, predicate, sq);
-        if (result != null && vec3.squaredDistanceTo(result.getPos()) < sq)
-            TARGET.updateTarget(result.getEntity());
-    }
-
-    @Nullable
-    public static LivingEntity serverGetTarget(PlayerEntity player)
-    {
-        if (player.getWorld().isClient()) return player.getAttacking();
-        UUID id = player.getUuid();
-        if (!RayTraceUtil.TARGET_MAP.containsKey(id))
-            return null;
-        UUID tid = RayTraceUtil.TARGET_MAP.get(id).target;
-        if (tid == null)
-            return null;
-        return (LivingEntity) (((ServerWorld) player.getWorld()).getEntity(tid));
     }
 }

@@ -30,27 +30,32 @@ public class BookEverything extends Item
     }
 
     @Nullable
-    private static Enchantment getEnch(ItemStack stack) {
+    private static Enchantment getEnch(ItemStack stack)
+    {
         String name = stack.getName().getString();
-        try {
+        try
+        {
             Identifier id = new Identifier(name.trim());
             if (!Registries.ENCHANTMENT.containsId(id))
                 return null;
             return Registries.ENCHANTMENT.get(id);
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             return null;
         }
     }
 
-    public static boolean allow(Enchantment ench) {
+    public static boolean allow(Enchantment ench)
+    {
         if (ench.isTreasure() ||
-                !ench.isAvailableForEnchantedBookOffer() ||
-                !ench.isAvailableForRandomSelection())
+            !ench.isAvailableForEnchantedBookOffer() ||
+            !ench.isAvailableForRandomSelection())
             return false;
         return ench.getMaxPower(ench.getMaxLevel()) >= ench.getMinPower(ench.getMaxLevel());
     }
 
-    public static int cost(Enchantment ench) {
+    public static int cost(Enchantment ench)
+    {
         return Math.max(ench.getMaxLevel(), ench.getMaxPower(ench.getMaxLevel()) / 10);
     }
 
@@ -58,8 +63,10 @@ public class BookEverything extends Item
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         ItemStack stack = user.getStackInHand(hand);
-        if (user.isSneaking()) {
-            if (!world.isClient()) {
+        if (user.isSneaking())
+        {
+            if (!world.isClient())
+            {
                 ItemStack result = new ItemStack(Items.ENCHANTED_BOOK);
                 NbtList listtag = EnchantedBookItem.getEnchantmentNbt(result);
                 for (var e : Registries.ENCHANTMENT.getEntrySet())
@@ -70,7 +77,8 @@ public class BookEverything extends Item
                 user.getInventory().offerOrDrop(result);
             }
             return TypedActionResult.consume(stack);
-        } else {
+        } else
+        {
             Enchantment ench = getEnch(stack);
             if (ench == null)
                 return TypedActionResult.fail(stack);
@@ -79,7 +87,8 @@ public class BookEverything extends Item
             int cost = cost(ench);
             if (user.experienceLevel < cost)
                 return TypedActionResult.fail(stack);
-            if (!world.isClient()) {
+            if (!world.isClient())
+            {
                 user.addExperienceLevels(-cost);
                 EnchantmentLevelEntry ins = new EnchantmentLevelEntry(ench, ench.getMaxLevel());
                 ItemStack result = EnchantedBookItem.forEnchantment(ins);
@@ -97,7 +106,8 @@ public class BookEverything extends Item
         Enchantment e = getEnch(stack);
         if (e == null)
             tooltip.add(LHTexts.ITEM_BOOK_EVERYTHING_INVALID.get().formatted(Formatting.GRAY));
-        else {
+        else
+        {
             if (allow(e))
                 tooltip.add(LHTexts.ITEM_BOOK_EVERYTHING_READY.get(e.getName(e.getMaxLevel()), cost(e)).formatted(Formatting.GREEN));
             else

@@ -29,11 +29,6 @@ public class LHItems
     {
         private static final Identifier SYMBOL_BG = L2Hostility.id("item/bg");
 
-        public static <T extends Item> Entry<T> of(String name, T item)
-        {
-            return new Entry<>(name, item);
-        }
-
         public Entry(String name, T content)
         {
             super(name, content);
@@ -41,6 +36,11 @@ public class LHItems
                 this.setTab(LHMiscs.TRAITS);
             else
                 this.setTab(LHMiscs.GROUP);
+        }
+
+        public static <T extends Item> Entry<T> of(String name, T item)
+        {
+            return new Entry<>(name, item);
         }
 
         @Override

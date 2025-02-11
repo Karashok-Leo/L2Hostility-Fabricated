@@ -51,6 +51,11 @@ public class MobTrait implements ItemConvertible
         this(() -> formatting.getColorValue() == null ? 0xffffff : formatting.getColorValue());
     }
 
+    public static MobTrait get(Identifier id)
+    {
+        return LHTraits.TRAIT.get(id);
+    }
+
     public TraitConfig.Config getConfig()
     {
         return LHData.traits.getOrDefault(getId());
@@ -118,7 +123,7 @@ public class MobTrait implements ItemConvertible
                             LivingEntity.class,
                             target.getBoundingBox().expand(radius),
                             e -> e.distanceTo(entity) < radius &&
-                                    !ReflectTrinket.canReflect(e, this)
+                                 !ReflectTrinket.canReflect(e, this)
                     )
                     .forEach(le -> this.onHurtingReflectTarget(level, entity, new LivingHurtEvent(le, event.getSource(), event.getAmount())));
         else this.onHurting(level, entity, event);
@@ -208,11 +213,6 @@ public class MobTrait implements ItemConvertible
     public Item asItem()
     {
         return Registries.ITEM.get(getNonNullId());
-    }
-
-    public static MobTrait get(Identifier id)
-    {
-        return LHTraits.TRAIT.get(id);
     }
 
     public String getIdStr()

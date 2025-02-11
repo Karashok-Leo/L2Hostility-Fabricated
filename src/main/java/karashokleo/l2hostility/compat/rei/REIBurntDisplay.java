@@ -1,11 +1,11 @@
 package karashokleo.l2hostility.compat.rei;
 
+import karashokleo.l2hostility.content.recipe.BurntRecipe;
+import karashokleo.l2hostility.init.LHCplTexts;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import karashokleo.l2hostility.content.recipe.BurntRecipe;
-import karashokleo.l2hostility.init.LHCplTexts;
 import net.minecraft.text.Text;
 
 import java.util.List;

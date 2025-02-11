@@ -48,6 +48,6 @@ public class DifficultyOverlay extends InfoSideBar<SideBar.IntSignature>
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
         if (player == null) return false;
         return player.getMainHandStack().isOf(MiscItems.DETECTOR) ||
-                player.getOffHandStack().isOf(MiscItems.DETECTOR);
+               player.getOffHandStack().isOf(MiscItems.DETECTOR);
     }
 }

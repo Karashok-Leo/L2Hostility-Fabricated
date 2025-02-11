@@ -7,15 +7,15 @@ import net.minecraft.entity.LivingEntity;
 public interface ReflectTrinket
 {
     /*
-    * If the trinket can reflect the given trait
-    * */
-    boolean canReflect(MobTrait trait);
-
-    /*
-    * If the entity can reflect the given trait
-    * */
+     * If the entity can reflect the given trait
+     * */
     static boolean canReflect(LivingEntity entity, MobTrait trait)
     {
         return !TrinketCompat.getTrinketItems(entity, stack -> stack.getItem() instanceof ReflectTrinket reflectTrinket && reflectTrinket.canReflect(trait)).isEmpty();
     }
+
+    /*
+     * If the trinket can reflect the given trait
+     * */
+    boolean canReflect(MobTrait trait);
 }

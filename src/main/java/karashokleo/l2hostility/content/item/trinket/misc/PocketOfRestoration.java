@@ -21,6 +21,11 @@ public class PocketOfRestoration extends BaseTrinketItem
 {
     public static final String ROOT = "UnsealRoot", KEY = "SealedSlotKey", START = "UnsealStartTime";
 
+    public PocketOfRestoration(Settings settings, int durability)
+    {
+        super(settings, durability);
+    }
+
     public static void setData(ItemStack stack, ItemStack sealed, String id, long time)
     {
         var data = sealed.getOrCreateNbt().get(SealedItem.DATA);
@@ -30,11 +35,6 @@ public class PocketOfRestoration extends BaseTrinketItem
         tag.put(SealedItem.DATA, data);
         tag.putString(KEY, id);
         tag.putLong(START, time);
-    }
-
-    public PocketOfRestoration(Settings settings, int durability)
-    {
-        super(settings, durability);
     }
 
     @Override

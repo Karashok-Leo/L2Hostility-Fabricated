@@ -32,7 +32,7 @@ public abstract class LivingEntityMixin
         {
             ++total;
             if (stack.isEmpty() ||
-                    EnchantmentHelper.getLevel(LHEnchantments.SHULKER_ARMOR, stack) > 0)
+                EnchantmentHelper.getLevel(LHEnchantments.SHULKER_ARMOR, stack) > 0)
                 continue;
             ++visible;
         }

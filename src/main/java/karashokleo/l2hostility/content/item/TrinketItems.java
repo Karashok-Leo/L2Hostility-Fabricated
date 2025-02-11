@@ -1,11 +1,11 @@
 package karashokleo.l2hostility.content.item;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import karashokleo.l2hostility.content.item.trinket.curse.*;
 import karashokleo.l2hostility.content.item.trinket.misc.*;
 import karashokleo.l2hostility.content.item.trinket.ring.*;
 import karashokleo.l2hostility.init.LHItems;
 import karashokleo.l2hostility.init.LHTags;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 
 public class TrinketItems
 {

@@ -10,6 +10,29 @@ import org.joml.Matrix4f;
 
 public class ChunkClearRenderer
 {
+    private final int d;
+    private final int greenCol;
+    private final int redCol;
+    private final int lineCol;
+    private final long cx, cz, cy;
+    private final boolean[][][] sections;
+    private final boolean inClear;
+    private final Matrix4f mat;
+    private VertexConsumer cons;
+    private ChunkClearRenderer(MatrixStack pose, int r, boolean[][][] sections, long cx, long cz, long cy)
+    {
+        this.mat = pose.peek().getPositionMatrix();
+        this.d = r * 2 + 1;
+        this.sections = sections;
+        this.cx = cx - r;
+        this.cz = cz - r;
+        this.cy = cy - r;
+        this.inClear = sections[r][r][r];
+        this.lineCol = 0xffffffff;
+        this.greenCol = 0x1f00ff00;
+        this.redCol = 0x1fff0000;
+    }
+
     public static void render(MatrixStack pose, PlayerEntity player, ChunkDifficulty center)
     {
         int r = 7;
@@ -36,30 +59,6 @@ public class ChunkClearRenderer
         pose.translate(-player.getX(), -player.getEyeY(), -player.getZ());
         new ChunkClearRenderer(pose, r, sections, cx, cz, py >> 4).render();
         pose.pop();
-    }
-
-    private final int d;
-    private final int greenCol;
-    private final int redCol;
-    private final int lineCol;
-    private final long cx, cz, cy;
-    private final boolean[][][] sections;
-    private final boolean inClear;
-    private final Matrix4f mat;
-    private VertexConsumer cons;
-
-    private ChunkClearRenderer(MatrixStack pose, int r, boolean[][][] sections, long cx, long cz, long cy)
-    {
-        this.mat = pose.peek().getPositionMatrix();
-        this.d = r * 2 + 1;
-        this.sections = sections;
-        this.cx = cx - r;
-        this.cz = cz - r;
-        this.cy = cy - r;
-        this.inClear = sections[r][r][r];
-        this.lineCol = 0xffffffff;
-        this.greenCol = 0x1f00ff00;
-        this.redCol = 0x1fff0000;
     }
 
     private void render()

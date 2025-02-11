@@ -137,14 +137,14 @@ public class LHEffects
 
     static class Entry<T extends StatusEffect> extends StatusEffectBuilder<T>
     {
-        public static <T extends StatusEffect> Entry<T> of(String name, T effect)
-        {
-            return new Entry<>(name, effect);
-        }
-
         private Entry(String name, T effect)
         {
             super(name, effect);
+        }
+
+        public static <T extends StatusEffect> Entry<T> of(String name, T effect)
+        {
+            return new Entry<>(name, effect);
         }
 
         @Override

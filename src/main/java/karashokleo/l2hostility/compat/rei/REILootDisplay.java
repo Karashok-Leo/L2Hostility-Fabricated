@@ -1,10 +1,10 @@
 package karashokleo.l2hostility.compat.rei;
 
+import karashokleo.l2hostility.compat.loot.ITraitLootRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import karashokleo.l2hostility.compat.loot.ITraitLootRecipe;
 import net.minecraft.text.Text;
 
 import java.util.ArrayList;
@@ -12,10 +12,10 @@ import java.util.List;
 
 public class REILootDisplay implements Display
 {
-    private EntryIngredient traits;
     private final EntryIngredient trinkets;
-    private EntryIngredient loot;
     private final List<Text> tooltip = new ArrayList<>();
+    private EntryIngredient traits;
+    private EntryIngredient loot;
 
     public REILootDisplay(ITraitLootRecipe recipe)
     {
@@ -25,21 +25,15 @@ public class REILootDisplay implements Display
         recipe.addTooltip(this.tooltip);
     }
 
+    public EntryIngredient getTraits()
+    {
+        return traits;
+    }
+
     public REILootDisplay setTraits(EntryIngredient traits)
     {
         this.traits = traits;
         return this;
-    }
-
-    public REILootDisplay setLoot(EntryIngredient loot)
-    {
-        this.loot = loot;
-        return this;
-    }
-
-    public EntryIngredient getTraits()
-    {
-        return traits;
     }
 
     public EntryIngredient getTrinkets()
@@ -50,6 +44,12 @@ public class REILootDisplay implements Display
     public EntryIngredient getLoot()
     {
         return loot;
+    }
+
+    public REILootDisplay setLoot(EntryIngredient loot)
+    {
+        this.loot = loot;
+        return this;
     }
 
     public List<Text> getTooltip()

@@ -1,10 +1,10 @@
 package karashokleo.l2hostility.content.trait.highlevel;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.traits.EffectBooster;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.entity.LivingEntity;

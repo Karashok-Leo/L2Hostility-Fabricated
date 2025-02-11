@@ -131,14 +131,14 @@ public class LHEntities
             extends NamedEntryBuilder<T>
             implements DefaultLanguageGeneratorProvider, TagGeneratorProvider
     {
-        public static <T extends EntityType<?>> Entry<T> of(String name, T entity)
-        {
-            return new Entry<>(name, entity);
-        }
-
         private Entry(String name, T entity)
         {
             super(name, entity);
+        }
+
+        public static <T extends EntityType<?>> Entry<T> of(String name, T entity)
+        {
+            return new Entry<>(name, entity);
         }
 
         @Override

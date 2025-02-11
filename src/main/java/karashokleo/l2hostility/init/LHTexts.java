@@ -140,13 +140,6 @@ public enum LHTexts
         this.count = count;
     }
 
-    public MutableText get(Object... objs)
-    {
-        if (objs.length != count)
-            throw new IllegalArgumentException("for " + name() + ": expect " + count + " parameters, got " + objs.length);
-        return Text.translatable(L2Hostility.MOD_ID + "." + id, objs);
-    }
-
     public static MutableText item(ItemStack stack)
     {
         return stack.getName().copy().formatted(stack.getRarity().formatting);
@@ -187,5 +180,12 @@ public enum LHTexts
         LHGenerators.ZH_TEXTS.addText(LHTags.NO_SEAL.id().toTranslationKey(tagTranslationPrefix), "无法被封印的物品");
 //        LHGenerators.EN_TEXTS.addText(LHTags.DELICATE_BONE.id().toTranslationKey(tagTranslationPrefix), "");
 //        LHGenerators.ZH_TEXTS.addText(LHTags.DELICATE_BONE.id().toTranslationKey(tagTranslationPrefix), "");
+    }
+
+    public MutableText get(Object... objs)
+    {
+        if (objs.length != count)
+            throw new IllegalArgumentException("for " + name() + ": expect " + count + " parameters, got " + objs.length);
+        return Text.translatable(L2Hostility.MOD_ID + "." + id, objs);
     }
 }

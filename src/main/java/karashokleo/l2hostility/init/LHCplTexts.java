@@ -61,13 +61,6 @@ public enum LHCplTexts
         this.count = count;
     }
 
-    public MutableText get(Object... objs)
-    {
-        if (objs.length != count)
-            throw new IllegalArgumentException("for " + name() + ": expect " + count + " parameters, got " + objs.length);
-        return Text.translatable(L2Hostility.MOD_ID + "." + id, objs);
-    }
-
     public static void init()
     {
         for (LHCplTexts text : LHCplTexts.values())
@@ -75,5 +68,12 @@ public enum LHCplTexts
             LHGenerators.EN_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defEn);
             LHGenerators.ZH_TEXTS.addText(L2Hostility.MOD_ID + "." + text.id, text.defZh);
         }
+    }
+
+    public MutableText get(Object... objs)
+    {
+        if (objs.length != count)
+            throw new IllegalArgumentException("for " + name() + ": expect " + count + " parameters, got " + objs.length);
+        return Text.translatable(L2Hostility.MOD_ID + "." + id, objs);
     }
 }

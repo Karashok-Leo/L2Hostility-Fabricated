@@ -1,7 +1,7 @@
 package karashokleo.l2hostility.content.item.consumable;
 
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.item.traits.EffectBooster;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;

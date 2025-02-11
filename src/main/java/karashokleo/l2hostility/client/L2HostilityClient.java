@@ -34,6 +34,23 @@ public class L2HostilityClient implements ClientModInitializer
 {
     public static TabToken<InvTabData, DifficultyTab> TAB_DIFFICULTY;
 
+    public static MinecraftClient getClient()
+    {
+        return MinecraftClient.getInstance();
+    }
+
+    @Nullable
+    public static ClientPlayerEntity getClientPlayer()
+    {
+        return getClient().player;
+    }
+
+    @Nullable
+    public static ClientWorld getClientWorld()
+    {
+        return getClient().world;
+    }
+
     @Override
     public void onInitializeClient()
     {
@@ -60,22 +77,5 @@ public class L2HostilityClient implements ClientModInitializer
         ModelPredicateProviderRegistry.register(TrinketItems.RESTORATION, L2Hostility.id("filled"), (stack, world, entity, seed) -> stack.getSubNbt(PocketOfRestoration.ROOT) == null ? 0 : 1);
 
         BuiltinItemRendererRegistry.INSTANCE.register(ComplementItems.FORCE_FIELD, ForceFieldRenderer.INSTANCE);
-    }
-
-    public static MinecraftClient getClient()
-    {
-        return MinecraftClient.getInstance();
-    }
-
-    @Nullable
-    public static ClientPlayerEntity getClientPlayer()
-    {
-        return getClient().player;
-    }
-
-    @Nullable
-    public static ClientWorld getClientWorld()
-    {
-        return getClient().world;
     }
 }

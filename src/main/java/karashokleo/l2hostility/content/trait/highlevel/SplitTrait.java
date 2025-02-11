@@ -12,18 +12,18 @@ import net.minecraft.util.Formatting;
 
 public class SplitTrait extends MobTrait
 {
-    public static void copyComponents(LivingEntity entity, LivingEntity added)
-    {
-        var originDiff = entity.getComponent(LHComponents.MOB_DIFFICULTY);
-        var addedDiff = added.getComponent(LHComponents.MOB_DIFFICULTY);
-        addedDiff.copyFrom(originDiff);
-    }
-
     // 使怪物能够像史莱姆一样分裂。
     // 怪物在死亡时分裂，分裂的怪物会继承所有词条并且词条等级 -1，拥有装备的怪物分裂出来的装备会降级 。
     public SplitTrait()
     {
         super(Formatting.GREEN);
+    }
+
+    public static void copyComponents(LivingEntity entity, LivingEntity added)
+    {
+        var originDiff = entity.getComponent(LHComponents.MOB_DIFFICULTY);
+        var addedDiff = added.getComponent(LHComponents.MOB_DIFFICULTY);
+        addedDiff.copyFrom(originDiff);
     }
 
     @Override

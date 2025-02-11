@@ -131,6 +131,17 @@ public enum LHAdvTexts
         this.descZh = descZh;
     }
 
+    public static void init()
+    {
+        for (LHAdvTexts text : LHAdvTexts.values())
+        {
+            LHGenerators.EN_TEXTS.addText(text.getTitleKey(), text.titleEn);
+            LHGenerators.EN_TEXTS.addText(text.getDescKey(), text.descEn);
+            LHGenerators.ZH_TEXTS.addText(text.getTitleKey(), text.titleZh);
+            LHGenerators.ZH_TEXTS.addText(text.getDescKey(), text.descZh);
+        }
+    }
+
     public MutableText getTitle()
     {
         return Text.translatable(getTitleKey());
@@ -149,16 +160,5 @@ public enum LHAdvTexts
     public String getDescKey()
     {
         return "advancements." + L2Hostility.MOD_ID + "." + id + ".description";
-    }
-
-    public static void init()
-    {
-        for (LHAdvTexts text : LHAdvTexts.values())
-        {
-            LHGenerators.EN_TEXTS.addText(text.getTitleKey(),text.titleEn);
-            LHGenerators.EN_TEXTS.addText(text.getDescKey(),text.descEn);
-            LHGenerators.ZH_TEXTS.addText(text.getTitleKey(),text.titleZh);
-            LHGenerators.ZH_TEXTS.addText(text.getDescKey(),text.descZh);
-        }
     }
 }

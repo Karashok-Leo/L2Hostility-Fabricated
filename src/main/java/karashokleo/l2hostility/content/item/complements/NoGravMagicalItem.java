@@ -25,6 +25,11 @@ public class NoGravMagicalItem extends TooltipItem
         super(settings, textSupplier);
     }
 
+    public static Vec3d offsetRandomly(Vec3d vec, Random r, float radius)
+    {
+        return new Vec3d(vec.x + (r.nextFloat() - .5f) * 2 * radius, vec.y + (r.nextFloat() - .5f) * 2 * radius, vec.z + (r.nextFloat() - .5f) * 2 * radius);
+    }
+
     public void onEntityItemUpdate(ItemEntity entity)
     {
         World world = entity.getWorld();
@@ -73,11 +78,6 @@ public class NoGravMagicalItem extends TooltipItem
         persistentData.remove("JustCreated");
         // just a flag to tell the client to play an effect
         entity.setSilent(true);
-    }
-
-    public static Vec3d offsetRandomly(Vec3d vec, Random r, float radius)
-    {
-        return new Vec3d(vec.x + (r.nextFloat() - .5f) * 2 * radius, vec.y + (r.nextFloat() - .5f) * 2 * radius, vec.z + (r.nextFloat() - .5f) * 2 * radius);
     }
 
     @Override

@@ -21,6 +21,11 @@ public class CleanseEffect extends StatusEffect implements IconOverlayEffect
 {
     private static int recursive = 0;
 
+    public CleanseEffect()
+    {
+        super(StatusEffectCategory.NEUTRAL, 0xffff7f);
+    }
+
     /*
      * 判断效果是否不受净化影响
      * true: 保留该效果
@@ -53,11 +58,6 @@ public class CleanseEffect extends StatusEffect implements IconOverlayEffect
                 entity.getActiveStatusEffects().remove(type);
         }
         recursive--;
-    }
-
-    public CleanseEffect()
-    {
-        super(StatusEffectCategory.NEUTRAL, 0xffff7f);
     }
 
     @Override

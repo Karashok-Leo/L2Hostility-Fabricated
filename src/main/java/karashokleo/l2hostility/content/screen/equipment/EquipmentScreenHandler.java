@@ -18,26 +18,24 @@ import org.jetbrains.annotations.Nullable;
 
 public class EquipmentScreenHandler extends BaseInventoryScreenHandler<EquipmentScreenHandler>
 {
-    public static EquipmentScreenHandler fromNetwork(int wid, PlayerInventory plInv, PacketByteBuf buf)
-    {
-        Entity entity = null;
-        if (L2HostilityClient.getClientWorld() != null)
-            entity = L2HostilityClient.getClientWorld().getEntityById(buf.readInt());
-        return new EquipmentScreenHandler(LHMiscs.EQUIPMENTS, wid, plInv, entity instanceof MobEntity golem ? golem : null);
-    }
-
-    public static EquipmentSlot[] SLOTS = {EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
-
     public static final SpriteManager MANAGER = new SpriteManager(L2Hostility.MOD_ID, "equipments");
+    public static EquipmentSlot[] SLOTS = {EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
     @Nullable
     protected MobEntity mob;
-
     public EquipmentScreenHandler(ScreenHandlerType<?> type, int wid, PlayerInventory plInv, @Nullable MobEntity mob)
     {
         super(type, wid, plInv, MANAGER, EquipmentInventory::new, false);
         this.mob = mob;
         addSlot("hand", (i, e) -> isValid(SLOTS[i], e));
         addSlot("armor", (i, e) -> isValid(SLOTS[i + 2], e));
+    }
+
+    public static EquipmentScreenHandler fromNetwork(int wid, PlayerInventory plInv, PacketByteBuf buf)
+    {
+        Entity entity = null;
+        if (L2HostilityClient.getClientWorld() != null)
+            entity = L2HostilityClient.getClientWorld().getEntityById(buf.readInt());
+        return new EquipmentScreenHandler(LHMiscs.EQUIPMENTS, wid, plInv, entity instanceof MobEntity golem ? golem : null);
     }
 
     private boolean isValid(EquipmentSlot slot, ItemStack stack)

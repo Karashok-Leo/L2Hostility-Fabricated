@@ -58,8 +58,8 @@ public class TargetSelectWand extends BaseWand
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         if (world != null &&
-                stack.getOrCreateNbt().contains(KEY) &&
-                world.getEntityById(stack.getOrCreateNbt().getInt(KEY)) instanceof LivingEntity le)
+            stack.getOrCreateNbt().contains(KEY) &&
+            world.getEntityById(stack.getOrCreateNbt().getInt(KEY)) instanceof LivingEntity le)
             tooltip.add(LHTexts.MSG_TARGET_RECORD.get(
                     le.getDisplayName().copy().formatted(Formatting.AQUA)
             ).formatted(Formatting.GRAY));

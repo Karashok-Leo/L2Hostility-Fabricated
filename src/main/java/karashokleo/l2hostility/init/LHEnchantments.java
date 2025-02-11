@@ -374,14 +374,14 @@ public class LHEnchantments
 
     static class Entry<T extends Enchantment> extends EnchantmentBuilder<T>
     {
-        public static <T extends Enchantment> Entry<T> of(String name, T enchantment)
-        {
-            return new Entry<>(name, enchantment);
-        }
-
         private Entry(String name, T enchantment)
         {
             super(name, enchantment);
+        }
+
+        public static <T extends Enchantment> Entry<T> of(String name, T enchantment)
+        {
+            return new Entry<>(name, enchantment);
         }
 
         @Override

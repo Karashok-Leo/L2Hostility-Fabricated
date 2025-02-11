@@ -4,8 +4,8 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHu
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.compat.trinket.slot.EntitySlotAccess;
 import karashokleo.l2hostility.content.item.MiscItems;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.content.item.traits.SealedItem;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -18,6 +18,13 @@ import java.util.List;
 
 public class RagnarokTrait extends LegendaryTrait
 {
+    // 传奇词条，使怪物能够封印你的装备。
+    // 怪物击中目标时随机封印【词条等级】个饰品和装备，需要像吃食物一样使用【词条等级】秒来解封，不会封印部分饰品与所有能够提供饰品栏位的装备和饰品。
+    public RagnarokTrait()
+    {
+        super(Formatting.DARK_BLUE);
+    }
+
     private static boolean allowSeal(EntitySlotAccess access)
     {
         ItemStack stack = access.get();
@@ -29,13 +36,6 @@ public class RagnarokTrait extends LegendaryTrait
         if (!LHConfig.common().traits.ragnarokSealSlotAdder)
             return !TrinketCompat.isSlotAdder(access);
         return true;
-    }
-
-    // 传奇词条，使怪物能够封印你的装备。
-    // 怪物击中目标时随机封印【词条等级】个饰品和装备，需要像吃食物一样使用【词条等级】秒来解封，不会封印部分饰品与所有能够提供饰品栏位的装备和饰品。
-    public RagnarokTrait()
-    {
-        super(Formatting.DARK_BLUE);
     }
 
     @Override

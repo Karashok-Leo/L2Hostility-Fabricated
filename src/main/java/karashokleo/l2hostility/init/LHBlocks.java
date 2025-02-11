@@ -57,14 +57,14 @@ public class LHBlocks
 
     public static class Entry<T extends Block> extends BlockBuilder<T>
     {
-        public static <T extends Block> Entry<T> of(String name, T block)
-        {
-            return new Entry<>(name, block);
-        }
-
         public Entry(String name, T content)
         {
             super(name, content);
+        }
+
+        public static <T extends Block> Entry<T> of(String name, T block)
+        {
+            return new Entry<>(name, block);
         }
 
         @Override

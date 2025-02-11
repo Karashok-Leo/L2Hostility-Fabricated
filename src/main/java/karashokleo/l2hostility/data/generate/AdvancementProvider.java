@@ -1,8 +1,5 @@
 package karashokleo.l2hostility.data.generate;
 
-import karashokleo.leobrary.compat.patchouli.PatchouliHelper;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.advancement.KillTraitCountTrigger;
 import karashokleo.l2hostility.content.advancement.KillTraitEffectTrigger;
@@ -11,7 +8,13 @@ import karashokleo.l2hostility.content.advancement.KillTraitsTrigger;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.content.item.TrinketItems;
-import karashokleo.l2hostility.init.*;
+import karashokleo.l2hostility.init.LHAdvTexts;
+import karashokleo.l2hostility.init.LHEffects;
+import karashokleo.l2hostility.init.LHTags;
+import karashokleo.l2hostility.init.LHTraits;
+import karashokleo.leobrary.compat.patchouli.PatchouliHelper;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.AdvancementRewards;
@@ -30,6 +33,29 @@ public class AdvancementProvider extends FabricAdvancementProvider
     public AdvancementProvider(FabricDataOutput output)
     {
         super(output);
+    }
+
+    public static Advancement simpleGet(Advancement parent, Item item, LHAdvTexts text, String path)
+    {
+        return simpleGet(parent, item, text, AdvancementFrame.TASK, path);
+    }
+
+    public static Advancement simpleGet(Advancement parent, Item item, LHAdvTexts text, AdvancementFrame frame, String path)
+    {
+        return Advancement.Builder.create()
+                .parent(parent)
+                .display(
+                        item,
+                        text.getTitle(),
+                        text.getDesc(),
+                        null,
+                        frame,
+                        true,
+                        true,
+                        false
+                )
+                .criterion("0", InventoryChangedCriterion.Conditions.items(item))
+                .build(L2Hostility.id("hostility/" + path));
     }
 
     @Override
@@ -318,28 +344,5 @@ public class AdvancementProvider extends FabricAdvancementProvider
         consumer.accept(wrath);
         consumer.accept(pride);
         consumer.accept(abrahadabra);
-    }
-
-    public static Advancement simpleGet(Advancement parent, Item item, LHAdvTexts text, String path)
-    {
-        return simpleGet(parent, item, text, AdvancementFrame.TASK, path);
-    }
-
-    public static Advancement simpleGet(Advancement parent, Item item, LHAdvTexts text, AdvancementFrame frame, String path)
-    {
-        return Advancement.Builder.create()
-                .parent(parent)
-                .display(
-                        item,
-                        text.getTitle(),
-                        text.getDesc(),
-                        null,
-                        frame,
-                        true,
-                        true,
-                        false
-                )
-                .criterion("0", InventoryChangedCriterion.Conditions.items(item))
-                .build(L2Hostility.id("hostility/" + path));
     }
 }

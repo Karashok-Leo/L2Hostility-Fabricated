@@ -47,30 +47,6 @@ public class LHData implements DataGeneratorEntrypoint
         resourceManagerHelper.registerReloadListener(new DifficultyConfigLoader());
     }
 
-    @Override
-    public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator)
-    {
-        LHGenerators.EMPTY_LOOTS.addLoot(MiscItems.GUIDE_BOOK, PatchouliHelper.loot(MiscItems.GUIDE_BOOK));
-
-        generateConfigTexts();
-
-        FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
-
-        pack.addProvider(EntityConfigProvider::new);
-        pack.addProvider(TraitConfigProvider::new);
-        pack.addProvider(WeaponConfigProvider::new);
-        pack.addProvider(WorldDifficultyConfigProvider::new);
-
-        GeneratorStorage.generate(L2Hostility.MOD_ID, pack);
-        pack.addProvider(RecipeProvider::new);
-        pack.addProvider(AdvancementProvider::new);
-        pack.addProvider(TraitGLMProvider::new);
-        PatchouliHelper.model(pack, MiscItems.GUIDE_BOOK);
-
-//        if (ModList.get().isLoaded(TwilightForestMod.ID))
-//            TFData.genConfig(collector);
-    }
-
     private static void generateConfigTexts()
     {
         IdUtil configId = IdUtil.of("text.autoconfig." + L2Hostility.MOD_ID);
@@ -101,6 +77,30 @@ public class LHData implements DataGeneratorEntrypoint
             prefix.popPrefix();
         }
         prefix.popPrefix();
+    }
+
+    @Override
+    public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator)
+    {
+        LHGenerators.EMPTY_LOOTS.addLoot(MiscItems.GUIDE_BOOK, PatchouliHelper.loot(MiscItems.GUIDE_BOOK));
+
+        generateConfigTexts();
+
+        FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+
+        pack.addProvider(EntityConfigProvider::new);
+        pack.addProvider(TraitConfigProvider::new);
+        pack.addProvider(WeaponConfigProvider::new);
+        pack.addProvider(WorldDifficultyConfigProvider::new);
+
+        GeneratorStorage.generate(L2Hostility.MOD_ID, pack);
+        pack.addProvider(RecipeProvider::new);
+        pack.addProvider(AdvancementProvider::new);
+        pack.addProvider(TraitGLMProvider::new);
+        PatchouliHelper.model(pack, MiscItems.GUIDE_BOOK);
+
+//        if (ModList.get().isLoaded(TwilightForestMod.ID))
+//            TFData.genConfig(collector);
     }
 
     @Override

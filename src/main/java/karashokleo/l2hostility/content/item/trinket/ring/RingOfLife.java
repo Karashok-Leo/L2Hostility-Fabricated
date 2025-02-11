@@ -28,7 +28,7 @@ public class RingOfLife extends DamageListenerTrinketItem
     {
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-                !source.isIn(DamageTypeTags.BYPASSES_EFFECTS))
+            !source.isIn(DamageTypeTags.BYPASSES_EFFECTS))
         {
             float damage = event.getAmount();
             float maxHealth = event.getEntity().getMaxHealth();

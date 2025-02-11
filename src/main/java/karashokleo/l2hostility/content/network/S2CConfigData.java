@@ -34,6 +34,11 @@ public class S2CConfigData implements SerialPacketS2C
         this.entityConfig = entityConfig;
     }
 
+    public static S2CConfigData create()
+    {
+        return new S2CConfigData(LHData.traits.getAll(), LHData.difficulties, LHData.entities);
+    }
+
     @Override
     public void handle(ClientPlayerEntity player)
     {
@@ -48,10 +53,5 @@ public class S2CConfigData implements SerialPacketS2C
         EntityConfig entityConfig = new EntityConfig();
         entityConfig.merge(this.entityConfig);
         LHData.entities = entityConfig;
-    }
-
-    public static S2CConfigData create()
-    {
-        return new S2CConfigData(LHData.traits.getAll(), LHData.difficulties, LHData.entities);
     }
 }

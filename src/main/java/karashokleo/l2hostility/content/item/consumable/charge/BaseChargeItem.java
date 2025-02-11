@@ -24,16 +24,6 @@ import java.util.List;
 
 public class BaseChargeItem extends Item
 {
-    public interface PlayerFire<T extends BaseFireballEntity>
-    {
-        T create(PlayerEntity player, double vx, double vy, double vz, World world);
-    }
-
-    public interface BlockFire<T extends BaseFireballEntity>
-    {
-        T create(double x, double y, double z, double vx, double vy, double vz, World world);
-    }
-
     protected final PlayerFire<?> playerFire;
     protected final BlockFire<?> blockFire;
 
@@ -71,5 +61,15 @@ public class BaseChargeItem extends Item
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHCplTexts.CHARGE_THROW.get().formatted(Formatting.GRAY));
+    }
+
+    public interface PlayerFire<T extends BaseFireballEntity>
+    {
+        T create(PlayerEntity player, double vx, double vy, double vz, World world);
+    }
+
+    public interface BlockFire<T extends BaseFireballEntity>
+    {
+        T create(double x, double y, double z, double vx, double vy, double vz, World world);
     }
 }

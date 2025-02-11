@@ -1,8 +1,8 @@
 package karashokleo.l2hostility.content.item.traits;
 
+import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.l2hostility.init.LHTexts;
-import karashokleo.l2hostility.init.LHEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -56,9 +56,9 @@ public class EnchantmentDisabler
     {
         if (world.isClient()) return;
         if (user instanceof PlayerEntity player &&
-                !player.getAbilities().creativeMode &&
-                stack.hasEnchantments() &&
-                EnchantmentHelper.getLevel(LHEnchantments.VANISH, stack) > 0)
+            !player.getAbilities().creativeMode &&
+            stack.hasEnchantments() &&
+            EnchantmentHelper.getLevel(LHEnchantments.VANISH, stack) > 0)
         {
             stack.setCount(0);
             return;

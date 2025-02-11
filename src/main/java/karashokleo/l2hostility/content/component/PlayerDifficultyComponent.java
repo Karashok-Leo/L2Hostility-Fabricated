@@ -20,12 +20,17 @@ public class PlayerDifficultyComponent implements ServerTickingComponent, AutoSy
         this.diff = new PlayerDifficulty(player);
     }
 
+    public static void copyStrategy(PlayerDifficultyComponent from, PlayerDifficultyComponent to, boolean lossless, boolean keepInventory, boolean sameCharacter)
+    {
+        RespawnCopyStrategy.copy(from, to);
+        to.diff.onClone(lossless, keepInventory);
+    }
+
     @Override
     public void serverTick()
     {
         this.diff.tick();
     }
-
 
     @Override
     public void readFromNbt(@NotNull NbtCompound tag)
@@ -37,11 +42,5 @@ public class PlayerDifficultyComponent implements ServerTickingComponent, AutoSy
     public void writeToNbt(@NotNull NbtCompound tag)
     {
         TagCodec.toTag(tag, this.diff);
-    }
-
-    public static void copyStrategy(PlayerDifficultyComponent from, PlayerDifficultyComponent to, boolean lossless, boolean keepInventory, boolean sameCharacter)
-    {
-        RespawnCopyStrategy.copy(from, to);
-        to.diff.onClone(lossless, keepInventory);
     }
 }

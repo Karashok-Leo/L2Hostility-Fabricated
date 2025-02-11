@@ -16,6 +16,17 @@ import java.util.List;
 @SerialClass
 public class WeaponConfig
 {
+    @SerialClass.SerialField
+    public final ArrayList<ItemConfig> armors = new ArrayList<>();
+    @SerialClass.SerialField
+    public final ArrayList<ItemConfig> melee_weapons = new ArrayList<>();
+    @SerialClass.SerialField
+    public final ArrayList<ItemConfig> ranged_weapons = new ArrayList<>();
+    @SerialClass.SerialField
+    public final ArrayList<EnchConfig> weapon_enchantments = new ArrayList<>();
+    @SerialClass.SerialField
+    public final ArrayList<EnchConfig> armor_enchantments = new ArrayList<>();
+
     public static ItemStack getRandomArmor(EquipmentSlot slot, int level, Random r)
     {
         WeaponConfig config = LHData.weapons;
@@ -45,7 +56,7 @@ public class WeaponConfig
             for (var item : e.stack)
             {
                 if (item.isEmpty() ||
-                        item.getItem() instanceof ArmorItem eq && eq.getSlotType() == slot)
+                    item.getItem() instanceof ArmorItem eq && eq.getSlotType() == slot)
                     sub.add(item);
             }
             if (!sub.isEmpty())
@@ -94,17 +105,6 @@ public class WeaponConfig
         }
         return ItemStack.EMPTY;
     }
-
-    @SerialClass.SerialField
-    public final ArrayList<ItemConfig> armors = new ArrayList<>();
-    @SerialClass.SerialField
-    public final ArrayList<ItemConfig> melee_weapons = new ArrayList<>();
-    @SerialClass.SerialField
-    public final ArrayList<ItemConfig> ranged_weapons = new ArrayList<>();
-    @SerialClass.SerialField
-    public final ArrayList<EnchConfig> weapon_enchantments = new ArrayList<>();
-    @SerialClass.SerialField
-    public final ArrayList<EnchConfig> armor_enchantments = new ArrayList<>();
 
     public void merge(WeaponConfig config)
     {

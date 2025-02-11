@@ -14,18 +14,12 @@ import java.util.List;
 
 public class TraitGenerator
 {
-    public static void generateTraits(MobDifficulty diff, LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
-    {
-        new TraitGenerator(diff, le, lv, traits, ins).generate();
-    }
-
     private final LivingEntity entity;
     private final int mobLevel;
     private final MobDifficultyCollector ins;
     private final HashMap<MobTrait, Integer> traits;
     private final Random rand;
     private final List<MobTrait> traitPool;
-
     private int level, weights;
 
     private TraitGenerator(MobDifficulty diff, LivingEntity entity, int mobLevel, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
@@ -51,6 +45,11 @@ public class TraitGenerator
         weights = 0;
         for (var e : traitPool)
             weights += e.getConfig().weight;
+    }
+
+    public static void generateTraits(MobDifficulty diff, LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
+    {
+        new TraitGenerator(diff, le, lv, traits, ins).generate();
     }
 
     // 获取词条等级

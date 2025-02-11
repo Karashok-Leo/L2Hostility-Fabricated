@@ -17,10 +17,10 @@ import java.util.List;
 
 public class EMILootRecipe implements EmiRecipe
 {
-    private EmiIngredient traits;
     private final EmiIngredient trinkets;
-    private EmiStack loot;
     private final List<Text> tooltip = new ArrayList<>();
+    private EmiIngredient traits;
+    private EmiStack loot;
 
     public EMILootRecipe(ITraitLootRecipe recipe)
     {

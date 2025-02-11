@@ -43,6 +43,40 @@ public class RecipeProvider extends FabricRecipeProvider
         super(output);
     }
 
+    private static void enchantmentAdd(Consumer<EnchantmentInfusionRecipeBuilder> consumer, Enchantment enchantment, int level, Consumer<RecipeJsonProvider> exporter)
+    {
+        EIRecipeUtil.add(
+                consumer,
+                enchantment,
+                level,
+                exporter,
+                ID_UTIL.path(Objects.requireNonNull(Registries.ENCHANTMENT.getId(enchantment)).getPath() + "/" + level).get()
+        );
+    }
+
+    private static void enchantmentSet(Consumer<EnchantmentInfusionRecipeBuilder> consumer, Enchantment enchantment, int level, Consumer<RecipeJsonProvider> exporter)
+    {
+        EIRecipeUtil.set(
+                consumer,
+                enchantment,
+                level,
+                exporter,
+                ID_UTIL.path(Objects.requireNonNull(Registries.ENCHANTMENT.getId(enchantment)).getPath() + "/" + level).get()
+        );
+    }
+
+    private static void convert(Consumer<RecipeJsonProvider> exporter, Item in, Item out, int count)
+    {
+        RecipeTemplate.unlock(new BurntRecipeBuilder(Ingredient.ofItems(in), out.getDefaultStack(), count)::criterion, in)
+                .offerTo(exporter, ID_UTIL.path(in).path("_to_").path(out).get());
+    }
+
+    public static void recycle(Consumer<RecipeJsonProvider> exporter, TagKey<Item> source, Item result, float experience)
+    {
+        RecipeTemplate.unlock(CookingRecipeJsonBuilder.createBlasting(Ingredient.fromTag(source), RecipeCategory.MISC, result, experience, 200)::criterion, result)
+                .offerTo(exporter, ID_UTIL.path(result).path("_recycle").get());
+    }
+
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter)
     {
@@ -1385,39 +1419,5 @@ public class RecipeProvider extends FabricRecipeProvider
                 .input(Items.ROTTEN_FLESH)
                 .input(Items.BONE)
                 .offerTo(exporter);
-    }
-
-    private static void enchantmentAdd(Consumer<EnchantmentInfusionRecipeBuilder> consumer, Enchantment enchantment, int level, Consumer<RecipeJsonProvider> exporter)
-    {
-        EIRecipeUtil.add(
-                consumer,
-                enchantment,
-                level,
-                exporter,
-                ID_UTIL.path(Objects.requireNonNull(Registries.ENCHANTMENT.getId(enchantment)).getPath() + "/" + level).get()
-        );
-    }
-
-    private static void enchantmentSet(Consumer<EnchantmentInfusionRecipeBuilder> consumer, Enchantment enchantment, int level, Consumer<RecipeJsonProvider> exporter)
-    {
-        EIRecipeUtil.set(
-                consumer,
-                enchantment,
-                level,
-                exporter,
-                ID_UTIL.path(Objects.requireNonNull(Registries.ENCHANTMENT.getId(enchantment)).getPath() + "/" + level).get()
-        );
-    }
-
-    private static void convert(Consumer<RecipeJsonProvider> exporter, Item in, Item out, int count)
-    {
-        RecipeTemplate.unlock(new BurntRecipeBuilder(Ingredient.ofItems(in), out.getDefaultStack(), count)::criterion, in)
-                .offerTo(exporter, ID_UTIL.path(in).path("_to_").path(out).get());
-    }
-
-    public static void recycle(Consumer<RecipeJsonProvider> exporter, TagKey<Item> source, Item result, float experience)
-    {
-        RecipeTemplate.unlock(CookingRecipeJsonBuilder.createBlasting(Ingredient.fromTag(source), RecipeCategory.MISC, result, experience, 200)::criterion, result)
-                .offerTo(exporter, ID_UTIL.path(result).path("_recycle").get());
     }
 }

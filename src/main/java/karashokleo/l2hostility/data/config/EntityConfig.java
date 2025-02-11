@@ -16,6 +16,10 @@ import java.util.*;
 @SerialClass
 public class EntityConfig
 {
+    @SerialClass.SerialField
+    public final ArrayList<Config> list = new ArrayList<>();
+    private final Map<EntityType<?>, Config> cache = new HashMap<>();
+
     public static boolean allow(EntityType<?> type, MobTrait trait)
     {
         Config config = LHData.entities.get(type);
@@ -23,10 +27,28 @@ public class EntityConfig
         return !config.blacklist.contains(trait);
     }
 
-    @SerialClass.SerialField
-    public final ArrayList<Config> list = new ArrayList<>();
+    public static Config entity(int min, int base, double var, double scale, List<EntityType<?>> keys)
+    {
+        return new Config(
+                new ArrayList<>(keys),
+                new DifficultyConfig.Config(min, base, var, scale, 1, 1)
+        );
+    }
 
-    private final Map<EntityType<?>, Config> cache = new HashMap<>();
+    public static ItemPool simplePool(int level, String slot, ItemStack stack)
+    {
+        return new ItemPool(level, 1, slot, new ArrayList<>(List.of(new ItemBuilder(100, stack))));
+    }
+
+    public static TraitBase trait(MobTrait trait, int free, int min)
+    {
+        return new TraitBase(trait, free, min, null);
+    }
+
+    public static TraitBase trait(MobTrait trait, int free, int min, int lv, float chance)
+    {
+        return new TraitBase(trait, free, min, new TraitCondition(lv, chance, null));
+    }
 
     public void merge(EntityConfig config)
     {
@@ -42,6 +64,22 @@ public class EntityConfig
         return LHConfig.common().enableEntitySpecificDatapack ? cache.get(type) : null;
     }
 
+    public final EntityConfig put(Config config)
+    {
+        list.add(config);
+        return this;
+    }
+
+    public final EntityConfig putEntity(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits)
+    {
+        return putEntityAndItem(min, base, var, scale, keys, traits, List.of());
+    }
+
+    public final EntityConfig putEntityAndItem(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits, List<ItemPool> items)
+    {
+        return put(entity(min, base, var, scale, keys).trait(traits).item(items));
+    }
+
     @SerialClass
     public static class Config
     {
@@ -52,9 +90,9 @@ public class EntityConfig
         @SerialClass.SerialField
         public final LinkedHashSet<MobTrait> blacklist = new LinkedHashSet<>();
         @SerialClass.SerialField
-        public DifficultyConfig.Config difficulty = new DifficultyConfig.Config(0, 0, 0, 0, 1, 1);
-        @SerialClass.SerialField
         public final ArrayList<ItemPool> items = new ArrayList<>();
+        @SerialClass.SerialField
+        public DifficultyConfig.Config difficulty = new DifficultyConfig.Config(0, 0, 0, 0, 1, 1);
         @SerialClass.SerialField
         public int minSpawnLevel = 0;
         @SerialClass.SerialField
@@ -140,44 +178,5 @@ public class EntityConfig
             if (mobLevel < lv) return false;
             return id == null || ins.hasAdvancement(id);
         }
-    }
-
-    public final EntityConfig put(Config config)
-    {
-        list.add(config);
-        return this;
-    }
-
-    public final EntityConfig putEntity(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits)
-    {
-        return putEntityAndItem(min, base, var, scale, keys, traits, List.of());
-    }
-
-    public final EntityConfig putEntityAndItem(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits, List<ItemPool> items)
-    {
-        return put(entity(min, base, var, scale, keys).trait(traits).item(items));
-    }
-
-    public static Config entity(int min, int base, double var, double scale, List<EntityType<?>> keys)
-    {
-        return new Config(
-                new ArrayList<>(keys),
-                new DifficultyConfig.Config(min, base, var, scale, 1, 1)
-        );
-    }
-
-    public static ItemPool simplePool(int level, String slot, ItemStack stack)
-    {
-        return new ItemPool(level, 1, slot, new ArrayList<>(List.of(new ItemBuilder(100, stack))));
-    }
-
-    public static TraitBase trait(MobTrait trait, int free, int min)
-    {
-        return new TraitBase(trait, free, min, null);
-    }
-
-    public static TraitBase trait(MobTrait trait, int free, int min, int lv, float chance)
-    {
-        return new TraitBase(trait, free, min, new TraitCondition(lv, chance, null));
     }
 }

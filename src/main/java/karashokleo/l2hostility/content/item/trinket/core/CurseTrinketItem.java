@@ -3,9 +3,6 @@ package karashokleo.l2hostility.content.item.trinket.core;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
-import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
-import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
-import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
@@ -23,6 +20,11 @@ import java.util.UUID;
 
 public class CurseTrinketItem extends DamageListenerTrinketItem
 {
+    public CurseTrinketItem(Settings settings)
+    {
+        super(settings);
+    }
+
     public static List<GenericItemStack<CurseTrinketItem>> getFromPlayer(LivingEntity player)
     {
         var list = TrinketCompat.getItems(player, e -> e.getItem() instanceof CurseTrinketItem);
@@ -31,11 +33,6 @@ public class CurseTrinketItem extends DamageListenerTrinketItem
             if (e.getItem() instanceof CurseTrinketItem item)
                 ans.add(new GenericItemStack<>(item, e));
         return ans;
-    }
-
-    public CurseTrinketItem(Settings settings)
-    {
-        super(settings);
     }
 
     @Override

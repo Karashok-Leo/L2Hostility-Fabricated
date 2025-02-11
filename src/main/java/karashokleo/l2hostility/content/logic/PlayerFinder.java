@@ -10,7 +10,8 @@ import org.jetbrains.annotations.Nullable;
 public class PlayerFinder
 {
     @Nullable
-    public static PlayerEntity getNearestPlayer(World world, LivingEntity le) {
+    public static PlayerEntity getNearestPlayer(World world, LivingEntity le)
+    {
         int safeZone = LHConfig.common().difficulty.newPlayerProtectRange;
         int sr = safeZone * safeZone;
 
@@ -18,21 +19,26 @@ public class PlayerFinder
         PlayerEntity lowPl = null;
         double nearDist = 0;
         PlayerEntity nearPl = null;
-        for (var pl : world.getPlayers()) {
+        for (var pl : world.getPlayers())
+        {
             double dist = pl.squaredDistanceTo(le);
             if (dist > 128 * 128)
                 continue;
             if (!pl.isAlive())
                 continue;
-            var plOpt= PlayerDifficulty.get(pl);
+            var plOpt = PlayerDifficulty.get(pl);
             int lv = plOpt.getLevel().getLevel();
-            if (dist < sr) {
-                if (lowPl == null || lv < lowLv) {
+            if (dist < sr)
+            {
+                if (lowPl == null || lv < lowLv)
+                {
                     lowPl = pl;
                     lowLv = lv;
                 }
-            } else {
-                if (nearPl == null || dist < nearDist) {
+            } else
+            {
+                if (nearPl == null || dist < nearDist)
+                {
                     nearPl = pl;
                     nearDist = dist;
                 }

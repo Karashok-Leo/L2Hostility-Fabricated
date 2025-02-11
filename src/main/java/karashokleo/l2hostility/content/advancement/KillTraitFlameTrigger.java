@@ -16,6 +16,24 @@ import java.util.function.Predicate;
 
 public class KillTraitFlameTrigger extends BaseCriterion<KillTraitFlameTrigger.Condition, KillTraitFlameTrigger>
 {
+    public KillTraitFlameTrigger(Identifier id)
+    {
+        super(id, Condition::new, Condition.class);
+    }
+
+    public static Condition condition(MobTrait traits, Type effect)
+    {
+        var ans = new Condition(LHTriggers.TRAIT_FLAME.getId(), LootContextPredicate.EMPTY);
+        ans.trait = traits;
+        ans.effect = effect;
+        return ans;
+    }
+
+    public void trigger(ServerPlayerEntity player, LivingEntity le, MobDifficulty cap)
+    {
+        this.trigger(player, e -> e.matchAll(le, cap));
+    }
+
     public enum Type
     {
         FLAME(Entity::isOnFire);
@@ -31,24 +49,6 @@ public class KillTraitFlameTrigger extends BaseCriterion<KillTraitFlameTrigger.C
         {
             return pred.test(le);
         }
-    }
-
-    public static Condition condition(MobTrait traits, Type effect)
-    {
-        var ans = new Condition(LHTriggers.TRAIT_FLAME.getId(), LootContextPredicate.EMPTY);
-        ans.trait = traits;
-        ans.effect = effect;
-        return ans;
-    }
-
-    public KillTraitFlameTrigger(Identifier id)
-    {
-        super(id, Condition::new, Condition.class);
-    }
-
-    public void trigger(ServerPlayerEntity player, LivingEntity le, MobDifficulty cap)
-    {
-        this.trigger(player, e -> e.matchAll(le, cap));
     }
 
     @SerialClass

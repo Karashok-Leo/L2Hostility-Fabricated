@@ -1,7 +1,7 @@
 package karashokleo.l2hostility.client;
 
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;

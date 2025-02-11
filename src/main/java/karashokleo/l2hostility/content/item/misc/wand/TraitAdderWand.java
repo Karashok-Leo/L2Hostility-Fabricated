@@ -22,6 +22,11 @@ public class TraitAdderWand extends BaseWand
 {
     private static final String TRAIT = "l2hostility_trait";
 
+    public TraitAdderWand(Settings settings)
+    {
+        super(settings);
+    }
+
     public static ItemStack set(ItemStack ans, MobTrait trait)
     {
         ans.getOrCreateNbt().putString(TRAIT, trait.getIdStr());
@@ -82,11 +87,6 @@ public class TraitAdderWand extends BaseWand
         if (old == k.getMaxLevel())
             return null;
         return old + 1;
-    }
-
-    public TraitAdderWand(Settings settings)
-    {
-        super(settings);
     }
 
     @Override

@@ -21,8 +21,8 @@ public class WindBottle extends TooltipItem
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected)
     {
         if (!world.isClient() &&
-                entity instanceof PlayerEntity player &&
-                entity.getVelocity().length() >= LHConfig.common().complements.materials.windSpeed)
+            entity instanceof PlayerEntity player &&
+            entity.getVelocity().length() >= LHConfig.common().complements.materials.windSpeed)
         {
             stack.decrement(1);
             player.getInventory().offerOrDrop(ComplementItems.CAPTURED_WIND.getDefaultStack());

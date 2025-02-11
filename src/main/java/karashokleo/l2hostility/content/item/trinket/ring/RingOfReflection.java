@@ -28,7 +28,8 @@ public class RingOfReflection extends CurseTrinketItem implements ReflectTrinket
     }
 
     @Override
-    public boolean canReflect(MobTrait trait) {
+    public boolean canReflect(MobTrait trait)
+    {
         return trait.isIn(LHTags.POTION);
     }
 }

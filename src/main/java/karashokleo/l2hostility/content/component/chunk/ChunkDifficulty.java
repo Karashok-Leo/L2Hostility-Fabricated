@@ -1,9 +1,9 @@
 package karashokleo.l2hostility.content.component.chunk;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
-import karashokleo.l2hostility.init.LHComponents;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.logic.MobDifficultyCollector;
+import karashokleo.l2hostility.init.LHComponents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -19,21 +19,21 @@ import java.util.Optional;
 @SerialClass
 public class ChunkDifficulty implements RegionalDifficultyModifier
 {
-    public enum ChunkStage
+    public final WorldChunk owner;
+    @SerialClass.SerialField
+    private ChunkStage stage = ChunkStage.PRE_INIT;
+    @SerialClass.SerialField
+    private SectionDifficulty[] sections;
+
+    public ChunkDifficulty(WorldChunk owner)
     {
-        PRE_INIT, INIT
+        this.owner = owner;
     }
 
     // 从WorldChunk获取ChunkDifficulty
     public static Optional<ChunkDifficulty> get(WorldChunk chunk)
     {
         return chunk.isEmpty() ? Optional.empty() : Optional.ofNullable(chunk.getComponent(LHComponents.CHUNK_DIFFICULTY).diff);
-    }
-
-    // 同步客户端
-    public void sync()
-    {
-        LHComponents.CHUNK_DIFFICULTY.sync(owner);
     }
 
     // 获取特定位置的ChunkDifficulty
@@ -53,15 +53,10 @@ public class ChunkDifficulty implements RegionalDifficultyModifier
         return Optional.empty();
     }
 
-    public final WorldChunk owner;
-    @SerialClass.SerialField
-    private ChunkStage stage = ChunkStage.PRE_INIT;
-    @SerialClass.SerialField
-    private SectionDifficulty[] sections;
-
-    public ChunkDifficulty(WorldChunk owner)
+    // 同步客户端
+    public void sync()
     {
-        this.owner = owner;
+        LHComponents.CHUNK_DIFFICULTY.sync(owner);
     }
 
     // 检查是否已经初始化
@@ -117,5 +112,10 @@ public class ChunkDifficulty implements RegionalDifficultyModifier
         for (int i = 0; i < size; i++)
             sections[i].section = owner.getSection(i);
         sync();
+    }
+
+    public enum ChunkStage
+    {
+        PRE_INIT, INIT
     }
 }
