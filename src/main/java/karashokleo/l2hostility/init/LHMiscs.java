@@ -15,9 +15,7 @@ public class LHMiscs
     public static final ItemGroupBuilder GROUP = GroupEntry.of("hostility");
     public static final ItemGroupBuilder TRAITS = GroupEntry.of("traits");
 
-    public static EntityAttribute ADD_LEVEL = new ClampedEntityAttribute("extra_difficulty", 0, 0, 1000).setTracked(true);
-
-    public static final ScreenHandlerType<EquipmentScreenHandler> EQUIPMENTS = new ExtendedScreenHandlerType<>(EquipmentScreenHandler::fromNetwork);
+    public static EntityAttribute ADD_LEVEL = new ClampedEntityAttribute("attribute.name.generic.extra_difficulty", 0, 0, 1000).setTracked(true);
 
     public static void register()
     {
@@ -39,18 +37,21 @@ public class LHMiscs
 
         Registry.register(Registries.SCREEN_HANDLER, L2Hostility.id("equipments"), EQUIPMENTS);
 //        Registry.register(Registries.SCREEN_HANDLER, L2Hostility.id("trinkets"), TRINKETS);
-    }
+
+        LHGenerators.EN_TEXTS.addAttribute(ADD_LEVEL, "Extra Difficulty");
+        LHGenerators.ZH_TEXTS.addAttribute(ADD_LEVEL, "额外难度");
+    }    public static final ScreenHandlerType<EquipmentScreenHandler> EQUIPMENTS = new ExtendedScreenHandlerType<>(EquipmentScreenHandler::fromNetwork);
 
     static class GroupEntry extends ItemGroupBuilder
     {
-        public static GroupEntry of(String name)
-        {
-            return new GroupEntry(name);
-        }
-
         public GroupEntry(String name)
         {
             super(name);
+        }
+
+        public static GroupEntry of(String name)
+        {
+            return new GroupEntry(name);
         }
 
         @Override
@@ -59,4 +60,6 @@ public class LHMiscs
             return L2Hostility.MOD_ID;
         }
     }
+
+
 }
