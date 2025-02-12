@@ -148,6 +148,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider
         );
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void add(MobTrait trait, Item curio, ItemStack stack, int start, double chance, double bonus, int min)
     {
         add(

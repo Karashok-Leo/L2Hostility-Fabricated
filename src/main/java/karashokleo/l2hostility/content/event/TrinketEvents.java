@@ -92,14 +92,10 @@ public class TrinketEvents
                 count++;
                 for (var stack : drops)
                 {
-                    System.out.println("BBB");
                     ItemStack itemStack = stack.getStack();
                     int ans = itemStack.getCount() * count;
                     if (LHConfig.common().items.nidhoggurCapAtItemMaxStack)
-                    {
-                        System.out.println("AAAA");
                         ans = Math.min(itemStack.getMaxCount(), ans);
-                    }
                     itemStack.setCount(ans);
                 }
             }

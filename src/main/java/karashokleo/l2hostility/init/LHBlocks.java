@@ -3,7 +3,7 @@ package karashokleo.l2hostility.init;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.block.HostilitySpawner;
 import karashokleo.leobrary.datagen.builder.BlockBuilder;
-import karashokleo.leobrary.datagen.builder.BlockSet;
+import karashokleo.leobrary.datagen.object.BlockSet;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.util.Identifier;

@@ -5,7 +5,7 @@ import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHCplTexts;
 import karashokleo.l2hostility.init.LHItems;
 import karashokleo.l2hostility.init.LHTexts;
-import karashokleo.leobrary.datagen.builder.MaterialSet;
+import karashokleo.leobrary.datagen.object.MaterialSet;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.MapColor;

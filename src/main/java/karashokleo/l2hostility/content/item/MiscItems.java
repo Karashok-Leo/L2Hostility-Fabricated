@@ -11,7 +11,7 @@ import karashokleo.l2hostility.content.item.misc.wand.TraitAdderWand;
 import karashokleo.l2hostility.content.item.traits.SealedItem;
 import karashokleo.l2hostility.init.LHItems;
 import karashokleo.l2hostility.init.LHTags;
-import karashokleo.leobrary.datagen.builder.MaterialSet;
+import karashokleo.leobrary.datagen.object.MaterialSet;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Blocks;
