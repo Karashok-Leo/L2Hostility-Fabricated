@@ -11,6 +11,7 @@ import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Formatting;
 
 public class UndyingTrait extends LegendaryTrait
@@ -36,6 +37,7 @@ public class UndyingTrait extends LegendaryTrait
             if (!allow) return true;
             entity.setHealth(entity.getHealth() + event.getAmount());
             LHNetworking.toTracking(entity, new S2CUndying(entity));
+            entity.getWorld().playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_TOTEM_USE, entity.getSoundCategory(), 1.0F, 1.0F);
             return false;
         } else return true;
     }

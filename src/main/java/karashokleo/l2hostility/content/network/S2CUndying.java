@@ -31,7 +31,6 @@ public class S2CUndying extends S2CEntity
         if (world != null && id >= 0 && world.getEntityById(id) instanceof LivingEntity entity)
         {
             L2HostilityClient.getClient().particleManager.addEmitter(entity, ParticleTypes.TOTEM_OF_UNDYING, 30);
-            entity.getWorld().playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_TOTEM_USE, entity.getSoundCategory(), 1.0F, 1.0F, false);
         }
     }
 }

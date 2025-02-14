@@ -28,11 +28,11 @@ public abstract class DrinkableBottleItem extends Item
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user)
     {
         PlayerEntity player = user instanceof PlayerEntity ? (PlayerEntity) user : null;
-        if (player instanceof ServerPlayerEntity)
-            Criteria.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
-
-        if (!world.isClient() && player instanceof ServerPlayerEntity sp)
-            doServerLogic(sp);
+        if (player instanceof ServerPlayerEntity serverPlayer)
+        {
+            Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);
+            doServerLogic(serverPlayer);
+        }
 
         if (player != null)
         {

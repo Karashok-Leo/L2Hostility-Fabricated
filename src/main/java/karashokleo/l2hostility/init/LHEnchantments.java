@@ -219,6 +219,15 @@ public class LHEnchantments
                 .addZH("沉默")
                 .addZHDesc("穿着4件带有沉默效果的装备时，玩家发出的任何震动都会被抵消")
                 .register();
+//        SOUL_BOUND = Entry.of(
+//                        "soul_bound",
+//                        new SoulBindingEnchantment()
+//                )
+//                .addEN()
+//                .addENDesc("Remain in inventory after death.")
+//                .addZH("灵魂绑定")
+//                .addZHDesc("死后保留物品")
+//                .register();
         ETERNAL = Entry.of(
                         "eternal",
                         new LegendaryEnchantment(
