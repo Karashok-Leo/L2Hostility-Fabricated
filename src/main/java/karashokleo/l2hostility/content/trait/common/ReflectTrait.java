@@ -29,7 +29,7 @@ public class ReflectTrait extends MobTrait
         {
             if (ReflectTrinket.canReflect(le, this)) return;
             float factor = (float) (level * LHConfig.common().traits.reflectFactor);
-            GenericEvents.schedule(() -> le.damage(entity.getDamageSources().indirectMagic(entity, null), event.getAmount() * factor));
+            GenericEvents.schedule(() -> le.damage(entity.getDamageSources().indirectMagic(null, entity), event.getAmount() * factor));
         }
     }
 

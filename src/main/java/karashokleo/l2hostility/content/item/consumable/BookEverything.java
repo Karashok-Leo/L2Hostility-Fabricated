@@ -74,7 +74,10 @@ public class BookEverything extends Item
                         listtag.add(EnchantmentHelper.createNbt(e.getKey().getValue(), e.getValue().getMaxLevel()));
                 result.getOrCreateNbt().put("StoredEnchantments", listtag);
                 stack.decrement(1);
-                user.getInventory().offerOrDrop(result);
+                if (stack.isEmpty())
+                    return TypedActionResult.success(result);
+                else
+                    user.getInventory().offerOrDrop(result);
             }
             return TypedActionResult.consume(stack);
         } else
