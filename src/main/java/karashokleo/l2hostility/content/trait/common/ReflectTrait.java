@@ -5,6 +5,7 @@ import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.init.LHTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -24,13 +25,17 @@ public class ReflectTrait extends MobTrait
     public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
     {
         // 距离小于3时触发
-        if (event.getSource().getAttacker() instanceof LivingEntity le &&
-            entity.distanceTo(le) < LHConfig.common().traits.reflectRange)
-        {
-            if (ReflectTrinket.canReflect(le, this)) return;
-            float factor = (float) (level * LHConfig.common().traits.reflectFactor);
-            GenericEvents.schedule(() -> le.damage(entity.getDamageSources().indirectMagic(null, entity), event.getAmount() * factor));
-        }
+        if (!(event.getSource().getAttacker() instanceof LivingEntity le))
+            return;
+        if (entity.distanceTo(le) >= LHConfig.common().traits.reflectRange)
+            return;
+        if (event.getSource().isIn(LHTags.MAGIC) &&
+            !LHConfig.common().traits.reflectMagic)
+            return;
+        if (ReflectTrinket.canReflect(le, this))
+            return;
+        float factor = (float) (level * LHConfig.common().traits.reflectFactor);
+        GenericEvents.schedule(() -> le.damage(entity.getDamageSources().indirectMagic(null, entity), event.getAmount() * factor));
     }
 
     @Override

@@ -70,7 +70,7 @@ public class TraitEvents
 
     public static void onHurt(LivingHurtEvent event)
     {
-        var optional = MobDifficulty.get(event.getSource().getAttacker());
+        var optional = MobDifficulty.get(event.getEntity());
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
         difficulty.traitEvent((k, v) -> k.onHurt(v, difficulty.owner, event));

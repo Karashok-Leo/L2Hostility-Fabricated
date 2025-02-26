@@ -56,7 +56,9 @@ public class CounterStrikeTrait extends MobTrait
         var diff = MobDifficulty.get(le);
         if (diff.isEmpty()) return;
         var data = diff.get().getOrCreateData(getId(), Data::new);
-        if (target instanceof LivingEntity && le instanceof MobEntity mob && mob.getTarget() == target)
+        if (target instanceof LivingEntity &&
+            le instanceof MobEntity mob &&
+            mob.getTarget() == target)
             data.strikeId = target.getUuid();
     }
 
