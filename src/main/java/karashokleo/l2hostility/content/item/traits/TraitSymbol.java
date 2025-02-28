@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.item.traits;
 
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.content.item.misc.wand.TraitAdderWand;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.content.trait.legendary.LegendaryTrait;
 import karashokleo.l2hostility.init.LHConfig;
@@ -78,15 +79,29 @@ public class TraitSymbol extends Item
                     sp.sendMessage(LHTexts.MSG_ERR_DISALLOW.get().formatted(Formatting.RED), true);
                 return ActionResult.FAIL;
             }
-            if (cap.getTraitLevel(trait) >= trait.getMaxLevel())
+
+            Integer ans;
+            if (user.getAbilities().creativeMode &&
+                user.isSneaking())
             {
-                if (user instanceof ServerPlayerEntity sp)
-                    sp.sendMessage(LHTexts.MSG_ERR_MAX.get().formatted(Formatting.RED), true);
-                return ActionResult.FAIL;
+                if (cap.getTraitLevel(trait) <= 0)
+                    return ActionResult.FAIL;
+                if (user.getWorld().isClient())
+                    return ActionResult.SUCCESS;
+                ans = cap.traits.compute(trait, TraitAdderWand::decrease);
+            } else
+            {
+                if (cap.getTraitLevel(trait) >= trait.getMaxLevel())
+                {
+                    if (user instanceof ServerPlayerEntity sp)
+                        sp.sendMessage(LHTexts.MSG_ERR_MAX.get().formatted(Formatting.RED), true);
+                    return ActionResult.FAIL;
+                }
+                if (user.getWorld().isClient())
+                    return ActionResult.SUCCESS;
+                ans = cap.traits.compute(trait, TraitAdderWand::increase);
             }
-            if (user.getWorld().isClient())
-                return ActionResult.SUCCESS;
-            int val = cap.traits.compute(trait, (k, v) -> (v == null ? 0 : v) + 1);
+            int val = ans == null ? 0 : ans;
             trait.initialize(entity, val);
             trait.postInit(entity, val);
             cap.sync();

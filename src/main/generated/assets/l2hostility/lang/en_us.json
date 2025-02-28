@@ -631,6 +631,7 @@
   "text.autoconfig.l2hostility.option.common.traits.ragnarokSealSlotAdder": "ragnarokSealSlotAdder",
   "text.autoconfig.l2hostility.option.common.traits.ragnarokTime": "ragnarokTime",
   "text.autoconfig.l2hostility.option.common.traits.reflectFactor": "reflectFactor",
+  "text.autoconfig.l2hostility.option.common.traits.reflectMagic": "reflectMagic",
   "text.autoconfig.l2hostility.option.common.traits.reflectRange": "reflectRange",
   "text.autoconfig.l2hostility.option.common.traits.regen": "regen",
   "text.autoconfig.l2hostility.option.common.traits.repellRange": "repellRange",

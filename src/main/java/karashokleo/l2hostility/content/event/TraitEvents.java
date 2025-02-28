@@ -46,6 +46,7 @@ public class TraitEvents
 
     public static void onAttacking(LivingAttackEvent event)
     {
+        if (event.getEntity().getWorld().isClient()) return;
         var optional = MobDifficulty.get(event.getSource().getAttacker());
         if (optional.isEmpty()) return;
         MobDifficulty attackerDifficulty = optional.get();
@@ -54,6 +55,7 @@ public class TraitEvents
 
     public static void onAttacked(LivingAttackEvent event)
     {
+        if (event.getEntity().getWorld().isClient()) return;
         var optional = MobDifficulty.get(event.getEntity());
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
@@ -62,6 +64,7 @@ public class TraitEvents
 
     public static void onHurting(LivingHurtEvent event)
     {
+        if (event.getEntity().getWorld().isClient()) return;
         var optional = MobDifficulty.get(event.getSource().getAttacker());
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
@@ -70,6 +73,7 @@ public class TraitEvents
 
     public static void onHurt(LivingHurtEvent event)
     {
+        if (event.getEntity().getWorld().isClient()) return;
         var optional = MobDifficulty.get(event.getEntity());
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
@@ -78,6 +82,7 @@ public class TraitEvents
 
     public static void onDamaged(LivingDamageEvent event)
     {
+        if (event.getEntity().getWorld().isClient()) return;
         var optional = MobDifficulty.get(event.getEntity());
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
@@ -86,6 +91,7 @@ public class TraitEvents
 
     public static void afterDeath(LivingEntity entity, DamageSource source)
     {
+        if (entity.getWorld().isClient()) return;
         var optional = MobDifficulty.get(entity);
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();

@@ -45,14 +45,14 @@ public class MiscItems
                 .ingot(new FabricItemSettings().rarity(Rarity.EPIC).fireproof())
                 .block(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK))
                 .buildIngot(itemBuilder -> itemBuilder.addTag(LHTags.CHAOS))
-                .buildBlock(blockBuilder -> blockBuilder.addTag(BlockTags.PICKAXE_MINEABLE, BlockTags.NEEDS_DIAMOND_TOOL))
+                .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.PICKAXE_MINEABLE, BlockTags.NEEDS_DIAMOND_TOOL))
                 .register();
 
         MIRACLE = MaterialEntry.of("miracle", "奇迹")
                 .ingot(new NetherStarItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof()))
                 .block(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK))
                 .buildIngot(itemBuilder -> itemBuilder.addTag(LHTags.CHAOS))
-                .buildBlock(blockBuilder -> blockBuilder.addTag(BlockTags.PICKAXE_MINEABLE, BlockTags.NEEDS_DIAMOND_TOOL))
+                .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.PICKAXE_MINEABLE, BlockTags.NEEDS_DIAMOND_TOOL))
                 .register();
 
         WITCH_DROPLET = LHItems.Entry.of(
