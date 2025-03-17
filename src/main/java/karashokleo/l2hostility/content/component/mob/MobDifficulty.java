@@ -136,7 +136,9 @@ public class MobDifficulty
         {
             PlayerDifficulty playerDiff = PlayerDifficulty.get(player);
             playerDiff.apply(instance);
-            if (!LHConfig.common().scaling.allowPlayerAllies && owner.isTeammate(player)) skip = true;
+            if (!LHConfig.common().scaling.allowPlayerAllies &&
+                owner.isTeammate(player))
+                skip = true;
         }
         lv = skip ? 0 : TraitManager.fill(this, owner, traits, instance);
         fullDrop = instance.isFullDrop();

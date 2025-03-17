@@ -30,7 +30,7 @@ public class TraitManager
     {
         int lv = diff.clampLevel(ins.getDifficulty(le.getRandom()));
         int ans = 0;
-        if (ins.apply_chance() < le.getRandom().nextDouble())
+        if (ins.getApplyChance() < le.getRandom().nextDouble())
             return ans;
         // add attributes
         if (!le.getType().isIn(LHTags.NO_SCALING))
@@ -44,7 +44,7 @@ public class TraitManager
             ItemPopulator.populateArmors(le, lv);
         }
         // add traits
-        if (ins.trait_chance(lv) >= le.getRandom().nextDouble())
+        if (ins.getTraitChance(lv) >= le.getRandom().nextDouble())
         {
             if (!le.getType().isIn(LHTags.NO_TRAIT))
                 TraitGenerator.generateTraits(diff, le, lv, traits, ins);

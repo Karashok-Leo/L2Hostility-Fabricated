@@ -31,7 +31,7 @@ public class EntityConfig
     {
         return new Config(
                 new ArrayList<>(keys),
-                new DifficultyConfig.Config(min, base, var, scale, 1, 1)
+                new DifficultyConfig.Config(min, base, 0, var, scale, 1, 1)
         );
     }
 
@@ -92,7 +92,7 @@ public class EntityConfig
         @SerialClass.SerialField
         public final ArrayList<ItemPool> items = new ArrayList<>();
         @SerialClass.SerialField
-        public DifficultyConfig.Config difficulty = new DifficultyConfig.Config(0, 0, 0, 0, 1, 1);
+        public DifficultyConfig.Config difficulty = new DifficultyConfig.Config(0, 0, 0, 0, 0, 1, 1);
         @SerialClass.SerialField
         public int minSpawnLevel = 0;
         @SerialClass.SerialField

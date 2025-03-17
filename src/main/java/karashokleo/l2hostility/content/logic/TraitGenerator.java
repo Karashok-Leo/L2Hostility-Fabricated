@@ -5,6 +5,8 @@ import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.data.config.EntityConfig;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTraits;
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.random.Random;
 
@@ -14,42 +16,58 @@ import java.util.List;
 
 public class TraitGenerator
 {
+    public static void generateTraits(MobDifficulty diff, LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
+    {
+        new TraitGenerator(diff, le, lv, traits, ins).generate();
+    }
+
+    public Event<ModifyTraitCountCapCallback> MODIFY_TRAIT_COUNT_CAP = EventFactory.createArrayBacked(ModifyTraitCountCapCallback.class, listeners -> (cap, difficulty, entity, level) ->
+    {
+        for (ModifyTraitCountCapCallback listener : listeners)
+            cap = listener.modifyTraitCountCap(cap, difficulty, entity, level);
+        return cap;
+    });
+
+    public interface ModifyTraitCountCapCallback
+    {
+        int modifyTraitCountCap(int traitCountCap, MobDifficulty difficulty, LivingEntity entity, int level);
+    }
+
     private final LivingEntity entity;
     private final int mobLevel;
+    private final int traitCountCap;
     private final MobDifficultyCollector ins;
     private final HashMap<MobTrait, Integer> traits;
     private final Random rand;
     private final List<MobTrait> traitPool;
-    private int level, weights;
+    private int level;
+    private int weights;
 
     private TraitGenerator(MobDifficulty diff, LivingEntity entity, int mobLevel, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
     {
         this.entity = entity;
         this.mobLevel = mobLevel;
+        this.traitCountCap = MODIFY_TRAIT_COUNT_CAP.invoker().modifyTraitCountCap(ins.traitCountCap, diff, entity, mobLevel);
         this.ins = ins;
         this.traits = traits;
 
-        rand = entity.getRandom();
-        level = mobLevel;
+        this.rand = entity.getRandom();
+        this.level = mobLevel;
 
         var config = diff.getConfigCache();
         if (config != null)
             for (var base : config.traits)
-                if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
+                if (base.condition() == null ||
+                    base.condition().match(entity, mobLevel, ins))
                     genBase(base);
 
-        traitPool = new ArrayList<>(LHTraits.TRAIT.stream().filter(e ->
+        this.traitPool = new ArrayList<>(LHTraits.TRAIT.stream().filter(e ->
                 (config == null || !config.blacklist.contains(e)) &&
                 !traits.containsKey(e) &&
                 e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
-        weights = 0;
+        this.weights = 0;
         for (var e : traitPool)
-            weights += e.getConfig().weight;
-    }
-
-    public static void generateTraits(MobDifficulty diff, LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
-    {
-        new TraitGenerator(diff, le, lv, traits, ins).generate();
+            this.weights += e.getConfig().weight;
     }
 
     // 获取词条等级
@@ -93,7 +111,7 @@ public class TraitGenerator
         int maxTrait = TraitManager.getMaxLevel() + 1;
         if (!e.allow(entity, mobLevel, maxTrait)) return;
         int max = e.getMaxLevel();// config bypass player trait cap
-        int cost = e.getCost(ins.trait_cost);
+        int cost = e.getCost(ins.traitCost);
         int old = Math.min(e.getMaxLevel(), Math.max(getRank(e), base.free()));
         int expected = Math.min(max, Math.max(old, base.min()));
         int rank = Math.min(expected, old + level / cost);
@@ -107,7 +125,7 @@ public class TraitGenerator
         while (level > 0 && !traitPool.isEmpty())
         {
             MobTrait e = pop();
-            int cost = e.getCost(ins.trait_cost);
+            int cost = e.getCost(ins.traitCost);
             if (cost > level)
                 continue;
             int max = Math.min(ins.getMaxTraitLevel(), e.getMaxLevel());
@@ -117,7 +135,10 @@ public class TraitGenerator
                 continue;
             setRank(e, rank);
             level -= (rank - old) * cost;
-            if (!ins.isFullChance() && rand.nextDouble() < LHConfig.common().scaling.globalTraitSuppression)
+            if (traits.size() >= traitCountCap)
+                break;
+            if (!ins.isFullChance() &&
+                rand.nextDouble() < LHConfig.common().scaling.globalTraitSuppression)
                 break;
         }
         for (var e : traits.entrySet())

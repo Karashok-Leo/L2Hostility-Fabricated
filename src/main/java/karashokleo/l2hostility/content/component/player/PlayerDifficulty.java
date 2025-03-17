@@ -96,6 +96,7 @@ public class PlayerDifficulty
         if (TrinketCompat.hasItemInTrinket(owner, TrinketItems.ABYSSAL_THORN))
         {
             instance.traitCostFactor(0);
+            instance.setNoTraitCountCap();
             instance.setFullChance();
             instance.setFullDrop();
         }

@@ -8,6 +8,7 @@
         "min": 0,
         "scale": 0.0,
         "trait_chance": 1.0,
+        "trait_count_cap": 0,
         "variation": 1.0
       },
       "entities": [
@@ -36,6 +37,7 @@
         "min": 0,
         "scale": 0.0,
         "trait_chance": 1.0,
+        "trait_count_cap": 0,
         "variation": 1.0
       },
       "entities": [
@@ -64,6 +66,7 @@
         "min": 0,
         "scale": 0.0,
         "trait_chance": 1.0,
+        "trait_count_cap": 0,
         "variation": 1.0
       },
       "entities": [
@@ -101,6 +104,7 @@
         "min": 0,
         "scale": 0.0,
         "trait_chance": 1.0,
+        "trait_count_cap": 0,
         "variation": 1.0
       },
       "entities": [
@@ -125,6 +129,7 @@
         "min": 100,
         "scale": 0.0,
         "trait_chance": 1.0,
+        "trait_count_cap": 0,
         "variation": 1.0
       },
       "entities": [

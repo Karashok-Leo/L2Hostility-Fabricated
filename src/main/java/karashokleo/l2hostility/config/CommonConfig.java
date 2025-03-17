@@ -106,6 +106,8 @@ public class CommonConfig implements ConfigData
         public double defaultLevelVar = 16;
         @Comment("Default dimension difficulty scale for mod dimensions")
         public double defaultLevelScale = 1.5;
+        @Comment("Default max number of traits. 0 means no limit")
+        public int defaultTraitCountCap = 5;
         @Comment("""
                 Mobs at Lv.N will have N x k% chance to have trait
                 Default k% = 0.01, so Lv.N mobs with have N% chance to have trait
@@ -312,7 +314,7 @@ public class CommonConfig implements ConfigData
         public double pullingStrength = 0.2;
         @Comment("Reprint damage factor per enchantment point")
         public double reprintDamage = 0.02;
-        @Comment("Reprint will gain Void Touch 20 (NYI) and Vanishing Curse when it hits a mob with max Enchantment level of X or higher")
+        @Comment("Reprint will gain Void Touch 20 and Vanishing Curse when it hits a mob with max Enchantment level of X or higher")
         public int reprintBypass = 10;
 
         @Comment("""

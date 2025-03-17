@@ -10,21 +10,36 @@ import net.minecraft.util.math.random.Random;
 
 public class MobDifficultyCollector
 {
-    public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel() + 1;
-    public double scale, varSq, apply_chance, trait_chance, trait_cost, finalFactor = 1;
+    public int min;
+    public int base;
+    public int count;
+    public int difficulty;
+    public int cap = Integer.MAX_VALUE;
+    public int traitCap = TraitManager.getMaxLevel() + 1;
+    public int traitCountCap;
+    public double scale;
+    public double varSq;
+    public double applyChance;
+    public double traitChance;
+    public double traitCost;
+    public double finalFactor = 1;
     private ServerPlayerEntity player;
-    private boolean fullChance, fullDrop;
+    private boolean fullChance;
+    private boolean fullDrop;
+
     public MobDifficultyCollector()
     {
-        apply_chance = LHConfig.common().scaling.globalApplyChance;
-        trait_chance = LHConfig.common().scaling.globalTraitChance;
-        trait_cost = 1;
+        traitCountCap = LHConfig.common().scaling.defaultTraitCountCap;
+        traitCountCap = traitCountCap > 0 ? traitCountCap : Integer.MAX_VALUE;
+        applyChance = LHConfig.common().scaling.globalApplyChance;
+        traitChance = LHConfig.common().scaling.globalTraitChance;
+        traitCost = 1;
     }
 
     public static MobDifficultyCollector noTrait(int lv)
     {
         var ans = new MobDifficultyCollector();
-        ans.trait_chance = 0;
+        ans.traitChance = 0;
         ans.base = lv;
         return ans;
     }
@@ -33,11 +48,12 @@ public class MobDifficultyCollector
     {
         min = Math.max(min, config.min());
         base += config.base();
+        traitCountCap = Math.min(traitCountCap, config.trait_count_cap() <= 0 ? Integer.MAX_VALUE : config.trait_count_cap());
         scale += config.scale();
         varSq += config.variation() * config.variation();
         count++;
-        apply_chance *= config.apply_chance();
-        trait_chance *= config.trait_chance();
+        applyChance *= config.apply_chance();
+        traitChance *= config.trait_chance();
         fullChance |= min > 0;
     }
 
@@ -58,7 +74,7 @@ public class MobDifficultyCollector
 
     public void traitCostFactor(double factor)
     {
-        trait_cost *= factor;
+        traitCost *= factor;
     }
 
     public void setCap(int cap)
@@ -87,19 +103,24 @@ public class MobDifficultyCollector
         return traitCap;
     }
 
-    public double apply_chance()
+    public double getApplyChance()
     {
-        return fullChance ? 1 : apply_chance;
+        return fullChance ? 1 : applyChance;
     }
 
-    public double trait_chance(int lv)
+    public double getTraitChance(int lv)
     {
-        return fullChance ? 1 : trait_chance * Math.min(1, lv * LHConfig.common().scaling.initialTraitChanceSlope);
+        return fullChance ? 1 : traitChance * Math.min(1, lv * LHConfig.common().scaling.initialTraitChanceSlope);
     }
 
     public int getBase()
     {
         return (int) Math.round(base + difficulty * scale);
+    }
+
+    public void setNoTraitCountCap()
+    {
+        traitCountCap = Integer.MAX_VALUE;
     }
 
     public void setFullChance()

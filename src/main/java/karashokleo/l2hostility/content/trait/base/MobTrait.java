@@ -174,7 +174,7 @@ public class MobTrait implements ItemConvertible
         var ans = getName();
         if (value != null) ans = ans.append(ScreenTexts.SPACE)
                 .append(Text.translatable("enchantment.level." + value));
-        return ans.setStyle(Style.EMPTY.withColor(color.getAsInt()));
+        return ans.setStyle(Style.EMPTY.withColor(getColor()));
     }
 
     public void addDetail(List<Text> list)

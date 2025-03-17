@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-27T17:39:50.3816707	L2 Hostility/Model Definitions
+// 1.20.1	2025-03-17T11:43:54.5235606	L2 Hostility/Model Definitions
 787903b9f0311061258da774b1ca33e23307b88a assets\l2hostility\models\item\soul_burner.json
 ba8303f3d0cf3332a374ead31a1187a77b1edc20 assets\l2hostility\models\item\triple_strip_cape.json
 54ec7d329a369b54157cf3d13348a880b9214075 assets\l2hostility\models\item\charm_of_looting_2.json
@@ -16,8 +16,8 @@ f92b21351f21bc24f49abacdeba1962c1b1fbc98 assets\l2hostility\models\item\totemic_
 dedb5287c68c054529d15637665dbbcbb095eec3 assets\l2hostility\models\item\ring_of_corrosion.json
 805de565deab18ce5f580b88c92574a5e29aaa13 assets\l2hostility\models\item\charm_of_looting_3.json
 95d92289af470cc15367930728bc8acf384b23c6 assets\l2hostility\models\item\heirophant_green.json
-bbcd1d0da5af79af061d7691421952994f29bd59 assets\l2hostility\models\item\eternium_ingot.json
 79ae127759f236b1028939db1327895956dc6060 assets\l2hostility\models\item\blackstone_core.json
+bbcd1d0da5af79af061d7691421952994f29bd59 assets\l2hostility\models\item\eternium_ingot.json
 f6895697bdab127d46712e9c9ad3aa07e2c99c38 assets\l2hostility\models\item\moonwalk.json
 c3e83e5767641301057986ee59bc7154e2749bb3 assets\l2hostility\models\item\booster_potion.json
 efa045a69c93b925fb2778b8a32faa6f9d56379b assets\l2hostility\models\item\sealed_item.json
@@ -38,8 +38,8 @@ ded4776cf1eaf975cc7ca77275ebf889426ad164 assets\l2hostility\models\item\soul_fir
 47b1669ffc91d13e17f5d08ed2a34cd11ddeaaf9 assets\l2hostility\models\item\ai_config_wand.json
 aa8aac690c3ed7ba60e12b9deb043759f3a3c4ab assets\l2hostility\models\item\speedy.json
 9afeaa99a5ad5e82b0d3cf603151a8ef52bb5e43 assets\l2hostility\models\item\witch_charge.json
-ffd80ef17e54fcd7ef3e1d11a93804e50b6aa529 assets\l2hostility\models\item\cursed.json
 63af5339c69219b6b56d8f418cf08eef080434ce assets\l2hostility\models\block\hostility_spawner.json
+ffd80ef17e54fcd7ef3e1d11a93804e50b6aa529 assets\l2hostility\models\item\cursed.json
 d2efe4e44e894da824f242de24f6adaf8701c69d assets\l2hostility\models\item\shulkerate_block.json
 14bb6ee947837560e0c1233d0087d52eb8a3f4c1 assets\l2hostility\models\item\charm_of_looting_4.json
 d27e3585ff4b25ff01856e4f825651ac8aa6bef2 assets\l2hostility\blockstates\sculkium_block.json
@@ -91,8 +91,8 @@ b44737985bd10b9bf3c657dbf0fd0885062fdb83 assets\l2hostility\models\item\totemic_
 008eb4cd510702215709490d83e311cc0082e832 assets\l2hostility\models\item\counter_strike.json
 180a4d8ded1ea48c6c97ed7c5ad10367e8f1d8a8 assets\l2hostility\models\item\wind_capture_bottle.json
 63c7d15ce82bfc9c7841fcf40dcdd0951a18cc4d assets\l2hostility\models\item\nausea.json
-3c1a8a1fb6d93cb38feac867c6a0cae28b6f980e assets\l2hostility\models\item\curse_of_gluttony.json
 d6f0641018234ca1b5984f6501c165892d066091 assets\l2hostility\models\item\poison.json
+3c1a8a1fb6d93cb38feac867c6a0cae28b6f980e assets\l2hostility\models\item\curse_of_gluttony.json
 7a532f277c3ec138c38afb77fbb7877cb637fc35 assets\l2hostility\models\item\miracle_block.json
 a894284aa81bcfd2f20c9ce92018f0751d493008 assets\l2hostility\models\item\hostility_essence.json
 afc112097770c1a42201c48a6fcfbc75243485c8 assets\l2hostility\models\item\platinum_star.json
@@ -131,8 +131,8 @@ ed5550c308958c62ec675a8c592c8d8fc43e40c0 assets\l2hostility\models\item\oddeyes_
 89b6fe18d01e36241b1351f4a39f40e0458bde5c assets\l2hostility\models\item\sculkium_nugget.json
 84f634cc35c3739a82b7e3190849c839bdf51700 assets\l2hostility\models\item\explosion_shard.json
 a05bb7b11be51e5184811d6a39397b6abb39aa49 assets\l2hostility\models\item\ragnarok.json
-79df8d7f57c20e395ef38ac80ae4f5c351e3823c assets\l2hostility\models\item\arena.json
 e16e74a184b0503c495c91a1ccb4a10449fd94c3 assets\l2hostility\models\item\chaos_ingot.json
+79df8d7f57c20e395ef38ac80ae4f5c351e3823c assets\l2hostility\models\item\arena.json
 ba69cec47e6a481ee3a839b4b203736c07085f0e assets\l2hostility\models\item\hostility_spawner.json
 f1bbc0e59c9ecc01c49d9855770360462beb86e5 assets\l2hostility\models\block\miracle_block.json
 f8c0c7e966fec3a4a914d67237bd38a9b42a8a7a assets\l2hostility\models\item\ring_of_reflection.json

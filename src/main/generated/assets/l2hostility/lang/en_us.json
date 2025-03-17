@@ -588,6 +588,7 @@
   "text.autoconfig.l2hostility.option.common.scaling.defaultLevelBase": "defaultLevelBase",
   "text.autoconfig.l2hostility.option.common.scaling.defaultLevelScale": "defaultLevelScale",
   "text.autoconfig.l2hostility.option.common.scaling.defaultLevelVar": "defaultLevelVar",
+  "text.autoconfig.l2hostility.option.common.scaling.defaultTraitCountCap": "defaultTraitCountCap",
   "text.autoconfig.l2hostility.option.common.scaling.dimensionFactor": "dimensionFactor",
   "text.autoconfig.l2hostility.option.common.scaling.distanceFactor": "distanceFactor",
   "text.autoconfig.l2hostility.option.common.scaling.drownedTridentChancePerLevel": "drownedTridentChancePerLevel",

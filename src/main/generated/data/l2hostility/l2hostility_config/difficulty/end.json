@@ -8,6 +8,7 @@
       "min": 0,
       "scale": 1.5,
       "trait_chance": 1.0,
+      "trait_count_cap": 0,
       "variation": 16.0
     }
   }

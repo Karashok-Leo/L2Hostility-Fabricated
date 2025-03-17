@@ -53,6 +53,7 @@ public class DifficultyConfig
             DEFAULT = new Config(
                     0,
                     LHConfig.common().scaling.defaultLevelBase,
+                    LHConfig.common().scaling.defaultTraitCountCap,
                     LHConfig.common().scaling.defaultLevelVar,
                     LHConfig.common().scaling.defaultLevelScale,
                     1,
@@ -79,7 +80,7 @@ public class DifficultyConfig
 
     public DifficultyConfig putDim(RegistryKey<World> key, int min, int base, double var, double scale)
     {
-        levelMap.put(key.getValue(), new Config(min, base, var, scale, 1, 1));
+        levelMap.put(key.getValue(), new Config(min, base, 0, var, scale, 1, 1));
         return this;
     }
 
@@ -87,13 +88,14 @@ public class DifficultyConfig
     public final DifficultyConfig putBiome(int min, int base, double var, double scale, RegistryKey<Biome>... keys)
     {
         for (var key : keys)
-            biomeMap.put(key.getValue(), new Config(min, base, var, scale, 1, 1));
+            biomeMap.put(key.getValue(), new Config(min, base, 0, var, scale, 1, 1));
         return this;
     }
 
     public record Config(
             int min,
             int base,
+            int trait_count_cap,
             double variation,
             double scale,
             double apply_chance,
