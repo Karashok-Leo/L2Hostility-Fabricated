@@ -41,7 +41,7 @@ public class TraitEvents
         var optional = MobDifficulty.get(attacker);
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
-        difficulty.traitEvent((k, v) -> k.onDamageSourceCreate(v, difficulty.owner, damageSource, type, source, position));
+        difficulty.traitEvent((k, v) -> k.onDamageSourceCreate(difficulty, difficulty.owner, v, damageSource, type, source, position));
     }
 
     public static void onAttacking(LivingAttackEvent event)
@@ -50,7 +50,7 @@ public class TraitEvents
         var optional = MobDifficulty.get(event.getSource().getAttacker());
         if (optional.isEmpty()) return;
         MobDifficulty attackerDifficulty = optional.get();
-        attackerDifficulty.traitEvent((k, v) -> k.onAttacking(v, attackerDifficulty.owner, event));
+        attackerDifficulty.traitEvent((k, v) -> k.onAttacking(attackerDifficulty, attackerDifficulty.owner, v, event));
     }
 
     public static void onAttacked(LivingAttackEvent event)
@@ -59,7 +59,7 @@ public class TraitEvents
         var optional = MobDifficulty.get(event.getEntity());
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
-        difficulty.traitEvent((k, v) -> k.onAttacked(v, difficulty.owner, event));
+        difficulty.traitEvent((k, v) -> k.onAttacked(difficulty, difficulty.owner, v, event));
     }
 
     public static void onHurting(LivingHurtEvent event)
@@ -68,7 +68,7 @@ public class TraitEvents
         var optional = MobDifficulty.get(event.getSource().getAttacker());
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
-        difficulty.traitEvent((k, v) -> k.postHurting(v, difficulty.owner, event));
+        difficulty.traitEvent((k, v) -> k.postHurting(difficulty, difficulty.owner, v, event));
     }
 
     public static void onHurt(LivingHurtEvent event)
@@ -77,7 +77,7 @@ public class TraitEvents
         var optional = MobDifficulty.get(event.getEntity());
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
-        difficulty.traitEvent((k, v) -> k.onHurt(v, difficulty.owner, event));
+        difficulty.traitEvent((k, v) -> k.onHurt(difficulty, difficulty.owner, v, event));
     }
 
     public static void onDamaged(LivingDamageEvent event)
@@ -86,7 +86,7 @@ public class TraitEvents
         var optional = MobDifficulty.get(event.getEntity());
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
-        difficulty.traitEvent((k, v) -> k.onDamaged(v, difficulty.owner, event));
+        difficulty.traitEvent((k, v) -> k.onDamaged(difficulty, difficulty.owner, v, event));
     }
 
     public static void afterDeath(LivingEntity entity, DamageSource source)
@@ -95,6 +95,6 @@ public class TraitEvents
         var optional = MobDifficulty.get(entity);
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
-        difficulty.traitEvent((k, v) -> k.onDeath(v, entity, source));
+        difficulty.traitEvent((k, v) -> k.onDeath(difficulty, entity, v, source));
     }
 }

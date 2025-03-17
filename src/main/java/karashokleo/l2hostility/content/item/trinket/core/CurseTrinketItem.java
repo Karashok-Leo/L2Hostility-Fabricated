@@ -6,6 +6,7 @@ import dev.emi.trinkets.api.SlotReference;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
+import karashokleo.l2hostility.content.logic.MobDifficultyCollector;
 import karashokleo.l2hostility.init.LHMiscs;
 import karashokleo.l2hostility.util.GenericItemStack;
 import net.minecraft.entity.LivingEntity;
@@ -58,5 +59,9 @@ public class CurseTrinketItem extends DamageListenerTrinketItem
     public double getGrowFactor(ItemStack stack, PlayerDifficulty player, MobDifficulty mob)
     {
         return 1;
+    }
+
+    public void modifyDifficulty(MobDifficultyCollector instance)
+    {
     }
 }

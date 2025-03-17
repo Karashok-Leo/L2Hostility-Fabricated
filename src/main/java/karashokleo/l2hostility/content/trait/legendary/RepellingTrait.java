@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -32,7 +33,7 @@ public class RepellingTrait extends PushPullTrait
     }
 
     @Override
-    public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
+    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&

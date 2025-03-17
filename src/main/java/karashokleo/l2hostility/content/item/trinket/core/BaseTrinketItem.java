@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Rarity;
 
+// trinket that player can only wear single
 public class BaseTrinketItem extends TrinketItem
 {
     public BaseTrinketItem(Settings settings)
@@ -24,4 +25,6 @@ public class BaseTrinketItem extends TrinketItem
     {
         return !TrinketCompat.hasItemInTrinket(entity, this) && super.canEquip(stack, slot, entity);
     }
+
+
 }

@@ -22,9 +22,10 @@ public class GrowthTrait extends MobTrait
     }
 
     @Override
-    public void serverTick(LivingEntity mob, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
-        if (mob.getHealth() == mob.getMaxHealth() && mob instanceof SlimeEntity slime)
+        if (mob.getHealth() == mob.getMaxHealth() &&
+            mob instanceof SlimeEntity slime)
         {
             int size = slime.getSize();
             if (size < 1 << (level + 2))
@@ -33,25 +34,22 @@ public class GrowthTrait extends MobTrait
     }
 
     @Override
-    public void postInit(LivingEntity mob, int lv)
+    public void postInit(MobDifficulty difficulty, LivingEntity mob, int lv)
     {
         var regen = LHTraits.REGEN;
-        MobDifficulty.get(mob).ifPresent(cap ->
-        {
-            if (regen.allow(mob) && cap.getTraitLevel(regen) < lv)
-                cap.setTrait(regen, lv);
-        });
+        if (regen.allow(mob) && difficulty.getTraitLevel(regen) < lv)
+            difficulty.setTrait(regen, lv);
     }
 
     @Override
-    public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
+    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
         if (event.getSource().isOf(DamageTypes.IN_WALL))
             event.setCanceled(true);
     }
 
     @Override
-    public void onDeath(int level, LivingEntity entity, DamageSource source)
+    public void onDeath(MobDifficulty difficulty, LivingEntity entity, int level, DamageSource source)
     {
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;
         entity.setHealth(entity.getMaxHealth());

@@ -23,18 +23,16 @@ public class CounterStrikeTrait extends MobTrait
     }
 
     @Override
-    public void serverTick(LivingEntity le, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity le, int level)
     {
-        var diff = MobDifficulty.get(le);
-        if (diff.isEmpty()) return;
-        var data = diff.get().getOrCreateData(getId(), Data::new);
+        var data = difficulty.getOrCreateData(getId(), Data::new);
         if (data.cooldown > 0)
         {
             data.cooldown--;
             return;
         }
         if (!le.isOnGround()) return;
-        var target = diff.get().owner.getTarget();
+        var target = difficulty.owner.getTarget();
         if (target == null || !target.isAlive()) return;
         if (target.distanceTo(le) > LHConfig.common().traits.counterStrikeRange) return;
         if (data.strikeId == null || !data.strikeId.equals(target.getUuid())) return;
@@ -49,13 +47,11 @@ public class CounterStrikeTrait extends MobTrait
     }
 
     @Override
-    public void onHurt(int level, LivingEntity le, LivingHurtEvent event)
+    public void onHurt(MobDifficulty difficulty, LivingEntity le, int level, LivingHurtEvent event)
     {
         if (le.getWorld().isClient()) return;
         var target = event.getSource().getAttacker();
-        var diff = MobDifficulty.get(le);
-        if (diff.isEmpty()) return;
-        var data = diff.get().getOrCreateData(getId(), Data::new);
+        var data = difficulty.getOrCreateData(getId(), Data::new);
         if (target instanceof LivingEntity &&
             le instanceof MobEntity mob &&
             mob.getTarget() == target)

@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.highlevel;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.traits.ReprintHandler;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
@@ -25,7 +26,7 @@ public class ReprintTrait extends MobTrait
     }
 
     @Override
-    public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         long total = 0;
         int maxLv = 0;

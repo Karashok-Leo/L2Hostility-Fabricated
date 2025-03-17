@@ -95,31 +95,31 @@ public class MobTrait implements ItemConvertible
         return true;
     }
 
-    public void initialize(LivingEntity mob, int level)
+    public void initialize(MobDifficulty difficulty, LivingEntity mob, int level)
     {
     }
 
-    public void postInit(LivingEntity mob, int lv)
+    public void postInit(MobDifficulty difficulty, LivingEntity mob, int lv)
     {
     }
 
-    public void serverTick(LivingEntity mob, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
     }
 
-    public void onDamageSourceCreate(int level, LivingEntity entity, DamageSource damageSource, RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Vec3d position)
+    public void onDamageSourceCreate(MobDifficulty difficulty, LivingEntity entity, int level, DamageSource damageSource, RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Vec3d position)
     {
     }
 
-    public void onAttacking(int level, LivingEntity entity, LivingAttackEvent event)
+    public void onAttacking(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
     }
 
-    public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
+    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
     }
 
-    public final void postHurting(int level, LivingEntity entity, LivingHurtEvent event)
+    public final void postHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         LivingEntity target = event.getEntity();
         int radius = LHConfig.common().items.reflectTrinketRadius;
@@ -130,28 +130,28 @@ public class MobTrait implements ItemConvertible
                             e -> e.distanceTo(entity) < radius &&
                                  !ReflectTrinket.canReflect(e, this)
                     )
-                    .forEach(le -> this.onHurtingReflectTarget(level, entity, new LivingHurtEvent(le, event.getSource(), event.getAmount())));
-        else this.onHurting(level, entity, event);
+                    .forEach(le -> this.onHurtingReflectTarget(difficulty, entity, level, new LivingHurtEvent(le, event.getSource(), event.getAmount())));
+        else this.onHurting(difficulty, entity, level, event);
     }
 
-    public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
     }
 
-    public void onHurtingReflectTarget(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurtingReflectTarget(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
-        onHurting(level, entity, event);
+        onHurting(difficulty, entity, level, event);
     }
 
-    public void onHurt(int level, LivingEntity entity, LivingHurtEvent event)
-    {
-    }
-
-    public void onDamaged(int level, LivingEntity entity, LivingDamageEvent event)
+    public void onHurt(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
     }
 
-    public void onDeath(int level, LivingEntity entity, DamageSource source)
+    public void onDamaged(MobDifficulty difficulty, LivingEntity entity, int level, LivingDamageEvent event)
+    {
+    }
+
+    public void onDeath(MobDifficulty difficulty, LivingEntity entity, int level, DamageSource source)
     {
     }
 

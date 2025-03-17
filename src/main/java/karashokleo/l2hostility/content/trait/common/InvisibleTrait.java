@@ -28,7 +28,7 @@ public class InvisibleTrait extends SelfEffectTrait
     }
 
     @Override
-    public void postInit(LivingEntity mob, int lv)
+    public void postInit(MobDifficulty difficulty, LivingEntity mob, int lv)
     {
         for (var e : EquipmentSlot.values())
         {

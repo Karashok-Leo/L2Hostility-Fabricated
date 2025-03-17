@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.trait.common;
 
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.content.network.S2CEffectAura;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
@@ -32,7 +33,7 @@ public class AuraEffectTrait extends MobTrait
     }
 
     @Override
-    public void serverTick(LivingEntity mob, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
         if (mob.age % TICK_AURA_INTERNAL != 0) return;
         int range = LHConfig.common().traits.auraRange.get(getId().getPath());

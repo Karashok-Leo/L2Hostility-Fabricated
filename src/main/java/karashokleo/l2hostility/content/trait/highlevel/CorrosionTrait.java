@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.highlevel;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.traits.DurabilityEater;
 import karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.EquipmentSlot;
@@ -20,7 +21,7 @@ public class CorrosionTrait extends SlotIterateDamageTrait
     }
 
     @Override
-    public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         int count = process(level, entity, event.getEntity());
         if (count < level)

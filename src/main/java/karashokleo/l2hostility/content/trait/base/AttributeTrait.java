@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.trait.base;
 
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.logic.TraitManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -30,7 +31,7 @@ public class AttributeTrait extends MobTrait
     }
 
     @Override
-    public void initialize(LivingEntity le, int level)
+    public void initialize(MobDifficulty difficulty, LivingEntity le, int level)
     {
         for (var e : entries)
             TraitManager.addAttribute(le, e.attribute.get(), e.name(), e.factor.getAsDouble() * level, e.op());

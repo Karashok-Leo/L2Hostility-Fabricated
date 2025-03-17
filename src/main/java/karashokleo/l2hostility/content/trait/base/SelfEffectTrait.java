@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.trait.base;
 
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.l2hostility.util.EffectHelper;
 import net.minecraft.entity.LivingEntity;
@@ -25,7 +26,7 @@ public class SelfEffectTrait extends MobTrait
     }
 
     @Override
-    public void serverTick(LivingEntity mob, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
         if (mob.age % TICK_REFRESH_INTERNAL == 0)
         {

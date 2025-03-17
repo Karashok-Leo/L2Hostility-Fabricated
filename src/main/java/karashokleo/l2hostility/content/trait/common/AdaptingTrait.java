@@ -27,15 +27,13 @@ public class AdaptingTrait extends MobTrait
     }
 
     @Override
-    public void onHurt(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurt(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         DamageSource source = event.getSource();
         if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
             source.isIn(DamageTypeTags.BYPASSES_EFFECTS)) return;
-        var cap = MobDifficulty.get(entity);
-        if (cap.isEmpty()) return;
 
-        Data data = cap.get().getOrCreateData(getId(), Data::new);
+        Data data = difficulty.getOrCreateData(getId(), Data::new);
         data.adapt(source.getType().msgId(), level)
                 .ifPresent(factor -> event.setAmount(event.getAmount() * factor));
     }

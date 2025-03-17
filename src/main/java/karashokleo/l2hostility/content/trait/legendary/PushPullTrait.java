@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHEnchantments;
@@ -44,7 +45,7 @@ public abstract class PushPullTrait extends LegendaryTrait
     }
 
     @Override
-    public void serverTick(LivingEntity mob, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
         int r = getRange();
         List<? extends LivingEntity> list = mob.getWorld()

@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.trait.common;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.SelfEffectTrait;
 import karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
@@ -33,7 +34,7 @@ public class FieryTrait extends SelfEffectTrait
 //    }
 
     @Override
-    public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
+    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
         DamageSource source = event.getSource();
         if (source.getSource() instanceof LivingEntity le)
@@ -43,7 +44,7 @@ public class FieryTrait extends SelfEffectTrait
     }
 
     @Override
-    public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         event.getEntity().setOnFireFor(LHConfig.common().traits.fieryTime);
     }

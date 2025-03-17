@@ -25,15 +25,13 @@ public class KillerAuraTrait extends LegendaryTrait
     }
 
     @Override
-    public void serverTick(LivingEntity mob, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
         int itv = LHConfig.common().traits.killerAuraInterval / level;
         int damage = LHConfig.common().traits.killerAuraDamage * level;
         int range = LHConfig.common().traits.killerAuraRange;
         if (mob.age % itv == 0)
         {
-            var diff = MobDifficulty.get(mob);
-            if (diff.isEmpty()) return;
             for (var e : mob.getWorld().getEntitiesByClass(LivingEntity.class, mob.getBoundingBox().expand(range), EntityPredicates.VALID_ENTITY))
                 if (e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode ||
                     e instanceof MobEntity target && target.getTarget() == mob ||

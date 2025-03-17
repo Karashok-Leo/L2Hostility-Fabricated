@@ -1,8 +1,11 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
+import dev.xkmc.l2serial.serialization.SerialClass;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.compat.trinket.slot.EntitySlotAccess;
+import karashokleo.l2hostility.content.component.mob.CapStorageData;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.content.item.traits.SealedItem;
 import karashokleo.l2hostility.init.LHConfig;
@@ -39,11 +42,20 @@ public class RagnarokTrait extends LegendaryTrait
     }
 
     @Override
-    public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
+        var data = difficulty.getOrCreateData(getId(), Data::new);
+        if (data.cooldown > 0) return;
+
         List<EntitySlotAccess> list = new ArrayList<>(TrinketCompat.getItemAccess(event.getEntity())
                 .stream().filter(RagnarokTrait::allowSeal).toList());
-        int count = Math.min(level, list.size());
+        if (list.isEmpty()) return;
+
+        int count = Math.min(level * LHConfig.common().traits.ragnarokCount, list.size());
+        if (count <= 0) return;
+        count = entity.getRandom().nextInt(count) + 1;
+
+        data.cooldown = LHConfig.common().traits.ragnarokCooldown;
         int time = LHConfig.common().traits.ragnarokTime * level;
         for (int i = 0; i < count; i++)
         {
@@ -54,13 +66,30 @@ public class RagnarokTrait extends LegendaryTrait
     }
 
     @Override
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
+    {
+        var data = difficulty.getOrCreateData(getId(), Data::new);
+        if (data.cooldown > 0)
+            data.cooldown--;
+    }
+
+    @Override
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        mapLevel(i -> Text.literal(i + "")
+                        mapLevel(i -> Text.literal(i * LHConfig.common().traits.ragnarokCount + "")
                                 .formatted(Formatting.AQUA)),
+                        Text.literal(LHConfig.common().traits.ragnarokCooldown / 20 + "")
+                                .formatted(Formatting.AQUA),
                         mapLevel(i -> Text.literal("" + Math.round(LHConfig.common().traits.ragnarokTime * i / 20f))
                                 .formatted(Formatting.AQUA)))
                 .formatted(Formatting.GRAY));
+    }
+
+    @SerialClass
+    public static class Data extends CapStorageData
+    {
+        @SerialClass.SerialField
+        public int cooldown = 0;
     }
 }

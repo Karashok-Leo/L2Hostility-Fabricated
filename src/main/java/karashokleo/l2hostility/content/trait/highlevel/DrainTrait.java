@@ -25,10 +25,8 @@ public class DrainTrait extends MobTrait
     }
 
     @Override
-    public void postInit(LivingEntity mob, int lv)
+    public void postInit(MobDifficulty difficulty, LivingEntity mob, int lv)
     {
-        var diff = MobDifficulty.get(mob);
-        if (diff.isEmpty()) return;
         var entryList = LHTraits.TRAIT.getEntryList(LHTags.POTION);
         if (entryList.isEmpty()) return;
         entryList.get().getRandom(mob.getRandom());
@@ -37,16 +35,16 @@ public class DrainTrait extends MobTrait
             var entry = entryList.get().getRandom(mob.getRandom());
             if (entry.isEmpty()) continue;
             var trait = entry.get().value();
-            if (trait.allow(mob) && !diff.get().hasTrait(trait))
+            if (trait.allow(mob) && !difficulty.hasTrait(trait))
             {
-                diff.get().setTrait(trait, lv);
+                difficulty.setTrait(trait, lv);
                 return;
             }
         }
     }
 
     @Override
-    public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         removeEffects(level, entity, event.getEntity());
         var neg = event

@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.common;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
@@ -22,9 +23,9 @@ public class ReflectTrait extends MobTrait
     }
 
     @Override
-    public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
+    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
-        // 距离小于3时触发
+        // 距离小于reflectRange时触发
         if (!(event.getSource().getAttacker() instanceof LivingEntity le))
             return;
         if (entity.distanceTo(le) >= LHConfig.common().traits.reflectRange)
@@ -35,7 +36,16 @@ public class ReflectTrait extends MobTrait
         if (ReflectTrinket.canReflect(le, this))
             return;
         float factor = (float) (level * LHConfig.common().traits.reflectFactor);
-        GenericEvents.schedule(() -> le.damage(entity.getDamageSources().indirectMagic(null, entity), event.getAmount() * factor));
+
+        float reflectAmount = event.getAmount() * factor;
+        float reflectLimit = (float) LHConfig.common().traits.reflectLimit;
+        if (reflectLimit >= 0)
+        {
+            reflectAmount = Math.min(reflectAmount, le.getMaxHealth() * reflectLimit);
+        }
+        float finalAmount = reflectAmount;
+
+        GenericEvents.schedule(() -> le.damage(entity.getDamageSources().indirectMagic(null, entity), finalAmount));
     }
 
     @Override

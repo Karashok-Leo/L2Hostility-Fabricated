@@ -33,7 +33,7 @@ public class SplitTrait extends MobTrait
     }
 
     @Override
-    public void onDeath(int level, LivingEntity entity, DamageSource source)
+    public void onDeath(MobDifficulty difficulty, LivingEntity entity, int level, DamageSource source)
     {
         if (entity.getWorld().isClient() ||
             source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))

@@ -1,7 +1,10 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
+import dev.xkmc.l2serial.serialization.SerialClass;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.content.component.mob.CapStorageData;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.traits.EnchantmentDisabler;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
@@ -31,14 +34,21 @@ public class DispellTrait extends LegendaryTrait
     }
 
     @Override
-    public void onDamageSourceCreate(int level, LivingEntity entity, DamageSource damageSource, RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Vec3d position)
+    public void onDamageSourceCreate(MobDifficulty difficulty, LivingEntity entity, int level, DamageSource damageSource, RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Vec3d position)
     {
+        var data = difficulty.getOrCreateData(getId(), Data::new);
+        if (data.bypassCooldown > 0) return;
+
+        data.bypassCooldown = LHConfig.common().traits.dispellBypassCooldown;
         damageSource.setBypassMagic();
     }
 
     @Override
-    public void onHurting(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
+        var data = difficulty.getOrCreateData(getId(), Data::new);
+        if (data.disableCooldown > 0) return;
+
         List<ItemStack> list = new ArrayList<>();
         for (EquipmentSlot slot : EquipmentSlot.values())
         {
@@ -47,8 +57,13 @@ public class DispellTrait extends LegendaryTrait
                 list.add(stack);
         }
         if (list.isEmpty()) return;
+
+        int count = Math.min(level * LHConfig.common().traits.dispellCount, list.size());
+        if (count <= 0) return;
+        count = entity.getRandom().nextInt(count) + 1;
+
+        data.disableCooldown = LHConfig.common().traits.dispellDisableCooldown;
         int time = LHConfig.common().traits.dispellTime * level;
-        int count = Math.min(level, list.size());
         for (int i = 0; i < count; i++)
         {
             int index = entity.getRandom().nextInt(list.size());
@@ -57,23 +72,58 @@ public class DispellTrait extends LegendaryTrait
     }
 
     @Override
-    public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
+    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
+        var data = difficulty.getOrCreateData(getId(), Data::new);
+        if (data.immuneCooldown > 0) return;
+
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
             !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
             source.isIn(LHTags.MAGIC))
+        {
+            data.immuneCooldown = LHConfig.common().traits.dispellImmuneCooldown;
             event.setCanceled(true);
+        }
+    }
+
+    @Override
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
+    {
+        var data = difficulty.getOrCreateData(getId(), Data::new);
+        if (data.immuneCooldown > 0)
+            data.immuneCooldown--;
+        if (data.bypassCooldown > 0)
+            data.bypassCooldown--;
+        if (data.disableCooldown > 0)
+            data.disableCooldown--;
     }
 
     @Override
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        mapLevel(i -> Text.literal(i + "")
-                                .formatted(Formatting.AQUA)),
-                        mapLevel(i -> Text.literal(LHConfig.common().traits.dispellTime * i / 20 + "")
-                                .formatted(Formatting.AQUA)))
-                .formatted(Formatting.GRAY));
+                Text.literal(LHConfig.common().traits.dispellImmuneCooldown / 20 + "")
+                        .formatted(Formatting.AQUA),
+                Text.literal(LHConfig.common().traits.dispellBypassCooldown / 20 + "")
+                        .formatted(Formatting.AQUA),
+                mapLevel(i -> Text.literal(i * LHConfig.common().traits.dispellCount + "")
+                        .formatted(Formatting.AQUA)),
+                mapLevel(i -> Text.literal(LHConfig.common().traits.dispellTime * i / 20 + ""
+                ).formatted(Formatting.AQUA)),
+                Text.literal(LHConfig.common().traits.dispellDisableCooldown / 20 + "")
+                        .formatted(Formatting.AQUA)
+        ).formatted(Formatting.GRAY));
+    }
+
+    @SerialClass
+    public static class Data extends CapStorageData
+    {
+        @SerialClass.SerialField
+        public int immuneCooldown = 0;
+        @SerialClass.SerialField
+        public int bypassCooldown = 0;
+        @SerialClass.SerialField
+        public int disableCooldown = 0;
     }
 }

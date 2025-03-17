@@ -16,7 +16,7 @@ public class MobDifficultyCollector
     public int difficulty;
     public int cap = Integer.MAX_VALUE;
     public int traitCap = TraitManager.getMaxLevel() + 1;
-    public int traitCountCap;
+    public int traitCountCap = Integer.MAX_VALUE;
     public double scale;
     public double varSq;
     public double applyChance;
@@ -29,8 +29,6 @@ public class MobDifficultyCollector
 
     public MobDifficultyCollector()
     {
-        traitCountCap = LHConfig.common().scaling.defaultTraitCountCap;
-        traitCountCap = traitCountCap > 0 ? traitCountCap : Integer.MAX_VALUE;
         applyChance = LHConfig.common().scaling.globalApplyChance;
         traitChance = LHConfig.common().scaling.globalTraitChance;
         traitCost = 1;

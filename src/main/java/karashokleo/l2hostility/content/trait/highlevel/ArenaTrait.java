@@ -26,7 +26,7 @@ public class ArenaTrait extends AuraEffectTrait
     }
 
     @Override
-    public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
+    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
         if (event.getSource().isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
             return;
@@ -36,15 +36,16 @@ public class ArenaTrait extends AuraEffectTrait
                 return;
             if (attacker instanceof PlayerEntity player && player.getAbilities().creativeMode)
                 return;
-            var diff = MobDifficulty.get(attacker);
-            if (diff.isPresent() && diff.get().getTraitLevel(this) >= level)
+            var attackerDifficulty = MobDifficulty.get(attacker);
+            if (attackerDifficulty.isPresent() &&
+                attackerDifficulty.get().getTraitLevel(this) >= level)
                 return;
         }
         event.setCanceled(true);
     }
 
     @Override
-    public void onDamaged(int level, LivingEntity mob, LivingDamageEvent event)
+    public void onDamaged(MobDifficulty difficulty, LivingEntity mob, int level, LivingDamageEvent event)
     {
         DamageSource source = event.getSource();
         if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) ||

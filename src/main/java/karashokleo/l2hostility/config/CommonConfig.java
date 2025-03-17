@@ -239,8 +239,25 @@ public class CommonConfig implements ConfigData
         public boolean reflectMagic = true;
         @Comment("Reflect factor per level for Reflect. 0.5 means +50% extra damage")
         public double reflectFactor = 0.3;
+        @Comment("Reflect damage will not exceed target's max health * reflectLimit. reflectLimit = 0 means no limit")
+        public double reflectLimit = 0.6;
+        @Comment("Cooldown in ticks for Dispell immunity to physical damage")
+        public int dementorImmuneCooldown = 100;
+        @Comment("Cooldown in ticks for Dementor to bypass armor and shield")
+        public int dementorBypassCooldown = 100;
+        @Comment("Cooldown in ticks for Dispell immunity to magic damage")
+        public int dispellImmuneCooldown = 100;
+        @Comment("Cooldown in ticks for Dispell to bypass magic protection")
+        public int dispellBypassCooldown = 100;
+        @Comment("""
+                Cooldown in ticks for enchantments to be disabled for Dispell
+                It defaults to 200 in the original mod, but I've reduced it based on my personal preference.
+                """)
+        public int dispellDisableCooldown = 100;
+        @Comment("Max count of enchantments to be disabled per level for Dispell")
+        public int dispellCount = 1;
         @Comment("Duration in ticks for enchantments to be disabled per level for Dispell")
-        public int dispellTime = 200;
+        public int dispellTime = 100;
         @Comment("Duration in seconds to set target on fire by Fiery")
         public int fieryTime = 5;
         @Comment("Duration in ticks for Weakness")
@@ -282,8 +299,14 @@ public class CommonConfig implements ConfigData
         public double erosionDurability = 0.1;
         @Comment("Damage bonus when nothing to erode")
         public double erosionDamage = 0.25;
+        @Comment("Number of revivals per level for Undying")
+        public int undyingTimes = 1;
+        @Comment("Cooldown in ticks for Ragnarok")
+        public int ragnarokCooldown = 100;
         @Comment("Seal time per level for Ragnarok")
         public int ragnarokTime = 20;
+        @Comment("Max seal count per level for Ragnarok")
+        public int ragnarokCount = 1;
         @Comment("Allow Ragnarok to seal items with Backpack in its id")
         public boolean ragnarokSealBackpack = false;
         @Comment("Allow Ragnarok to seal trinket items that adds trinket slot")

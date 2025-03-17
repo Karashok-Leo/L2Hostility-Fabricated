@@ -33,6 +33,7 @@ public class TraitGenerator
         int modifyTraitCountCap(int traitCountCap, MobDifficulty difficulty, LivingEntity entity, int level);
     }
 
+    private final MobDifficulty difficulty;
     private final LivingEntity entity;
     private final int mobLevel;
     private final int traitCountCap;
@@ -45,6 +46,7 @@ public class TraitGenerator
 
     private TraitGenerator(MobDifficulty diff, LivingEntity entity, int mobLevel, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
     {
+        this.difficulty = diff;
         this.entity = entity;
         this.mobLevel = mobLevel;
         this.traitCountCap = MODIFY_TRAIT_COUNT_CAP.invoker().modifyTraitCountCap(ins.traitCountCap, diff, entity, mobLevel);
@@ -156,6 +158,6 @@ public class TraitGenerator
                 break;
         }
         for (var e : traits.entrySet())
-            e.getKey().initialize(entity, e.getValue());
+            e.getKey().initialize(difficulty, entity, e.getValue());
     }
 }

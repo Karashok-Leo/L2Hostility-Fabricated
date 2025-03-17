@@ -1,11 +1,9 @@
 package karashokleo.l2hostility.content.component.player;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
-import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.ConsumableItems;
-import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.l2hostility.content.logic.LevelEditor;
@@ -38,6 +36,7 @@ public class PlayerDifficulty
     public int maxRankKilled = 0, rewardCount = 0;
     @Nullable
     public ChunkDifficulty prevChunk;
+
     public PlayerDifficulty(PlayerEntity player)
     {
         this.owner = player;
@@ -88,18 +87,8 @@ public class PlayerDifficulty
         instance.setPlayer(owner);
         instance.acceptBonus(getLevel());
         instance.setTraitCap(getRankCap());
-        if (TrinketCompat.hasItemInTrinket(owner, TrinketItems.CURSE_PRIDE))
-        {
-            instance.traitCostFactor(LHConfig.common().items.curse.prideTraitFactor);
-            instance.setFullChance();
-        }
-        if (TrinketCompat.hasItemInTrinket(owner, TrinketItems.ABYSSAL_THORN))
-        {
-            instance.traitCostFactor(0);
-            instance.setNoTraitCountCap();
-            instance.setFullChance();
-            instance.setFullDrop();
-        }
+        for (var stack : CurseTrinketItem.getFromPlayer(owner))
+            stack.item().modifyDifficulty(instance);
     }
 
     public int getRankCap()

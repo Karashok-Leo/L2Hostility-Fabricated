@@ -5,6 +5,7 @@ import dev.emi.trinkets.api.SlotReference;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
+import karashokleo.l2hostility.content.logic.MobDifficultyCollector;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
@@ -55,6 +56,13 @@ public class CurseOfPride extends CurseTrinketItem
             ans.put(EntityAttributes.GENERIC_MAX_HEALTH, new EntityAttributeModifier(uuid, NAME, rate, EntityAttributeModifier.Operation.MULTIPLY_BASE));
         }
         return ans;
+    }
+
+    @Override
+    public void modifyDifficulty(MobDifficultyCollector instance)
+    {
+        instance.traitCostFactor(LHConfig.common().items.curse.prideTraitFactor);
+        instance.setFullChance();
     }
 
     @Override

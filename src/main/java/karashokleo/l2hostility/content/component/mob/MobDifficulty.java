@@ -242,8 +242,8 @@ public class MobDifficulty
             pending.clear();
             for (var pair : temp)
             {
-                pair.getFirst().initialize(mob, pair.getSecond());
-                pair.getFirst().postInit(mob, pair.getSecond());
+                pair.getFirst().initialize(this, mob, pair.getSecond());
+                pair.getFirst().postInit(this, mob, pair.getSecond());
             }
             for (var pair : temp)
             {
@@ -281,7 +281,7 @@ public class MobDifficulty
         {
             stage = Stage.POST_INIT;
             ItemPopulator.postFill(this, owner);
-            traits.forEach((k, v) -> k.postInit(owner, v));
+            traits.forEach((k, v) -> k.postInit(this, owner, v));
             clearPending(owner);
             owner.setHealth(owner.getMaxHealth());
             sync = true;
@@ -304,7 +304,7 @@ public class MobDifficulty
                     sync |= traits.keySet().removeIf(Objects::isNull);
                     sync |= traits.keySet().removeIf(MobTrait::isBanned);
                 }
-                traits.forEach((k, v) -> k.serverTick(owner, v));
+                traits.forEach((k, v) -> k.serverTick(this, owner, v));
             }
             sync |= clearPending(owner);
         }
@@ -349,7 +349,15 @@ public class MobDifficulty
 
     public <T extends CapStorageData> T getOrCreateData(Identifier id, Supplier<T> sup)
     {
-        return Wrappers.cast(data.computeIfAbsent(id, e -> sup.get()));
+        try
+        {
+            return Wrappers.cast(data.computeIfAbsent(id, e -> sup.get()));
+        } catch (Exception e)
+        {
+            T newVal = sup.get();
+            data.put(id, newVal);
+            return newVal;
+        }
     }
 
     public List<Text> getTitle(boolean showLevel, boolean showTrait)

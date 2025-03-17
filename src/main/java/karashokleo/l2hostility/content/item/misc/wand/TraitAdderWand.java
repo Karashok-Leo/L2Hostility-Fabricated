@@ -102,8 +102,8 @@ public class TraitAdderWand extends BaseWand
         else
             ans = cap.traits.compute(trait, TraitAdderWand::increase);
         int val = ans == null ? 0 : ans;
-        trait.initialize(entity, val);
-        trait.postInit(entity, val);
+        trait.initialize(cap, entity, val);
+        trait.postInit(cap, entity, val);
         cap.sync();
         entity.setHealth(entity.getMaxHealth());
         player.sendMessage(LHTexts.MSG_SET_TRAIT.get(trait.getName(), entity.getDisplayName(), val));

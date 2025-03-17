@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.common;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.entity.fireball.HostilityFireballEntity;
 import karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
@@ -43,7 +44,7 @@ public class GrenadeTrait extends IntervalTrait
     }
 
     @Override
-    public void onHurt(int level, LivingEntity entity, LivingHurtEvent event)
+    public void onHurt(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         if (event.getSource().isIn(DamageTypeTags.IS_EXPLOSION))
             event.setCanceled(true);

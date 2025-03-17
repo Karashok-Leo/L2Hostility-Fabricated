@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.trait.common;
 
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHEffects;
@@ -21,7 +22,7 @@ public class RegenTrait extends MobTrait
     }
 
     @Override
-    public void serverTick(LivingEntity mob, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
         if (mob.age % 20 == 0)
             mob.heal((float) (mob.getMaxHealth() * LHConfig.common().traits.regen * level));

@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.trait.goals;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.legendary.LegendaryTrait;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
@@ -68,7 +69,7 @@ public class EnderTrait extends LegendaryTrait
     }
 
     @Override
-    public void serverTick(LivingEntity mob, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
         int duration = LHConfig.common().traits.teleportDuration;
         int r = LHConfig.common().traits.teleportRange;
@@ -97,7 +98,7 @@ public class EnderTrait extends LegendaryTrait
     }
 
     @Override
-    public void onAttacked(int level, LivingEntity entity, LivingAttackEvent event)
+    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&

@@ -295,27 +295,27 @@ public class LHTraits
                         new DementorTrait(),
                         120, 50, 1, 150)
                 .addEN()
-                .addENDesc("Immune to physical damage. Damage bypass armor and shield.")
+                .addENDesc("Immune to physical damage with a %ss cooldown. Damage bypass armor and shield with a %ss cooldown.")
                 .addZH("摄魂")
-                .addZHDesc("免疫物理伤害，伤害穿透护甲和盾牌")
+                .addZHDesc("免疫物理伤害，冷却%s秒。伤害穿透护甲和盾牌，冷却%s秒")
                 .register();
         DISPELL = Entry.of(
                         "dispell",
                         new DispellTrait(),
                         100, 50, 3, 150)
                 .addEN()
-                .addENDesc("Immune to magic damage. Damage bypass magical protections. Randomly picks %s enchanted equipment and disable enchantments on them for %s seconds.")
+                .addENDesc("Immune to magic damage with a %ss cooldown. Damage bypass magical protections with a %ss cooldown. Randomly picks up to %s enchanted equipment and disable enchantments on them for %s seconds, with a %ss cooldown.")
                 .addZH("破魔")
-                .addZHDesc("免疫魔法伤害。伤害穿透魔法保护。攻击时随机选中%s个附魔的装备并将其附魔封印%s秒")
+                .addZHDesc("免疫魔法伤害，冷却%s秒。伤害穿透魔法保护，冷却%s秒。攻击时随机选中最多%s个附魔的装备并将其附魔封印%s秒，冷却%s秒")
                 .register();
         UNDYING = Entry.of(
                         "undying",
                         new UndyingTrait(),
-                        150, 100, 1, 150)
+                        150, 100, 5, 150)
                 .addEN()
-                .addENDesc("Mob will heal to full health every time it dies.")
+                .addENDesc("Mob will heal to full health when it dies, up to %s times.")
                 .addZH("不死")
-                .addZHDesc("怪物死亡时满血复活")
+                .addZHDesc("怪物死亡时满血复活，最多%s次")
                 .addBlacklist(LHTags.SEMIBOSS)
                 .register();
         ENDER = Entry.of(
@@ -376,9 +376,9 @@ public class LHTraits
                         new RagnarokTrait(),
                         200, 50, 3, 600)
                 .addEN()
-                .addENDesc("When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal.")
+                .addENDesc("When hit target, randomly picks up to %s equipments/trinkets and seal them with a %ss cooldown, which takes %ss to unseal.")
                 .addZH("诸神黄昏")
-                .addZHDesc("击中目标时，随机选中%s个装备/饰品，并封印它们。右键使用%s秒来解封")
+                .addZHDesc("击中目标时，随机选中最多%s个装备/饰品，并封印它们，冷却%s秒。右键使用被封印物品%s秒以解封")
                 .register();
         WEAKNESS = Entry.of(
                         "weakness",
