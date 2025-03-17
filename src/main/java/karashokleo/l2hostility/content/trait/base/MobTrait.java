@@ -90,6 +90,11 @@ public class MobTrait implements ItemConvertible
         return allow(le, Integer.MAX_VALUE, TraitManager.getMaxLevel() + 1);
     }
 
+    public boolean compatibleWith(MobTrait trait, int lv)
+    {
+        return true;
+    }
+
     public void initialize(LivingEntity mob, int level)
     {
     }

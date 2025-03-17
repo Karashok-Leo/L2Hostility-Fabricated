@@ -133,10 +133,24 @@ public class TraitGenerator
             int rank = Math.min(max, old + rand.nextInt(level / cost) + 1);
             if (rank <= old)
                 continue;
+
+            boolean compatible = traits
+                    .keySet()
+                    .stream()
+                    .allMatch(trait ->
+                    {
+                        int lv = traits.get(trait);
+                        return e.compatibleWith(trait, lv) && trait.compatibleWith(e, rank);
+                    });
+            if (!compatible)
+                continue;
+
             setRank(e, rank);
             level -= (rank - old) * cost;
+
             if (traits.size() >= traitCountCap)
                 break;
+
             if (!ins.isFullChance() &&
                 rand.nextDouble() < LHConfig.common().scaling.globalTraitSuppression)
                 break;
