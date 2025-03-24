@@ -259,8 +259,6 @@ public class LHTraits
                 .addENDesc("After attacked, it will attempt to perform a counter strike.")
                 .addZH("反击")
                 .addZHDesc("被攻击后会试图冲刺反击")
-                .addWhitelist(EntityType.WARDEN)
-                .addWhitelist(LHTags.MELEE_WEAPON_TARGET)
                 .register();
         GRAVITY = Entry.of(
                         "gravity",
@@ -336,12 +334,7 @@ public class LHTraits
                 .addENDesc("Mob will push away entities hostile to it within %s blocks, and immune to projectiles.")
                 .addZH("排斥")
                 .addZHDesc("怪物会推开%s格内对自己有敌意的生物，并且免疫弹射物")
-                .addWhitelist(
-                        EntityType.SKELETON, EntityType.STRAY,
-                        EntityType.PILLAGER, EntityType.EVOKER, EntityType.WITCH,
-                        EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
-                        EntityType.WITHER
-                )
+                .addWhitelist(LHTags.RANGED_ENEMY)
                 .register();
         PULLING = Entry.of(
                         "pulling",
@@ -351,7 +344,7 @@ public class LHTraits
                 .addENDesc("Mob will pull entities hostile to it within %s blocks.")
                 .addZH("吸引")
                 .addZHDesc("怪物会吸引%s格内对自己有敌意的生物")
-                .addWhitelist(LHTags.MELEE_WEAPON_TARGET)
+                .addBlacklist(LHTags.RANGED_ENEMY)
                 .register();
         REPRINT = Entry.of(
                         "reprint",
@@ -434,6 +427,7 @@ public class LHTraits
                         25, 50, 3, 40)
                 .addEN("Levitater")
                 .addZH("升空")
+                .addWhitelist(LHTags.RANGED_ENEMY)
                 .addTag(LHTags.POTION)
                 .register();
         SOUL_BURNER = Entry.of(

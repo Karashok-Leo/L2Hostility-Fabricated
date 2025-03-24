@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:blaze",
+    "minecraft:ghast",
+    "minecraft:shulker",
+    "minecraft:pillager",
+    "minecraft:evoker",
+    "minecraft:witch",
+    "minecraft:guardian",
+    "minecraft:elder_guardian",
+    "minecraft:wither",
+    "#l2hostility:ranged_weapon_target"
+  ]
+}

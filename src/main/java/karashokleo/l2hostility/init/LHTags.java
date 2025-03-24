@@ -60,6 +60,7 @@ public class LHTags
     public static final TagKey<EntityType<?>> ARMOR_TARGET = createEntityTag("armor_target");
     public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
     public static final TagKey<EntityType<?>> RANGED_WEAPON_TARGET = createEntityTag("ranged_weapon_target");
+    public static final TagKey<EntityType<?>> RANGED_ENEMY = createEntityTag("ranged_enemy");
 
     public static void init()
     {
@@ -120,6 +121,14 @@ public class LHTags
         entityTypeTags.getOrCreateContainer(RANGED_WEAPON_TARGET)
                 .add(
                         EntityType.SKELETON, EntityType.STRAY
+                );
+        entityTypeTags.getOrCreateContainer(RANGED_ENEMY)
+                .addTag(RANGED_WEAPON_TARGET)
+                .add(
+                        EntityType.BLAZE, EntityType.GHAST, EntityType.SHULKER,
+                        EntityType.PILLAGER, EntityType.EVOKER, EntityType.WITCH,
+                        EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
+                        EntityType.WITHER
                 );
         LHGenerators.STATUS_EFFECT_TAGS.getOrCreateContainer(WRATH_INVULNERABILITY)
                 .add(

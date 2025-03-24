@@ -43,6 +43,11 @@
     - 通过词条物品或者词条本身(如嗜魔/生长)添加的词条不受影响
     - 当佩戴深渊王座时无数量限制
 - 词条兼容性方法(无法外部配置)
+- 部分词条的黑白名单不同
+    - 反击：白名单从Warden和近战武器持有者(`l2hostility:melee_weapon_target`)改为无白名单
+    - 排斥：白名单改为远程敌人(`l2hostility:ranged_enemy`)，包括原白名单和烈焰人、恶魂、潜影贝
+    - 吸引：白名单近战武器持有者(`l2hostility:melee_weapon_target`)改为黑名单远程敌人(`l2hostility:ranged_enemy`)
+    - 升空：白名单改为远程敌人(`l2hostility:ranged_enemy`)
 
 ## 尚未实现的内容 (按优先级排序)
 
