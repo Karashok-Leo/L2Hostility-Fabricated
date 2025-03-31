@@ -240,13 +240,13 @@ public class CommonConfig implements ConfigData
         @Comment("Reflect factor per level for Reflect. 0.5 means +50% extra damage")
         public double reflectFactor = 0.3;
         @Comment("Reflect damage will not exceed target's max health * reflectLimit. reflectLimit = 0 means no limit")
-        public double reflectLimit = 0.6;
-        @Comment("Cooldown in ticks for Dispell immunity to physical damage")
-        public int dementorImmuneCooldown = 100;
+        public double reflectLimit = 1.0;
+        @Comment("Immune factor for Dementor. 1.0 means 100% immunity")
+        public double dementorImmuneFactor = 0.9;
         @Comment("Cooldown in ticks for Dementor to bypass armor and shield")
         public int dementorBypassCooldown = 100;
-        @Comment("Cooldown in ticks for Dispell immunity to magic damage")
-        public int dispellImmuneCooldown = 100;
+        @Comment("Immune factor for Dispell. 1.0 means 100% immunity")
+        public double dispellImmuneFactor = 0.9;
         @Comment("Cooldown in ticks for Dispell to bypass magic protection")
         public int dispellBypassCooldown = 100;
         @Comment("""
@@ -335,10 +335,10 @@ public class CommonConfig implements ConfigData
         public int pullingRange = 10;
         @Comment("Pulling force strength, default is 0.2")
         public double pullingStrength = 0.2;
-        @Comment("Reprint damage factor per enchantment point")
+        @Comment("Reprint damage factor per enchantment level")
         public double reprintDamage = 0.02;
-        @Comment("Reprint will gain Void Touch 20 and Vanishing Curse when it hits a mob with max Enchantment level of X or higher")
-        public int reprintBypass = 10;
+        @Comment("Reprint will gain Vanishing Curse when total level of enchantments of each item is higher than this threshold")
+        public int reprintVanishThreshold = 20;
 
         @Comment("""
                 Trait toggle
@@ -439,6 +439,8 @@ public class CommonConfig implements ConfigData
 //            public double mobTypeBonus = 1D;
             @Comment("Damage factor for lifeSync (damage to user per durability cost)")
             public double lifeSyncFactor = 1;
+            @Comment("Healing reduction factor per level for curse effect")
+            public double curseFactor = 0.2;
         }
     }
 

@@ -283,9 +283,9 @@ public class LHEnchantments
                         new CurseBladeEnchantment()
                 )
                 .addEN()
-                .addENDesc("Apply cursed effect to target. Higher levels have longer duration.")
+                .addENDesc("Apply cursed effect to target. Higher levels have longer duration and reduce healing by a higher percentage.")
                 .addZH("诅咒之刃")
-                .addZHDesc("对敌人施加诅咒效果。更高级的附魔延长效果时间")
+                .addZHDesc("对敌人施加诅咒效果。更高级的附魔延长效果时间且减疗比例更高")
                 .register();
 
         ICE_THORN = Entry.of(

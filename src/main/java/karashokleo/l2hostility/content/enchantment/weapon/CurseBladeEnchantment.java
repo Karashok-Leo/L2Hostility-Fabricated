@@ -21,6 +21,7 @@ public class CurseBladeEnchantment extends AbstractBladeEnchantment
     @Override
     protected StatusEffectInstance getEffect(int level)
     {
-        return new StatusEffectInstance(LHEffects.CURSE, LHConfig.common().complements.properties.curseEnchantDuration << (level - 1));
+        // 1~3 level enchantment apply 2~4 amplifier (3~5 level) curse
+        return new StatusEffectInstance(LHEffects.CURSE, LHConfig.common().complements.properties.curseEnchantDuration << (level - 1), level + 1);
     }
 }

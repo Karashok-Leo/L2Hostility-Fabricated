@@ -26,7 +26,7 @@ public class LHDamageTypes
                 "%s was killed by killer aura",
                 "%s was killed by %s's killer aura",
                 "%s被杀戮光环杀死了",
-                "%s被%s被杀戮光环杀死了",
+                "%s被%s的杀戮光环杀死了",
                 DamageTypeTags.BYPASSES_ARMOR,
                 LHTags.MAGIC
         );

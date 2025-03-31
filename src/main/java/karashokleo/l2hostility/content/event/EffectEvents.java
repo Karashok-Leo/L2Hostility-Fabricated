@@ -4,6 +4,7 @@ import io.github.fabricators_of_create.porting_lib.core.event.BaseEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.effect.CleanseEffect;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTags;
@@ -12,9 +13,11 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.MathHelper;
 
 public class EffectEvents
 {
@@ -47,9 +50,18 @@ public class EffectEvents
         LivingHealCallback.EVENT.register(event ->
         {
             LivingEntity entity = event.getEntity();
-            if (entity.hasStatusEffect(LHEffects.CURSE))
-                return false;
+
+            // Curse
+            StatusEffectInstance curseEffect = entity.getStatusEffect(LHEffects.CURSE);
+            int curseLv = curseEffect == null ? 0 : curseEffect.getAmplifier() + 1;
+            float factor = (float) MathHelper.clamp(
+                    1 - curseLv * LHConfig.common().complements.properties.curseFactor,
+                    0, 1
+            );
             float amount = event.getAmount();
+            amount *= factor;
+
+            // Life Mending
             for (ItemStack stack : TrinketCompat.getItems(entity, e -> e.hasEnchantments() && e.isDamaged()))
             {
                 int lv = EnchantmentHelper.getLevel(LHEnchantments.LIFE_MENDING, stack);

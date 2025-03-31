@@ -81,10 +81,12 @@ public class LHPotions
                 .build();
 
         CURSE = new Entry("curse", LHEffects.CURSE)
-                .register(3600, 0, PotionEffectType.NORMAL)
-                .register(9600, 0, PotionEffectType.LONG)
+                .register(3600, 3, PotionEffectType.NORMAL)
+                .register(9600, 3, PotionEffectType.LONG)
+                .register(1800, 4, PotionEffectType.STRONG)
                 .recipe(ComplementItems.CURSED_DROPLET)
                 .recipeLong()
+                .recipeStrong()
                 .addEN("Cursed")
                 .addZH("诅咒")
                 .build();
