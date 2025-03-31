@@ -10,7 +10,7 @@
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "The number of traits a mob can have depends on level and trait ranks. When the maximum trait rank is low while mob level is high, the mob would have a lot of traits. Conversely, if the mob has low level but is allowed to have high rank traits, the mob may have only one trait."
+	  "text": "The number of traits a mob can have depends on the difficulty configurations of the mob and dimension as well as mob level and trait ranks. When the maximum trait rank is low while mob level is high, the mob would have a lot of traits. Conversely, if the mob has low level but is allowed to have high rank traits, the mob may have only one trait."
 	}
   ]
 }

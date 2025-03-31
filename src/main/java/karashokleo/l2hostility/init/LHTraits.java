@@ -166,7 +166,7 @@ public class LHTraits
                 .addEN()
                 .addENDesc("Memorize damage types taken and stack %s%% damage reduction for those damage every time. Memorizes last %s different damage types.")
                 .addZH("适应")
-                .addZHDesc("记忆最近收到的%2$s种伤害。每次受到记忆中的伤害时，对那个伤害叠加%s%%的减伤（无上限）")
+                .addZHDesc("记忆最近收到的%2$s种伤害。每次受到记忆中的伤害时，对那个伤害叠加%s%%的减伤")
                 .register();
         REFLECT = Entry.of(
                         "reflect",
@@ -448,7 +448,7 @@ public class LHTraits
                 .register();
         CURSED = Entry.of(
                         "cursed",
-                        new TargetEffectTrait(lv -> new StatusEffectInstance(LHEffects.CURSE, LHConfig.common().traits.curseTime * lv)),
+                        new TargetEffectTrait(lv -> new StatusEffectInstance(LHEffects.CURSE, LHConfig.common().traits.curseTime * lv, lv + 1)),
                         20, 100, 3, 20)
                 .addEN()
                 .addZH("诅咒")

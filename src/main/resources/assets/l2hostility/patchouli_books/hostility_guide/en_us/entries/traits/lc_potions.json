@@ -10,7 +10,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:cursed",
-	  "text": "This trait allows mobs to apply cursed effect, which prevents healing."
+	  "text": "This trait allows mobs to apply cursed effect, which reduces target's healing amount."
 	},
 	{
 	  "type": "patchouli:spotlight",

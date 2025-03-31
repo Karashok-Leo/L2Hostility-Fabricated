@@ -232,7 +232,9 @@ public class CommonConfig implements ConfigData
         @Comment("Regen rate for Regeneration trait per second per level")
         public double regen = 0.02;
         @Comment("Damage factor for Adaptive. Higher means less reduction")
-        public double adaptFactor = 0.5;
+        public double adaptFactor = 0.7;
+        @Comment("Min damage factor for Adaptive")
+        public double adaptMinFactor = 0.05;
         @Comment("Trigger range for Reflect")
         public double reflectRange = 3;
         @Comment("Allow Reflect to reflect magic damage")

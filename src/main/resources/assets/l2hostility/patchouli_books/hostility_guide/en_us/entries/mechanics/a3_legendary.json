@@ -10,7 +10,7 @@
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "Here are some examples of legendary traits that requires specific mechanics to kill:$(li)Cursed effect is required to kill mobs with Undying trait. Otherwise they will respawn indefinitely.$(li)Magic damage is required to kill mobs with Teleport Trait or Dementor Trait."
+	  "text": "Here are some examples of legendary traits that requires specific mechanics to kill:$(li)Cursed effect is required to kill mobs with Undying trait. Otherwise they will be able to be respawned many times.$(li)Magic damage is required to kill mobs with Teleport Trait or Dementor Trait."
 	}
   ]
 }

@@ -64,7 +64,9 @@ public class AdaptingTrait extends MobTrait
                 this.memory.remove(id);
                 this.memory.add(0, id);
                 int val = this.adaption.compute(id, (k, old) -> old == null ? 1 : old + 1);
-                return Optional.of((float) Math.pow(LHConfig.common().traits.adaptFactor, val - 1));
+                float factor = (float) Math.pow(LHConfig.common().traits.adaptFactor, val - 1);
+                factor = Math.max(factor, (float) LHConfig.common().traits.adaptMinFactor);
+                return Optional.of(factor);
             } else
             {
                 this.memory.add(0, id);
