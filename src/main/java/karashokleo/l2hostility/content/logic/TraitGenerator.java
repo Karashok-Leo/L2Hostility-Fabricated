@@ -1,12 +1,11 @@
 package karashokleo.l2hostility.content.logic;
 
+import karashokleo.l2hostility.api.event.ModifyTraitCountCapCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.data.config.EntityConfig;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTraits;
-import net.fabricmc.fabric.api.event.Event;
-import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.random.Random;
 
@@ -19,18 +18,6 @@ public class TraitGenerator
     public static void generateTraits(MobDifficulty diff, LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins)
     {
         new TraitGenerator(diff, le, lv, traits, ins).generate();
-    }
-
-    public Event<ModifyTraitCountCapCallback> MODIFY_TRAIT_COUNT_CAP = EventFactory.createArrayBacked(ModifyTraitCountCapCallback.class, listeners -> (cap, difficulty, entity, level) ->
-    {
-        for (ModifyTraitCountCapCallback listener : listeners)
-            cap = listener.modifyTraitCountCap(cap, difficulty, entity, level);
-        return cap;
-    });
-
-    public interface ModifyTraitCountCapCallback
-    {
-        int modifyTraitCountCap(int traitCountCap, MobDifficulty difficulty, LivingEntity entity, int level);
     }
 
     private final MobDifficulty difficulty;
@@ -49,7 +36,7 @@ public class TraitGenerator
         this.difficulty = diff;
         this.entity = entity;
         this.mobLevel = mobLevel;
-        this.traitCountCap = MODIFY_TRAIT_COUNT_CAP.invoker().modifyTraitCountCap(ins.traitCountCap, diff, entity, mobLevel);
+        this.traitCountCap = ModifyTraitCountCapCallback.EVENT.invoker().modifyTraitCountCap(ins.traitCountCap, diff, entity, mobLevel);
         this.ins = ins;
         this.traits = traits;
 

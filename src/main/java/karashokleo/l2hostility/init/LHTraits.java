@@ -173,9 +173,9 @@ public class LHTraits
                         new ReflectTrait(),
                         80, 50, 5, 100)
                 .addEN()
-                .addENDesc("Reflect damage within %s blocks as %s%% magical damage")
+                .addENDesc("Reflect damage within %s blocks as %s%% magical damage, up to %s%% of the attacker's max health.")
                 .addZH("反射")
-                .addZHDesc("将%s格内的伤害以%s%%魔法伤害的形式反射")
+                .addZHDesc("将%s格内的伤害以%s%%魔法伤害的形式反射，上限为攻击者最大血量的%s%%")
                 .register();
         SHULKER = Entry.of(
                         "shulker",
@@ -295,7 +295,7 @@ public class LHTraits
                 .addEN()
                 .addENDesc("Immune to physical damage with a %ss cooldown. Damage bypass armor and shield with a %ss cooldown.")
                 .addZH("摄魂")
-                .addZHDesc("免疫物理伤害，冷却%s秒。伤害穿透护甲和盾牌，冷却%s秒")
+                .addZHDesc("免疫%s%%的物理伤害。伤害穿透护甲和盾牌，冷却%s秒")
                 .register();
         DISPELL = Entry.of(
                         "dispell",
@@ -304,7 +304,7 @@ public class LHTraits
                 .addEN()
                 .addENDesc("Immune to magic damage with a %ss cooldown. Damage bypass magical protections with a %ss cooldown. Randomly picks up to %s enchanted equipment and disable enchantments on them for %s seconds, with a %ss cooldown.")
                 .addZH("破魔")
-                .addZHDesc("免疫魔法伤害，冷却%s秒。伤害穿透魔法保护，冷却%s秒。攻击时随机选中最多%s个附魔的装备并将其附魔封印%s秒，冷却%s秒")
+                .addZHDesc("免疫%s%%的魔法伤害。伤害穿透魔法保护，冷却%s秒。攻击时随机选中最多%s个附魔的装备并将其附魔封印%s秒，冷却%s秒")
                 .register();
         UNDYING = Entry.of(
                         "undying",
@@ -351,9 +351,9 @@ public class LHTraits
                         new ReprintTrait(),
                         100, 100, 1, 100)
                 .addEN()
-                .addENDesc("Mob will copy target enchantments, and deal %s more damage per enchantment point")
+                .addENDesc("Mob will copy target enchantments, and deal %s%% more damage per enchantment level")
                 .addZH("复印")
-                .addZHDesc("目标装备附魔点数每有1点，怪物伤害提升%s。近战复制所有装备附魔。x级附魔提供2^x附魔点数")
+                .addZHDesc("目标装备附魔每有1级，怪物伤害提升%s%%。近战复制所有装备附魔。")
                 .register();
         KILLER_AURA = Entry.of(
                         "killer_aura",

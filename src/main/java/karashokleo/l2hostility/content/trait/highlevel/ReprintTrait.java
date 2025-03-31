@@ -5,7 +5,6 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.traits.ReprintHandler;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
-import karashokleo.l2hostility.init.LHEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
@@ -28,8 +27,8 @@ public class ReprintTrait extends MobTrait
     @Override
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
+        boolean doReprint = event.getSource().getSource() == entity;
         long total = 0;
-        int maxLv = 0;
         for (var slot : EquipmentSlot.values())
         {
             ItemStack dst = entity.getEquippedStack(slot);
@@ -38,38 +37,44 @@ public class ReprintTrait extends MobTrait
             for (var e : targetEnch.entrySet())
             {
                 int lv = e.getValue();
-                maxLv = Math.max(maxLv, lv);
-                if (lv >= 30) total = -1;
-                else if (total >= 0) total += 1L << (lv - 1);
+                total += lv;
             }
-            if (event.getSource().getSource() == entity)
-                ReprintHandler.reprint(dst, src);
-        }
-        int bypass = LHConfig.common().traits.reprintBypass;
-        if (maxLv >= bypass)
-        {
-            ItemStack weapon = entity.getEquippedStack(EquipmentSlot.MAINHAND);
-            if (!weapon.isEmpty() &&
-                (weapon.hasEnchantments() || weapon.isEnchantable()))
+            if (doReprint)
             {
-                var map = EnchantmentHelper.get(weapon);
-                if (LHEnchantments.VOID_TOUCH.isAcceptableItem(weapon))
-                    map.compute(LHEnchantments.VOID_TOUCH, (k, v) -> v == null ? 20 : Math.max(v, 20));
-                map.compute(Enchantments.VANISHING_CURSE, (k, v) -> v == null ? 1 : Math.max(v, 1));
-                EnchantmentHelper.set(map, weapon);
+                ReprintHandler.reprint(dst, src);
             }
+        }
+        int threshold = LHConfig.common().traits.reprintVanishThreshold;
+
+        for (var slot : EquipmentSlot.values())
+        {
+            ItemStack equipped = event.getEntity().getEquippedStack(slot);
+            if (equipped.isEmpty() ||
+                !equipped.isEnchantable() ||
+                !equipped.hasEnchantments())
+                continue;
+            var totalLv = EnchantmentHelper.get(equipped)
+                    .values()
+                    .stream()
+                    .mapToInt(v -> v)
+                    .sum();
+            if (totalLv <= threshold)
+                continue;
+
+            var map = EnchantmentHelper.get(equipped);
+            map.compute(Enchantments.VANISHING_CURSE, (k, v) -> v == null ? 1 : Math.max(v, 1));
+            EnchantmentHelper.set(map, equipped);
         }
 
-        float factor = total >= 0 ? total : (float) Math.pow(2, maxLv - 1);
-        event.setAmount(event.getAmount() * 1 + (float) (LHConfig.common().traits.reprintDamage * factor));
+        float factor = 1 + (float) (LHConfig.common().traits.reprintDamage * total);
+        event.setAmount(event.getAmount() * factor);
     }
 
     @Override
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        mapLevel(i -> Text.literal(Math.round(LHConfig.common().traits.reprintDamage * i * 100) + "%")
-                                .formatted(Formatting.AQUA)))
-                .formatted(Formatting.GRAY));
+                mapLevel(i -> Text.literal(Math.round(LHConfig.common().traits.reprintDamage * i * 100) + "").formatted(Formatting.AQUA))
+        ).formatted(Formatting.GRAY));
     }
 }

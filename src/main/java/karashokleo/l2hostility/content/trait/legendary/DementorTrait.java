@@ -1,7 +1,8 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
-import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import karashokleo.l2hostility.api.event.ModifyDementorImmuneFactorCallback;
 import karashokleo.l2hostility.content.component.mob.CapStorageData;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.init.LHConfig;
@@ -40,27 +41,23 @@ public class DementorTrait extends LegendaryTrait
     }
 
     @Override
-    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
+    public void onDamaged(MobDifficulty difficulty, LivingEntity entity, int level, LivingDamageEvent event)
     {
-        var data = difficulty.getOrCreateData(getId(), Data::new);
-        if (data.immuneCooldown > 0) return;
-
         DamageSource source = event.getSource();
-        if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-            !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
-            !source.isIn(LHTags.MAGIC))
-        {
-            data.immuneCooldown = LHConfig.common().traits.dementorImmuneCooldown;
-            event.setCanceled(true);
-        }
+        if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
+            source.isIn(DamageTypeTags.BYPASSES_EFFECTS) ||
+            source.isIn(LHTags.MAGIC))
+            return;
+        float amount = event.getAmount();
+        double factor = LHConfig.common().traits.dementorImmuneFactor;
+        factor = ModifyDementorImmuneFactorCallback.EVENT.invoker().modifyDementorImmuneFactor(difficulty, entity, level, source, amount, factor);
+        event.setAmount((float) (amount * (1 - factor)));
     }
 
     @Override
     public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
         var data = difficulty.getOrCreateData(getId(), Data::new);
-        if (data.immuneCooldown > 0)
-            data.immuneCooldown--;
         if (data.bypassCooldown > 0)
             data.bypassCooldown--;
     }
@@ -69,7 +66,7 @@ public class DementorTrait extends LegendaryTrait
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                Text.literal(LHConfig.common().traits.dementorImmuneCooldown / 20 + "")
+                Text.literal((int) Math.round(LHConfig.common().traits.dispellImmuneFactor * 100) + "")
                         .formatted(Formatting.AQUA),
                 Text.literal(LHConfig.common().traits.dementorBypassCooldown / 20 + "")
                         .formatted(Formatting.AQUA)
@@ -79,8 +76,6 @@ public class DementorTrait extends LegendaryTrait
     @SerialClass
     public static class Data extends CapStorageData
     {
-        @SerialClass.SerialField
-        public int immuneCooldown = 0;
         @SerialClass.SerialField
         public int bypassCooldown = 0;
     }
