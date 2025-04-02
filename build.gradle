@@ -56,7 +56,7 @@ dependencies {
     modLocalRuntime "dev.emi:emi-fabric:${project.emi_version}"
 
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
-//    modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+    modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 
     modApi "com.terraformersmc:modmenu:${project.mod_menu_version}"
 

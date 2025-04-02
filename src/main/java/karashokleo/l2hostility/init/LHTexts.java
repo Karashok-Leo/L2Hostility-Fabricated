@@ -98,6 +98,7 @@ public enum LHTexts
     INFO_SECTION_DISTANCE_LEVEL("info.section_detail.distance", "Distance bonus: %s", "距离加成: %s", 1),
     BOSS_EVENT("boss_event", "Hostility Clearing Progress: %s/%s", "恶意清除进度：%s/%s", 2),
     LOOT_TITLE("compat.loot_title", "Trait Loot", "恶意词条掉落", 0),
+    TRAIT_TITLE("compat.trait_title", "Trait Generation", "恶意词条生成", 0),
     LOOT_CHANCE("compat.loot_chance", "%s chance for %s rank %s", "%3$s阶%2$s词条%1$s概率掉落", 3),
     LOOT_MIN_LEVEL("compat.min_level", "Drops on mobs with level %s or higher", "等级%s及以上的怪物才会掉落", 1),
     LOOT_MIN_HEALTH("compat.min_health", "Drops on mobs with %s or higher max health", "总血量在%s及以上的怪物才会掉落", 1),

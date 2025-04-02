@@ -1,7 +1,9 @@
 package karashokleo.l2hostility.compat.rei;
 
 import karashokleo.l2hostility.L2Hostility;
-import karashokleo.l2hostility.compat.loot.ITraitLootRecipe;
+import karashokleo.l2hostility.compat.shared.ITraitLootRecipe;
+import karashokleo.l2hostility.compat.shared.LivingEntityWrapper;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.loot.modifier.EnvyLootModifier;
 import karashokleo.l2hostility.content.loot.modifier.GluttonyLootModifier;
 import karashokleo.l2hostility.content.recipe.BurntRecipe;
@@ -21,12 +23,14 @@ public class REICompat implements REIClientPlugin
 {
     public static final CategoryIdentifier<REILootDisplay> LOOT = CategoryIdentifier.of(L2Hostility.MOD_ID, "loot");
     public static final CategoryIdentifier<REIBurntDisplay> BURNT = CategoryIdentifier.of(L2Hostility.MOD_ID, "burnt");
+    public static final CategoryIdentifier<REITraitDisplay> TRAIT = CategoryIdentifier.of(L2Hostility.MOD_ID, "trait");
 
     @Override
     public void registerCategories(CategoryRegistry registry)
     {
         registry.add(new REILootCategory());
         registry.add(new REIBurntCategory());
+        registry.add(new REITraitCategory());
         registry.addWorkstations(
                 BURNT,
                 EntryStacks.of(Items.LAVA_BUCKET),
@@ -53,5 +57,7 @@ public class REICompat implements REIClientPlugin
         }
         for (BurntRecipe recipe : registry.getRecipeManager().listAllOfType(LHRecipes.BURNT_RECIPE_TYPE))
             registry.add(new REIBurntDisplay(recipe));
+        LivingEntityWrapper.streamRegistry(MobDifficulty::validate, 2)
+                .forEach(entityWrapper -> registry.add(new REITraitDisplay(entityWrapper)));
     }
 }

@@ -4,7 +4,7 @@ import dev.xkmc.l2serial.network.SerialPacketS2C;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import io.github.fabricators_of_create.porting_lib.loot.IGlobalLootModifier;
 import io.github.fabricators_of_create.porting_lib.loot.LootModifierManager;
-import karashokleo.l2hostility.compat.loot.ITraitLootRecipe;
+import karashokleo.l2hostility.compat.shared.ITraitLootRecipe;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;

@@ -1,6 +1,6 @@
 package karashokleo.l2hostility.compat.rei;
 
-import karashokleo.l2hostility.compat.loot.ITraitLootRecipe;
+import karashokleo.l2hostility.compat.shared.ITraitLootRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;

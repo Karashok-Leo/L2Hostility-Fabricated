@@ -13,6 +13,7 @@ import karashokleo.l2hostility.init.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
@@ -71,6 +72,13 @@ public class MobDifficulty
         this.pos = pos;
         this.inherited = inherited;
         this.ticking = ticking;
+    }
+
+    public static boolean validate(Entity entity)
+    {
+        return (entity.getType().isIn(LHTags.WHITELIST) ||
+                (entity instanceof Monster &&
+                 !entity.getType().isIn(LHTags.BLACKLIST)));
     }
 
     public static Optional<MobDifficulty> get(MobEntity mob)

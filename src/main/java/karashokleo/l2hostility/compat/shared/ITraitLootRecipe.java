@@ -1,4 +1,4 @@
-package karashokleo.l2hostility.compat.loot;
+package karashokleo.l2hostility.compat.shared;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;

@@ -2,7 +2,7 @@ package karashokleo.l2hostility.content.loot.modifier;
 
 import io.github.fabricators_of_create.porting_lib.loot.LootModifier;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import karashokleo.l2hostility.compat.loot.ITraitLootRecipe;
+import karashokleo.l2hostility.compat.shared.ITraitLootRecipe;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;

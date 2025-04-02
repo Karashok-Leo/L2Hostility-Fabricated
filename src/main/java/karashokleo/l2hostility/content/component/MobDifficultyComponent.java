@@ -6,9 +6,7 @@ import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
 import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
-import karashokleo.l2hostility.init.LHTags;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.Monster;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,15 +23,8 @@ public class MobDifficultyComponent implements ServerTickingComponent, AutoSynce
     {
         this.mob = mob;
         this.diff = null;
-        if (validate())
+        if (MobDifficulty.validate(this.mob))
             this.diff = new MobDifficulty(mob);
-    }
-
-    private boolean validate()
-    {
-        return (this.mob.getType().isIn(LHTags.WHITELIST) ||
-                (this.mob instanceof Monster &&
-                 !this.mob.getType().isIn(LHTags.BLACKLIST)));
     }
 
     @Override
@@ -47,7 +38,7 @@ public class MobDifficultyComponent implements ServerTickingComponent, AutoSynce
     public void readFromNbt(@NotNull NbtCompound tag)
     {
         this.diff = null;
-        if (validate())
+        if (MobDifficulty.validate(this.mob))
         {
             this.diff = TagCodec.fromTag(tag, MobDifficulty.class, new MobDifficulty(this.mob), serialField -> true);
             if (this.diff != null)
