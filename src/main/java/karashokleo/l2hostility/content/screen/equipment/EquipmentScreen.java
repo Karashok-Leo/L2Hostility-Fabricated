@@ -18,14 +18,14 @@ public class EquipmentScreen extends BaseInventoryScreen<EquipmentScreenHandler>
         var sr = handler.sprite.get().getRenderer(this);
         sr.start(context);
         if (handler.getAsPredSlot("hand", 0, 1).getStack().isEmpty())
-            sr.draw(context, "hand", "altas_shield", 1, 19);
+            sr.draw(context, "hand", "altas_shield", 0, 18);
         if (handler.getAsPredSlot("armor", 0, 0).getStack().isEmpty())
-            sr.draw(context, "armor", "altas_helmet", 1, 1);
+            sr.draw(context, "armor", "altas_helmet", 0, 0);
         if (handler.getAsPredSlot("armor", 0, 1).getStack().isEmpty())
-            sr.draw(context, "armor", "altas_chestplate", 1, 1 + 18);
+            sr.draw(context, "armor", "altas_chestplate", 0, 18);
         if (handler.getAsPredSlot("armor", 0, 2).getStack().isEmpty())
-            sr.draw(context, "armor", "altas_leggings", 1, 1 + 18 * 2);
+            sr.draw(context, "armor", "altas_leggings", 0, 18 * 2);
         if (handler.getAsPredSlot("armor", 0, 3).getStack().isEmpty())
-            sr.draw(context, "armor", "altas_boots", 1, 1 + 18 * 3);
+            sr.draw(context, "armor", "altas_boots", 0, 18 * 3);
     }
 }
