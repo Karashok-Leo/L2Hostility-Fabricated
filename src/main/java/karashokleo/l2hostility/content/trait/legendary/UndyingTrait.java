@@ -29,17 +29,14 @@ public class UndyingTrait extends LegendaryTrait
         super(Formatting.DARK_BLUE);
     }
 
-    // return true to allow death
-    public static boolean tryTriggerUndying(LivingEntity entity, DamageSource source, float amount)
+    @Override
+    public boolean allowDeath(MobDifficulty difficulty, LivingEntity entity, int level, DamageSource source, float amount)
     {
         if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY)) return true;
-        var diff = MobDifficulty.get(entity);
-        if (diff.isEmpty()) return true;
-        if (diff.get().hasTrait(LHTraits.SPLIT)) return true;
-        int level = diff.get().getTraitLevel(LHTraits.UNDYING);
+        if (difficulty.hasTrait(LHTraits.SPLIT)) return true;
         if (level > 0 && validTarget(entity))
         {
-            var data = diff.get().getOrCreateData(LHTraits.UNDYING.getId(), Data::new);
+            var data = difficulty.getOrCreateData(LHTraits.UNDYING.getId(), Data::new);
             if (data.times >= level * LHConfig.common().traits.undyingTimes)
                 return true;
 

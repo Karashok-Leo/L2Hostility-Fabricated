@@ -6,6 +6,7 @@ import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.init.LHEffects;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -21,6 +22,7 @@ public class GravityTrait extends AuraEffectTrait
     {
         Entity attacker = event.getSource().getAttacker();
         if (!(attacker instanceof LivingEntity living)) return;
+        if (living instanceof EnderDragonEntity) return;
         if (living.isOnGround()) return;
         if (living.isSpectator()) return;
         if (living instanceof PlayerEntity player &&

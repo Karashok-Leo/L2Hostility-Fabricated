@@ -14,9 +14,7 @@ import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.event.DamageSourceCreateCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 
@@ -65,14 +63,24 @@ public class TrinketEvents
                     listener.onDamaged(e, target, event);
         });
 
-        // 色欲诅咒击杀必掉装备
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) ->
         {
-            if (!(entity instanceof MobEntity mob)) return;
-            var credit = mob.getPrimeAdversary();
-            if (credit != null && TrinketCompat.hasItemInTrinket(credit, TrinketItems.CURSE_LUST))
-                for (var e : EquipmentSlot.values())
-                    mob.setEquipmentDropChance(e, 1);
+            for (var e : TrinketCompat.getItems(entity, e -> e.getItem() instanceof DamageListenerTrinket))
+                if (e.getItem() instanceof DamageListenerTrinket listener)
+                    listener.onDeath(e, entity, source);
+            if (!(source.getAttacker() instanceof LivingEntity attacker)) return;
+            for (var e : TrinketCompat.getItems(attacker, e -> e.getItem() instanceof DamageListenerTrinket))
+                if (e.getItem() instanceof DamageListenerTrinket listener)
+                    listener.onKilled(e, attacker, entity, source);
+        });
+
+        ServerLivingEntityEvents.ALLOW_DEATH.register((entity, source, amount) ->
+        {
+            for (var e : TrinketCompat.getItems(entity, e -> e.getItem() instanceof DamageListenerTrinket))
+                if (e.getItem() instanceof DamageListenerTrinket listener &&
+                    !listener.allowDeath(e, entity, source, amount))
+                    return false;
+            return true;
         });
 
         // 尼德霍格之欲掉落

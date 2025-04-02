@@ -262,6 +262,8 @@ public class CommonConfig implements ConfigData
         public int dispellTime = 100;
         @Comment("Duration in seconds to set target on fire by Fiery")
         public int fieryTime = 5;
+        @Comment("When the target has more negative effects than this, the potion traits won't work. 0 means no limit")
+        public int potionTraitMaxEffect = 3;
         @Comment("Duration in ticks for Weakness")
         public int weakTime = 200;
         @Comment("Duration in ticks for Slowness")

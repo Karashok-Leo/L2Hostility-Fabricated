@@ -4,7 +4,6 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEve
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import karashokleo.l2hostility.content.trait.legendary.UndyingTrait;
 import karashokleo.leobrary.damage.api.event.DamageSourceCreateCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.Entity;
@@ -32,8 +31,9 @@ public class TraitEvents
         // applyDamage()尾部
         LivingDamageEvent.DAMAGE.register(TraitEvents::onDamaged);
 
-        ServerLivingEntityEvents.AFTER_DEATH.register(TraitEvents::afterDeath);
-        ServerLivingEntityEvents.ALLOW_DEATH.register(UndyingTrait::tryTriggerUndying);
+        ServerLivingEntityEvents.AFTER_DEATH.register(TraitEvents::onKilled);
+        ServerLivingEntityEvents.AFTER_DEATH.register(TraitEvents::onDeath);
+        ServerLivingEntityEvents.ALLOW_DEATH.register(TraitEvents::allowDeath);
     }
 
     public static void onDamageSourceCreate(RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Entity attacker, @Nullable Vec3d position, DamageSource damageSource)
@@ -89,12 +89,30 @@ public class TraitEvents
         difficulty.traitEvent((k, v) -> k.onDamaged(difficulty, difficulty.owner, v, event));
     }
 
-    public static void afterDeath(LivingEntity entity, DamageSource source)
+    public static void onKilled(LivingEntity entity, DamageSource source)
     {
-        if (entity.getWorld().isClient()) return;
+        var optional = MobDifficulty.get(source.getAttacker());
+        if (optional.isEmpty()) return;
+        MobDifficulty difficulty = optional.get();
+        difficulty.traitEvent((k, v) -> k.onKilled(difficulty, difficulty.owner, v, entity, source));
+    }
+
+    public static void onDeath(LivingEntity entity, DamageSource source)
+    {
         var optional = MobDifficulty.get(entity);
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
         difficulty.traitEvent((k, v) -> k.onDeath(difficulty, entity, v, source));
+    }
+
+    public static boolean allowDeath(LivingEntity entity, DamageSource source, float amount)
+    {
+        var optional = MobDifficulty.get(entity);
+        if (optional.isEmpty()) return true;
+        MobDifficulty difficulty = optional.get();
+        for (var e : difficulty.traits.entrySet())
+            if (!e.getKey().allowDeath(difficulty, entity, e.getValue(), source, amount))
+                return false;
+        return true;
     }
 }

@@ -479,6 +479,7 @@
   "l2hostility.tooltip.self_effect": "怪物获得常驻效果：",
   "l2hostility.tooltip.shift": "按SHIFT显示生成要求",
   "l2hostility.tooltip.target_effect": "怪物攻击将会施加：",
+  "l2hostility.tooltip.target_effect_max": "仅当目标已有的负面效果小于%s种时起效",
   "l2hostility.tooltip.tool.immune": "免疫: ",
   "l2hostility.tooltip.tool.poseidite_armor": "当使用者在水/雨中时，提供额外保护，提升移动/游泳速度，提供潮涌/海豚祝福效果",
   "l2hostility.tooltip.tool.poseidite_tool": "在水/雨中时提升伤害和攻击速度。对水生生物和怕水生物造成更高伤害",

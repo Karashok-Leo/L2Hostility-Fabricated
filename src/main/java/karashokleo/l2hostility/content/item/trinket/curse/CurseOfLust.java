@@ -4,6 +4,10 @@ import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -17,6 +21,14 @@ public class CurseOfLust extends CurseTrinketItem
     public CurseOfLust()
     {
         super();
+    }
+
+    @Override
+    public void onKilled(ItemStack stack, LivingEntity entity, LivingEntity killed, DamageSource source)
+    {
+        if (!(killed instanceof MobEntity mob)) return;
+        for (var e : EquipmentSlot.values())
+            mob.setEquipmentDropChance(e, 1);
     }
 
     @Override

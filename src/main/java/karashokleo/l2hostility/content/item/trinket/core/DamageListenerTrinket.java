@@ -37,4 +37,17 @@ public interface DamageListenerTrinket
     default void onDamaged(ItemStack stack, LivingEntity entity, LivingDamageEvent event)
     {
     }
+
+    default void onKilled(ItemStack stack, LivingEntity entity, LivingEntity killed, DamageSource source)
+    {
+    }
+
+    default void onDeath(ItemStack stack, LivingEntity entity, DamageSource source)
+    {
+    }
+
+    default boolean allowDeath(ItemStack stack, LivingEntity entity, DamageSource source, float amount)
+    {
+        return true;
+    }
 }

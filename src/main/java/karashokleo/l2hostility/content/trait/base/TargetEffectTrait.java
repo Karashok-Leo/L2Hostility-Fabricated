@@ -2,9 +2,11 @@ package karashokleo.l2hostility.content.trait.base;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.text.MutableText;
@@ -26,7 +28,16 @@ public class TargetEffectTrait extends MobTrait
     @Override
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
-        event.getEntity().addStatusEffect(func.apply(level), entity);
+        int maxEffect = LHConfig.common().traits.potionTraitMaxEffect;
+        if (maxEffect <= 0) return;
+        LivingEntity living = event.getEntity();
+        long count = living.getActiveStatusEffects()
+                .keySet()
+                .stream()
+                .filter(effect -> effect.getCategory() == StatusEffectCategory.HARMFUL)
+                .count();
+        if (count >= maxEffect) return;
+        living.addStatusEffect(func.apply(level), entity);
     }
 
     @Override
@@ -46,5 +57,8 @@ public class TargetEffectTrait extends MobTrait
                         StatusEffectUtil.getDurationText(ins, 1));
             return ans.formatted(effect.getCategory().getFormatting());
         }));
+        int maxEffect = LHConfig.common().traits.potionTraitMaxEffect;
+        if (maxEffect <= 0) return;
+        list.add(LHTexts.TOOLTIP_TARGET_EFFECT_MAX.get(maxEffect));
     }
 }

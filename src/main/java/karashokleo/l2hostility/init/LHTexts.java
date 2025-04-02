@@ -14,6 +14,7 @@ public enum LHTexts
     TOOLTIP_DISABLE("tooltip.disable", "%s enchantments disabled for %ss. Any new enchantment will vanish.", "%s个附魔被抑制了，剩余%s秒。任何新附魔将会被抹消", 2),
     TOOLTIP_SELF_EFFECT("tooltip.self_effect", "Mob gains continuous effect: ", "怪物获得常驻效果：", 0),
     TOOLTIP_TARGET_EFFECT("tooltip.target_effect", "Mob inflict effect on hit: ", "怪物攻击将会施加：", 0),
+    TOOLTIP_TARGET_EFFECT_MAX("tooltip.target_effect_max", "Only works if the target has less than %s existing harmful effects.", "仅当目标已有的负面效果小于%s种时起效", 1),
     TOOLTIP_LEGENDARY("tooltip.legendary", "Legendary", "传奇词条", 0),
     TOOLTIP_MIN_LEVEL("tooltip.min_level", "Minimum mob level: %s", "最低怪物等级: %s", 1),
     TOOLTIP_LEVEL_COST("tooltip.level_cost", "Mob level cost: %s", "怪物等级消耗: %s", 1),
