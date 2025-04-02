@@ -1,7 +1,7 @@
 package karashokleo.l2hostility.content.item.trinket.misc;
 
-import karashokleo.l2hostility.content.item.trinket.core.BaseTrinketItem;
 import karashokleo.l2hostility.content.item.trinket.core.EffectValidItem;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -14,11 +14,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DivinityCross extends BaseTrinketItem implements EffectValidItem
+public class DivinityCross extends SingleEpicTrinketItem implements EffectValidItem
 {
-    public DivinityCross(Settings settings)
+    public DivinityCross()
     {
-        super(settings);
+        super();
     }
 
     @Override

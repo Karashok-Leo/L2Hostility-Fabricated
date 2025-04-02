@@ -3,7 +3,8 @@ package karashokleo.l2hostility.content.item.trinket.ring;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.item.traits.DurabilityEater;
-import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
@@ -17,11 +18,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class RingOfCorrosion extends DamageListenerTrinketItem
+public class RingOfCorrosion extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
-    public RingOfCorrosion(Settings settings)
+    public RingOfCorrosion()
     {
-        super(settings);
+        super();
     }
 
     @Override

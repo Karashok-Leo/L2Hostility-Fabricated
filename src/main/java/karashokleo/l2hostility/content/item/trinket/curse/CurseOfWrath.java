@@ -26,9 +26,9 @@ public class CurseOfWrath extends CurseTrinketItem
 {
     private static final Set<StatusEffect> IMMUNE = Set.of(StatusEffects.BLINDNESS, StatusEffects.DARKNESS, StatusEffects.NAUSEA, StatusEffects.SLOWNESS, StatusEffects.MINING_FATIGUE, StatusEffects.WEAKNESS);
 
-    public CurseOfWrath(Settings settings)
+    public CurseOfWrath()
     {
-        super(settings);
+        super();
     }
 
     @Override

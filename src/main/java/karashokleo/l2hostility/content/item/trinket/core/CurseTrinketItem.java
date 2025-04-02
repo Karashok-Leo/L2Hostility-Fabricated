@@ -19,8 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class CurseTrinketItem extends DamageListenerTrinketItem
+public class CurseTrinketItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
+    public CurseTrinketItem()
+    {
+        super();
+    }
+
     public CurseTrinketItem(Settings settings)
     {
         super(settings);

@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.item.trinket.misc;
 
-import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -17,11 +18,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PlatinumStar extends DamageListenerTrinketItem
+public class PlatinumStar extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
-    public PlatinumStar(Settings settings)
+    public PlatinumStar()
     {
-        super(settings);
+        super();
     }
 
     @Override

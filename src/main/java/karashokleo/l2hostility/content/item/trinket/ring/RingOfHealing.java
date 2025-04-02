@@ -1,7 +1,7 @@
 package karashokleo.l2hostility.content.item.trinket.ring;
 
 import dev.emi.trinkets.api.SlotReference;
-import karashokleo.l2hostility.content.item.trinket.core.BaseTrinketItem;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
@@ -14,11 +14,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class RingOfHealing extends BaseTrinketItem
+public class RingOfHealing extends SingleEpicTrinketItem
 {
-    public RingOfHealing(Settings settings)
+    public RingOfHealing()
     {
-        super(settings);
+        super();
     }
 
     @Override

@@ -21,9 +21,9 @@ import java.util.List;
 
 public class ImagineBreaker extends CurseTrinketItem
 {
-    public ImagineBreaker(Settings settings)
+    public ImagineBreaker()
     {
-        super(settings);
+        super();
     }
 
     @Override

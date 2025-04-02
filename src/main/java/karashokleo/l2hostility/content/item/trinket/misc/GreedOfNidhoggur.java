@@ -16,9 +16,9 @@ import java.util.List;
 
 public class GreedOfNidhoggur extends CurseTrinketItem
 {
-    public GreedOfNidhoggur(Settings settings)
+    public GreedOfNidhoggur()
     {
-        super(settings);
+        super();
     }
 
     @Override

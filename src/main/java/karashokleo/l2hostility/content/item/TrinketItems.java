@@ -45,9 +45,7 @@ public class TrinketItems
 
         LOOT_1 = LHItems.Entry.of(
                         "charm_of_looting_1",
-                        new LootingCharm(
-                                new FabricItemSettings()
-                        )
+                        new LootingCharm()
                 )
                 .addModel()
                 .addEN("Unpolished Looting Charm")
@@ -57,9 +55,7 @@ public class TrinketItems
 
         LOOT_2 = LHItems.Entry.of(
                         "charm_of_looting_2",
-                        new LootingCharm(
-                                new FabricItemSettings()
-                        )
+                        new LootingCharm()
                 )
                 .addModel()
                 .addEN("Magical Looting Charm")
@@ -69,9 +65,7 @@ public class TrinketItems
 
         LOOT_3 = LHItems.Entry.of(
                         "charm_of_looting_3",
-                        new LootingCharm(
-                                new FabricItemSettings()
-                        )
+                        new LootingCharm()
                 )
                 .addModel()
                 .addEN("Chaotic Looting Charm")
@@ -81,9 +75,7 @@ public class TrinketItems
 
         LOOT_4 = LHItems.Entry.of(
                         "charm_of_looting_4",
-                        new LootingCharm(
-                                new FabricItemSettings()
-                        )
+                        new LootingCharm()
                 )
                 .addModel()
                 .addEN("Miraculous Looting Charm")
@@ -93,9 +85,7 @@ public class TrinketItems
 
         CURSE_ENVY = LHItems.Entry.of(
                         "curse_of_envy",
-                        new CurseOfEnvy(
-                                new FabricItemSettings()
-                        )
+                        new CurseOfEnvy()
                 )
                 .addModel()
                 .addEN()
@@ -105,9 +95,7 @@ public class TrinketItems
 
         CURSE_GLUTTONY = LHItems.Entry.of(
                         "curse_of_gluttony",
-                        new CurseOfGluttony(
-                                new FabricItemSettings()
-                        )
+                        new CurseOfGluttony()
                 )
                 .addModel()
                 .addEN()
@@ -117,9 +105,7 @@ public class TrinketItems
 
         CURSE_GREED = LHItems.Entry.of(
                         "curse_of_greed",
-                        new CurseOfGreed(
-                                new FabricItemSettings()
-                        )
+                        new CurseOfGreed()
                 )
                 .addModel()
                 .addEN()
@@ -129,9 +115,7 @@ public class TrinketItems
 
         CURSE_LUST = LHItems.Entry.of(
                         "curse_of_lust",
-                        new CurseOfLust(
-                                new FabricItemSettings()
-                        )
+                        new CurseOfLust()
                 )
                 .addModel()
                 .addEN()
@@ -141,9 +125,7 @@ public class TrinketItems
 
         CURSE_PRIDE = LHItems.Entry.of(
                         "curse_of_pride",
-                        new CurseOfPride(
-                                new FabricItemSettings()
-                        )
+                        new CurseOfPride()
                 )
                 .addModel()
                 .addEN()
@@ -153,9 +135,7 @@ public class TrinketItems
 
         CURSE_SLOTH = LHItems.Entry.of(
                         "curse_of_sloth",
-                        new CurseOfSloth(
-                                new FabricItemSettings()
-                        )
+                        new CurseOfSloth()
                 )
                 .addModel()
                 .addEN()
@@ -165,9 +145,7 @@ public class TrinketItems
 
         CURSE_WRATH = LHItems.Entry.of(
                         "curse_of_wrath",
-                        new CurseOfWrath(
-                                new FabricItemSettings()
-                        )
+                        new CurseOfWrath()
                 )
                 .addModel()
                 .addEN()
@@ -177,9 +155,7 @@ public class TrinketItems
 
         RING_OCEAN = LHItems.Entry.of(
                         "ring_of_ocean",
-                        new RingOfOcean(
-                                new FabricItemSettings()
-                        )
+                        new RingOfOcean()
                 )
                 .addModel()
                 .addEN()
@@ -189,9 +165,7 @@ public class TrinketItems
 
         RING_LIFE = LHItems.Entry.of(
                         "ring_of_life",
-                        new RingOfLife(
-                                new FabricItemSettings()
-                        )
+                        new RingOfLife()
                 )
                 .addModel()
                 .addEN()
@@ -201,9 +175,7 @@ public class TrinketItems
 
         RING_DIVINITY = LHItems.Entry.of(
                         "ring_of_divinity",
-                        new RingOfDivinity(
-                                new FabricItemSettings()
-                        )
+                        new RingOfDivinity()
                 )
                 .addModel()
                 .addEN()
@@ -213,9 +185,7 @@ public class TrinketItems
 
         RING_REFLECTION = LHItems.Entry.of(
                         "ring_of_reflection",
-                        new RingOfReflection(
-                                new FabricItemSettings()
-                        )
+                        new RingOfReflection()
                 )
                 .addModel()
                 .addEN()
@@ -225,9 +195,7 @@ public class TrinketItems
 
         RING_INCARCERATION = LHItems.Entry.of(
                         "ring_of_incarceration",
-                        new RingOfIncarceration(
-                                new FabricItemSettings()
-                        )
+                        new RingOfIncarceration()
                 )
                 .addModel()
                 .addEN()
@@ -237,9 +205,7 @@ public class TrinketItems
 
         RING_CORROSION = LHItems.Entry.of(
                         "ring_of_corrosion",
-                        new RingOfCorrosion(
-                                new FabricItemSettings()
-                        )
+                        new RingOfCorrosion()
                 )
                 .addModel()
                 .addEN()
@@ -249,9 +215,7 @@ public class TrinketItems
 
         RING_HEALING = LHItems.Entry.of(
                         "ring_of_healing",
-                        new RingOfHealing(
-                                new FabricItemSettings()
-                        )
+                        new RingOfHealing()
                 )
                 .addModel()
                 .addEN()
@@ -261,9 +225,7 @@ public class TrinketItems
 
         FLAMING_THORN = LHItems.Entry.of(
                         "flaming_thorn",
-                        new FlamingThorn(
-                                new FabricItemSettings()
-                        )
+                        new FlamingThorn()
                 )
                 .addModel()
                 .addEN()
@@ -273,9 +235,7 @@ public class TrinketItems
 
         IMAGINE_BREAKER = LHItems.Entry.of(
                         "imagine_breaker",
-                        new ImagineBreaker(
-                                new FabricItemSettings()
-                        )
+                        new ImagineBreaker()
                 )
                 .addModel()
                 .addEN()
@@ -285,9 +245,7 @@ public class TrinketItems
 
         PLATINUM_STAR = LHItems.Entry.of(
                         "platinum_star",
-                        new PlatinumStar(
-                                new FabricItemSettings()
-                        )
+                        new PlatinumStar()
                 )
                 .addModel()
                 .addEN()
@@ -297,9 +255,7 @@ public class TrinketItems
 
         INFINITY_GLOVE = LHItems.Entry.of(
                         "infinity_glove",
-                        new InfinityGlove(
-                                new FabricItemSettings()
-                        )
+                        new InfinityGlove()
                 )
                 .addModel()
                 .addEN()
@@ -309,9 +265,7 @@ public class TrinketItems
 
         ABYSSAL_THORN = LHItems.Entry.of(
                         "abyssal_thorn",
-                        new AbyssalThorn(
-                                new FabricItemSettings()
-                        )
+                        new AbyssalThorn()
                 )
                 .addModel()
                 .addEN()
@@ -321,9 +275,7 @@ public class TrinketItems
 
         DIVINITY_CROSS = LHItems.Entry.of(
                         "divinity_cross",
-                        new DivinityCross(
-                                new FabricItemSettings()
-                        )
+                        new DivinityCross()
                 )
                 .addModel()
                 .addEN()
@@ -333,9 +285,7 @@ public class TrinketItems
 
         DIVINITY_LIGHT = LHItems.Entry.of(
                         "divinity_light",
-                        new DivinityLight(
-                                new FabricItemSettings()
-                        )
+                        new DivinityLight()
                 )
                 .addModel()
                 .addEN()
@@ -345,9 +295,7 @@ public class TrinketItems
 
         ODDEYES_GLASSES = LHItems.Entry.of(
                         "oddeyes_glasses",
-                        new OddeyesGlasses(
-                                new FabricItemSettings()
-                        )
+                        new OddeyesGlasses()
                 )
                 .addModel()
                 .addEN()
@@ -357,9 +305,7 @@ public class TrinketItems
 
         TRIPLE_STRIP_CAPE = LHItems.Entry.of(
                         "triple_strip_cape",
-                        new TripleStripCape(
-                                new FabricItemSettings()
-                        )
+                        new TripleStripCape()
                 )
                 .addModel()
                 .addEN()
@@ -369,9 +315,7 @@ public class TrinketItems
 
         ABRAHADABRA = LHItems.Entry.of(
                         "abrahadabra",
-                        new Abrahadabra(
-                                new FabricItemSettings()
-                        )
+                        new Abrahadabra()
                 )
                 .addModel()
                 .addEN()
@@ -381,9 +325,7 @@ public class TrinketItems
 
         NIDHOGGUR = LHItems.Entry.of(
                         "greed_of_nidhoggur",
-                        new GreedOfNidhoggur(
-                                new FabricItemSettings()
-                        )
+                        new GreedOfNidhoggur()
                 )
                 .addModel()
                 .addEN()

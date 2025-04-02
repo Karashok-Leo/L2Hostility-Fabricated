@@ -14,9 +14,9 @@ import java.util.List;
 
 public class AbyssalThorn extends CurseTrinketItem
 {
-    public AbyssalThorn(Settings settings)
+    public AbyssalThorn()
     {
-        super(settings);
+        super();
     }
 
     @Override

@@ -18,9 +18,9 @@ import java.util.List;
 
 public class DivinityLight extends CurseTrinketItem
 {
-    public DivinityLight(Settings settings)
+    public DivinityLight()
     {
-        super(settings);
+        super();
     }
 
     @Override

@@ -2,7 +2,7 @@ package karashokleo.l2hostility.content.item.trinket.ring;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import dev.emi.trinkets.api.SlotReference;
-import karashokleo.l2hostility.content.item.trinket.core.BaseTrinketItem;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.l2hostility.util.EffectHelper;
@@ -19,11 +19,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class RingOfIncarceration extends BaseTrinketItem
+public class RingOfIncarceration extends SingleEpicTrinketItem
 {
-    public RingOfIncarceration(Settings settings)
+    public RingOfIncarceration()
     {
-        super(settings);
+        super();
     }
 
     @Override

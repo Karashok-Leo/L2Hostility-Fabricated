@@ -1,7 +1,8 @@
 package karashokleo.l2hostility.content.item.trinket.misc;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHDamageTypes;
 import karashokleo.l2hostility.init.LHEffects;
@@ -18,11 +19,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FlamingThorn extends DamageListenerTrinketItem
+public class FlamingThorn extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
-    public FlamingThorn(Settings settings)
+    public FlamingThorn()
     {
-        super(settings);
+        super();
     }
 
     @Override

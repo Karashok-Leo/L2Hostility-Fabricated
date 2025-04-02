@@ -16,9 +16,9 @@ import java.util.List;
 
 public class RingOfReflection extends CurseTrinketItem implements ReflectTrinket
 {
-    public RingOfReflection(Settings settings)
+    public RingOfReflection()
     {
-        super(settings);
+        super();
     }
 
     @Override

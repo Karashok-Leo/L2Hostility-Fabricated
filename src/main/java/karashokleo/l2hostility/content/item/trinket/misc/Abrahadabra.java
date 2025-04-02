@@ -16,9 +16,9 @@ import java.util.List;
 
 public class Abrahadabra extends CurseTrinketItem implements ReflectTrinket
 {
-    public Abrahadabra(Settings settings)
+    public Abrahadabra()
     {
-        super(settings);
+        super();
     }
 
     @Override

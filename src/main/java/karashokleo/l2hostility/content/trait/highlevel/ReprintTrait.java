@@ -50,7 +50,6 @@ public class ReprintTrait extends MobTrait
         {
             ItemStack equipped = event.getEntity().getEquippedStack(slot);
             if (equipped.isEmpty() ||
-                !equipped.isEnchantable() ||
                 !equipped.hasEnchantments())
                 continue;
             var totalLv = EnchantmentHelper.get(equipped)

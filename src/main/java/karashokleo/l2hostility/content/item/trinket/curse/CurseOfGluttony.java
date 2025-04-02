@@ -14,9 +14,9 @@ import java.util.List;
 
 public class CurseOfGluttony extends CurseTrinketItem
 {
-    public CurseOfGluttony(Settings settings)
+    public CurseOfGluttony()
     {
-        super(settings);
+        super();
     }
 
     @Override

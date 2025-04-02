@@ -16,9 +16,9 @@ import java.util.List;
 
 public class CurseOfGreed extends CurseTrinketItem
 {
-    public CurseOfGreed(Settings settings)
+    public CurseOfGreed()
     {
-        super(settings);
+        super();
     }
 
     @Override

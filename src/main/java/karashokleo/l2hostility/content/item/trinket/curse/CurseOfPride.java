@@ -26,9 +26,9 @@ public class CurseOfPride extends CurseTrinketItem
 {
     private static final String NAME = "l2hostility:pride";
 
-    public CurseOfPride(Settings settings)
+    public CurseOfPride()
     {
-        super(settings);
+        super();
     }
 
     @Override

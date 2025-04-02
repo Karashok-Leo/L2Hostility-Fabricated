@@ -9,7 +9,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffec
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.TrinketItems;
-import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinketItem;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.event.DamageSourceCreateCallback;
@@ -28,40 +28,40 @@ public class TrinketEvents
         DamageSourceCreateCallback.EVENT.register((type, source, attacker, position, damageSource) ->
         {
             if (attacker instanceof LivingEntity living)
-                for (var e : TrinketCompat.getItems(living, e -> e.getItem() instanceof DamageListenerTrinketItem))
-                    if (e.getItem() instanceof DamageListenerTrinketItem listener)
+                for (var e : TrinketCompat.getItems(living, e -> e.getItem() instanceof DamageListenerTrinket))
+                    if (e.getItem() instanceof DamageListenerTrinket listener)
                         listener.onDamageSourceCreate(e, living, damageSource, type, source, position);
         });
 
         LivingAttackEvent.ATTACK.register(event ->
         {
             LivingEntity target = event.getEntity();
-            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof DamageListenerTrinketItem))
-                if (e.getItem() instanceof DamageListenerTrinketItem listener)
+            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof DamageListenerTrinket))
+                if (e.getItem() instanceof DamageListenerTrinket listener)
                     listener.onAttacked(e, target, event);
             if (!(event.getSource().getAttacker() instanceof LivingEntity attacker)) return;
-            for (var e : TrinketCompat.getItems(attacker, e -> e.getItem() instanceof DamageListenerTrinketItem))
-                if (e.getItem() instanceof DamageListenerTrinketItem listener)
+            for (var e : TrinketCompat.getItems(attacker, e -> e.getItem() instanceof DamageListenerTrinket))
+                if (e.getItem() instanceof DamageListenerTrinket listener)
                     listener.onAttacking(e, attacker, event);
         });
 
         LivingHurtEvent.HURT.register(event ->
         {
             LivingEntity target = event.getEntity();
-            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof DamageListenerTrinketItem))
-                if (e.getItem() instanceof DamageListenerTrinketItem listener)
+            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof DamageListenerTrinket))
+                if (e.getItem() instanceof DamageListenerTrinket listener)
                     listener.onHurt(e, target, event);
             if (!(event.getSource().getAttacker() instanceof LivingEntity attacker)) return;
-            for (var e : TrinketCompat.getItems(attacker, e -> e.getItem() instanceof DamageListenerTrinketItem))
-                if (e.getItem() instanceof DamageListenerTrinketItem listener)
+            for (var e : TrinketCompat.getItems(attacker, e -> e.getItem() instanceof DamageListenerTrinket))
+                if (e.getItem() instanceof DamageListenerTrinket listener)
                     listener.onHurting(e, attacker, event);
         });
 
         LivingDamageEvent.DAMAGE.register(event ->
         {
             LivingEntity target = event.getEntity();
-            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof DamageListenerTrinketItem))
-                if (e.getItem() instanceof DamageListenerTrinketItem listener)
+            for (var e : TrinketCompat.getItems(target, e -> e.getItem() instanceof DamageListenerTrinket))
+                if (e.getItem() instanceof DamageListenerTrinket listener)
                     listener.onDamaged(e, target, event);
         });
 
