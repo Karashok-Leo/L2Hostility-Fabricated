@@ -5,12 +5,14 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDa
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.leobrary.damage.api.event.DamageSourceCreateCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,7 +33,8 @@ public class TraitEvents
         // applyDamage()尾部
         LivingDamageEvent.DAMAGE.register(TraitEvents::onDamaged);
 
-        ServerLivingEntityEvents.AFTER_DEATH.register(TraitEvents::onKilled);
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(TraitEvents::onKilled);
+        ServerLivingEntityEvents.AFTER_DEATH.register(TraitEvents::afterKilled);
         ServerLivingEntityEvents.AFTER_DEATH.register(TraitEvents::onDeath);
         ServerLivingEntityEvents.ALLOW_DEATH.register(TraitEvents::allowDeath);
     }
@@ -89,12 +92,20 @@ public class TraitEvents
         difficulty.traitEvent((k, v) -> k.onDamaged(difficulty, difficulty.owner, v, event));
     }
 
-    public static void onKilled(LivingEntity entity, DamageSource source)
+    public static void onKilled(ServerWorld world, Entity entity, LivingEntity killed)
+    {
+        var optional = MobDifficulty.get(entity);
+        if (optional.isEmpty()) return;
+        MobDifficulty difficulty = optional.get();
+        difficulty.traitEvent((k, v) -> k.onKilled(difficulty, difficulty.owner, v, killed));
+    }
+
+    public static void afterKilled(LivingEntity entity, DamageSource source)
     {
         var optional = MobDifficulty.get(source.getAttacker());
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
-        difficulty.traitEvent((k, v) -> k.onKilled(difficulty, difficulty.owner, v, entity, source));
+        difficulty.traitEvent((k, v) -> k.afterKilling(difficulty, difficulty.owner, v, entity, source));
     }
 
     public static void onDeath(LivingEntity entity, DamageSource source)

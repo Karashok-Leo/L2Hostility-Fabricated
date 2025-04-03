@@ -38,7 +38,11 @@ public interface DamageListenerTrinket
     {
     }
 
-    default void onKilled(ItemStack stack, LivingEntity entity, LivingEntity killed, DamageSource source)
+    default void onKilled(ItemStack stack, LivingEntity entity, LivingEntity killed)
+    {
+    }
+
+    default void afterKilling(ItemStack stack, LivingEntity entity, LivingEntity killed, DamageSource source)
     {
     }
 

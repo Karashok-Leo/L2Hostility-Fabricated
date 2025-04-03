@@ -151,7 +151,11 @@ public class MobTrait implements ItemConvertible
     {
     }
 
-    public void onKilled(MobDifficulty difficulty, LivingEntity entity, int level, LivingEntity killed, DamageSource source)
+    public void onKilled(MobDifficulty difficulty, LivingEntity entity, int level, LivingEntity killed)
+    {
+    }
+
+    public void afterKilling(MobDifficulty difficulty, LivingEntity entity, int level, LivingEntity killed, DamageSource source)
     {
     }
 

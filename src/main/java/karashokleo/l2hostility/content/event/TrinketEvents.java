@@ -13,6 +13,7 @@ import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.event.DamageSourceCreateCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -63,6 +64,14 @@ public class TrinketEvents
                     listener.onDamaged(e, target, event);
         });
 
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((serverWorld, entity, killed) ->
+        {
+            if (!(entity instanceof LivingEntity attacker)) return;
+            for (var e : TrinketCompat.getItems(attacker, e -> e.getItem() instanceof DamageListenerTrinket))
+                if (e.getItem() instanceof DamageListenerTrinket listener)
+                    listener.onKilled(e, attacker, killed);
+        });
+
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) ->
         {
             for (var e : TrinketCompat.getItems(entity, e -> e.getItem() instanceof DamageListenerTrinket))
@@ -71,7 +80,7 @@ public class TrinketEvents
             if (!(source.getAttacker() instanceof LivingEntity attacker)) return;
             for (var e : TrinketCompat.getItems(attacker, e -> e.getItem() instanceof DamageListenerTrinket))
                 if (e.getItem() instanceof DamageListenerTrinket listener)
-                    listener.onKilled(e, attacker, entity, source);
+                    listener.afterKilling(e, attacker, entity, source);
         });
 
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, source, amount) ->
