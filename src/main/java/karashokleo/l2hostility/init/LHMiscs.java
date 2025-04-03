@@ -15,7 +15,9 @@ public class LHMiscs
     public static final ItemGroupBuilder GROUP = GroupEntry.of("hostility");
     public static final ItemGroupBuilder TRAITS = GroupEntry.of("traits");
 
-    public static EntityAttribute ADD_LEVEL = new ClampedEntityAttribute("attribute.name.generic.extra_difficulty", 0, 0, 1000).setTracked(true);
+    public static final EntityAttribute ADD_LEVEL = new ClampedEntityAttribute("attribute.name.generic.extra_difficulty", 0, 0, 1000).setTracked(true);
+
+    public static final ScreenHandlerType<EquipmentScreenHandler> EQUIPMENTS = new ExtendedScreenHandlerType<>(EquipmentScreenHandler::fromNetwork);
 
     public static void register()
     {
@@ -40,9 +42,9 @@ public class LHMiscs
 
         LHGenerators.EN_TEXTS.addAttribute(ADD_LEVEL, "Extra Difficulty");
         LHGenerators.ZH_TEXTS.addAttribute(ADD_LEVEL, "额外难度");
-    }    public static final ScreenHandlerType<EquipmentScreenHandler> EQUIPMENTS = new ExtendedScreenHandlerType<>(EquipmentScreenHandler::fromNetwork);
+    }
 
-    static class GroupEntry extends ItemGroupBuilder
+    private static class GroupEntry extends ItemGroupBuilder
     {
         public GroupEntry(String name)
         {

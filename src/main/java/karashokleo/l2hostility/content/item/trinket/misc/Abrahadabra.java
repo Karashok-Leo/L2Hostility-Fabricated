@@ -31,6 +31,7 @@ public class Abrahadabra extends CurseTrinketItem implements ReflectTrinket
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.ABRAHADABRA.get().formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override

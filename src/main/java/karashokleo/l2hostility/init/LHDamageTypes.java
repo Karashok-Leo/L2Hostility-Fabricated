@@ -1,13 +1,13 @@
 package karashokleo.l2hostility.init;
 
 import karashokleo.l2hostility.L2Hostility;
+import karashokleo.leobrary.datagen.generator.DamageTypeGenerator;
 import net.minecraft.entity.damage.DamageEffects;
 import net.minecraft.entity.damage.DamageScaling;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.registry.tag.TagKey;
 
 public class LHDamageTypes
 {
@@ -20,7 +20,8 @@ public class LHDamageTypes
 
     public static void register()
     {
-        register(
+        DamageTypeGenerator generator = new DamageTypeGenerator(L2Hostility.MOD_ID);
+        generator.register(
                 KILLER_AURA,
                 new DamageType("killer_aura", DamageScaling.NEVER, 0.1F),
                 "%s was killed by killer aura",
@@ -30,7 +31,7 @@ public class LHDamageTypes
                 DamageTypeTags.BYPASSES_ARMOR,
                 LHTags.MAGIC
         );
-        register(
+        generator.register(
                 EMERALD,
                 new DamageType("emerald", DamageScaling.NEVER, 0.1F),
                 "%s was killed by emerald splash",
@@ -39,7 +40,7 @@ public class LHDamageTypes
                 "%s被%s的绿宝石水花杀死了",
                 DamageTypeTags.AVOIDS_GUARDIAN_THORNS
         );
-        register(
+        generator.register(
                 SOUL_FLAME,
                 new DamageType("soul_flame", DamageScaling.NEVER, 0F, DamageEffects.BURNING),
                 "%s has its soul burnt out",
@@ -51,7 +52,7 @@ public class LHDamageTypes
                 DamageTypeTags.NO_IMPACT,
                 LHTags.MAGIC
         );
-        register(
+        generator.register(
                 BLEED,
                 new DamageType("bleed", DamageScaling.NEVER, 0.1F),
                 "%s bleed to death",
@@ -64,7 +65,7 @@ public class LHDamageTypes
                 DamageTypeTags.BYPASSES_EFFECTS,
                 DamageTypeTags.NO_IMPACT
         );
-        register(
+        generator.register(
                 LIFE_SYNC,
                 new DamageType("life_sync", DamageScaling.NEVER, 0F),
                 "%s was drained",
@@ -77,7 +78,7 @@ public class LHDamageTypes
                 DamageTypeTags.BYPASSES_EFFECTS,
                 DamageTypeTags.NO_IMPACT
         );
-        register(
+        generator.register(
                 VOID_EYE,
                 new DamageType("void_eye", DamageScaling.NEVER, 0F),
                 "%s was cursed by void eye",
@@ -91,19 +92,5 @@ public class LHDamageTypes
                 DamageTypeTags.BYPASSES_EFFECTS,
                 DamageTypeTags.NO_IMPACT
         );
-    }
-
-    @SafeVarargs
-    public static void register(RegistryKey<DamageType> registryKey, DamageType damageType, String deathMsgEn, String deathMsgPlayerEn, String deathMsgZh, String deathMsgPlayerZh, TagKey<DamageType>... tags)
-    {
-        LHGenerators.DYNAMICS.add(registryKey, damageType);
-        String deathMsg = "death.attack." + damageType.msgId();
-        String deathMsgPlayer = "death.attack." + damageType.msgId() + ".player";
-        LHGenerators.EN_TEXTS.addText(deathMsg, deathMsgEn);
-        LHGenerators.EN_TEXTS.addText(deathMsgPlayer, deathMsgPlayerEn);
-        LHGenerators.ZH_TEXTS.addText(deathMsg, deathMsgZh);
-        LHGenerators.ZH_TEXTS.addText(deathMsgPlayer, deathMsgPlayerZh);
-        for (TagKey<DamageType> tag : tags)
-            LHGenerators.DAMAGE_TYPE_TAGS.getOrCreateContainer(tag).add(registryKey);
     }
 }

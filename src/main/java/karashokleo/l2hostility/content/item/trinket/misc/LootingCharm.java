@@ -22,5 +22,6 @@ public class LootingCharm extends SingleEpicTrinketItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.LOOTING_CHARM.get().formatted(Formatting.GRAY));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

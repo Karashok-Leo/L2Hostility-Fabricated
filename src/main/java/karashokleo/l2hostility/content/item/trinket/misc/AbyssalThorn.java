@@ -23,6 +23,7 @@ public class AbyssalThorn extends CurseTrinketItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.ABYSSAL_THORN.get().formatted(Formatting.RED));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override

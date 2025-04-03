@@ -35,5 +35,6 @@ public class PlatinumStar extends SingleEpicTrinketItem implements DamageListene
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.ITEM_PLATINUM_STAR.get().formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

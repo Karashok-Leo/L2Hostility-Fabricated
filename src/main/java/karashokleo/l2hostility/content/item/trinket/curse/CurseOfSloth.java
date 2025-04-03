@@ -37,5 +37,6 @@ public class CurseOfSloth extends CurseTrinketItem
     {
         tooltip.add(LHTexts.ITEM_CHARM_SLOTH.get().formatted(Formatting.GOLD));
         tooltip.add(LHTexts.ITEM_CHARM_NO_DROP.get().formatted(Formatting.RED));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

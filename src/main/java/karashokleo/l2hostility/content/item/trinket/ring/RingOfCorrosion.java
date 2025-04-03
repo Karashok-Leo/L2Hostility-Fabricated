@@ -44,5 +44,6 @@ public class RingOfCorrosion extends SingleEpicTrinketItem implements DamageList
     {
         tooltip.add(LHTexts.ITEM_RING_CORROSION.get(Math.round(LHConfig.common().items.ringOfCorrosionFactor * 100)).formatted(Formatting.GOLD));
         tooltip.add(LHTexts.ITEM_RING_CORROSION_NEG.get(Math.round(LHConfig.common().items.ringOfCorrosionFactor * 100)).formatted(Formatting.RED));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

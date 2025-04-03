@@ -422,6 +422,7 @@
   "l2hostility.item.equipment.ring_of_ocean": "玩家永远湿润",
   "l2hostility.item.equipment.ring_of_reflection": "当一个怪物携带的词条试图对你施加药水效果时，将其施加在周围所有对你有敌意的生物上作为替代",
   "l2hostility.item.equipment.section_render": "持有[%s]且佩戴[%s]时渲染被净化的区域",
+  "l2hostility.item.equipment.single_trinket": "无法同时佩戴多个",
   "l2hostility.item.equipment.witch_wand": "投掷随机喷溅药水，种类从药水词条中随机选择",
   "l2hostility.item.spawner": "召唤强力怪物。击败它们能让当前子区块不再生成有等级的怪物",
   "l2hostility.item.wand.adder": "右键方块选择词条。右键生物调整词条等级。按住Shift切换选择方向",

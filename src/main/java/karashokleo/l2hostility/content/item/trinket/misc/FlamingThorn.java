@@ -41,5 +41,6 @@ public class FlamingThorn extends SingleEpicTrinketItem implements DamageListene
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.ITEM_FLAME_THORN.get(Math.round(LHConfig.common().items.flameThornTime * 0.05f)).formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

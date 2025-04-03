@@ -4,6 +4,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHu
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
+import karashokleo.leobrary.effect.api.util.EffectUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -31,11 +32,7 @@ public class TargetEffectTrait extends MobTrait
         int maxEffect = LHConfig.common().traits.potionTraitMaxEffect;
         if (maxEffect <= 0) return;
         LivingEntity living = event.getEntity();
-        long count = living.getActiveStatusEffects()
-                .keySet()
-                .stream()
-                .filter(effect -> effect.getCategory() == StatusEffectCategory.HARMFUL)
-                .count();
+        long count = EffectUtil.streamEffects(living, StatusEffectCategory.HARMFUL).count();
         if (count >= maxEffect) return;
         living.addStatusEffect(func.apply(level), entity);
     }

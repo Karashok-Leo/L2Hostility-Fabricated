@@ -39,5 +39,6 @@ public class GreedOfNidhoggur extends CurseTrinketItem
         int nid = (int) Math.round(100 * LHConfig.common().items.nidhoggurDropFactor);
         tooltip.add(LHTexts.ITEM_CHARM_GREED.get(LHConfig.common().items.curse.greedDropFactor).formatted(Formatting.GOLD));
         tooltip.add(LHTexts.NIDHOGGUR.get(nid).formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

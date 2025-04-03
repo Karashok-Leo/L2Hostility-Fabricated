@@ -54,6 +54,7 @@ public class CurseOfWrath extends CurseTrinketItem
         int rate = (int) Math.round(100 * LHConfig.common().items.curse.wrathDamageBonus);
         tooltip.add(LHTexts.ITEM_CHARM_WRATH.get(rate).formatted(Formatting.GOLD));
         addTooltip(tooltip, IMMUNE);
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     private void addTooltip(List<Text> list, Set<StatusEffect> set)

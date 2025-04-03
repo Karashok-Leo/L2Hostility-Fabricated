@@ -216,7 +216,6 @@ public class CommonConfig implements ConfigData
 
     public static class Enchantments
     {
-
     }
 
     public static class Traits

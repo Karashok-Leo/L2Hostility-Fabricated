@@ -37,6 +37,7 @@ public class ImagineBreaker extends CurseTrinketItem
     {
         tooltip.add(LHTexts.ITEM_IMAGINE_BREAKER.get().formatted(Formatting.GOLD));
         tooltip.add(LHTexts.ITEM_CHARM_NO_DROP.get().formatted(Formatting.RED));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override

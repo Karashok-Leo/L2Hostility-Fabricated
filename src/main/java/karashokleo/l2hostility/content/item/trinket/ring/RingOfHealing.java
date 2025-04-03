@@ -25,6 +25,7 @@ public class RingOfHealing extends SingleEpicTrinketItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.ITEM_RING_HEALING.get(Math.round(LHConfig.common().items.ringOfHealingRate * 100)).formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override

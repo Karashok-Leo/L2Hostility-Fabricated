@@ -73,5 +73,6 @@ public class CurseOfPride extends CurseTrinketItem
         int trait = (int) Math.round(100 * (1 / LHConfig.common().items.curse.prideTraitFactor - 1));
         tooltip.add(LHTexts.ITEM_CHARM_PRIDE.get(protect, damage).formatted(Formatting.GOLD));
         tooltip.add(LHTexts.ITEM_CHARM_TRAIT_CHEAP.get(trait).formatted(Formatting.RED));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

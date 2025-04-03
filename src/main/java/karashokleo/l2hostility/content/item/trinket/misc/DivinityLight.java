@@ -27,6 +27,7 @@ public class DivinityLight extends CurseTrinketItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.DIVINITY_LIGHT.get().formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override

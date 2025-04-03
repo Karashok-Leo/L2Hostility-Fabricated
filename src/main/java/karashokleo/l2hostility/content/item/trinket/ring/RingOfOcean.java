@@ -22,5 +22,6 @@ public class RingOfOcean extends SingleEpicTrinketItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.ITEM_RING_OCEAN.get().formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

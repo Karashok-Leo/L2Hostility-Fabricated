@@ -54,5 +54,6 @@ public class RingOfDivinity extends SingleEpicTrinketItem implements DamageListe
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.ITEM_RING_DIVINITY.get().formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

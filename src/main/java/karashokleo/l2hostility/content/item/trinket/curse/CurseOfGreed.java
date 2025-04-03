@@ -37,5 +37,6 @@ public class CurseOfGreed extends CurseTrinketItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.ITEM_CHARM_GREED.get(LHConfig.common().items.curse.greedDropFactor).formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

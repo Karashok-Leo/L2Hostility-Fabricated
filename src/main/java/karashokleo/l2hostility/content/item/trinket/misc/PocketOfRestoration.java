@@ -87,5 +87,6 @@ public class PocketOfRestoration extends SingleEpicTrinketItem
             tooltip.add(LHTexts.TOOLTIP_SEAL_DATA.get().formatted(Formatting.GRAY));
             tooltip.add(ItemStack.fromNbt(stack.getOrCreateSubNbt(ROOT).getCompound(SealedItem.DATA)).getName());
         }
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

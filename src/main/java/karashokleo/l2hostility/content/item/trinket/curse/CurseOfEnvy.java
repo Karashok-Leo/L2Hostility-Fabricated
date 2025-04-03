@@ -30,5 +30,6 @@ public class CurseOfEnvy extends CurseTrinketItem
     {
         int rate = (int) Math.round(100 * LHConfig.common().items.curse.envyDropRate);
         tooltip.add(LHTexts.ITEM_CHARM_ENVY.get(rate).formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

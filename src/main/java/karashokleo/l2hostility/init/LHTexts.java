@@ -43,6 +43,7 @@ public enum LHTexts
     ITEM_BOOK_EVERYTHING_INVALID("item.book.everything_invalid", "Name is not ID of an enchantment", "当前物品名字不是附魔ID", 0),
     ITEM_BOOK_EVERYTHING_READY("item.book.everything_ready", "Enchantment %s cost %s levels", "产出%s消耗%s级经验", 2),
     ITEM_BOOK_EVERYTHING_FORBIDDEN("item.book.everything_forbidden", "%s is not obtainable", "%s不可获取", 1),
+    ITEM_SINGLE_TRINKET("item.equipment.single_trinket", "Cannot wear more than one at a time", "无法同时佩戴多个", 0),
     ITEM_CHARM_ENVY("item.equipment.curse_of_envy", "Get trait items when you kill mobs with traits, with a chance of %s%% per trait rank", "击杀怪物获取其词条，概率为词条每阶%s%%", 1),
     ITEM_CHARM_GLUTTONY("item.equipment.curse_of_gluttony", "Get Bottle of Curse when you kill mobs with level, with a chance of %s%% per level", "击杀怪物掉落瓶装恶意，概率为每级%s%%", 1),
     ITEM_CHARM_GREED("item.equipment.curse_of_greed", "x%s hostility loot drop chance", "击杀怪物的词条掉落物掉落概率x%s", 1),

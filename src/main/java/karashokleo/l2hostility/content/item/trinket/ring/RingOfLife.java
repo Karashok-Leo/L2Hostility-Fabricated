@@ -43,5 +43,6 @@ public class RingOfLife extends SingleEpicTrinketItem implements DamageListenerT
     {
         int perc = (int) Math.round(LHConfig.common().items.ringOfLifeMaxDamage * 100);
         tooltip.add(LHTexts.ITEM_RING_LIFE.get(perc).formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

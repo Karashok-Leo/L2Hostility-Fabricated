@@ -25,6 +25,7 @@ public class DivinityCross extends SingleEpicTrinketItem implements EffectValidI
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.DIVINITY_CROSS.get().formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override
