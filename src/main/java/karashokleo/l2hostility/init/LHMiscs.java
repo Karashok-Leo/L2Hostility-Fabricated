@@ -12,8 +12,10 @@ import net.minecraft.screen.ScreenHandlerType;
 
 public class LHMiscs
 {
-    public static final ItemGroupBuilder GROUP = GroupEntry.of("hostility");
-    public static final ItemGroupBuilder TRAITS = GroupEntry.of("traits");
+    /// 这里的Group id加上一个前缀是为了在ItemGroups排序将两个Group排在相邻位置
+    /// 因为ItemGroup的排序是根据Identifier来排序的，而Identifier优先比较Path的字典序
+    public static final ItemGroupBuilder GROUP = GroupEntry.of("l2h_hostility");
+    public static final ItemGroupBuilder TRAITS = GroupEntry.of("l2h_traits");
 
     public static final EntityAttribute ADD_LEVEL = new ClampedEntityAttribute("attribute.name.generic.extra_difficulty", 0, 0, 1000).setTracked(true);
 
