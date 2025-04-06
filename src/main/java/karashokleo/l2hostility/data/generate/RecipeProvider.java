@@ -1125,7 +1125,7 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('G', LHTraits.GRAVITY.asItem())
                         .offerTo(exporter, ID_UTIL.get(TrinketItems.RESTORATION));
 
-                RecipeTemplate.shaped(TrinketItems.ABYSSAL_THORN, 1, MiscItems.MIRACLE.ingot())
+                RecipeTemplate.shaped(TrinketItems.ABYSSAL_THRONE, 1, MiscItems.MIRACLE.ingot())
                         .pattern("AIA")
                         .pattern("IEI")
                         .pattern("XIX")
@@ -1133,7 +1133,7 @@ public class RecipeProvider extends FabricRecipeProvider
                         .input('E', ComplementItems.ETERNIUM.ingot())
                         .input('A', ComplementItems.GUARDIAN_EYE)
                         .input('X', ComplementItems.BLACKSTONE_CORE)
-                        .offerTo(exporter, ID_UTIL.get(TrinketItems.ABYSSAL_THORN));
+                        .offerTo(exporter, ID_UTIL.get(TrinketItems.ABYSSAL_THRONE));
 
                 RecipeTemplate.shaped(TrinketItems.DIVINITY_CROSS, 1, MiscItems.MIRACLE.ingot())
                         .pattern("STS")

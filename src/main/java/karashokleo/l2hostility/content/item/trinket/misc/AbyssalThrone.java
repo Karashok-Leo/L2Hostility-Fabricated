@@ -12,9 +12,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AbyssalThorn extends CurseTrinketItem
+public class AbyssalThrone extends CurseTrinketItem
 {
-    public AbyssalThorn()
+    public AbyssalThrone()
     {
         super();
     }
@@ -22,7 +22,7 @@ public class AbyssalThorn extends CurseTrinketItem
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(LHTexts.ABYSSAL_THORN.get().formatted(Formatting.RED));
+        tooltip.add(LHTexts.ABYSSAL_THRONE.get().formatted(Formatting.RED));
         super.appendTooltip(stack, world, tooltip, context);
     }
 

@@ -37,7 +37,7 @@ public abstract class EMIPageRecipe implements EmiRecipe
     public void addWidgets(WidgetHolder widgets)
     {
         List<EmiStack> stacks = this.getStacks();
-        int ph = (widgets.getHeight() - 42) / 18;
+        int ph = (widgets.getHeight() - getPageYOffset() - 20) / 18;
         int pageSize = (ph + 1) * 8;
         PageManager<EmiStack> manager = new PageManager<>(stacks, pageSize);
         if (pageSize < stacks.size())

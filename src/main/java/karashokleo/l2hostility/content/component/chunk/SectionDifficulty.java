@@ -63,7 +63,7 @@ public class SectionDifficulty
 
     private void modifyInstanceInternal(World world, BlockPos pos, MobDifficultyCollector instance)
     {
-        var levelDiff = LHData.difficulties.getByLevelOrDefault(world.getDimensionKey().getValue());
+        var levelDiff = LHData.difficulties.getByLevelOrDefault(world.getRegistryKey().getValue());
         instance.acceptConfig(levelDiff);
         LHData.difficulties.getByBiome(world, pos).ifPresent(instance::acceptConfig);
         instance.acceptBonusLevel(
@@ -75,7 +75,7 @@ public class SectionDifficulty
     public List<Text> getSectionDifficultyDetail(PlayerEntity player)
     {
         if (isCleared()) return List.of();
-        var levelDiff = LHData.difficulties.getByLevelOrDefault(player.getWorld().getDimensionKey().getValue());
+        var levelDiff = LHData.difficulties.getByLevelOrDefault(player.getWorld().getRegistryKey().getValue());
         int dim = levelDiff.base();
         BlockPos pos = player.getBlockPos();
         int bio = LHData.difficulties.getByBiome(player.getWorld(), pos).map(DifficultyConfig.Config::base).orElse(0);

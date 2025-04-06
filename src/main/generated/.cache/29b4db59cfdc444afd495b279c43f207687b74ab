@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-04T10:59:23.4948392	L2 Hostility/Tags for minecraft:entity_type
+// 1.20.1	2025-04-06T15:49:52.8933875	L2 Hostility/Tags for minecraft:entity_type
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\adaptive_whitelist.json
 40ff47b5b029f659937e49a112a4e3ad71554dfa data\minecraft\tags\entity_types\impact_projectiles.json
 d45e3286ace0c4f95a2a28c2aacf5331d13982bd data\l2hostility\tags\entity_types\no_trait.json
@@ -65,8 +65,8 @@ fd17659da63024b1060ced5310a9ec0ffefd2cc1 data\l2hostility\tags\entity_types\rang
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\pulling_whitelist.json
 46f2282ac72db09f145b3dcf035eff48422bd744 data\l2hostility\tags\entity_types\invisible_blacklist.json
 f3e753d87f43c336541a6c41a0184456c4c13231 data\l2hostility\tags\entity_types\levitation_whitelist.json
-8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\dementor_whitelist.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\grenade_whitelist.json
+8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\dementor_whitelist.json
 097dd603edf84557c894fc36b9897a8b565aa83f data\l2hostility\tags\entity_types\ranged_weapon_target.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\protection_whitelist.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\wither_blacklist.json
@@ -81,8 +81,8 @@ f3e753d87f43c336541a6c41a0184456c4c13231 data\l2hostility\tags\entity_types\levi
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\erosion_blacklist.json
 f3e753d87f43c336541a6c41a0184456c4c13231 data\l2hostility\tags\entity_types\repelling_whitelist.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\reflect_blacklist.json
-8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\blindness_blacklist.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\no_drop.json
+8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\blindness_blacklist.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\ragnarok_blacklist.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\growth_whitelist.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\l2hostility\tags\entity_types\regenerate_blacklist.json

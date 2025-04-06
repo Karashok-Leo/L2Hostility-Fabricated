@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "l2hostility:trinket/misc/abyssal_thorn"
+        "recipe": "l2hostility:trinket/misc/abyssal_throne"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "l2hostility:trinket/misc/abyssal_thorn"
+      "l2hostility:trinket/misc/abyssal_throne"
     ]
   },
   "sends_telemetry_event": false

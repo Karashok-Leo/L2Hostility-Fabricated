@@ -31,7 +31,7 @@ public class TrinketItems
     public static ImagineBreaker IMAGINE_BREAKER;
     public static PlatinumStar PLATINUM_STAR;
     public static InfinityGlove INFINITY_GLOVE;
-    public static AbyssalThorn ABYSSAL_THORN;
+    public static AbyssalThrone ABYSSAL_THRONE;
     public static DivinityCross DIVINITY_CROSS;
     public static DivinityLight DIVINITY_LIGHT;
     public static OddeyesGlasses ODDEYES_GLASSES;
@@ -263,9 +263,9 @@ public class TrinketItems
                 .addTag(LHTags.CHAOS, LHTags.HAND_SLOT, LHTags.OFF_HAND_SLOT)
                 .register();
 
-        ABYSSAL_THORN = LHItems.Entry.of(
-                        "abyssal_thorn",
-                        new AbyssalThorn()
+        ABYSSAL_THRONE = LHItems.Entry.of(
+                        "abyssal_throne",
+                        new AbyssalThrone()
                 )
                 .addModel()
                 .addEN()

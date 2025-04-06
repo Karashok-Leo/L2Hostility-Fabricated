@@ -20,7 +20,8 @@ public class PageSlotWidget extends SlotWidget
     @Override
     public EmiIngredient getStack()
     {
-        return this.manager.get(this.offset);
+        EmiStack stack = this.manager.get(this.offset);
+        return stack == null ? EmiStack.EMPTY : stack;
     }
 
     @Override

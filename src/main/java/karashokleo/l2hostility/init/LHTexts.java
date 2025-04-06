@@ -71,7 +71,7 @@ public enum LHTexts
     NIDHOGGUR("item.equipment.nidhoggur", "Mobs you kill will drop +%s%% loot per mob level", "击杀怪物掉落的所有掉落物根据怪物等级每级增加+%s%%", 1),
     POCKET_OF_RESTORATION("item.equipment.pocket_of_restoration", "Automatically put sealed item inside, unseal it, and put it back when finished.", "自动收纳被封印的物品，将其解除封印后放回原位", 0),
     LOOTING_CHARM("item.equipment.looting", "Enables some hostility trait drops. Check REI/EMI for detail.", "击杀带部分词条的生物时掉落额外奖励。查看REI/EMI了解详情", 0),
-    ABYSSAL_THORN("item.equipment.abyssal_thorn", "Mobs get all possible traits at their level, but with Curse of Envy, they will always drop trait symbols of those when killed", "怪物会获得当前等级下所有能获得的词条，但佩戴嫉妒诅咒时，必定掉落那些词条", 0),
+    ABYSSAL_THRONE("item.equipment.abyssal_throne", "Mobs get all possible traits at their level, but with Curse of Envy, they will always drop trait symbols of those when killed", "怪物会获得当前等级下所有能获得的词条，但佩戴嫉妒诅咒时，必定掉落那些词条", 0),
     DIVINITY_CROSS("item.equipment.divinity_cross", "Cleanse effect will not clear Lv.1 beneficial effects", "净化效果不会清除1级的正面效果", 0),
     DIVINITY_LIGHT("item.equipment.divinity_light", "Your adaptive level will stay at 0.", "玩家动态等级维持在0", 0),
     MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", "配置实体%s：将NoAI设为%s", 2),
