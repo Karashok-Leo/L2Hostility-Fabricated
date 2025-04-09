@@ -19,7 +19,7 @@ public class ClientConfig implements ConfigData
     public boolean overHeadRenderFullBright = true;
     @Comment("Overhead level color in decimal form, converted from hex form")
     public int overHeadLevelColor = 11184810;
-    @Comment("Overhead level color for mobs affected by abyssal thorn")
+    @Comment("Overhead level color for mobs affected by abyssal throne")
     public int overHeadLevelColorAbyss = 16733525;
     @Comment("Show nameplate style trait and name only when hovered")
     public boolean showOnlyWhenHovered = false;

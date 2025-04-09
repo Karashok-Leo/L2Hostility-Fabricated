@@ -48,7 +48,7 @@ public class ReprintTrait extends MobTrait
 
         for (var slot : EquipmentSlot.values())
         {
-            ItemStack equipped = event.getEntity().getEquippedStack(slot);
+            ItemStack equipped = entity.getEquippedStack(slot);
             if (equipped.isEmpty() ||
                 !equipped.hasEnchantments())
                 continue;
