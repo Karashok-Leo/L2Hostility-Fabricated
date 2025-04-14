@@ -58,6 +58,10 @@ public class EffectEvents
                     1 - curseLv * LHConfig.common().complements.properties.curseFactor,
                     0, 1
             );
+            if (factor == 0)
+            {
+                return false;
+            }
             float amount = event.getAmount();
             amount *= factor;
 
