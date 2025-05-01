@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.util;
 
+import io.github.fabricators_of_create.porting_lib.core.event.BaseEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.leobrary.effect.api.util.EffectUtil;
 import net.minecraft.entity.Entity;
@@ -14,6 +15,10 @@ public class EffectHelper
 {
     public static void forceAddEffectWithEvent(LivingEntity entity, StatusEffectInstance newEffect, Entity source)
     {
+        MobEffectEvent.Applicable event = new MobEffectEvent.Applicable(entity, newEffect);
+        event.sendEvent();
+        if (event.getResult() == BaseEvent.Result.DENY) return;
+
         StatusEffectInstance oldEffect = entity.getActiveStatusEffects().get(newEffect.getEffectType());
         if (EffectUtil.forceAddEffect(entity, newEffect, source))
             new MobEffectEvent.Added(entity, oldEffect, newEffect, source).sendEvent();

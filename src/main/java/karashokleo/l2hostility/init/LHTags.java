@@ -42,6 +42,7 @@ public class LHTags
     public static final TagKey<Item> DELICATE_BONE = createItemTag("delicate_bone");
 
     public static final TagKey<Enchantment> NO_DISPELL = createEnchantmentTag("no_dispell");
+    public static final TagKey<Enchantment> NO_REPRINT = createEnchantmentTag("no_reprint");
 
     public static final TagKey<StatusEffect> CLEANSE_BLACKLIST = createEffectTag("cleanse_blacklist");
     public static final TagKey<StatusEffect> WRATH_INVULNERABILITY = createEffectTag("wrath_invulnerability");
@@ -81,6 +82,17 @@ public class LHTags
                         LHEnchantments.SPLIT_SUPPRESS,
                         LHEnchantments.INSULATOR,
                         LHEnchantments.VANISH
+                );
+        LHGenerators.ENCHANTMENT_TAGS.getOrCreateContainer(NO_REPRINT)
+                .add(
+                        LHEnchantments.ETERNAL,
+                        LHEnchantments.ENCH_PROJECTILE,
+                        LHEnchantments.ENCH_FIRE,
+                        LHEnchantments.ENCH_ENVIRONMENT,
+                        LHEnchantments.ENCH_EXPLOSION,
+                        LHEnchantments.ENCH_MAGIC,
+                        LHEnchantments.ENCH_INVINCIBLE,
+                        LHEnchantments.ENCH_MATES
                 );
         LHGenerators.STATUS_EFFECT_TAGS.getOrCreateContainer(CLEANSE_BLACKLIST)
                 .add(

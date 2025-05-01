@@ -1,8 +1,10 @@
 package karashokleo.l2hostility.content.item.traits;
 
+import karashokleo.l2hostility.init.LHTags;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -37,6 +39,7 @@ public class ReprintHandler
     private static boolean allow(Map<Enchantment, Integer> map, Enchantment ench)
     {
         if (map.containsKey(ench)) return true;
+        if (Registries.ENCHANTMENT.getEntry(ench).isIn(LHTags.NO_REPRINT)) return false;
         for (var e : map.keySet())
             if (!e.canCombine(ench))
                 return false;

@@ -38,6 +38,7 @@ public class RingOfIncarceration extends SingleEpicTrinketItem
     {
         if (!entity.isSneaking()) return;
         if (entity.isSpectator()) return;
+        if (entity.getWorld().isClient()) return;
         // Default Entity Interact Distance: 3.0
         double reach = ReachEntityAttributes.getAttackRange(entity, 3.0);
         for (var e : entity.getWorld().getEntitiesByType(TypeFilter.instanceOf(LivingEntity.class), entity.getBoundingBox().expand(reach), e -> entity.distanceTo(e) < reach))

@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-06T15:49:52.8628206	L2 Hostility/Model Definitions
+// 1.20.1	2025-05-01T09:28:20.4964477	L2 Hostility/Model Definitions
 787903b9f0311061258da774b1ca33e23307b88a assets\l2hostility\models\item\soul_burner.json
 ba8303f3d0cf3332a374ead31a1187a77b1edc20 assets\l2hostility\models\item\triple_strip_cape.json
 54ec7d329a369b54157cf3d13348a880b9214075 assets\l2hostility\models\item\charm_of_looting_2.json
@@ -38,8 +38,8 @@ ded4776cf1eaf975cc7ca77275ebf889426ad164 assets\l2hostility\models\item\soul_fir
 47b1669ffc91d13e17f5d08ed2a34cd11ddeaaf9 assets\l2hostility\models\item\ai_config_wand.json
 aa8aac690c3ed7ba60e12b9deb043759f3a3c4ab assets\l2hostility\models\item\speedy.json
 9afeaa99a5ad5e82b0d3cf603151a8ef52bb5e43 assets\l2hostility\models\item\witch_charge.json
-ffd80ef17e54fcd7ef3e1d11a93804e50b6aa529 assets\l2hostility\models\item\cursed.json
 63af5339c69219b6b56d8f418cf08eef080434ce assets\l2hostility\models\block\hostility_spawner.json
+ffd80ef17e54fcd7ef3e1d11a93804e50b6aa529 assets\l2hostility\models\item\cursed.json
 d2efe4e44e894da824f242de24f6adaf8701c69d assets\l2hostility\models\item\shulkerate_block.json
 14bb6ee947837560e0c1233d0087d52eb8a3f4c1 assets\l2hostility\models\item\charm_of_looting_4.json
 d27e3585ff4b25ff01856e4f825651ac8aa6bef2 assets\l2hostility\blockstates\sculkium_block.json
@@ -64,9 +64,9 @@ daf50b250dc8c7ce6cb12a093b0dd1993c52e64f assets\l2hostility\models\item\drain.js
 ab6468a3edc27534ade0b63f4f810b2cce5e97ce assets\l2hostility\models\item\greed_of_nidhoggur.json
 9490a10afb4d159d34be10805e0cc02492130193 assets\l2hostility\models\item\miracle_ingot.json
 4b946676b9f080b4ad8ee512408e6ddc64372cff assets\l2hostility\models\block\sculkium_block.json
-68e7d5144c357b421964b2c26ba688790126b811 assets\l2hostility\models\item\dispell.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets\l2hostility\models\block\chaos_block.json
 e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets\l2hostility\models\item\wither.json
+68e7d5144c357b421964b2c26ba688790126b811 assets\l2hostility\models\item\dispell.json
 1739df0d5d6c03e3738f188a9606b095b5198c01 assets\l2hostility\models\item\adaptive.json
 38ebdcb219de6ddebd2181e8c53d6c00711a4b1f assets\l2hostility\models\item\bottle_of_sanity.json
 c22e95a1e35e2fbf55620102f54f37510eb6a704 assets\l2hostility\models\item\poseidite_block.json
@@ -94,8 +94,8 @@ b44737985bd10b9bf3c657dbf0fd0885062fdb83 assets\l2hostility\models\item\totemic_
 d6f0641018234ca1b5984f6501c165892d066091 assets\l2hostility\models\item\poison.json
 3c1a8a1fb6d93cb38feac867c6a0cae28b6f980e assets\l2hostility\models\item\curse_of_gluttony.json
 7a532f277c3ec138c38afb77fbb7877cb637fc35 assets\l2hostility\models\item\miracle_block.json
-a894284aa81bcfd2f20c9ce92018f0751d493008 assets\l2hostility\models\item\hostility_essence.json
 afc112097770c1a42201c48a6fcfbc75243485c8 assets\l2hostility\models\item\platinum_star.json
+a894284aa81bcfd2f20c9ce92018f0751d493008 assets\l2hostility\models\item\hostility_essence.json
 f39de621f7fb9484531ccbb1c2afa815ee4d9a96 assets\l2hostility\models\item\protection.json
 f13f7d5f287cd6c420cea695c84dc0f2377b4a78 assets\l2hostility\models\item\shulkerate_ingot.json
 4104394dfd7f01487f4766e82c90c707b98c7732 assets\l2hostility\models\item\sculkium_block.json
@@ -111,8 +111,8 @@ c31f068b4b2a417a624aaa2dda92bff9b69aef49 assets\l2hostility\models\item\abrahada
 cdab0ef3aed85ef59a2e0f6437d745dd45eaffc8 assets\l2hostility\models\item\life_essence.json
 f72a44d199f5c99ecb954baef47efc23468de1d3 assets\l2hostility\models\item\gravity.json
 90d283cf96c27a6098eb1cad5b5a8e9665ff352e assets\l2hostility\models\item\infinity_glove.json
-879dfafb1d12639f8f4706e68b0f56775d3b8e09 assets\l2hostility\models\item\poseidite_nugget.json
 d2ba5b6f2c4d1704590d3b54e675788f8d47cfb1 assets\l2hostility\models\item\chaos_block.json
+879dfafb1d12639f8f4706e68b0f56775d3b8e09 assets\l2hostility\models\item\poseidite_nugget.json
 f315d2aea7870807f68f0d91917dd3d602b4f8c6 assets\l2hostility\models\item\divinity_light.json
 58895a5b0bd596fcf050841c31c4595449a8c1d9 assets\l2hostility\models\item\target_select_wand.json
 43c4e173ed5bf8b1b6a1a2a3c295bfee364b6cef assets\l2hostility\models\item\levitation.json
@@ -130,8 +130,8 @@ ed5550c308958c62ec675a8c592c8d8fc43e40c0 assets\l2hostility\models\item\oddeyes_
 89b6fe18d01e36241b1351f4a39f40e0458bde5c assets\l2hostility\models\item\sculkium_nugget.json
 84f634cc35c3739a82b7e3190849c839bdf51700 assets\l2hostility\models\item\explosion_shard.json
 a05bb7b11be51e5184811d6a39397b6abb39aa49 assets\l2hostility\models\item\ragnarok.json
-79df8d7f57c20e395ef38ac80ae4f5c351e3823c assets\l2hostility\models\item\arena.json
 e16e74a184b0503c495c91a1ccb4a10449fd94c3 assets\l2hostility\models\item\chaos_ingot.json
+79df8d7f57c20e395ef38ac80ae4f5c351e3823c assets\l2hostility\models\item\arena.json
 ba69cec47e6a481ee3a839b4b203736c07085f0e assets\l2hostility\models\item\hostility_spawner.json
 f1bbc0e59c9ecc01c49d9855770360462beb86e5 assets\l2hostility\models\block\miracle_block.json
 f8c0c7e966fec3a4a914d67237bd38a9b42a8a7a assets\l2hostility\models\item\ring_of_reflection.json

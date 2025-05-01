@@ -35,6 +35,7 @@ public class EffectEvents
         MobEffectEvent.ADDED.register(event ->
         {
             LivingEntity entity = event.getEntity();
+            if (entity.getWorld().isClient()) return;
             if (entity.hasStatusEffect(LHEffects.CLEANSE) &&
                 !CleanseEffect.isInCleanseBlacklist(event.getEffectInstance(), entity))
                 GenericEvents.schedule(() -> CleanseEffect.clearOnEntity(entity));
