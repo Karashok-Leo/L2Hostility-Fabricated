@@ -56,8 +56,11 @@ public class PocketOfRestoration extends SingleEpicTrinketItem
                 {
                     access.set(result);
                     stack.getNbt().remove(ROOT);
-                } else if (entity instanceof PlayerEntity player && player.giveItemStack(result))
+                } else if (entity instanceof PlayerEntity player &&
+                           player.giveItemStack(result))
+                {
                     stack.getNbt().remove(ROOT);
+                }
             }
             return;
         }

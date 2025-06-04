@@ -4,10 +4,13 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEve
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
+import karashokleo.l2hostility.content.logic.ReflectState;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
+import karashokleo.leobrary.damage.api.state.DamageStateProvider;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -22,19 +25,40 @@ public class ReflectTrait extends MobTrait
         super(Formatting.DARK_RED);
     }
 
+    private void doReflect(LivingEntity target, LivingEntity attacker, float amount)
+    {
+        DamageSource source = attacker.getDamageSources().indirectMagic(null, attacker);
+        ((DamageStateProvider) source).addState(new ReflectState());
+        target.damage(source, amount);
+    }
+
     @Override
     public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
         // 距离小于reflectRange时触发
-        if (!(event.getSource().getAttacker() instanceof LivingEntity le))
+        DamageSource source = event.getSource();
+        if (!(source.getAttacker() instanceof LivingEntity le))
+        {
             return;
+        }
         if (entity.distanceTo(le) >= LHConfig.common().traits.reflectRange)
+        {
             return;
-        if (event.getSource().isIn(LHTags.MAGIC) &&
+        }
+        // avoid recursive damage
+        if (((DamageStateProvider) source).hasState(ReflectState.PREDICATE))
+        {
+            return;
+        }
+        if (source.isIn(LHTags.MAGIC) &&
             !LHConfig.common().traits.reflectMagic)
+        {
             return;
+        }
         if (ReflectTrinket.canReflect(le, this))
+        {
             return;
+        }
         float factor = (float) (level * LHConfig.common().traits.reflectFactor);
 
         float reflectAmount = event.getAmount() * factor;
@@ -45,7 +69,7 @@ public class ReflectTrait extends MobTrait
         }
         float finalAmount = reflectAmount;
 
-        GenericEvents.schedule(() -> le.damage(entity.getDamageSources().indirectMagic(null, entity), finalAmount));
+        GenericEvents.schedule(() -> doReflect(le, entity, finalAmount));
     }
 
     @Override

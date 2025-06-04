@@ -32,6 +32,6 @@ public record TrinketSlotAccess(LivingEntity le, String group, String name, int 
     @Override
     public String getID()
     {
-        return "curios/" + group + "/" + name + "/" + slot;
+        return "trinket/" + group + "/" + name + "/" + slot;
     }
 }

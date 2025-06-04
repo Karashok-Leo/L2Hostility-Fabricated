@@ -342,7 +342,7 @@
   "l2hostility.command.invalid_trait": "%s不是正确的词条id",
   "l2hostility.command.mob.success": "指令已对%s个怪物起效",
   "l2hostility.command.player.fail": "指令无目标或者无效",
-  "l2hostility.command.player.get_base": "%s的基础难度等级位Lv.%s",
+  "l2hostility.command.player.get_base": "%s的基础难度等级为Lv.%s",
   "l2hostility.command.player.get_dim": "%s造访过%s个维度",
   "l2hostility.command.player.get_total": "%s综合难度等级为Lv.%s",
   "l2hostility.command.player.success": "指令已对%s个玩家起效",

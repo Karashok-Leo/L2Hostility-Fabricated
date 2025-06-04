@@ -111,7 +111,7 @@ public enum LHTexts
     TOOLTIP_LOOT_REQUIRED("compat.required", "Requires you to equip %s while killing mobs", "需要佩戴[%s]饰品才能掉落", 1),
     COMMAND_PLAYER_SUCCEED("command.player.success", "Performed actions on %s players", "指令已对%s个玩家起效", 1),
     COMMAND_PLAYER_FAIL("command.player.fail", "Command has no target or no effect", "指令无目标或者无效", 0),
-    COMMAND_PLAYER_GET_BASE("command.player.get_base", "%s has base difficulty level %s", "%s的基础难度等级位Lv.%s", 2),
+    COMMAND_PLAYER_GET_BASE("command.player.get_base", "%s has base difficulty level %s", "%s的基础难度等级为Lv.%s", 2),
     COMMAND_PLAYER_GET_TOTAL("command.player.get_total", "%s has overall difficulty level %s", "%s综合难度等级为Lv.%s", 2),
     COMMAND_PLAYER_GET_DIM("command.player.get_dim", "%s has visited %s dimensions", "%s造访过%s个维度", 2),
     COMMAND_PLAYER_GET_TRAIT_CAP("command.player.trait_cap", "The max rank %s has killed is rank %s", "%s击杀的最高阶级词条为阶级%s", 2),
