@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.item.consumable;
 
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.logic.LevelEditor;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
@@ -26,7 +27,10 @@ public class BottleOfSanity extends DrinkableBottleItem
         PlayerDifficulty cap = PlayerDifficulty.get(player);
         LevelEditor editor = cap.getLevelEditor();
         editor.setBase(0);
-        cap.dimensions.clear();
+        if (LHConfig.common().items.bottleOfSanityClearDimensions)
+        {
+            cap.dimensions.clear();
+        }
         PlayerDifficulty.sync(player);
     }
 

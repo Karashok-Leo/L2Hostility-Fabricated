@@ -143,6 +143,8 @@ public class CommonConfig implements ConfigData
 
     public static class Items
     {
+        @Comment("Allow Bottle of Sanity to clear dimension difficulty")
+        public boolean bottleOfSanityClearDimensions = false;
         @Comment("Number of level to add when using bottle of curse")
         public int bottleOfCurseLevel = 50;
         @Comment("Minimum duration for witch charge to be effective, in ticks")
