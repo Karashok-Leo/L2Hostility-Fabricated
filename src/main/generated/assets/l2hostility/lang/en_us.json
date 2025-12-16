@@ -549,6 +549,7 @@
   "text.autoconfig.l2hostility.option.common.effects": "effects",
   "text.autoconfig.l2hostility.option.common.effects.cleansePredicate": "cleansePredicate",
   "text.autoconfig.l2hostility.option.common.enableEntitySpecificDatapack": "enableEntitySpecificDatapack",
+  "text.autoconfig.l2hostility.option.common.enableStructureSpecificDatapack": "enableStructureSpecificDatapack",
   "text.autoconfig.l2hostility.option.common.enchantments": "enchantments",
   "text.autoconfig.l2hostility.option.common.items": "items",
   "text.autoconfig.l2hostility.option.common.items.abrahadabraExtraLevel": "abrahadabraExtraLevel",
