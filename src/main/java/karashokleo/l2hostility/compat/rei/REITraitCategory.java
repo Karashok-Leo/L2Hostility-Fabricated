@@ -24,19 +24,19 @@ public class REITraitCategory implements DisplayCategory<REITraitDisplay>
     {
         List<Widget> widgets = Lists.newArrayList();
         Widget entityWidget = Widgets.createDrawableWidget((context, mouseX, mouseY, delta) ->
-                display.getEntityWrapper().render(context, bounds.getCenterX(), bounds.getY(), mouseX, mouseY));
+            display.getEntityWrapper().render(context, bounds.getCenterX(), bounds.getY(), mouseX, mouseY));
         widgets.add(entityWidget);
         int width = 8 * 18 + 4;
         Rectangle rectangle = new Rectangle(
-                bounds.getCenterX() - width / 2,
-                bounds.getY() + 28,
-                width,
-                96
+            bounds.getCenterX() - width / 2,
+            bounds.getY() + 28,
+            width,
+            96
         );
         widgets.add(Widgets.createSlotBase(rectangle));
         List<Slot> map = CollectionUtils.map(
-                display.getTraits(),
-                (t) -> Widgets.createSlot(new Point(0, 0)).disableBackground().entry(t)
+            display.getTraits(),
+            (t) -> Widgets.createSlot(new Point(0, 0)).disableBackground().entry(t)
         );
         widgets.add(new REIScrollableSlotsWidget(rectangle, map));
         return widgets;

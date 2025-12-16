@@ -33,7 +33,10 @@ public class DementorTrait extends LegendaryTrait
     public void onDamageSourceCreate(MobDifficulty difficulty, LivingEntity entity, int level, DamageSource damageSource, RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Vec3d position)
     {
         var data = difficulty.getOrCreateData(getId(), Data::new);
-        if (data.bypassCooldown > 0) return;
+        if (data.bypassCooldown > 0)
+        {
+            return;
+        }
 
         data.bypassCooldown = LHConfig.common().traits.dementorBypassCooldown;
         damageSource.setBypassArmor();
@@ -47,7 +50,9 @@ public class DementorTrait extends LegendaryTrait
         if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
             source.isIn(DamageTypeTags.BYPASSES_EFFECTS) ||
             source.isIn(LHTags.MAGIC))
+        {
             return;
+        }
         float amount = event.getAmount();
         double factor = LHConfig.common().traits.dementorImmuneFactor;
         factor = ModifyDementorImmuneFactorCallback.EVENT.invoker().modifyDementorImmuneFactor(difficulty, entity, level, source, amount, factor);
@@ -59,17 +64,19 @@ public class DementorTrait extends LegendaryTrait
     {
         var data = difficulty.getOrCreateData(getId(), Data::new);
         if (data.bypassCooldown > 0)
+        {
             data.bypassCooldown--;
+        }
     }
 
     @Override
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                Text.literal((int) Math.round(LHConfig.common().traits.dispellImmuneFactor * 100) + "")
-                        .formatted(Formatting.AQUA),
-                Text.literal(LHConfig.common().traits.dementorBypassCooldown / 20 + "")
-                        .formatted(Formatting.AQUA)
+            Text.literal((int) Math.round(LHConfig.common().traits.dispellImmuneFactor * 100) + "")
+                .formatted(Formatting.AQUA),
+            Text.literal(LHConfig.common().traits.dementorBypassCooldown / 20 + "")
+                .formatted(Formatting.AQUA)
         ).formatted(Formatting.GRAY));
     }
 

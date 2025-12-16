@@ -29,9 +29,14 @@ public class DifficultyConfig
     public EntityConfig.Config get(Identifier level, EntityType<?> type)
     {
         if (!LHConfig.common().enableEntitySpecificDatapack)
+        {
             return null;
+        }
         var list = levelDefaultTraits.get(level);
-        if (list == null) return null;
+        if (list == null)
+        {
+            return null;
+        }
         EntityConfig.Config def = null;
         for (var e : list)
         {
@@ -50,15 +55,17 @@ public class DifficultyConfig
     public static Config defaultConfig()
     {
         if (DEFAULT == null)
+        {
             DEFAULT = new Config(
-                    0,
-                    LHConfig.common().scaling.defaultLevelBase,
-                    LHConfig.common().scaling.defaultTraitCountCap,
-                    LHConfig.common().scaling.defaultLevelVar,
-                    LHConfig.common().scaling.defaultLevelScale,
-                    1,
-                    1
+                0,
+                LHConfig.common().scaling.defaultLevelBase,
+                LHConfig.common().scaling.defaultTraitCountCap,
+                LHConfig.common().scaling.defaultLevelVar,
+                LHConfig.common().scaling.defaultLevelScale,
+                1,
+                1
             );
+        }
         return DEFAULT;
     }
 
@@ -88,18 +95,20 @@ public class DifficultyConfig
     public final DifficultyConfig putBiome(int min, int base, double var, double scale, RegistryKey<Biome>... keys)
     {
         for (var key : keys)
+        {
             biomeMap.put(key.getValue(), new Config(min, base, 0, var, scale, 1, 1));
+        }
         return this;
     }
 
     public record Config(
-            int min,
-            int base,
-            int trait_count_cap,
-            double variation,
-            double scale,
-            double apply_chance,
-            double trait_chance
+        int min,
+        int base,
+        int trait_count_cap,
+        double variation,
+        double scale,
+        double apply_chance,
+        double trait_chance
     )
     {
     }

@@ -25,7 +25,9 @@ public class CorrosionTrait extends SlotIterateDamageTrait
     {
         int count = process(level, entity, event.getEntity());
         if (count < level)
+        {
             event.setAmount(event.getAmount() * (float) (LHConfig.common().traits.corrosionDamage * level * (level - count)));
+        }
     }
 
     @Override
@@ -38,12 +40,12 @@ public class CorrosionTrait extends SlotIterateDamageTrait
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        mapLevel(i -> Text.literal(i + "")
-                                .formatted(Formatting.AQUA)),
-                        mapLevel(i -> Text.literal(Math.round(LHConfig.common().traits.corrosionDurability * i * 100) + "%")
-                                .formatted(Formatting.AQUA)),
-                        mapLevel(i -> Text.literal(Math.round(LHConfig.common().traits.corrosionDamage * i * 100) + "%")
-                                .formatted(Formatting.AQUA)))
-                .formatted(Formatting.GRAY));
+                mapLevel(i -> Text.literal(i + "")
+                    .formatted(Formatting.AQUA)),
+                mapLevel(i -> Text.literal(Math.round(LHConfig.common().traits.corrosionDurability * i * 100) + "%")
+                    .formatted(Formatting.AQUA)),
+                mapLevel(i -> Text.literal(Math.round(LHConfig.common().traits.corrosionDamage * i * 100) + "%")
+                    .formatted(Formatting.AQUA)))
+            .formatted(Formatting.GRAY));
     }
 }

@@ -80,13 +80,19 @@ public class TraitConfig
             if (whitelistEntries.isPresent() &&
                 whitelistEntries.get().size() > 0)
             {
-                if (type.isIn(whitelist)) return true;
+                if (type.isIn(whitelist))
+                {
+                    return true;
+                }
                 def = false;
             }
             if (blacklistEntries.isPresent() &&
                 blacklistEntries.get().size() > 0)
             {
-                if (type.isIn(blacklist)) return false;
+                if (type.isIn(blacklist))
+                {
+                    return false;
+                }
                 def = true;
             }
             return def;

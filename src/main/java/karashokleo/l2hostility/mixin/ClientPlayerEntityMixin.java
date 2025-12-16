@@ -11,24 +11,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ClientPlayerEntityMixin
 {
     @Inject(
-            method = "updateHealth",
-            at = @At("TAIL")
+        method = "updateHealth",
+        at = @At("TAIL")
     )
     private void inject_updateHealth_stableBody(float health, CallbackInfo ci)
     {
         ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
         if (EntityFeature.STABLE_BODY.test(player))
+        {
             player.hurtTime = 0;
+        }
     }
 
     @Inject(
-            method = "handleStatus",
-            at = @At("TAIL")
+        method = "handleStatus",
+        at = @At("TAIL")
     )
     private void inject_handleStatus_stableBody(byte status, CallbackInfo ci)
     {
         ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
         if (EntityFeature.STABLE_BODY.test(player))
+        {
             player.hurtTime = 0;
+        }
     }
 }

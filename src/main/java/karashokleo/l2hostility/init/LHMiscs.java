@@ -24,19 +24,19 @@ public class LHMiscs
     public static void register()
     {
         GROUP.setIcon(() -> LHTraits.ENDER.asItem().getDefaultStack())
-                .addEN("L2 Hostility")
-                .addZH("莱特兰-恶意")
-                .register();
+            .addEN("L2 Hostility")
+            .addZH("莱特兰-恶意")
+            .register();
 
         TRAITS.setIcon(() -> LHTraits.FIERY.asItem().getDefaultStack())
-                .addEN("L2 Hostility - Traits")
-                .addZH("莱特兰-恶意-词条")
-                .register();
+            .addEN("L2 Hostility - Traits")
+            .addZH("莱特兰-恶意-词条")
+            .register();
 
         Registry.register(
-                Registries.ATTRIBUTE,
-                L2Hostility.id("level"),
-                ADD_LEVEL
+            Registries.ATTRIBUTE,
+            L2Hostility.id("level"),
+            ADD_LEVEL
         );
 
         Registry.register(Registries.SCREEN_HANDLER, L2Hostility.id("equipments"), EQUIPMENTS);

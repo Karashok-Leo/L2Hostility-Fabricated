@@ -47,9 +47,13 @@ public class ChunkDifficulty implements RegionalDifficultyModifier
     {
         Chunk chunk = world.getChunk(x, z, ChunkStatus.CARVERS, false);
         if (chunk instanceof WrapperProtoChunk im)
+        {
             chunk = im.getWrappedChunk();
+        }
         if (chunk instanceof WorldChunk c)
+        {
             return get(c);
+        }
         return Optional.empty();
     }
 
@@ -92,7 +96,9 @@ public class ChunkDifficulty implements RegionalDifficultyModifier
         BlockPos pos = mob.getBlockPos();
         int index = -owner.getBottomSectionCoord() + (pos.getY() >> 4);
         if (index >= 0 && index < sections.length)
+        {
             sections[index].addKillHistory(this, player, mob, diff);
+        }
     }
 
     // 初始化SectionDifficulty数组
@@ -110,7 +116,9 @@ public class ChunkDifficulty implements RegionalDifficultyModifier
             }
         }
         for (int i = 0; i < size; i++)
+        {
             sections[i].section = owner.getSection(i);
+        }
         sync();
     }
 

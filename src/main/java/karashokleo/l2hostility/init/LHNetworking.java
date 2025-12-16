@@ -55,7 +55,9 @@ public class LHNetworking
     public static <T extends SimplePacketBase> void toTracking(WorldChunk chunk, T packet)
     {
         if (chunk.getWorld() instanceof ServerWorld world)
+        {
             PlayerLookup.tracking(world, chunk.getPos()).forEach(player -> ServerPlayNetworking.send(player, HANDLER.getPacket(packet)));
+        }
     }
 
     public static <T extends SimplePacketBase> void toServer(T packet)

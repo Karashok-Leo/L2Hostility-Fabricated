@@ -25,67 +25,67 @@ public class RegionCommands
     public static LiteralArgumentBuilder<ServerCommandSource> build()
     {
         return literal("region")
-                .then(section())
-                .then(area());
+            .then(section())
+            .then(area());
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> section()
     {
         return literal("section")
-                .then(argument("pos", BlockPosArgumentType.blockPos())
-                        .then(literal("set_base")
-                                .requires(e -> e.hasPermissionLevel(2))
-                                .then(argument("level", IntegerArgumentType.integer(0))
-                                        .executes(sectionWorld((section, level, pos, lv) ->
-                                                section.getLevelEditor(level, pos).setBase(lv)))))
-                        .then(literal("add_base")
-                                .requires(e -> e.hasPermissionLevel(2))
-                                .then(argument("level", IntegerArgumentType.integer())
-                                        .executes(sectionWorld((section, level, pos, lv) ->
-                                                section.getLevelEditor(level, pos).addBase(lv)))))
-                        .then(literal("set_clear")
-                                .requires(e -> e.hasPermissionLevel(2))
-                                .executes(sectionRun((section, level, pos) ->
-                                        section.setClear(ChunkDifficulty.at(level, pos).orElseThrow(), pos))))
-                        .then(literal("set_unclear")
-                                .requires(e -> e.hasPermissionLevel(2))
-                                .executes(sectionRun((section, level, pos) ->
-                                        section.setUnclear(ChunkDifficulty.at(level, pos).orElseThrow(), pos))))
-                        .then(literal("get_base").executes(sectionGet((section, level, pos) ->
-                                LHTexts.COMMAND_REGION_GET_BASE.get(section.getLevelEditor(level, pos).getBase()))))
-                        .then(literal("get_total").executes(sectionGet((section, level, pos) ->
-                                LHTexts.COMMAND_REGION_GET_TOTAL.get(section.getLevelEditor(level, pos).getTotal()))))
-                        .then(literal("get_scale").executes(sectionGet((section, level, pos) ->
-                                LHTexts.COMMAND_REGION_GET_SCALE.get(section.getScale(level, pos)))))
-                        .then(literal("is_clear").executes(sectionGet((section, level, pos) ->
-                                section.isCleared() ? LHTexts.COMMAND_REGION_CLEAR.get() :
-                                        LHTexts.COMMAND_REGION_NOT_CLEAR.get()))
-                        )
-                );
+            .then(argument("pos", BlockPosArgumentType.blockPos())
+                .then(literal("set_base")
+                    .requires(e -> e.hasPermissionLevel(2))
+                    .then(argument("level", IntegerArgumentType.integer(0))
+                        .executes(sectionWorld((section, level, pos, lv) ->
+                            section.getLevelEditor(level, pos).setBase(lv)))))
+                .then(literal("add_base")
+                    .requires(e -> e.hasPermissionLevel(2))
+                    .then(argument("level", IntegerArgumentType.integer())
+                        .executes(sectionWorld((section, level, pos, lv) ->
+                            section.getLevelEditor(level, pos).addBase(lv)))))
+                .then(literal("set_clear")
+                    .requires(e -> e.hasPermissionLevel(2))
+                    .executes(sectionRun((section, level, pos) ->
+                        section.setClear(ChunkDifficulty.at(level, pos).orElseThrow(), pos))))
+                .then(literal("set_unclear")
+                    .requires(e -> e.hasPermissionLevel(2))
+                    .executes(sectionRun((section, level, pos) ->
+                        section.setUnclear(ChunkDifficulty.at(level, pos).orElseThrow(), pos))))
+                .then(literal("get_base").executes(sectionGet((section, level, pos) ->
+                    LHTexts.COMMAND_REGION_GET_BASE.get(section.getLevelEditor(level, pos).getBase()))))
+                .then(literal("get_total").executes(sectionGet((section, level, pos) ->
+                    LHTexts.COMMAND_REGION_GET_TOTAL.get(section.getLevelEditor(level, pos).getTotal()))))
+                .then(literal("get_scale").executes(sectionGet((section, level, pos) ->
+                    LHTexts.COMMAND_REGION_GET_SCALE.get(section.getScale(level, pos)))))
+                .then(literal("is_clear").executes(sectionGet((section, level, pos) ->
+                    section.isCleared() ? LHTexts.COMMAND_REGION_CLEAR.get() :
+                        LHTexts.COMMAND_REGION_NOT_CLEAR.get()))
+                )
+            );
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> area()
     {
         return literal("area")
-                .requires(e -> e.hasPermissionLevel(2))
-                .then(argument("from", BlockPosArgumentType.blockPos())
-                        .then(argument("to", BlockPosArgumentType.blockPos())
-                                .then(literal("set_base")
-                                        .then(argument("level", IntegerArgumentType.integer(0))
-                                                .executes(areaWorld((section, level, pos, lv) ->
-                                                        section.getLevelEditor(level, pos).setBase(lv)))))
-                                .then(literal("add_base")
-                                        .then(argument("level", IntegerArgumentType.integer())
-                                                .executes(areaWorld((section, level, pos, lv) ->
-                                                        section.getLevelEditor(level, pos).addBase(lv)))))
-                                .then(literal("set_clear")
-                                        .executes(areaRun((section, level, pos) ->
-                                                section.setClear(ChunkDifficulty.at(level, pos).orElseThrow(), pos))))
-                                .then(literal("set_unclear")
-                                        .executes(areaRun((section, level, pos) ->
-                                                section.setUnclear(ChunkDifficulty.at(level, pos).orElseThrow(), pos))))
-                        )
-                );
+            .requires(e -> e.hasPermissionLevel(2))
+            .then(argument("from", BlockPosArgumentType.blockPos())
+                .then(argument("to", BlockPosArgumentType.blockPos())
+                    .then(literal("set_base")
+                        .then(argument("level", IntegerArgumentType.integer(0))
+                            .executes(areaWorld((section, level, pos, lv) ->
+                                section.getLevelEditor(level, pos).setBase(lv)))))
+                    .then(literal("add_base")
+                        .then(argument("level", IntegerArgumentType.integer())
+                            .executes(areaWorld((section, level, pos, lv) ->
+                                section.getLevelEditor(level, pos).addBase(lv)))))
+                    .then(literal("set_clear")
+                        .executes(areaRun((section, level, pos) ->
+                            section.setClear(ChunkDifficulty.at(level, pos).orElseThrow(), pos))))
+                    .then(literal("set_unclear")
+                        .executes(areaRun((section, level, pos) ->
+                            section.setUnclear(ChunkDifficulty.at(level, pos).orElseThrow(), pos))))
+                )
+            );
     }
 
     private static Command<ServerCommandSource> sectionWorld(SectionWorldCommand cmd)
@@ -95,7 +95,10 @@ public class RegionCommands
             int level = ctx.getArgument("level", Integer.class);
             BlockPos sel = BlockPosArgumentType.getLoadedBlockPos(ctx, "pos");
             var e = SectionDifficulty.sectionAt(ctx.getSource().getWorld(), sel);
-            if (e.isEmpty()) throw BlockPosArgumentType.UNLOADED_EXCEPTION.create();
+            if (e.isEmpty())
+            {
+                throw BlockPosArgumentType.UNLOADED_EXCEPTION.create();
+            }
             if (!LHConfig.common().scaling.allowSectionDifficulty)
             {
                 ctx.getSource().sendMessage(LHTexts.COMMAND_REGION_LOCAL_OFF.get().formatted(Formatting.RED));
@@ -113,7 +116,10 @@ public class RegionCommands
         {
             BlockPos sel = BlockPosArgumentType.getLoadedBlockPos(ctx, "pos");
             var e = SectionDifficulty.sectionAt(ctx.getSource().getWorld(), sel);
-            if (e.isEmpty()) throw BlockPosArgumentType.UNLOADED_EXCEPTION.create();
+            if (e.isEmpty())
+            {
+                throw BlockPosArgumentType.UNLOADED_EXCEPTION.create();
+            }
             cmd.run(e.get(), ctx.getSource().getWorld(), sel);
             ctx.getSource().sendMessage(LHTexts.COMMAND_REGION_SUCCEED.get());
             return 0;
@@ -126,7 +132,10 @@ public class RegionCommands
         {
             BlockPos sel = BlockPosArgumentType.getLoadedBlockPos(ctx, "pos");
             var e = SectionDifficulty.sectionAt(ctx.getSource().getWorld(), sel);
-            if (e.isEmpty()) throw BlockPosArgumentType.UNLOADED_EXCEPTION.create();
+            if (e.isEmpty())
+            {
+                throw BlockPosArgumentType.UNLOADED_EXCEPTION.create();
+            }
             ctx.getSource().sendMessage(cmd.run(e.get(), ctx.getSource().getWorld(), sel));
             return 0;
         };

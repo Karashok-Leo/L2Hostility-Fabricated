@@ -13,13 +13,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class InGameOverlayRendererMixin
 {
     @Inject(
-            method = "renderFireOverlay",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "renderFireOverlay",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private static void inject_renderFireOverlay(MinecraftClient client, MatrixStack matrices, CallbackInfo ci)
     {
         if (EntityFeature.FIRE_REJECT.test(client.player))
+        {
             ci.cancel();
+        }
     }
 }

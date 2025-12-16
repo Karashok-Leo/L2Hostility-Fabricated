@@ -34,13 +34,19 @@ public abstract class PushPullTrait extends LegendaryTrait
     protected double getProcessedStrength(LivingEntity target, double dist)
     {
         if (ReflectTrinket.canReflect(target, this))
+        {
             return 0;
+        }
         double strength = getStrength(dist);
         int lv = 0;
         for (var armor : target.getArmorItems())
+        {
             lv += EnchantmentHelper.getLevel(LHEnchantments.INSULATOR, armor);
+        }
         if (lv > 0)
+        {
             strength *= Math.pow(LHConfig.common().items.insulatorFactor, lv);
+        }
         return strength;
     }
 
@@ -49,19 +55,25 @@ public abstract class PushPullTrait extends LegendaryTrait
     {
         int r = getRange();
         List<? extends LivingEntity> list = mob.getWorld()
-                .getEntitiesByType(
-                        TypeFilter.instanceOf(LivingEntity.class),
-                        mob.getBoundingBox().expand(r),
-                        e -> e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode &&
-                             !pl.isSpectator() ||
-                             e instanceof MobEntity m && m.getTarget() == mob
-                );
+            .getEntitiesByType(
+                TypeFilter.instanceOf(LivingEntity.class),
+                mob.getBoundingBox().expand(r),
+                e -> e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode &&
+                    !pl.isSpectator() ||
+                    e instanceof MobEntity m && m.getTarget() == mob
+            );
         for (var e : list)
         {
             double dist = mob.distanceTo(e) / r;
-            if (dist > 1) return; // 范围形状从立方体变为球
+            if (dist > 1)
+            {
+                return; // 范围形状从立方体变为球
+            }
             double strength = getProcessedStrength(e, dist);
-            if (strength == 0) continue;
+            if (strength == 0)
+            {
+                continue;
+            }
             Vec3d vec = e.getPos().subtract(mob.getPos()).normalize().multiply(strength);
             e.addVelocity(vec.x, vec.y, vec.z);
         }

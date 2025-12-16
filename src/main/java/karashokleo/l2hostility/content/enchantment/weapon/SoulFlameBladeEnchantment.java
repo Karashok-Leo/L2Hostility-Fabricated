@@ -12,9 +12,9 @@ public class SoulFlameBladeEnchantment extends AbstractBladeEnchantment
     public SoulFlameBladeEnchantment()
     {
         super(
-                Enchantment.Rarity.VERY_RARE,
-                EnchantmentTarget.WEAPON,
-                new EquipmentSlot[]{EquipmentSlot.MAINHAND}
+            Enchantment.Rarity.VERY_RARE,
+            EnchantmentTarget.WEAPON,
+            new EquipmentSlot[]{EquipmentSlot.MAINHAND}
         );
     }
 

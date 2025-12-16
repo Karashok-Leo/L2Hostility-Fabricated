@@ -41,7 +41,10 @@ public class EffectBooster
             if (pred.test(e.getEffectType()))
             {
                 int current = e.getDuration();
-                if (current < min) continue;
+                if (current < min)
+                {
+                    continue;
+                }
                 int max = Math.min(maxTime, (int) (current * factor));
                 if (max > current)
                 {
@@ -61,7 +64,10 @@ public class EffectBooster
             if (e.getEffectType().getCategory() == StatusEffectCategory.HARMFUL)
             {
                 int current = e.getDuration();
-                if (current < min) continue;
+                if (current < min)
+                {
+                    continue;
+                }
                 StatusEffectInstance newEffect = new StatusEffectInstanceBuilder(e).setDuration(StatusEffectInstance.INFINITE).build();
                 target.setStatusEffect(newEffect, null);
             }

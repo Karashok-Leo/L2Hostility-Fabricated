@@ -31,13 +31,29 @@ public class RagnarokTrait extends LegendaryTrait
     private static boolean allowSeal(EntitySlotAccess access)
     {
         ItemStack stack = access.get();
-        if (stack.isEmpty()) return false;
-        if (stack.isOf(MiscItems.SEAL)) return false;
-        if (stack.isIn(LHTags.NO_SEAL)) return false;
+        if (stack.isEmpty())
+        {
+            return false;
+        }
+        if (stack.isOf(MiscItems.SEAL))
+        {
+            return false;
+        }
+        if (stack.isIn(LHTags.NO_SEAL))
+        {
+            return false;
+        }
         if (!LHConfig.common().traits.ragnarokSealBackpack)
-            if (Registries.ITEM.getId(stack.getItem()).toString().contains("backpack")) return false;
+        {
+            if (Registries.ITEM.getId(stack.getItem()).toString().contains("backpack"))
+            {
+                return false;
+            }
+        }
         if (!LHConfig.common().traits.ragnarokSealSlotAdder)
+        {
             return !TrinketCompat.isSlotAdder(access);
+        }
         return true;
     }
 
@@ -45,14 +61,23 @@ public class RagnarokTrait extends LegendaryTrait
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         var data = difficulty.getOrCreateData(getId(), Data::new);
-        if (data.cooldown > 0) return;
+        if (data.cooldown > 0)
+        {
+            return;
+        }
 
         List<EntitySlotAccess> list = new ArrayList<>(TrinketCompat.getItemAccess(event.getEntity())
-                .stream().filter(RagnarokTrait::allowSeal).toList());
-        if (list.isEmpty()) return;
+            .stream().filter(RagnarokTrait::allowSeal).toList());
+        if (list.isEmpty())
+        {
+            return;
+        }
 
         int count = Math.min(level * LHConfig.common().traits.ragnarokCount, list.size());
-        if (count <= 0) return;
+        if (count <= 0)
+        {
+            return;
+        }
         count = entity.getRandom().nextInt(count) + 1;
 
         data.cooldown = LHConfig.common().traits.ragnarokCooldown;
@@ -70,20 +95,22 @@ public class RagnarokTrait extends LegendaryTrait
     {
         var data = difficulty.getOrCreateData(getId(), Data::new);
         if (data.cooldown > 0)
+        {
             data.cooldown--;
+        }
     }
 
     @Override
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        mapLevel(i -> Text.literal(i * LHConfig.common().traits.ragnarokCount + "")
-                                .formatted(Formatting.AQUA)),
-                        Text.literal(LHConfig.common().traits.ragnarokCooldown / 20 + "")
-                                .formatted(Formatting.AQUA),
-                        mapLevel(i -> Text.literal("" + Math.round(LHConfig.common().traits.ragnarokTime * i / 20f))
-                                .formatted(Formatting.AQUA)))
-                .formatted(Formatting.GRAY));
+                mapLevel(i -> Text.literal(i * LHConfig.common().traits.ragnarokCount + "")
+                    .formatted(Formatting.AQUA)),
+                Text.literal(LHConfig.common().traits.ragnarokCooldown / 20 + "")
+                    .formatted(Formatting.AQUA),
+                mapLevel(i -> Text.literal("" + Math.round(LHConfig.common().traits.ragnarokTime * i / 20f))
+                    .formatted(Formatting.AQUA)))
+            .formatted(Formatting.GRAY));
     }
 
     @SerialClass

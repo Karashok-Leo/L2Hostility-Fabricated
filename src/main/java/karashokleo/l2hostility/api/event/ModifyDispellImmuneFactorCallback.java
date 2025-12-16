@@ -11,7 +11,9 @@ public interface ModifyDispellImmuneFactorCallback
     Event<ModifyDispellImmuneFactorCallback> EVENT = EventFactory.createArrayBacked(ModifyDispellImmuneFactorCallback.class, listeners -> (difficulty, entity, level, source, amount, factor) ->
     {
         for (ModifyDispellImmuneFactorCallback listener : listeners)
+        {
             factor = listener.modifyDispellImmuneFactor(difficulty, entity, level, source, amount, factor);
+        }
         return factor;
     });
 

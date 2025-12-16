@@ -19,6 +19,7 @@ public class ChunkClearRenderer
     private final boolean inClear;
     private final Matrix4f mat;
     private VertexConsumer cons;
+
     private ChunkClearRenderer(MatrixStack pose, int r, boolean[][][] sections, long cx, long cz, long cy)
     {
         this.mat = pose.peek().getPositionMatrix();
@@ -47,7 +48,10 @@ public class ChunkClearRenderer
                 int ix = i - r + cx;
                 int iz = j - r + cz;
                 var ic = ChunkDifficulty.at(player.getWorld(), ix, iz).orElse(null);
-                if (ic == null) continue;
+                if (ic == null)
+                {
+                    continue;
+                }
                 for (int k = 0; k < r * 2 + 1; k++)
                 {
                     int iy = py + (k - r) * 16;
@@ -100,9 +104,18 @@ public class ChunkClearRenderer
 
     private boolean get(int x, int z, int y)
     {
-        if (x < 0 || x >= d) return false;
-        if (z < 0 || z >= d) return false;
-        if (y < 0 || y >= d) return false;
+        if (x < 0 || x >= d)
+        {
+            return false;
+        }
+        if (z < 0 || z >= d)
+        {
+            return false;
+        }
+        if (y < 0 || y >= d)
+        {
+            return false;
+        }
         return sections[x][z][y];
     }
 
@@ -129,7 +142,10 @@ public class ChunkClearRenderer
             boolean a = get(x + ax, z + az, y + ay);
             boolean b = get(x + bx, z + bz, y + by);
             boolean ab = get(x + ax + bx, z + az + bz, y + ay + by);
-            if (!s && !a && !b && !ab) return;
+            if (!s && !a && !b && !ab)
+            {
+                return;
+            }
             int fa = 0, fb = 0;
             if (s)
             {
@@ -158,7 +174,10 @@ public class ChunkClearRenderer
         {
             boolean s = get(x, z, y);
             boolean n = get(x + dx, z + dz, y + dy);
-            if (s == n) return;
+            if (s == n)
+            {
+                return;
+            }
             int df = s ? 1 : -1;
 
             faceVertex(x + dx, y + dy, z + dz, df);

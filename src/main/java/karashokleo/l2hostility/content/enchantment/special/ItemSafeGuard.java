@@ -17,9 +17,14 @@ public final class ItemSafeGuard
 
     public static boolean shouldPreventBreak(ItemStack stack, int damageToSet)
     {
-        if (damageToSet < stack.getMaxDamage()) return false;
-        if (EnchantmentHelper.getLevel(LHEnchantments.SAFEGUARD, stack) < 1)
+        if (damageToSet < stack.getMaxDamage())
+        {
             return false;
+        }
+        if (EnchantmentHelper.getLevel(LHEnchantments.SAFEGUARD, stack) < 1)
+        {
+            return false;
+        }
         NbtCompound nbt = stack.getOrCreateNbt();
         if (!nbt.contains(KEY_ROOT))
         {
@@ -34,7 +39,10 @@ public final class ItemSafeGuard
     public static void inventoryTick(ItemStack stack)
     {
         NbtCompound nbt = stack.getNbt();
-        if (nbt == null || !nbt.contains(KEY_ROOT)) return;
+        if (nbt == null || !nbt.contains(KEY_ROOT))
+        {
+            return;
+        }
         NbtList enchantments = stack.getEnchantments();
 
         // remove ticks if no safeguard enchantment
@@ -53,18 +61,27 @@ public final class ItemSafeGuard
         {
             if (stack.getDamage() == 0 ||
                 stack.getDamage() < safeguardMark.getInt(KEY_PREVIOUS_DAMAGE))
+            {
                 nbt.remove(KEY_ROOT);
-            else
+            } else
+            {
                 enchantments.removeIf(ItemSafeGuard::isSafeguard);
+            }
         }
 
         // increase tick
-        else safeguardMark.putInt(KEY_TICK, tick + 1);
+        else
+        {
+            safeguardMark.putInt(KEY_TICK, tick + 1);
+        }
     }
 
     private static boolean isSafeguard(NbtElement e)
     {
-        if (!(e instanceof NbtCompound c)) return false;
+        if (!(e instanceof NbtCompound c))
+        {
+            return false;
+        }
         var id = new Identifier(c.getString("id"));
         var rg = Registries.ENCHANTMENT;
         return rg.get(id) == LHEnchantments.SAFEGUARD;

@@ -66,156 +66,158 @@ public class LHTags
     public static void init()
     {
         LHGenerators.ITEM_TAGS.getOrCreateContainer(DELICATE_BONE)
-                .add(
-                        Items.SCULK_CATALYST,
-                        Items.SCULK_SHRIEKER
-                );
+            .add(
+                Items.SCULK_CATALYST,
+                Items.SCULK_SHRIEKER
+            );
         LHGenerators.ENCHANTMENT_TAGS.getOrCreateContainer(NO_DISPELL)
-                .add(
-                        Enchantments.UNBREAKING,
-                        LHEnchantments.LIFE_SYNC,
-                        LHEnchantments.HARDENED,
-                        LHEnchantments.SAFEGUARD,
-                        LHEnchantments.ETERNAL,
-                        LHEnchantments.DURABLE_ARMOR,
+            .add(
+                Enchantments.UNBREAKING,
+                LHEnchantments.LIFE_SYNC,
+                LHEnchantments.HARDENED,
+                LHEnchantments.SAFEGUARD,
+                LHEnchantments.ETERNAL,
+                LHEnchantments.DURABLE_ARMOR,
 //                        LHEnchantments.SOUL_BOUND,
-                        LHEnchantments.SPLIT_SUPPRESS,
-                        LHEnchantments.INSULATOR,
-                        LHEnchantments.VANISH
-                );
+                LHEnchantments.SPLIT_SUPPRESS,
+                LHEnchantments.INSULATOR,
+                LHEnchantments.VANISH
+            );
         LHGenerators.ENCHANTMENT_TAGS.getOrCreateContainer(NO_REPRINT)
-                .add(
-                        LHEnchantments.ETERNAL,
-                        LHEnchantments.ENCH_PROJECTILE,
-                        LHEnchantments.ENCH_FIRE,
-                        LHEnchantments.ENCH_ENVIRONMENT,
-                        LHEnchantments.ENCH_EXPLOSION,
-                        LHEnchantments.ENCH_MAGIC,
-                        LHEnchantments.ENCH_INVINCIBLE,
-                        LHEnchantments.ENCH_MATES
-                );
+            .add(
+                LHEnchantments.ETERNAL,
+                LHEnchantments.ENCH_PROJECTILE,
+                LHEnchantments.ENCH_FIRE,
+                LHEnchantments.ENCH_ENVIRONMENT,
+                LHEnchantments.ENCH_EXPLOSION,
+                LHEnchantments.ENCH_MAGIC,
+                LHEnchantments.ENCH_INVINCIBLE,
+                LHEnchantments.ENCH_MATES
+            );
         LHGenerators.STATUS_EFFECT_TAGS.getOrCreateContainer(CLEANSE_BLACKLIST)
-                .add(
-                        StatusEffects.NIGHT_VISION,
-                        StatusEffects.BAD_OMEN,
-                        StatusEffects.HERO_OF_THE_VILLAGE,
-                        StatusEffects.DOLPHINS_GRACE,
-                        StatusEffects.CONDUIT_POWER,
-                        StatusEffects.WATER_BREATHING
-                );
+            .add(
+                StatusEffects.NIGHT_VISION,
+                StatusEffects.BAD_OMEN,
+                StatusEffects.HERO_OF_THE_VILLAGE,
+                StatusEffects.DOLPHINS_GRACE,
+                StatusEffects.CONDUIT_POWER,
+                StatusEffects.WATER_BREATHING
+            );
 
         TagGenerator<EntityType<?>> entityTypeTags = LHGenerators.ENTITY_TYPE_TAGS;
         entityTypeTags.getOrCreateContainer(BLACKLIST);
         entityTypeTags.getOrCreateContainer(WHITELIST);
         entityTypeTags.getOrCreateContainer(NO_SCALING)
-                .addOptionalTag(BLACKLIST);
+            .addOptionalTag(BLACKLIST);
         entityTypeTags.getOrCreateContainer(NO_TRAIT)
-                .addOptionalTag(BLACKLIST)
-                .add(EntityType.ENDERMITE);
+            .addOptionalTag(BLACKLIST)
+            .add(EntityType.ENDERMITE);
         entityTypeTags.getOrCreateContainer(ARMOR_TARGET)
-                .add(
-                        EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
-                        EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON,
-                        EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE
-                );
+            .add(
+                EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
+                EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON,
+                EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE
+            );
         entityTypeTags.getOrCreateContainer(SEMIBOSS)
-                .add(
-                        EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER
-                )
-                .addOptionalTag(ConventionalEntityTypeTags.BOSSES);
+            .add(
+                EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER
+            )
+            .addOptionalTag(ConventionalEntityTypeTags.BOSSES);
         entityTypeTags.getOrCreateContainer(NO_DROP);
         entityTypeTags.getOrCreateContainer(MELEE_WEAPON_TARGET)
-                .add(
-                        EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
-                        EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE,
-                        EntityType.WITHER_SKELETON, EntityType.VINDICATOR
-                );
+            .add(
+                EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
+                EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE,
+                EntityType.WITHER_SKELETON, EntityType.VINDICATOR
+            );
         entityTypeTags.getOrCreateContainer(RANGED_WEAPON_TARGET)
-                .add(
-                        EntityType.SKELETON, EntityType.STRAY
-                );
+            .add(
+                EntityType.SKELETON, EntityType.STRAY
+            );
         entityTypeTags.getOrCreateContainer(RANGED_ENEMY)
-                .addTag(RANGED_WEAPON_TARGET)
-                .add(
-                        EntityType.BLAZE, EntityType.GHAST, EntityType.SHULKER,
-                        EntityType.PILLAGER, EntityType.EVOKER, EntityType.WITCH,
-                        EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
-                        EntityType.WITHER
-                );
+            .addTag(RANGED_WEAPON_TARGET)
+            .add(
+                EntityType.BLAZE, EntityType.GHAST, EntityType.SHULKER,
+                EntityType.PILLAGER, EntityType.EVOKER, EntityType.WITCH,
+                EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
+                EntityType.WITHER
+            );
         LHGenerators.STATUS_EFFECT_TAGS.getOrCreateContainer(WRATH_INVULNERABILITY)
-                .add(
-                        StatusEffects.BLINDNESS,
-                        StatusEffects.DARKNESS,
-                        StatusEffects.NAUSEA,
-                        StatusEffects.SLOWNESS,
-                        StatusEffects.MINING_FATIGUE,
-                        StatusEffects.WEAKNESS
-                );
+            .add(
+                StatusEffects.BLINDNESS,
+                StatusEffects.DARKNESS,
+                StatusEffects.NAUSEA,
+                StatusEffects.SLOWNESS,
+                StatusEffects.MINING_FATIGUE,
+                StatusEffects.WEAKNESS
+            );
 
         LHGenerators.DAMAGE_TYPE_TAGS.getOrCreateContainer(MAGIC)
-                .add(DamageTypes.MAGIC)
-                .add(DamageTypes.INDIRECT_MAGIC)
-                .add(DamageTypes.THORNS)
-                .add(DamageTypes.WITHER)
-                .add(DamageTypes.WITHER_SKULL)
-                .add(DamageTypes.DRAGON_BREATH);
+            .add(DamageTypes.MAGIC)
+            .add(DamageTypes.INDIRECT_MAGIC)
+            .add(DamageTypes.THORNS)
+            .add(DamageTypes.WITHER)
+            .add(DamageTypes.WITHER_SKULL)
+            .add(DamageTypes.DRAGON_BREATH);
         LHGenerators.DAMAGE_TYPE_TAGS.getOrCreateContainer(SPACE_SHARD)
-                .addOptionalTag(DamageTypeTags.IS_PROJECTILE);
+            .addOptionalTag(DamageTypeTags.IS_PROJECTILE);
 
         if (FabricLoader.getInstance().isModLoaded("spell_power"))
+        {
             LHGenerators.DAMAGE_TYPE_TAGS.getOrCreateContainer(MAGIC)
-                    .addOptionalTag(SpellPowerTags.DamageType.ALL);
+                .addOptionalTag(SpellPowerTags.DamageType.ALL);
+        }
 
         if (FabricLoader.getInstance().isModLoaded(BoMDData.COMPAT_MOD_ID))
         {
             entityTypeTags.getOrCreateContainer(SEMIBOSS)
-                    .addOptional(
-                            BoMDData.LICH,
-                            BoMDData.OBSIDILITH,
-                            BoMDData.GAUNTLET,
-                            BoMDData.VOID_BLOSSOM
-                    );
+                .addOptional(
+                    BoMDData.LICH,
+                    BoMDData.OBSIDILITH,
+                    BoMDData.GAUNTLET,
+                    BoMDData.VOID_BLOSSOM
+                );
             entityTypeTags.getOrCreateContainer(WHITELIST)
-                    .addOptional(
-                            BoMDData.LICH,
-                            BoMDData.OBSIDILITH,
-                            BoMDData.GAUNTLET,
-                            BoMDData.VOID_BLOSSOM
-                    );
+                .addOptional(
+                    BoMDData.LICH,
+                    BoMDData.OBSIDILITH,
+                    BoMDData.GAUNTLET,
+                    BoMDData.VOID_BLOSSOM
+                );
         }
         if (FabricLoader.getInstance().isModLoaded(IaFData.COMPAT_MOD_ID))
         {
             entityTypeTags.getOrCreateContainer(SEMIBOSS)
-                    .addOptional(
-                            IaFData.FIRE_DRAGON,
-                            IaFData.ICE_DRAGON,
-                            IaFData.LIGHTNING_DRAGON,
-                            IaFData.DEATH_WORM,
-                            IaFData.SEA_SERPENT
-                    );
+                .addOptional(
+                    IaFData.FIRE_DRAGON,
+                    IaFData.ICE_DRAGON,
+                    IaFData.LIGHTNING_DRAGON,
+                    IaFData.DEATH_WORM,
+                    IaFData.SEA_SERPENT
+                );
             entityTypeTags.getOrCreateContainer(WHITELIST)
-                    .addOptional(
-                            IaFData.FIRE_DRAGON,
-                            IaFData.ICE_DRAGON,
-                            IaFData.LIGHTNING_DRAGON,
-                            IaFData.DEATH_WORM,
-                            IaFData.SEA_SERPENT
-                    );
+                .addOptional(
+                    IaFData.FIRE_DRAGON,
+                    IaFData.ICE_DRAGON,
+                    IaFData.LIGHTNING_DRAGON,
+                    IaFData.DEATH_WORM,
+                    IaFData.SEA_SERPENT
+                );
         }
         if (FabricLoader.getInstance().isModLoaded(MMData.COMPAT_MOD_ID))
         {
             entityTypeTags.getOrCreateContainer(SEMIBOSS)
-                    .addOptional(
-                            ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.getResourceLocation(),
-                            ModRegistry.MUTANT_CREEPER_ENTITY_TYPE.getResourceLocation(),
-                            ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.getResourceLocation(),
-                            ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.getResourceLocation(),
-                            ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation()
-                    );
+                .addOptional(
+                    ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.getResourceLocation(),
+                    ModRegistry.MUTANT_CREEPER_ENTITY_TYPE.getResourceLocation(),
+                    ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.getResourceLocation(),
+                    ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.getResourceLocation(),
+                    ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation()
+                );
             entityTypeTags.getOrCreateContainer(WHITELIST)
-                    .addOptional(
-                            ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation()
-                    );
+                .addOptional(
+                    ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation()
+                );
         }
     }
 

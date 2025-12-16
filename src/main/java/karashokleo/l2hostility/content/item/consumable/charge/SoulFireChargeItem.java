@@ -27,14 +27,14 @@ public class SoulFireChargeItem extends BaseChargeItem
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(
-                LHCplTexts.EFFECT_CHARGE.get(
-                        EffectHelper.getEffectInstanceText(
-                                new StatusEffectInstance(
-                                        LHEffects.FLAME,
-                                        LHConfig.common().complements.fireCharge.soulFireChargeDuration
-                                )
-                        )
-                ).formatted(Formatting.GRAY)
+            LHCplTexts.EFFECT_CHARGE.get(
+                EffectHelper.getEffectInstanceText(
+                    new StatusEffectInstance(
+                        LHEffects.FLAME,
+                        LHConfig.common().complements.fireCharge.soulFireChargeDuration
+                    )
+                )
+            ).formatted(Formatting.GRAY)
         );
     }
 }

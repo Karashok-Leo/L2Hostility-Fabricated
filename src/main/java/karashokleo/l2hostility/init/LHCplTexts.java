@@ -73,7 +73,9 @@ public enum LHCplTexts
     public MutableText get(Object... objs)
     {
         if (objs.length != count)
+        {
             throw new IllegalArgumentException("for " + name() + ": expect " + count + " parameters, got " + objs.length);
+        }
         return Text.translatable(L2Hostility.MOD_ID + "." + id, objs);
     }
 }

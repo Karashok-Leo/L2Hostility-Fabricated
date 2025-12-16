@@ -45,18 +45,26 @@ public class TraitGenerator
 
         var config = diff.getConfigCache();
         if (config != null)
+        {
             for (var base : config.traits)
+            {
                 if (base.condition() == null ||
                     base.condition().match(entity, mobLevel, ins))
+                {
                     genBase(base);
+                }
+            }
+        }
 
         this.traitPool = new ArrayList<>(LHTraits.TRAIT.stream().filter(e ->
-                (config == null || !config.blacklist.contains(e)) &&
+            (config == null || !config.blacklist.contains(e)) &&
                 !traits.containsKey(e) &&
                 e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
         this.weights = 0;
         for (var e : traitPool)
+        {
             this.weights += e.getConfig().weight;
+        }
     }
 
     // 获取词条等级
@@ -69,9 +77,12 @@ public class TraitGenerator
     private void setRank(MobTrait e, int rank)
     {
         if (rank == 0)
+        {
             traits.remove(e);
-        else
+        } else
+        {
             traits.put(e, rank);
+        }
     }
 
     // 随机选择一个词条
@@ -96,9 +107,15 @@ public class TraitGenerator
     private void genBase(EntityConfig.TraitBase base)
     {
         MobTrait e = base.trait();
-        if (e == null) return;
+        if (e == null)
+        {
+            return;
+        }
         int maxTrait = TraitManager.getMaxLevel() + 1;
-        if (!e.allow(entity, mobLevel, maxTrait)) return;
+        if (!e.allow(entity, mobLevel, maxTrait))
+        {
+            return;
+        }
         int max = e.getMaxLevel();// config bypass player trait cap
         int cost = e.getCost(ins.traitCost);
         int old = Math.min(e.getMaxLevel(), Math.max(getRank(e), base.free()));
@@ -106,7 +123,9 @@ public class TraitGenerator
         int rank = Math.min(expected, old + level / cost);
         setRank(e, Math.max(old, rank));
         if (rank > old)
+        {
             level -= (rank - old) * cost;
+        }
     }
 
     private void generate()
@@ -116,35 +135,47 @@ public class TraitGenerator
             MobTrait e = pop();
             int cost = e.getCost(ins.traitCost);
             if (cost > level)
+            {
                 continue;
+            }
             int max = Math.min(ins.getMaxTraitLevel(), e.getMaxLevel());
             int old = Math.min(e.getMaxLevel(), getRank(e));
             int rank = Math.min(max, old + rand.nextInt(level / cost) + 1);
             if (rank <= old)
+            {
                 continue;
+            }
 
             boolean compatible = traits
-                    .keySet()
-                    .stream()
-                    .allMatch(trait ->
-                    {
-                        int lv = traits.get(trait);
-                        return e.compatibleWith(trait, lv) && trait.compatibleWith(e, rank);
-                    });
+                .keySet()
+                .stream()
+                .allMatch(trait ->
+                {
+                    int lv = traits.get(trait);
+                    return e.compatibleWith(trait, lv) && trait.compatibleWith(e, rank);
+                });
             if (!compatible)
+            {
                 continue;
+            }
 
             setRank(e, rank);
             level -= (rank - old) * cost;
 
             if (traits.size() >= traitCountCap)
+            {
                 break;
+            }
 
             if (!ins.isFullChance() &&
                 rand.nextDouble() < LHConfig.common().scaling.globalTraitSuppression)
+            {
                 break;
+            }
         }
         for (var e : traits.entrySet())
+        {
             e.getKey().initialize(difficulty, entity, e.getValue());
+        }
     }
 }

@@ -29,7 +29,9 @@ public class GrowthTrait extends MobTrait
         {
             int size = slime.getSize();
             if (size < 1 << (level + 2))
+            {
                 slime.setSize(size + 1, false);
+            }
         }
     }
 
@@ -38,20 +40,27 @@ public class GrowthTrait extends MobTrait
     {
         var regen = LHTraits.REGEN;
         if (regen.allow(mob) && difficulty.getTraitLevel(regen) < lv)
+        {
             difficulty.setTrait(regen, lv);
+        }
     }
 
     @Override
     public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
     {
         if (event.getSource().isOf(DamageTypes.IN_WALL))
+        {
             event.setCanceled(true);
+        }
     }
 
     @Override
     public void onDeath(MobDifficulty difficulty, LivingEntity entity, int level, DamageSource source)
     {
-        if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;
+        if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+        {
+            return;
+        }
         entity.setHealth(entity.getMaxHealth());
         entity.discard();
     }

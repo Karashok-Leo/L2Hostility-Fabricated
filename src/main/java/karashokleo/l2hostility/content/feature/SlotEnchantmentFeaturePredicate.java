@@ -8,8 +8,8 @@ import net.minecraft.entity.LivingEntity;
 import java.util.function.Supplier;
 
 public record SlotEnchantmentFeaturePredicate(
-        EquipmentSlot slot,
-        Supplier<Enchantment> e
+    EquipmentSlot slot,
+    Supplier<Enchantment> e
 ) implements FeaturePredicate
 {
     @Override

@@ -37,7 +37,9 @@ public class SplitTrait extends MobTrait
     {
         if (entity.getWorld().isClient() ||
             source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+        {
             return;
+        }
         add(entity);
         add(entity);
     }

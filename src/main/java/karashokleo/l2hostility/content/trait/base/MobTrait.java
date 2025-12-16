@@ -78,10 +78,19 @@ public class MobTrait implements ItemConvertible
 
     public boolean allow(LivingEntity le, int difficulty, int maxModLv)
     {
-        if (isBanned()) return false;
+        if (isBanned())
+        {
+            return false;
+        }
         TraitConfig.Config config = getConfig();
-        if (difficulty < config.min_level) return false;
-        if (!EntityConfig.allow(le.getType(), this)) return false;
+        if (difficulty < config.min_level)
+        {
+            return false;
+        }
+        if (!EntityConfig.allow(le.getType(), this))
+        {
+            return false;
+        }
         return config.allows(le.getType());
     }
 
@@ -124,14 +133,18 @@ public class MobTrait implements ItemConvertible
         LivingEntity target = event.getEntity();
         int radius = LHConfig.common().items.reflectTrinketRadius;
         if (ReflectTrinket.canReflect(target, this))
+        {
             target.getWorld().getEntitiesByClass(
-                            LivingEntity.class,
-                            target.getBoundingBox().expand(radius),
-                            e -> e.distanceTo(entity) < radius &&
-                                 !ReflectTrinket.canReflect(e, this)
-                    )
-                    .forEach(le -> this.onHurtingReflectTarget(difficulty, entity, level, new LivingHurtEvent(le, event.getSource(), event.getAmount())));
-        else this.onHurting(difficulty, entity, level, event);
+                    LivingEntity.class,
+                    target.getBoundingBox().expand(radius),
+                    e -> e.distanceTo(entity) < radius &&
+                        !ReflectTrinket.canReflect(e, this)
+                )
+                .forEach(le -> this.onHurtingReflectTarget(difficulty, entity, level, new LivingHurtEvent(le, event.getSource(), event.getAmount())));
+        } else
+        {
+            this.onHurting(difficulty, entity, level, event);
+        }
     }
 
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
@@ -172,7 +185,9 @@ public class MobTrait implements ItemConvertible
     public String getNameKey()
     {
         if (desc == null)
+        {
             desc = getNonNullId().toTranslationKey(LHTraits.TRAIT_KEY.getValue().getPath());
+        }
         return desc;
     }
 
@@ -190,8 +205,11 @@ public class MobTrait implements ItemConvertible
     public MutableText getFullName(@Nullable Integer value)
     {
         var ans = getName();
-        if (value != null) ans = ans.append(ScreenTexts.SPACE)
+        if (value != null)
+        {
+            ans = ans.append(ScreenTexts.SPACE)
                 .append(Text.translatable("enchantment.level." + value));
+        }
         return ans.setStyle(Style.EMPTY.withColor(getColor()));
     }
 
@@ -204,7 +222,9 @@ public class MobTrait implements ItemConvertible
     {
         MutableText comp = null;
         for (int i = 1; i <= getMaxLevel(); i++)
+        {
             comp = comp == null ? func.apply(i) : comp.append(Text.literal("/").formatted(Formatting.GRAY)).append(func.apply(i));
+        }
         assert comp != null;
         return comp;
     }
@@ -212,7 +232,9 @@ public class MobTrait implements ItemConvertible
     public boolean isBanned()
     {
         if (LHConfig.common().traits.traitToggle.containsKey(getNonNullId().getPath()))
+        {
             return !LHConfig.common().traits.traitToggle.get(getNonNullId().getPath());
+        }
         return false;
     }
 

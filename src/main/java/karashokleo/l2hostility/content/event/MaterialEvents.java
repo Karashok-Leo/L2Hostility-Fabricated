@@ -28,7 +28,9 @@ public class MaterialEvents
                 damageSource.getAttacker() instanceof PlayerEntity &&
                 ender.isAngry() &&
                 ender.getSteppingPos().getY() <= ender.getWorld().getBottomY() - LHConfig.common().complements.materials.belowVoid)
+            {
                 ender.dropStack(ComplementItems.VOID_EYE.getDefaultStack());
+            }
 
             if (entity instanceof PhantomEntity phantom)
             {
@@ -37,35 +39,51 @@ public class MaterialEvents
                     level.isSkyVisible(phantom.getSteppingPos()) &&
                     phantom.isOnFire()
                     && phantom.getSteppingPos().getY() >= level.getTopY() + LHConfig.common().complements.materials.phantomHeight)
+                {
                     phantom.dropStack(ComplementItems.SUN_MEMBRANE.getDefaultStack());
+                }
 
                 if (damageSource.isIn(DamageTypeTags.IS_EXPLOSION))
+                {
                     phantom.dropStack(ComplementItems.STORM_CORE.getDefaultStack());
+                }
             }
 
             if (entity instanceof DrownedEntity drowned
                 && damageSource.isIn(DamageTypeTags.IS_FREEZING))
+            {
                 drowned.dropStack(ComplementItems.HARD_ICE.getDefaultStack());
+            }
 
             if (entity instanceof PiglinBruteEntity brute &&
                 brute.hasStatusEffect(LHEffects.STONE_CAGE))
+            {
                 brute.dropStack(ComplementItems.BLACKSTONE_CORE.getDefaultStack());
+            }
 
             if (entity instanceof ElderGuardianEntity guardian &&
                 damageSource.isIn(DamageTypeTags.IS_LIGHTNING))
+            {
                 guardian.dropStack(ComplementItems.GUARDIAN_EYE.getDefaultStack());
+            }
 
             if (entity instanceof WitherEntity wither &&
                 damageSource.isIn(DamageTypeTags.IS_PROJECTILE))
+            {
                 wither.dropStack(ComplementItems.FORCE_FIELD.getDefaultStack());
+            }
 
             if (entity instanceof WardenEntity warden &&
                 damageSource.getAttacker() instanceof PlayerEntity)
+            {
                 warden.dropStack(ComplementItems.WARDEN_BONE_SHARD.getDefaultStack());
+            }
 
             if (entity instanceof GhastEntity ghast &&
                 ghast.hasStatusEffect(LHEffects.FLAME))
+            {
                 ghast.dropStack(ComplementItems.SOUL_FLAME.getDefaultStack());
+            }
         });
 
         LivingHurtEvent.HURT.register(event ->
@@ -74,7 +92,9 @@ public class MaterialEvents
                 event.getSource().getAttacker() instanceof PlayerEntity &&
                 LHConfig.common().complements.materials.enableSpaceShard &&
                 event.getAmount() >= LHConfig.common().complements.materials.spaceDamage)
+            {
                 event.getEntity().dropStack(ComplementItems.SPACE_SHARD.getDefaultStack());
+            }
         });
 
         LivingDamageEvent.DAMAGE.register(event ->
@@ -82,7 +102,9 @@ public class MaterialEvents
             if (event.getEntity() instanceof ChickenEntity chicken &&
                 event.getSource().getName().equals("sonic_boom") &&
                 event.getAmount() < chicken.getHealth() + chicken.getAbsorptionAmount())
+            {
                 chicken.dropStack(ComplementItems.RESONANT_FEATHER.getDefaultStack());
+            }
         });
 
         PlayerInteractionEvents.INTERACT_ENTITY_GENERAL.register((player, target, hand) ->
@@ -106,6 +128,8 @@ public class MaterialEvents
         if (source.isIn(DamageTypeTags.IS_EXPLOSION) &&
             preDamage >= LHConfig.common().complements.materials.explosionDamage &&
             finalDamage < player.getHealth() + player.getAbsorptionAmount())
+        {
             player.getInventory().offerOrDrop(ComplementItems.EXPLOSION_SHARD.getDefaultStack());
+        }
     }
 }

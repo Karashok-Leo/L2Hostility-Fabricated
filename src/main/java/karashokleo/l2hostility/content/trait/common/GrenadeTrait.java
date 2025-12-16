@@ -47,6 +47,8 @@ public class GrenadeTrait extends IntervalTrait
     public void onHurt(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         if (event.getSource().isIn(DamageTypeTags.IS_EXPLOSION))
+        {
             event.setCanceled(true);
+        }
     }
 }

@@ -57,14 +57,19 @@ public class BaseFireballEntity extends AbstractFireballEntity
     {
         super.tick();
         if (this.age >= this.lifespan)
+        {
             this.discard();
+        }
     }
 
     @Override
     protected void onCollision(HitResult hitResult)
     {
         super.onCollision(hitResult);
-        if (this.getWorld().isClient()) return;
+        if (this.getWorld().isClient())
+        {
+            return;
+        }
         this.onCollisionAction(hitResult.getPos());
         this.discard();
     }
@@ -73,7 +78,10 @@ public class BaseFireballEntity extends AbstractFireballEntity
     protected void onEntityHit(EntityHitResult entityHitResult)
     {
         super.onEntityHit(entityHitResult);
-        if (this.getWorld().isClient()) return;
+        if (this.getWorld().isClient())
+        {
+            return;
+        }
         this.onEntityHitAction(entityHitResult.getEntity());
     }
 
@@ -81,7 +89,10 @@ public class BaseFireballEntity extends AbstractFireballEntity
     protected void onBlockHit(BlockHitResult blockHitResult)
     {
         super.onBlockHit(blockHitResult);
-        if (this.getWorld().isClient()) return;
+        if (this.getWorld().isClient())
+        {
+            return;
+        }
         this.onBlockHitAction(blockHitResult.getBlockPos().offset(blockHitResult.getSide()));
     }
 

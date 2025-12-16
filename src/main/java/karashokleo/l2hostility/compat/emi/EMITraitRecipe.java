@@ -23,10 +23,10 @@ public class EMITraitRecipe extends EMIPageRecipe
         this.id = Registries.ENTITY_TYPE.getId(entityWrapper.entity().getType());
         this.entityWrapper = entityWrapper;
         this.traits = LHTraits.TRAIT
-                .stream()
-                .filter(trait -> trait.allow(entityWrapper.entity()))
-                .map(EmiStack::of)
-                .toList();
+            .stream()
+            .filter(trait -> trait.allow(entityWrapper.entity()))
+            .map(EmiStack::of)
+            .toList();
     }
 
     @Override
@@ -65,8 +65,8 @@ public class EMITraitRecipe extends EMIPageRecipe
         int centerX = widgets.getWidth() / 2;
         int pageYOffset = this.getPageYOffset();
         widgets.addDrawable(
-                0, -pageYOffset / 2, 20, 20,
-                (context, mouseX, mouseY, delta) -> entityWrapper.render(context, centerX, pageYOffset + 10, mouseX, mouseY)
+            0, -pageYOffset / 2, 20, 20,
+            (context, mouseX, mouseY, delta) -> entityWrapper.render(context, centerX, pageYOffset + 10, mouseX, mouseY)
         );
         super.addWidgets(widgets);
     }

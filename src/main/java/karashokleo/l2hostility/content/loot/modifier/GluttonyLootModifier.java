@@ -30,8 +30,14 @@ public class GluttonyLootModifier extends CurseLootModifier
     {
         double chance = factor * diff.getLevel() * LHConfig.common().items.curse.gluttonyBottleDropRate;
         int base = (int) chance;
-        if (context.getRandom().nextDouble() < chance - base) base++;
-        if (base > 0) generatedLoot.add(new ItemStack(ConsumableItems.BOTTLE_CURSE, base));
+        if (context.getRandom().nextDouble() < chance - base)
+        {
+            base++;
+        }
+        if (base > 0)
+        {
+            generatedLoot.add(new ItemStack(ConsumableItems.BOTTLE_CURSE, base));
+        }
     }
 
     @Override

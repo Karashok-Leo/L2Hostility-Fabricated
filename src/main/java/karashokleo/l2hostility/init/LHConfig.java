@@ -32,8 +32,8 @@ public class LHConfig
     public static void register()
     {
         AutoConfig.register(
-                Global.class,
-                PartitioningSerializer.wrap(JanksonConfigSerializer::new)
+            Global.class,
+            PartitioningSerializer.wrap(JanksonConfigSerializer::new)
         );
         CONFIG = AutoConfig.getConfigHolder(Global.class).getConfig();
     }

@@ -28,7 +28,10 @@ public class BookCopy extends Item
 
     public static int cost(Enchantment key, int value)
     {
-        if (key.getMaxLevel() >= value) return 1;
+        if (key.getMaxLevel() >= value)
+        {
+            return 1;
+        }
         return 1 << Math.min(10, value - key.getMaxLevel());
     }
 
@@ -49,10 +52,14 @@ public class BookCopy extends Item
             var map = EnchantmentHelper.get(right);
             int cost = 0;
             for (var e : map.entrySet())
+            {
                 cost += BookCopy.cost(e.getKey(), e.getValue());
+            }
             ItemStack result = right.copy();
             if (!LHConfig.common().items.bookOfReprintSpread)
+            {
                 result.setCount(left.getCount() + right.getCount());
+            }
             output.setStack(0, result);
             levelCost.set(cost);
             repairItemUsage.setValue(right.getCount());

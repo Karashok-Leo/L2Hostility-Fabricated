@@ -12,7 +12,7 @@ public class DebugCommands
     public static LiteralArgumentBuilder<ServerCommandSource> build()
     {
         return literal("debug")
-                .executes(DebugCommands::executeDebug);
+            .executes(DebugCommands::executeDebug);
     }
 
     private static int executeDebug(CommandContext<ServerCommandSource> context)

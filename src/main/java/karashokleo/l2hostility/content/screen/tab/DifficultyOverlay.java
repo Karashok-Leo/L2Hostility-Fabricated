@@ -25,7 +25,7 @@ public class DifficultyOverlay extends InfoSideBar<SideBar.IntSignature>
     {
         List<Pair<Text, Supplier<List<Text>>>> comp = new ArrayList<>();
         DifficultyScreen.addDifficultyInfo(comp,
-                Formatting.RED, Formatting.GREEN, Formatting.GOLD);
+            Formatting.RED, Formatting.GREEN, Formatting.GOLD);
         return comp.stream().map(Pair::getLeft).toList();
     }
 
@@ -44,10 +44,16 @@ public class DifficultyOverlay extends InfoSideBar<SideBar.IntSignature>
     @Override
     public boolean isScreenOn()
     {
-        if (L2HostilityClient.getClient().currentScreen != null) return false;
+        if (L2HostilityClient.getClient().currentScreen != null)
+        {
+            return false;
+        }
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
-        if (player == null) return false;
+        if (player == null)
+        {
+            return false;
+        }
         return player.getMainHandStack().isOf(MiscItems.DETECTOR) ||
-               player.getOffHandStack().isOf(MiscItems.DETECTOR);
+            player.getOffHandStack().isOf(MiscItems.DETECTOR);
     }
 }

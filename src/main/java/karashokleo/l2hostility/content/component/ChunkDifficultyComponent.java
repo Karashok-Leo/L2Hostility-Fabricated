@@ -20,7 +20,9 @@ public class ChunkDifficultyComponent implements AutoSyncedComponent
         this.chunk = chunk;
         this.diff = null;
         if (chunk instanceof WorldChunk worldChunk)
+        {
             this.diff = new ChunkDifficulty(worldChunk);
+        }
     }
 
     @Override
@@ -28,13 +30,18 @@ public class ChunkDifficultyComponent implements AutoSyncedComponent
     {
         this.diff = null;
         if (this.chunk instanceof WorldChunk worldChunk)
+        {
             this.diff = TagCodec.fromTag(tag, ChunkDifficulty.class, new ChunkDifficulty(worldChunk), serialField -> true);
+        }
     }
 
     @Override
     public void writeToNbt(@NotNull NbtCompound tag)
     {
-        if (this.diff == null) return;
+        if (this.diff == null)
+        {
+            return;
+        }
         TagCodec.toTag(tag, this.diff);
     }
 }

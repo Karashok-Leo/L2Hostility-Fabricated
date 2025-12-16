@@ -27,8 +27,12 @@ public class EnvyLootModifier extends CurseLootModifier
     protected void modifyLoot(ObjectArrayList<ItemStack> generatedLoot, LootContext context, MobDifficulty diff, double factor)
     {
         for (var entry : diff.traits.entrySet())
+        {
             if (diff.fullDrop || context.getRandom().nextDouble() < factor * entry.getValue() * LHConfig.common().items.curse.envyDropRate)
+            {
                 generatedLoot.add(entry.getKey().asItem().getDefaultStack());
+            }
+        }
     }
 
     @Override

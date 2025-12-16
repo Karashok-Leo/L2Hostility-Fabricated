@@ -25,10 +25,13 @@ public class StableBodyEnchantment extends SingleLevelEnchantment implements Att
     @Override
     public void addAttributes(int lv, ItemStack stack, EquipmentSlot slot, Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers)
     {
-        if (slot != EquipmentSlot.CHEST) return;
+        if (slot != EquipmentSlot.CHEST)
+        {
+            return;
+        }
         attributeModifiers.put(
-                EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
-                new EntityAttributeModifier(ID, "stable_body", 1, EntityAttributeModifier.Operation.ADDITION)
+            EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
+            new EntityAttributeModifier(ID, "stable_body", 1, EntityAttributeModifier.Operation.ADDITION)
         );
     }
 }

@@ -42,10 +42,17 @@ public class KillTraitsTrigger extends BaseCriterion<KillTraitsTrigger.Condition
 
         public boolean matchAll(MobDifficulty cap)
         {
-            if (cap.traits.isEmpty()) return false;
+            if (cap.traits.isEmpty())
+            {
+                return false;
+            }
             for (var e : traits)
+            {
                 if (!cap.hasTrait(e))
+                {
                     return false;
+                }
+            }
             return true;
         }
     }

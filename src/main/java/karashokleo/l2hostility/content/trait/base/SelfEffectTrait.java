@@ -41,12 +41,16 @@ public class SelfEffectTrait extends MobTrait
         list.add(LHTexts.TOOLTIP_SELF_EFFECT.get());
         Formatting color = effect.get().getCategory().getFormatting();
         if (getMaxLevel() == 1)
+        {
             list.add(effect.get().getName().copy().formatted(color));
-        else list.add(
+        } else
+        {
+            list.add(
                 mapLevel(e ->
-                        Text.translatable("potion.withAmplifier", effect.get().getName(),
-                                        Text.translatable("potion.potency." + (e - 1)))
-                                .formatted(color))
-        );
+                    Text.translatable("potion.withAmplifier", effect.get().getName(),
+                            Text.translatable("potion.potency." + (e - 1)))
+                        .formatted(color))
+            );
+        }
     }
 }

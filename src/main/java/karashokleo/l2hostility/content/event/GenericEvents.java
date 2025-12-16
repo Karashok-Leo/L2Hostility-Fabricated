@@ -33,7 +33,10 @@ public class GenericEvents
 
     private static synchronized void execute()
     {
-        if (TASKS.isEmpty()) return;
+        if (TASKS.isEmpty())
+        {
+            return;
+        }
         var temp = TASKS;
         TASKS = new ArrayList<>();
         temp.removeIf(BooleanSupplier::getAsBoolean);

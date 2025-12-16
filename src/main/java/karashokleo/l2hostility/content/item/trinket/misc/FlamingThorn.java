@@ -29,10 +29,16 @@ public class FlamingThorn extends SingleEpicTrinketItem implements DamageListene
     @Override
     public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
-        if (event.getSource().isOf(LHDamageTypes.SOUL_FLAME)) return;
+        if (event.getSource().isOf(LHDamageTypes.SOUL_FLAME))
+        {
+            return;
+        }
         LivingEntity target = event.getEntity();
         int size = target.getActiveStatusEffects().size();
-        if (size == 0) return;
+        if (size == 0)
+        {
+            return;
+        }
         StatusEffectInstance newEffect = new StatusEffectInstance(LHEffects.FLAME, LHConfig.common().items.flameThornTime, size - 1);
         EffectHelper.forceAddEffectWithEvent(target, newEffect, entity);
     }

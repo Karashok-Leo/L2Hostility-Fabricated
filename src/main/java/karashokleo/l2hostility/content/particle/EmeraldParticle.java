@@ -29,8 +29,13 @@ public class EmeraldParticle extends SpriteBillboardParticle
         this.prevPosX = this.x;
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
-        if (this.maxAge-- <= 0) this.markDead();
-        else this.move(this.velocityX, this.velocityY, this.velocityZ);
+        if (this.maxAge-- <= 0)
+        {
+            this.markDead();
+        } else
+        {
+            this.move(this.velocityX, this.velocityY, this.velocityZ);
+        }
     }
 
     @Override

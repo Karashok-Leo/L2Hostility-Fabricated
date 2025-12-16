@@ -47,21 +47,22 @@ public class DifficultyScreen extends BaseTextScreen
         list.add(new Pair<>(LHTexts.INFO_PLAYER_EXP.get(perc), List::of));
         int maxCap = cap.getRankCap();
         list.add(new Pair<>(LHTexts.INFO_PLAYER_CAP.get(
-                maxCap > TraitManager.getMaxLevel() ?
-                        LHTexts.TOOLTIP_LEGENDARY.get().formatted(formats[2]) : maxCap), List::of));
+            maxCap > TraitManager.getMaxLevel() ?
+                LHTexts.TOOLTIP_LEGENDARY.get().formatted(formats[2]) : maxCap), List::of));
         var opt = ChunkDifficulty.at(player.getWorld(), player.getBlockPos());
         if (opt.isPresent())
         {
             ChunkDifficulty chunk = opt.get();
             SectionDifficulty sec = chunk.getSection(player.getBlockPos().getY());
             if (sec.isCleared())
+            {
                 list.add(new Pair<>(LHTexts.INFO_CHUNK_CLEAR.get().formatted(formats[1]), List::of));
-            else
+            } else
             {
                 MobDifficultyCollector ins = new MobDifficultyCollector();
                 chunk.modifyInstance(player.getBlockPos(), ins);
                 list.add(new Pair<>(LHTexts.INFO_CHUNK_LEVEL.get(ins.getBase()).formatted(formats[0]),
-                        () -> sec.getSectionDifficultyDetail(player)));
+                    () -> sec.getSectionDifficultyDetail(player)));
                 list.add(new Pair<>(LHTexts.INFO_CHUNK_SCALE.get(ins.scale).formatted(formats[0]), List::of));
             }
         }
@@ -85,11 +86,15 @@ public class DifficultyScreen extends BaseTextScreen
         for (var c : list)
         {
             if (mx >= x && mx <= x + textRenderer.getWidth(c.getLeft()) && my >= y && my <= y + 10)
+            {
                 tooltip = c.getRight() == null ? null : c.getRight().get();
+            }
             context.drawText(this.textRenderer, c.getLeft(), x, y, 0, false);
             y += 10;
         }
         if (tooltip != null && !tooltip.isEmpty())
+        {
             context.drawTooltip(this.textRenderer, tooltip, mx, my);
+        }
     }
 }

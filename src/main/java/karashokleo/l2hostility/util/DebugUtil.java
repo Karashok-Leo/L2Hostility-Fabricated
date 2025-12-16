@@ -42,7 +42,10 @@ public class DebugUtil
                 }
             }
 
-            if (!found) LOGGER.info("[Debug Info for Mixin] No Mixin metadata found for {}", className);
+            if (!found)
+            {
+                LOGGER.info("[Debug Info for Mixin] No Mixin metadata found for {}", className);
+            }
 
         } catch (Exception e)
         {

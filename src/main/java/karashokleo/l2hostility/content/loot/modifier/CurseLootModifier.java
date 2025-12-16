@@ -29,13 +29,20 @@ public abstract class CurseLootModifier extends LootModifier implements ITraitLo
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context)
     {
         var opt = MobDifficulty.get(context.get(LootContextParameters.THIS_ENTITY));
-        if (opt.isEmpty()) return generatedLoot;
+        if (opt.isEmpty())
+        {
+            return generatedLoot;
+        }
         var diff = opt.get();
         double factor = diff.dropRate;
         PlayerEntity player = context.get(LootContextParameters.LAST_DAMAGE_PLAYER);
         if (player != null)
+        {
             for (var stack : CurseTrinketItem.getFromPlayer(player))
+            {
                 factor *= stack.item().getLootFactor(stack.stack(), PlayerDifficulty.get(player), diff);
+            }
+        }
         modifyLoot(generatedLoot, context, diff, factor);
         return generatedLoot;
     }
@@ -52,8 +59,12 @@ public abstract class CurseLootModifier extends LootModifier implements ITraitLo
     {
         List<ItemStack> ans = new ArrayList<>();
         for (var c : getConditions())
+        {
             if (c instanceof TraitLootCondition cl)
+            {
                 ans.add(cl.trait.asItem().getDefaultStack());
+            }
+        }
         return ans;
     }
 
@@ -62,8 +73,12 @@ public abstract class CurseLootModifier extends LootModifier implements ITraitLo
     {
         List<ItemStack> ans = new ArrayList<>();
         for (var c : getConditions())
+        {
             if (c instanceof PlayerHasItemLootCondition condition)
+            {
                 ans.add(condition.item.getDefaultStack());
+            }
+        }
         return ans;
     }
 }

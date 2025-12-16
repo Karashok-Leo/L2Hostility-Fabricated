@@ -28,25 +28,36 @@ public class ItemPopulator
     {
         var r = le.getRandom();
         for (EquipmentSlot slot : EquipmentSlot.values())
+        {
             if (slot.getType() == EquipmentSlot.Type.ARMOR)
+            {
                 if (le.getEquippedStack(slot).isEmpty())
                 {
                     ItemStack stack = WeaponConfig.getRandomArmor(slot, lv, r);
                     if (!stack.isEmpty())
+                    {
                         le.equipStack(slot, stack);
+                    }
                 }
+            }
+        }
     }
 
     // 装备武器
     public static void populateWeapons(LivingEntity le, MobDifficulty cap, Random r)
     {
         var manager = Registries.ITEM.streamTags();
-        if (manager == null) return;
+        if (manager == null)
+        {
+            return;
+        }
         if (le instanceof DrownedEntity && le.getMainHandStack().isEmpty())
         {
             double factor = cap.getLevel() * LHConfig.common().scaling.drownedTridentChancePerLevel;
             if (factor > le.getRandom().nextDouble())
+            {
                 le.setStackInHand(Hand.MAIN_HAND, new ItemStack(Items.TRIDENT));
+            }
         }
         if (le.getType().isIn(LHTags.MELEE_WEAPON_TARGET))
         {
@@ -54,27 +65,46 @@ public class ItemPopulator
             {
                 ItemStack stack = WeaponConfig.getRandomMeleeWeapon(cap.getLevel(), r);
                 if (!stack.isEmpty())
+                {
                     le.equipStack(EquipmentSlot.MAINHAND, stack);
+                }
             }
         } else if (le.getType().isIn(LHTags.RANGED_WEAPON_TARGET))
         {
             ItemStack stack = WeaponConfig.getRandomRangedWeapon(cap.getLevel(), r);
             if (!stack.isEmpty())
+            {
                 le.equipStack(EquipmentSlot.MAINHAND, stack);
+            }
         }
     }
 
     // 装备饰品（？
     public static void generateItems(MobDifficulty cap, LivingEntity le, EntityConfig.ItemPool pool)
     {
-        if (cap.getLevel() < pool.level()) return;
-        if (le.getRandom().nextFloat() > pool.chance()) return;
+        if (cap.getLevel() < pool.level())
+        {
+            return;
+        }
+        if (le.getRandom().nextFloat() > pool.chance())
+        {
+            return;
+        }
         var slot = TrinketCompat.decode(pool.slot(), le);
-        if (slot == null) return;
+        if (slot == null)
+        {
+            return;
+        }
         var list = pool.entries();
         int total = 0;
-        for (var e : list) total += e.weight();
-        if (total <= 0) return;
+        for (var e : list)
+        {
+            total += e.weight();
+        }
+        if (total <= 0)
+        {
+            return;
+        }
         total = le.getRandom().nextInt(total);
         for (var e : list)
         {
@@ -91,19 +121,34 @@ public class ItemPopulator
     public static void fillEnchantments(int level, Random source, ItemStack stack, EquipmentSlot slot)
     {
         var config = LHData.weapons;
-        if (slot == EquipmentSlot.OFFHAND) return;
+        if (slot == EquipmentSlot.OFFHAND)
+        {
+            return;
+        }
         var list = slot == EquipmentSlot.MAINHAND ?
-                config.weapon_enchantments : config.armor_enchantments;
+            config.weapon_enchantments : config.armor_enchantments;
         var map = EnchantmentHelper.get(stack);
         for (var e : list)
         {
             int elv = e.level() <= 0 ? 1 : e.level();
-            if (elv > level) continue;
+            if (elv > level)
+            {
+                continue;
+            }
             for (var ench : e.enchantments())
             {
-                if (e.chance() < source.nextDouble()) continue;
-                if (!ench.isAvailableForRandomSelection()) continue;
-                if (!isValid(map.keySet(), ench)) continue;
+                if (e.chance() < source.nextDouble())
+                {
+                    continue;
+                }
+                if (!ench.isAvailableForRandomSelection())
+                {
+                    continue;
+                }
+                if (!isValid(map.keySet(), ench))
+                {
+                    continue;
+                }
                 int max = Math.min(level / elv, ench.getMaxLevel());
                 map.put(ench, Math.max(max, map.getOrDefault(ench, 0)));
             }
@@ -115,11 +160,19 @@ public class ItemPopulator
     private static boolean isValid(Set<Enchantment> old, Enchantment ench)
     {
         for (var other : old)
+        {
             if (ench == other)
+            {
                 return true;
+            }
+        }
         for (var other : old)
+        {
             if (!ench.canCombine(other))
+            {
                 return false;
+            }
+        }
         return true;
     }
 
@@ -133,21 +186,30 @@ public class ItemPopulator
         for (var e : EquipmentSlot.values())
         {
             ItemStack stack = le.getEquippedStack(e);
-            if (!stack.isEnchantable()) continue;
+            if (!stack.isEnchantable())
+            {
+                continue;
+            }
             if (!stack.hasEnchantments())
             {
                 float lvl = MathHelper.clamp(cap.getLevel() * 0.02f, 0, 1) *
-                            r.nextInt(30) +
-                            cap.getEnchantBonus();
+                    r.nextInt(30) +
+                    cap.getEnchantBonus();
                 stack = EnchantmentHelper.enchant(r, stack, (int) lvl, false);
             }
             if (LHConfig.common().scaling.allowExtraEnchantments)
+            {
                 fillEnchantments(cap.getLevel(), le.getRandom(), stack, e);
+            }
             le.equipStack(e, stack);
         }
         var config = cap.getConfigCache();
         if (config != null && !config.items.isEmpty())
+        {
             for (var pool : config.items)
+            {
                 generateItems(cap, le, pool);
+            }
+        }
     }
 }

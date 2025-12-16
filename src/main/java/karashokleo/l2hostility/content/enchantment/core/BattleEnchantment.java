@@ -18,10 +18,16 @@ public class BattleEnchantment extends UnobtainableEnchantment
     @Nullable
     protected LivingEntity getTarget(Entity target)
     {
-        if (target instanceof LivingEntity le) return le;
+        if (target instanceof LivingEntity le)
+        {
+            return le;
+        }
         if (target instanceof PartEntity<?> part)
         {
-            if (part.getParent() == target) return null;
+            if (part.getParent() == target)
+            {
+                return null;
+            }
             return getTarget(part.getParent());
         }
         return null;

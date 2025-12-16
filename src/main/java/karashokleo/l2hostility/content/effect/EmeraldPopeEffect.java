@@ -32,11 +32,16 @@ public class EmeraldPopeEffect extends StatusEffect implements ClientRenderEffec
 
     private static void renderEffect(int lv, Entity entity)
     {
-        if (MinecraftClient.getInstance().isPaused()) return;
+        if (MinecraftClient.getInstance().isPaused())
+        {
+            return;
+        }
         int r = (lv + 1) * LHConfig.common().complements.properties.emeraldBaseRange;
         int count = (1 + lv) * (1 + lv) * 4;
         for (int i = 0; i < count; i++)
+        {
             addParticle(entity.getWorld(), entity.getPos(), r);
+        }
     }
 
     @Environment(EnvType.CLIENT)
@@ -50,20 +55,23 @@ public class EmeraldPopeEffect extends StatusEffect implements ClientRenderEffec
         v0 = v0.rotateX(a0).rotateY(b0);
         v1 = v1.rotateX(a0).rotateY(b0);
         w.addImportantParticle(
-                LHParticles.EMERALD,
-                vec.x + v0.x,
-                vec.y + v0.y,
-                vec.z + v0.z,
-                vec.x + v1.x,
-                vec.y + v1.y,
-                vec.z + v1.z
+            LHParticles.EMERALD,
+            vec.x + v0.x,
+            vec.y + v0.y,
+            vec.z + v0.z,
+            vec.x + v1.x,
+            vec.y + v1.y,
+            vec.z + v1.z
         );
     }
 
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier)
     {
-        if (entity.getWorld().isClient()) return;
+        if (entity.getWorld().isClient())
+        {
+            return;
+        }
         int radius = (amplifier + 1) * LHConfig.common().complements.properties.emeraldBaseRange;
         var atk = entity.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE);
         int damage = (int) (LHConfig.common().complements.properties.emeraldDamageFactor * (atk == null ? 1 : atk.getValue()));
@@ -79,7 +87,9 @@ public class EmeraldPopeEffect extends StatusEffect implements ClientRenderEffec
             {
                 double dist = targetPos.distanceTo(selfPos);
                 if (dist > 0.1)
+                {
                     ((LivingEntity) target).takeKnockback(0.4F, selfPos.x - targetPos.x, selfPos.z - targetPos.z);
+                }
                 target.damage(source, damage);
             }
         }
@@ -95,7 +105,9 @@ public class EmeraldPopeEffect extends StatusEffect implements ClientRenderEffec
     public @Nullable EffectRenderer getRenderer(LivingEntity entity, int lv)
     {
         if (entity != MinecraftClient.getInstance().player)
+        {
             renderEffect(lv, entity);
+        }
         return null;
     }
 

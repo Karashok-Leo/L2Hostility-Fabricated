@@ -28,25 +28,29 @@ public abstract class ItemEntityMixin extends Entity
     public abstract ItemStack getStack();
 
     @Inject(
-            method = "tick",
-            at = @At("HEAD")
+        method = "tick",
+        at = @At("HEAD")
     )
     private void inject_tick(CallbackInfo ci)
     {
         if (this.getStack().getItem() instanceof NoGravMagicalItem item)
+        {
             item.onEntityItemUpdate((ItemEntity) (Object) this);
+        }
     }
 
     @Inject(
-            method = "damage",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/item/ItemStack;onItemEntityDestroyed(Lnet/minecraft/entity/ItemEntity;)V"
-            )
+        method = "damage",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/item/ItemStack;onItemEntityDestroyed(Lnet/minecraft/entity/ItemEntity;)V"
+        )
     )
     private void inject_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir)
     {
         if (source.isIn(DamageTypeTags.IS_FIRE))
+        {
             BurntRecipe.onItemKill(getWorld(), this, getStack());
+        }
     }
 }

@@ -18,18 +18,18 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public record LivingEntityWrapper(
-        LivingEntity entity,
-        int scale,
-        Text text
+    LivingEntity entity,
+    int scale,
+    Text text
 )
 {
     public static Stream<LivingEntityWrapper> streamRegistry(Predicate<Entity> predicate, int scale)
     {
         return Registries.ENTITY_TYPE.stream()
-                .map(entityType -> entityType.create(L2HostilityClient.getClientWorld()))
-                .filter(entity -> entity instanceof LivingEntity)
-                .filter(predicate)
-                .map(entity -> LivingEntityWrapper.of((LivingEntity) entity, scale, entity.getName()));
+            .map(entityType -> entityType.create(L2HostilityClient.getClientWorld()))
+            .filter(entity -> entity instanceof LivingEntity)
+            .filter(predicate)
+            .map(entity -> LivingEntityWrapper.of((LivingEntity) entity, scale, entity.getName()));
     }
 
     @Nullable
@@ -43,7 +43,9 @@ public record LivingEntityWrapper(
     {
         Entity entity = entityType.create(L2HostilityClient.getClientWorld());
         if (!(entity instanceof LivingEntity living))
+        {
             return null;
+        }
         return of(living, scale, text);
     }
 
@@ -52,10 +54,14 @@ public record LivingEntityWrapper(
         Box box = entity.getBoundingBox();
         double len = box.getAverageSideLength();
         if (len > 1.05)
+        {
             len = (len + Math.sqrt(len)) / 2.0;
+        }
 
         if (entity instanceof SlimeEntity)
+        {
             ((SlimeEntity) entity).setSize(5, false);
+        }
         scale *= (int) (1.05 / len * 8.0);
 
         return new LivingEntityWrapper(entity, scale, text);

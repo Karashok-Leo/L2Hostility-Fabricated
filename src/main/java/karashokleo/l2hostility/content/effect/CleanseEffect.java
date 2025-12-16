@@ -35,13 +35,15 @@ public class CleanseEffect extends StatusEffect implements IconOverlayEffect
     {
         StatusEffect type = effectInstance.getEffectType();
         if (Registries.STATUS_EFFECT
-                    .getEntry(type)
-                    .isIn(LHTags.CLEANSE_BLACKLIST) ||
+            .getEntry(type)
+            .isIn(LHTags.CLEANSE_BLACKLIST) ||
             TrinketCompat.isEffectValidInTrinket(effectInstance, entity))
+        {
             return true;
+        }
         return type == LHEffects.CLEANSE ||
-               !LHConfig.common().effects.cleansePredicate
-                       .contains(type.getCategory());
+            !LHConfig.common().effects.cleansePredicate
+                .contains(type.getCategory());
     }
 
     public static void clearOnEntity(LivingEntity entity)
@@ -50,12 +52,19 @@ public class CleanseEffect extends StatusEffect implements IconOverlayEffect
         List<StatusEffectInstance> list = new ArrayList<>(entity.getStatusEffects());
         for (StatusEffectInstance ins : list)
         {
-            if (isInCleanseBlacklist(ins, entity)) continue;
+            if (isInCleanseBlacklist(ins, entity))
+            {
+                continue;
+            }
             StatusEffect type = ins.getEffectType();
             if (recursive <= 1)
+            {
                 entity.removeStatusEffect(type);
+            }
             if (entity.hasStatusEffect(type))
+            {
                 entity.getActiveStatusEffects().remove(type);
+            }
         }
         recursive--;
     }

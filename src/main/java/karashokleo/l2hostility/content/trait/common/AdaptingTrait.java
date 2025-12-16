@@ -31,22 +31,25 @@ public class AdaptingTrait extends MobTrait
     {
         DamageSource source = event.getSource();
         if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
-            source.isIn(DamageTypeTags.BYPASSES_EFFECTS)) return;
+            source.isIn(DamageTypeTags.BYPASSES_EFFECTS))
+        {
+            return;
+        }
 
         Data data = difficulty.getOrCreateData(getId(), Data::new);
         data.adapt(source.getType().msgId(), level)
-                .ifPresent(factor -> event.setAmount(event.getAmount() * factor));
+            .ifPresent(factor -> event.setAmount(event.getAmount() * factor));
     }
 
     @Override
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        Text.literal((int) Math.round(100 * (1 - LHConfig.common().traits.adaptFactor)) + "")
-                                .formatted(Formatting.AQUA),
-                        mapLevel(i -> Text.literal("" + i)
-                                .formatted(Formatting.AQUA)))
-                .formatted(Formatting.GRAY));
+                Text.literal((int) Math.round(100 * (1 - LHConfig.common().traits.adaptFactor)) + "")
+                    .formatted(Formatting.AQUA),
+                mapLevel(i -> Text.literal("" + i)
+                    .formatted(Formatting.AQUA)))
+            .formatted(Formatting.GRAY));
     }
 
     @SerialClass

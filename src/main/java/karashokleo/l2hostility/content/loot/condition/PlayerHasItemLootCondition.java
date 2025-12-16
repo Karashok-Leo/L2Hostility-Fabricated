@@ -35,7 +35,10 @@ public class PlayerHasItemLootCondition implements LootCondition
     @Override
     public boolean test(LootContext context)
     {
-        if (!context.hasParameter(LootContextParameters.LAST_DAMAGE_PLAYER)) return false;
+        if (!context.hasParameter(LootContextParameters.LAST_DAMAGE_PLAYER))
+        {
+            return false;
+        }
         PlayerEntity player = context.get(LootContextParameters.LAST_DAMAGE_PLAYER);
         return TrinketCompat.hasItemInTrinket(player, item);
     }

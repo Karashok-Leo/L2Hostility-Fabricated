@@ -18,21 +18,26 @@ public class MobTraitRenderer
     public static void renderNamePlate(Entity entity, int light, MatrixStack matrices, TextRenderer textRenderer, VertexConsumerProvider vertexConsumers)
     {
         var diff = MobDifficulty.get(entity);
-        if (diff.isEmpty()) return;
+        if (diff.isEmpty())
+        {
+            return;
+        }
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
         assert player != null;
         boolean needHover = entity.isInvisible() || LHConfig.client().showOnlyWhenHovered;
         if (needHover && RayTraceUtil.rayTraceEntity(player, ReachEntityAttributes.getAttackRange(player, 3.0), e -> e == entity) == null)
+        {
             return;
+        }
         var list = diff.get().getTitle(
-                LHConfig.client().showLevelOverHead,
-                LHConfig.client().showTraitOverHead
+            LHConfig.client().showLevelOverHead,
+            LHConfig.client().showTraitOverHead
         );
         int offset = list.size();
         float off = (float) LHConfig.client().overHeadRenderOffset;
         TextRenderer.TextLayerType mode = player.canSee(entity) ?
-                TextRenderer.TextLayerType.SEE_THROUGH :
-                TextRenderer.TextLayerType.NORMAL;
+            TextRenderer.TextLayerType.SEE_THROUGH :
+            TextRenderer.TextLayerType.NORMAL;
         for (var e : list)
         {
             renderNameTag(entity, light, (offset + off) * 0.2f, matrices, textRenderer, e, vertexConsumers, mode);

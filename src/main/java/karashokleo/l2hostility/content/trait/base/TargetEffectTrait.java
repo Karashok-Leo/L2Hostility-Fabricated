@@ -30,10 +30,16 @@ public class TargetEffectTrait extends MobTrait
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         int maxEffect = LHConfig.common().traits.potionTraitMaxEffect;
-        if (maxEffect <= 0) return;
+        if (maxEffect <= 0)
+        {
+            return;
+        }
         LivingEntity living = event.getEntity();
         long count = EffectUtil.streamEffects(living, StatusEffectCategory.HARMFUL).count();
-        if (count >= maxEffect) return;
+        if (count >= maxEffect)
+        {
+            return;
+        }
         living.addStatusEffect(func.apply(level), entity);
     }
 
@@ -47,15 +53,22 @@ public class TargetEffectTrait extends MobTrait
             MutableText ans = Text.translatable(ins.getTranslationKey());
             StatusEffect effect = ins.getEffectType();
             if (ins.getAmplifier() > 0)
+            {
                 ans = Text.translatable("potion.withAmplifier", ans,
-                        Text.translatable("potion.potency." + ins.getAmplifier()));
+                    Text.translatable("potion.potency." + ins.getAmplifier()));
+            }
             if (!ins.isDurationBelow(20))
+            {
                 ans = Text.translatable("potion.withDuration", ans,
-                        StatusEffectUtil.getDurationText(ins, 1));
+                    StatusEffectUtil.getDurationText(ins, 1));
+            }
             return ans.formatted(effect.getCategory().getFormatting());
         }));
         int maxEffect = LHConfig.common().traits.potionTraitMaxEffect;
-        if (maxEffect <= 0) return;
+        if (maxEffect <= 0)
+        {
+            return;
+        }
         list.add(LHTexts.TOOLTIP_TARGET_EFFECT_MAX.get(maxEffect));
     }
 }

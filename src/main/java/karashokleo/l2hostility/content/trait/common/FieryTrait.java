@@ -38,9 +38,13 @@ public class FieryTrait extends SelfEffectTrait
     {
         DamageSource source = event.getSource();
         if (source.getSource() instanceof LivingEntity le)
+        {
             le.setOnFireFor(LHConfig.common().traits.fieryTime);
+        }
         if (source.isIn(DamageTypeTags.IS_FIRE))
+        {
             event.setCanceled(true);
+        }
     }
 
     @Override
@@ -53,9 +57,9 @@ public class FieryTrait extends SelfEffectTrait
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        Text.literal(LHConfig.common().traits.fieryTime + "")
-                                .formatted(Formatting.AQUA))
-                .formatted(Formatting.GRAY));
+                Text.literal(LHConfig.common().traits.fieryTime + "")
+                    .formatted(Formatting.AQUA))
+            .formatted(Formatting.GRAY));
         super.addDetail(list);
     }
 }

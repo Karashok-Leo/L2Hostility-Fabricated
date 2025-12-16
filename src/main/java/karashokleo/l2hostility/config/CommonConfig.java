@@ -68,29 +68,29 @@ public class CommonConfig implements ConfigData
         @Comment("Chance per level for drowned to hold trident")
         public double drownedTridentChancePerLevel = 0.005d;
         @Comment("""
-                Enchantment bonus per level.
-                Note: use it only when Apotheosis is installed,
-                Otherwise too high enchantment level will yield no enchantment
-                """)
+            Enchantment bonus per level.
+            Note: use it only when Apotheosis is installed,
+            Otherwise too high enchantment level will yield no enchantment
+            """)
         public double enchantmentFactor = 0;
         @Comment("Difficulty bonus per level visited")
         public int dimensionFactor = 10;
         @Comment("Difficulty bonus per block from origin")
         public double distanceFactor = 0.003;
         @Comment("""
-                Chance for health/damage bonus and trait to apply
-                Not applicable to mobs with minimum level.
-                """)
+            Chance for health/damage bonus and trait to apply
+            Not applicable to mobs with minimum level.
+            """)
         public double globalApplyChance = 1;
         @Comment("""
-                Chance for trait to apply
-                Not applicable to mobs with minimum level.
-                """)
+            Chance for trait to apply
+            Not applicable to mobs with minimum level.
+            """)
         public double globalTraitChance = 1;
         @Comment("""
-                Chance to stop adding traits after adding a trait
-                Not applicable to mobs with minimum level.
-                """)
+            Chance to stop adding traits after adding a trait
+            Not applicable to mobs with minimum level.
+            """)
         public double globalTraitSuppression = 0.1;
         @Comment("Allow legendary traits")
         public boolean allowLegendary = true;
@@ -109,10 +109,10 @@ public class CommonConfig implements ConfigData
         @Comment("Default max number of traits. 0 means no limit")
         public int defaultTraitCountCap = 5;
         @Comment("""
-                Mobs at Lv.N will have N x k% chance to have trait
-                Default k% = 0.01, so Lv.N mobs with have N% chance to have trait
-                Mobs with entity config and trait chance of 1 will not be affected
-                """)
+            Mobs at Lv.N will have N x k% chance to have trait
+            Default k% = 0.01, so Lv.N mobs with have N% chance to have trait
+            Mobs with entity config and trait chance of 1 will not be affected
+            """)
         public double initialTraitChanceSlope = 0.01;
         @Comment("Slimes hostility loot drop rate decay per split")
         public double splitDropRateFactor = 0.25;
@@ -129,9 +129,9 @@ public class CommonConfig implements ConfigData
         @Comment("Allow to use hostility orb")
         public boolean allowHostilityOrb = true;
         @Comment("""
-                Radius for Hostility Orb to take effect.
-                0 means 1x1x1 section, 1 means 3x3x3 sections, 2 means 5x5x5 sections
-                """)
+            Radius for Hostility Orb to take effect.
+            0 means 1x1x1 section, 1 means 3x3x3 sections, 2 means 5x5x5 sections
+            """)
         public int orbRadius = 2;
         @Comment("[NYI] Allow to use hostility spawner")
         public boolean allowHostilitySpawner = true;
@@ -209,9 +209,9 @@ public class CommonConfig implements ConfigData
     public static class Effects
     {
         @Comment("""
-                Effect Categories that can cleansed
-                Only supports configuration in the config file.
-                """)
+            Effect Categories that can cleansed
+            Only supports configuration in the config file.
+            """)
         @ConfigEntry.Gui.Excluded
         public List<StatusEffectCategory> cleansePredicate = List.of(StatusEffectCategory.BENEFICIAL, StatusEffectCategory.HARMFUL, StatusEffectCategory.NEUTRAL);
     }
@@ -253,9 +253,9 @@ public class CommonConfig implements ConfigData
         @Comment("Cooldown in ticks for Dispell to bypass magic protection")
         public int dispellBypassCooldown = 100;
         @Comment("""
-                Cooldown in ticks for enchantments to be disabled for Dispell
-                It defaults to 200 in the original mod, but I've reduced it based on my personal preference.
-                """)
+            Cooldown in ticks for enchantments to be disabled for Dispell
+            It defaults to 200 in the original mod, but I've reduced it based on my personal preference.
+            """)
         public int dispellDisableCooldown = 100;
         @Comment("Max count of enchantments to be disabled per level for Dispell")
         public int dispellCount = 1;
@@ -274,9 +274,9 @@ public class CommonConfig implements ConfigData
         @Comment("Duration in ticks for Wither")
         public int witherTime = 200;
         @Comment("""
-                Duration in ticks for Levitation
-                It defaults to 200 in the original mod, but I've reduced it based on my personal preference.
-                """)
+            Duration in ticks for Levitation
+            It defaults to 200 in the original mod, but I've reduced it based on my personal preference.
+            """)
         public int levitationTime = 80;
         @Comment("Duration in ticks for Blindness")
         public int blindTime = 200;
@@ -346,25 +346,25 @@ public class CommonConfig implements ConfigData
         public int reprintVanishThreshold = 20;
 
         @Comment("""
-                Trait toggle
-                Only supports configuration in the config file.
-                """)
+            Trait toggle
+            Only supports configuration in the config file.
+            """)
         @ConfigEntry.Gui.Excluded
         public Map<String, Boolean> traitToggle = LHTraits.TRAIT.stream().collect(
-                Collectors.toMap(
-                        mobTrait -> mobTrait.getNonNullId().getPath(),
-                        mobTrait -> true
-                )
+            Collectors.toMap(
+                mobTrait -> mobTrait.getNonNullId().getPath(),
+                mobTrait -> true
+            )
         );
         @Comment("""
-                Effect range for aura effect traits
-                Only supports configuration in the config file.
-                """)
+            Effect range for aura effect traits
+            Only supports configuration in the config file.
+            """)
         @ConfigEntry.Gui.Excluded
         public Map<String, Integer> auraRange = Map.of(
-                "gravity", 10,
-                "moonwalk", 10,
-                "arena", 24
+            "gravity", 10,
+            "moonwalk", 10,
+            "arena", 24
         );
     }
 

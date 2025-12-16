@@ -46,8 +46,8 @@ public class WitchWand extends Item
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         world.playSound(user, user.getX(), user.getY(), user.getZ(),
-                SoundEvents.ENTITY_LINGERING_POTION_THROW, SoundCategory.NEUTRAL,
-                0.5F, 0.4F / (user.getRandom().nextFloat() * 0.4F + 0.8F));
+            SoundEvents.ENTITY_LINGERING_POTION_THROW, SoundCategory.NEUTRAL,
+            0.5F, 0.4F / (user.getRandom().nextFloat() * 0.4F + 0.8F));
         ItemStack stack = user.getStackInHand(hand);
         if (!world.isClient())
         {
@@ -61,7 +61,9 @@ public class WitchWand extends Item
             entity.setVelocity(user, user.getPitch(), user.getYaw(), -20.0F, 0.5F, 1.0F);
             world.spawnEntity(entity);
             if (!user.getAbilities().creativeMode)
+            {
                 stack.damage(1, user, e -> e.sendToolBreakStatus(hand));
+            }
         }
         user.getItemCooldownManager().set(this, 60);
         return TypedActionResult.success(stack);

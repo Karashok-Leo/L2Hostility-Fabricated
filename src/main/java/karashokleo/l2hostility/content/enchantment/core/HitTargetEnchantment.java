@@ -12,17 +12,21 @@ public interface HitTargetEnchantment
         ItemStack mainhand = attacker.getMainHandStack();
         ItemStack offhand = attacker.getOffHandStack();
         if (!handle(mainhand, attacker, event))
+        {
             handle(offhand, attacker, event);
+        }
     }
 
     static boolean handle(ItemStack stack, LivingEntity attacker, LivingHurtEvent event)
     {
         for (var entry : EnchantmentHelper.get(stack).entrySet())
+        {
             if (entry.getKey() instanceof HitTargetEnchantment ench)
             {
                 ench.onHurting(entry.getValue(), attacker, event);
                 return true;
             }
+        }
         return false;
     }
 

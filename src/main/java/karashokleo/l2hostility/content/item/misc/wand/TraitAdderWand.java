@@ -41,7 +41,9 @@ public class TraitAdderWand extends BaseWand
             Identifier id = new Identifier(str);
             MobTrait ans = LHTraits.TRAIT.get(id);
             if (ans != null)
+            {
                 return ans;
+            }
         }
         return LHTraits.TANK;
     }
@@ -56,7 +58,9 @@ public class TraitAdderWand extends BaseWand
         var list = values();
         int index = list.indexOf(mod);
         if (index + 1 >= list.size())
+        {
             return list.get(0);
+        }
         return list.get(index + 1);
     }
 
@@ -65,7 +69,9 @@ public class TraitAdderWand extends BaseWand
         var list = values();
         int index = list.indexOf(mod);
         if (index == 0)
+        {
             return list.get(list.size() - 1);
+        }
         return list.get(index - 1);
     }
 
@@ -73,9 +79,13 @@ public class TraitAdderWand extends BaseWand
     public static Integer decrease(MobTrait k, @Nullable Integer old)
     {
         if (old == null || old == 0)
+        {
             return k.getMaxLevel();
+        }
         if (old == 1)
+        {
             return null;
+        }
         return old - 1;
     }
 
@@ -83,9 +93,13 @@ public class TraitAdderWand extends BaseWand
     public static Integer increase(MobTrait k, @Nullable Integer old)
     {
         if (old == null)
+        {
             return 1;
+        }
         if (old == k.getMaxLevel())
+        {
             return null;
+        }
         return old + 1;
     }
 
@@ -93,14 +107,20 @@ public class TraitAdderWand extends BaseWand
     public void clickTarget(ItemStack stack, PlayerEntity player, LivingEntity entity)
     {
         var opt = MobDifficulty.get(entity);
-        if (opt.isEmpty()) return;
+        if (opt.isEmpty())
+        {
+            return;
+        }
         var cap = opt.get();
         MobTrait trait = get(stack);
         Integer ans;
         if (player.isSneaking())
+        {
             ans = cap.traits.compute(trait, TraitAdderWand::decrease);
-        else
+        } else
+        {
             ans = cap.traits.compute(trait, TraitAdderWand::increase);
+        }
         int val = ans == null ? 0 : ans;
         trait.initialize(cap, entity, val);
         trait.postInit(cap, entity, val);

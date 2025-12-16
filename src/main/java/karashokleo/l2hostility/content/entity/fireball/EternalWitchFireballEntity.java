@@ -28,6 +28,8 @@ public class EternalWitchFireballEntity extends BaseFireballEntity
     protected void onEntityHitAction(Entity target)
     {
         if (target instanceof LivingEntity living)
+        {
             EffectBooster.boostInfinite(living);
+        }
     }
 }

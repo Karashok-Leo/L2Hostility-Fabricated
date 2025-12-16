@@ -54,7 +54,9 @@ public class UnobtainableEnchantment extends Enchantment
     {
         MutableText text = Text.translatable(this.getTranslationKey());
         if (level != 1 || this.getMaxLevel() != 1)
+        {
             text.append(" ").append(Text.translatable("enchantment.level." + level));
+        }
         text.formatted(getColor());
         return text;
     }

@@ -61,14 +61,19 @@ public class CurseOfWrath extends CurseTrinketItem
     {
         TreeMap<Identifier, StatusEffect> map = new TreeMap<>();
         for (StatusEffect e : set)
+        {
             map.put(Registries.STATUS_EFFECT.getId(e), e);
+        }
         MutableText comp = LHTexts.ARMOR_IMMUNE.get();
         boolean comma = false;
         for (StatusEffect e : map.values())
         {
-            if (comma) comp = comp.append(", ");
+            if (comma)
+            {
+                comp = comp.append(", ");
+            }
             comp = comp.append(Text.translatable(e.getTranslationKey())
-                    .formatted(e.getCategory().getFormatting()));
+                .formatted(e.getCategory().getFormatting()));
             comma = true;
         }
         list.add(comp.formatted(Formatting.LIGHT_PURPLE));

@@ -40,7 +40,7 @@ public class SingleEpicTrinketItem extends TrinketItem
     public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         return !TrinketCompat.hasItemInTrinket(entity, this) &&
-               super.canEquip(stack, slot, entity);
+            super.canEquip(stack, slot, entity);
     }
 
     @Override

@@ -15,13 +15,13 @@ public class LHBlocks
     public static void register()
     {
         SPAWNER = Entry.of(
-                        "hostility_spawner",
-                        new HostilitySpawner()
-                )
-                .addSimpleItem()
-                .addEN()
-                .addZH("恶意刷怪笼")
-                .registerWithItem();
+                "hostility_spawner",
+                new HostilitySpawner()
+            )
+            .addSimpleItem()
+            .addEN()
+            .addZH("恶意刷怪笼")
+            .registerWithItem();
 
         LHGenerators.MODELS.addBlock(LHBlocks::generateSpawnerState);
     }
@@ -34,24 +34,24 @@ public class LHBlocks
         Identifier id_failed = generator.createSubModel(SPAWNER.block(), "_failed", Models.CUBE_ALL, TextureMap::all);
         generator.registerParentedItemModel(SPAWNER.block(), id);
         generator.blockStateCollector.accept(VariantsBlockStateSupplier
-                .create(SPAWNER.block())
-                .coordinate(
-                        BlockStateVariantMap
-                                .create(HostilitySpawner.STATE)
-                                .register(phase -> BlockStateVariant
-                                        .create()
-                                        .put(
-                                                VariantSettings.MODEL,
-                                                switch (phase)
-                                                {
-                                                    case IDLE -> id;
-                                                    case ACTIVATED -> id_activated;
-                                                    case CLEAR -> id_clear;
-                                                    case FAILED -> id_failed;
-                                                }
-                                        )
-                                )
-                )
+            .create(SPAWNER.block())
+            .coordinate(
+                BlockStateVariantMap
+                    .create(HostilitySpawner.STATE)
+                    .register(phase -> BlockStateVariant
+                        .create()
+                        .put(
+                            VariantSettings.MODEL,
+                            switch (phase)
+                            {
+                                case IDLE -> id;
+                                case ACTIVATED -> id_activated;
+                                case CLEAR -> id_clear;
+                                case FAILED -> id_failed;
+                            }
+                        )
+                    )
+            )
         );
     }
 
@@ -77,7 +77,9 @@ public class LHBlocks
         public BlockSet registerWithItem()
         {
             if (this.getItem() != null)
+            {
                 LHMiscs.GROUP.add(this.getItem());
+            }
             return super.registerWithItem();
         }
     }

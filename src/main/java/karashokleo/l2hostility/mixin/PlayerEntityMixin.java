@@ -22,10 +22,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerEntityMixin
 {
     @Inject(
-            method = "createPlayerAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;",
-            at = @At("RETURN"),
-            require = 1,
-            allow = 1
+        method = "createPlayerAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;",
+        at = @At("RETURN"),
+        require = 1,
+        allow = 1
     )
     private static void inject_createPlayerAttributes(final CallbackInfoReturnable<DefaultAttributeContainer.Builder> info)
     {
@@ -33,8 +33,8 @@ public abstract class PlayerEntityMixin
     }
 
     @Inject(
-            method = "applyDamage",
-            at = @At("HEAD")
+        method = "applyDamage",
+        at = @At("HEAD")
     )
     private void inject_head_applyDamage(DamageSource source, float amount, CallbackInfo ci, @Share("preDamage") LocalFloatRef preDamageRef)
     {
@@ -42,8 +42,8 @@ public abstract class PlayerEntityMixin
     }
 
     @Inject(
-            method = "applyDamage",
-            at = @At("RETURN")
+        method = "applyDamage",
+        at = @At("RETURN")
     )
     private void inject_return_applyDamage(DamageSource source, float amount, CallbackInfo ci, @Share("preDamage") LocalFloatRef preDamageRef)
     {
@@ -51,12 +51,12 @@ public abstract class PlayerEntityMixin
     }
 
     @ModifyArg(
-            method = "attack",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/World;getNonSpectatingEntities(Ljava/lang/Class;Lnet/minecraft/util/math/Box;)Ljava/util/List;"
-            ),
-            index = 1
+        method = "attack",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/World;getNonSpectatingEntities(Ljava/lang/Class;Lnet/minecraft/util/math/Box;)Ljava/util/List;"
+        ),
+        index = 1
     )
     private Box inject_attack_sweepBox(Box box)
     {

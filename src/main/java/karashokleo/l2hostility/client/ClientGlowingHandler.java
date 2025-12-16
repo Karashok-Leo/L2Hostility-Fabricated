@@ -21,16 +21,27 @@ public class ClientGlowingHandler
     public static boolean isGlowing(Entity entity)
     {
         var diff = MobDifficulty.get(entity);
-        if (diff.isEmpty()) return false;
-        if (diff.get().summoned) return true;
+        if (diff.isEmpty())
+        {
+            return false;
+        }
+        if (diff.get().summoned)
+        {
+            return true;
+        }
         if (entity.getWorld().isClient())
+        {
             return isGlowingImpl(diff.get().owner);
+        }
         return false;
     }
 
     private static boolean playerHasGlass(PlayerEntity player)
     {
-        if (player.age == cacheTick) return cacheGlass;
+        if (player.age == cacheTick)
+        {
+            return cacheGlass;
+        }
         cacheGlass = TrinketCompat.hasItemEquippedOrInTrinket(player, MiscItems.DETECTOR_GLASSES);
         cacheTick = player.age;
         return cacheGlass;

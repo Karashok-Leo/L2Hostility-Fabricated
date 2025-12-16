@@ -29,7 +29,9 @@ public class S2CLootData implements SerialPacketS2C
         {
             var res = IGlobalLootModifier.DIRECT_CODEC.encodeStart(NbtOps.INSTANCE, e).result();
             if (res.isPresent() && res.get() instanceof NbtCompound ct)
+            {
                 this.list.add(ct);
+            }
         }
     }
 
@@ -37,8 +39,12 @@ public class S2CLootData implements SerialPacketS2C
     {
         List<IGlobalLootModifier> list = new ArrayList<>();
         for (var e : LootModifierManager.getLootModifierManager().getAllLootMods())
+        {
             if (e instanceof ITraitLootRecipe)
+            {
                 list.add(e);
+            }
+        }
         return new S2CLootData(list);
     }
 
@@ -49,9 +55,14 @@ public class S2CLootData implements SerialPacketS2C
         for (var ct : list)
         {
             var ans = IGlobalLootModifier.DIRECT_CODEC.decode(NbtOps.INSTANCE, ct).result();
-            if (ans.isEmpty()) continue;
+            if (ans.isEmpty())
+            {
+                continue;
+            }
             if (ans.get().getFirst() instanceof ITraitLootRecipe mod)
+            {
                 ITraitLootRecipe.LIST_CACHE.add(mod);
+            }
         }
     }
 }

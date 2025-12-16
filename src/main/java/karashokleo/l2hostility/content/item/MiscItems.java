@@ -42,159 +42,159 @@ public class MiscItems
     public static void register()
     {
         CHAOS = MaterialEntry.of("chaos", "混沌")
-                .ingot(new FabricItemSettings().rarity(Rarity.EPIC).fireproof())
-                .block(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK))
-                .buildIngot(itemBuilder -> itemBuilder.addTag(LHTags.CHAOS))
-                .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.PICKAXE_MINEABLE, BlockTags.NEEDS_DIAMOND_TOOL))
-                .register();
+            .ingot(new FabricItemSettings().rarity(Rarity.EPIC).fireproof())
+            .block(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK))
+            .buildIngot(itemBuilder -> itemBuilder.addTag(LHTags.CHAOS))
+            .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.PICKAXE_MINEABLE, BlockTags.NEEDS_DIAMOND_TOOL))
+            .register();
 
         MIRACLE = MaterialEntry.of("miracle", "奇迹")
-                .ingot(new NetherStarItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof()))
-                .block(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK))
-                .buildIngot(itemBuilder -> itemBuilder.addTag(LHTags.CHAOS))
-                .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.PICKAXE_MINEABLE, BlockTags.NEEDS_DIAMOND_TOOL))
-                .register();
+            .ingot(new NetherStarItem(new FabricItemSettings().rarity(Rarity.EPIC).fireproof()))
+            .block(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK))
+            .buildIngot(itemBuilder -> itemBuilder.addTag(LHTags.CHAOS))
+            .buildBlock(blockBuilder -> blockBuilder.addLoot().addTag(BlockTags.PICKAXE_MINEABLE, BlockTags.NEEDS_DIAMOND_TOOL))
+            .register();
 
         WITCH_DROPLET = LHItems.Entry.of(
-                        "witch_droplet",
-                        new Item(
-                                new FabricItemSettings()
-                        )
+                "witch_droplet",
+                new Item(
+                    new FabricItemSettings()
                 )
-                .addModel()
-                .addEN()
-                .addZH("女巫浓缩凝露")
-                .register();
+            )
+            .addModel()
+            .addEN()
+            .addZH("女巫浓缩凝露")
+            .register();
 
 
         DETECTOR = LHItems.Entry.of(
-                        "hostility_detector",
-                        new Detector(
-                                new FabricItemSettings()
-                                        .maxCount(1)
-                        )
+                "hostility_detector",
+                new Detector(
+                    new FabricItemSettings()
+                        .maxCount(1)
                 )
-                .addModel()
-                .addEN()
-                .addZH("恶意探测器")
-                .register();
+            )
+            .addModel()
+            .addEN()
+            .addZH("恶意探测器")
+            .register();
 
         DETECTOR_GLASSES = LHItems.Entry.of(
-                        "detector_glasses",
-                        new DetectorGlasses(
-                                new FabricItemSettings()
-                                        .maxCount(1)
-                        )
+                "detector_glasses",
+                new DetectorGlasses(
+                    new FabricItemSettings()
+                        .maxCount(1)
                 )
-                .addModel()
-                .addEN()
-                .addZH("侦测眼镜")
-                .addTag(LHTags.FACE_SLOT)
-                .register();
+            )
+            .addModel()
+            .addEN()
+            .addZH("侦测眼镜")
+            .addTag(LHTags.FACE_SLOT)
+            .register();
 
         WITCH_WAND = LHItems.Entry.of(
-                        "witch_wand",
-                        new WitchWand(
-                                new FabricItemSettings()
-                                        .maxDamage(300)
-                                        .rarity(Rarity.EPIC)
-                                        .fireproof()
-                        )
+                "witch_wand",
+                new WitchWand(
+                    new FabricItemSettings()
+                        .maxDamage(300)
+                        .rarity(Rarity.EPIC)
+                        .fireproof()
                 )
-                .addModel(Models.HANDHELD)
-                .addEN()
-                .addZH("混乱魔药法杖")
-                .addTag(LHTags.CHAOS)
-                .register();
+            )
+            .addModel(Models.HANDHELD)
+            .addEN()
+            .addZH("混乱魔药法杖")
+            .addTag(LHTags.CHAOS)
+            .register();
 
         HOSTILITY_ESSENCE = LHItems.Entry.of(
-                        "hostility_essence",
-                        new NetherStarItem(
-                                new FabricItemSettings()
-                                        .rarity(Rarity.EPIC)
-                                        .fireproof()
-                        )
+                "hostility_essence",
+                new NetherStarItem(
+                    new FabricItemSettings()
+                        .rarity(Rarity.EPIC)
+                        .fireproof()
                 )
-                .addModel()
-                .addEN()
-                .addZH("恶意精华")
-                .register();
+            )
+            .addModel()
+            .addEN()
+            .addZH("恶意精华")
+            .register();
 
         MIRACLE_POWDER = LHItems.Entry.of(
-                        "miracle_powder",
-                        new NetherStarItem(
-                                new FabricItemSettings()
-                                        .rarity(Rarity.EPIC)
-                                        .fireproof()
-                        )
+                "miracle_powder",
+                new NetherStarItem(
+                    new FabricItemSettings()
+                        .rarity(Rarity.EPIC)
+                        .fireproof()
                 )
-                .addModel()
-                .addEN()
-                .addZH("奇迹粉末")
-                .register();
+            )
+            .addModel()
+            .addEN()
+            .addZH("奇迹粉末")
+            .register();
 
 
         TRAIT_ADDER_WAND = LHItems.Entry.of(
-                        "trait_adder_wand",
-                        new TraitAdderWand(
-                                new FabricItemSettings()
-                                        .maxCount(1)
-                        )
+                "trait_adder_wand",
+                new TraitAdderWand(
+                    new FabricItemSettings()
+                        .maxCount(1)
                 )
-                .addModel(Models.HANDHELD)
-                .addEN()
-                .addZH("词条配置手杖")
-                .register();
+            )
+            .addModel(Models.HANDHELD)
+            .addEN()
+            .addZH("词条配置手杖")
+            .register();
 
         TARGET_SELECT_WAND = LHItems.Entry.of(
-                        "target_select_wand",
-                        new TargetSelectWand(
-                                new FabricItemSettings()
-                                        .maxCount(1)
-                        )
+                "target_select_wand",
+                new TargetSelectWand(
+                    new FabricItemSettings()
+                        .maxCount(1)
                 )
-                .addModel(Models.HANDHELD)
-                .addEN()
-                .addZH("攻击目标控制手杖")
-                .register();
+            )
+            .addModel(Models.HANDHELD)
+            .addEN()
+            .addZH("攻击目标控制手杖")
+            .register();
 
         EQUIPMENT_WAND = LHItems.Entry.of(
-                        "equipment_wand",
-                        new EquipmentWand(
-                                new FabricItemSettings()
-                                        .maxCount(1)
-                        )
+                "equipment_wand",
+                new EquipmentWand(
+                    new FabricItemSettings()
+                        .maxCount(1)
                 )
-                .addModel(Models.HANDHELD)
-                .addEN()
-                .addZH("装备配置手杖")
-                .register();
+            )
+            .addModel(Models.HANDHELD)
+            .addEN()
+            .addZH("装备配置手杖")
+            .register();
 
         AI_CONFIG_WAND = LHItems.Entry.of(
-                        "ai_config_wand",
-                        new AiConfigWand(
-                                new FabricItemSettings()
-                                        .maxCount(1)
-                        )
+                "ai_config_wand",
+                new AiConfigWand(
+                    new FabricItemSettings()
+                        .maxCount(1)
                 )
-                .addModel(Models.HANDHELD)
-                .addEN()
-                .addZH("AI控制手杖")
-                .register();
+            )
+            .addModel(Models.HANDHELD)
+            .addEN()
+            .addZH("AI控制手杖")
+            .register();
 
         SEAL = LHItems.Entry.of(
-                        "sealed_item",
-                        new SealedItem(
-                                new FabricItemSettings()
-                                        .maxCount(1)
-                                        .fireproof()
-                        )
+                "sealed_item",
+                new SealedItem(
+                    new FabricItemSettings()
+                        .maxCount(1)
+                        .fireproof()
                 )
-                .addModel(Models.HANDHELD)
-                .addEN()
-                .addZH("被封印的物品")
-                .addTag(LHTags.NO_SEAL)
-                .setTab(null)
-                .register();
+            )
+            .addModel(Models.HANDHELD)
+            .addEN()
+            .addZH("被封印的物品")
+            .addTag(LHTags.NO_SEAL)
+            .setTab(null)
+            .register();
     }
 }

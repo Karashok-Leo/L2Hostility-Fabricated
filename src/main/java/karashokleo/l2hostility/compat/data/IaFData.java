@@ -26,26 +26,26 @@ public class IaFData
     {
         Map<Identifier, EntityConfig> configs = new HashMap<>();
         addEntity(configs, 100, 50, FIRE_DRAGON, List.of(
-                EntityConfig.trait(LHTraits.ADAPTIVE, 1, 2),
-                EntityConfig.trait(LHTraits.REGEN, 2, 3),
-                EntityConfig.trait(LHTraits.SOUL_BURNER, 2, 3)
+            EntityConfig.trait(LHTraits.ADAPTIVE, 1, 2),
+            EntityConfig.trait(LHTraits.REGEN, 2, 3),
+            EntityConfig.trait(LHTraits.SOUL_BURNER, 2, 3)
         ), List.of(LHTraits.TANK));
         addEntity(configs, 100, 50, ICE_DRAGON, List.of(
-                EntityConfig.trait(LHTraits.ADAPTIVE, 1, 2),
-                EntityConfig.trait(LHTraits.REGEN, 2, 3),
-                EntityConfig.trait(LHTraits.FREEZING, 2, 3)
+            EntityConfig.trait(LHTraits.ADAPTIVE, 1, 2),
+            EntityConfig.trait(LHTraits.REGEN, 2, 3),
+            EntityConfig.trait(LHTraits.FREEZING, 2, 3)
         ), List.of(LHTraits.TANK));
         addEntity(configs, 100, 50, LIGHTNING_DRAGON, List.of(
-                EntityConfig.trait(LHTraits.ADAPTIVE, 1, 2),
-                EntityConfig.trait(LHTraits.REGEN, 2, 3),
-                EntityConfig.trait(LHTraits.REFLECT, 2, 3)
+            EntityConfig.trait(LHTraits.ADAPTIVE, 1, 2),
+            EntityConfig.trait(LHTraits.REGEN, 2, 3),
+            EntityConfig.trait(LHTraits.REFLECT, 2, 3)
         ), List.of(LHTraits.TANK));
         addEntity(configs, 30, 10, GHOST, List.of(
-                EntityConfig.trait(LHTraits.DEMENTOR, 0, 1)
+            EntityConfig.trait(LHTraits.DEMENTOR, 0, 1)
         ), List.of(LHTraits.DISPELL));
         addEntity(configs, 30, 10, SIREN, List.of(
-                EntityConfig.trait(LHTraits.CONFUSION, 1, 1),
-                EntityConfig.trait(LHTraits.DRAIN, 0, 1)
+            EntityConfig.trait(LHTraits.CONFUSION, 1, 1),
+            EntityConfig.trait(LHTraits.DRAIN, 0, 1)
         ), List.of());
         return configs;
     }

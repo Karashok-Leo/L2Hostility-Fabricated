@@ -10,7 +10,9 @@ public interface ModifyTraitCountCapCallback
     Event<ModifyTraitCountCapCallback> EVENT = EventFactory.createArrayBacked(ModifyTraitCountCapCallback.class, listeners -> (cap, difficulty, entity, level) ->
     {
         for (ModifyTraitCountCapCallback listener : listeners)
+        {
             cap = listener.modifyTraitCountCap(cap, difficulty, entity, level);
+        }
         return cap;
     });
 

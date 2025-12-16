@@ -7,7 +7,6 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundEvents;
 
 @SerialClass
 public class S2CUndying extends S2CEntity
@@ -26,7 +25,10 @@ public class S2CUndying extends S2CEntity
     @Override
     public void handle(ClientPlayerEntity player)
     {
-        if (!LHConfig.client().showUndyingParticles) return;
+        if (!LHConfig.client().showUndyingParticles)
+        {
+            return;
+        }
         ClientWorld world = L2HostilityClient.getClientWorld();
         if (world != null && id >= 0 && world.getEntityById(id) instanceof LivingEntity entity)
         {

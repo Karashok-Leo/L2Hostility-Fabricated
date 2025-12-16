@@ -44,14 +44,19 @@ public class SealedItem extends TrinketItem
 //        if (EnchantmentHelper.getLevel(LHEnchantments.SOUL_BOUND, stack) > 0)
 //            ans.addEnchantment(LHEnchantments.SOUL_BOUND, 1);
         if (EnchantmentHelper.getLevel(LHEnchantments.VANISH, stack) > 0)
+        {
             ans.addEnchantment(LHEnchantments.VANISH, 1);
+        }
         return ans;
     }
 
     @Override
     public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
-        if (!stack.hasNbt() || stack.getSubNbt(SealedItem.DATA) == null) return false;
+        if (!stack.hasNbt() || stack.getSubNbt(SealedItem.DATA) == null)
+        {
+            return false;
+        }
         var ctag = stack.getOrCreateSubNbt(SealedItem.DATA);
         ItemStack content = ItemStack.fromNbt(ctag);
         return content.getItem() instanceof Trinket trinket && trinket.canEquip(content, slot, entity);
@@ -90,7 +95,7 @@ public class SealedItem extends TrinketItem
         tooltip.add(ItemStack.fromNbt(stack.getOrCreateNbt().getCompound(DATA)).getName());
         int time = stack.getOrCreateNbt().getInt(TIME);
         tooltip.add(LHTexts.TOOLTIP_SEAL_TIME.get(
-                Text.literal(time / 20 + "").formatted(Formatting.AQUA)
+            Text.literal(time / 20 + "").formatted(Formatting.AQUA)
         ).formatted(Formatting.RED));
     }
 }

@@ -23,9 +23,13 @@ public class PlayerFinder
         {
             double dist = pl.squaredDistanceTo(le);
             if (dist > 128 * 128)
+            {
                 continue;
+            }
             if (!pl.isAlive())
+            {
                 continue;
+            }
             var plOpt = PlayerDifficulty.get(pl);
             int lv = plOpt.getLevel().getLevel();
             if (dist < sr)
@@ -44,7 +48,12 @@ public class PlayerFinder
                 }
             }
         }
-        if (lowPl != null) return lowPl;
-        else return nearPl;
+        if (lowPl != null)
+        {
+            return lowPl;
+        } else
+        {
+            return nearPl;
+        }
     }
 }

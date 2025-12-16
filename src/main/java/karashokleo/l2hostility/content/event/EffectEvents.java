@@ -29,22 +29,31 @@ public class EffectEvents
             LivingEntity entity = event.getEntity();
             if (entity.hasStatusEffect(LHEffects.CLEANSE) &&
                 !CleanseEffect.isInCleanseBlacklist(event.getEffectInstance(), entity))
+            {
                 event.setResult(BaseEvent.Result.DENY);
+            }
         });
 
         MobEffectEvent.ADDED.register(event ->
         {
             LivingEntity entity = event.getEntity();
-            if (entity.getWorld().isClient()) return;
+            if (entity.getWorld().isClient())
+            {
+                return;
+            }
             if (entity.hasStatusEffect(LHEffects.CLEANSE) &&
                 !CleanseEffect.isInCleanseBlacklist(event.getEffectInstance(), entity))
+            {
                 GenericEvents.schedule(() -> CleanseEffect.clearOnEntity(entity));
+            }
         });
 
         MobEffectEvent.REMOVE.register(event ->
         {
             if (event.getEffect() == LHEffects.ANTI_BUILD)
+            {
                 event.setCanceled(true);
+            }
         });
 
         // CURSE / LIFE MENDING
@@ -56,8 +65,8 @@ public class EffectEvents
             StatusEffectInstance curseEffect = entity.getStatusEffect(LHEffects.CURSE);
             int curseLv = curseEffect == null ? 0 : curseEffect.getAmplifier() + 1;
             float factor = (float) MathHelper.clamp(
-                    1 - curseLv * LHConfig.common().complements.properties.curseFactor,
-                    0, 1
+                1 - curseLv * LHConfig.common().complements.properties.curseFactor,
+                0, 1
             );
             if (factor == 0)
             {
@@ -75,11 +84,17 @@ public class EffectEvents
                     int damage = stack.getDamage();
                     int repair = 1 << (lv - 1);
                     int armor = EnchantmentHelper.getLevel(LHEnchantments.DURABLE_ARMOR, stack);
-                    if (armor > 0) repair *= 1 + armor;
+                    if (armor > 0)
+                    {
+                        repair *= 1 + armor;
+                    }
                     int recover = Math.min(damage, (int) Math.floor(amount * repair));
                     stack.setDamage(damage - recover);
                     amount -= 1f * recover / repair;
-                    if (amount < 1e-3) break;
+                    if (amount < 1e-3)
+                    {
+                        break;
+                    }
                 }
             }
             event.setAmount(amount);
@@ -91,30 +106,34 @@ public class EffectEvents
         {
             if (event.getEntity() instanceof LivingEntity living &&
                 living.hasStatusEffect(LHEffects.STONE_CAGE))
+            {
                 event.setCanceled(true);
+            }
         });
 
         // 禁止放置方块
         UseBlockCallback.EVENT.register(
-                (player, world, hand, hitResult) ->
+            (player, world, hand, hitResult) ->
+            {
+                if (!player.getAbilities().creativeMode &&
+                    player.hasStatusEffect(LHEffects.ANTI_BUILD))
                 {
-                    if (!player.getAbilities().creativeMode &&
-                        player.hasStatusEffect(LHEffects.ANTI_BUILD))
+                    ItemStack stack = player.getStackInHand(hand);
+                    if (stack.getItem() instanceof BlockItem ||
+                        stack.isIn(LHTags.ANTIBUILD_BAN))
                     {
-                        ItemStack stack = player.getStackInHand(hand);
-                        if (stack.getItem() instanceof BlockItem ||
-                            stack.isIn(LHTags.ANTIBUILD_BAN))
-                            return ActionResult.FAIL;
+                        return ActionResult.FAIL;
                     }
-                    return ActionResult.PASS;
                 }
+                return ActionResult.PASS;
+            }
         );
 
         // 禁止破坏方块
         PlayerBlockBreakEvents.BEFORE.register(
-                (world, player, pos, state, blockEntity) ->
-                        player.getAbilities().creativeMode ||
-                        !player.hasStatusEffect(LHEffects.ANTI_BUILD)
+            (world, player, pos, state, blockEntity) ->
+                player.getAbilities().creativeMode ||
+                    !player.hasStatusEffect(LHEffects.ANTI_BUILD)
         );
     }
 }

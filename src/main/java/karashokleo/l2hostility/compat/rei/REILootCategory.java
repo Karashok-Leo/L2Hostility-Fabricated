@@ -36,11 +36,11 @@ public class REILootCategory implements DisplayCategory<REILootDisplay>
         widgets.add(trinkets);
         widgets.add(loot);
         widgets.add(Widgets.createTooltip(point ->
-                bounds.contains(point) &&
+            bounds.contains(point) &&
                 !(traits.getBounds().contains(point) ||
-                  trinkets.getBounds().contains(point) ||
-                  loot.getBounds().contains(point)) ?
-                        Tooltip.create(point, display.getTooltip()) : null));
+                    trinkets.getBounds().contains(point) ||
+                    loot.getBounds().contains(point)) ?
+                Tooltip.create(point, display.getTooltip()) : null));
         return widgets;
     }
 

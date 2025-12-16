@@ -19,16 +19,21 @@ public class ClientEvents
     {
         ItemTooltipCallback.EVENT.register((stack, context, lines) ->
         {
-            if (L2HostilityClient.getClientWorld() == null) return;
+            if (L2HostilityClient.getClientWorld() == null)
+            {
+                return;
+            }
             EnchantmentDisabler.modifyTooltip(stack, lines, L2HostilityClient.getClientWorld());
         });
 
         ClientTickEvents.START_CLIENT_TICK.register(client ->
-                client.execute(() ->
+            client.execute(() ->
+            {
+                for (EntityTarget target : EntityTarget.LIST)
                 {
-                    for (EntityTarget target : EntityTarget.LIST)
-                        target.tickRender();
-                }));
+                    target.tickRender();
+                }
+            }));
 
         ClientTickEvents.END_CLIENT_TICK.register(client ->
         {
@@ -37,7 +42,7 @@ public class ClientEvents
                 player.age % CHUNK_RENDER_INTERNAL == 0)
             {
                 renderChunk = TrinketCompat.hasItemEquippedOrInTrinket(player, MiscItems.DETECTOR_GLASSES) &&
-                              TrinketCompat.hasItemEquippedOrInTrinket(player, MiscItems.DETECTOR);
+                    TrinketCompat.hasItemEquippedOrInTrinket(player, MiscItems.DETECTOR);
             }
         });
 
@@ -45,10 +50,19 @@ public class ClientEvents
         {
 //            if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRIPWIRE_BLOCKS) return;
             ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
-            if (player == null) return;
+            if (player == null)
+            {
+                return;
+            }
             var opt = ChunkDifficulty.at(player.getWorld(), player.getBlockPos());
-            if (opt.isEmpty()) return;
-            if (!renderChunk) return;
+            if (opt.isEmpty())
+            {
+                return;
+            }
+            if (!renderChunk)
+            {
+                return;
+            }
             ChunkClearRenderer.render(context.matrixStack(), player, opt.get());
         });
     }

@@ -24,7 +24,9 @@ public class VoidEye extends ShadowSteelItem
         super.onEntityItemUpdate(entity);
         Vec3d v = entity.getVelocity();
         if (v.getY() < 0.05)
+        {
             entity.setVelocity(v.add(0, 0.005, 0));
+        }
     }
 
     @Override

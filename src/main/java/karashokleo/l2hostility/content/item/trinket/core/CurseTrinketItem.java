@@ -36,8 +36,12 @@ public class CurseTrinketItem extends SingleEpicTrinketItem implements DamageLis
         var list = TrinketCompat.getItems(player, e -> e.getItem() instanceof CurseTrinketItem);
         List<GenericItemStack<CurseTrinketItem>> ans = new ArrayList<>();
         for (var e : list)
+        {
             if (e.getItem() instanceof CurseTrinketItem item)
+            {
                 ans.add(new GenericItemStack<>(item, e));
+            }
+        }
         return ans;
     }
 
@@ -47,7 +51,9 @@ public class CurseTrinketItem extends SingleEpicTrinketItem implements DamageLis
         Multimap<EntityAttribute, EntityAttributeModifier> map = LinkedHashMultimap.create();
         int lv = getExtraLevel();
         if (lv > 0)
+        {
             map.put(LHMiscs.ADD_LEVEL, new EntityAttributeModifier(uuid, Registries.ITEM.getId(this).getPath(), lv, EntityAttributeModifier.Operation.ADDITION));
+        }
         return map;
     }
 

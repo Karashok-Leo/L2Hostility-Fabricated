@@ -21,15 +21,35 @@ public class GravityTrait extends AuraEffectTrait
     public void onDamaged(MobDifficulty difficulty, LivingEntity entity, int level, LivingDamageEvent event)
     {
         Entity attacker = event.getSource().getAttacker();
-        if (!(attacker instanceof LivingEntity living)) return;
-        if (living instanceof EnderDragonEntity) return;
-        if (living.isOnGround()) return;
-        if (living.isSpectator()) return;
+        if (!(attacker instanceof LivingEntity living))
+        {
+            return;
+        }
+        if (living instanceof EnderDragonEntity)
+        {
+            return;
+        }
+        if (living.isOnGround())
+        {
+            return;
+        }
+        if (living.isSpectator())
+        {
+            return;
+        }
         if (living instanceof PlayerEntity player &&
-            player.isCreative()) return;
-        if (ReflectTrinket.canReflect(living, this)) return;
+            player.isCreative())
+        {
+            return;
+        }
+        if (ReflectTrinket.canReflect(living, this))
+        {
+            return;
+        }
         living.addVelocity(0, -level, 0);
         if (living instanceof ServerPlayerEntity)
+        {
             living.velocityModified = true;
+        }
     }
 }

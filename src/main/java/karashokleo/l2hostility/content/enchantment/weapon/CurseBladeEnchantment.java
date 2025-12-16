@@ -12,9 +12,9 @@ public class CurseBladeEnchantment extends AbstractBladeEnchantment
     public CurseBladeEnchantment()
     {
         super(
-                Enchantment.Rarity.VERY_RARE,
-                EnchantmentTarget.WEAPON,
-                new EquipmentSlot[]{EquipmentSlot.MAINHAND}
+            Enchantment.Rarity.VERY_RARE,
+            EnchantmentTarget.WEAPON,
+            new EquipmentSlot[]{EquipmentSlot.MAINHAND}
         );
     }
 

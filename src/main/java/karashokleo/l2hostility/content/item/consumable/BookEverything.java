@@ -37,7 +37,9 @@ public class BookEverything extends Item
         {
             Identifier id = new Identifier(name.trim());
             if (!Registries.ENCHANTMENT.containsId(id))
+            {
                 return null;
+            }
             return Registries.ENCHANTMENT.get(id);
         } catch (Exception e)
         {
@@ -50,7 +52,9 @@ public class BookEverything extends Item
         if (ench.isTreasure() ||
             !ench.isAvailableForEnchantedBookOffer() ||
             !ench.isAvailableForRandomSelection())
+        {
             return false;
+        }
         return ench.getMaxPower(ench.getMaxLevel()) >= ench.getMinPower(ench.getMaxLevel());
     }
 
@@ -70,26 +74,39 @@ public class BookEverything extends Item
                 ItemStack result = new ItemStack(Items.ENCHANTED_BOOK);
                 NbtList listtag = EnchantedBookItem.getEnchantmentNbt(result);
                 for (var e : Registries.ENCHANTMENT.getEntrySet())
+                {
                     if (allow(e.getValue()))
+                    {
                         listtag.add(EnchantmentHelper.createNbt(e.getKey().getValue(), e.getValue().getMaxLevel()));
+                    }
+                }
                 result.getOrCreateNbt().put("StoredEnchantments", listtag);
                 stack.decrement(1);
                 if (stack.isEmpty())
+                {
                     return TypedActionResult.success(result);
-                else
+                } else
+                {
                     user.getInventory().offerOrDrop(result);
+                }
             }
             return TypedActionResult.consume(stack);
         } else
         {
             Enchantment ench = getEnch(stack);
             if (ench == null)
+            {
                 return TypedActionResult.fail(stack);
+            }
             if (!allow(ench))
+            {
                 return TypedActionResult.fail(stack);
+            }
             int cost = cost(ench);
             if (user.experienceLevel < cost)
+            {
                 return TypedActionResult.fail(stack);
+            }
             if (!world.isClient())
             {
                 user.addExperienceLevels(-cost);
@@ -108,13 +125,17 @@ public class BookEverything extends Item
         tooltip.add(LHTexts.ITEM_BOOK_EVERYTHING_SHIFT.get().formatted(Formatting.GOLD));
         Enchantment e = getEnch(stack);
         if (e == null)
+        {
             tooltip.add(LHTexts.ITEM_BOOK_EVERYTHING_INVALID.get().formatted(Formatting.GRAY));
-        else
+        } else
         {
             if (allow(e))
+            {
                 tooltip.add(LHTexts.ITEM_BOOK_EVERYTHING_READY.get(e.getName(e.getMaxLevel()), cost(e)).formatted(Formatting.GREEN));
-            else
+            } else
+            {
                 tooltip.add(LHTexts.ITEM_BOOK_EVERYTHING_FORBIDDEN.get(e.getName(e.getMaxLevel())).formatted(Formatting.RED));
+            }
         }
     }
 }

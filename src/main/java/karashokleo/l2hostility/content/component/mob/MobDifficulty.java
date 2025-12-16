@@ -77,8 +77,8 @@ public class MobDifficulty
     public static boolean validate(Entity entity)
     {
         return (entity.getType().isIn(LHTags.WHITELIST) ||
-                (entity instanceof Monster &&
-                 !entity.getType().isIn(LHTags.BLACKLIST)));
+            (entity instanceof Monster &&
+                !entity.getType().isIn(LHTags.BLACKLIST)));
     }
 
     public static Optional<MobDifficulty> get(MobEntity mob)
@@ -137,7 +137,10 @@ public class MobDifficulty
         boolean skip = !LHConfig.common().scaling.allowNoAI && owner.isAiDisabled();
         MobDifficultyCollector instance = new MobDifficultyCollector();
         var config = getConfigCache();
-        if (config != null) instance.acceptConfig(config.difficulty);
+        if (config != null)
+        {
+            instance.acceptConfig(config.difficulty);
+        }
         difficulty.modifyInstance(owner.getBlockPos(), instance);
         PlayerEntity player = PlayerFinder.getNearestPlayer(owner.getWorld(), owner);
         if (player != null)
@@ -146,7 +149,9 @@ public class MobDifficulty
             playerDiff.apply(instance);
             if (!LHConfig.common().scaling.allowPlayerAllies &&
                 owner.isTeammate(player))
+            {
                 skip = true;
+            }
         }
         lv = skip ? 0 : TraitManager.fill(this, owner, traits, instance);
         fullDrop = instance.isFullDrop();
@@ -167,7 +172,10 @@ public class MobDifficulty
         init((pos, ins) ->
         {
             ins.base = level;
-            if (max) ins.setFullChance();
+            if (max)
+            {
+                ins.setFullChance();
+            }
         });
         return true;
     }
@@ -183,7 +191,10 @@ public class MobDifficulty
         for (var ent : parent.traits.entrySet())
         {
             int rank = ent.getKey().inherited(this, ent.getValue(), ctx);
-            if (rank > 0) traits.put(ent.getKey(), rank);
+            if (rank > 0)
+            {
+                traits.put(ent.getKey(), rank);
+            }
         }
         TraitManager.fill(this, child, traits, MobDifficultyCollector.noTrait(lv));
         stage = Stage.INIT;
@@ -233,20 +244,33 @@ public class MobDifficulty
 
     public void removeTrait(MobTrait trait)
     {
-        if (!traits.containsKey(trait)) return;
-        if (ticking) setTrait(trait, 0);
-        else traits.remove(trait);
+        if (!traits.containsKey(trait))
+        {
+            return;
+        }
+        if (ticking)
+        {
+            setTrait(trait, 0);
+        } else
+        {
+            traits.remove(trait);
+        }
         sync();
     }
 
     private boolean clearPending(MobEntity mob)
     {
-        if (pending.isEmpty()) return false;
+        if (pending.isEmpty())
+        {
+            return false;
+        }
         while (!pending.isEmpty())
         {
             var temp = new ArrayList<>(pending);
             for (var pair : pending)
+            {
                 traits.put(pair.getFirst(), pair.getSecond());
+            }
             pending.clear();
             for (var pair : temp)
             {
@@ -267,7 +291,10 @@ public class MobDifficulty
     public boolean shouldDiscard()
     {
         var config = getConfigCache();
-        if (config == null || config.minSpawnLevel <= 0) return false;
+        if (config == null || config.minSpawnLevel <= 0)
+        {
+            return false;
+        }
         return lv < config.minSpawnLevel;
     }
 
@@ -283,7 +310,7 @@ public class MobDifficulty
                 return;
             }
             ChunkDifficulty.at(owner.getWorld(), owner.getBlockPos())
-                    .ifPresent(this::init);
+                .ifPresent(this::init);
         }
         if (stage == Stage.INIT)
         {
@@ -328,7 +355,10 @@ public class MobDifficulty
 //                owner.discard();
 //            }
 //        }
-        if (sync && !owner.isRemoved()) sync();
+        if (sync && !owner.isRemoved())
+        {
+            sync();
+        }
         ticking = false;
     }
 
@@ -372,10 +402,15 @@ public class MobDifficulty
     {
         List<Text> ans = new ArrayList<>();
         if (showLevel && lv > 0)
+        {
             ans.add(LHTexts.LV.get(lv).setStyle(Style.EMPTY
-                    .withColor(fullDrop ? LHConfig.client().overHeadLevelColorAbyss :
-                            LHConfig.client().overHeadLevelColor)));
-        if (!showTrait) return ans;
+                .withColor(fullDrop ? LHConfig.client().overHeadLevelColorAbyss :
+                    LHConfig.client().overHeadLevelColor)));
+        }
+        if (!showTrait)
+        {
+            return ans;
+        }
         MutableText temp = null;
         int count = 0;
         for (var e : traits.entrySet())
@@ -397,7 +432,10 @@ public class MobDifficulty
                 }
             }
         }
-        if (count > 0) ans.add(temp);
+        if (count > 0)
+        {
+            ans.add(temp);
+        }
         return ans;
     }
 

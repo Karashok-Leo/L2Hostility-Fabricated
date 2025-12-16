@@ -13,23 +13,38 @@ public class ReprintHandler
 {
     public static void reprint(ItemStack dst, ItemStack src)
     {
-        if (!dst.hasEnchantments() && !dst.isEnchantable() || !src.hasEnchantments()) return;
+        if (!dst.hasEnchantments() && !dst.isEnchantable() || !src.hasEnchantments())
+        {
+            return;
+        }
         var selfEnch = EnchantmentHelper.get(dst);
         var targetEnch = EnchantmentHelper.get(src);
         Map<Enchantment, Integer> newEnch = new LinkedHashMap<>();
         for (var pair : targetEnch.entrySet())
         {
             Enchantment e = pair.getKey();
-            if (!e.isAcceptableItem(dst)) continue;
-            if (!allow(newEnch, e)) continue;
+            if (!e.isAcceptableItem(dst))
+            {
+                continue;
+            }
+            if (!allow(newEnch, e))
+            {
+                continue;
+            }
             int lv = pair.getValue();
             newEnch.compute(e, (k, v) -> v == null ? lv : Math.max(v, lv));
         }
         for (var pair : selfEnch.entrySet())
         {
             Enchantment e = pair.getKey();
-            if (!e.isAcceptableItem(dst)) continue;
-            if (!allow(newEnch, e)) continue;
+            if (!e.isAcceptableItem(dst))
+            {
+                continue;
+            }
+            if (!allow(newEnch, e))
+            {
+                continue;
+            }
             int lv = pair.getValue();
             newEnch.compute(e, (k, v) -> v == null ? lv : Math.max(v, lv));
         }
@@ -38,11 +53,21 @@ public class ReprintHandler
 
     private static boolean allow(Map<Enchantment, Integer> map, Enchantment ench)
     {
-        if (map.containsKey(ench)) return true;
-        if (Registries.ENCHANTMENT.getEntry(ench).isIn(LHTags.NO_REPRINT)) return false;
+        if (map.containsKey(ench))
+        {
+            return true;
+        }
+        if (Registries.ENCHANTMENT.getEntry(ench).isIn(LHTags.NO_REPRINT))
+        {
+            return false;
+        }
         for (var e : map.keySet())
+        {
             if (!e.canCombine(ench))
+            {
                 return false;
+            }
+        }
         return true;
     }
 }

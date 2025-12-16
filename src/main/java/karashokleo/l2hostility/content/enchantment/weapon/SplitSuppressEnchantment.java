@@ -16,10 +16,10 @@ public class SplitSuppressEnchantment extends RemoveTraitEnchantment
     public SplitSuppressEnchantment()
     {
         super(
-                Enchantment.Rarity.VERY_RARE,
-                EnchantmentTarget.WEAPON,
-                new EquipmentSlot[]{EquipmentSlot.MAINHAND},
-                () -> LHTraits.SPLIT
+            Enchantment.Rarity.VERY_RARE,
+            EnchantmentTarget.WEAPON,
+            new EquipmentSlot[]{EquipmentSlot.MAINHAND},
+            () -> LHTraits.SPLIT
         );
     }
 

@@ -37,10 +37,14 @@ public class TraitSymbol extends Item
     private static boolean allow(PlayerEntity player, MobTrait trait, LivingEntity target)
     {
         if (!LHConfig.common().scaling.allowPlayerAllies && target.isTeammate(player))
+        {
             return false;
+        }
         if (!LHConfig.common().scaling.allowTraitOnOwnable && target instanceof Ownable own &&
             own.getOwner() instanceof PlayerEntity)
+        {
             return false;
+        }
         return trait.allow(target);
     }
 
@@ -53,7 +57,9 @@ public class TraitSymbol extends Item
             var set = LHTraits.TRAIT.getIds();
             L2Hostility.LOGGER.error("List of all ids registered: ");
             for (var e : set)
+            {
                 L2Hostility.LOGGER.error(e.toString());
+            }
         }
         assert ans != null;
         return ans;
@@ -76,7 +82,9 @@ public class TraitSymbol extends Item
             if (!allow(user, trait, entity))
             {
                 if (user instanceof ServerPlayerEntity sp)
+                {
                     sp.sendMessage(LHTexts.MSG_ERR_DISALLOW.get().formatted(Formatting.RED), true);
+                }
                 return ActionResult.FAIL;
             }
 
@@ -85,20 +93,28 @@ public class TraitSymbol extends Item
                 user.isSneaking())
             {
                 if (cap.getTraitLevel(trait) <= 0)
+                {
                     return ActionResult.FAIL;
+                }
                 if (user.getWorld().isClient())
+                {
                     return ActionResult.SUCCESS;
+                }
                 ans = cap.traits.compute(trait, TraitAdderWand::decrease);
             } else
             {
                 if (cap.getTraitLevel(trait) >= trait.getMaxLevel())
                 {
                     if (user instanceof ServerPlayerEntity sp)
+                    {
                         sp.sendMessage(LHTexts.MSG_ERR_MAX.get().formatted(Formatting.RED), true);
+                    }
                     return ActionResult.FAIL;
                 }
                 if (user.getWorld().isClient())
+                {
                     return ActionResult.SUCCESS;
+                }
                 ans = cap.traits.compute(trait, TraitAdderWand::increase);
             }
             int val = ans == null ? 0 : ans;
@@ -112,7 +128,9 @@ public class TraitSymbol extends Item
                 Criteria.CONSUME_ITEM.trigger(sp, stack);
             }
             if (!user.getAbilities().creativeMode)
+            {
                 stack.decrement(1);
+            }
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
@@ -128,7 +146,9 @@ public class TraitSymbol extends Item
             return;
         }
         if (get() instanceof LegendaryTrait)
+        {
             tooltip.add(LHTexts.TOOLTIP_LEGENDARY.get().formatted(Formatting.GOLD));
+        }
 
         if (Screen.hasShiftDown())
         {

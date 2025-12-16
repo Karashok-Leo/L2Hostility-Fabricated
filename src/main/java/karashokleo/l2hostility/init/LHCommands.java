@@ -11,12 +11,12 @@ public class LHCommands
     public static void register()
     {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
-                dispatcher.register(
-                        CommandManager.literal("hostility")
-                                .then(MobCommands.build())
-                                .then(RegionCommands.build())
-                                .then(PlayerCommands.build())
-                )
+            dispatcher.register(
+                CommandManager.literal("hostility")
+                    .then(MobCommands.build())
+                    .then(RegionCommands.build())
+                    .then(PlayerCommands.build())
+            )
         );
     }
 }

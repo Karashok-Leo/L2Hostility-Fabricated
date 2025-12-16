@@ -26,11 +26,11 @@ import java.util.Optional;
 public class TraitLootModifier extends CurseLootModifier
 {
     public static final Codec<TraitLootModifier> CODEC = RecordCodecBuilder.create(i -> codecStart(i).and(i.group(
-                    LHTraits.TRAIT.getCodec().optionalFieldOf("trait").forGetter(e -> Optional.ofNullable(e.trait)),
-                    Codec.DOUBLE.fieldOf("chance").forGetter(e -> e.chance),
-                    Codec.DOUBLE.fieldOf("rankBonus").forGetter(e -> e.rankBonus),
-                    ItemStack.CODEC.fieldOf("result").forGetter(e -> e.result)))
-            .apply(i, (conditions, trait, chance, rankBonus, stack) -> new TraitLootModifier(trait.orElse(null), chance, rankBonus, stack, conditions)));
+            LHTraits.TRAIT.getCodec().optionalFieldOf("trait").forGetter(e -> Optional.ofNullable(e.trait)),
+            Codec.DOUBLE.fieldOf("chance").forGetter(e -> e.chance),
+            Codec.DOUBLE.fieldOf("rankBonus").forGetter(e -> e.rankBonus),
+            ItemStack.CODEC.fieldOf("result").forGetter(e -> e.result)))
+        .apply(i, (conditions, trait, chance, rankBonus, stack) -> new TraitLootModifier(trait.orElse(null), chance, rankBonus, stack, conditions)));
 
     @Nullable
     public final MobTrait trait;
@@ -53,8 +53,12 @@ public class TraitLootModifier extends CurseLootModifier
         double rate = chance + lv * rankBonus;
         int count = 0;
         for (int i = 0; i < result.getCount() * factor; i++)
+        {
             if (context.getRandom().nextDouble() < rate)
+            {
                 count++;
+            }
+        }
         if (count > 0)
         {
             ItemStack ans = result.copy();
@@ -84,7 +88,9 @@ public class TraitLootModifier extends CurseLootModifier
     {
         List<ItemStack> traits = new ArrayList<>();
         if (this.trait != null)
+        {
             traits.add(this.trait.asItem().getDefaultStack());
+        }
         traits.addAll(super.getTraits());
         return traits;
     }
@@ -99,51 +105,69 @@ public class TraitLootModifier extends CurseLootModifier
         List<PlayerHasItemLootCondition> itemReq = new ArrayList<>();
         List<MobHealthLootCondition> health = new ArrayList<>();
         for (var c : getConditions())
+        {
             if (c instanceof TraitLootCondition cl)
             {
                 if (cl.trait == trait)
                 {
                     max = Math.min(max, cl.maxLevel);
                     min = Math.max(min, cl.minLevel);
-                } else other.add(cl);
+                } else
+                {
+                    other.add(cl);
+                }
             } else if (c instanceof MobLevelLootCondition cl)
+            {
                 minLevel = cl.minLevel;
-            else if (c instanceof PlayerHasItemLootCondition cl)
+            } else if (c instanceof PlayerHasItemLootCondition cl)
+            {
                 itemReq.add(cl);
-            else if (c instanceof MobHealthLootCondition cl)
+            } else if (c instanceof MobHealthLootCondition cl)
+            {
                 health.add(cl);
+            }
+        }
         if (minLevel > 0)
+        {
             list.add(LHTexts.LOOT_MIN_LEVEL.get(Text.literal(minLevel + "")
-                            .formatted(Formatting.AQUA))
-                    .formatted(Formatting.LIGHT_PURPLE));
+                    .formatted(Formatting.AQUA))
+                .formatted(Formatting.LIGHT_PURPLE));
+        }
         for (var e : health)
+        {
             list.add(LHTexts.LOOT_MIN_HEALTH.get(Text.literal(e.minHealth + "")
-                            .formatted(Formatting.AQUA))
-                    .formatted(Formatting.LIGHT_PURPLE));
+                    .formatted(Formatting.AQUA))
+                .formatted(Formatting.LIGHT_PURPLE));
+        }
         if (trait != null)
+        {
             for (int lv = min; lv <= max; lv++)
+            {
                 list.add(LHTexts.LOOT_CHANCE.get(
-                                Text.literal(Math.round((chance + rankBonus * lv) * 100) + "%")
-                                        .formatted(Formatting.AQUA),
-                                trait.getName().formatted(Formatting.GOLD),
-                                Text.literal(lv + "").formatted(Formatting.AQUA))
-                        .formatted(Formatting.GRAY));
-        else
-            list.add(LHTexts.LOOT_NO_TRAIT.get(Text.literal(Math.round(chance * 100) + "%")
-                            .formatted(Formatting.AQUA))
+                        Text.literal(Math.round((chance + rankBonus * lv) * 100) + "%")
+                            .formatted(Formatting.AQUA),
+                        trait.getName().formatted(Formatting.GOLD),
+                        Text.literal(lv + "").formatted(Formatting.AQUA))
                     .formatted(Formatting.GRAY));
+            }
+        } else
+        {
+            list.add(LHTexts.LOOT_NO_TRAIT.get(Text.literal(Math.round(chance * 100) + "%")
+                    .formatted(Formatting.AQUA))
+                .formatted(Formatting.GRAY));
+        }
         for (var c : other)
         {
             int cmin = Math.max(c.minLevel, 1);
             int cmax = Math.min(c.maxLevel, c.trait.getMaxLevel());
             String str = cmax == cmin ?
-                    cmin + "" :
-                    cmax >= c.trait.getMaxLevel() ?
-                            cmin + "+" :
-                            cmin + "-" + cmax;
+                cmin + "" :
+                cmax >= c.trait.getMaxLevel() ?
+                    cmin + "+" :
+                    cmin + "-" + cmax;
             list.add(LHTexts.LOOT_OTHER_TRAIT.get(c.trait.getName().formatted(Formatting.GOLD),
-                            Text.literal(str).formatted(Formatting.AQUA))
-                    .formatted(Formatting.RED));
+                    Text.literal(str).formatted(Formatting.AQUA))
+                .formatted(Formatting.RED));
         }
         for (var e : itemReq)
         {

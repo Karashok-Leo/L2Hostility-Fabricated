@@ -30,9 +30,9 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler
     }
 
     @Inject(
-            method = "updateResult",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "updateResult",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_updateResult(CallbackInfo ci)
     {
@@ -47,12 +47,12 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler
     }
 
     @Inject(
-            method = "onTakeOutput",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/inventory/Inventory;setStack(ILnet/minecraft/item/ItemStack;)V",
-                    ordinal = 0
-            )
+        method = "onTakeOutput",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/inventory/Inventory;setStack(ILnet/minecraft/item/ItemStack;)V",
+            ordinal = 0
+        )
     )
     private void inject_onTakeOutput(PlayerEntity player, ItemStack stack, CallbackInfo ci)
     {

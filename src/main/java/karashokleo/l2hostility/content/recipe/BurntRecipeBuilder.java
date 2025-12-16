@@ -50,31 +50,33 @@ public class BurntRecipeBuilder extends RecipeJsonBuilder
     {
         this.validate(recipeId);
         this.advancementBuilder
-                .parent(CraftingRecipeJsonBuilder.ROOT)
-                .criterion("has_the_recipe", RecipeUnlockedCriterion.create(recipeId))
-                .rewards(AdvancementRewards.Builder.recipe(recipeId))
-                .criteriaMerger(CriterionMerger.OR);
+            .parent(CraftingRecipeJsonBuilder.ROOT)
+            .criterion("has_the_recipe", RecipeUnlockedCriterion.create(recipeId))
+            .rewards(AdvancementRewards.Builder.recipe(recipeId))
+            .criteriaMerger(CriterionMerger.OR);
         exporter.accept(
-                new BurntRecipeJsonProvider(
-                        new BurntRecipe(recipeId, ingredient, result, chance),
-                        recipeId,
-                        advancementBuilder,
-                        recipeId.withPrefixedPath("recipes/burnt/")
-                )
+            new BurntRecipeJsonProvider(
+                new BurntRecipe(recipeId, ingredient, result, chance),
+                recipeId,
+                advancementBuilder,
+                recipeId.withPrefixedPath("recipes/burnt/")
+            )
         );
     }
 
     protected void validate(Identifier id)
     {
         if (this.advancementBuilder.getCriteria().isEmpty())
+        {
             throw new IllegalStateException("No way of obtaining recipe " + id);
+        }
     }
 
     public record BurntRecipeJsonProvider(
-            BurntRecipe recipe,
-            Identifier recipeId,
-            Advancement.Builder builder,
-            Identifier advancementId
+        BurntRecipe recipe,
+        Identifier recipeId,
+        Advancement.Builder builder,
+        Identifier advancementId
     ) implements RecipeJsonProvider
     {
         @Override

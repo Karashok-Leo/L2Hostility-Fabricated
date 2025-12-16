@@ -25,9 +25,14 @@ public class CurseOfLust extends CurseTrinketItem
     @Override
     public void onKilled(ItemStack stack, LivingEntity entity, LivingEntity killed)
     {
-        if (!(killed instanceof MobEntity mob)) return;
+        if (!(killed instanceof MobEntity mob))
+        {
+            return;
+        }
         for (var e : EquipmentSlot.values())
+        {
             mob.setEquipmentDropChance(e, 1);
+        }
     }
 
     @Override

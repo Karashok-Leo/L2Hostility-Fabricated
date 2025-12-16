@@ -76,9 +76,9 @@ public class ReflectTrait extends MobTrait
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                LHConfig.common().traits.reflectRange,
-                mapLevel(i -> Text.literal((int) Math.round(100 * (i * LHConfig.common().traits.reflectFactor)) + "").formatted(Formatting.AQUA)),
-                (int) Math.round(100 * LHConfig.common().traits.reflectLimit)
+            LHConfig.common().traits.reflectRange,
+            mapLevel(i -> Text.literal((int) Math.round(100 * (i * LHConfig.common().traits.reflectFactor)) + "").formatted(Formatting.AQUA)),
+            (int) Math.round(100 * LHConfig.common().traits.reflectLimit)
         ).formatted(Formatting.GRAY));
     }
 }

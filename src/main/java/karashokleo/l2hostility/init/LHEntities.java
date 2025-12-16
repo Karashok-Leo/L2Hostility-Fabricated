@@ -30,106 +30,106 @@ public class LHEntities
     public static void register()
     {
         HOSTILITY_BULLET = Entry.of(
-                        "hostility_bullet",
-                        FabricEntityTypeBuilder.<HostilityBulletEntity>create()
-                                .entityFactory(HostilityBulletEntity::new)
-                                .spawnGroup(SpawnGroup.MISC)
-                                .dimensions(EntityDimensions.changing(0.3125f, 0.3125f))
-                                .trackRangeChunks(8)
-                                .build()
-                )
-                .addEN()
-                .addZH("恶意潜影弹")
-                .register();
+                "hostility_bullet",
+                FabricEntityTypeBuilder.<HostilityBulletEntity>create()
+                    .entityFactory(HostilityBulletEntity::new)
+                    .spawnGroup(SpawnGroup.MISC)
+                    .dimensions(EntityDimensions.changing(0.3125f, 0.3125f))
+                    .trackRangeChunks(8)
+                    .build()
+            )
+            .addEN()
+            .addZH("恶意潜影弹")
+            .register();
         HOSTILITY_FIREBALL = Entry.of(
-                        "hostility_fireball",
-                        FabricEntityTypeBuilder.<HostilityFireballEntity>create()
-                                .entityFactory(HostilityFireballEntity::new)
-                                .spawnGroup(SpawnGroup.MISC)
-                                .dimensions(EntityDimensions.changing(1.0f, 1.0f))
-                                .trackRangeChunks(4)
-                                .trackedUpdateRate(10)
-                                .build()
-                )
-                .addEN()
-                .addZH("恶意火球")
-                .addTag(EntityTypeTags.IMPACT_PROJECTILES)
-                .register();
+                "hostility_fireball",
+                FabricEntityTypeBuilder.<HostilityFireballEntity>create()
+                    .entityFactory(HostilityFireballEntity::new)
+                    .spawnGroup(SpawnGroup.MISC)
+                    .dimensions(EntityDimensions.changing(1.0f, 1.0f))
+                    .trackRangeChunks(4)
+                    .trackedUpdateRate(10)
+                    .build()
+            )
+            .addEN()
+            .addZH("恶意火球")
+            .addTag(EntityTypeTags.IMPACT_PROJECTILES)
+            .register();
         SOUL_FIREBALL = Entry.of(
-                        "soul_fire_charge",
-                        FabricEntityTypeBuilder.<SoulFireballEntity>create()
-                                .entityFactory(SoulFireballEntity::new)
-                                .spawnGroup(SpawnGroup.MISC)
-                                .dimensions(EntityDimensions.changing(1.0f, 1.0f))
-                                .trackRangeChunks(4)
-                                .trackedUpdateRate(10)
-                                .build()
-                )
-                .addEN()
-                .addZH("魂炎弹")
-                .addTag(EntityTypeTags.IMPACT_PROJECTILES)
-                .register();
+                "soul_fire_charge",
+                FabricEntityTypeBuilder.<SoulFireballEntity>create()
+                    .entityFactory(SoulFireballEntity::new)
+                    .spawnGroup(SpawnGroup.MISC)
+                    .dimensions(EntityDimensions.changing(1.0f, 1.0f))
+                    .trackRangeChunks(4)
+                    .trackedUpdateRate(10)
+                    .build()
+            )
+            .addEN()
+            .addZH("魂炎弹")
+            .addTag(EntityTypeTags.IMPACT_PROJECTILES)
+            .register();
         STRONG_FIREBALL = Entry.of(
-                        "strong_fire_charge",
-                        FabricEntityTypeBuilder.<StrongFireballEntity>create()
-                                .entityFactory(StrongFireballEntity::new)
-                                .spawnGroup(SpawnGroup.MISC)
-                                .dimensions(EntityDimensions.changing(1.0f, 1.0f))
-                                .trackRangeChunks(4)
-                                .trackedUpdateRate(10)
-                                .build()
-                )
-                .addEN()
-                .addZH("爆炎弹")
-                .addTag(EntityTypeTags.IMPACT_PROJECTILES)
-                .register();
+                "strong_fire_charge",
+                FabricEntityTypeBuilder.<StrongFireballEntity>create()
+                    .entityFactory(StrongFireballEntity::new)
+                    .spawnGroup(SpawnGroup.MISC)
+                    .dimensions(EntityDimensions.changing(1.0f, 1.0f))
+                    .trackRangeChunks(4)
+                    .trackedUpdateRate(10)
+                    .build()
+            )
+            .addEN()
+            .addZH("爆炎弹")
+            .addTag(EntityTypeTags.IMPACT_PROJECTILES)
+            .register();
         BLACK_FIREBALL = Entry.of(
-                        "black_fire_charge",
-                        FabricEntityTypeBuilder.<BlackFireballEntity>create()
-                                .entityFactory(BlackFireballEntity::new)
-                                .spawnGroup(SpawnGroup.MISC)
-                                .dimensions(EntityDimensions.changing(1.0f, 1.0f))
-                                .trackRangeChunks(4)
-                                .trackedUpdateRate(10)
-                                .build()
-                )
-                .addEN()
-                .addZH("黑炎弹")
-                .addTag(EntityTypeTags.IMPACT_PROJECTILES)
-                .register();
+                "black_fire_charge",
+                FabricEntityTypeBuilder.<BlackFireballEntity>create()
+                    .entityFactory(BlackFireballEntity::new)
+                    .spawnGroup(SpawnGroup.MISC)
+                    .dimensions(EntityDimensions.changing(1.0f, 1.0f))
+                    .trackRangeChunks(4)
+                    .trackedUpdateRate(10)
+                    .build()
+            )
+            .addEN()
+            .addZH("黑炎弹")
+            .addTag(EntityTypeTags.IMPACT_PROJECTILES)
+            .register();
         WITCH_FIREBALL = Entry.of(
-                        "witch_charge",
-                        FabricEntityTypeBuilder.<WitchFireballEntity>create()
-                                .entityFactory(WitchFireballEntity::new)
-                                .spawnGroup(SpawnGroup.MISC)
-                                .dimensions(EntityDimensions.changing(1.0f, 1.0f))
-                                .trackRangeChunks(4)
-                                .trackedUpdateRate(10)
-                                .build()
-                )
-                .addEN()
-                .addZH("嗜魔弹")
-                .addTag(EntityTypeTags.IMPACT_PROJECTILES)
-                .register();
+                "witch_charge",
+                FabricEntityTypeBuilder.<WitchFireballEntity>create()
+                    .entityFactory(WitchFireballEntity::new)
+                    .spawnGroup(SpawnGroup.MISC)
+                    .dimensions(EntityDimensions.changing(1.0f, 1.0f))
+                    .trackRangeChunks(4)
+                    .trackedUpdateRate(10)
+                    .build()
+            )
+            .addEN()
+            .addZH("嗜魔弹")
+            .addTag(EntityTypeTags.IMPACT_PROJECTILES)
+            .register();
         ETERNAL_WITCH_FIREBALL = Entry.of(
-                        "eternal_witch_charge",
-                        FabricEntityTypeBuilder.<EternalWitchFireballEntity>create()
-                                .entityFactory(EternalWitchFireballEntity::new)
-                                .spawnGroup(SpawnGroup.MISC)
-                                .dimensions(EntityDimensions.changing(1.0f, 1.0f))
-                                .trackRangeChunks(4)
-                                .trackedUpdateRate(10)
-                                .build()
-                )
-                .addEN()
-                .addZH("永恒嗜魔弹")
-                .addTag(EntityTypeTags.IMPACT_PROJECTILES)
-                .register();
+                "eternal_witch_charge",
+                FabricEntityTypeBuilder.<EternalWitchFireballEntity>create()
+                    .entityFactory(EternalWitchFireballEntity::new)
+                    .spawnGroup(SpawnGroup.MISC)
+                    .dimensions(EntityDimensions.changing(1.0f, 1.0f))
+                    .trackRangeChunks(4)
+                    .trackedUpdateRate(10)
+                    .build()
+            )
+            .addEN()
+            .addZH("永恒嗜魔弹")
+            .addTag(EntityTypeTags.IMPACT_PROJECTILES)
+            .register();
     }
 
     static class Entry<T extends EntityType<?>>
-            extends NamedEntryBuilder<T>
-            implements DefaultLanguageGeneratorProvider, TagGeneratorProvider
+        extends NamedEntryBuilder<T>
+        implements DefaultLanguageGeneratorProvider, TagGeneratorProvider
     {
         private Entry(String name, T entity)
         {

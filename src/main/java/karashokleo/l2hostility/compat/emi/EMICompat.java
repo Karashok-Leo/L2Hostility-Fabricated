@@ -36,19 +36,28 @@ public class EMICompat implements EmiPlugin
         for (ITraitLootRecipe recipe : ITraitLootRecipe.LIST_CACHE)
         {
             if (recipe instanceof EnvyLootModifier)
+            {
                 for (MobTrait trait : LHTraits.TRAIT)
+                {
                     registry.addRecipe(
-                            new EMILootRecipe(recipe)
-                                    .setTraits(EmiStack.of(trait.asItem()))
-                                    .setLoot(EmiStack.of(trait.asItem()))
+                        new EMILootRecipe(recipe)
+                            .setTraits(EmiStack.of(trait.asItem()))
+                            .setLoot(EmiStack.of(trait.asItem()))
                     );
-            else if (recipe instanceof GluttonyLootModifier)
+                }
+            } else if (recipe instanceof GluttonyLootModifier)
+            {
                 registry.addRecipe(new EMILootRecipe(recipe).setTraits(EmiIngredient.of(LHTags.TRAIT_ITEM)));
-            else registry.addRecipe(new EMILootRecipe(recipe));
+            } else
+            {
+                registry.addRecipe(new EMILootRecipe(recipe));
+            }
         }
         for (BurntRecipe recipe : registry.getRecipeManager().listAllOfType(LHRecipes.BURNT_RECIPE_TYPE))
+        {
             registry.addRecipe(new EMIBurntRecipe(recipe));
+        }
         LivingEntityWrapper.streamRegistry(MobDifficulty::validate, 2)
-                .forEach(entityWrapper -> registry.addRecipe(new EMITraitRecipe(entityWrapper)));
+            .forEach(entityWrapper -> registry.addRecipe(new EMITraitRecipe(entityWrapper)));
     }
 }

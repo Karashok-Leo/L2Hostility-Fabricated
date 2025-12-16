@@ -36,15 +36,27 @@ public class RingOfIncarceration extends SingleEpicTrinketItem
     @Override
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
-        if (!entity.isSneaking()) return;
-        if (entity.isSpectator()) return;
-        if (entity.getWorld().isClient()) return;
+        if (!entity.isSneaking())
+        {
+            return;
+        }
+        if (entity.isSpectator())
+        {
+            return;
+        }
+        if (entity.getWorld().isClient())
+        {
+            return;
+        }
         // Default Entity Interact Distance: 3.0
         double reach = ReachEntityAttributes.getAttackRange(entity, 3.0);
         for (var e : entity.getWorld().getEntitiesByType(TypeFilter.instanceOf(LivingEntity.class), entity.getBoundingBox().expand(reach), e -> entity.distanceTo(e) < reach))
         {
             if (e.isSpectator() ||
-                e instanceof PlayerEntity player && player.isCreative()) continue;
+                e instanceof PlayerEntity player && player.isCreative())
+            {
+                continue;
+            }
             StatusEffectInstance newEffect = new StatusEffectInstance(LHEffects.STONE_CAGE, 40, 0, true, true);
             EffectHelper.forceAddEffectWithEvent(e, newEffect, entity);
         }

@@ -33,59 +33,59 @@ public class MobCommands
     public static LiteralArgumentBuilder<ServerCommandSource> build()
     {
         return literal("mobs")
-                .then(argument("targets", EntityArgumentType.entities())
-                        .then(level())
-                        .then(trait())
-                );
+            .then(argument("targets", EntityArgumentType.entities())
+                .then(level())
+                .then(trait())
+            );
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> trait()
     {
         return literal("trait")
-                .then(literal("clear")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .executes(mobRun(MobCommands::commandClearTrait)))
-                .then(literal("remove")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .then(argument("trait", RegistryKeyArgumentType.registryKey(LHTraits.TRAIT_KEY))
-                                .executes(mobTrait(MobCommands::commandRemoveTrait))))
-                .then(literal("set")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .then(argument("trait", RegistryKeyArgumentType.registryKey(LHTraits.TRAIT_KEY))
-                                .then(argument("rank", IntegerArgumentType.integer(0))
-                                        .executes(mobTraitRank(MobCommands::commandSetTrait)))));
+            .then(literal("clear")
+                .requires(e -> e.hasPermissionLevel(2))
+                .executes(mobRun(MobCommands::commandClearTrait)))
+            .then(literal("remove")
+                .requires(e -> e.hasPermissionLevel(2))
+                .then(argument("trait", RegistryKeyArgumentType.registryKey(LHTraits.TRAIT_KEY))
+                    .executes(mobTrait(MobCommands::commandRemoveTrait))))
+            .then(literal("set")
+                .requires(e -> e.hasPermissionLevel(2))
+                .then(argument("trait", RegistryKeyArgumentType.registryKey(LHTraits.TRAIT_KEY))
+                    .then(argument("rank", IntegerArgumentType.integer(0))
+                        .executes(mobTraitRank(MobCommands::commandSetTrait)))));
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> level()
     {
         return literal("level")
-                .then(literal("rerollTrait")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .executes(mobRun(cap ->
-                                cap.reInit(cap.getLevel(), false))))
-                .then(literal("rerollTraitNoSuppression")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .executes(mobRun(cap ->
-                                cap.reInit(cap.getLevel(), true))))
-                .then(literal("setAndRerollTrait")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .then(argument("level", IntegerArgumentType.integer(0))
-                                .executes(mobLevel((cap, level) ->
-                                        cap.reInit(level, false)))))
-                .then(literal("addAndRerollTrait")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .then(argument("level", IntegerArgumentType.integer(0))
-                                .executes(mobLevel((cap, level) ->
-                                        cap.reInit(cap.getLevel() + level, false)))))
-                .then(literal("set")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .then(argument("level", IntegerArgumentType.integer(0))
-                                .executes(mobLevel(MobCommands::commandSetLevel))))
-                .then(literal("add")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .then(argument("level", IntegerArgumentType.integer(0))
-                                .executes(mobLevel((cap, level) ->
-                                        commandSetLevel(cap, cap.getLevel() + level)))));
+            .then(literal("rerollTrait")
+                .requires(e -> e.hasPermissionLevel(2))
+                .executes(mobRun(cap ->
+                    cap.reInit(cap.getLevel(), false))))
+            .then(literal("rerollTraitNoSuppression")
+                .requires(e -> e.hasPermissionLevel(2))
+                .executes(mobRun(cap ->
+                    cap.reInit(cap.getLevel(), true))))
+            .then(literal("setAndRerollTrait")
+                .requires(e -> e.hasPermissionLevel(2))
+                .then(argument("level", IntegerArgumentType.integer(0))
+                    .executes(mobLevel((cap, level) ->
+                        cap.reInit(level, false)))))
+            .then(literal("addAndRerollTrait")
+                .requires(e -> e.hasPermissionLevel(2))
+                .then(argument("level", IntegerArgumentType.integer(0))
+                    .executes(mobLevel((cap, level) ->
+                        cap.reInit(cap.getLevel() + level, false)))))
+            .then(literal("set")
+                .requires(e -> e.hasPermissionLevel(2))
+                .then(argument("level", IntegerArgumentType.integer(0))
+                    .executes(mobLevel(MobCommands::commandSetLevel))))
+            .then(literal("add")
+                .requires(e -> e.hasPermissionLevel(2))
+                .then(argument("level", IntegerArgumentType.integer(0))
+                    .executes(mobLevel((cap, level) ->
+                        commandSetLevel(cap, cap.getLevel() + level)))));
     }
 
     private static boolean commandSetLevel(MobDifficulty cap, int level)
@@ -97,23 +97,37 @@ public class MobCommands
 
     private static boolean commandClearTrait(MobDifficulty cap)
     {
-        if (cap.traits.isEmpty()) return false;
+        if (cap.traits.isEmpty())
+        {
+            return false;
+        }
         for (var e : cap.traits.keySet())
+        {
             cap.setTrait(e, 0);
+        }
         return true;
     }
 
     private static boolean commandRemoveTrait(MobDifficulty cap, MobTrait trait)
     {
-        if (!cap.hasTrait(trait)) return false;
+        if (!cap.hasTrait(trait))
+        {
+            return false;
+        }
         cap.removeTrait(trait);
         return true;
     }
 
     private static boolean commandSetTrait(MobDifficulty cap, MobTrait trait, int rank)
     {
-        if (!trait.allow(cap.owner)) return false;
-        if (trait.getConfig().max_rank < rank) return false;
+        if (!trait.allow(cap.owner))
+        {
+            return false;
+        }
+        if (trait.getConfig().max_rank < rank)
+        {
+            return false;
+        }
         cap.setTrait(trait, rank);
         return true;
     }
@@ -172,8 +186,14 @@ public class MobCommands
         for (var e : list)
         {
             var cap = MobDifficulty.get(e);
-            if (cap.isEmpty()) continue;
-            if (task.test(cap.get())) count++;
+            if (cap.isEmpty())
+            {
+                continue;
+            }
+            if (task.test(cap.get()))
+            {
+                count++;
+            }
         }
         return count;
     }
@@ -190,8 +210,8 @@ public class MobCommands
     }
 
     private static <T> RegistryKey<T> getRegistryKey(
-            CommandContext<ServerCommandSource> ctx, String name,
-            RegistryKey<Registry<T>> reg, DynamicCommandExceptionType err
+        CommandContext<ServerCommandSource> ctx, String name,
+        RegistryKey<Registry<T>> reg, DynamicCommandExceptionType err
     ) throws CommandSyntaxException
     {
         RegistryKey<?> ans = ctx.getArgument(name, RegistryKey.class);
@@ -205,8 +225,8 @@ public class MobCommands
     }
 
     private static <T> RegistryEntry.Reference<T> resolveKey(
-            CommandContext<ServerCommandSource> ctx, String name,
-            RegistryKey<Registry<T>> reg, DynamicCommandExceptionType err
+        CommandContext<ServerCommandSource> ctx, String name,
+        RegistryKey<Registry<T>> reg, DynamicCommandExceptionType err
     ) throws CommandSyntaxException
     {
         RegistryKey<T> ans = getRegistryKey(ctx, name, reg, err);

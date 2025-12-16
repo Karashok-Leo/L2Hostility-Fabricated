@@ -27,26 +27,37 @@ public class EnchantmentDisabler
     public static void disableEnchantment(World world, ItemStack stack, int duration)
     {
         NbtCompound root = stack.getOrCreateNbt();
-        if (!root.contains(ENCH, NbtElement.LIST_TYPE)) return;
+        if (!root.contains(ENCH, NbtElement.LIST_TYPE))
+        {
+            return;
+        }
         double durability = stack.getMaxDamage() == 0 ? 0 : 1d * stack.getDamage() / stack.getMaxDamage();
         NbtCompound tag = stack.getOrCreateSubNbt(ROOT);
         var list = root.getList(ENCH, NbtElement.COMPOUND_TYPE);
         var cache = new NbtList();
         list.removeIf(e ->
         {
-            if (noDispell(e)) return false;
+            if (noDispell(e))
+            {
+                return false;
+            }
             cache.add(e);
             return true;
         });
         tag.put(OLD, cache);
         tag.putLong(TIME, world.getTime() + duration);
         if (stack.isDamageable())
+        {
             stack.setDamage(MathHelper.clamp((int) Math.floor(durability * stack.getMaxDamage()), 0, stack.getMaxDamage() - 1));
+        }
     }
 
     private static boolean noDispell(NbtElement e)
     {
-        if (!(e instanceof NbtCompound c)) return false;
+        if (!(e instanceof NbtCompound c))
+        {
+            return false;
+        }
         var id = new Identifier(c.getString("id"));
         var rg = Registries.ENCHANTMENT;
         return rg.getEntry(rg.get(id)).isIn(LHTags.NO_DISPELL);
@@ -54,7 +65,10 @@ public class EnchantmentDisabler
 
     public static void tickStack(World world, Entity user, ItemStack stack)
     {
-        if (world.isClient()) return;
+        if (world.isClient())
+        {
+            return;
+        }
         if (user instanceof PlayerEntity player &&
             !player.getAbilities().creativeMode &&
             stack.hasEnchantments() &&
@@ -63,7 +77,10 @@ public class EnchantmentDisabler
             stack.setCount(0);
             return;
         }
-        if (stack.getNbt() == null || !stack.getNbt().contains(ROOT, NbtElement.COMPOUND_TYPE)) return;
+        if (stack.getNbt() == null || !stack.getNbt().contains(ROOT, NbtElement.COMPOUND_TYPE))
+        {
+            return;
+        }
         NbtCompound root = stack.getOrCreateNbt();
         NbtCompound tag = stack.getOrCreateSubNbt(ROOT);
         long time = tag.getLong(TIME);
@@ -79,19 +96,24 @@ public class EnchantmentDisabler
 
     public static void modifyTooltip(ItemStack stack, List<Text> tooltip, World level)
     {
-        if (stack.getNbt() == null || !stack.getNbt().contains(ROOT, NbtElement.COMPOUND_TYPE)) return;
+        if (stack.getNbt() == null || !stack.getNbt().contains(ROOT, NbtElement.COMPOUND_TYPE))
+        {
+            return;
+        }
         NbtCompound tag = stack.getOrCreateSubNbt(ROOT);
         long time = Math.max(0, tag.getLong(TIME) - level.getTime());
         NbtList list = tag.getList(OLD, NbtElement.COMPOUND_TYPE);
         tooltip.add(LHTexts.TOOLTIP_DISABLE.get(
-                        Text.literal(list.size() + "")
-                                .formatted(Formatting.LIGHT_PURPLE),
-                        Text.literal(time / 20 + "")
-                                .formatted(Formatting.AQUA))
-                .formatted(Formatting.RED));
+                Text.literal(list.size() + "")
+                    .formatted(Formatting.LIGHT_PURPLE),
+                Text.literal(time / 20 + "")
+                    .formatted(Formatting.AQUA))
+            .formatted(Formatting.RED));
         List<Text> disabled = new ArrayList<>();
         ItemStack.appendEnchantments(disabled, list);
         for (var e : disabled)
+        {
             tooltip.add(e.copy().formatted(Formatting.DARK_GRAY));
+        }
     }
 }

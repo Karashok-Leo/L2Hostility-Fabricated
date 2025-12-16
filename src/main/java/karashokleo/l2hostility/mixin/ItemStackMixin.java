@@ -27,8 +27,8 @@ import java.util.function.Consumer;
 public abstract class ItemStackMixin
 {
     @Inject(
-            method = "inventoryTick",
-            at = @At("HEAD")
+        method = "inventoryTick",
+        at = @At("HEAD")
     )
     public void inject_inventoryTick(World world, Entity entity, int slot, boolean selected, CallbackInfo ci)
     {
@@ -42,29 +42,37 @@ public abstract class ItemStackMixin
     public int inject_damage_hardened(int amount)
     {
         ItemStack self = (ItemStack) (Object) this;
-        if (amount > 1 && EnchantmentHelper.getLevel(LHEnchantments.HARDENED, self) > 0) return 1;
+        if (amount > 1 && EnchantmentHelper.getLevel(LHEnchantments.HARDENED, self) > 0)
+        {
+            return 1;
+        }
         return amount;
     }
 
     // Life Sync & Eternal
     @Inject(
-            method = "damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V",
+        at = @At("HEAD"),
+        cancellable = true
     )
     public <T extends LivingEntity> void inject_damage_lifeSync(int amount, T living, Consumer<T> onBroken, CallbackInfo ci)
     {
         ItemStack self = (ItemStack) (Object) this;
-        if (living.getWorld().isClient()) return;
+        if (living.getWorld().isClient())
+        {
+            return;
+        }
 
         if (EnchantmentHelper.getLevel(LHEnchantments.ETERNAL, self) > 0)
+        {
             ci.cancel();
+        }
 
         if (EnchantmentHelper.getLevel(LHEnchantments.LIFE_SYNC, self) > 0)
         {
             GenericEvents.schedule(() -> living.damage(
-                    LifeSyncEnchantment.getSource(living.getWorld()),
-                    (float) (amount * LHConfig.common().complements.properties.lifeSyncFactor)
+                LifeSyncEnchantment.getSource(living.getWorld()),
+                (float) (amount * LHConfig.common().complements.properties.lifeSyncFactor)
             ));
             ci.cancel();
         }
@@ -81,16 +89,18 @@ public abstract class ItemStackMixin
 
     // Safeguard
     @WrapOperation(
-            method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"
-            )
+        method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"
+        )
     )
     public void inject_damage_safeguard(ItemStack self, int val, Operation<Void> op)
     {
         if (ItemSafeGuard.shouldPreventBreak(self, val))
+        {
             val = self.getMaxDamage() - 1;
+        }
         op.call(self, val);
 //        int max = self.getMaxDamage();
 //        if (max <= val + 1 && EnchantmentHelper.getLevel(LHEnchantments.SAFEGUARD, self) > 0)
@@ -119,8 +129,8 @@ public abstract class ItemStackMixin
     }
 
     @ModifyReturnValue(
-            at = @At("RETURN"),
-            method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z"
+        at = @At("RETURN"),
+        method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z"
     )
     public boolean inject_damage_safeguard_preventBreaking(boolean broken)
     {

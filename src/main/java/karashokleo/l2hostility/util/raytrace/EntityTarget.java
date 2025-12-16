@@ -29,7 +29,9 @@ public class EntityTarget
     public void updateTarget(@Nullable Entity entity)
     {
         if (target != entity)
+        {
             onChange(entity);
+        }
         target = entity;
         time = 0;
     }
@@ -41,7 +43,9 @@ public class EntityTarget
     public void tickRender()
     {
         if (target == null)
+        {
             return;
+        }
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
         if (player == null)
         {
@@ -51,7 +55,9 @@ public class EntityTarget
         ItemStack stack = player.getMainHandStack();
         int distance = 0;
         if (stack.getItem() instanceof IGlowingTarget glow)
+        {
             distance = glow.getDistance(stack);
+        }
         if (distance == 0)
         {
             updateTarget(null);
@@ -68,9 +74,13 @@ public class EntityTarget
         double angle = Math.acos(dot / len_d / len_v);
         double dist = Math.sin(angle) * len_d;
         if (angle > max_angle && dist > max_distance)
+        {
             updateTarget(null);
+        }
         time++;
         if (time >= max_time)
+        {
             updateTarget(null);
+        }
     }
 }

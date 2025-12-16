@@ -34,9 +34,11 @@ public class SectionDifficulty
     int index;
     @SerialClass.SerialField
     private SectionStage stage = SectionStage.INIT;
+
     public SectionDifficulty()
     {
     }
+
     public SectionDifficulty(ChunkSection section, int index, BlockPos activePos, SectionStage stage)
     {
         this.section = section;
@@ -56,9 +58,13 @@ public class SectionDifficulty
     {
         modifyInstanceInternal(world, pos, instance);
         if (LHConfig.common().scaling.allowSectionDifficulty)
+        {
             instance.acceptBonusLevel(difficulty.getLevel());
+        }
         if (stage == SectionStage.CLEARED)
+        {
             instance.setCap(0);
+        }
     }
 
     private void modifyInstanceInternal(World world, BlockPos pos, MobDifficultyCollector instance)
@@ -67,26 +73,29 @@ public class SectionDifficulty
         instance.acceptConfig(levelDiff);
         LHData.difficulties.getByBiome(world, pos).ifPresent(instance::acceptConfig);
         instance.acceptBonusLevel(
-                (int) Math.round(LHConfig.common().scaling.distanceFactor *
-                                 Math.sqrt(1d * (pos.getX() * pos.getX() + pos.getZ() * pos.getZ()))));
+            (int) Math.round(LHConfig.common().scaling.distanceFactor *
+                Math.sqrt(1d * (pos.getX() * pos.getX() + pos.getZ() * pos.getZ()))));
     }
 
     // 获取SectionDifficulty文本
     public List<Text> getSectionDifficultyDetail(PlayerEntity player)
     {
-        if (isCleared()) return List.of();
+        if (isCleared())
+        {
+            return List.of();
+        }
         var levelDiff = LHData.difficulties.getByLevelOrDefault(player.getWorld().getRegistryKey().getValue());
         int dim = levelDiff.base();
         BlockPos pos = player.getBlockPos();
         int bio = LHData.difficulties.getByBiome(player.getWorld(), pos).map(DifficultyConfig.Config::base).orElse(0);
         int dist = (int) Math.round(LHConfig.common().scaling.distanceFactor *
-                                    Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ()));
+            Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ()));
         int adaptive = difficulty.getLevel();
         return List.of(
-                LHTexts.INFO_SECTION_DIM_LEVEL.get(dim).formatted(Formatting.GRAY),
-                LHTexts.INFO_SECTION_BIOME_LEVEL.get(bio).formatted(Formatting.GRAY),
-                LHTexts.INFO_SECTION_DISTANCE_LEVEL.get(dist).formatted(Formatting.GRAY),
-                LHTexts.INFO_SECTION_ADAPTIVE_LEVEL.get(adaptive).formatted(Formatting.GRAY)
+            LHTexts.INFO_SECTION_DIM_LEVEL.get(dim).formatted(Formatting.GRAY),
+            LHTexts.INFO_SECTION_BIOME_LEVEL.get(bio).formatted(Formatting.GRAY),
+            LHTexts.INFO_SECTION_DISTANCE_LEVEL.get(dist).formatted(Formatting.GRAY),
+            LHTexts.INFO_SECTION_ADAPTIVE_LEVEL.get(adaptive).formatted(Formatting.GRAY)
         );
     }
 
@@ -97,7 +106,10 @@ public class SectionDifficulty
 
     public boolean setClear(ChunkDifficulty chunk, BlockPos pos)
     {
-        if (stage == SectionStage.CLEARED) return false;
+        if (stage == SectionStage.CLEARED)
+        {
+            return false;
+        }
         stage = SectionStage.CLEARED;
         chunk.owner.setNeedsSaving(true);
         chunk.sync();
@@ -107,7 +119,10 @@ public class SectionDifficulty
 
     public boolean setUnclear(ChunkDifficulty chunk, BlockPos pos)
     {
-        if (stage == SectionStage.INIT) return false;
+        if (stage == SectionStage.INIT)
+        {
+            return false;
+        }
         stage = SectionStage.INIT;
         chunk.owner.setNeedsSaving(true);
         chunk.sync();
@@ -128,7 +143,7 @@ public class SectionDifficulty
         MobDifficultyCollector col = new MobDifficultyCollector();
         modifyInstanceInternal(world, pos, col);
         var diff = LHConfig.common().scaling.allowSectionDifficulty ?
-                difficulty : new DifficultyLevel();
+            difficulty : new DifficultyLevel();
         return new LevelEditor(diff, col.getBase());
     }
 

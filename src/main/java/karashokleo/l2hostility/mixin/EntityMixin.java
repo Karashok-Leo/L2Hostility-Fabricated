@@ -20,46 +20,59 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EntityMixin
 {
     @Inject(
-            method = "isBeingRainedOn",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "isBeingRainedOn",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_isBeingRainedOn(CallbackInfoReturnable<Boolean> cir)
     {
         if (((Entity) (Object) this) instanceof LivingEntity le)
+        {
             if (TrinketCompat.hasItemInTrinket(le, TrinketItems.RING_OCEAN))
+            {
                 cir.setReturnValue(true);
+            }
+        }
     }
 
     @Inject(
-            method = "isGlowing",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "isGlowing",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_isGlowing(CallbackInfoReturnable<Boolean> cir)
     {
         if (ClientGlowingHandler.isGlowing(Wrappers.cast(this)))
+        {
             cir.setReturnValue(true);
+        }
         for (EntityTarget target : EntityTarget.LIST)
+        {
             if (target.target == (Object) this)
+            {
                 cir.setReturnValue(true);
+            }
+        }
     }
 
     @Inject(
-            method = "getTeamColorValue",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "getTeamColorValue",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_getTeamColorValue(CallbackInfoReturnable<Integer> cir)
     {
         Integer col = ClientGlowingHandler.getColor(Wrappers.cast(this));
-        if (col != null) cir.setReturnValue(col);
+        if (col != null)
+        {
+            cir.setReturnValue(col);
+        }
     }
 
     @Inject(
-            method = "occludeVibrationSignals",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "occludeVibrationSignals",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_dampened_occludeVibrationSignals(CallbackInfoReturnable<Boolean> cir)
     {
@@ -72,7 +85,10 @@ public abstract class EntityMixin
                 ItemStack stack = self.getEquippedStack(slot);
                 count += EnchantmentHelper.getLevel(LHEnchantments.DAMPENED, stack);
             }
-            if (count > 0) cir.setReturnValue(true);
+            if (count > 0)
+            {
+                cir.setReturnValue(true);
+            }
         }
     }
 }

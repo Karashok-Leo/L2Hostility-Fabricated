@@ -63,7 +63,9 @@ public class NoGravMagicalItem extends TooltipItem
         entity.setNoGravity(true);
 
         if (!persistentData.contains("JustCreated"))
+        {
             return;
+        }
         onCreated(entity, persistentData);
     }
 

@@ -22,10 +22,10 @@ public class REITraitDisplay implements Display
         this.id = Registries.ENTITY_TYPE.getId(entityWrapper.entity().getType());
         this.entityWrapper = entityWrapper;
         var traits = LHTraits.TRAIT
-                .stream()
-                .filter(trait -> trait.allow(entityWrapper.entity()))
-                .map(e -> e.asItem().getDefaultStack())
-                .toList();
+            .stream()
+            .filter(trait -> trait.allow(entityWrapper.entity()))
+            .map(e -> e.asItem().getDefaultStack())
+            .toList();
         this.traits = EntryIngredients.ofItemStacks(traits);
     }
 

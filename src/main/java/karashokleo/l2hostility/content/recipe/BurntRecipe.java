@@ -46,14 +46,20 @@ public class BurntRecipe implements Recipe<BurntRecipe.Inv>
     {
         Inv inv = new Inv(stack);
         var opt = world.getRecipeManager().getFirstMatch(LHRecipes.BURNT_RECIPE_TYPE, inv, world);
-        if (opt.isEmpty()) return;
+        if (opt.isEmpty())
+        {
+            return;
+        }
         BurntRecipe recipe = opt.get();
         ItemStack result = recipe.craft(inv, world.getRegistryManager());
         int chance = recipe.chance;
         int trial = stack.getCount();
         int det = trial / chance;
         trial = trial % chance;
-        if (world.random.nextInt(chance) < trial) det++;
+        if (world.random.nextInt(chance) < trial)
+        {
+            det++;
+        }
         det *= result.getCount();
         while (det > 0)
         {

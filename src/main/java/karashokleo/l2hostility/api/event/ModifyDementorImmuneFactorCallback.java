@@ -11,7 +11,9 @@ public interface ModifyDementorImmuneFactorCallback
     Event<ModifyDementorImmuneFactorCallback> EVENT = EventFactory.createArrayBacked(ModifyDementorImmuneFactorCallback.class, listeners -> (difficulty, entity, level, source, amount, factor) ->
     {
         for (ModifyDementorImmuneFactorCallback listener : listeners)
+        {
             factor = listener.modifyDementorImmuneFactor(difficulty, entity, level, source, amount, factor);
+        }
         return factor;
     });
 

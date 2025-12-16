@@ -38,7 +38,10 @@ public class DispellTrait extends LegendaryTrait
     public void onDamageSourceCreate(MobDifficulty difficulty, LivingEntity entity, int level, DamageSource damageSource, RegistryEntry<DamageType> type, @Nullable Entity source, @Nullable Vec3d position)
     {
         var data = difficulty.getOrCreateData(getId(), Data::new);
-        if (data.bypassCooldown > 0) return;
+        if (data.bypassCooldown > 0)
+        {
+            return;
+        }
 
         data.bypassCooldown = LHConfig.common().traits.dispellBypassCooldown;
         damageSource.setBypassMagic();
@@ -48,19 +51,30 @@ public class DispellTrait extends LegendaryTrait
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         var data = difficulty.getOrCreateData(getId(), Data::new);
-        if (data.disableCooldown > 0) return;
+        if (data.disableCooldown > 0)
+        {
+            return;
+        }
 
         List<ItemStack> list = new ArrayList<>();
         for (EquipmentSlot slot : EquipmentSlot.values())
         {
             ItemStack stack = event.getEntity().getEquippedStack(slot);
             if (stack.hasEnchantments() && !(stack.getOrCreateNbt().contains("l2hostility_enchantment")))
+            {
                 list.add(stack);
+            }
         }
-        if (list.isEmpty()) return;
+        if (list.isEmpty())
+        {
+            return;
+        }
 
         int count = Math.min(level * LHConfig.common().traits.dispellCount, list.size());
-        if (count <= 0) return;
+        if (count <= 0)
+        {
+            return;
+        }
         count = entity.getRandom().nextInt(count) + 1;
 
         data.disableCooldown = LHConfig.common().traits.dispellDisableCooldown;
@@ -79,7 +93,9 @@ public class DispellTrait extends LegendaryTrait
         if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
             source.isIn(DamageTypeTags.BYPASSES_EFFECTS) ||
             !source.isIn(LHTags.MAGIC))
+        {
             return;
+        }
         float amount = event.getAmount();
         double factor = LHConfig.common().traits.dispellImmuneFactor;
         factor = ModifyDispellImmuneFactorCallback.EVENT.invoker().modifyDispellImmuneFactor(difficulty, entity, level, source, amount, factor);
@@ -91,25 +107,29 @@ public class DispellTrait extends LegendaryTrait
     {
         var data = difficulty.getOrCreateData(getId(), Data::new);
         if (data.bypassCooldown > 0)
+        {
             data.bypassCooldown--;
+        }
         if (data.disableCooldown > 0)
+        {
             data.disableCooldown--;
+        }
     }
 
     @Override
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                Text.literal((int) Math.round(LHConfig.common().traits.dispellImmuneFactor * 100) + "")
-                        .formatted(Formatting.AQUA),
-                Text.literal(LHConfig.common().traits.dispellBypassCooldown / 20 + "")
-                        .formatted(Formatting.AQUA),
-                mapLevel(i -> Text.literal(i * LHConfig.common().traits.dispellCount + "")
-                        .formatted(Formatting.AQUA)),
-                mapLevel(i -> Text.literal(LHConfig.common().traits.dispellTime * i / 20 + ""
-                ).formatted(Formatting.AQUA)),
-                Text.literal(LHConfig.common().traits.dispellDisableCooldown / 20 + "")
-                        .formatted(Formatting.AQUA)
+            Text.literal((int) Math.round(LHConfig.common().traits.dispellImmuneFactor * 100) + "")
+                .formatted(Formatting.AQUA),
+            Text.literal(LHConfig.common().traits.dispellBypassCooldown / 20 + "")
+                .formatted(Formatting.AQUA),
+            mapLevel(i -> Text.literal(i * LHConfig.common().traits.dispellCount + "")
+                .formatted(Formatting.AQUA)),
+            mapLevel(i -> Text.literal(LHConfig.common().traits.dispellTime * i / 20 + ""
+            ).formatted(Formatting.AQUA)),
+            Text.literal(LHConfig.common().traits.dispellDisableCooldown / 20 + "")
+                .formatted(Formatting.AQUA)
         ).formatted(Formatting.GRAY));
     }
 

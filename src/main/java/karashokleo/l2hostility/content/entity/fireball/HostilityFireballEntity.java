@@ -47,11 +47,11 @@ public class HostilityFireballEntity extends BaseFireballEntity
     protected void onCollisionAction(Vec3d pos)
     {
         Explosion explosion = new Explosion(
-                this.getWorld(), this, null, null,
-                this.getX(), this.getY(), this.getZ(),
-                this.explosionPower,
-                this.createFire,
-                this.destroyBlock ? Explosion.DestructionType.DESTROY_WITH_DECAY : Explosion.DestructionType.KEEP
+            this.getWorld(), this, null, null,
+            this.getX(), this.getY(), this.getZ(),
+            this.explosionPower,
+            this.createFire,
+            this.destroyBlock ? Explosion.DestructionType.DESTROY_WITH_DECAY : Explosion.DestructionType.KEEP
         );
         explosion.collectBlocksAndDamageEntities();
         explosion.affectWorld(true);

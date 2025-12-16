@@ -66,9 +66,9 @@ public class TraitGLMProvider extends GlobalLootModifierProvider
         var loot4 = TrinketItems.LOOT_4;
 
         add("loot_envy", new EnvyLootModifier(LootTableTemplate.byPlayer().build(),
-                new PlayerHasItemLootCondition(TrinketItems.CURSE_ENVY)));
+            new PlayerHasItemLootCondition(TrinketItems.CURSE_ENVY)));
         add("loot_gluttony", new GluttonyLootModifier(LootTableTemplate.byPlayer().build(),
-                new PlayerHasItemLootCondition(TrinketItems.CURSE_GLUTTONY)));
+            new PlayerHasItemLootCondition(TrinketItems.CURSE_GLUTTONY)));
 
         add(LHTraits.TANK, loot1, new ItemStack(Items.DIAMOND, 4), 1, 0, 0.1);
         add(LHTraits.TANK, loot1, new ItemStack(Items.NETHERITE_SCRAP, 1), 3, 0, 0.1);
@@ -122,29 +122,29 @@ public class TraitGLMProvider extends GlobalLootModifierProvider
         add(LHTraits.DISPELL, loot4, new ItemStack(TrinketItems.IMAGINE_BREAKER), 3, 1, 0);
 
         add(LHTraits.TANK, new ItemStack(ComplementItems.SHULKERATE.nugget(), 6), 0, 0.1,
-                LootTableTemplate.byPlayer().build(),
-                new TraitLootCondition(LHTraits.TANK, 3, 5),
-                new TraitLootCondition(LHTraits.PROTECTION, 1, 3),
-                new PlayerHasItemLootCondition(loot2)
+            LootTableTemplate.byPlayer().build(),
+            new TraitLootCondition(LHTraits.TANK, 3, 5),
+            new TraitLootCondition(LHTraits.PROTECTION, 1, 3),
+            new PlayerHasItemLootCondition(loot2)
         );
         add(LHTraits.TANK, new ItemStack(ComplementItems.SHULKERATE.ingot(), 2), 0, 0.1,
-                LootTableTemplate.byPlayer().build(),
-                new TraitLootCondition(LHTraits.TANK, 3, 5),
-                new TraitLootCondition(LHTraits.PROTECTION, 4, 5),
-                new PlayerHasItemLootCondition(loot2)
+            LootTableTemplate.byPlayer().build(),
+            new TraitLootCondition(LHTraits.TANK, 3, 5),
+            new TraitLootCondition(LHTraits.PROTECTION, 4, 5),
+            new PlayerHasItemLootCondition(loot2)
         );
         add(LHTraits.SPEEDY, new ItemStack(ComplementItems.SCULKIUM.nugget(), 4), 0, 0.1,
-                LootTableTemplate.byPlayer().build(),
-                new TraitLootCondition(LHTraits.SPEEDY, 3, 5),
-                new TraitLootCondition(LHTraits.TANK, 3, 5),
-                new PlayerHasItemLootCondition(loot3)
+            LootTableTemplate.byPlayer().build(),
+            new TraitLootCondition(LHTraits.SPEEDY, 3, 5),
+            new TraitLootCondition(LHTraits.TANK, 3, 5),
+            new PlayerHasItemLootCondition(loot3)
         );
 
         add(LHTraits.DEMENTOR, new ItemStack(MiscItems.CHAOS.ingot(), 1), 1, 0,
-                LootTableTemplate.byPlayer().build(),
-                new TraitLootCondition(LHTraits.KILLER_AURA, 1, 5),
-                new TraitLootCondition(LHTraits.RAGNAROK, 1, 5),
-                new PlayerHasItemLootCondition(loot4)
+            LootTableTemplate.byPlayer().build(),
+            new TraitLootCondition(LHTraits.KILLER_AURA, 1, 5),
+            new TraitLootCondition(LHTraits.RAGNAROK, 1, 5),
+            new PlayerHasItemLootCondition(loot4)
         );
     }
 
@@ -152,29 +152,29 @@ public class TraitGLMProvider extends GlobalLootModifierProvider
     private void add(MobTrait trait, Item curio, ItemStack stack, int start, double chance, double bonus, int min)
     {
         add(
-                trait, stack, chance, bonus,
-                LootTableTemplate.byPlayer().build(),
-                new TraitLootCondition(trait, start, 5),
-                new MobLevelLootCondition(min),
-                new PlayerHasItemLootCondition(curio)
+            trait, stack, chance, bonus,
+            LootTableTemplate.byPlayer().build(),
+            new TraitLootCondition(trait, start, 5),
+            new MobLevelLootCondition(min),
+            new PlayerHasItemLootCondition(curio)
         );
     }
 
     private void add(MobTrait trait, Item curio, ItemStack stack, int start, double chance, double bonus)
     {
         add(
-                trait, stack, chance, bonus,
-                LootTableTemplate.byPlayer().build(),
-                new TraitLootCondition(trait, start, 5),
-                new PlayerHasItemLootCondition(curio)
+            trait, stack, chance, bonus,
+            LootTableTemplate.byPlayer().build(),
+            new TraitLootCondition(trait, start, 5),
+            new PlayerHasItemLootCondition(curio)
         );
     }
 
     private void add(MobTrait trait, ItemStack stack, double chance, double bonus, LootCondition... conditions)
     {
         add(
-                trait.getNonNullId().getPath() + "_drop_" + Registries.ITEM.getId(stack.getItem()).getPath(),
-                new TraitLootModifier(trait, chance, bonus, stack, conditions)
+            trait.getNonNullId().getPath() + "_drop_" + Registries.ITEM.getId(stack.getItem()).getPath(),
+            new TraitLootModifier(trait, chance, bonus, stack, conditions)
         );
     }
 }

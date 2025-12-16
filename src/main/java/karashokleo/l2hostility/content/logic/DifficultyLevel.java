@@ -29,11 +29,16 @@ public class DifficultyLevel
     public static int ofAny(LivingEntity entity)
     {
         if (entity instanceof PlayerEntity player)
+        {
             return PlayerDifficulty.get(player).getLevel().getLevel();
+        }
         if (entity instanceof MobEntity mob)
         {
             var diff = MobDifficulty.get(mob);
-            if (diff.isPresent()) return diff.get().getLevel();
+            if (diff.isPresent())
+            {
+                return diff.get().getLevel();
+            }
         }
         return 0;
     }
@@ -65,7 +70,9 @@ public class DifficultyLevel
     {
         double rate = LHConfig.common().difficulty.playerDeathDecay;
         if (rate < 1)
+        {
             level = Math.max(0, level - Math.max(1, (int) Math.ceil(level * (1 - rate))));
+        }
         experience = 0;
     }
 

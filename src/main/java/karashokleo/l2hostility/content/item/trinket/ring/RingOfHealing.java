@@ -31,7 +31,10 @@ public class RingOfHealing extends SingleEpicTrinketItem
     @Override
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
-        if (entity.age % 20 != 0) return;
+        if (entity.age % 20 != 0)
+        {
+            return;
+        }
         entity.heal((float) (LHConfig.common().items.ringOfHealingRate * entity.getMaxHealth()));
     }
 }

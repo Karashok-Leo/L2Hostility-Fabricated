@@ -26,8 +26,8 @@ import java.util.function.Consumer;
 import static karashokleo.l2hostility.init.LHTraits.TRAIT_KEY;
 
 public abstract class MobTraitBuilder<T extends MobTrait>
-        extends NamedEntryBuilder<T>
-        implements DefaultLanguageGeneratorProvider, TagGeneratorProvider, ModelGeneratorProvider
+    extends NamedEntryBuilder<T>
+    implements DefaultLanguageGeneratorProvider, TagGeneratorProvider, ModelGeneratorProvider
 {
     protected TraitConfig.Config config;
     protected String translationKey;
@@ -47,10 +47,10 @@ public abstract class MobTraitBuilder<T extends MobTrait>
     {
         Identifier id = getId();
         this.getItemBuilder()
-                .apply(name, new TraitSymbol(new FabricItemSettings()))
-                .addModel()
-                .addTag(LHTags.TRAIT_ITEM)
-                .register();
+            .apply(name, new TraitSymbol(new FabricItemSettings()))
+            .addModel()
+            .addTag(LHTags.TRAIT_ITEM)
+            .register();
         this.generateConfig(content, config);
         return Registry.register(LHTraits.TRAIT, id, content);
     }
@@ -95,14 +95,18 @@ public abstract class MobTraitBuilder<T extends MobTrait>
     {
         TagGenerator<MobTrait> tagGenerator = this.getTagGenerator(TRAIT_KEY);
         for (TagKey<MobTrait> key : keys)
+        {
             tagGenerator.getOrCreateContainer(key).add(getId());
+        }
         return this;
     }
 
     public String getTranslationKey()
     {
         if (translationKey == null)
+        {
             translationKey = getId().toTranslationKey(TRAIT_KEY.getValue().getPath());
+        }
         return translationKey;
     }
 

@@ -24,14 +24,18 @@ public class MobDifficultyComponent implements ServerTickingComponent, AutoSynce
         this.mob = mob;
         this.diff = null;
         if (MobDifficulty.validate(this.mob))
+        {
             this.diff = new MobDifficulty(mob);
+        }
     }
 
     @Override
     public void serverTick()
     {
         if (this.diff != null && mob.isAlive())
+        {
             this.diff.serverTick();
+        }
     }
 
     @Override
@@ -52,14 +56,20 @@ public class MobDifficultyComponent implements ServerTickingComponent, AutoSynce
     @Override
     public void writeToNbt(@NotNull NbtCompound tag)
     {
-        if (this.diff == null) return;
+        if (this.diff == null)
+        {
+            return;
+        }
         TagCodec.toTag(tag, this.diff);
     }
 
     @Override
     public void copyFrom(@NotNull MobDifficultyComponent other)
     {
-        if (this.diff == null || other.diff == null) return;
+        if (this.diff == null || other.diff == null)
+        {
+            return;
+        }
         this.diff.copyFrom(other.mob, this.mob, other.diff);
     }
 }

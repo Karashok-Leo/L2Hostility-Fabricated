@@ -53,7 +53,10 @@ public class BaseChargeItem extends Item
             world.spawnEntity(fireBall);
         }
         player.incrementStat(Stats.USED.getOrCreateStat(this));
-        if (!player.getAbilities().creativeMode) itemstack.decrement(1);
+        if (!player.getAbilities().creativeMode)
+        {
+            itemstack.decrement(1);
+        }
         return TypedActionResult.success(itemstack, world.isClient());
     }
 

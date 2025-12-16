@@ -23,7 +23,9 @@ public abstract class BaseWand extends Item implements IGlowingTarget, IMobClick
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected)
     {
         if (world.isClient() && selected && entity instanceof PlayerEntity player)
+        {
             RayTraceUtil.clientUpdateTarget(player, 64);
+        }
     }
 
     @Override
@@ -33,8 +35,13 @@ public abstract class BaseWand extends Item implements IGlowingTarget, IMobClick
         if (!world.isClient())
         {
             LivingEntity target = RayTraceUtil.serverGetTarget(user);
-            if (target != null) clickTarget(stack, user, target);
-            else clickNothing(stack, user);
+            if (target != null)
+            {
+                clickTarget(stack, user, target);
+            } else
+            {
+                clickNothing(stack, user);
+            }
         }
         return TypedActionResult.success(stack);
     }

@@ -32,9 +32,9 @@ public class EMIBurntRecipe implements EmiRecipe
     public List<EmiIngredient> getCatalysts()
     {
         return List.of(
-                EmiStack.of(Items.LAVA_BUCKET),
-                EmiStack.of(Items.FLINT_AND_STEEL),
-                EmiStack.of(Items.FIRE_CHARGE)
+            EmiStack.of(Items.LAVA_BUCKET),
+            EmiStack.of(Items.FLINT_AND_STEEL),
+            EmiStack.of(Items.FIRE_CHARGE)
         );
     }
 

@@ -78,15 +78,22 @@ public class MobDifficultyCollector
     public void setCap(int cap)
     {
         if (LHConfig.common().scaling.allowBypassMinimum)
+        {
             this.min = Math.min(this.min, cap);
-        else cap = Math.max(this.min, cap);
+        } else
+        {
+            cap = Math.max(this.min, cap);
+        }
         this.cap = Math.min(this.cap, cap);
     }
 
     public int getDifficulty(Random random)
     {
         double mean = base + difficulty * scale;
-        if (count > 0) mean += random.nextGaussian() * Math.sqrt(varSq);
+        if (count > 0)
+        {
+            mean += random.nextGaussian() * Math.sqrt(varSq);
+        }
         mean *= finalFactor;
         return (int) Math.round(MathHelper.clamp(mean, min, cap));
     }
@@ -148,9 +155,15 @@ public class MobDifficultyCollector
 
     public boolean hasAdvancement(Identifier id)
     {
-        if (player == null) return true;
+        if (player == null)
+        {
+            return true;
+        }
         var adv = player.server.getAdvancementLoader().get(id);
-        if (adv == null) return false;
+        if (adv == null)
+        {
+            return false;
+        }
         var prog = player.getAdvancementTracker().getProgress(adv);
         return prog.isDone();
     }

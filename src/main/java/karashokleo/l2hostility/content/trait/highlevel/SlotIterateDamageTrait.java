@@ -37,7 +37,9 @@ public abstract class SlotIterateDamageTrait extends MobTrait
         {
             ItemStack stack = target.getEquippedStack(slot);
             if (stack.isDamageable())
+            {
                 list.add(slot);
+            }
         }
         int count = Math.min(level, list.size());
         for (int i = 0; i < count; i++)

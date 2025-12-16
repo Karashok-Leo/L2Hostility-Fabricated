@@ -42,11 +42,11 @@ public class MobLevelLootCondition implements LootCondition
     public boolean test(LootContext context)
     {
         return MobDifficulty.get(context.get(LootContextParameters.THIS_ENTITY))
-                .filter(diff ->
-                {
-                    int lv = diff.getLevel();
-                    return (minLevel <= 0 || lv >= minLevel) &&
-                           (maxLevel <= 0 || lv < maxLevel);
-                }).isPresent();
+            .filter(diff ->
+            {
+                int lv = diff.getLevel();
+                return (minLevel <= 0 || lv >= minLevel) &&
+                    (maxLevel <= 0 || lv < maxLevel);
+            }).isPresent();
     }
 }

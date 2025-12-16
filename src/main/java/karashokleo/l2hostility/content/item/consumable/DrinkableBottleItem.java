@@ -38,16 +38,22 @@ public abstract class DrinkableBottleItem extends Item
         {
             player.incrementStat(Stats.USED.getOrCreateStat(this));
             if (!player.getAbilities().creativeMode)
+            {
                 stack.decrement(1);
+            }
         }
 
         if (player == null || !player.getAbilities().creativeMode)
         {
             if (stack.isEmpty())
+            {
                 return new ItemStack(Items.GLASS_BOTTLE);
+            }
 
             if (player != null)
+            {
                 player.getInventory().insertStack(new ItemStack(Items.GLASS_BOTTLE));
+            }
         }
 
         user.emitGameEvent(GameEvent.DRINK);

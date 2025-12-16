@@ -31,27 +31,33 @@ public class EntityConfigProvider extends AbstractDataProvider
     public void addAll()
     {
         add(L2Hostility.id("bosses"), new EntityConfig()
-                .putEntity(0, 20, 1, 0, List.of(EntityType.ELDER_GUARDIAN), List.of(
-                        EntityConfig.trait(LHTraits.REPELLING, 1, 1, 300, 0.5f)
-                ))
-                .putEntity(0, 20, 1, 0, List.of(EntityType.PIGLIN_BRUTE), List.of(
-                        EntityConfig.trait(LHTraits.PULLING, 1, 1, 300, 0.5f)
-                ))
-                .putEntity(0, 20, 1, 0, List.of(EntityType.WARDEN), List.of(
-                        EntityConfig.trait(LHTraits.DISPELL, 1, 1, 200, 1),
-                        EntityConfig.trait(LHTraits.REPRINT, 1, 1, 300, 1)
-                ))
-                .putEntity(0, 50, 1, 0, List.of(EntityType.WITHER), List.of(
-                        EntityConfig.trait(LHTraits.CURSED, 0, 1)
-                ))
-                .putEntity(100, 50, 1, 0, List.of(EntityType.ENDER_DRAGON), List.of())
+            .putEntity(0, 20, 1, 0, List.of(EntityType.ELDER_GUARDIAN), List.of(
+                EntityConfig.trait(LHTraits.REPELLING, 1, 1, 300, 0.5f)
+            ))
+            .putEntity(0, 20, 1, 0, List.of(EntityType.PIGLIN_BRUTE), List.of(
+                EntityConfig.trait(LHTraits.PULLING, 1, 1, 300, 0.5f)
+            ))
+            .putEntity(0, 20, 1, 0, List.of(EntityType.WARDEN), List.of(
+                EntityConfig.trait(LHTraits.DISPELL, 1, 1, 200, 1),
+                EntityConfig.trait(LHTraits.REPRINT, 1, 1, 300, 1)
+            ))
+            .putEntity(0, 50, 1, 0, List.of(EntityType.WITHER), List.of(
+                EntityConfig.trait(LHTraits.CURSED, 0, 1)
+            ))
+            .putEntity(100, 50, 1, 0, List.of(EntityType.ENDER_DRAGON), List.of())
         );
 
         if (FabricLoader.getInstance().isModLoaded(BoMDData.COMPAT_MOD_ID))
+        {
             BoMDData.getConfigs().forEach(this::add);
+        }
         if (FabricLoader.getInstance().isModLoaded(IaFData.COMPAT_MOD_ID))
+        {
             IaFData.getConfigs().forEach(this::add);
+        }
         if (FabricLoader.getInstance().isModLoaded(MMData.COMPAT_MOD_ID))
+        {
             MMData.getConfigs().forEach(this::add);
+        }
     }
 }

@@ -12,11 +12,11 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class BackgroundRendererMixin
 {
     @WrapOperation(
-            method = "applyFog",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/Entity;isSpectator()Z"
-            )
+        method = "applyFog",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/Entity;isSpectator()Z"
+        )
     )
     private static boolean inject_applyFog(Entity instance, Operation<Boolean> original)
     {

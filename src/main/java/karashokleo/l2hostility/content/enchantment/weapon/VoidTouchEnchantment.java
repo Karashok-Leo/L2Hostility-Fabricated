@@ -16,9 +16,9 @@ public class VoidTouchEnchantment extends UnobtainableEnchantment
     public VoidTouchEnchantment()
     {
         super(
-                Enchantment.Rarity.VERY_RARE,
-                EnchantmentTarget.WEAPON,
-                new EquipmentSlot[]{EquipmentSlot.MAINHAND}
+            Enchantment.Rarity.VERY_RARE,
+            EnchantmentTarget.WEAPON,
+            new EquipmentSlot[]{EquipmentSlot.MAINHAND}
         );
     }
 
@@ -28,10 +28,14 @@ public class VoidTouchEnchantment extends UnobtainableEnchantment
         if (source != null)
         {
             if (source.isIn(DamageTypeTags.BYPASSES_ARMOR))
+            {
                 chance += LHConfig.common().complements.properties.voidTouchChanceBonus;
+            }
             if (source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
                 source.isIn(DamageTypeTags.BYPASSES_ENCHANTMENTS))
+            {
                 chance += LHConfig.common().complements.properties.voidTouchChanceBonus;
+            }
         }
         return chance;
     }
@@ -39,7 +43,10 @@ public class VoidTouchEnchantment extends UnobtainableEnchantment
     public boolean allow(LivingEntity living, DamageSource source)
     {
         int level = EnchantmentHelper.getEquipmentLevel(this, living);
-        if (level <= 0) return false;
+        if (level <= 0)
+        {
+            return false;
+        }
         double chance = getChance(source, level);
         return living.getRandom().nextDouble() < chance;
     }

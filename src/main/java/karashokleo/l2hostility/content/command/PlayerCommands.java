@@ -24,72 +24,72 @@ public class PlayerCommands
     public static LiteralArgumentBuilder<ServerCommandSource> build()
     {
         return literal("player")
-                .then(argument("player", EntityArgumentType.players())
-                        .then(difficulty())
-                        .then(trait())
-                        .then(dim())
-                );
+            .then(argument("player", EntityArgumentType.players())
+                .then(difficulty())
+                .then(trait())
+                .then(dim())
+            );
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> difficulty()
     {
         return literal("difficulty")
-                .then(literal("base")
-                        .then(literal("set")
-                                .requires(e -> e.hasPermissionLevel(2))
-                                .then(argument("level", IntegerArgumentType.integer(0))
-                                        .executes(playerLevel((player, level) ->
-                                                player.getLevelEditor().setBase(level)))))
-                        .then(literal("add")
-                                .requires(e -> e.hasPermissionLevel(2))
-                                .then(argument("level", IntegerArgumentType.integer())
-                                        .executes(playerLevel((player, level) ->
-                                                player.getLevelEditor().addBase(level)))))
-                        .then(literal("get").executes(playerGet(player ->
-                                LHTexts.COMMAND_PLAYER_GET_BASE.get(player.owner.getDisplayName(), player.getLevelEditor().getBase())))))
-                .then(literal("total")
-                        .then(literal("set")
-                                .requires(e -> e.hasPermissionLevel(2))
-                                .then(argument("level", IntegerArgumentType.integer(0))
-                                        .executes(playerLevel((player, level) ->
-                                                player.getLevelEditor().setTotal(level)))))
-                        .then(literal("add")
-                                .requires(e -> e.hasPermissionLevel(2))
-                                .then(argument("level", IntegerArgumentType.integer())
-                                        .executes(playerLevel((player, level) ->
-                                                player.getLevelEditor().addTotal(level)))))
-                        .then(literal("get").executes(playerGet(player ->
-                                LHTexts.COMMAND_PLAYER_GET_TOTAL.get(player.owner.getDisplayName(), player.getLevelEditor().getTotal())))));
+            .then(literal("base")
+                .then(literal("set")
+                    .requires(e -> e.hasPermissionLevel(2))
+                    .then(argument("level", IntegerArgumentType.integer(0))
+                        .executes(playerLevel((player, level) ->
+                            player.getLevelEditor().setBase(level)))))
+                .then(literal("add")
+                    .requires(e -> e.hasPermissionLevel(2))
+                    .then(argument("level", IntegerArgumentType.integer())
+                        .executes(playerLevel((player, level) ->
+                            player.getLevelEditor().addBase(level)))))
+                .then(literal("get").executes(playerGet(player ->
+                    LHTexts.COMMAND_PLAYER_GET_BASE.get(player.owner.getDisplayName(), player.getLevelEditor().getBase())))))
+            .then(literal("total")
+                .then(literal("set")
+                    .requires(e -> e.hasPermissionLevel(2))
+                    .then(argument("level", IntegerArgumentType.integer(0))
+                        .executes(playerLevel((player, level) ->
+                            player.getLevelEditor().setTotal(level)))))
+                .then(literal("add")
+                    .requires(e -> e.hasPermissionLevel(2))
+                    .then(argument("level", IntegerArgumentType.integer())
+                        .executes(playerLevel((player, level) ->
+                            player.getLevelEditor().addTotal(level)))))
+                .then(literal("get").executes(playerGet(player ->
+                    LHTexts.COMMAND_PLAYER_GET_TOTAL.get(player.owner.getDisplayName(), player.getLevelEditor().getTotal())))));
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> trait()
     {
         return literal("traitCap")
-                .then(literal("set")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .then(argument("level", IntegerArgumentType.integer(0, TraitManager.getMaxLevel()))
-                                .executes(playerLevel((player, level) ->
-                                {
-                                    player.maxRankKilled = level;
-                                    return true;
-                                }))))
-                .then(literal("get").executes(playerGet(player ->
-                        LHTexts.COMMAND_PLAYER_GET_TRAIT_CAP.get(player.owner.getDisplayName(), player.maxRankKilled))));
+            .then(literal("set")
+                .requires(e -> e.hasPermissionLevel(2))
+                .then(argument("level", IntegerArgumentType.integer(0, TraitManager.getMaxLevel()))
+                    .executes(playerLevel((player, level) ->
+                    {
+                        player.maxRankKilled = level;
+                        return true;
+                    }))))
+            .then(literal("get").executes(playerGet(player ->
+                LHTexts.COMMAND_PLAYER_GET_TRAIT_CAP.get(player.owner.getDisplayName(), player.maxRankKilled))));
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> dim()
     {
         return literal("dimensions")
-                .then(literal("clear")
-                        .requires(e -> e.hasPermissionLevel(2))
-                        .executes(playerRun(player ->
-                        {
-                            boolean ans = !player.dimensions.isEmpty();
-                            player.dimensions.clear();
-                            return ans;
-                        })))
-                .then(literal("get").executes(playerGet(player ->
-                        LHTexts.COMMAND_PLAYER_GET_DIM.get(player.owner.getDisplayName(), player.dimensions.size()))));
+            .then(literal("clear")
+                .requires(e -> e.hasPermissionLevel(2))
+                .executes(playerRun(player ->
+                {
+                    boolean ans = !player.dimensions.isEmpty();
+                    player.dimensions.clear();
+                    return ans;
+                })))
+            .then(literal("get").executes(playerGet(player ->
+                LHTexts.COMMAND_PLAYER_GET_DIM.get(player.owner.getDisplayName(), player.dimensions.size()))));
     }
 
     private static Command<ServerCommandSource> playerRun(PlayerCommand cmd)

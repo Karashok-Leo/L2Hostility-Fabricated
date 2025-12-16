@@ -24,9 +24,9 @@ public class EternalWitchChargeItem extends BaseChargeItem
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(
-                LHTexts.TOOLTIP_WITCH_ETERNAL.get(
-                        LHConfig.common().items.witchChargeMinDuration / 20
-                ).formatted(Formatting.GRAY)
+            LHTexts.TOOLTIP_WITCH_ETERNAL.get(
+                LHConfig.common().items.witchChargeMinDuration / 20
+            ).formatted(Formatting.GRAY)
         );
     }
 }

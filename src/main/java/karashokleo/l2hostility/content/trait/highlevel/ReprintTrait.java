@@ -51,14 +51,18 @@ public class ReprintTrait extends MobTrait
             ItemStack equipped = entity.getEquippedStack(slot);
             if (equipped.isEmpty() ||
                 !equipped.hasEnchantments())
+            {
                 continue;
+            }
             var totalLv = EnchantmentHelper.get(equipped)
-                    .values()
-                    .stream()
-                    .mapToInt(v -> v)
-                    .sum();
+                .values()
+                .stream()
+                .mapToInt(v -> v)
+                .sum();
             if (totalLv <= threshold)
+            {
                 continue;
+            }
 
             var map = EnchantmentHelper.get(equipped);
             map.compute(Enchantments.VANISHING_CURSE, (k, v) -> v == null ? 1 : Math.max(v, 1));
@@ -73,7 +77,7 @@ public class ReprintTrait extends MobTrait
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                mapLevel(i -> Text.literal(Math.round(LHConfig.common().traits.reprintDamage * i * 100) + "").formatted(Formatting.AQUA))
+            mapLevel(i -> Text.literal(Math.round(LHConfig.common().traits.reprintDamage * i * 100) + "").formatted(Formatting.AQUA))
         ).formatted(Formatting.GRAY));
     }
 }

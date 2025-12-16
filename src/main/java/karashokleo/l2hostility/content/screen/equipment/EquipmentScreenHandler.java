@@ -22,6 +22,7 @@ public class EquipmentScreenHandler extends BaseInventoryScreenHandler<Equipment
     public static EquipmentSlot[] SLOTS = {EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
     @Nullable
     protected MobEntity mob;
+
     public EquipmentScreenHandler(ScreenHandlerType<?> type, int wid, PlayerInventory plInv, @Nullable MobEntity mob)
     {
         super(type, wid, plInv, MANAGER, EquipmentInventory::new, false);
@@ -34,16 +35,23 @@ public class EquipmentScreenHandler extends BaseInventoryScreenHandler<Equipment
     {
         Entity entity = null;
         if (L2HostilityClient.getClientWorld() != null)
+        {
             entity = L2HostilityClient.getClientWorld().getEntityById(buf.readInt());
+        }
         return new EquipmentScreenHandler(LHMiscs.EQUIPMENTS, wid, plInv, entity instanceof MobEntity golem ? golem : null);
     }
 
     private boolean isValid(EquipmentSlot slot, ItemStack stack)
     {
         if (mob == null || !canUse(playerInventory.player))
+        {
             return false;
+        }
         EquipmentSlot exp = LivingEntity.getPreferredEquipmentSlot(stack);
-        if (exp == slot) return true;
+        if (exp == slot)
+        {
+            return true;
+        }
         return !exp.isArmorSlot();
     }
 
@@ -59,10 +67,19 @@ public class EquipmentScreenHandler extends BaseInventoryScreenHandler<Equipment
         if (mob != null)
         {
             ItemStack stack = this.slots.get(slot).getStack();
-            if (slot >= 36) this.insertItem(stack, 0, 36, true);
-            else for (int i = 0; i < 6; i++)
-                if (SLOTS[i] == LivingEntity.getPreferredEquipmentSlot(stack))
-                    this.insertItem(stack, 36 + i, 37 + i, false);
+            if (slot >= 36)
+            {
+                this.insertItem(stack, 0, 36, true);
+            } else
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    if (SLOTS[i] == LivingEntity.getPreferredEquipmentSlot(stack))
+                    {
+                        this.insertItem(stack, 36 + i, 37 + i, false);
+                    }
+                }
+            }
             this.inventory.markDirty();
         }
         return ItemStack.EMPTY;

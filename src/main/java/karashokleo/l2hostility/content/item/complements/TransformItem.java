@@ -21,10 +21,10 @@ public class TransformItem extends TooltipItem
     private final Supplier<EntityType<? extends MobEntity>> to;
 
     public TransformItem(
-            Settings settings,
-            Supplier<MutableText> textSupplier,
-            Supplier<EntityType<? extends MobEntity>> from,
-            Supplier<EntityType<? extends MobEntity>> to
+        Settings settings,
+        Supplier<MutableText> textSupplier,
+        Supplier<EntityType<? extends MobEntity>> from,
+        Supplier<EntityType<? extends MobEntity>> to
     )
     {
         super(settings, textSupplier);
@@ -36,8 +36,14 @@ public class TransformItem extends TooltipItem
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand)
     {
         World world = entity.getWorld();
-        if (entity.getType() != from.get()) return ActionResult.FAIL;
-        if (world.getDifficulty() == Difficulty.PEACEFUL) return ActionResult.FAIL;
+        if (entity.getType() != from.get())
+        {
+            return ActionResult.FAIL;
+        }
+        if (world.getDifficulty() == Difficulty.PEACEFUL)
+        {
+            return ActionResult.FAIL;
+        }
         if (world instanceof ServerWorld serverWorld)
         {
             convertMob(serverWorld, entity);

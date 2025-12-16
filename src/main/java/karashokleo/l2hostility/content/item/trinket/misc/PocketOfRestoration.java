@@ -29,7 +29,10 @@ public class PocketOfRestoration extends SingleEpicTrinketItem
     public static void setData(ItemStack stack, ItemStack sealed, String id, long time)
     {
         var data = sealed.getOrCreateNbt().get(SealedItem.DATA);
-        if (data == null) return;
+        if (data == null)
+        {
+            return;
+        }
         var tag = stack.getOrCreateSubNbt(ROOT);
         tag.putInt(SealedItem.TIME, sealed.getOrCreateNbt().getInt(SealedItem.TIME));
         tag.put(SealedItem.DATA, data);
@@ -40,8 +43,14 @@ public class PocketOfRestoration extends SingleEpicTrinketItem
     @Override
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
-        if (entity.getWorld().isClient()) return;
-        if (!entity.isAlive()) return;
+        if (entity.getWorld().isClient())
+        {
+            return;
+        }
+        if (!entity.isAlive())
+        {
+            return;
+        }
         var list = TrinketCompat.getItemAccess(entity);
         if (stack.getNbt() != null && stack.getNbt().contains(ROOT))
         {
@@ -57,7 +66,7 @@ public class PocketOfRestoration extends SingleEpicTrinketItem
                     access.set(result);
                     stack.getNbt().remove(ROOT);
                 } else if (entity instanceof PlayerEntity player &&
-                           player.giveItemStack(result))
+                    player.giveItemStack(result))
                 {
                     stack.getNbt().remove(ROOT);
                 }
@@ -65,8 +74,11 @@ public class PocketOfRestoration extends SingleEpicTrinketItem
             return;
         }
         if (stack.getDamage() + 1 >= stack.getMaxDamage())
+        {
             return;
+        }
         for (var e : list)
+        {
             if (e.get().getItem() instanceof SealedItem)
             {
                 ItemStack sealed = e.get();
@@ -79,6 +91,7 @@ public class PocketOfRestoration extends SingleEpicTrinketItem
                 setData(stack, sealed, id, time);
                 return;
             }
+        }
     }
 
     @Override

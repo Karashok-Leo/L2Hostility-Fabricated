@@ -31,8 +31,8 @@ public class PullingTrait extends PushPullTrait
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        Text.literal(LHConfig.common().traits.pullingRange + "")
-                                .formatted(Formatting.AQUA))
-                .formatted(Formatting.GRAY));
+                Text.literal(LHConfig.common().traits.pullingRange + "")
+                    .formatted(Formatting.AQUA))
+            .formatted(Formatting.GRAY));
     }
 }

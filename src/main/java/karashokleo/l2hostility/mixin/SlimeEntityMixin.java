@@ -13,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class SlimeEntityMixin
 {
     @WrapOperation(
-            method = "remove",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/mob/SlimeEntity;isDead()Z"
-            )
+        method = "remove",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/mob/SlimeEntity;isDead()Z"
+        )
     )
     public boolean l2hostility$remove$suppress(SlimeEntity instance, Operation<Boolean> original)
     {
@@ -29,11 +29,11 @@ public abstract class SlimeEntityMixin
     }
 
     @WrapOperation(
-            method = "remove",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/mob/SlimeEntity;setAiDisabled(Z)V"
-            )
+        method = "remove",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/mob/SlimeEntity;setAiDisabled(Z)V"
+        )
     )
     public void l2hostility$remove$inheritCap(SlimeEntity sub, boolean noAI, Operation<Void> op)
     {

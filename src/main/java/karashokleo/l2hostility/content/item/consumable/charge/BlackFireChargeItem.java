@@ -27,14 +27,14 @@ public class BlackFireChargeItem extends BaseChargeItem
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(
-                LHCplTexts.EFFECT_CHARGE.get(
-                        EffectHelper.getEffectInstanceText(
-                                new StatusEffectInstance(
-                                        LHEffects.STONE_CAGE,
-                                        LHConfig.common().complements.fireCharge.blackFireChargeDuration
-                                )
-                        )
-                ).formatted(Formatting.GRAY)
+            LHCplTexts.EFFECT_CHARGE.get(
+                EffectHelper.getEffectInstanceText(
+                    new StatusEffectInstance(
+                        LHEffects.STONE_CAGE,
+                        LHConfig.common().complements.fireCharge.blackFireChargeDuration
+                    )
+                )
+            ).formatted(Formatting.GRAY)
         );
     }
 }

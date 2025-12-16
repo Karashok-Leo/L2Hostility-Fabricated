@@ -13,14 +13,20 @@ public class EquipmentInventory extends BaseInventoryScreenHandler.BaseInventory
     @Override
     public ItemStack getStack(int slot)
     {
-        if (parent.mob == null) return ItemStack.EMPTY;
+        if (parent.mob == null)
+        {
+            return ItemStack.EMPTY;
+        }
         return parent.mob.getEquippedStack(EquipmentScreenHandler.SLOTS[slot]);
     }
 
     @Override
     public void setStack(int slot, ItemStack stack)
     {
-        if (parent.mob == null) return;
+        if (parent.mob == null)
+        {
+            return;
+        }
         parent.mob.equipStack(EquipmentScreenHandler.SLOTS[slot], stack);
 
     }
@@ -28,7 +34,10 @@ public class EquipmentInventory extends BaseInventoryScreenHandler.BaseInventory
     @Override
     public ItemStack removeStack(int slot, int amount)
     {
-        if (parent.mob == null) return ItemStack.EMPTY;
+        if (parent.mob == null)
+        {
+            return ItemStack.EMPTY;
+        }
         return parent.mob.getEquippedStack(EquipmentScreenHandler.SLOTS[slot]).split(amount);
     }
 }

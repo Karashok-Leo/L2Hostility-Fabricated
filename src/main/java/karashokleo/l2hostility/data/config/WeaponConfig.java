@@ -51,13 +51,18 @@ public class WeaponConfig
         List<ItemConfig> list = new ArrayList<>();
         for (var e : entries)
         {
-            if (e.level > level) continue;
+            if (e.level > level)
+            {
+                continue;
+            }
             ArrayList<ItemStack> sub = new ArrayList<>();
             for (var item : e.stack)
             {
                 if (item.isEmpty() ||
                     item.getItem() instanceof ArmorItem eq && eq.getSlotType() == slot)
+                {
                     sub.add(item);
+                }
             }
             if (!sub.isEmpty())
             {
@@ -67,7 +72,9 @@ public class WeaponConfig
 
         }
         if (total == 0)
+        {
             return ItemStack.EMPTY;
+        }
         int val = r.nextInt(total);
         for (var e : list)
         {
@@ -93,7 +100,9 @@ public class WeaponConfig
             }
         }
         if (total == 0)
+        {
             return ItemStack.EMPTY;
+        }
         int val = r.nextInt(total);
         for (var e : list)
         {
@@ -118,7 +127,10 @@ public class WeaponConfig
     public WeaponConfig putArmor(int level, int weight, Item... items)
     {
         ArrayList<ItemStack> list = new ArrayList<>();
-        for (var e : items) list.add(e.getDefaultStack());
+        for (var e : items)
+        {
+            list.add(e.getDefaultStack());
+        }
         armors.add(new ItemConfig(list, level, weight));
         return this;
     }
@@ -126,7 +138,10 @@ public class WeaponConfig
     public WeaponConfig putMeleeWeapon(int level, int weight, Item... items)
     {
         ArrayList<ItemStack> list = new ArrayList<>();
-        for (var e : items) list.add(e.getDefaultStack());
+        for (var e : items)
+        {
+            list.add(e.getDefaultStack());
+        }
         melee_weapons.add(new ItemConfig(list, level, weight));
         return this;
     }

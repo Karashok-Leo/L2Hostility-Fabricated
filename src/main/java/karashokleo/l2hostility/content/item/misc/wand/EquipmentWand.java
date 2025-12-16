@@ -33,7 +33,9 @@ public class EquipmentWand extends BaseWand
 //        }
 
         if (entity instanceof MobEntity mob)
+        {
             new EquipmentScreenHandlerFactory(mob).open((ServerPlayerEntity) player);
+        }
     }
 
 

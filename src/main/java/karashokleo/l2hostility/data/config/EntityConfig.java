@@ -23,15 +23,18 @@ public class EntityConfig
     public static boolean allow(EntityType<?> type, MobTrait trait)
     {
         Config config = LHData.entities.get(type);
-        if (config == null) return true;
+        if (config == null)
+        {
+            return true;
+        }
         return !config.blacklist.contains(trait);
     }
 
     public static Config entity(int min, int base, double var, double scale, List<EntityType<?>> keys)
     {
         return new Config(
-                new ArrayList<>(keys),
-                new DifficultyConfig.Config(min, base, 0, var, scale, 1, 1)
+            new ArrayList<>(keys),
+            new DifficultyConfig.Config(min, base, 0, var, scale, 1, 1)
         );
     }
 
@@ -54,8 +57,12 @@ public class EntityConfig
     {
         list.addAll(config.list);
         for (var e : config.list)
+        {
             for (var type : e.entities)
+            {
                 cache.put(type, e);
+            }
+        }
     }
 
     @Nullable
@@ -104,8 +111,8 @@ public class EntityConfig
         }
 
         public Config(
-                List<EntityType<?>> entities,
-                DifficultyConfig.Config difficulty
+            List<EntityType<?>> entities,
+            DifficultyConfig.Config difficulty
         )
         {
             this.entities.addAll(entities);
@@ -174,8 +181,14 @@ public class EntityConfig
     {
         public boolean match(LivingEntity entity, int mobLevel, MobDifficultyCollector ins)
         {
-            if (entity.getRandom().nextDouble() > chance) return false;
-            if (mobLevel < lv) return false;
+            if (entity.getRandom().nextDouble() > chance)
+            {
+                return false;
+            }
+            if (mobLevel < lv)
+            {
+                return false;
+            }
             return id == null || ins.hasAdvancement(id);
         }
     }

@@ -25,16 +25,18 @@ public class RegenTrait extends MobTrait
     public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
         if (mob.age % 20 == 0)
+        {
             mob.heal((float) (mob.getMaxHealth() * LHConfig.common().traits.regen * level));
+        }
     }
 
     @Override
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        mapLevel(i -> Text.literal((int) Math.round(LHConfig.common().traits.regen * 100 * i) + "")
-                                .formatted(Formatting.AQUA)))
-                .formatted(Formatting.GRAY));
+                mapLevel(i -> Text.literal((int) Math.round(LHConfig.common().traits.regen * 100 * i) + "")
+                    .formatted(Formatting.AQUA)))
+            .formatted(Formatting.GRAY));
     }
 
     @Override
@@ -45,7 +47,10 @@ public class RegenTrait extends MobTrait
 
     public boolean validTarget(LivingEntity le)
     {
-        if (le instanceof EnderDragonEntity) return false;
+        if (le instanceof EnderDragonEntity)
+        {
+            return false;
+        }
         // 无法施加Curse = 无法拥有该词条
         return le.canHaveStatusEffect(new StatusEffectInstance(LHEffects.CURSE, 100));
     }

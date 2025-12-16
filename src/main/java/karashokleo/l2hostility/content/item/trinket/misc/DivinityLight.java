@@ -40,6 +40,8 @@ public class DivinityLight extends CurseTrinketItem
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         if (entity instanceof PlayerEntity player)
+        {
             PlayerDifficulty.get(player).getLevelEditor().setBase(0);
+        }
     }
 }

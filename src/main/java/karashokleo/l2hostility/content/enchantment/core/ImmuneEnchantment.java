@@ -13,9 +13,9 @@ public class ImmuneEnchantment extends UnobtainableEnchantment
     public ImmuneEnchantment()
     {
         super(
-                Rarity.VERY_RARE,
-                EnchantmentTarget.ARMOR,
-                new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}
+            Rarity.VERY_RARE,
+            EnchantmentTarget.ARMOR,
+            new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}
         );
     }
 
@@ -36,10 +36,12 @@ public class ImmuneEnchantment extends UnobtainableEnchantment
     {
         Text name = super.getName(level);
         if (LHConfig.common().complements.enableImmunityEnchantments)
+        {
             return name;
+        }
         return LHCplTexts.BANNED_ENCH.get()
-                .formatted(Formatting.DARK_RED)
-                .append(" ")
-                .append(name.copy().formatted(Formatting.DARK_GRAY, Formatting.STRIKETHROUGH));
+            .formatted(Formatting.DARK_RED)
+            .append(" ")
+            .append(name.copy().formatted(Formatting.DARK_GRAY, Formatting.STRIKETHROUGH));
     }
 }

@@ -33,7 +33,10 @@ public abstract class IntervalTrait extends MobTrait
     public void serverTick(MobDifficulty difficulty, LivingEntity e, int level)
     {
         var data = getData(difficulty);
-        if (data.tickCount++ < interval.applyAsInt(level)) return;
+        if (data.tickCount++ < interval.applyAsInt(level))
+        {
+            return;
+        }
         action(difficulty.owner, level, data);
     }
 
@@ -51,10 +54,10 @@ public abstract class IntervalTrait extends MobTrait
     public void addDetail(List<Text> list)
     {
         list.add(
-                Text.translatable(
-                        getDescKey(),
-                        mapLevel(lv -> Text.literal(interval.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA))
-                ).formatted(Formatting.GRAY)
+            Text.translatable(
+                getDescKey(),
+                mapLevel(lv -> Text.literal(interval.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA))
+            ).formatted(Formatting.GRAY)
         );
     }
 

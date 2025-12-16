@@ -42,13 +42,13 @@ public class S2CEffectAura extends S2CEntity
             {
                 v0 = v0.rotateX(tpi / 4).rotateY(entity.getRandom().nextFloat() * tpi);
                 entity.getWorld().addImportantParticle(
-                        ParticleTypes.EFFECT,
-                        center.x + v0.x,
-                        center.y + v0.y + 0.5f,
-                        center.z + v0.z,
-                        (color >> 16 & 255) / 255.0,
-                        (color >> 8 & 255) / 255.0,
-                        (color & 255) / 255.0
+                    ParticleTypes.EFFECT,
+                    center.x + v0.x,
+                    center.y + v0.y + 0.5f,
+                    center.z + v0.z,
+                    (color >> 16 & 255) / 255.0,
+                    (color >> 8 & 255) / 255.0,
+                    (color & 255) / 255.0
                 );
             }
         }

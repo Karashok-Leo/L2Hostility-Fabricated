@@ -25,7 +25,10 @@ public record TrinketSlotAccess(LivingEntity le, String group, String name, int 
     public void set(ItemStack stack)
     {
         var opt = TrinketsApi.getTrinketComponent(le);
-        if (opt.isEmpty()) return;
+        if (opt.isEmpty())
+        {
+            return;
+        }
         opt.get().getInventory().get(group).get(name).setStack(slot, stack);
     }
 

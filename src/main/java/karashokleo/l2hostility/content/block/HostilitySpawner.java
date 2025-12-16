@@ -19,11 +19,11 @@ public class HostilitySpawner extends Block
     public HostilitySpawner()
     {
         super(
-                FabricBlockSettings
-                        .copyOf(Blocks.SPAWNER)
-                        .strength(50F, 1200F)
-                        .luminance(state -> state.get(STATE).light())
-                        .nonOpaque()
+            FabricBlockSettings
+                .copyOf(Blocks.SPAWNER)
+                .strength(50F, 1200F)
+                .luminance(state -> state.get(STATE).light())
+                .nonOpaque()
         );
         this.setDefaultState(this.getDefaultState().with(STATE, State.IDLE));
     }

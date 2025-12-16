@@ -11,9 +11,9 @@ public class VanishEnchantment extends SingleLevelEnchantment
     public VanishEnchantment()
     {
         super(
-                Enchantment.Rarity.VERY_RARE,
-                EnchantmentTarget.VANISHABLE,
-                EquipmentSlot.values()
+            Enchantment.Rarity.VERY_RARE,
+            EnchantmentTarget.VANISHABLE,
+            EquipmentSlot.values()
         );
     }
 

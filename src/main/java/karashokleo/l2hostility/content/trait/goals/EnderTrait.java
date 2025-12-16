@@ -35,7 +35,10 @@ public class EnderTrait extends LegendaryTrait
             double d1 = entity.getY() + (double) (entity.getRandom().nextInt(r * 2) - r);
             double d2 = entity.getZ() + (entity.getRandom().nextDouble() - 0.5D) * r * 2;
             return teleport(entity, d0, d1, d2);
-        } else return false;
+        } else
+        {
+            return false;
+        }
     }
 
     @SuppressWarnings("deprecation")
@@ -43,7 +46,9 @@ public class EnderTrait extends LegendaryTrait
     {
         BlockPos.Mutable ipos = new BlockPos.Mutable(pX, pY, pZ);
         while (ipos.getY() > entity.getWorld().getBottomY() && !entity.getWorld().getBlockState(ipos).blocksMovement())
+        {
             ipos.move(Direction.DOWN);
+        }
 
         BlockState blockstate = entity.getWorld().getBlockState(ipos);
         boolean flag = blockstate.blocksMovement();
@@ -52,7 +57,10 @@ public class EnderTrait extends LegendaryTrait
         {
             var event = new EntityEvents.Teleport.EntityTeleportEvent(entity, pX, pY, pZ);
             event.sendEvent();
-            if (event.isCanceled()) return false;
+            if (event.isCanceled())
+            {
+                return false;
+            }
             Vec3d vec3 = entity.getPos();
             boolean flag2 = entity.teleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
             if (flag2)
@@ -65,7 +73,10 @@ public class EnderTrait extends LegendaryTrait
                 }
             }
             return flag2;
-        } else return false;
+        } else
+        {
+            return false;
+        }
     }
 
     @Override
@@ -78,10 +89,15 @@ public class EnderTrait extends LegendaryTrait
             Vec3d old = mob.getPos();
             Vec3d target = m.getTarget().getPos();
             if (target.distanceTo(old) > r)
+            {
                 target = target.subtract(old).normalize().multiply(r).add(old);
+            }
             var event = new EntityEvents.Teleport.EntityTeleportEvent(m, target.getX(), target.getY(), target.getZ());
             event.sendEvent();
-            if (event.isCanceled()) return;
+            if (event.isCanceled())
+            {
+                return;
+            }
             mob.teleport(target.getX(), target.getY(), target.getZ());
             if (!mob.getWorld().isSpaceEmpty(mob))
             {
@@ -104,7 +120,11 @@ public class EnderTrait extends LegendaryTrait
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
             !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
             !source.isIn(LHTags.MAGIC))
+        {
             if (teleport(entity) || source.isIn(DamageTypeTags.IS_PROJECTILE))
+            {
                 event.setCanceled(true);
+            }
+        }
     }
 }

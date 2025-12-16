@@ -71,8 +71,7 @@ public class L2HostilityClient implements ClientModInitializer
         BlockRenderLayerMap.INSTANCE.putBlock(LHBlocks.SPAWNER.block(), RenderLayer.getCutout());
 
         HandledScreens.register(LHMiscs.EQUIPMENTS, EquipmentScreen::new);
-        TAB_DIFFICULTY = TabRegistry.GROUP.registerTab(5000, DifficultyTab::new,
-                () -> Items.ZOMBIE_HEAD, LHTexts.INFO_TAB_TITLE.get());
+        TAB_DIFFICULTY = TabRegistry.GROUP.registerTab(5000, DifficultyTab::new, () -> Items.ZOMBIE_HEAD, LHTexts.INFO_TAB_TITLE.get());
 
         ModelPredicateProviderRegistry.register(TrinketItems.RESTORATION, L2Hostility.id("filled"), (stack, world, entity, seed) -> stack.getSubNbt(PocketOfRestoration.ROOT) == null ? 0 : 1);
 

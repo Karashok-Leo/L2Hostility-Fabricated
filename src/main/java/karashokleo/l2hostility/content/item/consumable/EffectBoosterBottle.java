@@ -30,9 +30,9 @@ public class EffectBoosterBottle extends DrinkableBottleItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(LHTexts.TOOLTIP_WITCH_BOTTLE.get(
-                LHConfig.common().items.witchChargeMinDuration / 20,
-                Math.round(100 * LHConfig.common().traits.drainDuration),
-                LHConfig.common().traits.drainDurationMax / 20
+            LHConfig.common().items.witchChargeMinDuration / 20,
+            Math.round(100 * LHConfig.common().traits.drainDuration),
+            LHConfig.common().traits.drainDurationMax / 20
         ).formatted(Formatting.GRAY));
     }
 }

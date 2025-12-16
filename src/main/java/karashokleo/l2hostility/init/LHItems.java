@@ -33,9 +33,12 @@ public class LHItems
         {
             super(name, content);
             if (content instanceof TraitSymbol)
+            {
                 this.setTab(LHMiscs.TRAITS);
-            else
+            } else
+            {
                 this.setTab(LHMiscs.GROUP);
+            }
         }
 
         public static <T extends Item> Entry<T> of(String name, T item)
@@ -48,16 +51,20 @@ public class LHItems
         {
             ModelGenerator modelGenerator = this.getModelGenerator();
             if (content instanceof TrinketItem)
+            {
                 modelGenerator.addItemWithTexturePrefix(content, Models.GENERATED, "trinket/");
-            else if (content instanceof TraitSymbol)
+            } else if (content instanceof TraitSymbol)
+            {
                 modelGenerator.addItem(generator ->
-                        Models.GENERATED_TWO_LAYERS.upload(
-                                this.getId().withPrefixedPath("item/"),
-                                TextureMap.layered(SYMBOL_BG, this.getId().withPrefixedPath("item/trait/")),
-                                generator.writer
-                        ));
-            else
+                    Models.GENERATED_TWO_LAYERS.upload(
+                        this.getId().withPrefixedPath("item/"),
+                        TextureMap.layered(SYMBOL_BG, this.getId().withPrefixedPath("item/trait/")),
+                        generator.writer
+                    ));
+            } else
+            {
                 modelGenerator.addItem(content);
+            }
             return this;
         }
 
@@ -66,9 +73,12 @@ public class LHItems
         {
             ModelGenerator modelGenerator = this.getModelGenerator();
             if (content instanceof TrinketItem)
+            {
                 modelGenerator.addItemWithTexturePrefix(content, model, "trinket/");
-            else
+            } else
+            {
                 modelGenerator.addItem(content, model);
+            }
             return this;
         }
 

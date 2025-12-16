@@ -31,7 +31,9 @@ public class BottleOfCurse extends DrinkableBottleItem
     {
         ItemStack stack = user.getStackInHand(hand);
         if (TrinketCompat.hasItemInTrinket(user, TrinketItems.DIVINITY_LIGHT))
+        {
             return TypedActionResult.fail(stack);
+        }
         return super.use(world, user, hand);
     }
 

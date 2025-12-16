@@ -24,9 +24,9 @@ public class StrongFireChargeItem extends BaseChargeItem
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(
-                LHCplTexts.EXPLOSION_CHARGE.get(
-                        LHConfig.common().complements.fireCharge.strongFireChargePower
-                ).formatted(Formatting.GRAY)
+            LHCplTexts.EXPLOSION_CHARGE.get(
+                LHConfig.common().complements.fireCharge.strongFireChargePower
+            ).formatted(Formatting.GRAY)
         );
     }
 }

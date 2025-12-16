@@ -35,14 +35,26 @@ public class AuraEffectTrait extends MobTrait
     @Override
     public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
-        if (mob.age % TICK_AURA_INTERNAL != 0) return;
+        if (mob.age % TICK_AURA_INTERNAL != 0)
+        {
+            return;
+        }
         int range = LHConfig.common().traits.auraRange.get(getId().getPath());
         LHNetworking.toTracking(mob, new S2CEffectAura(mob, range, effect.get().getColor()));
         for (var e : mob.getWorld().getEntitiesByClass(LivingEntity.class, mob.getBoundingBox().expand(range), EntityPredicates.VALID_ENTITY))
         {
-            if (e instanceof PlayerEntity pl && pl.getAbilities().creativeMode) continue;
-            if (e.distanceTo(mob) > range) continue;
-            if (!canApply(e)) continue;
+            if (e instanceof PlayerEntity pl && pl.getAbilities().creativeMode)
+            {
+                continue;
+            }
+            if (e.distanceTo(mob) > range)
+            {
+                continue;
+            }
+            if (!canApply(e))
+            {
+                continue;
+            }
             StatusEffectInstance newEffect = new StatusEffectInstance(effect.get(), 40, level - 1, true, true);
             EffectHelper.forceAddEffectWithEvent(e, newEffect, mob);
         }

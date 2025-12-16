@@ -29,14 +29,18 @@ public class RingOfCorrosion extends SingleEpicTrinketItem implements DamageList
     public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
         for (EquipmentSlot e : EquipmentSlot.values())
+        {
             DurabilityEater.flat(event.getEntity(), e, LHConfig.common().items.ringOfCorrosionFactor);
+        }
     }
 
     @Override
     public void onDamaged(ItemStack stack, LivingEntity entity, LivingDamageEvent event)
     {
         for (EquipmentSlot e : EquipmentSlot.values())
+        {
             DurabilityEater.flat(entity, e, LHConfig.common().items.ringOfCorrosionPenalty);
+        }
     }
 
     @Override

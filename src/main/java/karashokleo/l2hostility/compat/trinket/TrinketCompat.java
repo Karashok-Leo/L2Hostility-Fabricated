@@ -31,9 +31,9 @@ public class TrinketCompat
     public static boolean isEffectValidInTrinket(StatusEffectInstance effectInstance, LivingEntity entity)
     {
         return TrinketsApi.getTrinketComponent(entity).map(trinketComponent ->
-                trinketComponent.isEquipped(stack ->
-                        stack.getItem() instanceof EffectValidItem effectValidItem &&
-                        effectValidItem.isEffectValid(effectInstance, stack, entity))).orElse(false);
+            trinketComponent.isEquipped(stack ->
+                stack.getItem() instanceof EffectValidItem effectValidItem &&
+                    effectValidItem.isEffectValid(effectInstance, stack, entity))).orElse(false);
     }
 
     // 装备栏或者饰品栏是否存在item
@@ -46,8 +46,12 @@ public class TrinketCompat
     public static boolean hasItemEquipped(LivingEntity le, Item item)
     {
         for (EquipmentSlot e : EquipmentSlot.values())
+        {
             if (le.getEquippedStack(e).isOf(item))
+            {
                 return true;
+            }
+        }
         return false;
     }
 
@@ -117,22 +121,33 @@ public class TrinketCompat
         {
             ItemStack stack = le.getEquippedStack(e);
             if (!stack.isEmpty() && pred.test(stack))
+            {
                 list.add(stack);
+            }
         }
     }
 
     private static void getTrinketItems(List<ItemStack> list, LivingEntity le, Predicate<ItemStack> pred)
     {
         var opt = TrinketsApi.getTrinketComponent(le);
-        if (opt.isEmpty()) return;
+        if (opt.isEmpty())
+        {
+            return;
+        }
         for (Map<String, TrinketInventory> map : opt.get().getInventory().values())
+        {
             for (TrinketInventory inventory : map.values())
+            {
                 for (int i = 0; i < inventory.size(); ++i)
                 {
                     ItemStack stack = inventory.getStack(i);
                     if (!stack.isEmpty() && pred.test(stack))
+                    {
                         list.add(stack);
+                    }
                 }
+            }
+        }
     }
 
     public static void getItemAccess(List<EntitySlotAccess> list, LivingEntity le)
@@ -144,17 +159,28 @@ public class TrinketCompat
     public static void getItemAccessEquipped(List<EntitySlotAccess> list, LivingEntity le)
     {
         for (EquipmentSlot e : EquipmentSlot.values())
+        {
             list.add(new EquipmentSlotAccess(le, e));
+        }
     }
 
     public static void getItemAccessInTrinket(List<EntitySlotAccess> list, LivingEntity le)
     {
         var opt = TrinketsApi.getTrinketComponent(le);
-        if (opt.isEmpty()) return;
+        if (opt.isEmpty())
+        {
+            return;
+        }
         for (Map.Entry<String, Map<String, TrinketInventory>> entry : opt.get().getInventory().entrySet())
+        {
             for (Map.Entry<String, TrinketInventory> inventoryEntry : entry.getValue().entrySet())
+            {
                 for (int i = 0; i < inventoryEntry.getValue().size(); ++i)
+                {
                     list.add(new TrinketSlotAccess(le, entry.getKey(), inventoryEntry.getKey(), i));
+                }
+            }
+        }
     }
 
     // 反序列化 EntitySlotAccess
@@ -165,9 +191,12 @@ public class TrinketCompat
         {
             var strings = id.split("/");
             if (strings[0].equals("equipment"))
+            {
                 return new EquipmentSlotAccess(le, EquipmentSlot.byName(strings[1]));
-            else if (strings[0].equals("trinket"))
+            } else if (strings[0].equals("trinket"))
+            {
                 return new TrinketSlotAccess(le, strings[1], strings[2], Integer.parseInt(strings[3]));
+            }
         } catch (Exception ignored)
         {
         }
@@ -180,14 +209,23 @@ public class TrinketCompat
         Multimap<EntityAttribute, EntityAttributeModifier> multimap = null;
         ItemStack stack = access.get();
         if (access instanceof EquipmentSlotAccess equipmentSlotAccess)
+        {
             multimap = stack.getAttributeModifiers(equipmentSlotAccess.slot());
-        else if (access instanceof TrinketSlotAccess trinketSlotAccess &&
-                 stack.getItem() instanceof Trinket trinket)
+        } else if (access instanceof TrinketSlotAccess trinketSlotAccess &&
+            stack.getItem() instanceof Trinket trinket)
+        {
             multimap = trinket.getModifiers(stack, new SlotReference(trinketSlotAccess.getInventory(), trinketSlotAccess.slot()), trinketSlotAccess.le(), UUID.randomUUID());
+        }
         if (multimap != null)
+        {
             for (var e : multimap.keySet())
+            {
                 if (e instanceof SlotAttributes.SlotEntityAttribute)
+                {
                     return true;
+                }
+            }
+        }
         return false;
     }
 }

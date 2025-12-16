@@ -39,15 +39,17 @@ public class RepellingTrait extends PushPullTrait
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
             !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
             source.isIn(DamageTypeTags.IS_PROJECTILE))
+        {
             event.setCanceled(true);
+        }
     }
 
     @Override
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        Text.literal(LHConfig.common().traits.repellRange + "")
-                                .formatted(Formatting.AQUA))
-                .formatted(Formatting.GRAY));
+                Text.literal(LHConfig.common().traits.repellRange + "")
+                    .formatted(Formatting.AQUA))
+            .formatted(Formatting.GRAY));
     }
 }

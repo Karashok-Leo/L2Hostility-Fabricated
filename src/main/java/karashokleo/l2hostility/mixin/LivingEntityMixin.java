@@ -19,9 +19,9 @@ public abstract class LivingEntityMixin
     public abstract Iterable<ItemStack> getArmorItems();
 
     @Inject(
-            method = "getArmorVisibility",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "getArmorVisibility",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_getArmorVisibility(CallbackInfoReturnable<Float> cir)
     {
@@ -33,7 +33,9 @@ public abstract class LivingEntityMixin
             ++total;
             if (stack.isEmpty() ||
                 EnchantmentHelper.getLevel(LHEnchantments.SHULKER_ARMOR, stack) > 0)
+            {
                 continue;
+            }
             ++visible;
         }
         cir.setReturnValue(total > 0 ? (float) visible / (float) total : 0.0F);

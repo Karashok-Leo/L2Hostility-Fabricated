@@ -73,7 +73,9 @@ public class LHData implements DataGeneratorEntrypoint
             LHGenerators.EN_TEXTS.addText(prefix.getNamespace() + "." + prefix.getPrefix(), name);
             Class<?> fieldClazz = field.getType();
             if (inner.contains(fieldClazz))
+            {
                 generateConfigTexts(fieldClazz, prefix);
+            }
             prefix.popPrefix();
         }
         prefix.popPrefix();

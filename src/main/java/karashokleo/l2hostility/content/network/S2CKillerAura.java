@@ -37,9 +37,9 @@ public class S2CKillerAura extends S2CEntity
                 float tpi = (float) (Math.PI * 2);
                 Vec3d v0 = new Vec3d(0, radius, 0).rotateX(tpi / 4).rotateY(world.getRandom().nextFloat() * tpi);
                 world.addImportantParticle(ParticleTypes.FLAME,
-                        center.x + v0.x,
-                        center.y + v0.y + 0.5f,
-                        center.z + v0.z, 0, 0, 0);
+                    center.x + v0.x,
+                    center.y + v0.y + 0.5f,
+                    center.z + v0.z, 0, 0, 0);
             }
             entity.getWorld().playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_FIRECHARGE_USE, entity.getSoundCategory(), 3, 1.0F, false);
         }

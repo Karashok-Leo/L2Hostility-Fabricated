@@ -20,7 +20,9 @@ public abstract class AbstractBladeEnchantment extends BattleEnchantment
     {
         var le = getTarget(target);
         if (le != null && le != user && !user.getWorld().isClient())
+        {
             EffectHelper.forceAddEffectWithEvent(le, getEffect(level), user);
+        }
     }
 
     protected abstract StatusEffectInstance getEffect(int level);

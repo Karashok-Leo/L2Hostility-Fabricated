@@ -34,7 +34,9 @@ public class AttributeTrait extends MobTrait
     public void initialize(MobDifficulty difficulty, LivingEntity le, int level)
     {
         for (var e : entries)
+        {
             TraitManager.addAttribute(le, e.attribute.get(), e.name(), e.factor.getAsDouble() * level, e.op());
+        }
     }
 
     @Override
@@ -43,25 +45,28 @@ public class AttributeTrait extends MobTrait
         for (var e : entries)
         {
             double value = e.factor.getAsDouble();
-            if (value == 0) continue;
+            if (value == 0)
+            {
+                continue;
+            }
             list.add(mapLevel(i ->
-                    (e.op == EntityAttributeModifier.Operation.ADDITION ?
-                            Text.literal("+" + Math.round(value * i)) :
-                            Text.literal("+" + Math.round(value * i * 100) + "%"))
-                            .formatted(Formatting.AQUA))
-                    .append(ScreenTexts.SPACE)
-                    .append(
-                            Text.translatable(e.attribute.get().getTranslationKey())
-                                    .formatted(Formatting.BLUE)
-                    ));
+                (e.op == EntityAttributeModifier.Operation.ADDITION ?
+                    Text.literal("+" + Math.round(value * i)) :
+                    Text.literal("+" + Math.round(value * i * 100) + "%"))
+                    .formatted(Formatting.AQUA))
+                .append(ScreenTexts.SPACE)
+                .append(
+                    Text.translatable(e.attribute.get().getTranslationKey())
+                        .formatted(Formatting.BLUE)
+                ));
         }
     }
 
     public record AttributeEntry(
-            String name,
-            Supplier<EntityAttribute> attribute,
-            DoubleSupplier factor,
-            EntityAttributeModifier.Operation op
+        String name,
+        Supplier<EntityAttribute> attribute,
+        DoubleSupplier factor,
+        EntityAttributeModifier.Operation op
     )
     {
     }

@@ -24,11 +24,11 @@ public class WitchChargeItem extends BaseChargeItem
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(
-                LHTexts.TOOLTIP_WITCH_CHARGE.get(
-                        LHConfig.common().items.witchChargeMinDuration / 20,
-                        Math.round(100 * LHConfig.common().traits.drainDuration),
-                        LHConfig.common().traits.drainDurationMax / 20
-                ).formatted(Formatting.GRAY)
+            LHTexts.TOOLTIP_WITCH_CHARGE.get(
+                LHConfig.common().items.witchChargeMinDuration / 20,
+                Math.round(100 * LHConfig.common().traits.drainDuration),
+                LHConfig.common().traits.drainDurationMax / 20
+            ).formatted(Formatting.GRAY)
         );
     }
 }

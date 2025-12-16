@@ -28,12 +28,18 @@ public class DrainTrait extends MobTrait
     public void postInit(MobDifficulty difficulty, LivingEntity mob, int lv)
     {
         var entryList = LHTraits.TRAIT.getEntryList(LHTags.POTION);
-        if (entryList.isEmpty()) return;
+        if (entryList.isEmpty())
+        {
+            return;
+        }
         entryList.get().getRandom(mob.getRandom());
         for (int i = 0; i < 4; i++)
         {
             var entry = entryList.get().getRandom(mob.getRandom());
-            if (entry.isEmpty()) continue;
+            if (entry.isEmpty())
+            {
+                continue;
+            }
             var trait = entry.get().value();
             if (trait.allow(mob) && !difficulty.hasTrait(trait))
             {
@@ -48,22 +54,25 @@ public class DrainTrait extends MobTrait
     {
         removeEffects(level, entity, event.getEntity());
         var neg = event
-                .getEntity()
-                .getStatusEffects()
-                .stream()
-                .filter(e -> e.getEffectType().getCategory() == StatusEffectCategory.HARMFUL)
-                .count();
+            .getEntity()
+            .getStatusEffects()
+            .stream()
+            .filter(e -> e.getEffectType().getCategory() == StatusEffectCategory.HARMFUL)
+            .count();
         event.setAmount(event.getAmount() * (float) (1 + LHConfig.common().traits.drainDamage * level * neg));
     }
 
     public void removeEffects(int level, LivingEntity attacker, LivingEntity target)
     {
         var pos = new ArrayList<>(target.getStatusEffects().stream()
-                .filter(e -> e.getEffectType().getCategory() == StatusEffectCategory.BENEFICIAL)
-                .toList());
+            .filter(e -> e.getEffectType().getCategory() == StatusEffectCategory.BENEFICIAL)
+            .toList());
         for (int i = 0; i < level; i++)
         {
-            if (pos.isEmpty()) continue;
+            if (pos.isEmpty())
+            {
+                continue;
+            }
             var ins = pos.remove(attacker.getRandom().nextInt(pos.size()));
             target.removeStatusEffect(ins.getEffectType());
         }
@@ -76,14 +85,14 @@ public class DrainTrait extends MobTrait
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                mapLevel(i -> Text.literal(i + "")
-                        .formatted(Formatting.AQUA)),
-                mapLevel(i -> Text.literal(Math.round(i * LHConfig.common().traits.drainDamage * 100) + "%")
-                        .formatted(Formatting.AQUA)),
-                mapLevel(i -> Text.literal(Math.round(i * LHConfig.common().traits.drainDuration * 100) + "%")
-                        .formatted(Formatting.AQUA)),
-                mapLevel(i -> Text.literal(Math.round(i * LHConfig.common().traits.drainDurationMax / 20f) + "")
-                        .formatted(Formatting.AQUA))
+            mapLevel(i -> Text.literal(i + "")
+                .formatted(Formatting.AQUA)),
+            mapLevel(i -> Text.literal(Math.round(i * LHConfig.common().traits.drainDamage * 100) + "%")
+                .formatted(Formatting.AQUA)),
+            mapLevel(i -> Text.literal(Math.round(i * LHConfig.common().traits.drainDuration * 100) + "%")
+                .formatted(Formatting.AQUA)),
+            mapLevel(i -> Text.literal(Math.round(i * LHConfig.common().traits.drainDurationMax / 20f) + "")
+                .formatted(Formatting.AQUA))
         ).formatted(Formatting.GRAY));
     }
 }

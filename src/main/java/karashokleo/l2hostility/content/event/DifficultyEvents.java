@@ -34,20 +34,29 @@ public class DifficultyEvents
     public static void onDamageArmor(DamageAccess access)
     {
         var optional = MobDifficulty.get(access.getAttacker());
-        if (optional.isEmpty()) return;
+        if (optional.isEmpty())
+        {
+            return;
+        }
         int level = optional.get().getLevel();
         double factor = LHConfig.common().scaling.exponentialDamage ?
-                Math.pow(1 + LHConfig.common().scaling.damageFactor, level) :
-                1 + level * LHConfig.common().scaling.damageFactor;
+            Math.pow(1 + LHConfig.common().scaling.damageFactor, level) :
+            1 + level * LHConfig.common().scaling.damageFactor;
         access.addModifier(DamageModifier.multiply((float) factor));
     }
 
     public static int onDropExperience(int amount, PlayerEntity player, LivingEntity livingEntity)
     {
         var op = MobDifficulty.get(livingEntity);
-        if (op.isEmpty()) return amount;
+        if (op.isEmpty())
+        {
+            return amount;
+        }
         MobDifficulty diff = op.get();
-        if (diff.noDrop) return amount;
+        if (diff.noDrop)
+        {
+            return amount;
+        }
         int exp = amount;
         int level = diff.getLevel();
         exp = (int) (exp * (1 + LHConfig.common().scaling.expDropFactor * level));
@@ -59,15 +68,23 @@ public class DifficultyEvents
         Entity killer = damageSource.getAttacker();
         PlayerEntity player = null;
         if (killer instanceof PlayerEntity pl)
+        {
             player = pl;
-        else if (killer instanceof Ownable own && own.getOwner() instanceof PlayerEntity pl)
+        } else if (killer instanceof Ownable own && own.getOwner() instanceof PlayerEntity pl)
+        {
             player = pl;
+        }
         var op = MobDifficulty.get(entity);
-        if (op.isEmpty()) return;
+        if (op.isEmpty())
+        {
+            return;
+        }
         MobDifficulty mobDiff = op.get();
         MobEntity mob = mobDiff.owner;
         if (killer != null)
+        {
             mobDiff.onKilled(mob, player);
+        }
         if (player != null)
         {
             PlayerDifficulty playerDiff = PlayerDifficulty.get(player);
@@ -75,7 +92,9 @@ public class DifficultyEvents
             WorldChunk chunk = mob.getWorld().getWorldChunk(mob.getBlockPos());
             var chunkDiff = ChunkDifficulty.get(chunk);
             if (chunkDiff.isPresent())
+            {
                 chunkDiff.get().addKillHistory(player, mob, mobDiff);
+            }
         }
     }
 }

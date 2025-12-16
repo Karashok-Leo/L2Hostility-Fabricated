@@ -38,7 +38,10 @@ public class WindSweepEnchantment extends UnobtainableEnchantment implements Att
     @Override
     public void addAttributes(int lv, ItemStack stack, EquipmentSlot slot, Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers)
     {
-        if (slot != EquipmentSlot.MAINHAND) return;
+        if (slot != EquipmentSlot.MAINHAND)
+        {
+            return;
+        }
         attributeModifiers.put(ReachEntityAttributes.ATTACK_RANGE, new EntityAttributeModifier(MODIFIER_UUID, MODIFIER_NAME, lv, EntityAttributeModifier.Operation.ADDITION));
     }
 }

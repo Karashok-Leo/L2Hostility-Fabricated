@@ -39,11 +39,16 @@ public class MiscEvents
         // 属性附魔
         ModifyItemAttributeModifiersCallback.EVENT.register((stack, slot, attributeModifiers) ->
         {
-            if (!stack.hasEnchantments()) return;
+            if (!stack.hasEnchantments())
+            {
+                return;
+            }
             EnchantmentHelper.get(stack).forEach((enchantment, level) ->
             {
                 if (enchantment instanceof AttributeEnchantment ins)
+                {
                     ins.addAttributes(level, stack, slot, attributeModifiers);
+                }
             });
         });
 
@@ -51,48 +56,70 @@ public class MiscEvents
         LivingAttackEvent.ATTACK.register(event ->
         {
             if (!LHConfig.common().complements.enableImmunityEnchantments)
+            {
                 return;
+            }
 
             if (EntityFeature.OWNER_PROTECTION.test(event.getEntity()))
             {
                 if (event.getSource().getAttacker() instanceof Ownable ownable && ownable.getOwner() == event.getEntity())
+                {
                     event.setCanceled(true);
+                }
             }
             if (EntityFeature.INVINCIBLE.test(event.getEntity()))
+            {
                 event.setCanceled(true);
+            }
 
             if (event.getSource().isIn(DamageTypeTags.BYPASSES_EFFECTS) ||
                 event.getSource().isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+            {
                 return;
+            }
 
             if (EntityFeature.ENVIRONMENTAL_REJECT.test(event.getEntity()) &&
                 event.getSource().getAttacker() == null)
+            {
                 event.setCanceled(true);
+            }
 
             if (EntityFeature.MAGIC_REJECT.test(event.getEntity()) &&
                 event.getSource().isIn(LHTags.MAGIC))
+            {
                 event.setCanceled(true);
+            }
 
             if (event.getSource().isIn(DamageTypeTags.BYPASSES_ENCHANTMENTS))
+            {
                 return;
+            }
 
             if (EntityFeature.PROJECTILE_REJECT.test(event.getEntity()) &&
                 event.getSource().isIn(DamageTypeTags.IS_PROJECTILE))
+            {
                 event.setCanceled(true);
+            }
 
             if (EntityFeature.FIRE_REJECT.test(event.getEntity()) &&
                 event.getSource().isIn(DamageTypeTags.IS_FIRE))
+            {
                 event.setCanceled(true);
+            }
 
             if (EntityFeature.EXPLOSION_REJECT.test(event.getEntity()) &&
                 event.getSource().isIn(DamageTypeTags.IS_EXPLOSION))
+            {
                 event.setCanceled(true);
+            }
         });
         LivingEntityEvents.LivingTickEvent.TICK.register(event ->
         {
             if (event.getEntity().isOnFire() &&
                 EntityFeature.FIRE_REJECT.test(event.getEntity()))
+            {
                 event.getEntity().extinguish();
+            }
         });
 
         // 虚空之触
@@ -119,21 +146,23 @@ public class MiscEvents
         LivingHurtEvent.HURT.register(event ->
         {
             if (event.getSource().getAttacker() instanceof LivingEntity attacker)
+            {
                 HitTargetEnchantment.handle(attacker, event);
+            }
         });
 
         // 跳过实体交互
         UseEntityCallback.EVENT.register(
-                (player, world, hand, entity, hitResult) ->
-                        player.getStackInHand(hand).getItem() instanceof IMobClickItem && entity instanceof LivingEntity &&
-                        !entity.getWorld().isClient() ?
-                                ActionResult.FAIL :
-                                ActionResult.PASS
+            (player, world, hand, entity, hitResult) ->
+                player.getStackInHand(hand).getItem() instanceof IMobClickItem && entity instanceof LivingEntity &&
+                    !entity.getWorld().isClient() ?
+                    ActionResult.FAIL :
+                    ActionResult.PASS
         );
 
         // 物品实体加入世界判断是否携带 VANISH
         EntityEvents.ON_JOIN_WORLD.register((entity, world, b) ->
-                !(entity instanceof ItemEntity ie && EnchantmentHelper.getLevel(LHEnchantments.VANISH, ie.getStack()) > 0));
+            !(entity instanceof ItemEntity ie && EnchantmentHelper.getLevel(LHEnchantments.VANISH, ie.getStack()) > 0));
 
         // 发送 LootModifier
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> LHNetworking.toClientPlayer(sender, S2CLootData.create()));
@@ -147,7 +176,10 @@ public class MiscEvents
     public static boolean canSee(Entity instance, Operation<Boolean> original)
     {
         boolean ans = original.call(instance);
-        if (ans) return true;
+        if (ans)
+        {
+            return true;
+        }
         if (instance instanceof LivingEntity le)
         {
             if (le.isInLava())

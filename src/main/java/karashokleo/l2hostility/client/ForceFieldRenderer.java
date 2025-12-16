@@ -31,7 +31,10 @@ public class ForceFieldRenderer implements BuiltinItemRendererRegistry.DynamicIt
     @Override
     public void render(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay)
     {
-        if (!stack.isOf(ComplementItems.FORCE_FIELD)) return;
+        if (!stack.isOf(ComplementItems.FORCE_FIELD))
+        {
+            return;
+        }
         setUpWither();
         matrices.push();
         translateWither(mode, matrices);
@@ -44,8 +47,11 @@ public class ForceFieldRenderer implements BuiltinItemRendererRegistry.DynamicIt
         MinecraftClient mc = MinecraftClient.getInstance();
         EntityModelLoader modelLoader = mc.getEntityModelLoader();
         if (wither_model == null)
+        {
             wither_model = new WitherEntityModel<>(modelLoader.getModelPart(EntityModelLayers.WITHER_ARMOR));
+        }
         if (wither_armor == null)
+        {
             wither_armor = new WitherArmorFeatureRenderer(new FeatureRendererContext<>()
             {
                 @Override
@@ -60,6 +66,7 @@ public class ForceFieldRenderer implements BuiltinItemRendererRegistry.DynamicIt
                     return WITHER_LOCATION;
                 }
             }, modelLoader);
+        }
 
         World world = mc.world;
         if (world == null)
@@ -68,11 +75,20 @@ public class ForceFieldRenderer implements BuiltinItemRendererRegistry.DynamicIt
             return;
         }
         if (wither != null)
+        {
             if (wither.getWorld() != world)
+            {
                 wither = null;
+            }
+        }
         if (wither == null)
+        {
             wither = EntityType.WITHER.create(world);
-        if (wither == null) return;
+        }
+        if (wither == null)
+        {
+            return;
+        }
         assert mc.player != null;
         wither.age = mc.player.age;
         wither.setHealth(1);

@@ -54,19 +54,34 @@ public class PlayerDifficulty
 
     public void onClone(boolean lossless, boolean keepInventory)
     {
-        if (lossless) return;
-        if (LHConfig.common().difficulty.keepInventoryRuleKeepDifficulty && keepInventory)
+        if (lossless)
+        {
             return;
+        }
+        if (LHConfig.common().difficulty.keepInventoryRuleKeepDifficulty && keepInventory)
+        {
+            return;
+        }
         if (LHConfig.common().difficulty.deathDecayDimension)
+        {
             dimensions.clear();
+        }
         if (LHConfig.common().difficulty.deathDecayTraitCap)
-            if (maxRankKilled > 0) maxRankKilled--;
+        {
+            if (maxRankKilled > 0)
+            {
+                maxRankKilled--;
+            }
+        }
         difficulty.decay();
     }
 
     public void tick()
     {
-        if (!(owner instanceof ServerPlayerEntity)) return;
+        if (!(owner instanceof ServerPlayerEntity))
+        {
+            return;
+        }
         // 恶意刷怪笼
 //        var opt = ChunkDifficulty.at(owner.getWorld(), owner.getBlockPos());
 //        if (opt.isPresent()) {
@@ -79,7 +94,10 @@ public class PlayerDifficulty
 //                }
 //            }
 //        }
-        if (dimensions.add(owner.getWorld().getDimensionKey().getValue())) sync(owner);
+        if (dimensions.add(owner.getWorld().getDimensionKey().getValue()))
+        {
+            sync(owner);
+        }
     }
 
     public void apply(MobDifficultyCollector instance)
@@ -88,7 +106,9 @@ public class PlayerDifficulty
         instance.acceptBonus(getLevel());
         instance.setTraitCap(getRankCap());
         for (var stack : CurseTrinketItem.getFromPlayer(owner))
+        {
             stack.item().modifyDifficulty(instance);
+        }
     }
 
     public int getRankCap()
@@ -101,10 +121,12 @@ public class PlayerDifficulty
         double growFactor = 1;
         // 从饰品栏获取难度增长系数
         for (var stack : CurseTrinketItem.getFromPlayer(owner))
+        {
             growFactor *= stack.item().getGrowFactor(stack.stack(), this, cap);
+        }
         difficulty.grow(growFactor, cap);
         cap.traits.values().stream().max(Comparator.naturalOrder())
-                .ifPresent(integer -> maxRankKilled = Math.max(maxRankKilled, integer));
+            .ifPresent(integer -> maxRankKilled = Math.max(maxRankKilled, integer));
         if (getLevel().getLevel() > rewardCount * 10)
         {
             rewardCount++;
@@ -143,10 +165,10 @@ public class PlayerDifficulty
         int item = (int) owner.getAttributeValue(LHMiscs.ADD_LEVEL);
         int dim = getDimCount() * LHConfig.common().scaling.dimensionFactor;
         return List.of(
-                LHTexts.INFO_PLAYER_ADAPTIVE_LEVEL.get(difficulty.level).formatted(Formatting.GRAY),
-                LHTexts.INFO_PLAYER_ITEM_LEVEL.get(item).formatted(Formatting.GRAY),
-                LHTexts.INFO_PLAYER_DIM_LEVEL.get(dim).formatted(Formatting.GRAY),
-                LHTexts.INFO_PLAYER_EXT_LEVEL.get(difficulty.extraLevel).formatted(Formatting.GRAY)
+            LHTexts.INFO_PLAYER_ADAPTIVE_LEVEL.get(difficulty.level).formatted(Formatting.GRAY),
+            LHTexts.INFO_PLAYER_ITEM_LEVEL.get(item).formatted(Formatting.GRAY),
+            LHTexts.INFO_PLAYER_DIM_LEVEL.get(dim).formatted(Formatting.GRAY),
+            LHTexts.INFO_PLAYER_EXT_LEVEL.get(difficulty.extraLevel).formatted(Formatting.GRAY)
         );
     }
 

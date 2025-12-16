@@ -44,9 +44,12 @@ public class TargetSelectWand extends BaseWand
                 }
                 stack.getOrCreateNbt().remove(KEY);
                 if (succeed)
+                {
                     player.sendMessage(LHTexts.MSG_SET_TARGET.get(entity.getDisplayName(), le.getDisplayName()));
-                else
+                } else
+                {
                     player.sendMessage(LHTexts.MSG_TARGET_FAIL.get(entity.getDisplayName(), le.getDisplayName()));
+                }
                 return;
             }
         }
@@ -60,9 +63,13 @@ public class TargetSelectWand extends BaseWand
         if (world != null &&
             stack.getOrCreateNbt().contains(KEY) &&
             world.getEntityById(stack.getOrCreateNbt().getInt(KEY)) instanceof LivingEntity le)
+        {
             tooltip.add(LHTexts.MSG_TARGET_RECORD.get(
-                    le.getDisplayName().copy().formatted(Formatting.AQUA)
+                le.getDisplayName().copy().formatted(Formatting.AQUA)
             ).formatted(Formatting.GRAY));
-        else tooltip.add(LHTexts.ITEM_WAND_TARGET.get().formatted(Formatting.GRAY));
+        } else
+        {
+            tooltip.add(LHTexts.ITEM_WAND_TARGET.get().formatted(Formatting.GRAY));
+        }
     }
 }

@@ -35,10 +35,10 @@ public class REIBurntCategory implements DisplayCategory<REIBurntDisplay>
         widgets.add(ingredient);
         widgets.add(result);
         widgets.add(Widgets.createTooltip(point ->
-                bounds.contains(point) &&
+            bounds.contains(point) &&
                 !(ingredient.getBounds().contains(point) ||
-                  result.getBounds().contains(point)) ?
-                        Tooltip.create(point, display.getTooltip()) : null));
+                    result.getBounds().contains(point)) ?
+                Tooltip.create(point, display.getTooltip()) : null));
         return widgets;
     }
 

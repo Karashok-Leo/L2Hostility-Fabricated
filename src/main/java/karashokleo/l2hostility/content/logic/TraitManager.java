@@ -18,10 +18,15 @@ public class TraitManager
     public static void addAttribute(LivingEntity le, EntityAttribute attr, String name, double factor, EntityAttributeModifier.Operation op)
     {
         var ins = le.getAttributeInstance(attr);
-        if (ins == null) return;
+        if (ins == null)
+        {
+            return;
+        }
         var modifier = new EntityAttributeModifier(MathHelper.getUUIDFromString(name), name, factor, op);
         if (ins.hasModifier(modifier))
+        {
             ins.removeModifier(modifier.getId());
+        }
         ins.addPersistentModifier(modifier);
     }
 
@@ -31,7 +36,9 @@ public class TraitManager
         int lv = diff.clampLevel(ins.getDifficulty(le.getRandom()));
         int ans = 0;
         if (ins.getApplyChance() < le.getRandom().nextDouble())
+        {
             return ans;
+        }
         // add attributes
         if (!le.getType().isIn(LHTags.NO_SCALING))
         {
@@ -47,7 +54,9 @@ public class TraitManager
         if (ins.getTraitChance(lv) >= le.getRandom().nextDouble())
         {
             if (!le.getType().isIn(LHTags.NO_TRAIT))
+            {
                 TraitGenerator.generateTraits(diff, le, lv, traits, ins);
+            }
             ans = lv;
         }
         le.setHealth(le.getMaxHealth());
@@ -57,12 +66,12 @@ public class TraitManager
     public static void scale(LivingEntity le, int lv)
     {
         double factor = LHConfig.common().scaling.exponentialHealth ?
-                Math.pow(1 + LHConfig.common().scaling.healthFactor, lv) - 1 :
-                lv * LHConfig.common().scaling.healthFactor;
+            Math.pow(1 + LHConfig.common().scaling.healthFactor, lv) - 1 :
+            lv * LHConfig.common().scaling.healthFactor;
         addAttribute(
-                le, EntityAttributes.GENERIC_MAX_HEALTH,
-                "hostility_health", factor,
-                EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+            le, EntityAttributes.GENERIC_MAX_HEALTH,
+            "hostility_health", factor,
+            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
         );
     }
 

@@ -23,7 +23,9 @@ public class InvisibleTrait extends SelfEffectTrait
     {
         var diff = MobDifficulty.get(le);
         if (diff.isEmpty() || diff.get().summoned)
+        {
             return false;
+        }
         return super.allow(le, difficulty, maxModLv);
     }
 
@@ -34,8 +36,12 @@ public class InvisibleTrait extends SelfEffectTrait
         {
             ItemStack stack = mob.getEquippedStack(e);
             if (!stack.isEmpty())
+            {
                 if (EnchantmentHelper.getLevel(LHEnchantments.SHULKER_ARMOR, stack) == 0)
+                {
                     stack.addEnchantment(LHEnchantments.SHULKER_ARMOR, 1);
+                }
+            }
         }
     }
 }

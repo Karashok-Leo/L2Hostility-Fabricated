@@ -32,10 +32,10 @@ public class REICompat implements REIClientPlugin
         registry.add(new REIBurntCategory());
         registry.add(new REITraitCategory());
         registry.addWorkstations(
-                BURNT,
-                EntryStacks.of(Items.LAVA_BUCKET),
-                EntryStacks.of(Items.FLINT_AND_STEEL),
-                EntryStacks.of(Items.FIRE_CHARGE)
+            BURNT,
+            EntryStacks.of(Items.LAVA_BUCKET),
+            EntryStacks.of(Items.FLINT_AND_STEEL),
+            EntryStacks.of(Items.FIRE_CHARGE)
         );
     }
 
@@ -45,19 +45,28 @@ public class REICompat implements REIClientPlugin
         for (ITraitLootRecipe recipe : ITraitLootRecipe.LIST_CACHE)
         {
             if (recipe instanceof EnvyLootModifier)
+            {
                 for (MobTrait trait : LHTraits.TRAIT)
+                {
                     registry.add(
-                            new REILootDisplay(recipe)
-                                    .setTraits(EntryIngredients.of(trait.asItem()))
-                                    .setLoot(EntryIngredients.of(trait.asItem()))
+                        new REILootDisplay(recipe)
+                            .setTraits(EntryIngredients.of(trait.asItem()))
+                            .setLoot(EntryIngredients.of(trait.asItem()))
                     );
-            else if (recipe instanceof GluttonyLootModifier)
+                }
+            } else if (recipe instanceof GluttonyLootModifier)
+            {
                 registry.add(new REILootDisplay(recipe).setTraits(EntryIngredients.ofItemTag(LHTags.TRAIT_ITEM)));
-            else registry.add(new REILootDisplay(recipe));
+            } else
+            {
+                registry.add(new REILootDisplay(recipe));
+            }
         }
         for (BurntRecipe recipe : registry.getRecipeManager().listAllOfType(LHRecipes.BURNT_RECIPE_TYPE))
+        {
             registry.add(new REIBurntDisplay(recipe));
+        }
         LivingEntityWrapper.streamRegistry(MobDifficulty::validate, 2)
-                .forEach(entityWrapper -> registry.add(new REITraitDisplay(entityWrapper)));
+            .forEach(entityWrapper -> registry.add(new REITraitDisplay(entityWrapper)));
     }
 }

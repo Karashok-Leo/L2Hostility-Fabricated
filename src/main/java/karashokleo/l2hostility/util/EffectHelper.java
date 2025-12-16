@@ -17,11 +17,16 @@ public class EffectHelper
     {
         MobEffectEvent.Applicable event = new MobEffectEvent.Applicable(entity, newEffect);
         event.sendEvent();
-        if (event.getResult() == BaseEvent.Result.DENY) return;
+        if (event.getResult() == BaseEvent.Result.DENY)
+        {
+            return;
+        }
 
         StatusEffectInstance oldEffect = entity.getActiveStatusEffects().get(newEffect.getEffectType());
         if (EffectUtil.forceAddEffect(entity, newEffect, source))
+        {
             new MobEffectEvent.Added(entity, oldEffect, newEffect, source).sendEvent();
+        }
     }
 
     public static MutableText getEffectInstanceText(StatusEffectInstance instance)
@@ -29,9 +34,13 @@ public class EffectHelper
         StatusEffect effect = instance.getEffectType();
         MutableText text = Text.translatable(effect.getTranslationKey());
         if (instance.getAmplifier() > 0)
+        {
             text = Text.translatable("potion.withAmplifier", text, Text.translatable("potion.potency." + instance.getAmplifier()));
+        }
         if (instance.getDuration() > 20)
+        {
             text = Text.translatable("potion.withDuration", text, StatusEffectUtil.getDurationText(instance, 1));
+        }
         return text.formatted(effect.getCategory().getFormatting());
     }
 }

@@ -31,25 +31,41 @@ public class HostilityOrb extends Item
     {
         ItemStack stack = user.getStackInHand(hand);
         if (!LHConfig.common().orbAndSpawner.allowHostilityOrb)
+        {
             return TypedActionResult.pass(stack);
+        }
         if (!TrinketCompat.hasItemEquippedOrInTrinket(user, MiscItems.DETECTOR) ||
             !TrinketCompat.hasItemEquippedOrInTrinket(user, MiscItems.DETECTOR_GLASSES))
+        {
             return TypedActionResult.pass(stack);
+        }
         if (!world.isClient())
         {
             boolean success = false;
             int r = LHConfig.common().orbAndSpawner.orbRadius;
             for (int x = -r; x <= r; x++)
+            {
                 for (int y = -r; y <= r; y++)
+                {
                     for (int z = -r; z <= r; z++)
                     {
                         BlockPos pos = user.getBlockPos().add(x * 16, y * 16, z * 16);
-                        if (world.isOutOfHeightLimit(pos)) continue;
+                        if (world.isOutOfHeightLimit(pos))
+                        {
+                            continue;
+                        }
                         var opt = ChunkDifficulty.at(world, pos);
                         if (opt.isPresent())
+                        {
                             success = opt.get().getSection(pos.getY()).setClear(opt.get(), pos);
+                        }
                     }
-            if (success) stack.decrement(1);
+                }
+            }
+            if (success)
+            {
+                stack.decrement(1);
+            }
         }
         return TypedActionResult.success(stack);
     }

@@ -11,9 +11,9 @@ public class FlameThornEnchantment extends AbstractThornEnchantment
     public FlameThornEnchantment()
     {
         super(
-                Rarity.VERY_RARE,
-                EnchantmentTarget.ARMOR,
-                new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}
+            Rarity.VERY_RARE,
+            EnchantmentTarget.ARMOR,
+            new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}
         );
     }
 

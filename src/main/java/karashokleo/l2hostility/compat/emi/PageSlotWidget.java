@@ -28,7 +28,9 @@ public class PageSlotWidget extends SlotWidget
     public void render(DrawContext draw, int mouseX, int mouseY, float delta)
     {
         if (this.getStack().isEmpty())
+        {
             return;
+        }
         super.render(draw, mouseX, mouseY, delta);
     }
 

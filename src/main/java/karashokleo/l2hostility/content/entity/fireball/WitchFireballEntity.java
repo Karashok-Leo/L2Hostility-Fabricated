@@ -28,6 +28,8 @@ public class WitchFireballEntity extends BaseFireballEntity
     protected void onEntityHitAction(Entity target)
     {
         if (target instanceof LivingEntity living)
+        {
             EffectBooster.boostCharge(living);
+        }
     }
 }
