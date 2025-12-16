@@ -9,6 +9,7 @@ import karashokleo.l2hostility.content.loot.condition.MobLevelLootCondition;
 import karashokleo.l2hostility.content.loot.condition.PlayerHasItemLootCondition;
 import karashokleo.l2hostility.content.loot.condition.TraitLootCondition;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.l2hostility.init.LHTraits;
 import net.minecraft.item.ItemStack;
@@ -57,6 +58,10 @@ public class TraitLootModifier extends CurseLootModifier
         if (count > 0)
         {
             ItemStack ans = result.copy();
+            if (LHConfig.common().items.nidhoggurCapAtItemMaxStack)
+            {
+                count = Math.min(count, ans.getMaxCount());
+            }
             ans.setCount(count);
             generatedLoot.add(ans);
         }
