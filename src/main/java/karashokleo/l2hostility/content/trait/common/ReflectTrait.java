@@ -49,7 +49,7 @@ public class ReflectTrait extends MobTrait
             return;
         }
         // avoid recursive damage
-        if (source.hasState(REFLECT_STATE::equals))
+        if (source.hasState(REFLECT_STATE))
         {
             return;
         }
