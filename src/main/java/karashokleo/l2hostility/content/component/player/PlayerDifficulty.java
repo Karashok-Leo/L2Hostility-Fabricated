@@ -31,7 +31,7 @@ public class PlayerDifficulty
     public final TreeSet<Identifier> dimensions = new TreeSet<>();
     @SerialClass.SerialField
     private final DifficultyLevel difficulty = new DifficultyLevel();
-    public PlayerEntity owner;
+    public final PlayerEntity owner;
     @SerialClass.SerialField
     public int maxRankKilled = 0, rewardCount = 0;
     @Nullable

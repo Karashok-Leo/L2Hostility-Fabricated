@@ -37,7 +37,7 @@ public class MobDifficulty
     @SerialClass.SerialField
     private final HashMap<Identifier, CapStorageData> data = new HashMap<>();
     private final ArrayList<Pair<MobTrait, Integer>> pending = new ArrayList<>();
-    public MobEntity owner;
+    public final MobEntity owner;
     @SerialClass.SerialField
     public int lv;
     @SerialClass.SerialField

@@ -29,7 +29,7 @@ public abstract class MobTraitBuilder<T extends MobTrait>
     extends NamedEntryBuilder<T>
     implements DefaultLanguageGeneratorProvider, TagGeneratorProvider, ModelGeneratorProvider
 {
-    protected TraitConfig.Config config;
+    protected final TraitConfig.Config config;
     protected String translationKey;
 
     protected MobTraitBuilder(String name, T trait, TraitConfig.Config config)

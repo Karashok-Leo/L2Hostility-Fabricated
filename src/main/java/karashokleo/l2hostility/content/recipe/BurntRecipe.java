@@ -27,7 +27,7 @@ public class BurntRecipe implements Recipe<BurntRecipe.Inv>
     public ItemStack result;
     @SerialClass.SerialField
     public int chance;
-    protected Identifier id;
+    protected final Identifier id;
 
     public BurntRecipe(Identifier id)
     {

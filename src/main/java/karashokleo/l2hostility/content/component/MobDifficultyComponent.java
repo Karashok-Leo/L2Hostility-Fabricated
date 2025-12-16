@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class MobDifficultyComponent implements ServerTickingComponent, AutoSyncedComponent, CopyableComponent<MobDifficultyComponent>
 {
-    public MobEntity mob;
+    public final MobEntity mob;
     @Nullable
     public MobDifficulty diff;
 

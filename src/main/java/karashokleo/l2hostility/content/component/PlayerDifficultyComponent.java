@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PlayerDifficultyComponent implements ServerTickingComponent, AutoSyncedComponent
 {
-    public PlayerEntity player;
+    public final PlayerEntity player;
     public PlayerDifficulty diff;
 
     public PlayerDifficultyComponent(PlayerEntity player)

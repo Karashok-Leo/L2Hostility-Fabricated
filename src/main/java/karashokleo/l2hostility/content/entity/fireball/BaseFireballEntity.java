@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 public class BaseFireballEntity extends AbstractFireballEntity
 {
-    public int lifespan = 200;
+    public final int lifespan = 200;
 
     public BaseFireballEntity(EntityType<? extends BaseFireballEntity> entityType, World world)
     {

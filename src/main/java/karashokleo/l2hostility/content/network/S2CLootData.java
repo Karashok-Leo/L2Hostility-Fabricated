@@ -16,7 +16,7 @@ import java.util.List;
 public class S2CLootData implements SerialPacketS2C
 {
     @SerialClass.SerialField
-    public ArrayList<NbtCompound> list = new ArrayList<>();
+    public final ArrayList<NbtCompound> list = new ArrayList<>();
 
     @Deprecated
     public S2CLootData()

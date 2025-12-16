@@ -25,13 +25,13 @@ public class BurntRecipeBuilder extends RecipeJsonBuilder
     private final Advancement.Builder advancementBuilder = Advancement.Builder.createUntelemetered();
 
     @SerialClass.SerialField
-    public Ingredient ingredient;
+    public final Ingredient ingredient;
 
     @SerialClass.SerialField
-    public ItemStack result;
+    public final ItemStack result;
 
     @SerialClass.SerialField
-    public int chance;
+    public final int chance;
 
     public BurntRecipeBuilder(Ingredient ingredient, ItemStack result, int chance)
     {

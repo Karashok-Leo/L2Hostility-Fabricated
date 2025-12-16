@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ChunkDifficultyComponent implements AutoSyncedComponent
 {
-    public Chunk chunk;
+    public final Chunk chunk;
     @Nullable
     public ChunkDifficulty diff;
 

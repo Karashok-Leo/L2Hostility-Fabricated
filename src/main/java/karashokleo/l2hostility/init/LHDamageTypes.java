@@ -11,12 +11,12 @@ import net.minecraft.registry.tag.DamageTypeTags;
 
 public class LHDamageTypes
 {
-    public static RegistryKey<DamageType> KILLER_AURA = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("killer_aura"));
-    public static RegistryKey<DamageType> EMERALD = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("emerald"));
-    public static RegistryKey<DamageType> SOUL_FLAME = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("soul_flame"));
-    public static RegistryKey<DamageType> BLEED = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("bleed"));
-    public static RegistryKey<DamageType> LIFE_SYNC = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("life_sync"));
-    public static RegistryKey<DamageType> VOID_EYE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("void_eye"));
+    public static final RegistryKey<DamageType> KILLER_AURA = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("killer_aura"));
+    public static final RegistryKey<DamageType> EMERALD = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("emerald"));
+    public static final RegistryKey<DamageType> SOUL_FLAME = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("soul_flame"));
+    public static final RegistryKey<DamageType> BLEED = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("bleed"));
+    public static final RegistryKey<DamageType> LIFE_SYNC = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("life_sync"));
+    public static final RegistryKey<DamageType> VOID_EYE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, L2Hostility.id("void_eye"));
 
     public static void register()
     {

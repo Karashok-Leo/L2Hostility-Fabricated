@@ -19,9 +19,9 @@ import org.jetbrains.annotations.Nullable;
 public class EquipmentScreenHandler extends BaseInventoryScreenHandler<EquipmentScreenHandler>
 {
     public static final SpriteManager MANAGER = new SpriteManager(L2Hostility.MOD_ID, "equipments");
-    public static EquipmentSlot[] SLOTS = {EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
+    public static final EquipmentSlot[] SLOTS = {EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
     @Nullable
-    protected MobEntity mob;
+    protected final MobEntity mob;
 
     public EquipmentScreenHandler(ScreenHandlerType<?> type, int wid, PlayerInventory plInv, @Nullable MobEntity mob)
     {

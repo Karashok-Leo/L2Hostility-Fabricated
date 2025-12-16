@@ -193,11 +193,8 @@ public class MiscEvents
             }
             if (le.inPowderSnow)
             {
-                if (PowderSnowBlock.canWalkOnPowderSnow(instance) ||
-                    EntityFeature.ENVIRONMENTAL_REJECT.test(le))
-                {
-                    return true;
-                }
+                return PowderSnowBlock.canWalkOnPowderSnow(instance) ||
+                    EntityFeature.ENVIRONMENTAL_REJECT.test(le);
             }
         }
         return false;
