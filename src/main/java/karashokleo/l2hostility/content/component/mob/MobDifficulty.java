@@ -16,6 +16,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -119,6 +120,10 @@ public class MobDifficulty
         if (configCache == null)
         {
             configCache = LHData.entities.get(owner.getType());
+        }
+        if (configCache == null && owner.getWorld() instanceof ServerWorld world)
+        {
+            configCache = LHData.difficulties.get(world, owner.getBlockPos(), owner.getType());
         }
         if (configCache == null)
         {

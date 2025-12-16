@@ -3,10 +3,16 @@ package karashokleo.l2hostility.data.config.provider;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.data.Constants;
 import karashokleo.l2hostility.data.config.DifficultyConfig;
+import karashokleo.l2hostility.data.config.EntityConfig;
+import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.leobrary.data.AbstractDataProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.gen.structure.StructureKeys;
+
+import java.util.List;
 
 public class WorldDifficultyConfigProvider extends AbstractDataProvider
 {
@@ -56,6 +62,24 @@ public class WorldDifficultyConfigProvider extends AbstractDataProvider
 
         add(L2Hostility.id("nether"), new DifficultyConfig()
             .putDim(World.NETHER, 0, 20, 9, 1.2)
+            .putLevelDef(
+                World.NETHER,
+                EntityConfig
+                    .entity(0, 10, 0, 0, List.of(EntityType.ZOMBIE))
+                    .trait(List.of(EntityConfig.trait(LHTraits.TANK, 1, 1)))
+            )
+            .putLevelDef(
+                World.NETHER,
+                EntityConfig
+                    .entity(0, 10, 0, 0, List.of(EntityType.SKELETON))
+                    .trait(List.of(EntityConfig.trait(LHTraits.SPEEDY, 1, 1)))
+            )
+            .putStructureDef(
+                StructureKeys.BASTION_REMNANT,
+                EntityConfig
+                    .entity(0, 20, 0, 0, List.of(EntityType.PIGLIN))
+                    .trait(List.of(EntityConfig.trait(LHTraits.PROTECTION, 1, 1)))
+            )
         );
 
         add(L2Hostility.id("end"), new DifficultyConfig()

@@ -1,7 +1,7 @@
 # L2Hostility Fabricated
 
-*Current Version - 2.4.29*
-*Current Commit - e57a776*
+*Current Version - 2.4.30*
+*Current Commit - eb44a5c*
 
 ## 与官方版本的差异
 

@@ -16,6 +16,8 @@ public class CommonConfig implements ConfigData
 {
     @Comment("Allow entity specific difficulty configs to load")
     public boolean enableEntitySpecificDatapack = true;
+    @Comment("Allow structure specific difficulty configs to load")
+    public boolean enableStructureSpecificDatapack = true;
     @ConfigEntry.Gui.CollapsibleObject
     public Difficulty difficulty = new Difficulty();
     @ConfigEntry.Gui.CollapsibleObject

@@ -4,10 +4,14 @@ import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.structure.Structure;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -24,6 +28,8 @@ public class DifficultyConfig
     public final HashMap<Identifier, Config> biomeMap = new HashMap<>();
     @SerialClass.SerialField
     public final HashMap<Identifier, ArrayList<EntityConfig.Config>> levelDefaultTraits = new HashMap<>();
+    @SerialClass.SerialField
+    public final HashMap<Identifier, ArrayList<EntityConfig.Config>> structureDefaultTraits = new HashMap<>();
 
     @Nullable
     public EntityConfig.Config get(Identifier level, EntityType<?> type)
@@ -47,6 +53,60 @@ public class DifficultyConfig
             if (e.entities.isEmpty())
             {
                 def = e;
+            }
+        }
+        return def;
+    }
+
+    @Nullable
+    public EntityConfig.Config get(ServerWorld level, BlockPos pos, EntityType<?> type)
+    {
+        if (!LHConfig.common().enableEntitySpecificDatapack)
+        {
+            return null;
+        }
+        if (!LHConfig.common().enableStructureSpecificDatapack)
+        {
+            return null;
+        }
+        if (structureDefaultTraits.isEmpty())
+        {
+            return null;
+        }
+        var manager = level.getStructureAccessor();
+        var map = manager.getStructureReferences(pos);
+        EntityConfig.Config def = null;
+        for (var ent : map.entrySet())
+        {
+            var structure = ent.getKey();
+            var key = level.getRegistryManager().get(RegistryKeys.STRUCTURE).getId(structure);
+            var list = structureDefaultTraits.get(key);
+            if (list == null)
+            {
+                continue;
+            }
+            MutableBoolean ans = new MutableBoolean(false);
+            manager.acceptStructureStarts(structure, ent.getValue(), (e) ->
+            {
+                if (ans.isFalse() && manager.structureContains(pos, e))
+                {
+                    ans.setTrue();
+                }
+            });
+            if (ans.isFalse())
+            {
+                continue;
+            }
+            for (var e : list)
+            {
+                if (e.entities.contains(type))
+                {
+                    return e;
+                }
+                if (e.entities.isEmpty())
+                {
+                    def = e;
+                }
             }
         }
         return def;
@@ -98,6 +158,18 @@ public class DifficultyConfig
         {
             biomeMap.put(key.getValue(), new Config(min, base, 0, var, scale, 1, 1));
         }
+        return this;
+    }
+
+    public DifficultyConfig putLevelDef(RegistryKey<World> id, EntityConfig.Config config)
+    {
+        levelDefaultTraits.computeIfAbsent(id.getValue(), l -> new ArrayList<>()).add(config);
+        return this;
+    }
+
+    public DifficultyConfig putStructureDef(RegistryKey<Structure> id, EntityConfig.Config config)
+    {
+        structureDefaultTraits.computeIfAbsent(id.getValue(), l -> new ArrayList<>()).add(config);
         return this;
     }
 
