@@ -1,14 +1,15 @@
 package karashokleo.l2hostility.content.trait.common;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
+import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
-import karashokleo.l2hostility.content.logic.ReflectState;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
-import karashokleo.leobrary.damage.api.state.DamageStateProvider;
+import karashokleo.leobrary.damage.api.state.DamageState;
+import karashokleo.leobrary.damage.api.state.IdentifierDamageState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.text.Text;
@@ -18,6 +19,8 @@ import java.util.List;
 
 public class ReflectTrait extends MobTrait
 {
+    public static final DamageState REFLECT_STATE = new IdentifierDamageState(L2Hostility.id("reflect"));
+
     // 使怪物拥有反弹近战伤害的能力。
     // 怪物能够将直接的伤害以魔法伤害反射给攻击者，每级增加 30% 的反射量。
     public ReflectTrait()
@@ -28,7 +31,7 @@ public class ReflectTrait extends MobTrait
     private void doReflect(LivingEntity target, LivingEntity attacker, float amount)
     {
         DamageSource source = attacker.getDamageSources().indirectMagic(null, attacker);
-        ((DamageStateProvider) source).addState(new ReflectState());
+        source.addState(REFLECT_STATE);
         target.damage(source, amount);
     }
 
@@ -46,7 +49,7 @@ public class ReflectTrait extends MobTrait
             return;
         }
         // avoid recursive damage
-        if (((DamageStateProvider) source).hasState(ReflectState.PREDICATE))
+        if (source.hasState(REFLECT_STATE::equals))
         {
             return;
         }

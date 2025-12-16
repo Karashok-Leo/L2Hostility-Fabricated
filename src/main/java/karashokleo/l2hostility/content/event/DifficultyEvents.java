@@ -22,7 +22,7 @@ public class DifficultyEvents
     public static void register()
     {
         // 等级伤害加成
-        DamagePhase.ARMOR.registerModifier(1000, DifficultyEvents::onDamageArmor);
+        DamagePhase.ARMOR.addListener(1000, DifficultyEvents::onDamageArmor);
 
         // 等级经验加成
         LivingEntityEvents.EXPERIENCE_DROP.register(DifficultyEvents::onDropExperience);
