@@ -23,8 +23,6 @@ public class CommonConfig implements ConfigData
     @ConfigEntry.Gui.CollapsibleObject
     public Scaling scaling = new Scaling();
     @ConfigEntry.Gui.CollapsibleObject
-    public OrbAndSpawner orbAndSpawner = new OrbAndSpawner();
-    @ConfigEntry.Gui.CollapsibleObject
     public Items items = new Items();
     @ConfigEntry.Gui.CollapsibleObject
     public Effects effects = new Effects();
@@ -34,6 +32,8 @@ public class CommonConfig implements ConfigData
     public Traits traits = new Traits();
     @ConfigEntry.Gui.CollapsibleObject
     public Complements complements = new Complements();
+    @ConfigEntry.Gui.CollapsibleObject
+    public Misc misc = new Misc();
 
     public static class Difficulty
     {
@@ -124,23 +124,6 @@ public class CommonConfig implements ConfigData
         public boolean allowPlayerAllies = false;
         @Comment("Keep traits on mobs tamed by player")
         public boolean allowTraitOnOwnable = false;
-    }
-
-    public static class OrbAndSpawner
-    {
-        @Comment("Allow to use hostility orb")
-        public boolean allowHostilityOrb = true;
-        @Comment("""
-            Radius for Hostility Orb to take effect.
-            0 means 1x1x1 section, 1 means 3x3x3 sections, 2 means 5x5x5 sections
-            """)
-        public int orbRadius = 2;
-        @Comment("[NYI] Allow to use hostility spawner")
-        public boolean allowHostilitySpawner = true;
-        @Comment("[NYI] Number of mobs to spawn in Hostility Spawner")
-        public int hostilitySpawnCount = 16;
-        @Comment("[NYI] Level bonus factor for mobs to spawn in Hostility Spawner")
-        public int hostilitySpawnLevelFactor = 2;
     }
 
     public static class Items
@@ -451,6 +434,25 @@ public class CommonConfig implements ConfigData
         }
     }
 
+    public static class Misc
+    {
+        @Comment("Show killer title (lv and traits) in death message")
+        public boolean deathMessageShowKillerTitle = true;
+        @Comment("Allow to use hostility orb")
+        public boolean allowHostilityOrb = true;
+        @Comment("""
+            Radius for Hostility Orb to take effect.
+            0 means 1x1x1 section, 1 means 3x3x3 sections, 2 means 5x5x5 sections
+            """)
+        public int orbRadius = 2;
+        @Comment("[NYI] Allow to use hostility spawner")
+        public boolean allowHostilitySpawner = true;
+        @Comment("[NYI] Number of mobs to spawn in Hostility Spawner")
+        public int hostilitySpawnCount = 16;
+        @Comment("[NYI] Level bonus factor for mobs to spawn in Hostility Spawner")
+        public int hostilitySpawnLevelFactor = 2;
+    }
+
     /*
     banBottles = builder.comment("Ban drinking bottle of curse and sanity")
         .define("banBottles", false);
@@ -460,8 +462,5 @@ public class CommonConfig implements ConfigData
 
     dropRateFromSpawner = builder.comment("Drop rate of hostility loot from mobs from spawner")
         .defineInRange("dropRateFromSpawner", 0.5d, 0, 1);
-
-    maxMobLevel = builder.comment("Max mob level")
-        .defineInRange("maxMobLevel", 3000, 100, 100000);
     */
 }

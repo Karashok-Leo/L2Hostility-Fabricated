@@ -29,7 +29,7 @@ public class MobTraitRenderer
         {
             return;
         }
-        var list = diff.get().getTitle(
+        var list = diff.get().getTitleWrap(
             LHConfig.client().showLevelOverHead,
             LHConfig.client().showTraitOverHead
         );

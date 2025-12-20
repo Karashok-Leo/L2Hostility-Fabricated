@@ -64,6 +64,7 @@
     - 排斥：白名单改为远程敌人(`l2hostility:ranged_enemy`)，包括原白名单和烈焰人、恶魂、潜影贝
     - 吸引：白名单近战武器持有者(`l2hostility:melee_weapon_target`)改为黑名单远程敌人(`l2hostility:ranged_enemy`)
     - 升空：白名单改为远程敌人(`l2hostility:ranged_enemy`)
+- 支持在死亡消息中显示等级和词条信息(配置项deathMessageShowKillerTitle)
 
 ## 尚未实现的内容
 

@@ -15,7 +15,7 @@ public class TraitInfo implements IEntityComponentProvider
     @Override
     public void appendTooltip(ITooltip iTooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig)
     {
-        MobDifficulty.get(entityAccessor.getEntity()).ifPresent(mobDifficulty -> iTooltip.addAll(mobDifficulty.getTitle(true, true)));
+        MobDifficulty.get(entityAccessor.getEntity()).ifPresent(mobDifficulty -> iTooltip.addAll(mobDifficulty.getTitleWrap(true, true)));
     }
 
     @Override

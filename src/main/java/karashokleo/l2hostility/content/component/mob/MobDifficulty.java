@@ -403,14 +403,74 @@ public class MobDifficulty
         }
     }
 
-    public List<Text> getTitle(boolean showLevel, boolean showTrait)
+    @Nullable
+    public Text getTitleLine(boolean showLevel, boolean showTrait)
+    {
+        MutableText lvText = null;
+        if (showLevel && lv > 0)
+        {
+            lvText = LHTexts.LV.get(lv).setStyle(
+                Style.EMPTY.withColor(
+                    fullDrop ?
+                        LHConfig.client().overHeadLevelColorAbyss :
+                        LHConfig.client().overHeadLevelColor
+                )
+            );
+        }
+        MutableText traitText = null;
+        if (showTrait)
+        {
+            for (var e : traits.entrySet())
+            {
+                var comp = e.getKey().getFullName(e.getValue());
+                if (traitText == null)
+                {
+                    traitText = comp;
+                } else
+                {
+                    traitText.append(
+                        Text.literal(" / ")
+                            .formatted(Formatting.WHITE)
+                    ).append(comp);
+                }
+            }
+        }
+        if (lvText == null && traitText == null)
+        {
+            return null;
+        }
+        MutableText ans = Text.empty();
+        ans.append("[");
+        if (lvText != null)
+        {
+            ans.append(lvText);
+        }
+        if (traitText != null)
+        {
+            if (lvText != null)
+            {
+                ans.append(" ");
+            }
+            ans.append(traitText);
+        }
+        ans.append("]");
+        return ans;
+    }
+
+    public List<Text> getTitleWrap(boolean showLevel, boolean showTrait)
     {
         List<Text> ans = new ArrayList<>();
         if (showLevel && lv > 0)
         {
-            ans.add(LHTexts.LV.get(lv).setStyle(Style.EMPTY
-                .withColor(fullDrop ? LHConfig.client().overHeadLevelColorAbyss :
-                    LHConfig.client().overHeadLevelColor)));
+            ans.add(
+                LHTexts.LV.get(lv).setStyle(
+                    Style.EMPTY.withColor(
+                        fullDrop ?
+                            LHConfig.client().overHeadLevelColorAbyss :
+                            LHConfig.client().overHeadLevelColor
+                    )
+                )
+            );
         }
         if (!showTrait)
         {
@@ -427,7 +487,10 @@ public class MobDifficulty
                 count = 1;
             } else
             {
-                temp.append(Text.literal(" / ").formatted(Formatting.WHITE)).append(comp);
+                temp.append(
+                    Text.literal(" / ")
+                        .formatted(Formatting.WHITE)
+                ).append(comp);
                 count++;
                 if (count >= 3)
                 {

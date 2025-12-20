@@ -30,7 +30,7 @@ public class HostilityOrb extends Item
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         ItemStack stack = user.getStackInHand(hand);
-        if (!LHConfig.common().orbAndSpawner.allowHostilityOrb)
+        if (!LHConfig.common().misc.allowHostilityOrb)
         {
             return TypedActionResult.pass(stack);
         }
@@ -42,7 +42,7 @@ public class HostilityOrb extends Item
         if (!world.isClient())
         {
             boolean success = false;
-            int r = LHConfig.common().orbAndSpawner.orbRadius;
+            int r = LHConfig.common().misc.orbRadius;
             for (int x = -r; x <= r; x++)
             {
                 for (int y = -r; y <= r; y++)
@@ -73,12 +73,12 @@ public class HostilityOrb extends Item
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        if (!LHConfig.common().orbAndSpawner.allowHostilityOrb)
+        if (!LHConfig.common().misc.allowHostilityOrb)
         {
             tooltip.add(LHTexts.BANNED.get());
             return;
         }
-        int r = LHConfig.common().orbAndSpawner.orbRadius * 2 + 1;
+        int r = LHConfig.common().misc.orbRadius * 2 + 1;
         tooltip.add(LHTexts.orbUse().formatted(Formatting.DARK_GREEN));
         tooltip.add(LHTexts.ITEM_ORB.get(r, r, r).formatted(Formatting.GRAY));
 //        tooltip.add(LHTexts.sectionRender().formatted(Formatting.DARK_GREEN));
