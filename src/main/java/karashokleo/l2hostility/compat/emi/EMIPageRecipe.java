@@ -6,38 +6,38 @@ import dev.emi.emi.api.widget.WidgetHolder;
 
 import java.util.List;
 
-public abstract class EMIPageRecipe implements EmiRecipe
+public interface EMIPageRecipe extends EmiRecipe
 {
-    protected abstract List<EmiStack> getStacks();
+    List<EmiStack> getStacks();
 
-    public int getPageYOffset()
+    default int getPageYOffset()
     {
         return 75;
     }
 
     @Override
-    public int getDisplayHeight()
+    default int getDisplayHeight()
     {
         return ((this.getStacks().size() - 1) / 8 + 1) * 18 + this.getPageYOffset();
     }
 
     @Override
-    public int getDisplayWidth()
+    default int getDisplayWidth()
     {
         return 144;
     }
 
     @Override
-    public boolean supportsRecipeTree()
+    default boolean supportsRecipeTree()
     {
         return false;
     }
 
     @Override
-    public void addWidgets(WidgetHolder widgets)
+    default void addWidgets(WidgetHolder widgets)
     {
         List<EmiStack> stacks = this.getStacks();
-        int ph = (widgets.getHeight() - getPageYOffset() - 20) / 18;
+        int ph = (widgets.getHeight() - getPageYOffset()) / 18;
         int pageSize = (ph + 1) * 8;
         PageManager<EmiStack> manager = new PageManager<>(stacks, pageSize);
         if (pageSize < stacks.size())

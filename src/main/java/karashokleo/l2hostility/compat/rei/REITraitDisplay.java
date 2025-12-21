@@ -11,22 +11,25 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 
-public class REITraitDisplay implements Display
+public record REITraitDisplay(
+    Identifier id,
+    LivingEntityWrapper entityWrapper,
+    EntryIngredient traits
+) implements Display
 {
-    protected final Identifier id;
-    protected final LivingEntityWrapper entityWrapper;
-    protected final EntryIngredient traits;
-
     public REITraitDisplay(LivingEntityWrapper entityWrapper)
     {
-        this.id = Registries.ENTITY_TYPE.getId(entityWrapper.entity().getType());
-        this.entityWrapper = entityWrapper;
-        var traits = LHTraits.TRAIT
-            .stream()
-            .filter(trait -> trait.allow(entityWrapper.entity()))
-            .map(e -> e.asItem().getDefaultStack())
-            .toList();
-        this.traits = EntryIngredients.ofItemStacks(traits);
+        this(
+            Registries.ENTITY_TYPE.getId(entityWrapper.entity().getType()),
+            entityWrapper,
+            EntryIngredients.ofItemStacks(
+                LHTraits.TRAIT
+                    .stream()
+                    .filter(trait -> trait.allow(entityWrapper.entity()))
+                    .map(e -> e.asItem().getDefaultStack())
+                    .toList()
+            )
+        );
     }
 
     public LivingEntityWrapper getEntityWrapper()

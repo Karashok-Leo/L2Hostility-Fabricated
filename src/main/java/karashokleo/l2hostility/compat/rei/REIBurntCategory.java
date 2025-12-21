@@ -49,6 +49,12 @@ public class REIBurntCategory implements DisplayCategory<REIBurntDisplay>
     }
 
     @Override
+    public int getDisplayWidth(REIBurntDisplay display)
+    {
+        return 104;
+    }
+
+    @Override
     public CategoryIdentifier<? extends REIBurntDisplay> getCategoryIdentifier()
     {
         return REICompat.BURNT;

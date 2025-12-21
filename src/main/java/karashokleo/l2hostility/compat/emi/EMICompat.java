@@ -41,13 +41,16 @@ public class EMICompat implements EmiPlugin
                 {
                     registry.addRecipe(
                         new EMILootRecipe(recipe)
-                            .setTraits(EmiStack.of(trait.asItem()))
-                            .setLoot(EmiStack.of(trait.asItem()))
+                            .withTraits(EmiStack.of(trait.asItem()))
+                            .withLoot(EmiStack.of(trait.asItem()))
                     );
                 }
             } else if (recipe instanceof GluttonyLootModifier)
             {
-                registry.addRecipe(new EMILootRecipe(recipe).setTraits(EmiIngredient.of(LHTags.TRAIT_ITEM)));
+                registry.addRecipe(
+                    new EMILootRecipe(recipe)
+                        .withTraits(EmiIngredient.of(LHTags.TRAIT_ITEM))
+                );
             } else
             {
                 registry.addRecipe(new EMILootRecipe(recipe));

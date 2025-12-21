@@ -15,31 +15,32 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EMILootRecipe implements EmiRecipe
+public record EMILootRecipe(
+    EmiIngredient trinkets,
+    EmiIngredient traits,
+    EmiStack loot,
+    List<Text> tooltip
+) implements EmiRecipe
 {
-    private final EmiIngredient trinkets;
-    private final List<Text> tooltip = new ArrayList<>();
-    private EmiIngredient traits;
-    private EmiStack loot;
-
     public EMILootRecipe(ITraitLootRecipe recipe)
     {
-        this.traits = EmiIngredient.of(Ingredient.ofStacks(recipe.getTraits().stream()));
-        this.trinkets = EmiIngredient.of(Ingredient.ofStacks(recipe.getTrinketsRequired().stream()));
-        this.loot = EmiStack.of(recipe.getLoot());
+        this(
+            EmiIngredient.of(Ingredient.ofStacks(recipe.getTrinketsRequired().stream())),
+            EmiIngredient.of(Ingredient.ofStacks(recipe.getTraits().stream())),
+            EmiStack.of(recipe.getLoot()),
+            new ArrayList<>()
+        );
         recipe.addTooltip(this.tooltip);
     }
 
-    public EMILootRecipe setTraits(EmiIngredient traits)
+    public EMILootRecipe withTraits(EmiIngredient traits)
     {
-        this.traits = traits;
-        return this;
+        return new EMILootRecipe(this.trinkets, traits, this.loot, this.tooltip);
     }
 
-    public EMILootRecipe setLoot(EmiStack loot)
+    public EMILootRecipe withLoot(EmiStack loot)
     {
-        this.loot = loot;
-        return this;
+        return new EMILootRecipe(this.trinkets, this.traits, loot, this.tooltip);
     }
 
     @Override
@@ -51,6 +52,7 @@ public class EMILootRecipe implements EmiRecipe
     @Override
     public @Nullable Identifier getId()
     {
+        // TODO: fix
         return null;
     }
 

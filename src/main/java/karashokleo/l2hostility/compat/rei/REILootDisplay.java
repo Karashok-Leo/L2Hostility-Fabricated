@@ -10,30 +10,37 @@ import net.minecraft.text.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class REILootDisplay implements Display
+public record REILootDisplay(
+    EntryIngredient trinkets,
+    EntryIngredient traits,
+    EntryIngredient loot,
+    List<Text> tooltip
+) implements Display
 {
-    private final EntryIngredient trinkets;
-    private final List<Text> tooltip = new ArrayList<>();
-    private EntryIngredient traits;
-    private EntryIngredient loot;
-
     public REILootDisplay(ITraitLootRecipe recipe)
     {
-        this.traits = EntryIngredients.ofItemStacks(recipe.getTraits());
-        this.trinkets = EntryIngredients.ofItemStacks(recipe.getTrinketsRequired());
-        this.loot = EntryIngredients.of(recipe.getLoot());
+        this(
+            EntryIngredients.ofItemStacks(recipe.getTrinketsRequired()),
+            EntryIngredients.ofItemStacks(recipe.getTraits()),
+            EntryIngredients.of(recipe.getLoot()),
+            new ArrayList<>()
+        );
         recipe.addTooltip(this.tooltip);
+    }
+
+    public REILootDisplay withTraits(EntryIngredient traits)
+    {
+        return new REILootDisplay(this.trinkets, traits, this.loot, this.tooltip);
+    }
+
+    public REILootDisplay withLoot(EntryIngredient loot)
+    {
+        return new REILootDisplay(this.trinkets, this.traits, loot, this.tooltip);
     }
 
     public EntryIngredient getTraits()
     {
         return traits;
-    }
-
-    public REILootDisplay setTraits(EntryIngredient traits)
-    {
-        this.traits = traits;
-        return this;
     }
 
     public EntryIngredient getTrinkets()
@@ -44,12 +51,6 @@ public class REILootDisplay implements Display
     public EntryIngredient getLoot()
     {
         return loot;
-    }
-
-    public REILootDisplay setLoot(EntryIngredient loot)
-    {
-        this.loot = loot;
-        return this;
     }
 
     public List<Text> getTooltip()

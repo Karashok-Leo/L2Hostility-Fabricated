@@ -10,17 +10,19 @@ import net.minecraft.text.Text;
 
 import java.util.List;
 
-public class REIBurntDisplay implements Display
+public record REIBurntDisplay(
+    EntryIngredient ingredient,
+    EntryIngredient result,
+    List<Text> tooltip
+) implements Display
 {
-    private final EntryIngredient ingredient;
-    private final EntryIngredient result;
-    private final List<Text> tooltip;
-
     public REIBurntDisplay(BurntRecipe recipe)
     {
-        this.ingredient = EntryIngredients.ofIngredient(recipe.ingredient);
-        this.result = EntryIngredients.of(recipe.result);
-        this.tooltip = List.of(LHCplTexts.BURNT_COUNT.get(recipe.chance));
+        this(
+            EntryIngredients.ofIngredient(recipe.ingredient),
+            EntryIngredients.of(recipe.result),
+            List.of(LHCplTexts.BURNT_COUNT.get(recipe.chance))
+        );
     }
 
     public EntryIngredient getIngredient()

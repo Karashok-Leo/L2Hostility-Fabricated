@@ -50,13 +50,16 @@ public class REICompat implements REIClientPlugin
                 {
                     registry.add(
                         new REILootDisplay(recipe)
-                            .setTraits(EntryIngredients.of(trait.asItem()))
-                            .setLoot(EntryIngredients.of(trait.asItem()))
+                            .withTraits(EntryIngredients.of(trait.asItem()))
+                            .withLoot(EntryIngredients.of(trait.asItem()))
                     );
                 }
             } else if (recipe instanceof GluttonyLootModifier)
             {
-                registry.add(new REILootDisplay(recipe).setTraits(EntryIngredients.ofItemTag(LHTags.TRAIT_ITEM)));
+                registry.add(
+                    new REILootDisplay(recipe)
+                        .withTraits(EntryIngredients.ofItemTag(LHTags.TRAIT_ITEM))
+                );
             } else
             {
                 registry.add(new REILootDisplay(recipe));

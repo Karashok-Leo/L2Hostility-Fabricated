@@ -15,17 +15,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class EMIBurntRecipe implements EmiRecipe
+public record EMIBurntRecipe(
+    Identifier id,
+    EmiIngredient ingredient,
+    EmiStack result,
+    List<Text> tooltip
+) implements EmiRecipe
 {
-    private final EmiIngredient ingredient;
-    private final EmiStack result;
-    private final List<Text> tooltip;
-
     public EMIBurntRecipe(BurntRecipe recipe)
     {
-        this.ingredient = EmiIngredient.of(recipe.ingredient);
-        this.result = EmiStack.of(recipe.result);
-        this.tooltip = List.of(LHCplTexts.BURNT_COUNT.get(recipe.chance));
+        this(
+            recipe.getId(),
+            EmiIngredient.of(recipe.ingredient),
+            EmiStack.of(recipe.result),
+            List.of(LHCplTexts.BURNT_COUNT.get(recipe.chance))
+        );
     }
 
     @Override
@@ -47,7 +51,7 @@ public class EMIBurntRecipe implements EmiRecipe
     @Override
     public @Nullable Identifier getId()
     {
-        return null;
+        return id;
     }
 
     @Override

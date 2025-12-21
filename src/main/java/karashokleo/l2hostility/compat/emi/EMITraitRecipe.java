@@ -12,25 +12,29 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class EMITraitRecipe extends EMIPageRecipe
+public record EMITraitRecipe(
+    Identifier id,
+    LivingEntityWrapper entityWrapper,
+    List<EmiStack> traits
+) implements EMIPageRecipe
 {
-    protected final Identifier id;
-    protected final LivingEntityWrapper entityWrapper;
-    protected final List<EmiStack> traits;
-
     public EMITraitRecipe(LivingEntityWrapper entityWrapper)
     {
-        this.id = Registries.ENTITY_TYPE.getId(entityWrapper.entity().getType());
-        this.entityWrapper = entityWrapper;
-        this.traits = LHTraits.TRAIT
-            .stream()
-            .filter(trait -> trait.allow(entityWrapper.entity()))
-            .map(EmiStack::of)
-            .toList();
+        this(
+            Registries.ENTITY_TYPE
+                .getId(entityWrapper.entity().getType())
+                .withPrefixedPath("/"),
+            entityWrapper,
+            LHTraits.TRAIT
+                .stream()
+                .filter(trait -> trait.allow(entityWrapper.entity()))
+                .map(EmiStack::of)
+                .toList()
+        );
     }
 
     @Override
-    protected List<EmiStack> getStacks()
+    public List<EmiStack> getStacks()
     {
         return traits;
     }
@@ -68,6 +72,6 @@ public class EMITraitRecipe extends EMIPageRecipe
             0, -pageYOffset / 2, 20, 20,
             (context, mouseX, mouseY, delta) -> entityWrapper.render(context, centerX, pageYOffset + 10, mouseX, mouseY)
         );
-        super.addWidgets(widgets);
+        EMIPageRecipe.super.addWidgets(widgets);
     }
 }

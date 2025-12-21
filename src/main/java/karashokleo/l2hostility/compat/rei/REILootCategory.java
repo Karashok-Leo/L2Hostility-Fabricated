@@ -51,6 +51,12 @@ public class REILootCategory implements DisplayCategory<REILootDisplay>
     }
 
     @Override
+    public int getDisplayWidth(REILootDisplay display)
+    {
+        return 104;
+    }
+
+    @Override
     public CategoryIdentifier<? extends REILootDisplay> getCategoryIdentifier()
     {
         return REICompat.LOOT;
