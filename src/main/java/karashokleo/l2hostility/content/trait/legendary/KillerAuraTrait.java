@@ -43,11 +43,11 @@ public class KillerAuraTrait extends LegendaryTrait
                     {
                         continue;
                     }
-                    if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, mob, e, this, level))
+                    if (ReflectTrinket.canReflect(e, this))
                     {
                         continue;
                     }
-                    if (ReflectTrinket.canReflect(e, this))
+                    if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, mob, e, this, level))
                     {
                         continue;
                     }

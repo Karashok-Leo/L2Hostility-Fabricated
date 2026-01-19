@@ -36,12 +36,12 @@ public class TargetEffectTrait extends MobTrait
             return;
         }
         LivingEntity living = event.getEntity();
-        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, living, this, level))
+        long count = EffectUtil.streamEffects(living, StatusEffectCategory.HARMFUL).count();
+        if (count >= maxEffect)
         {
             return;
         }
-        long count = EffectUtil.streamEffects(living, StatusEffectCategory.HARMFUL).count();
-        if (count >= maxEffect)
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, living, this, level))
         {
             return;
         }

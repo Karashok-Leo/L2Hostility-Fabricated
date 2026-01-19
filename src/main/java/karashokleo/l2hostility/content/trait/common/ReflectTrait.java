@@ -59,11 +59,11 @@ public class ReflectTrait extends MobTrait
         {
             return;
         }
-        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, le, this, level))
+        if (ReflectTrinket.canReflect(le, this))
         {
             return;
         }
-        if (ReflectTrinket.canReflect(le, this))
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, le, this, level))
         {
             return;
         }

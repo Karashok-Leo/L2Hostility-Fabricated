@@ -52,11 +52,11 @@ public class AuraEffectTrait extends MobTrait
             {
                 continue;
             }
-            if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, mob, e, this, level))
+            if (!canApply(e))
             {
                 continue;
             }
-            if (!canApply(e))
+            if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, mob, e, this, level))
             {
                 continue;
             }

@@ -25,29 +25,32 @@ public class ArenaTrait extends AuraEffectTrait
         return true;
     }
 
-    @Override
-    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
+    private boolean allowDamage(MobDifficulty difficulty, LivingEntity entity, int level, DamageSource source)
     {
-        if (event.getSource().isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+        if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
         {
-            return;
+            return true;
         }
-        if (event.getSource().getAttacker() instanceof LivingEntity attacker)
+        if (source.getAttacker() instanceof LivingEntity attacker)
         {
             if (attacker.hasStatusEffect(LHEffects.ANTI_BUILD))
             {
-                return;
+                return true;
             }
-            if (attacker instanceof PlayerEntity player && player.getAbilities().creativeMode)
+            if (attacker instanceof PlayerEntity player)
             {
-                return;
+                return player.getAbilities().creativeMode;
             }
-            var attackerDifficulty = MobDifficulty.get(attacker);
-            if (attackerDifficulty.isPresent() &&
-                attackerDifficulty.get().getTraitLevel(this) >= level)
-            {
-                return;
-            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event)
+    {
+        if (allowDamage(difficulty, entity, level, event.getSource()))
+        {
+            return;
         }
         event.setCanceled(true);
     }
@@ -55,12 +58,7 @@ public class ArenaTrait extends AuraEffectTrait
     @Override
     public void onDamaged(MobDifficulty difficulty, LivingEntity mob, int level, LivingDamageEvent event)
     {
-        DamageSource source = event.getSource();
-        if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
-            (source.getAttacker() instanceof LivingEntity le &&
-                le.hasStatusEffect(LHEffects.ANTI_BUILD)) ||
-            (source.getAttacker() instanceof PlayerEntity player &&
-                player.getAbilities().creativeMode))
+        if (allowDamage(difficulty, mob, level, event.getSource()))
         {
             return;
         }

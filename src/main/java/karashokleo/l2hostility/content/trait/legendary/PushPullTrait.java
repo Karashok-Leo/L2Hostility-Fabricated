@@ -53,14 +53,15 @@ public abstract class PushPullTrait extends LegendaryTrait
 
     protected boolean canApply(MobDifficulty difficulty, LivingEntity mob, int level, LivingEntity target)
     {
-        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, mob, target, this, level))
+        boolean eligible = (target instanceof PlayerEntity pl &&
+            !pl.getAbilities().creativeMode &&
+            !pl.isSpectator()) ||
+            (target instanceof MobEntity m && m.getTarget() == mob);
+        if (!eligible)
         {
             return false;
         }
-        return target instanceof PlayerEntity pl &&
-            !pl.getAbilities().creativeMode &&
-            !pl.isSpectator() ||
-            target instanceof MobEntity m && m.getTarget() == mob;
+        return AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, mob, target, this, level);
     }
 
     @Override

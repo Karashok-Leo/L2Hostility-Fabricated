@@ -26,10 +26,6 @@ public class GravityTrait extends AuraEffectTrait
         {
             return;
         }
-        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, living, this, level))
-        {
-            return;
-        }
         if (living instanceof EnderDragonEntity)
         {
             return;
@@ -48,6 +44,10 @@ public class GravityTrait extends AuraEffectTrait
             return;
         }
         if (ReflectTrinket.canReflect(living, this))
+        {
+            return;
+        }
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, living, this, level))
         {
             return;
         }

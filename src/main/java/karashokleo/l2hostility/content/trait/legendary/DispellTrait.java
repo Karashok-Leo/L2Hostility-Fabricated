@@ -52,10 +52,6 @@ public class DispellTrait extends LegendaryTrait
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
         LivingEntity target = event.getEntity();
-        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, target, this, level))
-        {
-            return;
-        }
         var data = difficulty.getOrCreateData(getId(), Data::new);
         if (data.disableCooldown > 0)
         {
@@ -78,6 +74,10 @@ public class DispellTrait extends LegendaryTrait
 
         int count = Math.min(level * LHConfig.common().traits.dispellCount, list.size());
         if (count <= 0)
+        {
+            return;
+        }
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, target, this, level))
         {
             return;
         }
