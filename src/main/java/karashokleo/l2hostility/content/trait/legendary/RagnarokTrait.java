@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.trait.legendary;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.compat.trinket.slot.EntitySlotAccess;
 import karashokleo.l2hostility.content.component.mob.CapStorageData;
@@ -60,13 +61,18 @@ public class RagnarokTrait extends LegendaryTrait
     @Override
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
+        LivingEntity target = event.getEntity();
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, target, this, level))
+        {
+            return;
+        }
         var data = difficulty.getOrCreateData(getId(), Data::new);
         if (data.cooldown > 0)
         {
             return;
         }
 
-        List<EntitySlotAccess> list = new ArrayList<>(TrinketCompat.getItemAccess(event.getEntity())
+        List<EntitySlotAccess> list = new ArrayList<>(TrinketCompat.getItemAccess(target)
             .stream().filter(RagnarokTrait::allowSeal).toList());
         if (list.isEmpty())
         {

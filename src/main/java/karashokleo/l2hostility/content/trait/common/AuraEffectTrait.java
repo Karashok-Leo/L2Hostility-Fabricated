@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.trait.common;
 
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.content.network.S2CEffectAura;
@@ -48,6 +49,10 @@ public class AuraEffectTrait extends MobTrait
                 continue;
             }
             if (e.distanceTo(mob) > range)
+            {
+                continue;
+            }
+            if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, mob, e, this, level))
             {
                 continue;
             }

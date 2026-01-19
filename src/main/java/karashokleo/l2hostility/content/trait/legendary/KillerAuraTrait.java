@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.content.network.S2CKillerAura;
@@ -39,6 +40,10 @@ public class KillerAuraTrait extends LegendaryTrait
                     mob instanceof MobEntity mobmob && mobmob.getTarget() == e)
                 {
                     if (e.distanceTo(mob) > range)
+                    {
+                        continue;
+                    }
+                    if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, mob, e, this, level))
                     {
                         continue;
                     }

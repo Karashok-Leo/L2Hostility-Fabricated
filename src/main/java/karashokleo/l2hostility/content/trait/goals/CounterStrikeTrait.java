@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.trait.goals;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.CapStorageData;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
@@ -67,14 +68,24 @@ public class CounterStrikeTrait extends MobTrait
         {
             return;
         }
-        var target = event.getSource().getAttacker();
-        var data = difficulty.getOrCreateData(getId(), Data::new);
-        if (target instanceof LivingEntity &&
-            le instanceof MobEntity mob &&
-            mob.getTarget() == target)
+        if (!(event.getSource().getAttacker() instanceof LivingEntity target))
         {
-            data.strikeId = target.getUuid();
+            return;
         }
+        if (!(le instanceof MobEntity mob))
+        {
+            return;
+        }
+        if (mob.getTarget() != target)
+        {
+            return;
+        }
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, mob, target, this, level))
+        {
+            return;
+        }
+        var data = difficulty.getOrCreateData(getId(), Data::new);
+        data.strikeId = target.getUuid();
     }
 
     @SerialClass

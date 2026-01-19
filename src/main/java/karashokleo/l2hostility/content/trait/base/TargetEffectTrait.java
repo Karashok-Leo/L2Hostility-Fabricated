@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.base;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
@@ -35,6 +36,10 @@ public class TargetEffectTrait extends MobTrait
             return;
         }
         LivingEntity living = event.getEntity();
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, living, this, level))
+        {
+            return;
+        }
         long count = EffectUtil.streamEffects(living, StatusEffectCategory.HARMFUL).count();
         if (count >= maxEffect)
         {

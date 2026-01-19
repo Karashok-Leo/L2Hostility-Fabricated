@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.trait.common;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import karashokleo.l2hostility.L2Hostility;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
@@ -55,6 +56,10 @@ public class ReflectTrait extends MobTrait
         }
         if (source.isIn(LHTags.MAGIC) &&
             !LHConfig.common().traits.reflectMagic)
+        {
+            return;
+        }
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, le, this, level))
         {
             return;
         }

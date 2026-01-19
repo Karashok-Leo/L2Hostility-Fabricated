@@ -3,6 +3,7 @@ package karashokleo.l2hostility.content.trait.legendary;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.api.event.ModifyDispellImmuneFactorCallback;
 import karashokleo.l2hostility.content.component.mob.CapStorageData;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
@@ -50,6 +51,11 @@ public class DispellTrait extends LegendaryTrait
     @Override
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
+        LivingEntity target = event.getEntity();
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, target, this, level))
+        {
+            return;
+        }
         var data = difficulty.getOrCreateData(getId(), Data::new);
         if (data.disableCooldown > 0)
         {
@@ -59,7 +65,7 @@ public class DispellTrait extends LegendaryTrait
         List<ItemStack> list = new ArrayList<>();
         for (EquipmentSlot slot : EquipmentSlot.values())
         {
-            ItemStack stack = event.getEntity().getEquippedStack(slot);
+            ItemStack stack = target.getEquippedStack(slot);
             if (stack.hasEnchantments() && !(stack.getOrCreateNbt().contains("l2hostility_enchantment")))
             {
                 list.add(stack);

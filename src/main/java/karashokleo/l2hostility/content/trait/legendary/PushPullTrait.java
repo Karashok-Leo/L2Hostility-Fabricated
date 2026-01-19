@@ -1,5 +1,6 @@
 package karashokleo.l2hostility.content.trait.legendary;
 
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.init.LHConfig;
@@ -50,6 +51,18 @@ public abstract class PushPullTrait extends LegendaryTrait
         return strength;
     }
 
+    protected boolean canApply(MobDifficulty difficulty, LivingEntity mob, int level, LivingEntity target)
+    {
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, mob, target, this, level))
+        {
+            return false;
+        }
+        return target instanceof PlayerEntity pl &&
+            !pl.getAbilities().creativeMode &&
+            !pl.isSpectator() ||
+            target instanceof MobEntity m && m.getTarget() == mob;
+    }
+
     @Override
     public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
@@ -58,9 +71,7 @@ public abstract class PushPullTrait extends LegendaryTrait
             .getEntitiesByType(
                 TypeFilter.instanceOf(LivingEntity.class),
                 mob.getBoundingBox().expand(r),
-                e -> e instanceof PlayerEntity pl && !pl.getAbilities().creativeMode &&
-                    !pl.isSpectator() ||
-                    e instanceof MobEntity m && m.getTarget() == mob
+                e -> canApply(difficulty, mob, level, e)
             );
         for (var e : list)
         {

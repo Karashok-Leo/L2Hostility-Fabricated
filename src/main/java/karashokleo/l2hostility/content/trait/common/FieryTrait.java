@@ -2,6 +2,7 @@ package karashokleo.l2hostility.content.trait.common;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.SelfEffectTrait;
 import karashokleo.l2hostility.init.LHConfig;
@@ -39,7 +40,10 @@ public class FieryTrait extends SelfEffectTrait
         DamageSource source = event.getSource();
         if (source.getSource() instanceof LivingEntity le)
         {
-            le.setOnFireFor(LHConfig.common().traits.fieryTime);
+            if (AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, le, this, level))
+            {
+                le.setOnFireFor(LHConfig.common().traits.fieryTime);
+            }
         }
         if (source.isIn(DamageTypeTags.IS_FIRE))
         {
@@ -50,7 +54,12 @@ public class FieryTrait extends SelfEffectTrait
     @Override
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
-        event.getEntity().setOnFireFor(LHConfig.common().traits.fieryTime);
+        LivingEntity target = event.getEntity();
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, target, this, level))
+        {
+            return;
+        }
+        target.setOnFireFor(LHConfig.common().traits.fieryTime);
     }
 
     @Override

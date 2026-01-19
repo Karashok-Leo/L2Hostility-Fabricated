@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.highlevel;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.traits.DurabilityEater;
 import karashokleo.l2hostility.init.LHConfig;
@@ -23,7 +24,12 @@ public class ErosionTrait extends SlotIterateDamageTrait
     @Override
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
-        int count = process(level, entity, event.getEntity());
+        LivingEntity target = event.getEntity();
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, target, this, level))
+        {
+            return;
+        }
+        int count = process(level, entity, target);
         if (count < level)
         {
             event.setAmount(event.getAmount() * (float) (LHConfig.common().traits.erosionDamage * level * (level - count)));

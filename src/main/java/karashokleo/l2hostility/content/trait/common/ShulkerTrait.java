@@ -1,5 +1,7 @@
 package karashokleo.l2hostility.content.trait.common;
 
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.entity.HostilityBulletEntity;
 import karashokleo.l2hostility.init.LHConfig;
 import net.minecraft.entity.LivingEntity;
@@ -8,6 +10,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+
+import java.util.Optional;
 
 public class ShulkerTrait extends IntervalTrait
 {
@@ -22,14 +26,28 @@ public class ShulkerTrait extends IntervalTrait
     public void action(MobEntity mob, int level, Data data)
     {
         LivingEntity target = mob.getTarget();
-        if (target != null && target.isAlive())
+        if (target == null)
         {
-            World world = mob.getWorld();
-            var bullet = new HostilityBulletEntity(world, mob, target, Direction.Axis.Y, level * 4.0f);
-            bullet.setPosition(mob.getX(), mob.getBodyY(0.5) + 0.5, mob.getZ());
-            world.spawnEntity(bullet);
-            mob.playSound(SoundEvents.ENTITY_SHULKER_SHOOT, 2.0F, (mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F + 1.0F);
-            super.action(mob, level, data);
+            return;
         }
+        if (!target.isAlive())
+        {
+            return;
+        }
+        Optional<MobDifficulty> optional = MobDifficulty.get(mob);
+        if (optional.isEmpty())
+        {
+            return;
+        }
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(optional.get(), mob, target, this, level))
+        {
+            return;
+        }
+        World world = mob.getWorld();
+        var bullet = new HostilityBulletEntity(world, mob, target, Direction.Axis.Y, level * 4.0f);
+        bullet.setPosition(mob.getX(), mob.getBodyY(0.5) + 0.5, mob.getZ());
+        world.spawnEntity(bullet);
+        mob.playSound(SoundEvents.ENTITY_SHULKER_SHOOT, 2.0F, (mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F + 1.0F);
+        super.action(mob, level, data);
     }
 }

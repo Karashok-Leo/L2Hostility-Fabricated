@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.highlevel;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.traits.EffectBooster;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
@@ -52,9 +53,13 @@ public class DrainTrait extends MobTrait
     @Override
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
-        removeEffects(level, entity, event.getEntity());
-        var neg = event
-            .getEntity()
+        LivingEntity target = event.getEntity();
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, target, this, level))
+        {
+            return;
+        }
+        removeEffects(level, entity, target);
+        var neg = target
             .getStatusEffects()
             .stream()
             .filter(e -> e.getEffectType().getCategory() == StatusEffectCategory.HARMFUL)

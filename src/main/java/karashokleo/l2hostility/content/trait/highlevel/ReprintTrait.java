@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.highlevel;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.traits.ReprintHandler;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
@@ -27,12 +28,18 @@ public class ReprintTrait extends MobTrait
     @Override
     public void onHurting(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event)
     {
+        // should it be seemed as an active effect?
+        LivingEntity target = event.getEntity();
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, target, this, level))
+        {
+            return;
+        }
         boolean doReprint = event.getSource().getSource() == entity;
         long total = 0;
         for (var slot : EquipmentSlot.values())
         {
             ItemStack dst = entity.getEquippedStack(slot);
-            ItemStack src = event.getEntity().getEquippedStack(slot);
+            ItemStack src = target.getEquippedStack(slot);
             var targetEnch = EnchantmentHelper.get(src);
             for (var e : targetEnch.entrySet())
             {

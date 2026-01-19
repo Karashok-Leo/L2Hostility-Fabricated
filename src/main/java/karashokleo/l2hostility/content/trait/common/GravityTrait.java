@@ -1,6 +1,7 @@
 package karashokleo.l2hostility.content.trait.common;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.init.LHEffects;
@@ -22,6 +23,10 @@ public class GravityTrait extends AuraEffectTrait
     {
         Entity attacker = event.getSource().getAttacker();
         if (!(attacker instanceof LivingEntity living))
+        {
+            return;
+        }
+        if (!AllowTraitEffectCallback.EVENT.invoker().allowTraitEffect(difficulty, entity, living, this, level))
         {
             return;
         }
