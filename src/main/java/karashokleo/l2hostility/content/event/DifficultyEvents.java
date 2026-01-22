@@ -55,7 +55,7 @@ public class DifficultyEvents
         MobDifficulty diff = op.get();
         if (diff.noDrop)
         {
-            return amount;
+            return 0;
         }
         int exp = amount;
         int level = diff.getLevel();

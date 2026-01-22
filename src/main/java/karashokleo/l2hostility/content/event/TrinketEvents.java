@@ -1,5 +1,7 @@
 package karashokleo.l2hostility.content.event;
 
+import fuzs.puzzleslib.api.event.v1.core.EventResult;
+import fuzs.puzzleslib.api.event.v1.entity.living.LivingDropsCallback;
 import io.github.fabricators_of_create.porting_lib.core.event.BaseEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
@@ -7,16 +9,15 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDa
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
-import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
-import karashokleo.l2hostility.init.LHConfig;
+import karashokleo.l2hostility.content.item.trinket.misc.GreedOfNidhoggur;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.event.DamageSourceCreateCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 
 public class TrinketEvents
@@ -147,42 +148,23 @@ public class TrinketEvents
         });
 
         // 尼德霍格之欲掉落
-        LivingEntityEvents.DROPS.register((target, source, drops, lootingLevel, recentlyHit) ->
+        boolean registered = false;
+        if (FabricLoader.getInstance().isModLoaded("puzzleslib"))
         {
-            var op = MobDifficulty.get(target);
-            if (op.isEmpty())
+            try
             {
-                return false;
-            }
-            MobDifficulty diff = op.get();
-            // return true means cancel the drop
-            if (diff.noDrop)
+                Class.forName("fuzs.puzzleslib.api.event.v1.entity.living.LivingDropsCallback");
+                Class.forName("fuzs.puzzleslib.api.event.v1.core.EventResult");
+                LivingDropsCallback.EVENT.register((entity, damageSource, drops, lootingLevel, recentlyHit) -> GreedOfNidhoggur.applyLootEffect(entity, damageSource, drops, lootingLevel, recentlyHit) ? EventResult.DENY : EventResult.PASS);
+                registered = true;
+            } catch (Exception ignored)
             {
-                return true;
             }
-            LivingEntity killer = target.getPrimeAdversary();
-            if (killer != null && TrinketCompat.hasItemInTrinket(killer, TrinketItems.NIDHOGGUR))
-            {
-                double val = LHConfig.common().items.nidhoggurDropFactor * diff.getLevel();
-                int count = (int) val;
-                if (target.getRandom().nextDouble() < val - count)
-                {
-                    count++;
-                }
-                count++;
-                for (var stack : drops)
-                {
-                    ItemStack itemStack = stack.getStack();
-                    int ans = itemStack.getCount() * count;
-                    if (LHConfig.common().items.nidhoggurCapAtItemMaxStack)
-                    {
-                        ans = Math.min(itemStack.getMaxCount(), ans);
-                    }
-                    itemStack.setCount(ans);
-                }
-            }
-            return false;
-        });
+        }
+        if (!registered)
+        {
+            LivingEntityEvents.DROPS.register(GreedOfNidhoggur::applyLootEffect);
+        }
 
         // 暴怒之戒免疫
         MobEffectEvent.APPLICABLE.register(event ->

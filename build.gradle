@@ -32,6 +32,9 @@ loom {
         server {
             property("fabric.development", "false")
         }
+        client {
+//            property("mixin.debug.export", "true")
+        }
         datagen {
             property("fabric-api.datagen.modid", archives_base_name)
         }
