@@ -8,6 +8,7 @@ import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.l2hostility.init.LHTraits;
+import karashokleo.leobrary.effect.api.util.EffectUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.text.Text;
@@ -59,19 +60,18 @@ public class DrainTrait extends MobTrait
             return;
         }
         removeEffects(level, entity, target);
-        var neg = target
-            .getStatusEffects()
-            .stream()
-            .filter(e -> e.getEffectType().getCategory() == StatusEffectCategory.HARMFUL)
-            .count();
+        EffectBooster.boostTrait(target, level);
+        var neg = EffectUtil.streamEffects(target, StatusEffectCategory.HARMFUL).count();
         event.setAmount(event.getAmount() * (float) (1 + LHConfig.common().traits.drainDamage * level * neg));
     }
 
     public void removeEffects(int level, LivingEntity attacker, LivingEntity target)
     {
-        var pos = new ArrayList<>(target.getStatusEffects().stream()
-            .filter(e -> e.getEffectType().getCategory() == StatusEffectCategory.BENEFICIAL)
-            .toList());
+        var pos = new ArrayList<>(
+            EffectUtil.streamEffects(target, StatusEffectCategory.BENEFICIAL)
+                .filter(EffectBooster::drainAllow)
+                .toList()
+        );
         for (int i = 0; i < level; i++)
         {
             if (pos.isEmpty())
@@ -79,11 +79,8 @@ public class DrainTrait extends MobTrait
                 continue;
             }
             var ins = pos.remove(attacker.getRandom().nextInt(pos.size()));
-            target.removeStatusEffect(ins.getEffectType());
+            target.removeStatusEffect(ins);
         }
-        double factor = 1 + LHConfig.common().traits.drainDuration * level;
-        int maxTime = level * LHConfig.common().traits.drainDurationMax;
-        EffectBooster.boostTrait(target, factor, maxTime);
     }
 
     @Override

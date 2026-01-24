@@ -351,6 +351,11 @@ public class CommonConfig implements ConfigData
             "moonwalk", 10,
             "arena", 24
         );
+
+        @Comment("Mob effects that will not be removed or boosted by drain")
+        public List<String> drainBlacklist = List.of(
+            "l2hostility:stone_cage"
+        );
     }
 
     public static class Complements

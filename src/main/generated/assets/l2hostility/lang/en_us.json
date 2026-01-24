@@ -631,6 +631,7 @@
   "text.autoconfig.l2hostility.option.common.traits.dispellDisableCooldown": "dispellDisableCooldown",
   "text.autoconfig.l2hostility.option.common.traits.dispellImmuneFactor": "dispellImmuneFactor",
   "text.autoconfig.l2hostility.option.common.traits.dispellTime": "dispellTime",
+  "text.autoconfig.l2hostility.option.common.traits.drainBlacklist": "drainBlacklist",
   "text.autoconfig.l2hostility.option.common.traits.drainDamage": "drainDamage",
   "text.autoconfig.l2hostility.option.common.traits.drainDuration": "drainDuration",
   "text.autoconfig.l2hostility.option.common.traits.drainDurationMax": "drainDurationMax",
