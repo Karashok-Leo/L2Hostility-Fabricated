@@ -15,10 +15,16 @@ import org.joml.Matrix4f;
 
 public class MobTraitRenderer
 {
+    public static final String FLAG = "NoTitlePlateRendering";
+
     public static void renderNamePlate(Entity entity, int light, MatrixStack matrices, TextRenderer textRenderer, VertexConsumerProvider vertexConsumers)
     {
         var diff = MobDifficulty.get(entity);
         if (diff.isEmpty())
+        {
+            return;
+        }
+        if (entity.getCommandTags().contains(FLAG))
         {
             return;
         }

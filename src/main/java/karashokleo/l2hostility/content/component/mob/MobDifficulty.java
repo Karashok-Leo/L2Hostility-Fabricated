@@ -42,7 +42,11 @@ public class MobDifficulty
     @SerialClass.SerialField
     public int lv;
     @SerialClass.SerialField
-    public boolean summoned = false, noDrop = false, fullDrop = false;
+    public boolean summoned = false;
+    @SerialClass.SerialField
+    public boolean noDrop = false;
+    @SerialClass.SerialField
+    public boolean fullDrop = false;
     @SerialClass.SerialField
     public double dropRate = 1;
     @Nullable
