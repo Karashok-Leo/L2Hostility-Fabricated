@@ -1,5 +1,7 @@
 package karashokleo.l2hostility.config;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import karashokleo.l2hostility.init.LHTraits;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
@@ -198,7 +200,7 @@ public class CommonConfig implements ConfigData
             Only supports configuration in the config file.
             """)
         @ConfigEntry.Gui.Excluded
-        public List<StatusEffectCategory> cleansePredicate = List.of(StatusEffectCategory.BENEFICIAL, StatusEffectCategory.HARMFUL, StatusEffectCategory.NEUTRAL);
+        public List<StatusEffectCategory> cleansePredicate = null;
     }
 
     public static class Enchantments
@@ -335,27 +337,16 @@ public class CommonConfig implements ConfigData
             Only supports configuration in the config file.
             """)
         @ConfigEntry.Gui.Excluded
-        public Map<String, Boolean> traitToggle = LHTraits.TRAIT.stream().collect(
-            Collectors.toMap(
-                mobTrait -> mobTrait.getNonNullId().getPath(),
-                mobTrait -> true
-            )
-        );
+        public Map<String, Boolean> traitToggle = null;
         @Comment("""
             Effect range for aura effect traits
             Only supports configuration in the config file.
             """)
         @ConfigEntry.Gui.Excluded
-        public Map<String, Integer> auraRange = Map.of(
-            "gravity", 10,
-            "moonwalk", 10,
-            "arena", 24
-        );
+        public Map<String, Integer> auraRange = null;
 
         @Comment("Mob effects that will not be removed or boosted by drain")
-        public List<String> drainBlacklist = List.of(
-            "l2hostility:stone_cage"
-        );
+        public List<String> drainBlacklist = null;
     }
 
     public static class Complements
@@ -468,4 +459,42 @@ public class CommonConfig implements ConfigData
     dropRateFromSpawner = builder.comment("Drop rate of hostility loot from mobs from spawner")
         .defineInRange("dropRateFromSpawner", 0.5d, 0, 1);
     */
+
+    @Override
+    public void validatePostLoad()
+    {
+        if (effects.cleansePredicate == null)
+        {
+            effects.cleansePredicate = Lists.newArrayList(
+                StatusEffectCategory.BENEFICIAL,
+                StatusEffectCategory.HARMFUL,
+                StatusEffectCategory.NEUTRAL
+            );
+        }
+        if (traits.traitToggle == null)
+        {
+            traits.traitToggle = LHTraits.TRAIT.stream().collect(
+                Collectors.toMap(
+                    mobTrait -> mobTrait.getNonNullId().getPath(),
+                    mobTrait -> true
+                )
+            );
+        }
+        if (traits.auraRange == null)
+        {
+            traits.auraRange = Maps.newHashMap(
+                Map.of(
+                    "gravity", 10,
+                    "moonwalk", 10,
+                    "arena", 24
+                )
+            );
+        }
+        if (traits.drainBlacklist == null)
+        {
+            traits.drainBlacklist = Lists.newArrayList(
+                "l2hostility:stone_cage"
+            );
+        }
+    }
 }
