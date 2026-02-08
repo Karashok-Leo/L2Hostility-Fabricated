@@ -3,7 +3,8 @@ package karashokleo.l2hostility.util.raytrace;
 import com.google.common.collect.Maps;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.client.L2HostilityClient;
-import karashokleo.l2hostility.init.LHNetworking;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -26,10 +27,9 @@ import java.util.function.Predicate;
 
 public class RayTraceUtil
 {
-    public static final int CLIENT_TIMEOUT = 100;
     public static final int SERVER_TIMEOUT = 200;
-    public static final EntityTarget TARGET = new EnderEntityTarget();
     public static final ConcurrentMap<UUID, ServerTarget> TARGET_MAP = Maps.newConcurrentMap();
+
 
     @Nullable
     public static EntityHitResult rayTraceEntity(PlayerEntity player, double reach, Predicate<Entity> pred)
@@ -81,38 +81,42 @@ public class RayTraceUtil
         });
     }
 
-    public static void sync(TargetSetPacket packet)
+    public static void serverUpdateTarget(PlayerEntity player, @Nullable UUID targetUuid)
     {
-        if (packet.target == null)
+        UUID playerUuid = player.getUuid();
+        if (targetUuid == null)
         {
-            TARGET_MAP.remove(packet.player);
-        } else if (TARGET_MAP.containsKey(packet.player))
+            TARGET_MAP.remove(playerUuid);
+        } else if (TARGET_MAP.containsKey(playerUuid))
         {
-            ServerTarget target = TARGET_MAP.get(packet.player);
-            target.target = packet.target;
+            ServerTarget target = TARGET_MAP.get(playerUuid);
+            target.target = targetUuid;
             target.time = 0;
         } else
         {
-            TARGET_MAP.put(packet.player, new ServerTarget(packet.target));
+            TARGET_MAP.put(playerUuid, new ServerTarget(targetUuid));
         }
     }
 
+    @Environment(EnvType.CLIENT)
     public static void clientUpdateTarget(PlayerEntity player, double range)
     {
-        if (!player.getWorld().isClient())
+        ClientPlayerEntity clientPlayer = L2HostilityClient.getClientPlayer();
+        if (player != clientPlayer ||
+            clientPlayer == null)
         {
             return;
         }
-        Vec3d vec3 = player.getEyePos();
-        Vec3d vec31 = player.getRotationVec(1.0F).multiply(range);
+        Vec3d vec3 = clientPlayer.getEyePos();
+        Vec3d vec31 = clientPlayer.getRotationVec(1.0F).multiply(range);
         Vec3d vec32 = vec3.add(vec31);
-        Box aabb = player.getBoundingBox().stretch(vec31).expand(1.0D);
+        Box aabb = clientPlayer.getBoundingBox().stretch(vec31).expand(1.0D);
         double sq = range * range;
         Predicate<Entity> predicate = (e) -> (e instanceof LivingEntity) && !e.isSpectator();
-        EntityHitResult result = ProjectileUtil.raycast(player, vec3, vec32, aabb, predicate, sq);
+        EntityHitResult result = ProjectileUtil.raycast(clientPlayer, vec3, vec32, aabb, predicate, sq);
         if (result != null && vec3.squaredDistanceTo(result.getPos()) < sq)
         {
-            TARGET.updateTarget(result.getEntity());
+            EnderEntityTarget.TARGET.updateTarget(result.getEntity());
         }
     }
 
@@ -136,46 +140,8 @@ public class RayTraceUtil
         return (LivingEntity) (((ServerWorld) player.getWorld()).getEntity(tid));
     }
 
-    public static class EnderEntityTarget extends EntityTarget
-    {
-        private int timeout = 0;
-
-        public EnderEntityTarget()
-        {
-            super(3, Math.PI / 180 * 5, 10);
-        }
-
-        @Override
-        public void onChange(@Nullable Entity entity)
-        {
-            ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
-            if (player == null)
-            {
-                return;
-            }
-            UUID eid = entity == null ? null : entity.getUuid();
-            LHNetworking.toServer(new TargetSetPacket(player.getUuid(), eid));
-            timeout = 0;
-        }
-
-        @Override
-        public void tickRender()
-        {
-            super.tickRender();
-            if (target != null)
-            {
-                timeout++;
-                if (timeout > CLIENT_TIMEOUT)
-                {
-                    onChange(target);
-                }
-            }
-        }
-    }
-
     public static class ServerTarget
     {
-
         public UUID target;
         public int time;
 

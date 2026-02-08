@@ -1,6 +1,8 @@
 package karashokleo.l2hostility.util.raytrace;
 
 import karashokleo.l2hostility.client.L2HostilityClient;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -9,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
+@Environment(EnvType.CLIENT)
 public class EntityTarget
 {
     public static final ArrayList<EntityTarget> LIST = new ArrayList<>();

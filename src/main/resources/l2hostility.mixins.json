@@ -15,6 +15,7 @@
   "client": [
     "ArmorFeatureRendererMixin",
     "BackgroundRendererMixin",
+    "ClientEntityMixin",
     "ClientPlayerEntityMixin",
     "EntityRendererMixin",
     "HeldItemFeatureRendererMixin",

@@ -1,6 +1,8 @@
 package karashokleo.l2hostility.client;
 
 import karashokleo.l2hostility.content.item.ComplementItems;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -18,6 +20,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
 
+@Environment(EnvType.CLIENT)
 public class ForceFieldRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer
 {
     public static final ForceFieldRenderer INSTANCE = new ForceFieldRenderer();

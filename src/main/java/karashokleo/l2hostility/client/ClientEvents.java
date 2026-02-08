@@ -5,11 +5,14 @@ import karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.content.item.traits.EnchantmentDisabler;
 import karashokleo.l2hostility.util.raytrace.EntityTarget;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.network.ClientPlayerEntity;
 
+@Environment(EnvType.CLIENT)
 public class ClientEvents
 {
     private static final int CHUNK_RENDER_INTERNAL = 4;

@@ -4,6 +4,8 @@ import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.LightmapTextureManager;
@@ -13,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
 import org.joml.Matrix4f;
 
+@Environment(EnvType.CLIENT)
 public class MobTraitRenderer
 {
     public static final String FLAG = "NoTitlePlateRendering";

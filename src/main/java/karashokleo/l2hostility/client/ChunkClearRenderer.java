@@ -1,6 +1,8 @@
 package karashokleo.l2hostility.client;
 
 import karashokleo.l2hostility.content.component.chunk.ChunkDifficulty;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -8,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import org.joml.Matrix4f;
 
+@Environment(EnvType.CLIENT)
 public class ChunkClearRenderer
 {
     private final int d;

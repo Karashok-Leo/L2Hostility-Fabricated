@@ -1,11 +1,8 @@
 package karashokleo.l2hostility.mixin;
 
-import dev.xkmc.l2serial.util.Wrappers;
-import karashokleo.l2hostility.client.ClientGlowingHandler;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.init.LHEnchantments;
-import karashokleo.l2hostility.util.raytrace.EntityTarget;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -32,40 +29,6 @@ public abstract class EntityMixin
             {
                 cir.setReturnValue(true);
             }
-        }
-    }
-
-    @Inject(
-        method = "isGlowing",
-        at = @At("HEAD"),
-        cancellable = true
-    )
-    private void inject_isGlowing(CallbackInfoReturnable<Boolean> cir)
-    {
-        if (ClientGlowingHandler.isGlowing(Wrappers.cast(this)))
-        {
-            cir.setReturnValue(true);
-        }
-        for (EntityTarget target : EntityTarget.LIST)
-        {
-            if (target.target == (Object) this)
-            {
-                cir.setReturnValue(true);
-            }
-        }
-    }
-
-    @Inject(
-        method = "getTeamColorValue",
-        at = @At("HEAD"),
-        cancellable = true
-    )
-    private void inject_getTeamColorValue(CallbackInfoReturnable<Integer> cir)
-    {
-        Integer col = ClientGlowingHandler.getColor(Wrappers.cast(this));
-        if (col != null)
-        {
-            cir.setReturnValue(col);
         }
     }
 
